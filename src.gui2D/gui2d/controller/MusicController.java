@@ -40,6 +40,7 @@ public class MusicController extends Node {
 		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC;
 	}
 
+	private List<AudioNode> fadeOutList;
 	private AudioNode currentlyPlayingNode;
 	private String currentlyPlayingTrack;
 	private boolean switchMusic;
@@ -51,6 +52,7 @@ public class MusicController extends Node {
 		this.currentlyPlayingNode = null;
 		this.currentlyPlayingTrack = null;
 		this.switchMusic = false;
+		this.fadeOutList = new ArrayList<>();
 		this.initMusicTracks();
 	}
 
@@ -106,18 +108,34 @@ public class MusicController extends Node {
 			}
 
 			if (this.currentlyPlayingNode.getStatus() == AudioSource.Status.Stopped) {
-				this.detachChild(currentlyPlayingNode);
+				this.fadeOutList.add(currentlyPlayingNode);
 				this.currentlyPlayingNode = null;
 			}
 		} else {
 			if (this.currentlyPlayingNode != null) {
-				this.currentlyPlayingNode.stop();
-				this.detachChild(currentlyPlayingNode);
+				this.fadeOutList.add(currentlyPlayingNode);
 			}
 			this.currentlyPlayingNode = null;
 			this.switchMusic = false;
 		}
 
+		for (int i = 0; i < this.fadeOutList.size(); i++) {
+			AudioNode audioNode = this.fadeOutList.get(i);
+			if (audioNode.getVolume() > 0) {
+				// Reduce volume:
+				float newVolume = audioNode.getVolume() - MUSIC_VOLUME / (MUSIC_FADE_TIME / tpsMilis);
+				if (newVolume < 0)
+					audioNode.setVolume(0);
+				else
+					audioNode.setVolume(newVolume);
+			} else {
+				// Stop & Drop node:
+				audioNode.stop();
+				this.detachChild(audioNode);
+				this.fadeOutList.remove(i);
+				i--;
+			}
+		}
 		this.lock.unlock();
 	}
 
