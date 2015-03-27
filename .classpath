@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="images"/>
+	<classpathentry kind="src" path="src.editor"/>
+	<classpathentry kind="src" path="src.model"/>
+	<classpathentry kind="src" path="src.tests"/>
+	<classpathentry kind="src" path="src.network"/>
+	<classpathentry kind="src" path="src.common"/>
+	<classpathentry kind="src" path="src.gui2D"/>
+	<classpathentry kind="src" path="src.executables"/>
+	<classpathentry kind="src" path="sounds"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/eventbus.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/gluegen-rt.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jbullet.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jglfont-core.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jinput.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-blender.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-core.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-desktop.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-effects.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-jbullet.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-jogg.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-lwjgl.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-lwjgl-natives.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-networking.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-niftygui.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-openal-soft-natives-android.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-plugins.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-terrain.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-testdata.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/joal.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/j-ogg-oggd.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/j-ogg-vorbisd.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jogl-all.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/lwjgl.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty-default-controls.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty-examples.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty-style-black.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/stack-alloc.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/vecmath.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/xmlpull-xpp3.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/utils/msgpack-core-0.7.0-p4.jar" sourcepath="C:/Users/Michael/.m2/repository/org/msgpack/msgpack-core/0.7.0-p4/msgpack-core-0.7.0-p4-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/utils/guava-18.0.jar" sourcepath="C:/Users/Michael/.m2/repository/com/google/guava/guava/18.0/guava-18.0-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
