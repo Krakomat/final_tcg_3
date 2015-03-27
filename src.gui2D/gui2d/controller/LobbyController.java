@@ -20,7 +20,8 @@ import com.jme3.scene.Node;
 
 public class LobbyController extends Node implements GUI2DController {
 
-	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, backButton, deckEditorButton;
+	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, backButton, deckEditorButton,
+			exitButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextPanel2D ipAdressPanel, usernamePanel, equipedDeckPanel;
@@ -106,6 +107,18 @@ public class LobbyController extends Node implements GUI2DController {
 		backButton.setVisible(false);
 		dropInUpdateQueue(backButton);
 		this.attachChild(backButton);
+
+		exitButton = new TextButton2D("exitButton", "X", screenWidth * 0.03f, screenWidth * 0.03f) {
+
+			@Override
+			public void mouseSelect() {
+				System.exit(0);
+			}
+		};
+		exitButton.setLocalTranslation(screenWidth * 0.97f, screenHeight - screenWidth * 0.03f, 0);
+		exitButton.setVisible(false);
+		dropInUpdateQueue(exitButton);
+		this.attachChild(exitButton);
 
 		deckEditorButton = new TextButton2D("deckEditorButton", "Edit Deck", buttonWidth, buttonHeight) {
 
@@ -248,6 +261,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(multiPlayerButton);
 		this.ipAdressPanel.setVisible(true);
 		this.dropInUpdateQueue(ipAdressPanel);
+		this.exitButton.setVisible(true);
+		this.dropInUpdateQueue(exitButton);
 		this.usernamePanel.setVisible(true);
 		this.equipedDeckPanel.setVisible(true);
 		this.deckEditorButton.setVisible(true);
@@ -271,6 +286,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(dummyBotButton);
 		this.backButton.setVisible(false);
 		this.dropInUpdateQueue(backButton);
+		this.exitButton.setVisible(false);
+		this.dropInUpdateQueue(exitButton);
 		this.ipAdressPanel.setVisible(false);
 		this.dropInUpdateQueue(ipAdressPanel);
 		this.usernamePanel.setVisible(false);
