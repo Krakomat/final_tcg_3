@@ -13,7 +13,6 @@ import model.game.GameParameters;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
-import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.TextButton2D;
 
 import com.jme3.scene.Node;

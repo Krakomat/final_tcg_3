@@ -21,6 +21,7 @@ import network.client.Account;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
+import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.Image2D;
 
@@ -359,6 +360,7 @@ public class DeckEditController extends Node implements GUI2DController {
 
 	protected void backButtonClicked() {
 		GUI2D.getInstance().switchMode(GUI2DMode.LOBBY);
+		GUI2D.getInstance().getMusicController().switchMusic(MusicType.LOBBY_MUSIC);
 	}
 
 	protected void deckEditorButtonClicked() {

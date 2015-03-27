@@ -633,7 +633,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		switch (newMode) {
 		case START:
 			this.currentActiveController = this.titleController;
-			this.musicController.switchMusic(MusicType.TITLE_MUSIC);
 			break;
 		case DECK_EDIT:
 			this.currentActiveController = this.deckEditController;
@@ -645,7 +644,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			break;
 		case LOBBY:
 			this.currentActiveController = this.lobbyController;
-			this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
 			break;
 		default:
 			break;
