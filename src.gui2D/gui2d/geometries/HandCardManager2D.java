@@ -1,0 +1,226 @@
+package gui2d.geometries;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.database.Card;
+import model.database.Database;
+
+import com.jme3.asset.TextureKey;
+import com.jme3.scene.Node;
+
+import common.utilities.Lock;
+import gui2d.GUI2D;
+import gui2d.abstracts.SelectableNode;
+import gui2d.controller.IngameController;
+
+/**
+ * Stores HandCard2d geometries and arranges/updates them on update(). Has to be attached to a {@link IngameController}!
+ * 
+ * @author Michael
+ *
+ */
+public class HandCardManager2D extends Node implements SelectableNode {
+
+	private List<HandCard2D> handCards;
+	private List<Card> cards;
+
+	private int level;
+	private float xPos = this.getLocalTranslation().x;
+	private float yPos = this.getLocalTranslation().y;
+	private Lock lock;
+
+	public HandCardManager2D(String name) {
+		this.setName(name);
+		handCards = new ArrayList<>();
+		xPos = 0;
+		yPos = 0;
+		level = 0;
+		cards = new ArrayList<>();
+		lock = new Lock();
+		initHandCards();
+	}
+
+	public HandCardManager2D(String name, float xPos, float yPos, int zPos) {
+		this.setName(name);
+		handCards = new ArrayList<>();
+		this.xPos = xPos;
+		this.yPos = yPos;
+		level = zPos;
+		cards = new ArrayList<>();
+		lock = new Lock();
+		initHandCards();
+	}
+
+	private void initHandCards() {
+		/*
+		 * Creates 9 HandCard2D objects and attaches them to this.handCards.
+		 */
+		int screenWidth = GUI2D.getInstance().getResolution().getKey();
+		int size = 9;
+		float epsilon = screenWidth * 0.01f; // distance between two cards
+		float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
+
+		float startPoint = 0;
+		if (size % 2 == 0)
+			startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+		else
+			startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+
+		float height = handCardWidth * 1.141f;
+		for (int i = 0; i < size; i++) {
+			TextureKey tex = Database.getTextureKey("00000");
+			HandCard2D handCard = new HandCard2D("HandCard" + i, tex, handCardWidth, height, i) {
+				@Override
+				public void mouseSelect() {
+					handCardSelected(this.getIndex());
+				}
+			};
+			handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * i, yPos, level);
+			this.attachChild(handCard);
+			this.handCards.add(handCard);
+			handCard.setVisible(false);
+			handCard.update();
+		}
+	}
+
+	@Override
+	public boolean mouseOver(float xPos, float yPos) {
+		return false;
+	}
+
+	@Override
+	public synchronized void update() {
+		try {
+			this.lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		// Align hand cards:
+		{
+			int screenWidth = GUI2D.getInstance().getResolution().getKey();
+			int size = cards.size();
+			float epsilon = screenWidth * 0.01f; // distance between two cards
+			float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
+
+			float startPoint = 0;
+			if (size % 2 == 0)
+				startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+			else
+				startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+			for (int i = 0; i < size; i++) {
+				HandCard2D handCard = this.handCards.get(i);
+				handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * i, yPos, level);
+			}
+		}
+
+		// Update:
+		for (int i = 0; i < 9; i++)
+			this.handCards.get(i).update();
+		lock.unlock();
+	}
+
+	public void handCardSelected(int index) {
+		IngameController parent = (IngameController) this.getParent();
+		parent.handCardGeometrySelected(handCards.get(index));
+	}
+
+	@Override
+	public void mouseEnter() {
+		// Do nothing here
+	}
+
+	@Override
+	public void mouseExit() {
+		// Do nothing here
+	}
+
+	@Override
+	public void mouseSelect() {
+		// Do nothing here
+	}
+
+	public void mousePressed() {
+		// Do nothing here!
+	}
+
+	public void mouseReleased() {
+		// Do nothing here!
+	}
+
+	@Override
+	public void audioSelect() {
+		// Do nothing here!
+	}
+
+	@Override
+	public boolean isGlowing() {
+		return false;
+	}
+
+	@Override
+	public void setGlowing(boolean value) {
+		// Do nothing here
+	}
+
+	@Override
+	public boolean isSelected() {
+		return false;
+	}
+
+	@Override
+	public void setSelected(boolean value) {
+		// Do nothing here
+	}
+
+	@Override
+	public boolean isVisible() {
+		return true;
+	}
+
+	@Override
+	public synchronized void setVisible(boolean value) {
+
+	}
+
+	@Override
+	public int getLevel() {
+		return level;
+	}
+
+	public List<HandCard2D> getHandCard2Ds() {
+		return this.handCards;
+	}
+
+	public HandCard2D getHandCard(int index) {
+		return handCards.get(index);
+	}
+
+	public void setCards(List<Card> cards) {
+		try {
+			this.lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		this.cards = cards;
+		for (int i = 0; i < 9; i++) {
+			HandCard2D handCard = this.handCards.get(i);
+			// Create a hand card for each card o position:
+			TextureKey tex = null;
+			if (cards.size() > i)
+				tex = Database.getTextureKey(cards.get(i).getCardId());
+			if (tex == null) // Card not visible
+				tex = Database.getTextureKey("00000");
+
+			handCard.setTexture(tex);
+			if (cards.size() > i)
+				handCard.setVisible(true);
+			else
+				handCard.setVisible(false);
+		}
+
+		this.lock.unlock();
+	}
+}

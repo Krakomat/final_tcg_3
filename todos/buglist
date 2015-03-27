@@ -1,0 +1,9 @@
+View:
+
+GameModel: 
+	- A Pokemon that is Asleep or Paralyzed should not be allowed to retreat. 
+	- Retreat is allowed only once per turn
+	- A Confused Pokémon can retreat to the Bench normally (without coinflipping), where it loses all Special Conditions
+	- If a Pokémon is Asleep, Confused, or Paralyzed, and a new attack is made against it that makes it Asleep, Confused, or Paralyzed, the old condition should be 
+	  erased and only the new one counts. But these three conditions are the only effects that erase each other. So, for example, a Pokémon can be Confused and 
+	  Burned at the same time.

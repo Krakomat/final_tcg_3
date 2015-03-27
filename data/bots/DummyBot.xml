@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="5">
+    <Name>DummyBot</Name>
+    <Password>dummy</Password>
+    <AccountType>BOT_DUMMY</AccountType>
+    <Deck Name="DummyBotDeck">
+        <Card ID="00046">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00047">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00044">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00045">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00048">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00049">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00042">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00043">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00040">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00041">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00035">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00036">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00033">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00034">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00039">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00037">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00038">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00031">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00032">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00030">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00024">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00068">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00025">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00069">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00022">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00066">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00023">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00067">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00028">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00029">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00026">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00027">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00060">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00061">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00020">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00064">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00021">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00065">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00062">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00063">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00019">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00013">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00057">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00014">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00058">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00011">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00055">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00012">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00056">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00017">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00018">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00015">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00059">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00016">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00050">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00053">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00010">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00054">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00051">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00052">
+            <Size>1</Size>
+        </Card>
+    </Deck>
+</Account>
