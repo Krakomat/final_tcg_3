@@ -42,7 +42,7 @@ public class SerializationTest {
 	private GameModelUpdate update;
 	private Deck deck;
 	private List<DynamicPokemonCondition> condList;
-	
+
 	@Before
 	public void init() {
 		Database.init();
@@ -92,6 +92,7 @@ public class SerializationTest {
 
 		update = new GameModelUpdateImpl();
 		update.setPositionList(positionList);
+		update.setTurnNumber((short) 4);
 
 		deck = new Deck();
 		deck.setName("TestDeck");
@@ -213,7 +214,7 @@ public class SerializationTest {
 	public void conditionListTest() throws IOException {
 		ByteString b = serializer.packConditionList(condList);
 		List<DynamicPokemonCondition> newList = serializer.unpackConditionList(b);
-		for (int i = 0; i < newList.size(); i++){
+		for (int i = 0; i < newList.size(); i++) {
 			assertTrue(condList.get(i).getRemainingTurns() == newList.get(i).getRemainingTurns());
 			assertTrue(condList.get(i).getCondition().equals(newList.get(i).getCondition()));
 		}
@@ -233,6 +234,7 @@ public class SerializationTest {
 		ByteString b = serializer.packGameModelUpdate(update);
 		GameModelUpdate newUpdate = serializer.unpackGameModelUpdate(b);
 
+		assertTrue(newUpdate.getTurnNumber() == 4);
 		for (int i = 0; i < newUpdate.getPositionList().size(); i++)
 			this.checkPosition(newUpdate.getPositionList().get(i), update.getPositionList().get(i));
 	}

@@ -864,6 +864,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	public GameModelUpdate getGameModelForPlayer(Player player) {
 		GameModelUpdate gameModelUpdate = new GameModelUpdateImpl();
+		gameModelUpdate.setTurnNumber((short) this.turnNumber);
+
 		Card dummyCard = new Card();
 		for (Position pos : gameField.getAllPositions()) {
 			Position position = new PositionImpl(pos.getPositionID(), pos.getColor());
@@ -902,70 +904,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	public Position getPosition(PositionID posID) {
-		switch (posID) {
-		case BLUE_ACTIVEPOKEMON:
-			return gameField.getBlueActive();
-		case BLUE_BENCH_1:
-			return gameField.getBlueBench1();
-		case BLUE_BENCH_2:
-			return gameField.getBlueBench2();
-		case BLUE_BENCH_3:
-			return gameField.getBlueBench3();
-		case BLUE_BENCH_4:
-			return gameField.getBlueBench4();
-		case BLUE_BENCH_5:
-			return gameField.getBlueBench5();
-		case BLUE_DECK:
-			return gameField.getBlueDeck();
-		case BLUE_DISCARDPILE:
-			return gameField.getBlueDiscardPile();
-		case BLUE_HAND:
-			return gameField.getBlueHand();
-		case BLUE_PRICE_1:
-			return gameField.getBluePrice1();
-		case BLUE_PRICE_2:
-			return gameField.getBluePrice2();
-		case BLUE_PRICE_3:
-			return gameField.getBluePrice3();
-		case BLUE_PRICE_4:
-			return gameField.getBluePrice4();
-		case BLUE_PRICE_5:
-			return gameField.getBluePrice5();
-		case BLUE_PRICE_6:
-			return gameField.getBluePrice6();
-		case RED_ACTIVEPOKEMON:
-			return gameField.getRedActive();
-		case RED_BENCH_1:
-			return gameField.getRedBench1();
-		case RED_BENCH_2:
-			return gameField.getRedBench2();
-		case RED_BENCH_3:
-			return gameField.getRedBench3();
-		case RED_BENCH_4:
-			return gameField.getRedBench4();
-		case RED_BENCH_5:
-			return gameField.getRedBench5();
-		case RED_DECK:
-			return gameField.getRedDeck();
-		case RED_DISCARDPILE:
-			return gameField.getRedDiscardPile();
-		case RED_HAND:
-			return gameField.getRedHand();
-		case RED_PRICE_1:
-			return gameField.getRedPrice1();
-		case RED_PRICE_2:
-			return gameField.getRedPrice2();
-		case RED_PRICE_3:
-			return gameField.getRedPrice3();
-		case RED_PRICE_4:
-			return gameField.getRedPrice4();
-		case RED_PRICE_5:
-			return gameField.getRedPrice5();
-		case RED_PRICE_6:
-			return gameField.getRedPrice6();
-		default:
-			return null;
-		}
+		return this.gameField.getPosition(posID);
 	}
 
 	public ArrayList<Card> getBasicPokemonOnPosition(PositionID posID) {
@@ -980,120 +919,15 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	public ArrayList<PositionID> getFullArenaPositions(Color playerColor) {
-		ArrayList<PositionID> positionList = new ArrayList<PositionID>();
-		if (this.playerBlue.getColor() == playerColor) {
-			if (!this.getPosition(PositionID.BLUE_ACTIVEPOKEMON).isEmpty())
-				positionList.add(PositionID.BLUE_ACTIVEPOKEMON);
-			if (!this.getPosition(PositionID.BLUE_BENCH_1).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_1);
-			if (!this.getPosition(PositionID.BLUE_BENCH_2).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_2);
-			if (!this.getPosition(PositionID.BLUE_BENCH_3).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_3);
-			if (!this.getPosition(PositionID.BLUE_BENCH_4).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_4);
-			if (!this.getPosition(PositionID.BLUE_BENCH_5).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_5);
-		} else if (this.playerRed.getColor() == playerColor) {
-			if (!this.getPosition(PositionID.RED_ACTIVEPOKEMON).isEmpty())
-				positionList.add(PositionID.RED_ACTIVEPOKEMON);
-			if (!this.getPosition(PositionID.RED_BENCH_1).isEmpty())
-				positionList.add(PositionID.RED_BENCH_1);
-			if (!this.getPosition(PositionID.RED_BENCH_2).isEmpty())
-				positionList.add(PositionID.RED_BENCH_2);
-			if (!this.getPosition(PositionID.RED_BENCH_3).isEmpty())
-				positionList.add(PositionID.RED_BENCH_3);
-			if (!this.getPosition(PositionID.RED_BENCH_4).isEmpty())
-				positionList.add(PositionID.RED_BENCH_4);
-			if (!this.getPosition(PositionID.RED_BENCH_5).isEmpty())
-				positionList.add(PositionID.RED_BENCH_5);
-		} else
-			System.err.println("Wrong call of method 'getTopPokemonOnField'!");
-		return positionList;
+		return this.gameField.getFullArenaPositions(playerColor, playerBlue, playerRed);
 	}
 
 	public ArrayList<PositionID> getFullBenchPositions(Color playerColor) {
-		ArrayList<PositionID> positionList = new ArrayList<PositionID>();
-		if (this.playerBlue.getColor() == playerColor) {
-			if (!this.getPosition(PositionID.BLUE_BENCH_1).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_1);
-			if (!this.getPosition(PositionID.BLUE_BENCH_2).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_2);
-			if (!this.getPosition(PositionID.BLUE_BENCH_3).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_3);
-			if (!this.getPosition(PositionID.BLUE_BENCH_4).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_4);
-			if (!this.getPosition(PositionID.BLUE_BENCH_5).isEmpty())
-				positionList.add(PositionID.BLUE_BENCH_5);
-		} else if (this.playerRed.getColor() == playerColor) {
-			if (!this.getPosition(PositionID.RED_BENCH_1).isEmpty())
-				positionList.add(PositionID.RED_BENCH_1);
-			if (!this.getPosition(PositionID.RED_BENCH_2).isEmpty())
-				positionList.add(PositionID.RED_BENCH_2);
-			if (!this.getPosition(PositionID.RED_BENCH_3).isEmpty())
-				positionList.add(PositionID.RED_BENCH_3);
-			if (!this.getPosition(PositionID.RED_BENCH_4).isEmpty())
-				positionList.add(PositionID.RED_BENCH_4);
-			if (!this.getPosition(PositionID.RED_BENCH_5).isEmpty())
-				positionList.add(PositionID.RED_BENCH_5);
-		} else
-			System.err.println("Wrong call of method 'getTopPokemonOnField'!");
-		return positionList;
+		return this.gameField.getFullBenchPositions(playerColor, playerBlue, playerRed);
 	}
 
 	public ArrayList<PositionID> getPositionsForEvolving(PokemonCard c, Color color) {
-		ArrayList<PositionID> posList = new ArrayList<PositionID>();
-		if (color == Color.BLUE) {
-			Card topCard = this.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.BLUE_ACTIVEPOKEMON);
-
-			topCard = this.getPosition(PositionID.BLUE_BENCH_1).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.BLUE_BENCH_1);
-
-			topCard = this.getPosition(PositionID.BLUE_BENCH_2).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.BLUE_BENCH_2);
-
-			topCard = this.getPosition(PositionID.BLUE_BENCH_3).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.BLUE_BENCH_3);
-
-			topCard = this.getPosition(PositionID.BLUE_BENCH_4).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.BLUE_BENCH_4);
-
-			topCard = this.getPosition(PositionID.BLUE_BENCH_5).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.BLUE_BENCH_5);
-		} else if (color == Color.RED) {
-			Card topCard = this.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.RED_ACTIVEPOKEMON);
-
-			topCard = this.getPosition(PositionID.RED_BENCH_1).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.RED_BENCH_1);
-
-			topCard = this.getPosition(PositionID.RED_BENCH_2).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.RED_BENCH_2);
-
-			topCard = this.getPosition(PositionID.RED_BENCH_3).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.RED_BENCH_3);
-
-			topCard = this.getPosition(PositionID.RED_BENCH_4).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.RED_BENCH_4);
-
-			topCard = this.getPosition(PositionID.RED_BENCH_5).getTopCard();
-			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && this.turnNumber > topCard.getPlayedInTurn())
-				posList.add(PositionID.RED_BENCH_5);
-		} else
-			System.err.println("Wrong player send to method 'returnPositionsForEvolving'!");
-		return posList;
+		return this.gameField.getPositionsForEvolving(c, color, turnNumber);
 	}
 
 	/**

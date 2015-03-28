@@ -9,6 +9,7 @@ import model.interfaces.Position;
 
 public class GameModelUpdateImpl implements GameModelUpdate {
 	private List<Position> updateList;
+	private short turnNumber;
 
 	public GameModelUpdateImpl() {
 		updateList = new ArrayList<Position>();
@@ -34,5 +35,13 @@ public class GameModelUpdateImpl implements GameModelUpdate {
 	@Override
 	public void setPositionList(List<Position> posList) {
 		this.updateList = posList;
+	}
+
+	public short getTurnNumber() {
+		return turnNumber;
+	}
+
+	public void setTurnNumber(short turnNumber) {
+		this.turnNumber = turnNumber;
 	}
 }

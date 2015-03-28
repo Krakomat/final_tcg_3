@@ -20,6 +20,7 @@ import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.game.LocalPokemonGameModel;
 import model.interfaces.GameModelUpdate;
 import model.interfaces.Position;
 
@@ -29,7 +30,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	private Color color;
 	private PokemonGameManager server;
 	private final PlayerImpl self;
-	private GameModelUpdate localGameModel;
+	private LocalPokemonGameModel localGameModel;
 
 	/**
 	 * Creates a new {@link PlayerImpl} object with the given parameters.
@@ -87,13 +88,15 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate) {
-		this.localGameModel = gameModelUpdate;
+		this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this);
 		view.userUpdatesGameModel(this.localGameModel, color);
 	}
 
-	private GameModelUpdate getFreshGameModel() {
-		if (this.localGameModel == null)
-			this.localGameModel = server.getGameModelForPlayer(self);
+	private LocalPokemonGameModel getFreshGameModel() {
+		if (this.localGameModel == null) {
+			GameModelUpdate gameModelUpdate = server.getGameModelForPlayer(self);
+			return new LocalPokemonGameModel(gameModelUpdate, this);
+		}
 		return this.localGameModel;
 	}
 
@@ -102,24 +105,23 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				GameModelUpdate gameModel = getFreshGameModel();
-
+				localGameModel = getFreshGameModel();
 				if (color == Color.BLUE) {
 					List<Pair<Position, Integer>> choosableCards = new ArrayList<>();
 					// Check hand:
-					Position handPos = gameModel.getPosition(PositionID.BLUE_HAND);
+					Position handPos = localGameModel.getPosition(PositionID.BLUE_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
 						List<String> actions = server.getPlayerActions(i, PositionID.BLUE_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
-					Position activePosition = gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
+					Position activePosition = localGameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
 					List<String> actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {
-						Position benchPosition = gameModel.getPosition(PositionID.valueOf("BLUE_BENCH_" + i));
+						Position benchPosition = localGameModel.getPosition(PositionID.valueOf("BLUE_BENCH_" + i));
 						if (benchPosition.size() > 0) {
 							actions = server.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), self);
 							if (!actions.isEmpty())
@@ -132,19 +134,19 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 				} else if (color == Color.RED) {
 					List<Pair<Position, Integer>> choosableCards = new ArrayList<>();
 					// Check hand:
-					Position handPos = gameModel.getPosition(PositionID.RED_HAND);
+					Position handPos = localGameModel.getPosition(PositionID.RED_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
 						List<String> actions = server.getPlayerActions(i, PositionID.RED_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
-					Position activePosition = gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
+					Position activePosition = localGameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
 					List<String> actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {
-						Position benchPosition = gameModel.getPosition(PositionID.valueOf("RED_BENCH_" + i));
+						Position benchPosition = localGameModel.getPosition(PositionID.valueOf("RED_BENCH_" + i));
 						if (benchPosition.size() > 0) {
 							actions = server.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), self);
 							if (!actions.isEmpty())

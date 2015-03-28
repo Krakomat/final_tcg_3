@@ -2,6 +2,8 @@ package model.interfaces;
 
 import java.util.ArrayList;
 
+import network.client.Player;
+import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.PositionID;
 
@@ -21,6 +23,8 @@ public interface GameField {
 	public ArrayList<PositionID> getNonEmptyPriceList(Color color);
 
 	public ArrayList<Position> getAllPositions();
+
+	public Position getPosition(PositionID posID);
 
 	public Position getBlueHand();
 
@@ -141,4 +145,35 @@ public interface GameField {
 	public Position getRedPrice6();
 
 	public void setRedPrice6(Position redPrice6);
+
+	/**
+	 * Returns all bench positions with cards on them from the players arena fields.
+	 * 
+	 * @param playerColor
+	 * @param playerBlue
+	 * @param playerRed
+	 * @return
+	 */
+	ArrayList<PositionID> getFullBenchPositions(Color playerColor, Player playerBlue, Player playerRed);
+
+	/**
+	 * Returns all positions with cards on them from the players arena fields.
+	 * 
+	 * @param playerColor
+	 * @param playerBlue
+	 * @param playerRed
+	 * @return
+	 */
+	ArrayList<PositionID> getFullArenaPositions(Color playerColor, Player playerBlue, Player playerRed);
+
+	/**
+	 * Returns an array list of the positionsIDs, if the given card can be put on a basic pokemon(in the arena of the given player), which evolves into the given
+	 * card. Also checks, evolution is allowed in this turn(one cannot put a pokemon on the bench and evolve it in the same turn).
+	 * 
+	 * @param c
+	 * @param color
+	 * @param turnNumber
+	 * @return
+	 */
+	ArrayList<PositionID> getPositionsForEvolving(PokemonCard c, Color color, int turnNumber);
 }

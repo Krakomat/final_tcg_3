@@ -47,6 +47,14 @@ public class TCGSerializer {
 		return new Integer((int) b.asLong());
 	}
 
+	public ByteString packShort(short s) {
+		return new ByteString(s);
+	}
+
+	public short unpackShort(ByteString b) {
+		return (short) b.asLong();
+	}
+
 	public ByteString packBool(boolean b) {
 		return new ByteString(b ? 1 : 0);
 	}
@@ -815,6 +823,10 @@ public class TCGSerializer {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		MessagePacker packer = MessagePack.newDefaultPacker(out);
 
+		ByteString turnNumber = this.packShort(update.getTurnNumber());
+		packer.packBinaryHeader(turnNumber.length());
+		packer.writePayload(turnNumber.copyAsBytes());
+
 		ByteString b = this.packPositionList(update.getPositionList());
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
@@ -827,6 +839,9 @@ public class TCGSerializer {
 		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
 
 		GameModelUpdate update = new GameModelUpdateImpl();
+
+		ByteString turnNumber = unpackByteString(unpacker);
+		update.setTurnNumber(this.unpackShort(turnNumber));
 
 		ByteString bString = unpackByteString(unpacker);
 		update.setPositionList(this.unpackPositionList(bString));

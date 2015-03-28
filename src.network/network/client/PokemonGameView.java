@@ -8,7 +8,7 @@ import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 
 /**
@@ -95,11 +95,11 @@ public interface PokemonGameView {
 	/**
 	 * The user updates his representation of the game field with the given game field.
 	 * 
-	 * @param gameModelUpdate
+	 * @param gameModel
 	 * @param ownColor
 	 *            the color, that the player, who updates this view, has.
 	 */
-	public void userUpdatesGameModel(GameModelUpdate gameModelUpdate, Color ownColor);
+	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor);
 
 	/**
 	 * The user receives a game message from the server. He displays this message in his view.

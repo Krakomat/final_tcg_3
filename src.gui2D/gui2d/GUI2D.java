@@ -13,7 +13,7 @@ import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
@@ -437,9 +437,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	}
 
 	@Override
-	public void userUpdatesGameModel(GameModelUpdate gameModelUpdate, Color ownColor) {
+	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor) {
 		System.out.println("Started Update from " + Thread.currentThread().getName());
-		for (Position p : gameModelUpdate.getPositionList()) {
+		for (Position p : gameModel.getGameField().getAllPositions()) {
 			SelectableNode n = ingameController.getPositionGeometry(p.getPositionID(), ownColor);
 			if (n != null) {
 				n = ingameController.updateGeometry(n, p);

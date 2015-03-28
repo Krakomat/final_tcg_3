@@ -40,4 +40,18 @@ public interface GameModelUpdate {
 	 * @param posList
 	 */
 	public void setPositionList(List<Position> posList);
+
+	/**
+	 * Returns the turn number.
+	 * 
+	 * @return
+	 */
+	public short getTurnNumber();
+
+	/**
+	 * Sets the turn number.
+	 * 
+	 * @param turnNumber
+	 */
+	public void setTurnNumber(short turnNumber);
 }

@@ -1,6 +1,4 @@
 View:
-	- "Show card" feature
-	- "Show stack" feature(for discard pile)
 	- Add Animations (For attacks, coinflips, etc.)
 	- Add sounds
 	- Rework distribution view, s.t. the minus button can be pressed so long until the resources on the pokemon are gone and not just once. Also add a balance counter.
