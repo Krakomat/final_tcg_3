@@ -210,7 +210,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public List<String> getAttackNames(PositionID posID) {
-		return this.server.getAttacksForPosition(posID);
+		return this.localGameModel.getAttacksForPosition(posID);
 	}
 
 	@Override

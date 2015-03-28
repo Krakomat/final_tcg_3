@@ -14,3 +14,6 @@ Patch 1.01
 				- Deck
 				- Discard Pile
 				- All cards in the deck editor
+	Network
+		- Clients are now able to compute the actions for hand cards or arena positions locally due to the new LocalGameModel
+		- Client knows the attacks of its pokemon locally

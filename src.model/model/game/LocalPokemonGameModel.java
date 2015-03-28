@@ -348,4 +348,15 @@ public class LocalPokemonGameModel implements PokemonGame {
 	public GameField getGameField() {
 		return this.gameField;
 	}
+
+	public List<String> getAttacksForPosition(PositionID position) {
+		Position pos = this.getPosition(position);
+		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
+			return new ArrayList<String>(); // position empty or no arena position
+
+		// Get the attacks from the card script:
+		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
+		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
+		return script.getAttackNames();
+	}
 }

@@ -320,6 +320,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	@Override
+	@Deprecated
 	public List<String> getAttacksForPosition(PositionID position) {
 		Position pos = this.gameModel.getPosition(position);
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
