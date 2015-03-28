@@ -10,6 +10,7 @@ import model.interfaces.Position;
 public class GameModelUpdateImpl implements GameModelUpdate {
 	private List<Position> updateList;
 	private short turnNumber;
+	private boolean energyPlayAllowed;
 
 	public GameModelUpdateImpl() {
 		updateList = new ArrayList<Position>();
@@ -43,5 +44,13 @@ public class GameModelUpdateImpl implements GameModelUpdate {
 
 	public void setTurnNumber(short turnNumber) {
 		this.turnNumber = turnNumber;
+	}
+
+	public boolean isEnergyPlayAllowed() {
+		return energyPlayAllowed;
+	}
+
+	public void setEnergyPlayAllowed(boolean energyPlayAllowed) {
+		this.energyPlayAllowed = energyPlayAllowed;
 	}
 }

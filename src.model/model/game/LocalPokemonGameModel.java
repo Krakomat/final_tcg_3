@@ -6,17 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 import network.client.Player;
+import network.client.PlayerImpl;
 import model.database.Card;
+import model.database.EnergyCard;
 import model.database.PokemonCard;
+import model.database.TrainerCard;
 import model.enums.CardType;
 import model.enums.Color;
 import model.enums.GameState;
+import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.interfaces.GameField;
 import model.interfaces.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
+import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.CardScriptFactory;
+import model.scripting.abstracts.PokemonCardScript;
 
 /**
  * Used by a client to locally store the game model that was send from the server.
@@ -50,20 +56,112 @@ public class LocalPokemonGameModel implements PokemonGame {
 		this.playerOnTurn = client;
 		if (client.getColor() == Color.BLUE) {
 			this.playerBlue = client;
-			this.playerRed = null;
+			this.playerRed = new PlayerImpl(gameID, "EnemyPlayer", "");
 		} else {
-			this.playerBlue = null;
+			this.playerBlue = new PlayerImpl(gameID, "EnemyPlayer", "");
 			this.playerRed = client;
 		}
 		this.gameState = GameState.RUNNING;
-		this.energyPlayed = false; // modify this in the setter
+		this.energyPlayed = gameModelUpdate.isEnergyPlayAllowed();
 		this.attackAction = new AttackAction(this);
 		this.attackCondition = new AttackCondition(this);
 		this.cardScriptFactory = new CardScriptFactory();
 		this.cardMap = new HashMap<>();
-		for (Position position : this.gameField.getAllPositions())
-			for (Card c : position.getCards())
+		for (Position position : this.gameField.getAllPositions()) {
+			for (Card c : position.getCards()) {
+				c.setCurrentPositionLocal(position);
 				this.cardMap.put(c.getGameID(), c);
+				if (!c.getCardId().equals("00000")) {
+					CardScript script = this.cardScriptFactory.createScript(c, this);
+					c.setCardScript(script);
+				}
+			}
+		}
+	}
+
+	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
+		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
+		Card c = handCard ? this.getPosition(position).getCardAtIndex(positionIndex) : this.getPosition(position).getTopCard();
+		ArrayList<PlayerAction> actionList = new ArrayList<PlayerAction>();
+		Position pos = this.getPosition(position);
+		// If player on turn and position doesn't belong to enemy
+		boolean playerOnTurn = this.getPlayerOnTurn().getColor() == player.getColor();
+		boolean playerOnTurnBlue = this.getPlayerOnTurn().getColor() == Color.BLUE;
+		boolean playerOnTurnRed = this.getPlayerOnTurn().getColor() == Color.RED;
+		boolean positionColorBlue = pos.getColor() == Color.BLUE;
+		if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
+			actionList = getActionsForSelectedPosition(actionList, c, position, player);
+		}
+		ArrayList<String> stringActionList = new ArrayList<String>();
+		for (int i = 0; i < actionList.size(); i++)
+			stringActionList.add(actionList.get(i).toString());
+		return stringActionList;
+	}
+
+	/**
+	 * Adds actions to the given list, which are dependent to the position, the selected card is on. Only is called, if the given player is on turn.
+	 * 
+	 * @param actionList
+	 * @param game
+	 * @param c
+	 * @param posID
+	 * @param player
+	 * @return
+	 */
+	private ArrayList<PlayerAction> getActionsForSelectedPosition(ArrayList<PlayerAction> actionList, Card c, PositionID posID, Player player) {
+		CardScript script = c.getCardScript();
+
+		// Check playedFromHand
+		if (c instanceof PokemonCard || c instanceof TrainerCard || c instanceof EnergyCard) {
+			if (script.canBePlayedFromHand() != null)
+				actionList.add(script.canBePlayedFromHand());
+		} else
+			throw new IllegalArgumentException("Error: Card is not valid!");
+
+		// Check attack1/2, pokemonPower, retreat:
+		if (c instanceof PokemonCard) {
+			PokemonCardScript pScript = (PokemonCardScript) script;
+
+			// Check retreat:
+			if (pScript.retreatCanBeExecuted())
+				actionList.add(PlayerAction.RETREAT_POKEMON);
+
+			// Check attacks:
+			if (c.getCurrentPosition().getPositionID() == PositionID.BLUE_ACTIVEPOKEMON || c.getCurrentPosition().getPositionID() == PositionID.RED_ACTIVEPOKEMON) {
+				for (String attName : pScript.getAttackNames()) {
+					if (pScript.attackCanBeExecuted(attName)) {
+						switch (pScript.getAttackNumber(attName)) {
+						case 0:
+							actionList.add(PlayerAction.ATTACK_1);
+							break;
+						case 1:
+							actionList.add(PlayerAction.ATTACK_2);
+							break;
+						case -1:
+							throw new IllegalArgumentException("Error: AttackName" + attName + " is not valid!");
+						default:
+							throw new IllegalArgumentException("Error: AttackName " + attName + " is out of range in the list");
+						}
+					}
+				}
+			}
+			// Check pokemon power:
+			for (String powerName : pScript.getPokemonPowerNames()) {
+				if (pScript.pokemonPowerCanBeExecuted(powerName)) {
+					switch (pScript.getPokemonPowerNumber(powerName)) {
+					case 0:
+						actionList.add(PlayerAction.POKEMON_POWER);
+						break;
+					case -1:
+						throw new IllegalArgumentException("Error: powerName" + powerName + " is not valid!");
+					default:
+						throw new IllegalArgumentException("Error: powerName " + powerName + " is out of range in the list");
+					}
+				}
+			}
+
+		}
+		return actionList;
 	}
 
 	@Override
@@ -84,30 +182,27 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public Player getPlayerOnTurn() {
-		// leave empty
-		return null;
+		return this.playerOnTurn;
 	}
 
 	@Override
 	public Player getPlayerRed() {
-		// leave empty
-		return null;
+		return this.playerRed;
 	}
 
 	@Override
 	public void setPlayerRed(Player playerRed) {
-		// leave empty
+		this.playerRed = playerRed;
 	}
 
 	@Override
 	public Player getPlayerBlue() {
-		// leave empty
-		return null;
+		return this.playerBlue;
 	}
 
 	@Override
 	public void setPlayerBlue(Player playerBlue) {
-		// leave empty
+		this.playerBlue = playerBlue;
 	}
 
 	@Override

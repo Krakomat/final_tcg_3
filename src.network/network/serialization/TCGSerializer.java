@@ -823,6 +823,10 @@ public class TCGSerializer {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		MessagePacker packer = MessagePack.newDefaultPacker(out);
 
+		ByteString energyPlay = this.packBool(update.isEnergyPlayAllowed());
+		packer.packBinaryHeader(energyPlay.length());
+		packer.writePayload(energyPlay.copyAsBytes());
+
 		ByteString turnNumber = this.packShort(update.getTurnNumber());
 		packer.packBinaryHeader(turnNumber.length());
 		packer.writePayload(turnNumber.copyAsBytes());
@@ -839,6 +843,9 @@ public class TCGSerializer {
 		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
 
 		GameModelUpdate update = new GameModelUpdateImpl();
+
+		ByteString energyPlay = unpackByteString(unpacker);
+		update.setEnergyPlayAllowed(this.unpackBool(energyPlay));
 
 		ByteString turnNumber = unpackByteString(unpacker);
 		update.setTurnNumber(this.unpackShort(turnNumber));

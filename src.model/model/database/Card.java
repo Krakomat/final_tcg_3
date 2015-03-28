@@ -49,6 +49,16 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
+	 * Sets the current position for this card. WARNING: Do not use this method at the server. This method is only being used for the construction of the local game
+	 * model.
+	 * 
+	 * @param value
+	 */
+	public void setCurrentPositionLocal(Position value) {
+		this.currentPosition = value;
+	}
+
+	/**
 	 * @return Returns the name.
 	 */
 	public String getName() {

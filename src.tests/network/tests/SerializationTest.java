@@ -93,7 +93,8 @@ public class SerializationTest {
 		update = new GameModelUpdateImpl();
 		update.setPositionList(positionList);
 		update.setTurnNumber((short) 4);
-
+		update.setEnergyPlayAllowed(true);
+		
 		deck = new Deck();
 		deck.setName("TestDeck");
 		deck.setCards(stringList);
@@ -235,6 +236,7 @@ public class SerializationTest {
 		GameModelUpdate newUpdate = serializer.unpackGameModelUpdate(b);
 
 		assertTrue(newUpdate.getTurnNumber() == 4);
+		assertTrue(newUpdate.isEnergyPlayAllowed() == true);
 		for (int i = 0; i < newUpdate.getPositionList().size(); i++)
 			this.checkPosition(newUpdate.getPositionList().get(i), update.getPositionList().get(i));
 	}

@@ -111,19 +111,19 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					// Check hand:
 					Position handPos = localGameModel.getPosition(PositionID.BLUE_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
-						List<String> actions = server.getPlayerActions(i, PositionID.BLUE_HAND, self);
+						List<String> actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
-					List<String> actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
+					List<String> actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {
 						Position benchPosition = localGameModel.getPosition(PositionID.valueOf("BLUE_BENCH_" + i));
 						if (benchPosition.size() > 0) {
-							actions = server.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), self);
+							actions = localGameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), self);
 							if (!actions.isEmpty())
 								choosableCards.add(new Pair<Position, Integer>(benchPosition, benchPosition.size() - 1));
 						}
@@ -136,19 +136,19 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					// Check hand:
 					Position handPos = localGameModel.getPosition(PositionID.RED_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
-						List<String> actions = server.getPlayerActions(i, PositionID.RED_HAND, self);
+						List<String> actions = localGameModel.getPlayerActions(i, PositionID.RED_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
-					List<String> actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
+					List<String> actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {
 						Position benchPosition = localGameModel.getPosition(PositionID.valueOf("RED_BENCH_" + i));
 						if (benchPosition.size() > 0) {
-							actions = server.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), self);
+							actions = localGameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), self);
 							if (!actions.isEmpty())
 								choosableCards.add(new Pair<Position, Integer>(benchPosition, benchPosition.size() - 1));
 						}
@@ -178,9 +178,9 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	public List<PlayerAction> getPlayerActionsForHandCard(int index) {
 		List<String> actions = null;
 		if (this.color.equals(Color.BLUE))
-			actions = server.getPlayerActions(index, PositionID.BLUE_HAND, this);
+			actions = this.localGameModel.getPlayerActions(index, PositionID.BLUE_HAND, this);
 		else if (this.color.equals(Color.RED))
-			actions = server.getPlayerActions(index, PositionID.RED_HAND, this);
+			actions = this.localGameModel.getPlayerActions(index, PositionID.RED_HAND, this);
 		if (actions == null) {
 			System.err.println("Error in getPlayerActionsForHandCard(...) in class PlayerImpl: No color set!");
 			return new ArrayList<>();
@@ -195,9 +195,9 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	public List<PlayerAction> getPlayerActionsForArenaPosition(PositionID positionID) {
 		List<String> actions = null;
 		if (this.color.equals(Color.BLUE))
-			actions = server.getPlayerActions(0, positionID, this);
+			actions = this.localGameModel.getPlayerActions(0, positionID, this);
 		else if (this.color.equals(Color.RED))
-			actions = server.getPlayerActions(0, positionID, this);
+			actions = this.localGameModel.getPlayerActions(0, positionID, this);
 		if (actions == null) {
 			System.err.println("Error in getPlayerActionsForArenaPosition(...) in class PlayerImpl: No color set!");
 			return new ArrayList<>();

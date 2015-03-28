@@ -54,4 +54,18 @@ public interface GameModelUpdate {
 	 * @param turnNumber
 	 */
 	public void setTurnNumber(short turnNumber);
+
+	/**
+	 * Returns the energyPlayedAllowed parameter.
+	 * 
+	 * @return
+	 */
+	public boolean isEnergyPlayAllowed();
+
+	/**
+	 * Sets energyPlayedAllowed parameter.
+	 * 
+	 * @param energyPlayAllowed
+	 */
+	public void setEnergyPlayAllowed(boolean energyPlayAllowed);
 }
