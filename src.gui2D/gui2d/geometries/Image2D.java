@@ -27,6 +27,7 @@ public abstract class Image2D extends Node implements SelectableNode {
 	/** Level for the starting zPosition */
 	private float level;
 	private boolean visible;
+	private String cardId;
 	private Node selectedNode;
 	private Node glowingNode;
 	private Lock lock;
@@ -37,6 +38,7 @@ public abstract class Image2D extends Node implements SelectableNode {
 		this.level = 0;
 		this.name = name;
 		this.visible = true;
+		this.cardId = null;
 		this.lock = new Lock();
 
 		this.imagePanel = new Panel2D(name, texture, width, height) {
@@ -246,5 +248,13 @@ public abstract class Image2D extends Node implements SelectableNode {
 		}
 		this.visible = value;
 		lock.unlock();
+	}
+
+	public String getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
 	}
 }

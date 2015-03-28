@@ -5,4 +5,12 @@ Patch 1.01
 		
 	GUI
 		- added an exit button in the lobby
-		- Hand Cards can now be viewed in more detail via the new Card Viewer: Right click on a hand card to show its card details.
+		- Cards can now be viewed in more detail via the new Card Viewer: Right click on a card to show its card details:
+			The following types of cards can be viewed:
+				- Hand cards
+				- Active positions
+				- Bench positions
+				- Prices
+				- Deck
+				- Discard Pile
+				- All cards in the deck editor

@@ -59,6 +59,8 @@ public class Database {
 	 * @return gesuchte Karte
 	 */
 	public static Card createCard(String id) {
+		if (id.equals("00000"))
+			return new Card();
 		Card c = cards.get(Integer.parseInt(id) - 1);
 		if (c instanceof PokemonCard) {
 			PokemonCard p = new PokemonCard();

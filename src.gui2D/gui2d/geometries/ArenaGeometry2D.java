@@ -46,6 +46,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 	private List<Element> energyList;
 	private int damageMarks, hitPoints;
 	private Lock lock;
+	private String topCardID;
 
 	private AudioNode clickSoundNode;
 
@@ -62,6 +63,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 		this.conditionList = new ArrayList<>();
 		this.energyList = new ArrayList<>();
 		this.lock = new Lock();
+		this.topCardID = "";
 
 		this.imagePanel = new Panel2D(name, texture, width, height) {
 			@Override
@@ -436,5 +438,13 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 				damageBox.setVisible(false);
 		}
 		this.lock.unlock();
+	}
+
+	public String getTopCardID() {
+		return this.topCardID;
+	}
+
+	public void setTopCardID(String id) {
+		this.topCardID = id;
 	}
 }

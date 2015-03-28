@@ -1,5 +1,7 @@
 package gui2d.geometries;
 
+import java.util.List;
+
 import gui2d.GUI2D;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
@@ -30,6 +32,7 @@ public abstract class ImageCounter2D extends Node implements SelectableNode {
 	private int level;
 
 	private boolean visible;
+	private List<String> cardIds; // the ids of cards on this component
 
 	private Node selectedNode;
 	private Node glowingNode;
@@ -39,6 +42,7 @@ public abstract class ImageCounter2D extends Node implements SelectableNode {
 		this.level = 0;
 		this.name = name;
 		this.visible = true;
+		this.cardIds = null;
 		this.lock = new Lock();
 
 		this.imagePanel = new Panel2D(name, texture, width, height) {
@@ -263,5 +267,13 @@ public abstract class ImageCounter2D extends Node implements SelectableNode {
 		}
 		this.imagePanel.setTexture(texture);
 		this.lock.unlock();
+	}
+
+	public List<String> getCardIds() {
+		return cardIds;
+	}
+
+	public void setCardIds(List<String> cardIds) {
+		this.cardIds = cardIds;
 	}
 }

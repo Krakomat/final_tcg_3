@@ -94,7 +94,17 @@ public class IngameController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelectRightClick() {
-				// TODO
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+						viewer.setVisible(true);
+						List<Card> cardList = new ArrayList<>();
+						cardList.add(Database.createCard(ownActive.getTopCardID()));
+						viewer.setData("Cards", cardList);
+						GUI2D.getInstance().addToUpdateQueue(viewer);
+					}
+				}).start();
 			}
 		};
 		ownActive.setLocalTranslation(screenWidth * 0.5f - activePosWidth, screenHeight * 0.48f - activePosHeight, 0);
@@ -110,7 +120,17 @@ public class IngameController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelectRightClick() {
-				// TODO
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+						viewer.setVisible(true);
+						List<Card> cardList = new ArrayList<>();
+						cardList.add(Database.createCard(enemyActive.getTopCardID()));
+						viewer.setData("Cards", cardList);
+						GUI2D.getInstance().addToUpdateQueue(viewer);
+					}
+				}).start();
 			}
 		};
 		enemyActive.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f, 0);
@@ -131,7 +151,18 @@ public class IngameController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					// TODO
+					ArenaGeometry2D self = this;
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+							viewer.setVisible(true);
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(Database.createCard(self.getTopCardID()));
+							viewer.setData("Cards", cardList);
+							GUI2D.getInstance().addToUpdateQueue(viewer);
+						}
+					}).start();
 				}
 			};
 			ownBenchPos.setLocalTranslation(screenWidth * 0.1f, screenHeight * 0.69f - benchPosHeight * i, 0);
@@ -149,7 +180,18 @@ public class IngameController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					// TODO
+					ArenaGeometry2D self = this;
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+							viewer.setVisible(true);
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(Database.createCard(self.getTopCardID()));
+							viewer.setData("Cards", cardList);
+							GUI2D.getInstance().addToUpdateQueue(viewer);
+						}
+					}).start();
 				}
 			};
 			enemyBenchPos.setLocalTranslation(screenWidth * 0.81f, screenHeight * 0.69f - benchPosHeight * i, 0);
@@ -168,7 +210,18 @@ public class IngameController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelectRightClick() {
-				// nothing to do here
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+						viewer.setVisible(true);
+						List<Card> cardList = new ArrayList<>();
+						for (int i = 0; i < ownDeck.getCardIds().size(); i++)
+							cardList.add(Database.createCard(ownDeck.getCardIds().get(i)));
+						viewer.setData("Cards", cardList);
+						GUI2D.getInstance().addToUpdateQueue(viewer);
+					}
+				}).start();
 			}
 		};
 		ownDeck.setLocalTranslation(screenWidth * 0.85f, screenHeight * 0.03f, 0);
@@ -185,7 +238,18 @@ public class IngameController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelectRightClick() {
-				// nothing to do here
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+						viewer.setVisible(true);
+						List<Card> cardList = new ArrayList<>();
+						for (int i = 0; i < enemyDeck.getCardIds().size(); i++)
+							cardList.add(Database.createCard(enemyDeck.getCardIds().get(i)));
+						viewer.setData("Cards", cardList);
+						GUI2D.getInstance().addToUpdateQueue(viewer);
+					}
+				}).start();
 			}
 		};
 		enemyDeck.setLocalTranslation(screenWidth * 0.10f, screenHeight * 0.85f, 0);
@@ -202,7 +266,18 @@ public class IngameController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelectRightClick() {
-				// TODO
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+						viewer.setVisible(true);
+						List<Card> cardList = new ArrayList<>();
+						for (int i = 0; i < ownGraveyard.getCardIds().size(); i++)
+							cardList.add(Database.createCard(ownGraveyard.getCardIds().get(i)));
+						viewer.setData("Cards", cardList);
+						GUI2D.getInstance().addToUpdateQueue(viewer);
+					}
+				}).start();
 			}
 		};
 		ownGraveyard.setLocalTranslation(screenWidth * 0.92f, screenHeight * 0.03f, 0);
@@ -219,7 +294,18 @@ public class IngameController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelectRightClick() {
-				// TODO
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+						viewer.setVisible(true);
+						List<Card> cardList = new ArrayList<>();
+						for (int i = 0; i < enemyGraveyard.getCardIds().size(); i++)
+							cardList.add(Database.createCard(enemyGraveyard.getCardIds().get(i)));
+						viewer.setData("Cards", cardList);
+						GUI2D.getInstance().addToUpdateQueue(viewer);
+					}
+				}).start();
 			}
 		};
 		enemyGraveyard.setLocalTranslation(screenWidth * 0.03f, screenHeight * 0.85f, 0);
@@ -240,7 +326,18 @@ public class IngameController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					// nothing to do here
+					Image2D self = this;
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+							viewer.setVisible(true);
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(Database.createCard(self.getCardId()));
+							viewer.setData("Cards", cardList);
+							GUI2D.getInstance().addToUpdateQueue(viewer);
+						}
+					}).start();
 				}
 			};
 			ownPriceImage.setLocalTranslation(screenWidth * 0.5f - activePosWidth + prizePosWidth * i, screenHeight * 0.48f - activePosHeight - prizePosHeight, 0);
@@ -257,7 +354,18 @@ public class IngameController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					// nothing to do here
+					Image2D self = this;
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+							viewer.setVisible(true);
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(Database.createCard(self.getCardId()));
+							viewer.setData("Cards", cardList);
+							GUI2D.getInstance().addToUpdateQueue(viewer);
+						}
+					}).start();
 				}
 			};
 			enemyPriceImage.setLocalTranslation(screenWidth * 0.5f + prizePosWidth * i, screenHeight * 0.48f + activePosHeight, 0);
@@ -716,7 +824,7 @@ public class IngameController extends Node implements GUI2DController {
 	 * @param stackGeo
 	 */
 	public void stackGeometrySelected(ImageCounter2D stackGeo) {
-		// TODO needed for "show stack" feature
+		// nothing to do here!
 	}
 
 	/**
@@ -990,6 +1098,7 @@ public class IngameController extends Node implements GUI2DController {
 				active.setConditionList(pokemon.getConditions());
 				active.setEnergyList(p.getEnergy());
 				active.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				active.setTopCardID(pokemon.getCardId());
 				active.setVisible(true);
 			} else
 				active.setVisible(false);
@@ -1003,6 +1112,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1016,6 +1126,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1029,6 +1140,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1042,6 +1154,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1055,6 +1168,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1068,6 +1182,10 @@ public class IngameController extends Node implements GUI2DController {
 					deck.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					deck.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				List<String> cardIds = new ArrayList<>();
+				for (int i = 0; i < p.getCards().size(); i++)
+					cardIds.add(p.getCards().get(i).getCardId());
+				deck.setCardIds(cardIds);
 				deck.setVisible(true);
 			} else
 				deck.setVisible(false);
@@ -1081,6 +1199,10 @@ public class IngameController extends Node implements GUI2DController {
 					discardPile.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					discardPile.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				List<String> cardIds = new ArrayList<>();
+				for (int i = 0; i < p.getCards().size(); i++)
+					cardIds.add(p.getCards().get(i).getCardId());
+				discardPile.setCardIds(cardIds);
 				discardPile.setVisible(true);
 			} else
 				discardPile.setVisible(false);
@@ -1101,6 +1223,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1113,6 +1236,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1125,6 +1249,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1137,6 +1262,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1149,6 +1275,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1161,6 +1288,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1174,6 +1302,7 @@ public class IngameController extends Node implements GUI2DController {
 				active.setConditionList(pokemon.getConditions());
 				active.setEnergyList(p.getEnergy());
 				active.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				active.setTopCardID(pokemon.getCardId());
 				active.setVisible(true);
 			} else
 				active.setVisible(false);
@@ -1187,6 +1316,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1200,6 +1330,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1213,6 +1344,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1226,6 +1358,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1239,6 +1372,7 @@ public class IngameController extends Node implements GUI2DController {
 				bench.setConditionList(pokemon.getConditions());
 				bench.setEnergyList(p.getEnergy());
 				bench.setTexture(Database.getPokemonThumbnailKey(pokemon.getCardId()));
+				bench.setTopCardID(pokemon.getCardId());
 				bench.setVisible(true);
 			} else
 				bench.setVisible(false);
@@ -1252,6 +1386,10 @@ public class IngameController extends Node implements GUI2DController {
 					deck.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					deck.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				List<String> cardIds = new ArrayList<>();
+				for (int i = 0; i < p.getCards().size(); i++)
+					cardIds.add(p.getCards().get(i).getCardId());
+				deck.setCardIds(cardIds);
 				deck.setVisible(true);
 			} else
 				deck.setVisible(false);
@@ -1265,6 +1403,10 @@ public class IngameController extends Node implements GUI2DController {
 					discardPile.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					discardPile.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				List<String> cardIds = new ArrayList<>();
+				for (int i = 0; i < p.getCards().size(); i++)
+					cardIds.add(p.getCards().get(i).getCardId());
+				discardPile.setCardIds(cardIds);
 				discardPile.setVisible(true);
 			} else
 				discardPile.setVisible(false);
@@ -1285,6 +1427,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1297,6 +1440,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1309,6 +1453,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1321,6 +1466,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1333,6 +1479,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);
@@ -1345,6 +1492,7 @@ public class IngameController extends Node implements GUI2DController {
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
 					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
 				price.setVisible(false);

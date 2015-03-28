@@ -24,6 +24,7 @@ import gui2d.abstracts.SelectableNode;
 import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.Image2D;
+import gui2d.geometries.chooser.CardViewer;
 
 import com.jme3.scene.Node;
 
@@ -218,7 +219,18 @@ public class DeckEditController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					// TODO
+					Image2D self = this;
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+							viewer.setVisible(true);
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(Database.createCard(self.getCardId()));
+							viewer.setData("Cards", cardList);
+							GUI2D.getInstance().addToUpdateQueue(viewer);
+						}
+					}).start();
 				}
 			};
 			deckImage.setLocalTranslation(screenWidth * 0.70f + (deckImageWidth + deckImageBorder) * (i % 6), screenHeight * 0.85f
@@ -244,7 +256,18 @@ public class DeckEditController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					// TODO
+					Image2D self = this;
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+							viewer.setVisible(true);
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(Database.createCard(self.getCardId()));
+							viewer.setData("Cards", cardList);
+							GUI2D.getInstance().addToUpdateQueue(viewer);
+						}
+					}).start();
 				}
 			};
 			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 5), screenHeight * 0.7f
@@ -507,12 +530,14 @@ public class DeckEditController extends Node implements GUI2DController {
 		for (int i = 0; i < this.deckImages.size(); i++) {
 			Image2D deckImage = this.deckImages.get(i);
 			if (i < this.deckCards.size()) {
+				deckImage.setCardId(this.deckCards.get(i));
 				deckImage.setVisible(true);
 				deckImage.setTexture(Database.getCardThumbnailKey(this.deckCards.get(i)));
 				Thread t = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						GUI2D.getInstance().getIOController().addShootable(deckImage);
+						GUI2D.getInstance().getIOController().addRightShootable(deckImage);
 					}
 				});
 				t.start();
@@ -522,6 +547,7 @@ public class DeckEditController extends Node implements GUI2DController {
 					@Override
 					public void run() {
 						GUI2D.getInstance().getIOController().removeShootable(deckImage);
+						GUI2D.getInstance().getIOController().removeRightShootable(deckImage);
 					}
 				});
 				t.start();
@@ -539,12 +565,14 @@ public class DeckEditController extends Node implements GUI2DController {
 			Image2D libraryImage = this.libraryImages.get(i);
 
 			if (this.currentStartIndex + i < this.shownLibraryCards.size()) {
+				libraryImage.setCardId(this.shownLibraryCards.get(this.currentStartIndex + i));
 				libraryImage.setTexture(Database.getCardThumbnailKey(this.shownLibraryCards.get(this.currentStartIndex + i)));
 				libraryImage.setVisible(true);
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
 						GUI2D.getInstance().getIOController().addShootable(libraryImage);
+						GUI2D.getInstance().getIOController().addRightShootable(libraryImage);
 					}
 				}).start();
 			} else {
@@ -552,7 +580,8 @@ public class DeckEditController extends Node implements GUI2DController {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						GUI2D.getInstance().getIOController().addShootable(libraryImage);
+						GUI2D.getInstance().getIOController().removeShootable(libraryImage);
+						GUI2D.getInstance().getIOController().removeRightShootable(libraryImage);
 					}
 				}).start();
 			}
@@ -702,6 +731,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				@Override
 				public void run() {
 					GUI2D.getInstance().getIOController().removeShootable(deckImage);
+					GUI2D.getInstance().getIOController().removeRightShootable(deckImage);
 				}
 			});
 			t.start();
@@ -715,6 +745,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				@Override
 				public void run() {
 					GUI2D.getInstance().getIOController().removeShootable(libraryImage);
+					GUI2D.getInstance().getIOController().removeRightShootable(libraryImage);
 				}
 			}).start();
 			dropInUpdateQueue(libraryImage);
