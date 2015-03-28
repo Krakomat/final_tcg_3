@@ -55,6 +55,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				backButtonClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		backButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, 0, 0);
 		backButton.setVisible(false);
@@ -67,6 +72,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				pageLeftButtonClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		pageLeftButton.setLocalTranslation(screenWidth * 0.125f - buttonWidth / 2, screenHeight * 0.12f, 0);
 		pageLeftButton.setVisible(false);
@@ -78,6 +88,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				pageRightButtonClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		pageRightButton.setLocalTranslation(screenWidth * 0.575f - buttonWidth / 2, screenHeight * 0.12f, 0);
@@ -125,6 +140,11 @@ public class DeckEditController extends Node implements GUI2DController {
 				public void mouseSelect() {
 					filterButtonClicked(index);
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			filterButton.setLocalTranslation(screenWidth * 0.29f - buttonWidth / 2 + elementButtonWidth * i, screenHeight * 0.12f, 0);
 			filterButton.setVisible(false);
@@ -138,6 +158,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				saveDeckButtonClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		saveDeckButton.setLocalTranslation(screenWidth * 0.775f - buttonWidth / 2, screenHeight * 0.93f, 0);
 		saveDeckButton.setVisible(false);
@@ -150,6 +175,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				loadDeckButtonClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		loadDeckButton.setLocalTranslation(screenWidth * 0.87f - buttonWidth / 2, screenHeight * 0.93f, 0);
 		loadDeckButton.setVisible(false);
@@ -161,6 +191,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				clearDeckButtonClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		clearDeckButton.setLocalTranslation(screenWidth * 0.965f - buttonWidth / 2, screenHeight * 0.93f, 0);
@@ -179,6 +214,11 @@ public class DeckEditController extends Node implements GUI2DController {
 				@Override
 				public void mouseSelect() {
 					deckImageSelected(h);
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// TODO
 				}
 			};
 			deckImage.setLocalTranslation(screenWidth * 0.70f + (deckImageWidth + deckImageBorder) * (i % 6), screenHeight * 0.85f
@@ -200,6 +240,11 @@ public class DeckEditController extends Node implements GUI2DController {
 				@Override
 				public void mouseSelect() {
 					libraryImageSelected(h);
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// TODO
 				}
 			};
 			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 5), screenHeight * 0.7f

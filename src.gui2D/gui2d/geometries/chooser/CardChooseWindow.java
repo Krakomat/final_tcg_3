@@ -36,6 +36,11 @@ public class CardChooseWindow extends ChooseWindow {
 				public void mouseSelect() {
 					imageSelected(index);
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			image.setLocalTranslation(imageXPos, imageYPos, level + 0.00001f);
 

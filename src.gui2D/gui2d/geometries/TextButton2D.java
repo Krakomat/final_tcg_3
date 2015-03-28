@@ -141,6 +141,8 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 
 	public abstract void mouseSelect();
 
+	public abstract void mouseSelectRightClick();
+
 	public void audioSelect() {
 		this.clickSoundNode.playInstance();
 	}

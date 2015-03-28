@@ -77,6 +77,11 @@ public abstract class ImageText2D extends Node implements SelectableNode {
 			public void mouseSelect() {
 				// Do nothing here!
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// Do nothing here!
+			}
 		};
 		this.textPanel.setLocalTranslation(0, 0, 0.00001f);
 		this.attachChild(textPanel);
@@ -127,6 +132,8 @@ public abstract class ImageText2D extends Node implements SelectableNode {
 	}
 
 	public abstract void mouseSelect();
+
+	public abstract void mouseSelectRightClick();
 
 	public void audioSelect() {
 

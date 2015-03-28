@@ -42,6 +42,11 @@ public class LobbyController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				singlePlayerClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		singlePlayerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
 		singlePlayerButton.setVisible(false);
@@ -53,6 +58,11 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				multiPlayerClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		multiPlayerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
@@ -66,6 +76,11 @@ public class LobbyController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				multiPlayerCreateClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		multiPlayerCreateButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
 		multiPlayerCreateButton.setVisible(false);
@@ -77,6 +92,11 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				multiPlayerConnectClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		multiPlayerConnectButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
@@ -90,6 +110,11 @@ public class LobbyController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				dummyBotClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		dummyBotButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
 		dummyBotButton.setVisible(false);
@@ -101,6 +126,11 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				backButtonClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		backButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, 0, 0);
@@ -114,6 +144,11 @@ public class LobbyController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				System.exit(0);
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		exitButton.setLocalTranslation(screenWidth * 0.97f, screenHeight - screenWidth * 0.03f, 0);
 		exitButton.setVisible(false);
@@ -126,6 +161,11 @@ public class LobbyController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				deckEditorButtonClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		deckEditorButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, 0, 0);
 		deckEditorButton.setVisible(false);
@@ -137,6 +177,11 @@ public class LobbyController extends Node implements GUI2DController {
 				@Override
 				public void mouseSelect() {
 
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
 				}
 			};
 		} catch (UnknownHostException e) {
@@ -152,6 +197,11 @@ public class LobbyController extends Node implements GUI2DController {
 			public void mouseSelect() {
 
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		usernamePanel.setLocalTranslation(0, 0, 0);
 		usernamePanel.setVisible(false);
@@ -162,6 +212,11 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		equipedDeckPanel.setLocalTranslation(0, screenHeight - (screenWidth * 0.2f / 8), 0);

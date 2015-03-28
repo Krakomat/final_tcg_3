@@ -581,6 +581,10 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		return musicController;
 	}
 
+	public IngameController getIngameController() {
+		return this.ingameController;
+	}
+
 	public synchronized void addToUpdateQueue(SelectableNode node) {
 		if (Thread.currentThread().getName().equals(Threads.RENDER_THREAD.toString()))
 			System.err.println("[RENDER] Error: Called addToUpdateQueue from render thread.");

@@ -42,6 +42,11 @@ public interface SelectableNode {
 	public void mouseSelect();
 
 	/**
+	 * This method is called when the mouse selects this element via right click.
+	 */
+	public void mouseSelectRightClick();
+
+	/**
 	 * Is called when the mouse is pressed on this button.
 	 */
 	public void mousePressed();

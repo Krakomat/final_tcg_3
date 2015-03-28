@@ -41,6 +41,11 @@ public class DistributionChooser extends WindowGeometry {
 				public void mouseSelect() {
 					// Do nothing!
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			arenaGeo.setLocalTranslation(width * 0.5f, height * 0.8f - (height * 0.13f) * i, 0.00001f);
 			this.arenaPositions.add(arenaGeo);
@@ -58,6 +63,11 @@ public class DistributionChooser extends WindowGeometry {
 				public void mouseSelect() {
 					plusClicked(index);
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			buttonGeo.setLocalTranslation(width * 0.5f - buttonWidth, height * 0.8f - (height * 0.13f) * i + buttonHeight, 0.00001f);
 			this.plusButtons.add(buttonGeo);
@@ -72,6 +82,11 @@ public class DistributionChooser extends WindowGeometry {
 				public void mouseSelect() {
 					minusClicked(index);
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			buttonGeo.setLocalTranslation(width * 0.5f - buttonWidth, height * 0.8f - (height * 0.13f) * i, 0.00001f);
 			this.minusButtons.add(buttonGeo);
@@ -82,6 +97,11 @@ public class DistributionChooser extends WindowGeometry {
 			@Override
 			public void mouseSelect() {
 				okClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		okButton.setLocalTranslation(width * 0.40f, height * 0.04f, level + 0.00001f);

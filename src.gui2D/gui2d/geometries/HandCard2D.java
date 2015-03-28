@@ -20,6 +20,8 @@ public abstract class HandCard2D extends Image2D implements SelectableNode {
 
 	public abstract void mouseSelect();
 
+	public abstract void mouseSelectRightClick();
+
 	public int getIndex() {
 		return index;
 	}

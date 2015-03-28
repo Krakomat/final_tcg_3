@@ -120,6 +120,11 @@ public class WindowGeometry extends Node implements SelectableNode {
 		// Do nothing here!
 	}
 
+	@Override
+	public void mouseSelectRightClick() {
+		// Do nothing here!
+	}
+
 	public void audioSelect() {
 
 	}

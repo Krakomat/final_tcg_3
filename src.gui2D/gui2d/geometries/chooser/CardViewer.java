@@ -1,30 +1,32 @@
 package gui2d.geometries.chooser;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.controller.IOController;
+import gui2d.geometries.Image2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.WindowGeometry;
 
-public class ChooseWindow extends WindowGeometry {
+import java.util.ArrayList;
+import java.util.List;
 
-	protected int chooseAmount, startIndex;
-	protected boolean chooseExactly, correctlyChosen, choosingFinished;
-	protected TextButton2D goLeftButton, goRightButton, okButton;
-	protected ChooseGeometryChecker checker;
-	/** Chosen indices */
-	protected List<Integer> indexList;
-	protected int chooseListSize;
+import com.google.common.base.Preconditions;
+
+import common.utilities.Lock;
+import model.database.Card;
+import model.database.Database;
+
+public class CardViewer extends WindowGeometry {
+
+	private List<Card> cards;
+	private Image2D cardImage;
+	private int currentCardIndex;
 	private Lock lock;
+	private TextButton2D goLeftButton, goRightButton, okButton;
 
-	public ChooseWindow(String name, String text, float width, float height) {
+	public CardViewer(String name, String text, float width, float height) {
 		super(name, text, width, height);
-		this.indexList = new ArrayList<>();
-		this.choosingFinished = false;
-		chooseListSize = 0;
+		this.cards = new ArrayList<>();
+		this.currentCardIndex = -1;
 		lock = new Lock();
 
 		goLeftButton = new TextButton2D(name, "<<", width * 0.1f, height * 0.1f) {
@@ -68,9 +70,73 @@ public class ChooseWindow extends WindowGeometry {
 		};
 		okButton.setLocalTranslation(xPos + width * 0.40f, yPos + height * 0.05f, level + 0.00001f);
 		this.attachChild(okButton);
+
+		this.cardImage = new Image2D(name, Database.getTextureKey("00000"), width * 0.50f, height * 0.7f) {
+			@Override
+			public void mouseSelect() {
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+			}
+		};
+		cardImage.setLocalTranslation(xPos + width * 0.25f, yPos + height * 0.2f, level + 0.00001f);
+		this.attachChild(cardImage);
 	}
 
-	@Override
+	protected void goOkClicked() {
+		CardViewer self = this;
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				unregisterShootables(GUI2D.getInstance().getIOController());
+				setVisible(false);
+				GUI2D.getInstance().getIOController().restoreShootables();
+				GUI2D.getInstance().addToUpdateQueue(self); // waits for update queue here
+			}
+		}).start();
+	}
+
+	protected void goRightClicked() {
+		CardViewer self = this;
+		this.currentCardIndex++;
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				GUI2D.getInstance().addToUpdateQueue(self); // waits for update queue here
+			}
+		}).start();
+	}
+
+	protected void goLeftClicked() {
+		CardViewer self = this;
+		this.currentCardIndex--;
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				GUI2D.getInstance().addToUpdateQueue(self); // waits for update queue here
+			}
+		}).start();
+	}
+
+	public void setData(String title, List<Card> cardList) {
+		try {
+			this.lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Preconditions.checkArgument(cardList.size() > 0, "Error: Called setData of class CardViewer with an empty card list!");
+		this.setText(title);
+		this.cards = cardList;
+		this.currentCardIndex = 0;
+		this.cardImage.setTexture(Database.getTextureKey(cards.get(currentCardIndex).getCardId()));
+		this.goLeftButton.setVisible(false);
+		this.goRightButton.setVisible(cards.size() > 1 ? true : false);
+		this.okButton.setVisible(true);
+		GUI2D.getInstance().getIOController().storeShootables();
+		this.lock.unlock();
+	}
+
 	public void update() {
 		super.update();
 
@@ -80,63 +146,35 @@ public class ChooseWindow extends WindowGeometry {
 			e.printStackTrace();
 		}
 
-		if (this.checker != null)
-			this.correctlyChosen = this.checker.checkSelectionIsOk();
-		this.unregisterShootables(GUI2D.getInstance().getIOController());
-
 		if (this.isVisible()) {
-			if (startIndex > 0)
+			// Call update on image:
+			cardImage.setTexture(Database.getTextureKey(cards.get(currentCardIndex).getCardId()));
+			cardImage.setVisible(true);
+
+			if (this.currentCardIndex > 0)
 				this.goLeftButton.setVisible(true);
 			else
 				this.goLeftButton.setVisible(false);
 
-			if (startIndex < (chooseListSize - 15))
+			if (this.currentCardIndex < this.cards.size() - 1)
 				this.goRightButton.setVisible(true);
 			else
 				this.goRightButton.setVisible(false);
 
-			if (correctlyChosen)
-				this.okButton.setVisible(true);
-			else
-				this.okButton.setVisible(false);
-
 			this.registerShootables(GUI2D.getInstance().getIOController());
 		} else {
+			cardImage.setVisible(false);
 			this.goLeftButton.setVisible(false);
 			this.goRightButton.setVisible(false);
 			this.okButton.setVisible(false);
 		}
+		// Update components:
+		this.cardImage.update();
 		this.goLeftButton.update();
 		this.goRightButton.update();
 		this.okButton.update();
 
 		this.lock.unlock();
-	}
-
-	protected void goOkClicked() {
-		this.choosingFinished = true;
-	}
-
-	protected void goRightClicked() {
-		this.startIndex += 15;
-		ChooseWindow self = this;
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				GUI2D.getInstance().addToUpdateQueue(self);
-			}
-		}).start();
-	}
-
-	protected void goLeftClicked() {
-		this.startIndex -= 15;
-		ChooseWindow self = this;
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				GUI2D.getInstance().addToUpdateQueue(self);
-			}
-		}).start();
 	}
 
 	public void registerShootables(IOController ioController) {
@@ -176,45 +214,14 @@ public class ChooseWindow extends WindowGeometry {
 			ioController.removeShootable(goRightButton);
 	}
 
-	/**
-	 * Updates the data on this ChooseGeometry.
-	 * 
-	 * @param title
-	 * @param chooseAmount
-	 * @param chooseExactly
-	 * @param checker
-	 */
-	public void setData(String title, int chooseAmount, boolean chooseExactly, ChooseGeometryChecker checker, int chooseListSize) {
+	public void setVisible(boolean value) {
+		super.setVisible(value);
 		try {
 			this.lock.lock();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		this.setText(title);
-		this.chooseAmount = chooseAmount;
-		this.startIndex = 0;
-		this.chooseExactly = chooseExactly;
-		this.correctlyChosen = false;
-		this.checker = checker;
-		this.indexList.clear();
-		this.choosingFinished = false;
-		this.chooseListSize = chooseListSize;
+		cardImage.setVisible(value);
 		this.lock.unlock();
-	}
-
-	public boolean choosingFinished() {
-		return choosingFinished;
-	}
-
-	public List<Integer> getChosenIndices() {
-		return indexList;
-	}
-
-	public int getChooseAmount() {
-		return chooseAmount;
-	}
-
-	public boolean isChooseExactly() {
-		return chooseExactly;
 	}
 }

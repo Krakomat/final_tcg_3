@@ -10,6 +10,7 @@ import gui2d.geometries.ImageCounter2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.chooser.AttackChooseWindow;
 import gui2d.geometries.chooser.CardChooseWindow;
+import gui2d.geometries.chooser.CardViewer;
 import gui2d.geometries.chooser.DistributionChooser;
 import gui2d.geometries.chooser.ElementChooseWindow;
 import gui2d.geometries.messages.CardPanel2D;
@@ -56,6 +57,9 @@ public class IngameController extends Node implements GUI2DController {
 	private AttackChooseWindow attackChooseWindow;
 	private DistributionChooser distributionChooser;
 
+	/* View Window: */
+	private CardViewer cardViewer;
+
 	/* Message Panels: */
 	private TextPanel2D messagePanel;
 	private CardPanel2D cardMessagePanel;
@@ -87,6 +91,11 @@ public class IngameController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				arenaPositionSelected(this);
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// TODO
+			}
 		};
 		ownActive.setLocalTranslation(screenWidth * 0.5f - activePosWidth, screenHeight * 0.48f - activePosHeight, 0);
 		ownActive.setVisible(false);
@@ -97,6 +106,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				arenaPositionSelected(this);
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// TODO
 			}
 		};
 		enemyActive.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f, 0);
@@ -114,6 +128,11 @@ public class IngameController extends Node implements GUI2DController {
 				public void mouseSelect() {
 					arenaPositionSelected(this);
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// TODO
+				}
 			};
 			ownBenchPos.setLocalTranslation(screenWidth * 0.1f, screenHeight * 0.69f - benchPosHeight * i, 0);
 			ownBenchPos.setVisible(false);
@@ -126,6 +145,11 @@ public class IngameController extends Node implements GUI2DController {
 				@Override
 				public void mouseSelect() {
 					arenaPositionSelected(this);
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// TODO
 				}
 			};
 			enemyBenchPos.setLocalTranslation(screenWidth * 0.81f, screenHeight * 0.69f - benchPosHeight * i, 0);
@@ -141,6 +165,11 @@ public class IngameController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				stackGeometrySelected(this);
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		ownDeck.setLocalTranslation(screenWidth * 0.85f, screenHeight * 0.03f, 0);
 		ownDeck.setVisible(false);
@@ -152,6 +181,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				stackGeometrySelected(this);
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		enemyDeck.setLocalTranslation(screenWidth * 0.10f, screenHeight * 0.85f, 0);
@@ -165,6 +199,11 @@ public class IngameController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				stackGeometrySelected(this);
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// TODO
+			}
 		};
 		ownGraveyard.setLocalTranslation(screenWidth * 0.92f, screenHeight * 0.03f, 0);
 		ownGraveyard.setVisible(false);
@@ -176,6 +215,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				stackGeometrySelected(this);
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// TODO
 			}
 		};
 		enemyGraveyard.setLocalTranslation(screenWidth * 0.03f, screenHeight * 0.85f, 0);
@@ -193,6 +237,11 @@ public class IngameController extends Node implements GUI2DController {
 				public void mouseSelect() {
 					prizeGeometrySelected(this);
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			ownPriceImage.setLocalTranslation(screenWidth * 0.5f - activePosWidth + prizePosWidth * i, screenHeight * 0.48f - activePosHeight - prizePosHeight, 0);
 			ownPriceImage.setVisible(false);
@@ -204,6 +253,11 @@ public class IngameController extends Node implements GUI2DController {
 				@Override
 				public void mouseSelect() {
 					prizeGeometrySelected(this);
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
 				}
 			};
 			enemyPriceImage.setLocalTranslation(screenWidth * 0.5f + prizePosWidth * i, screenHeight * 0.48f + activePosHeight, 0);
@@ -221,6 +275,11 @@ public class IngameController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				endTurnClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		endTurnButton.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight, 0);
 		endTurnButton.setVisible(false);
@@ -232,6 +291,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				attack1Clicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		attack1Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight + buttonHeight * 3, 0);
@@ -245,6 +309,11 @@ public class IngameController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				attack2Clicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		attack2Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight + buttonHeight * 2, 0);
 		attack2Button.setVisible(false);
@@ -256,6 +325,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				retreatClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		retreatButton.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight + buttonHeight, 0);
@@ -269,6 +343,11 @@ public class IngameController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				playClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		playButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.17f, 0);
 		playButton.setVisible(false);
@@ -280,6 +359,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				pokePowerClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		pokePowerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.17f, 0);
@@ -312,11 +396,22 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().getGuiNode().attachChild(distributionChooser);
 		distributionChooser.setVisible(false);
 
+		cardViewer = new CardViewer("CardViewer", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.8f);
+		cardViewer.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
+		GUI2D.getInstance().getGuiNode().attachChild(cardViewer);
+		cardViewer.setVisible(false);
+
 		messagePanel = new TextPanel2D("MessagePanel", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
 				GUI2D.getInstance().getResolution().getValue() * 0.10f) {
 			@Override
 			public void mouseSelect() {
 				// Do nothing here!
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		messagePanel.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.73f, 0);
@@ -328,6 +423,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				// Do nothing here!
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
 			}
 		};
 		cardMessagePanel.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.50f, 0);
@@ -343,6 +443,7 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().addToUpdateQueue(messagePanel);
 				GUI2D.getInstance().addToUpdateQueue(cardMessagePanel);
 				GUI2D.getInstance().addToUpdateQueue(distributionChooser);
+				GUI2D.getInstance().addToUpdateQueue(cardViewer);
 			}
 		}).start();
 	}
@@ -468,6 +569,7 @@ public class IngameController extends Node implements GUI2DController {
 
 			node.setSelected(false);
 			node.setGlowing(false);
+			GUI2D.getInstance().getIOController().removeRightShootable(node);
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -1380,6 +1482,10 @@ public class IngameController extends Node implements GUI2DController {
 
 	public DistributionChooser getDistributionChooser() {
 		return distributionChooser;
+	}
+
+	public CardViewer getCardViewer() {
+		return this.cardViewer;
 	}
 
 	public TextPanel2D getMessagePanel() {

@@ -27,7 +27,7 @@ public class IOController {
 
 	private InputManager inputManager;
 	/** Contains nodes that can be selected by the mouse */
-	private List<SelectableNode> shootables;
+	private List<SelectableNode> shootables, rightClickShootables, storedShootables;
 	/** Node on which the mouse is positioned currently */
 	private SelectableNode currentMouseOverNode;
 
@@ -36,6 +36,8 @@ public class IOController {
 	public IOController(InputManager inputManager) {
 		this.inputManager = inputManager;
 		this.shootables = new ArrayList<>();
+		this.storedShootables = new ArrayList<>();
+		this.rightClickShootables = new ArrayList<>();
 		this.currentMouseOverNode = null;
 		this.lock = new Lock();
 	}
@@ -44,6 +46,7 @@ public class IOController {
 		inputManager.setCursorVisible(true);
 
 		inputManager.addMapping("MouseClick", new MouseButtonTrigger(MouseInput.BUTTON_LEFT)); // Trigger: leftclick
+		inputManager.addMapping("MouseClickRight", new MouseButtonTrigger(MouseInput.BUTTON_RIGHT)); // Trigger: rightclick
 		inputManager.addMapping("ActivateFlyCam", new KeyTrigger(KeyInput.KEY_RETURN)); // Trigger: Return
 		inputManager.addMapping("RotateRight", new MouseAxisTrigger(MouseInput.AXIS_X, true));
 		inputManager.addMapping("RotateLeft", new MouseAxisTrigger(MouseInput.AXIS_X, false));
@@ -51,6 +54,7 @@ public class IOController {
 		inputManager.addMapping("RotateDown", new MouseAxisTrigger(MouseInput.AXIS_Y, false));
 
 		inputManager.addListener(actionListener, "MouseClick");
+		inputManager.addListener(actionListener, "MouseClickRight");
 		inputManager.addListener(actionListener, "ActivateFlyCam");
 
 		inputManager.addListener(analogListener, "RotateRight");
@@ -93,6 +97,27 @@ public class IOController {
 						shotNode.mouseReleased();
 					} else
 						shotNode.mousePressed();
+				}
+			} else if (name.equals("MouseClickRight")) {
+				// 1. Reset results list.
+				Vector2f click2d = inputManager.getCursorPosition();
+
+				// Compute result:
+				SelectableNode shotNode = null;
+				List<SelectableNode> shotNodes = new ArrayList<>();
+				for (SelectableNode node : rightClickShootables) {
+					if (node.mouseOver(click2d.x, click2d.y))
+						shotNodes.add(node);
+				}
+				// Get the node with the highest level:
+				for (SelectableNode node : shotNodes) {
+					if (shotNode == null || shotNode.getLevel() < node.getLevel())
+						shotNode = node;
+				}
+
+				// 3. Use the result:
+				if (shotNode != null && keyPressed) {
+					shotNode.mouseSelectRightClick();
 				}
 			}
 			lock.unlock();
@@ -206,5 +231,86 @@ public class IOController {
 
 		lock.unlock();
 		return sList;
+	}
+
+	public boolean hasRightShootable(SelectableNode node) {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		boolean b = this.rightClickShootables.contains(node);
+		lock.unlock();
+		return b;
+	}
+
+	/**
+	 * Adds a shootable for right clicking.
+	 * 
+	 * @param node
+	 */
+	public synchronized void addRightShootable(SelectableNode node) {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (!this.rightClickShootables.contains(node))
+			this.rightClickShootables.add(node);
+
+		lock.unlock();
+	}
+
+	/**
+	 * Removes a shootable for right clicking.
+	 * 
+	 * @param node
+	 */
+	public synchronized void removeRightShootable(SelectableNode node) {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		if (this.rightClickShootables.contains(node))
+			this.rightClickShootables.remove(node);
+
+		lock.unlock();
+	}
+
+	/**
+	 * Stores all nodes that are currently shootable in a separate list.
+	 */
+	public synchronized void storeShootables() {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		this.storedShootables.clear();
+		for (SelectableNode node : this.shootables)
+			this.storedShootables.add(node);
+		this.shootables.clear();
+
+		lock.unlock();
+	}
+
+	/**
+	 * Restores all nodes that have been stored previously in {@link #storeShootables()}. Deletes all nodes that have been added between storing and restoring from
+	 * the shootables list.
+	 */
+	public synchronized void restoreShootables() {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		this.shootables.clear();
+		for (SelectableNode node : this.storedShootables)
+			this.shootables.add(node);
+		lock.unlock();
 	}
 }

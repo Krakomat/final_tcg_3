@@ -13,6 +13,7 @@ import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.abstracts.SelectableNode;
 import gui2d.controller.IngameController;
+import gui2d.geometries.chooser.CardViewer;
 
 /**
  * Stores HandCard2d geometries and arranges/updates them on update(). Has to be attached to a {@link IngameController}!
@@ -75,6 +76,11 @@ public class HandCardManager2D extends Node implements SelectableNode {
 				public void mouseSelect() {
 					handCardSelected(this.getIndex());
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					handCardSelectedRightClick(this.getIndex());
+				}
 			};
 			handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * i, yPos, level);
 			this.attachChild(handCard);
@@ -124,6 +130,20 @@ public class HandCardManager2D extends Node implements SelectableNode {
 	public void handCardSelected(int index) {
 		IngameController parent = (IngameController) this.getParent();
 		parent.handCardGeometrySelected(handCards.get(index));
+	}
+
+	public void handCardSelectedRightClick(int index) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+				viewer.setVisible(true);
+				List<Card> cardList = new ArrayList<>();
+				cardList.add(cards.get(index));
+				viewer.setData("Cards", cardList);
+				GUI2D.getInstance().addToUpdateQueue(viewer);
+			}
+		}).start();
 	}
 
 	@Override
@@ -222,5 +242,10 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		}
 
 		this.lock.unlock();
+	}
+
+	@Override
+	public void mouseSelectRightClick() {
+
 	}
 }

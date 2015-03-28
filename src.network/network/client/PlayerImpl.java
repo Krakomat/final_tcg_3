@@ -1,5 +1,8 @@
 package network.client;
 
+import gui2d.GUI2D;
+import gui2d.abstracts.SelectableNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,6 +156,10 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 						view.setCardChoosable(p.getKey(), p.getValue(), true);
 				} else
 					System.err.println("Received playerMakesMove() from server, but no color assigned to this player");
+
+				// Make positions right clickable:
+				for (SelectableNode node : GUI2D.getInstance().getIngameController().getSelectableNodes())
+					GUI2D.getInstance().getIOController().addRightShootable(node);
 
 				// Make EndTurnButton visible:
 				view.setEndTurnButtonVisible(true);

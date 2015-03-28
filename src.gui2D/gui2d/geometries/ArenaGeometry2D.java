@@ -113,6 +113,11 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 				public void mouseSelect() {
 					// Do nothing here
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			damageBox.setLocalTranslation(boxXPos, boxYPos, zPos);
 			this.hpBoxes.add(damageBox);
@@ -130,6 +135,11 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 				public void mouseSelect() {
 					// Do nothing here
 				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
 			};
 			damageBox.setLocalTranslation(boxXPos, boxYPos, zPos);
 			this.energyBoxes.add(damageBox);
@@ -146,6 +156,11 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 				@Override
 				public void mouseSelect() {
 					// Do nothing here
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
 				}
 			};
 			damageBox.setLocalTranslation(boxXPos, boxYPos, zPos);
@@ -203,6 +218,8 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 	}
 
 	public abstract void mouseSelect();
+
+	public abstract void mouseSelectRightClick();
 
 	public void audioSelect() {
 		this.clickSoundNode.playInstance();

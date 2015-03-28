@@ -41,6 +41,11 @@ public class TitleController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				startButtonClicked();
 			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
 		};
 		startButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.25f + buttonHeight / 2, 0);
 		startButton.setVisible(false);
@@ -51,6 +56,11 @@ public class TitleController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
+				// nothing to do here
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
 				// nothing to do here
 			}
 		};
