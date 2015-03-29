@@ -22,4 +22,8 @@ public class Triple<K, V, A> {
 	public A getAction() {
 		return action;
 	}
+
+	public String toString() {
+		return "(" + key.toString() + ", " + value.toString() + ", " + action.toString() + ")";
+	}
 }

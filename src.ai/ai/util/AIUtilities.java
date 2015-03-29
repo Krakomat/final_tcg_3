@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import network.client.Player;
+import model.database.Card;
+import model.database.EnergyCard;
 import model.enums.Color;
+import model.enums.Element;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
@@ -122,5 +125,48 @@ public class AIUtilities {
 			}
 		}
 		return outList;
+	}
+
+	/**
+	 * Checks if the given list of cards is able to pay the given costs of energy.
+	 * 
+	 * @param chosenEnergyCards
+	 * @param costs
+	 * @return
+	 */
+	public boolean checkPaymentOk(List<Card> chosenEnergyCards, List<Element> costs) {
+		List<Element> chosenEnergy = new ArrayList<Element>();
+		for (Card c : chosenEnergyCards) {
+			List<Element> energy = ((EnergyCard) c).getProvidedEnergy();
+			for (Element ele : energy)
+				chosenEnergy.add(ele);
+		}
+
+		// Get a copy of the color- and colorless costs:
+		List<Element> colorCosts = new ArrayList<>();
+		int colorless = 0;
+		for (Element element : costs)
+			if (element != Element.COLORLESS)
+				colorCosts.add(element);
+			else
+				colorless++;
+
+		// Try to pay color costs:
+		for (Element element : chosenEnergy) {
+			boolean payed = false;
+			for (int i = 0; i < colorCosts.size() && !payed; i++) {
+				Element costElement = colorCosts.get(i);
+				if (costElement == element) {
+					colorCosts.remove(costElement);
+					payed = true;
+				}
+			}
+		}
+		boolean colorPayed = colorCosts.size() == 0;
+
+		// Try to pay the rest costs(colorless):
+		boolean colorlessPayed = chosenEnergy.size() >= colorless;
+
+		return colorPayed && colorlessPayed;
 	}
 }
