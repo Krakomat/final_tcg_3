@@ -81,12 +81,13 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void simpleInitApp() {
+		this.settings.setMinResolution(1280, 720);
 		this.setPauseOnLostFocus(false);
 		Thread.currentThread().setName(Threads.RENDER_THREAD.toString());
 		GUI2D = this;
 		this.setDisplayStatView(false);
+		this.setDisplayFps(false);
 		this.resolution = new Pair<>(this.settings.getWidth(), this.settings.getHeight());
-
 		camController = new CameraController(cam, flyCam);
 		camController.initCam();
 		ioController = new IOController(inputManager);
@@ -691,5 +692,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	@Override
 	public void destroy() {
 		super.destroy();
+		System.exit(0);
 	}
 }
