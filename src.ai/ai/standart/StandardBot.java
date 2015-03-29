@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Preconditions;
+
 import network.client.Player;
 import network.server.PokemonGameManager;
 import common.utilities.Triple;
 import model.database.Card;
+import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.enums.Element;
 import model.enums.PlayerAction;
@@ -18,13 +21,25 @@ import model.interfaces.Position;
 import ai.interfaces.Bot;
 import ai.util.AIUtilities;
 
+/**
+ * A simple (but not trivial) implementation of an ai.
+ * 
+ * @author Michael
+ *
+ */
 public class StandardBot implements Bot {
+	private enum BotState {
+		CHOOSE_ACTIVE, CHOOSE_BENCH, NORMAL;
+	}
+
+	private BotState botState;
 	private AIUtilities aiUtilities;
 	private LocalPokemonGameModel gameModel;
 
 	public StandardBot() {
 		this.aiUtilities = new AIUtilities();
 		this.gameModel = null;
+		this.botState = BotState.NORMAL;
 	}
 
 	@Override
@@ -34,7 +49,7 @@ public class StandardBot implements Bot {
 
 	@Override
 	public void startGame() {
-
+		this.botState = BotState.CHOOSE_ACTIVE;
 	}
 
 	@Override
@@ -65,8 +80,21 @@ public class StandardBot implements Bot {
 	@Override
 	public List<Card> choosesCards(List<Card> cards, int amount, boolean exact) {
 		List<Card> chosenCards = new ArrayList<Card>();
-		for (int i = 0; i < amount && i < cards.size(); i++)
-			chosenCards.add(cards.get(i));
+		if (this.botState == BotState.CHOOSE_ACTIVE) {
+			/*
+			 * Choose active pokemon: Choose the pokemon with the most HP.
+			 */
+			PokemonCard chosenCard = (PokemonCard) cards.get(0);
+			for (Card card : cards) {
+				if (chosenCard.getHitpoints() < ((PokemonCard) card).getHitpoints())
+					chosenCard = (PokemonCard) card;
+			}
+			chosenCards.add(chosenCard);
+			this.botState = BotState.NORMAL;
+		} else {
+			for (int i = 0; i < amount && i < cards.size(); i++)
+				chosenCards.add(cards.get(i));
+		}
 		return chosenCards;
 	}
 
@@ -80,18 +108,74 @@ public class StandardBot implements Bot {
 
 	@Override
 	public List<Element> choosesElements(List<Element> elements, int amount, boolean exact) {
-		return null;
+		List<Element> chosenElements = new ArrayList<Element>();
+		for (int i = 0; i < amount && i < elements.size(); i++)
+			chosenElements.add(elements.get(i));
+		return chosenElements;
 	}
 
 	@Override
 	public List<String> choosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> chosenAttacks = new ArrayList<String>();
+		for (int i = 0; i < amount && i < attacks.size(); i++)
+			chosenAttacks.add(attacks.get(i));
+		return chosenAttacks;
 	}
 
 	@Override
 	public List<Card> paysEnergyCosts(List<Element> costs, List<Card> energyCards) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Card> chosenCards = new ArrayList<>();
+		List<Card> availableCards = new ArrayList<>();
+		for (Card c : energyCards)
+			availableCards.add(c);
+
+		// Get a copy of the color- and colorless costs:
+		List<Element> colorCosts = new ArrayList<>();
+		int colorless = 0;
+		for (Element element : costs)
+			if (element != Element.COLORLESS)
+				colorCosts.add(element);
+			else
+				colorless++;
+
+		// Pay color costs:
+		for (Element element : colorCosts) {
+			boolean payed = false;
+			for (int i = 0; i < availableCards.size() && !payed; i++) {
+				EnergyCard c = (EnergyCard) availableCards.get(i);
+				if (c.getProvidedEnergy().contains(element)) {
+					payed = true;
+					availableCards.remove(i);
+					i--;
+					chosenCards.add(c);
+				}
+			}
+		}
+
+		// Pay colorless costs with non-basic energy:
+		for (int i = 0; i < colorless; i++) {
+			EnergyCard c = (EnergyCard) availableCards.get(i);
+			if (c.getProvidedEnergy().size() >= colorless && !c.isBasisEnergy()) {
+				chosenCards.add(c);
+				colorless = colorless - c.getProvidedEnergy().size();
+				availableCards.remove(i);
+				i--;
+			}
+		}
+
+		// Pay colorless costs with basic energy:
+		for (int i = 0; i < colorless; i++) {
+			EnergyCard c = (EnergyCard) availableCards.get(i);
+			if (c.getProvidedEnergy().size() >= colorless) {
+				chosenCards.add(c);
+				colorless = colorless - c.getProvidedEnergy().size();
+				availableCards.remove(i);
+				i--;
+			}
+		}
+
+		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of StandardBot was not ok! Cost: " + costs + " Payment: "
+				+ chosenCards);
+		return chosenCards;
 	}
 }
