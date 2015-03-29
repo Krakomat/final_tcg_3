@@ -12,18 +12,14 @@ GameModel:
 	- Add a concede feature, so players can give up
 	- Implement timer for (single) actions for a client
 	
-Multiplayer network:
-	- Store playerActions for cards locally, s.t. on selecting a node the actions do not need to come from the server
-	- (HARD!) Compute actions for a card locally using the local fresh game model
-
-Editor:
+CardEditor:
 	- Rework editor, s.t. editions can be managed better
 		
-Deckeditor:
+DeckEditor:
 	- Make filters glow on mouseOver
 	- Introduce filters for editions
 
-Bot:
+AI:
 	- Standard dummy bot that can play cards
 	- (HARD!) Enhanced bot that knows what he's doing
 	
@@ -31,4 +27,4 @@ New Cards:
 	- Jungle
 	- Fossil
 
-Ingame Chat
+Chat in game

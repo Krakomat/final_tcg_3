@@ -1,0 +1,27 @@
+Algorithm(1):
+	On playerMakesMove():
+		1. Compute a List of (Card, ACTION) [without attacks]
+		2. If this list is empty goto 5
+		3. Execute one arbitrary action
+		4. Goto 1
+		5. Compute a list of attacks
+		6. If this list is empty end turn
+		7. Choose attack with the highest cost
+		
+Algorithm(2):
+	On playerMakesMove():
+		1. Get the fresh game model
+		2. Judge(gameModel)
+		3. Compute a List of (Card, ACTION) [without attacks]
+		4. If this list is empty goto 8
+		5. For each pair do:
+			- Copy fresh game model
+			- Execute action
+			- Judge(newGameModel) --> Results in list of (Card, ACTION, value)
+		6. Send action that results in the best game model to the server.
+		7. return
+		8. Compute a List of Attacks
+		9. If this list is empty goto 12
+	   10. Send best attack to server
+	   11. return
+	   12. Send end turn to server

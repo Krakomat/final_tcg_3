@@ -23,6 +23,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import ai.standart.StandardBot;
+
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
@@ -91,10 +93,13 @@ public class AccountStorageHelper {
 			Player acc = null;
 			switch (accType) {
 			case BOT_DUMMY:
-				acc = DummyBot.createDummyBot(id, name, password);
+				acc = DummyBot.createBot(id, name, password);
 				break;
 			case REAL_PLAYER:
 				acc = PlayerImpl.createNewPlayer(id, name, password);
+				break;
+			case BOT_STANDARD:
+				acc = StandardBot.createBot(id, name, password);
 				break;
 			default:
 				System.err.println("Wrong AccountType in method parseAccount() of class AccountStorageHelper");

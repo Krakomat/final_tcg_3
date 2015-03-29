@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>StandardBot</Name>
+	<Password />
+	<AccountType>BOT_STANDARD</AccountType>
+	<Deck Name="SimpleDeck">
+		<Cards>
+			<Card ID="00002">
+				<Size>1</Size>
+			</Card>
+			<Card ID="00007">
+				<Size>2</Size>
+			</Card>
+			<Card ID="00008">
+				<Size>1</Size>
+			</Card>
+			<Card ID="00027">
+				<Size>3</Size>
+			</Card>
+			<Card ID="00034">
+				<Size>2</Size>
+			</Card>
+			<Card ID="00041">
+				<Size>1</Size>
+			</Card>
+			<Card ID="00042">
+				<Size>2</Size>
+			</Card>
+			<Card ID="00052">
+				<Size>4</Size>
+			</Card>
+			<Card ID="00056">
+				<Size>3</Size>
+			</Card>
+			<Card ID="00062">
+				<Size>3</Size>
+			</Card>
+			<Card ID="00063">
+				<Size>4</Size>
+			</Card>
+			<Card ID="00065">
+				<Size>3</Size>
+			</Card>
+			<Card ID="00075">
+				<Size>1</Size>
+			</Card>
+			<Card ID="00091">
+				<Size>2</Size>
+			</Card>
+			<Card ID="00097">
+				<Size>16</Size>
+			</Card>
+			<Card ID="00102">
+				<Size>12</Size>
+			</Card>
+		</Cards>
+	</Deck>
+</Account>

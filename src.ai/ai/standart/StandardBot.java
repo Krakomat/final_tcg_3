@@ -1,15 +1,24 @@
-package network.client;
+package ai.standart;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import ai.util.AIUtilities;
+import common.utilities.Triple;
+import network.client.AccountImpl;
+import network.client.Player;
 import network.server.PokemonGameManager;
 import model.database.Card;
+import model.database.PokemonCard;
 import model.enums.AccountType;
 import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
+import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.game.LocalPokemonGameModel;
 import model.interfaces.GameModelUpdate;
 import model.interfaces.Position;
 
@@ -19,10 +28,11 @@ import model.interfaces.Position;
  * @author Michael
  *
  */
-public class DummyBot extends AccountImpl implements Player {
+public class StandardBot extends AccountImpl implements Player {
 
-	static boolean BOT_DEBUGGER = false;
 	private PokemonGameManager server;
+	private LocalPokemonGameModel localGameModel;
+	private AIUtilities aiUtilities;
 
 	/**
 	 * Creates a new {@link PlayerImpl} object with the given parameters.
@@ -33,25 +43,22 @@ public class DummyBot extends AccountImpl implements Player {
 	 * @return
 	 */
 	public static Player createBot(long id, String name, String password) {
-		DummyBot p = new DummyBot(id, name, password);
+		StandardBot p = new StandardBot(id, name, password);
 		return p;
 	}
 
-	public DummyBot(long id, String name, String password) {
+	public StandardBot(long id, String name, String password) {
 		super(id, name, password);
-		this.accountType = AccountType.BOT_DUMMY;
+		this.accountType = AccountType.BOT_STANDARD;
+		this.localGameModel = null;
+		this.aiUtilities = new AIUtilities();
 	}
 
 	private Color playerColor;
 
 	@Override
 	public List<Card> playerChoosesCards(List<Card> cards, int amount, boolean exact, String message) {
-		if (BOT_DEBUGGER) {
-			System.out.println("[Bot] " + this.name + " received playerChoosesCards");
-			for (int i = 0; i < cards.size(); i++)
-				System.out.println("[Bot] Card " + cards.get(i).getName() + " can be chosen by " + this.name);
-		}
-		ArrayList<Card> chosenCards = new ArrayList<Card>();
+		List<Card> chosenCards = new ArrayList<Card>();
 		for (int i = 0; i < amount && i < cards.size(); i++)
 			chosenCards.add(cards.get(i));
 		return chosenCards;
@@ -59,11 +66,6 @@ public class DummyBot extends AccountImpl implements Player {
 
 	@Override
 	public List<PositionID> playerChoosesPositions(List<PositionID> positionList, int amount, boolean exact, String message) {
-		if (BOT_DEBUGGER) {
-			System.out.println("[Bot] " + this.name + " received playerChoosesPositions");
-			for (int i = 0; i < positionList.size(); i++)
-				System.out.println("[Bot] Position " + positionList.get(i) + " can be chosen by " + this.name);
-		}
 		ArrayList<PositionID> chosenPositions = new ArrayList<PositionID>();
 		for (int i = 0; i < amount && i < positionList.size(); i++)
 			chosenPositions.add(positionList.get(i));
@@ -72,53 +74,56 @@ public class DummyBot extends AccountImpl implements Player {
 
 	@Override
 	public List<Element> playerChoosesElements(List<Element> elements, int amount, boolean exact, String message) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerChoosesElements");
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<String> playerChoosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact, String message) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerChoosesAttacks");
+	public List<String> playerChoosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact, String message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerPaysEnergyCosts");
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerUpdatesGameModel");
-		// TODO Auto-generated method stub
-
+		this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this);
 	}
 
 	@Override
 	public List<Integer> playerDistributesDamage(List<Position> positionList, List<Integer> damageList, List<Integer> maxDistList, DistributionMode mode) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerDistributesDamage");
 		return null;
 	}
 
 	@Override
 	public void playerMakesMove() {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerMakesMove");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		server.endTurn(this);
+		this.aiUtilities.sleep(2000);
+		System.out.println("[StandardBot] Execute playerMakesMove()");
+		// (Position, positionIndex, Action)
+		List<Triple<Position, Integer, String>> actionList = this.aiUtilities.computePlayerActions(this.localGameModel, this);
+		List<Triple<Position, Integer, String>> attackList = this.aiUtilities.filterActions(actionList, PlayerAction.ATTACK_1, PlayerAction.ATTACK_2,
+				PlayerAction.RETREAT_POKEMON);
+		this.aiUtilities.filterActions(attackList, PlayerAction.RETREAT_POKEMON);
+		if (!actionList.isEmpty()) {
+			Random r = new SecureRandom();
+			int index = r.nextInt(actionList.size());
+			int handCardIndex = actionList.get(index).getValue();
+			server.playerPlaysCard(this, handCardIndex);
+		} else if (!attackList.isEmpty()) {
+			Random r = new SecureRandom();
+			int index = r.nextInt(attackList.size());
+			Triple<Position, Integer, String> attackTriple = attackList.get(index);
+			if (attackTriple.getAction().equals(PlayerAction.ATTACK_1.toString()))
+				this.server.executeAttack(this, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(0));
+			else if (attackTriple.getAction().equals(PlayerAction.ATTACK_2.toString()))
+				this.server.executeAttack(this, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(1));
+		} else
+			server.endTurn(this);
 	}
 
 	@Override
@@ -133,33 +138,26 @@ public class DummyBot extends AccountImpl implements Player {
 
 	@Override
 	public void receiveGameDeleted() {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received receiveGameDeleted");
+
 	}
 
 	@Override
 	public void playerReceivesGameTextMessage(String message) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerReceivesCardMessage");
+
 	}
 
 	@Override
 	public void playerReceivesCardMessage(String message, Card card) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerReceivesCardMessage");
 
 	}
 
 	@Override
 	public void playerReceivesCardMessage(String message, List<Card> cardList) {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received playerReceivesCardMessage");
 	}
 
 	@Override
 	public void startGame() {
-		if (BOT_DEBUGGER)
-			System.out.println("[Bot] " + this.name + " received startGame()");
+		// TODO
 	}
 
 	@Override
@@ -169,7 +167,6 @@ public class DummyBot extends AccountImpl implements Player {
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

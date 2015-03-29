@@ -176,6 +176,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		return this.password.equals(password);
 	}
 
+	@Deprecated
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
 		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
 		Card c = handCard ? gameModel.getPosition(position).getCardAtIndex(positionIndex) : gameModel.getPosition(position).getTopCard();

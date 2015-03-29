@@ -20,7 +20,7 @@ import com.jme3.scene.Node;
 
 public class LobbyController extends Node implements GUI2DController {
 
-	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, backButton, deckEditorButton,
+	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, standardBot, backButton, deckEditorButton,
 			exitButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -120,6 +120,23 @@ public class LobbyController extends Node implements GUI2DController {
 		dummyBotButton.setVisible(false);
 		dropInUpdateQueue(dummyBotButton);
 		this.attachChild(dummyBotButton);
+
+		standardBot = new TextButton2D("standardBot", "Standard Bot", buttonWidth, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				standardBotClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		standardBot.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
+		standardBot.setVisible(false);
+		dropInUpdateQueue(standardBot);
+		this.attachChild(standardBot);
 
 		backButton = new TextButton2D("backButton", "Back", buttonWidth, buttonHeight) {
 
@@ -225,6 +242,24 @@ public class LobbyController extends Node implements GUI2DController {
 		this.attachChild(equipedDeckPanel);
 	}
 
+	protected void standardBotClicked() {
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+		GUI2D.getInstance().getPlayer().createGame();
+
+		// Create standard bot and connect him to the server that was created in createGame:
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Player bot = Database.getBot("StandardBot");
+				ClientBorder botBorder = new ClientBorder(bot);
+				bot.setServer(botBorder);
+
+				// Register at server:
+				botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
+			}
+		}).start();
+	}
+
 	private void dropInUpdateQueue(SelectableNode node) {
 		Thread t = new Thread(new Runnable() {
 			@Override
@@ -264,6 +299,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(backButton);
 		this.dummyBotButton.setVisible(true);
 		this.dropInUpdateQueue(dummyBotButton);
+		this.standardBot.setVisible(true);
+		this.dropInUpdateQueue(standardBot);
 	}
 
 	protected void multiPlayerCreateClicked() {
@@ -339,6 +376,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(multiPlayerConnectButton);
 		this.dummyBotButton.setVisible(false);
 		this.dropInUpdateQueue(dummyBotButton);
+		this.standardBot.setVisible(false);
+		this.dropInUpdateQueue(standardBot);
 		this.backButton.setVisible(false);
 		this.dropInUpdateQueue(backButton);
 		this.exitButton.setVisible(false);
