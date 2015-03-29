@@ -28,7 +28,7 @@ import model.interfaces.Position;
  * @author Michael
  *
  */
-public class StandardBot extends AccountImpl implements Player {
+public class StandardBotBorder extends AccountImpl implements Player {
 
 	private PokemonGameManager server;
 	private LocalPokemonGameModel localGameModel;
@@ -43,11 +43,11 @@ public class StandardBot extends AccountImpl implements Player {
 	 * @return
 	 */
 	public static Player createBot(long id, String name, String password) {
-		StandardBot p = new StandardBot(id, name, password);
+		StandardBotBorder p = new StandardBotBorder(id, name, password);
 		return p;
 	}
 
-	public StandardBot(long id, String name, String password) {
+	public StandardBotBorder(long id, String name, String password) {
 		super(id, name, password);
 		this.accountType = AccountType.BOT_STANDARD;
 		this.localGameModel = null;
@@ -102,8 +102,7 @@ public class StandardBot extends AccountImpl implements Player {
 
 	@Override
 	public void playerMakesMove() {
-		this.aiUtilities.sleep(2000);
-		System.out.println("[StandardBot] Execute playerMakesMove()");
+		this.aiUtilities.sleep(4000);
 		// (Position, positionIndex, Action)
 		List<Triple<Position, Integer, String>> actionList = this.aiUtilities.computePlayerActions(this.localGameModel, this);
 		List<Triple<Position, Integer, String>> attackList = this.aiUtilities.filterActions(actionList, PlayerAction.ATTACK_1, PlayerAction.ATTACK_2,
