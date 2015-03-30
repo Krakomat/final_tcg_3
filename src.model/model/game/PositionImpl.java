@@ -63,7 +63,7 @@ public class PositionImpl implements Position {
 
 	public List<Element> getEnergy() {
 		if (providedEnergy.isEmpty()) {
-			ArrayList<Element> energy = new ArrayList<Element>();
+			List<Element> energy = new ArrayList<Element>();
 			for (int i = 0; i < cards.size(); i++) {
 				if (cards.get(i) instanceof EnergyCard) {
 					for (int j = 0; j < ((EnergyCard) cards.get(i)).getProvidedEnergy().size(); j++) {

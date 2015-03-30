@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import network.client.Player;
+import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
 import model.enums.Color;
@@ -23,7 +24,7 @@ public class AIUtilities {
 	 * @param player
 	 * @return
 	 */
-	public List<Triple<Position, Integer, String>> computePlayerActions(LocalPokemonGameModel gameModel, Player player) {
+	public List<Triple<Position, Integer, String>> computePlayerActions(LocalPokemonGameModel gameModel, Player player, PokemonGameManager server) {
 		if (player.getColor() == Color.BLUE) {
 			List<Triple<Position, Integer, String>> choosableCards = new ArrayList<>();
 			// Check hand:
@@ -37,7 +38,11 @@ public class AIUtilities {
 			}
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
-			List<String> actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
+			List<String> actions = null;
+			if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+				actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
+			else
+				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
 			if (!actions.isEmpty()) {
 				for (String action : actions)
 					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
@@ -66,7 +71,11 @@ public class AIUtilities {
 			}
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
-			List<String> actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
+			List<String> actions = null;
+			if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+				actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
+			else
+				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
 			if (!actions.isEmpty()) {
 				for (String action : actions)
 					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));

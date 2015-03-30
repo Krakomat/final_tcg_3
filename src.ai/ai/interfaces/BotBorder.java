@@ -105,6 +105,7 @@ public class BotBorder extends AccountImpl implements Player {
 	@Override
 	public void setColor(Color color) {
 		playerColor = color;
+		this.botModel.setColor(color);
 	}
 
 	@Override

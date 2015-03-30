@@ -866,7 +866,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		GameModelUpdate gameModelUpdate = new GameModelUpdateImpl();
 		gameModelUpdate.setTurnNumber((short) this.turnNumber);
 		gameModelUpdate.setEnergyPlayAllowed(this.energyPlayed);
-		
+
 		Card dummyCard = new Card();
 		for (Position pos : gameField.getAllPositions()) {
 			Position position = new PositionImpl(pos.getPositionID(), pos.getColor());

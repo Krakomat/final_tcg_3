@@ -17,3 +17,16 @@ Patch 1.01
 	Network
 		- Clients are now able to compute the actions for hand cards or arena positions locally due to the new LocalGameModel
 		- Client knows the attacks of its pokemon locally
+	AI
+		- New Bot: StandardBot[Beta]
+
+Patch 1.02
+	GUI
+		- Added a symbol for the application
+		- The application now closed properly
+	
+	AI
+		- StandardBot[Beta] intelligently plays energy cards
+		
+	Client
+		- Fixed a bug, where "Lauchschlag" (Porenta) could be executed several times at the client

@@ -567,6 +567,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public void stopGame() {
 		this.ingameController.hide();
 		this.lobbyController.restart();
+		this.currentActiveController = this.lobbyController;
 	}
 
 	@Override

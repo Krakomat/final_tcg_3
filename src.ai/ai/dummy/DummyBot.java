@@ -11,6 +11,7 @@ import network.client.Player;
 import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
+import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
@@ -132,5 +133,10 @@ public class DummyBot implements Bot {
 		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of DummyBot was not ok! Cost: " + costs + " Payment: "
 				+ chosenCards);
 		return chosenCards;
+	}
+
+	@Override
+	public void setColor(Color color) {
+
 	}
 }

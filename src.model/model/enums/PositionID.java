@@ -45,6 +45,19 @@ public enum PositionID {
 	}
 
 	/**
+	 * Returns the active position for the given color.
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public static PositionID getActivePokemon(Color color) {
+		if (color == Color.BLUE)
+			return PositionID.BLUE_ACTIVEPOKEMON;
+		else
+			return PositionID.RED_ACTIVEPOKEMON;
+	}
+
+	/**
 	 * Returns the respective bench position for the given player and the given index. Returns null, if the given index is not in the range of 1 to 5.
 	 * 
 	 * @param color
@@ -66,5 +79,18 @@ public enum PositionID {
 		default:
 			return null;
 		}
+	}
+
+	/**
+	 * Returns the hand position for the given color.
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public static PositionID getHandPosition(Color color) {
+		if (color == Color.BLUE)
+			return PositionID.BLUE_HAND;
+		else
+			return PositionID.RED_HAND;
 	}
 }

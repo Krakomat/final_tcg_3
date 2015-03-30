@@ -117,7 +117,11 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
-					List<String> actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
+					List<String> actions = null;
+					if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+						actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
+					else
+						actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {
@@ -142,7 +146,11 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
-					List<String> actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
+					List<String> actions = null;
+					if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+						actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
+					else
+						actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {

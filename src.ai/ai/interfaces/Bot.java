@@ -3,6 +3,7 @@ package ai.interfaces;
 import java.util.List;
 
 import model.database.Card;
+import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
@@ -85,4 +86,11 @@ public interface Bot {
 	 * @return
 	 */
 	public List<Card> paysEnergyCosts(List<Element> costs, List<Card> energyCards);
+
+	/**
+	 * Sets the color for this bot.
+	 * 
+	 * @param color
+	 */
+	public void setColor(Color color);
 }

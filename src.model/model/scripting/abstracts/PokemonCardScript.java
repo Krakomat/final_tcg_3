@@ -264,6 +264,21 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
+	 * Returns the attack costs for the given attack. Returns null, if a wrong attack name was given to this script.
+	 * 
+	 * @param attackName
+	 * @return
+	 */
+	public List<Element> getAttackCosts(String attackName) {
+		if (!this.attackCosts.containsKey(attackName))
+			return null;
+		List<Element> costs = new ArrayList<>();
+		for (Element element : this.attackCosts.get(attackName))
+			costs.add(element);
+		return costs;
+	}
+
+	/**
 	 * Returns the available attack names of this script.
 	 * 
 	 * @return
