@@ -63,43 +63,48 @@ public class StandardBot implements Bot {
 
 	@Override
 	public void makeMove(PokemonGameManager server, Player player) {
-		this.aiUtilities.sleep(4000);
-		// (Position, positionIndex, Action)
-		List<Triple<Position, Integer, String>> actionList = this.aiUtilities.computePlayerActions(this.gameModel, player, server);
-		List<Triple<Position, Integer, String>> energyList = this.aiUtilities.filterActions(actionList, PlayerAction.PLAY_ENERGY_CARD);
-		List<Triple<Position, Integer, String>> attackList = this.aiUtilities.filterActions(actionList, PlayerAction.ATTACK_1, PlayerAction.ATTACK_2,
-				PlayerAction.RETREAT_POKEMON);
-		@SuppressWarnings("unused")
-		List<Triple<Position, Integer, String>> retreatList = this.aiUtilities.filterActions(attackList, PlayerAction.RETREAT_POKEMON);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				aiUtilities.sleep(4000);
+				// (Position, positionIndex, Action)
+				List<Triple<Position, Integer, String>> actionList = aiUtilities.computePlayerActions(gameModel, player, server);
+				List<Triple<Position, Integer, String>> energyList = aiUtilities.filterActions(actionList, PlayerAction.PLAY_ENERGY_CARD);
+				List<Triple<Position, Integer, String>> attackList = aiUtilities.filterActions(actionList, PlayerAction.ATTACK_1, PlayerAction.ATTACK_2,
+						PlayerAction.RETREAT_POKEMON);
+				@SuppressWarnings("unused")
+				List<Triple<Position, Integer, String>> retreatList = aiUtilities.filterActions(attackList, PlayerAction.RETREAT_POKEMON);
 
-		if (!actionList.isEmpty()) {
-			Random r = new SecureRandom();
-			int index = r.nextInt(actionList.size());
-			int handCardIndex = actionList.get(index).getValue();
-			server.playerPlaysCard(player, handCardIndex);
-			return;// End makeMove()
-		}
-		if (!energyList.isEmpty()) {
-			boolean turnDone = checkAndExecuteEnergy(player, server);
-			if (turnDone)
-				return;
-		}
-		if (!attackList.isEmpty()) {
-			Random r = new SecureRandom();
-			int index = r.nextInt(attackList.size());
-			Triple<Position, Integer, String> attackTriple = attackList.get(index);
-			if (attackTriple.getAction().equals(PlayerAction.ATTACK_1.toString()))
-				server.executeAttack(player, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(0));
-			else if (attackTriple.getAction().equals(PlayerAction.ATTACK_2.toString()))
-				server.executeAttack(player, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(1));
-			else {
-				System.err.println("Bot couldn't decide on an attack!");
-				server.endTurn(player);
+				if (!actionList.isEmpty()) {
+					Random r = new SecureRandom();
+					int index = r.nextInt(actionList.size());
+					int handCardIndex = actionList.get(index).getValue();
+					server.playerPlaysCard(player, handCardIndex);
+					return;// End makeMove()
+				}
+				if (!energyList.isEmpty()) {
+					boolean turnDone = checkAndExecuteEnergy(player, server);
+					if (turnDone)
+						return;
+				}
+				if (!attackList.isEmpty()) {
+					Random r = new SecureRandom();
+					int index = r.nextInt(attackList.size());
+					Triple<Position, Integer, String> attackTriple = attackList.get(index);
+					if (attackTriple.getAction().equals(PlayerAction.ATTACK_1.toString()))
+						server.executeAttack(player, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(0));
+					else if (attackTriple.getAction().equals(PlayerAction.ATTACK_2.toString()))
+						server.executeAttack(player, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(1));
+					else {
+						System.err.println("Bot couldn't decide on an attack!");
+						server.endTurn(player);
+					}
+					return;// End makeMove()
+				} else
+					server.endTurn(player);
+				return;// End makeMove()
 			}
-			return;// End makeMove()
-		} else
-			server.endTurn(player);
-		return;// End makeMove()
+		}).start();
 	}
 
 	/**

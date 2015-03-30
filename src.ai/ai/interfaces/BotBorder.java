@@ -2,6 +2,7 @@ package ai.interfaces;
 
 import java.util.List;
 
+import ai.dummy.DummyBot;
 import ai.standart.StandardBot;
 import network.client.AccountImpl;
 import network.client.Player;
@@ -43,9 +44,9 @@ public class BotBorder extends AccountImpl implements Player {
 	public BotBorder(long id, String name, String password, AccountType type) {
 		super(id, name, password);
 		this.accountType = type;
-		switch(this.accountType){
+		switch (this.accountType) {
 		case BOT_DUMMY:
-			this.botModel = new StandardBot();
+			this.botModel = new DummyBot();
 			break;
 		case BOT_STANDARD:
 			this.botModel = new StandardBot();

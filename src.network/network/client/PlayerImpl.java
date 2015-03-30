@@ -105,6 +105,8 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				@SuppressWarnings("unused")
+				GameModelUpdate update = server.getGameModelForPlayer(self);
 				localGameModel = getFreshGameModel();
 				if (color == Color.BLUE) {
 					List<Pair<Position, Integer>> choosableCards = new ArrayList<>();

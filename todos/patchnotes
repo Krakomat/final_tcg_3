@@ -27,6 +27,8 @@ Patch 1.02
 	
 	AI
 		- StandardBot[Beta] intelligently plays energy cards
+		- Fixed a bug that prevented bots from communicating with the server
+		- Fixed a bug where the standard bot was used in instead of the dummy bot
 		
 	Client
 		- Fixed a bug, where "Lauchschlag" (Porenta) could be executed several times at the client
