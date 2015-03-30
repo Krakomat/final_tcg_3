@@ -68,10 +68,7 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 		this.attachChild(this.textBitmap);
 
 		// Init audio:
-		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), EffectController.BUTTON_CLICKED, false);
-		this.clickSoundNode.setPositional(false);
-		this.clickSoundNode.setLooping(false);
-		this.clickSoundNode.setVolume(2);
+		this.clickSoundNode = EffectController.createEffectAudioNode(EffectController.BUTTON_CLICKED);
 		this.attachChild(this.clickSoundNode);
 	}
 

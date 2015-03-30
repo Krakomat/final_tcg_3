@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="PsyPunch">
+    <Cards>
+        <Card ID="00001">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00003">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00007">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00008">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00010">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00031">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00032">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00034">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00043">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00052">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00075">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00076">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00077">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00078">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00083">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00085">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00097">
+            <Size>12</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>12</Size>
+        </Card>
+    </Cards>
+</Deck>
