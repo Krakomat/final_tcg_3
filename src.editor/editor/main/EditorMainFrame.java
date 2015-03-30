@@ -71,7 +71,7 @@ public class EditorMainFrame extends JPanel {
 			}
 		});
 		pokemonJScrollPane = new JScrollPane(pokemonJList);
-		newPokemonButton = new JButton(new BitmapComponent("/tilesets/other/pokeball.png").getImageIcon());
+		newPokemonButton = new JButton(new BitmapComponent("/tilesets/other/pokeball16x16.png").getImageIcon());
 		newPokemonButton.addActionListener(new ActionListener() {
 
 			@Override

@@ -21,7 +21,6 @@ DeckEditor:
 
 AI:
 	- Standard dummy bot that can play cards
-		- Implement intelligent use of energy cards
 		- Implement intelligent use of retreat/attack
 	- (HARD!) Enhanced bot that knows what he's doing
 	
