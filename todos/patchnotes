@@ -30,3 +30,4 @@ Patch 1.02
 		
 	Client
 		- Fixed a bug, where "Lauchschlag" (Porenta) could be executed several times at the client
+		- Fixed a bug, where the client would crash when using Piepi-doll or Lektrobal token
