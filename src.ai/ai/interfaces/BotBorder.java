@@ -90,7 +90,7 @@ public class BotBorder extends AccountImpl implements Player {
 
 	@Override
 	public List<Integer> playerDistributesDamage(List<Position> positionList, List<Integer> damageList, List<Integer> maxDistList, DistributionMode mode) {
-		return null;
+		return damageList;
 	}
 
 	@Override

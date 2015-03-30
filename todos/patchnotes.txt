@@ -1,6 +1,8 @@
 Patch 1.03
 	Game
 		- A Pokemon that is Asleep or Paralyzed should not be allowed to retreat. 
+	GUI
+		- Fixed a bug where the music did not switch properly between ingame and lobby controller
 
 Patch 1.02
 	GUI

@@ -565,9 +565,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void stopGame() {
-		this.ingameController.hide();
-		this.lobbyController.restart();
-		this.currentActiveController = this.lobbyController;
+		this.switchMode(GUI2DMode.LOBBY);
 	}
 
 	@Override
@@ -649,6 +647,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			this.musicController.switchMusic(MusicType.INGAME_MUSIC);
 			break;
 		case LOBBY:
+			if (this.currentActiveController != this.titleController)
+				this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
 			this.currentActiveController = this.lobbyController;
 			break;
 		default:

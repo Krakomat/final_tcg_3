@@ -4,10 +4,6 @@ View:
 	- Rework distribution view, s.t. the minus button can be pressed so long until the resources on the pokemon are gone and not just once. Also add a balance counter.
 	
 GameModel: 
-	- What If You Don’t Have a Basic Pokémon Card in Your Hand? Then show your hand to your opponent, shuffle it back into your deck, and draw 7 new cards. 
-	  Your opponent continues his or her set-up and can choose to draw an extra card after setting aside his or her Prize cards. If you still do not have any Basic 
-	  Pokémon cards in your new hand, you repeat this process, but your opponent can draw an extra card each time! Remember, Fossil Trainer cards in your hand always 
-	  count as Basic Pokémon cards during this part of the game
 	- time counter for each turn
 	- Add a concede feature, so players can give up
 	- Implement timer for (single) actions for a client
