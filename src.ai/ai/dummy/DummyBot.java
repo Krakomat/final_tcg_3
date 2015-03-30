@@ -39,7 +39,7 @@ public class DummyBot implements Bot {
 	@Override
 	public void makeMove(PokemonGameManager server, Player player) {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

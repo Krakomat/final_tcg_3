@@ -95,7 +95,13 @@ public class BotBorder extends AccountImpl implements Player {
 
 	@Override
 	public void playerMakesMove() {
-		this.botModel.makeMove(server, this);
+		Player self = this;
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				botModel.makeMove(server, self);
+			}
+		}).start();
 	}
 
 	@Override

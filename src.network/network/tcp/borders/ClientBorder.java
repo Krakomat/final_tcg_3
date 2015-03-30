@@ -203,7 +203,6 @@ public class ClientBorder implements PokemonGameManager {
 	}
 
 	public void setRespondMessage(RespondMessage respondMessage) {
-		System.err.println("SETTING RESPONSE");
 		this.respondMessage = respondMessage;
 	}
 
