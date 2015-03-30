@@ -353,9 +353,24 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				if (!pScript.attackCanBeExecuted(attackName))
 					gameModel.playerLoses(player);
 
-				// Check if pokemon is blind and flip a coin, if attacking is allowed:
+				// Check if pokemon is confused and flip a coin, if attacking is allowed or the pokemon hurts itself:
 				boolean attackAllowed = true;
-				if (active.hasCondition(PokemonCondition.BLIND)) {
+				if (active.hasCondition(PokemonCondition.CONFUSED)) {
+					gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!");
+					Coin c = gameModel.getAttackAction().flipACoin();
+					gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+
+					if (c == Coin.TAILS) {
+						attackAllowed = false;
+						// Damage attacker:
+						gameModel.sendTextMessageToAllPlayers(active.getName() + " hurts itself!");
+						gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
+								active.getCurrentPosition().getPositionID(), 20, true);
+					}
+				}
+
+				// Check if pokemon is blind and flip a coin, if attacking is allowed:
+				if (attackAllowed && active.hasCondition(PokemonCondition.BLIND)) {
 					gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails");
 					Coin c = gameModel.getAttackAction().flipACoin();
 					gameModel.sendTextMessageToAllPlayers("Coin showed " + c);

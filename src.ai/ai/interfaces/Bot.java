@@ -30,7 +30,7 @@ public interface Bot {
 	public void startGame();
 
 	/**
-	 * The bot has to make a move.
+	 * The bot has to make a move. Implement this method by starting a separate thread. Otherwise the bot won't be able to send requests to the server!
 	 * 
 	 * @param server
 	 * @param player
