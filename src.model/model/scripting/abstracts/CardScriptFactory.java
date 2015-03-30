@@ -237,6 +237,10 @@ public class CardScriptFactory {
 			return new Script_00101_PsychicEnergy((EnergyCard) card, gameModel);
 		case "00102":
 			return new Script_00102_WaterEnergy((EnergyCard) card, gameModel);
+		case "00103":
+			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only used locally for Piepi doll
+		case "00104":
+			return new Script_00104_LektrobalToken((EnergyCard) card, gameModel); // Only used locally for Lektrobal token
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}

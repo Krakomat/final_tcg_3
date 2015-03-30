@@ -77,7 +77,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 			blueCards.get(i).setCurrentPosition(blueDeck);
 			blueDeck.addToPosition(blueCards.get(i));
 		}
-
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
