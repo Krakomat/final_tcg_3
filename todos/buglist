@@ -2,7 +2,6 @@ View:
 
 GameModel: 
 	- You are able to evolve a pokemon on the first turn
-	- A Pokemon that is Asleep or Paralyzed should not be allowed to retreat. 
 	- Retreat is allowed only once per turn
 	- A Confused Pokémon can retreat to the Bench normally (without coinflipping), where it loses all Special Conditions
 	- If a Pokémon is Asleep, Confused, or Paralyzed, and a new attack is made against it that makes it Asleep, Confused, or Paralyzed, the old condition should be 

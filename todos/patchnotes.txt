@@ -1,3 +1,24 @@
+Patch 1.03
+	Game
+		- A Pokemon that is Asleep or Paralyzed should not be allowed to retreat. 
+
+Patch 1.02
+	GUI
+		- Added a symbol for the application
+		- The application now closed properly
+	
+	AI
+		- StandardBot[Beta] intelligently plays energy cards
+		- Fixed a bug that prevented bots from communicating with the server
+		- Fixed a bug where the standard bot was used in instead of the dummy bot
+		
+	Client
+		- Fixed a bug, where "Lauchschlag" (Porenta) could be executed several times at the client
+		- Fixed a bug, where the client would crash when using Piepi-doll or Lektrobal token
+	
+	Game
+		- Confusion is now checked properly before attacking
+
 Patch 1.01
 	Music & Sounds
 		- added sound effect for clicking a button
@@ -19,20 +40,3 @@ Patch 1.01
 		- Client knows the attacks of its pokemon locally
 	AI
 		- New Bot: StandardBot[Beta]
-
-Patch 1.02
-	GUI
-		- Added a symbol for the application
-		- The application now closed properly
-	
-	AI
-		- StandardBot[Beta] intelligently plays energy cards
-		- Fixed a bug that prevented bots from communicating with the server
-		- Fixed a bug where the standard bot was used in instead of the dummy bot
-		
-	Client
-		- Fixed a bug, where "Lauchschlag" (Porenta) could be executed several times at the client
-		- Fixed a bug, where the client would crash when using Piepi-doll or Lektrobal token
-	
-	Server
-		- Confusion is now checked properly before attacking

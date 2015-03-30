@@ -153,6 +153,10 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		if (gameModel.getFullBenchPositions(this.getCardOwner().getColor()).isEmpty())
 			return false;
 
+		// A Pokemon that is Asleep or Paralyzed should not be allowed to retreat:
+		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			return false;
+
 		return pos.getEnergy().size() >= pCard.getRetreatCosts().size();
 	}
 
