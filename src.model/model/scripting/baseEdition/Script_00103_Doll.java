@@ -7,6 +7,7 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
 import model.enums.Color;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -22,6 +23,7 @@ import network.client.Player;
 public class Script_00103_Doll extends PokemonCardScript {
 
 	private TrainerCard clefaryDoll;
+	private boolean firstPositionMove;
 
 	/**
 	 * Constructor only for local purposes!
@@ -33,12 +35,14 @@ public class Script_00103_Doll extends PokemonCardScript {
 		super(card, gameModel);
 		this.clefaryDoll = null;
 		this.addPokemonPower("Discard");
+		this.firstPositionMove = false;
 	}
 
 	public Script_00103_Doll(PokemonCard card, PokemonGame gameModel, TrainerCard clefaryDoll) {
 		super(card, gameModel);
 		this.clefaryDoll = clefaryDoll;
 		this.addPokemonPower("Discard");
+		this.firstPositionMove = false;
 	}
 
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
@@ -92,6 +96,36 @@ public class Script_00103_Doll extends PokemonCardScript {
 		}
 	}
 
+	public void moveToPosition(PositionID targetPosition) {
+		if (targetPosition == null || gameModel.getFullArenaPositions(Color.BLUE).contains(targetPosition)
+				|| gameModel.getFullArenaPositions(Color.RED).contains(targetPosition)) {
+			// Everything ok
+		} else {
+			if (!firstPositionMove)
+				firstPositionMove = true;
+			else {
+				/*
+				 * Swap with trainer card here:
+				 */
+
+				Position position = gameModel.getPosition(targetPosition);
+
+				// Remove doll from position:
+				boolean success = position.removeFromPosition(this.card);
+				if (!success)
+					System.err.println("Couldn't remove doll from position");
+				this.card.setCurrentPosition(null);
+
+				// Unregister doll from gameModel:
+				gameModel.unregisterCard(this.card);
+
+				// Add trainer card to position:
+				position.addToPosition(clefaryDoll);
+				clefaryDoll.setCurrentPosition(position);
+			}
+		}
+	}
+
 	@Override
 	public boolean retreatCanBeExecuted() {
 		return false; // Cannot retreat!
@@ -107,5 +141,13 @@ public class Script_00103_Doll extends PokemonCardScript {
 			return PositionID.BLUE_DISCARDPILE;
 		else
 			return PositionID.RED_DISCARDPILE;
+	}
+
+	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
+		// Clefairy doll cannot be ASLEEP, CONFUSED, POISONED/TOXIC or PARALYZED!
+		PokemonCard doll = (PokemonCard) this.card;
+		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED
+				|| condition == PokemonCondition.POISONED || condition == PokemonCondition.TOXIC)
+			doll.cureCondition(condition);
 	}
 }

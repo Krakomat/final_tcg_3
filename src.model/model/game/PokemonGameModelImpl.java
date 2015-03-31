@@ -368,7 +368,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 				Position pos = this.getPosition(posID);
 				PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 				// Increase price count only if pokemon isn't clefary doll:
-				if (!pokemon.getCardId().equals("00070")) {
+				if (!pokemon.getCardId().equals("00103")) {
 					if (pos.getColor() == Color.BLUE)
 						pricesRed++;
 					else if (pos.getColor() == Color.RED)
