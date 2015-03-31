@@ -68,4 +68,18 @@ public interface GameModelUpdate {
 	 * @param energyPlayAllowed
 	 */
 	public void setEnergyPlayAllowed(boolean energyPlayAllowed);
+
+	/**
+	 * Returns the retreatAllowed parameter.
+	 * 
+	 * @return
+	 */
+	public boolean isRetreatAllowed();
+
+	/**
+	 * Sets the retreat allowed parameter
+	 * 
+	 * @param value
+	 */
+	public void setRetreatAllowed(boolean value);
 }

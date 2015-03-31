@@ -38,7 +38,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 	protected Player playerOnTurn;
 	protected Player playerRed, playerBlue;
 	protected GameState gameState;
-	protected boolean energyPlayed;
+	protected boolean energyPlayed, retreatExecuted;
 	protected AttackAction attackAction;
 	protected AttackCondition attackCondition;
 	protected Map<Integer, Card> cardMap;
@@ -66,6 +66,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 		}
 		this.gameState = GameState.RUNNING;
 		this.energyPlayed = gameModelUpdate.isEnergyPlayAllowed();
+		this.retreatExecuted = gameModelUpdate.isRetreatAllowed();
 		this.attackAction = new AttackAction(this);
 		this.attackCondition = new AttackCondition(this);
 		this.cardScriptFactory = new CardScriptFactory();
@@ -378,5 +379,15 @@ public class LocalPokemonGameModel implements PokemonGame {
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
 		return script.getPokemonPowerNames();
+	}
+
+	@Override
+	public boolean getRetreatExecuted() {
+		return retreatExecuted;
+	}
+
+	@Override
+	public void setRetreatExecuted(boolean value) {
+		this.retreatExecuted = value;
 	}
 }

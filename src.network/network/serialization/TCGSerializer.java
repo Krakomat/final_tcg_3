@@ -827,6 +827,10 @@ public class TCGSerializer {
 		packer.packBinaryHeader(energyPlay.length());
 		packer.writePayload(energyPlay.copyAsBytes());
 
+		ByteString retreatPlay = this.packBool(update.isRetreatAllowed());
+		packer.packBinaryHeader(retreatPlay.length());
+		packer.writePayload(retreatPlay.copyAsBytes());
+
 		ByteString turnNumber = this.packShort(update.getTurnNumber());
 		packer.packBinaryHeader(turnNumber.length());
 		packer.writePayload(turnNumber.copyAsBytes());
@@ -846,6 +850,9 @@ public class TCGSerializer {
 
 		ByteString energyPlay = unpackByteString(unpacker);
 		update.setEnergyPlayAllowed(this.unpackBool(energyPlay));
+
+		ByteString retreatPlay = unpackByteString(unpacker);
+		update.setRetreatAllowed(this.unpackBool(retreatPlay));
 
 		ByteString turnNumber = unpackByteString(unpacker);
 		update.setTurnNumber(this.unpackShort(turnNumber));

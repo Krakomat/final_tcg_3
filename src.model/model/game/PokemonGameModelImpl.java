@@ -36,7 +36,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	protected Player playerRed, playerBlue;
 	protected GameField gameField;
 	protected GameState gameState;
-	protected boolean energyPlayed;
+	protected boolean energyPlayed, retreatExecuted;
 	protected AttackAction attackAction;
 	protected AttackCondition attackCondition;
 	protected Map<Integer, Card> cardMap;
@@ -58,6 +58,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		gameState = GameState.PREGAME;
 		turnNumber = 0;
 		energyPlayed = false;
+		retreatExecuted = false;
 		cardMap = new HashMap<>();
 		attackCondition = new AttackCondition(this);
 		attackAction = new AttackAction(this);
@@ -68,6 +69,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	public void initNewGame() {
 		this.turnNumber = 0;
 		this.energyPlayed = false;
+		this.retreatExecuted = false;
 		this.gameField = new GameFieldImpl();
 		this.gameState = GameState.PREGAME;
 		this.cardGameIDCounter = 0;
@@ -596,6 +598,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		// Draw a card or end game if the player is not able to draw:
 		if (this.attackAction.playerDrawsCards(1, playerOnTurn)) {
 			this.energyPlayed = false;
+			this.retreatExecuted = false;
 			// Update GameModel:
 			this.sendGameModelToPlayers(this.getPlayerList(), "");
 		} else
@@ -879,6 +882,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		GameModelUpdate gameModelUpdate = new GameModelUpdateImpl();
 		gameModelUpdate.setTurnNumber((short) this.turnNumber);
 		gameModelUpdate.setEnergyPlayAllowed(this.energyPlayed);
+		gameModelUpdate.setRetreatAllowed(this.retreatExecuted);
 
 		Card dummyCard = new Card();
 		for (Position pos : gameField.getAllPositions()) {
@@ -1037,5 +1041,15 @@ public class PokemonGameModelImpl implements PokemonGame {
 			return PositionID.RED_ACTIVEPOKEMON;
 		else
 			return PositionID.BLUE_ACTIVEPOKEMON;
+	}
+
+	@Override
+	public boolean getRetreatExecuted() {
+		return this.retreatExecuted;
+	}
+
+	@Override
+	public void setRetreatExecuted(boolean value) {
+		this.retreatExecuted = value;
 	}
 }

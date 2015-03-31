@@ -94,6 +94,7 @@ public class SerializationTest {
 		update.setPositionList(positionList);
 		update.setTurnNumber((short) 4);
 		update.setEnergyPlayAllowed(true);
+		update.setRetreatAllowed(true);
 		
 		deck = new Deck();
 		deck.setName("TestDeck");
@@ -237,6 +238,7 @@ public class SerializationTest {
 
 		assertTrue(newUpdate.getTurnNumber() == 4);
 		assertTrue(newUpdate.isEnergyPlayAllowed() == true);
+		assertTrue(newUpdate.isRetreatAllowed() == true);
 		for (int i = 0; i < newUpdate.getPositionList().size(); i++)
 			this.checkPosition(newUpdate.getPositionList().get(i), update.getPositionList().get(i));
 	}

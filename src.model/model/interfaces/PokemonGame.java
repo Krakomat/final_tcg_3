@@ -256,4 +256,8 @@ public interface PokemonGame {
 	boolean getEnergyPlayed();
 
 	PositionID getDefendingPosition(Color attackerColor);
+
+	boolean getRetreatExecuted();
+
+	void setRetreatExecuted(boolean value);
 }

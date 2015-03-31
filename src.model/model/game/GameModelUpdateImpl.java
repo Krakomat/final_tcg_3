@@ -10,7 +10,7 @@ import model.interfaces.Position;
 public class GameModelUpdateImpl implements GameModelUpdate {
 	private List<Position> updateList;
 	private short turnNumber;
-	private boolean energyPlayAllowed;
+	private boolean energyPlayAllowed, retreatAllowed;
 
 	public GameModelUpdateImpl() {
 		updateList = new ArrayList<Position>();
@@ -52,5 +52,15 @@ public class GameModelUpdateImpl implements GameModelUpdate {
 
 	public void setEnergyPlayAllowed(boolean energyPlayAllowed) {
 		this.energyPlayAllowed = energyPlayAllowed;
+	}
+
+	@Override
+	public boolean isRetreatAllowed() {
+		return retreatAllowed;
+	}
+
+	@Override
+	public void setRetreatAllowed(boolean value) {
+		this.retreatAllowed = value;
 	}
 }

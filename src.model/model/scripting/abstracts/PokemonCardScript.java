@@ -145,6 +145,10 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		PokemonCard pCard = (PokemonCard) card;
 		Position pos = pCard.getCurrentPosition();
 
+		// Return false, if retreat was already executed in this turn:
+		if (gameModel.getRetreatExecuted())
+			return false;
+
 		// Return false, if the pokemon is not an active pokemon:
 		if (pos.getPositionID() != PositionID.BLUE_ACTIVEPOKEMON && pos.getPositionID() != PositionID.RED_ACTIVEPOKEMON)
 			return false;
@@ -218,6 +222,7 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			List<Card> cardList = new ArrayList<>();
 			cardList.add(pCard);
 			cardList.add(newActive);
+			gameModel.setRetreatExecuted(true);
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + pCard.getName() + " with " + newActive.getName(), cardList, "");
 			gameModel.getAttackAction().swapPokemon(pCard.getCurrentPosition().getPositionID(), chosenPosition);
 			gameModel.sendGameModelToAllPlayers("");
