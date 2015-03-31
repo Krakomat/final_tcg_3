@@ -133,7 +133,7 @@ public class StandardBot implements Bot {
 					// Check if we have that energy in our hand:
 					int index = this.hasEnergyCardForElement(element);
 					if (index > -1) {
-						chosenPosition = PositionID.getActivePokemon(color);
+						chosenPosition = positionID;
 						energyCardIndex = index;
 						break; // End inner for
 					}

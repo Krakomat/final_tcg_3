@@ -8,7 +8,9 @@ Patch 1.03
 	GUI
 		- Fixed a bug where the music did not switch properly between ingame and lobby controller
 		- Fixed a bug where hand cards where still shown, even though the players hand is empty
-	
+	AI
+		- Standard Bot: Fixed a bug where the bot attaches too much energy to the active pokemon
+		
 Patch 1.02
 	GUI
 		- Added a symbol for the application
