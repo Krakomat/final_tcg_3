@@ -1212,8 +1212,10 @@ public class IngameController extends Node implements GUI2DController {
 			if (p.size() > 0) {
 				hand.setCards(p.getCards());
 				hand.setVisible(true);
-			} else
+			} else{
+				hand.setCards(new ArrayList<Card>());
 				hand.setVisible(false);
+			}
 			break;
 		case BLUE_PRICE_1:
 			Image2D price = (Image2D) n;
@@ -1416,8 +1418,10 @@ public class IngameController extends Node implements GUI2DController {
 			if (p.size() > 0) {
 				hand.setCards(p.getCards());
 				hand.setVisible(true);
-			} else
+			} else{
+				hand.setCards(new ArrayList<Card>());
 				hand.setVisible(false);
+			}
 			break;
 		case RED_PRICE_1:
 			price = (Image2D) n;

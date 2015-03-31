@@ -7,7 +7,7 @@ Patch 1.03
 		- Pokemon Händler: Fixed a bug that prevented this card from being played
 	GUI
 		- Fixed a bug where the music did not switch properly between ingame and lobby controller
-	
+		- Fixed a bug where hand cards where still shown, even though the players hand is empty
 	
 Patch 1.02
 	GUI

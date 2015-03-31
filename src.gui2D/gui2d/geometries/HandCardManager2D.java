@@ -227,7 +227,7 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		this.cards = cards;
 		for (int i = 0; i < 9; i++) {
 			HandCard2D handCard = this.handCards.get(i);
-			// Create a hand card for each card o position:
+			// Create a hand card for each card of position:
 			TextureKey tex = null;
 			if (cards.size() > i)
 				tex = Database.getTextureKey(cards.get(i).getCardId());
