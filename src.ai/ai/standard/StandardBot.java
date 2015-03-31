@@ -1,4 +1,4 @@
-package ai.standart;
+package ai.standard;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

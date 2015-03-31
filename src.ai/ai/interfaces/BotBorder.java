@@ -3,7 +3,7 @@ package ai.interfaces;
 import java.util.List;
 
 import ai.dummy.DummyBot;
-import ai.standart.StandardBot;
+import ai.standard.StandardBot;
 import network.client.AccountImpl;
 import network.client.Player;
 import network.server.PokemonGameManager;
