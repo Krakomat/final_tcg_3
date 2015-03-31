@@ -46,7 +46,7 @@ import common.utilities.Threads;
 
 public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private static GUI2D GUI2D;// public variable for the gui
-	private static final long MESSAGE_TIME = 2000;
+	private static final long MESSAGE_TIME = 1000;
 
 	/**
 	 * Returns the current instance of this gui.

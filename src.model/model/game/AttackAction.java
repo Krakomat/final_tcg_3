@@ -41,11 +41,12 @@ public class AttackAction {
 	}
 
 	/**
-	 * Flips a coin and returns the result. No messages send to the client here!
+	 * Flips a coin and returns the result. Only sound messages send here!
 	 * 
 	 * @return
 	 */
 	public Coin flipACoin() {
+		gameModel.sendSoundToAllPlayers(Sounds.COINFLIP);
 		Random r = new SecureRandom();
 		int value = r.nextInt(2);
 		if (value == 0)

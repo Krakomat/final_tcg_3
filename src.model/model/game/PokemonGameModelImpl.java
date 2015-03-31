@@ -14,6 +14,7 @@ import model.database.Deck;
 import model.database.DynamicPokemonCondition;
 import model.database.PokemonCard;
 import model.enums.CardType;
+import model.enums.Coin;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.GameState;
@@ -78,12 +79,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 			blueCards.get(i).setCurrentPosition(blueDeck);
 			blueDeck.addToPosition(blueCards.get(i));
 		}
-		
+
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-		
+
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -327,14 +328,14 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 * 
 	 */
 	private void startupCoinflip() {
-		int coinflip = new Random().nextInt(2); // Either 0 or 1
+		Coin coinflip = this.attackAction.flipACoin();
 
 		switch (coinflip) {
-		case 0:
+		case HEADS:
 			this.playerOnTurn = playerRed; // Gets switched before the real first turn, because of method nextTurn()!
 			this.sendTextMessageToPlayers(getPlayerList(), "Coin shows 'Heads' - " + playerBlue.getName() + " begins.", "");
 			break;
-		case 1:
+		case TAILS:
 			this.playerOnTurn = playerBlue; // Gets switched before the real first turn, because of method nextTurn()!
 			this.sendTextMessageToPlayers(getPlayerList(), "Coin shows 'Tails' - " + playerRed.getName() + " begins.", "");
 			break;
