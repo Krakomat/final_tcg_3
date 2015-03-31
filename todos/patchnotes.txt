@@ -13,6 +13,7 @@ Patch 1.03
 		- Fixed a bug where hand cards where still shown, even though the players hand is empty
 	AI
 		- Standard Bot: Fixed a bug where the bot attaches too much energy to the active pokemon
+		- Standard Bot: Improved algorithm for assigning energy
 	Client
 		- Fixed a bug where the client asks the server for pokemon power names
 

@@ -25,7 +25,7 @@ public class EffectController {
 				public void run() {
 					try {
 						Clip clip = AudioSystem.getClip();
-						AudioInputStream inputStream = AudioSystem.getAudioInputStream(EffectController.class.getResourceAsStream(url));
+						AudioInputStream inputStream = AudioSystem.getAudioInputStream(EffectController.class.getResource(url));
 						clip.open(inputStream);
 						clip.start();
 					} catch (Exception e) {

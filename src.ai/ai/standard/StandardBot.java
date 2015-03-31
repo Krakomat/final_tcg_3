@@ -165,7 +165,7 @@ public class StandardBot implements Bot {
 		for (int i = 0; i < handPosition.getCards().size(); i++) {
 			if (handPosition.getCards().get(i) instanceof EnergyCard) {
 				EnergyCard energyCard = (EnergyCard) handPosition.getCards().get(i);
-				if (energyCard.getProvidedEnergy().contains(element))
+				if (energyCard.getProvidedEnergy().contains(element) || element == Element.COLORLESS)
 					return i;
 			}
 		}
