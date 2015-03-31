@@ -18,7 +18,7 @@ public class Script_00069_Hornliu extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Giftstachel", att1Cost);
+		this.addAttack("Poison Sting", att1Cost);
 	}
 
 	@Override

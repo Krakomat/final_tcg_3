@@ -18,17 +18,17 @@ public class Script_00020_Elektek extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Donnerschock", att1Cost);
+		this.addAttack("Thundershock", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Donnerschlag", att2Cost);
+		this.addAttack("Thunderpunch", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Donnerschock"))
+		if (attackName.equals("Thundershock"))
 			this.donnerschock();
 		else
 			this.donnerschlag();

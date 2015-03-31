@@ -20,19 +20,19 @@ public class Script_00006_Garados extends PokemonCardScript {
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
-		this.addAttack("Drachenwut", att1Cost);
+		this.addAttack("Dragon Rage", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.WATER);
-		this.addAttack("Blubbstrahl", att2Cost);
+		this.addAttack("Bubblebeam", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Drachenwut"))
+		if (attackName.equals("Dragon Rage"))
 			this.drachenwut();
 		else
 			this.blubbstrahl();

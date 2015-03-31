@@ -19,18 +19,18 @@ public class Script_00005_Piepi extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Gesang", att1Cost);
+		this.addAttack("Sing", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Metronom", att2Cost);
+		this.addAttack("Metronome", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Gesang"))
+		if (attackName.equals("Sing"))
 			this.gesang();
 		else
 			this.metronom();

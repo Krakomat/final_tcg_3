@@ -21,19 +21,19 @@ public class Script_00009_Magneton extends PokemonCardScript {
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Donnerwelle", att1Cost);
+		this.addAttack("Tunder Wave", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Selbstzerstörung", att2Cost);
+		this.addAttack("Selfdestruct", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Donnerwelle"))
+		if (attackName.equals("Tunder Wave"))
 			this.donnerwelle();
 		else
 			this.selbstzerstoerung();

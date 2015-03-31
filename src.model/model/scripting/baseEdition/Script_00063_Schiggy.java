@@ -18,17 +18,17 @@ public class Script_00063_Schiggy extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
-		this.addAttack("Blubber", att1Cost);
+		this.addAttack("Bubble", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Panzerschutz", att2Cost);
+		this.addAttack("Withdraw", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Blubber"))
+		if (attackName.equals("Bubble"))
 			this.blubber();
 		else
 			this.panzerschutz();

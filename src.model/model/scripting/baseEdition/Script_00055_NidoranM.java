@@ -16,7 +16,7 @@ public class Script_00055_NidoranM extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Hornattacke", att1Cost);
+		this.addAttack("Horn Hazard", att1Cost);
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Script_00055_NidoranM extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if damage is applied:
-		gameModel.sendTextMessageToAllPlayers("If Tails then Hornattacke does nothing!", "");
+		gameModel.sendTextMessageToAllPlayers("If Tails then Horn Hazard does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		else
-			gameModel.sendTextMessageToAllPlayers("Hornattacke does nothing!", "");
+			gameModel.sendTextMessageToAllPlayers("Horn Hazard does nothing!", "");
 	}
 }

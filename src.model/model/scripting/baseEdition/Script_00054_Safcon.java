@@ -19,17 +19,17 @@ public class Script_00054_Safcon extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Erhärten", att1Cost);
+		this.addAttack("Stiffen", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		this.addAttack("Stachelspore", att2Cost);
+		this.addAttack("Stun Spore", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Erhärten"))
+		if (attackName.equals("Stiffen"))
 			this.erhaerten();
 		else
 			this.stachelspore();

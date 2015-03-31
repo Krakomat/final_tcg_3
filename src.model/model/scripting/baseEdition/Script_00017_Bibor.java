@@ -20,18 +20,18 @@ public class Script_00017_Bibor extends PokemonCardScript {
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Duonadel", att1Cost);
+		this.addAttack("Twineedle", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		this.addAttack("Giftstachel", att2Cost);
+		this.addAttack("Poison Sting", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Duonadel"))
+		if (attackName.equals("Twineedle"))
 			this.duonadel();
 		else
 			this.giftstachel();

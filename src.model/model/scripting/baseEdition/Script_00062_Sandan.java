@@ -16,7 +16,7 @@ public class Script_00062_Sandan extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.ROCK);
-		this.addAttack("Sandwirbel", att1Cost);
+		this.addAttack("Sand-attack", att1Cost);
 	}
 
 	@Override

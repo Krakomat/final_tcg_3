@@ -21,8 +21,8 @@ public class Script_00008_Machomei extends PokemonCardScript {
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Geowurf", att1Cost);
-		this.addPokemonPower("Gegenschlag");
+		this.addAttack("Seismic Toss", att1Cost);
+		this.addPokemonPower("Strikes Back");
 		attackerPosition = null;
 	}
 
@@ -38,7 +38,7 @@ public class Script_00008_Machomei extends PokemonCardScript {
 		if (gegenschlagCanBeExecuted()) {
 			this.attackerPosition = source;
 			if (this.attackerPosition != null)
-				this.executePokemonPower("Gegenschlag");
+				this.executePokemonPower("Strikes Back");
 		}
 	}
 

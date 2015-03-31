@@ -17,16 +17,16 @@ public class Script_00029_Alpollo extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.PSYCHIC);
-		this.addAttack("Hypnose", att1Cost);
+		this.addAttack("Hypnosis", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.PSYCHIC);
-		this.addAttack("Traumfresser", att2Cost);
+		this.addAttack("Dream Eater", att2Cost);
 	}
 
 	public boolean attackCanBeExecuted(String attackName) {
-		if (attackName.equals("Traumfresser")) {
+		if (attackName.equals("Dream Eater")) {
 			// if the defending pokemon is not asleep return false:
 			PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 			PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
@@ -38,7 +38,7 @@ public class Script_00029_Alpollo extends PokemonCardScript {
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Hypnose"))
+		if (attackName.equals("Hypnosis"))
 			this.hypnose();
 		else
 			this.traumfresser();

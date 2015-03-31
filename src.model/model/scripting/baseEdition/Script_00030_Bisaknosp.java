@@ -19,18 +19,18 @@ public class Script_00030_Bisaknosp extends PokemonCardScript {
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Rankenhieb", att1Cost);
+		this.addAttack("Vine Whip", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		this.addAttack("Giftpuder", att2Cost);
+		this.addAttack("Poisonpowder", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Rankenhieb"))
+		if (attackName.equals("Vine Whip"))
 			this.rankenhieb();
 		else
 			this.giftpuder();

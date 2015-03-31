@@ -19,17 +19,17 @@ public class Script_00033_Kokuna extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Erhärten", att1Cost);
+		this.addAttack("Stiffen", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		this.addAttack("Giftpuder", att2Cost);
+		this.addAttack("Poisonpowder", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Erhärten"))
+		if (attackName.equals("Stiffen"))
 			this.erhaerten();
 		else
 			this.giftpuder();

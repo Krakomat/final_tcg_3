@@ -17,19 +17,19 @@ public class Script_00034_Maschok extends PokemonCardScript {
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Karateschlag", att1Cost);
+		this.addAttack("Karate Chop", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Überroller", att2Cost);
+		this.addAttack("Submission", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Karateschlag"))
+		if (attackName.equals("Karate Chop"))
 			this.karateschlag();
 		else
 			this.ueberroller();

@@ -20,18 +20,18 @@ public class Script_00064_Starmie extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
-		this.addAttack("Erholung", att1Cost);
+		this.addAttack("Recover", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Sternenfrost", att2Cost);
+		this.addAttack("Star Freeze", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Erholung"))
+		if (attackName.equals("Recover"))
 			this.erholung();
 		else
 			this.sternenfrost();

@@ -17,18 +17,18 @@ public class Script_00032_Kadabra extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.PSYCHIC);
 		att1Cost.add(Element.PSYCHIC);
-		this.addAttack("Erholung", att1Cost);
+		this.addAttack("Recover", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Super Psychoschock", att2Cost);
+		this.addAttack("Super Psy", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Erholung"))
+		if (attackName.equals("Recover"))
 			this.erholung();
 		else
 			this.superPsychoschock();

@@ -15,7 +15,7 @@ public class Script_00061_Rattfratz extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Biss", att1Cost);
+		this.addAttack("Bite", att1Cost);
 	}
 
 	@Override

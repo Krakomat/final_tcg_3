@@ -20,19 +20,19 @@ public class Script_00014_Raichu extends PokemonCardScript {
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Agilität", att1Cost);
+		this.addAttack("Agility", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Donner", att2Cost);
+		this.addAttack("Thunder", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Agilität"))
+		if (attackName.equals("Agility"))
 			this.agilitaet();
 		else
 			this.donner();

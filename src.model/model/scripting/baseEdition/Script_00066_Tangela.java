@@ -19,18 +19,18 @@ public class Script_00066_Tangela extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Klammergriff", att1Cost);
+		this.addAttack("Bind", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		this.addAttack("Giftpuder", att2Cost);
+		this.addAttack("Poisonpowder", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Klammergriff"))
+		if (attackName.equals("Bind"))
 			this.klammergriff();
 		else
 			this.giftpuder();

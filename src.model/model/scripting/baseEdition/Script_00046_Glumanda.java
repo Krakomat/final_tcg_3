@@ -16,17 +16,17 @@ public class Script_00046_Glumanda extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Kratzer", att1Cost);
+		this.addAttack("Scratch", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Glut", att2Cost);
+		this.addAttack("Ember", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Kratzer"))
+		if (attackName.equals("Scratch"))
 			this.kratzer();
 		else
 			this.glut();

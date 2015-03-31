@@ -17,17 +17,17 @@ public class Script_00058_Pikachu extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Nagen", att1Cost);
+		this.addAttack("Gnaw", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Donnerschock", att2Cost);
+		this.addAttack("Thunder Jolt", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Nagen"))
+		if (attackName.equals("Gnaw"))
 			this.nagen();
 		else
 			this.donnerschock();

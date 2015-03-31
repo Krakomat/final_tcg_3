@@ -19,7 +19,7 @@ public class Script_00035_Karpador extends PokemonCardScript {
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
-		this.addAttack("Dreschflegel", att2Cost);
+		this.addAttack("Flail", att2Cost);
 	}
 
 	@Override

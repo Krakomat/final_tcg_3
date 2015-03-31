@@ -15,7 +15,7 @@ public class Script_00026_Dratini extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Pfund", att1Cost);
+		this.addAttack("Pound", att1Cost);
 	}
 
 	@Override

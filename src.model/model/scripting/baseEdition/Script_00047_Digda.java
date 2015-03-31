@@ -15,17 +15,17 @@ public class Script_00047_Digda extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.ROCK);
-		this.addAttack("Schaufler", att1Cost);
+		this.addAttack("Dig", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
-		this.addAttack("Schlammbad", att2Cost);
+		this.addAttack("Mud Slap", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Schaufler"))
+		if (attackName.equals("Dig"))
 			this.schaufler();
 		else
 			this.schlammbad();

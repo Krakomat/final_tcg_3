@@ -17,12 +17,12 @@ public class Script_00039_Porygon extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Umwandlung 1", att1Cost);
+		this.addAttack("Conversion 1", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Umwandlung 2", att2Cost);
+		this.addAttack("Conversion 2", att2Cost);
 	}
 
 	public boolean attackCanBeExecuted(String attackName) {
@@ -31,9 +31,9 @@ public class Script_00039_Porygon extends PokemonCardScript {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PokemonCard attackingPokemon = (PokemonCard) gameModel.getPosition(attacker).getTopCard();
 
-		if (attackName.equals("Umwandlung 1") && defendingPokemon.getCurrentWeakness() == null)
+		if (attackName.equals("Conversion 1") && defendingPokemon.getCurrentWeakness() == null)
 			return false;
-		else if (attackName.equals("Umwandlung 2") && attackingPokemon.getCurrentResistance() == null)
+		else if (attackName.equals("Conversion 2") && attackingPokemon.getCurrentResistance() == null)
 			return false;
 
 		return super.attackCanBeExecuted(attackName);
@@ -41,7 +41,7 @@ public class Script_00039_Porygon extends PokemonCardScript {
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Umwandlung 1"))
+		if (attackName.equals("Conversion 1"))
 			this.umwandlung1();
 		else
 			this.umwandlung2();
@@ -67,7 +67,7 @@ public class Script_00039_Porygon extends PokemonCardScript {
 			targetPokemon.setCurrentWeakness(chosenElement);
 			gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + "'s weakness is changed to " + chosenElement.toString(), "");
 		} else
-			gameModel.sendTextMessageToAllPlayers("Umwandlung 1 has no effect on " + defendingPokemon.getName() + "!", "");
+			gameModel.sendTextMessageToAllPlayers("Conversion 1 has no effect on " + defendingPokemon.getName() + "!", "");
 
 	}
 

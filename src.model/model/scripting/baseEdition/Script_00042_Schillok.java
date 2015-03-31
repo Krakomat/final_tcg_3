@@ -19,18 +19,18 @@ public class Script_00042_Schillok extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Panzerschutz", att1Cost);
+		this.addAttack("Withdraw", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Biss", att2Cost);
+		this.addAttack("Bite", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Panzerschutz"))
+		if (attackName.equals("Withdraw"))
 			this.panzerschutz();
 		else
 			this.biss();

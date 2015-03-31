@@ -18,7 +18,7 @@ public class Script_00045_Raupy extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Fadenschuss", att1Cost);
+		this.addAttack("String Shot", att1Cost);
 	}
 
 	@Override

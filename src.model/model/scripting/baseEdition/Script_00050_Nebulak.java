@@ -19,17 +19,17 @@ public class Script_00050_Nebulak extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.PSYCHIC);
-		this.addAttack("Schlafgas", att1Cost);
+		this.addAttack("Sleeping Gas", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Schicksalsband", att2Cost);
+		this.addAttack("Destiny Bond", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Schlafgas"))
+		if (attackName.equals("Sleeping Gas"))
 			this.schlafgas();
 		else
 			this.schicksalsband();

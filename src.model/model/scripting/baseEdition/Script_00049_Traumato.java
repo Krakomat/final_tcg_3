@@ -18,17 +18,17 @@ public class Script_00049_Traumato extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Pfund", att1Cost);
+		this.addAttack("Pound", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.PSYCHIC);
-		this.addAttack("Konfusstrahl", att2Cost);
+		this.addAttack("Confuse Ray", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Pfund"))
+		if (attackName.equals("Pound"))
 			this.pfund();
 		else
 			this.konfusstrahl();

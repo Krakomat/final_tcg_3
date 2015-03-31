@@ -21,19 +21,19 @@ public class Script_00013_Quappo extends PokemonCardScript {
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Aquaknarre", att1Cost);
+		this.addAttack("Water Gun", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Strudel", att2Cost);
+		this.addAttack("Whirlpool", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Aquaknarre"))
+		if (attackName.equals("Water Gun"))
 			this.aquaknarre();
 		else
 			this.strudel();

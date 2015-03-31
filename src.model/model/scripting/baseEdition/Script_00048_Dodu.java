@@ -15,7 +15,7 @@ public class Script_00048_Dodu extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Furienschlag", att1Cost);
+		this.addAttack("Fury Attack", att1Cost);
 	}
 
 	@Override

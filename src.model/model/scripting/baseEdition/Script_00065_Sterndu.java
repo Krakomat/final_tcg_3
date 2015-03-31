@@ -15,7 +15,7 @@ public class Script_00065_Sterndu extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
-		this.addAttack("Hieb", att1Cost);
+		this.addAttack("Slap", att1Cost);
 	}
 
 	@Override

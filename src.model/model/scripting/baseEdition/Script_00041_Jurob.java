@@ -15,7 +15,7 @@ public class Script_00041_Jurob extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
-		this.addAttack("Kopfnuss", att1Cost);
+		this.addAttack("Headbutt", att1Cost);
 	}
 
 	@Override

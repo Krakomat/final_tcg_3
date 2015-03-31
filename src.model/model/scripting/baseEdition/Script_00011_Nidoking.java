@@ -20,18 +20,18 @@ public class Script_00011_Nidoking extends PokemonCardScript {
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Prügeln", att1Cost);
+		this.addAttack("Trash", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		this.addAttack("Toxin", att2Cost);
+		this.addAttack("Toxic", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Prügeln"))
+		if (attackName.equals("Trash"))
 			this.pruegeln();
 		else
 			this.toxin();

@@ -18,18 +18,18 @@ public class Script_00024_Glutexo extends PokemonCardScript {
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Schlitzer", att1Cost);
+		this.addAttack("Slash", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Flammenwurf", att2Cost);
+		this.addAttack("Flamethrower", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Schlitzer"))
+		if (attackName.equals("Slash"))
 			this.schlitzer();
 		else
 			this.flammenwurf();

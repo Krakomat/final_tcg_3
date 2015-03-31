@@ -16,7 +16,7 @@ public class Script_00044_Bisasam extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Egelsamen", att1Cost);
+		this.addAttack("Leech Seed", att1Cost);
 	}
 
 	@Override

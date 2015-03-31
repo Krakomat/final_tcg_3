@@ -20,19 +20,19 @@ public class Script_00016_Zapdos extends PokemonCardScript {
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Donner", att1Cost);
+		this.addAttack("Thunder", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Donnerblitz", att2Cost);
+		this.addAttack("Thunderbolt", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Donner"))
+		if (attackName.equals("Thunder"))
 			this.donner();
 		else
 			this.donnerblitz();

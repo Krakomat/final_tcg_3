@@ -28,13 +28,13 @@ public class Script_00022_Tauboga extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Wirbelwind", att1Cost);
+		this.addAttack("Whirlwind", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Spiegeltrick", att2Cost);
+		this.addAttack("Mirror Move", att2Cost);
 
 		this.lastAttackTurn = -100;
 		this.damageHistory = new HashMap<>();
@@ -43,7 +43,7 @@ public class Script_00022_Tauboga extends PokemonCardScript {
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Wirbelwind"))
+		if (attackName.equals("Whirlwind"))
 			this.wirbelwind();
 		else
 			this.spiegeltrick();
@@ -86,7 +86,7 @@ public class Script_00022_Tauboga extends PokemonCardScript {
 			if (this.conditionHistory.containsKey(lastAttackTurn))
 				gameModel.getAttackAction().inflictConditionToPosition(defender, conditionHistory.get(lastAttackTurn));
 		} else
-			gameModel.sendTextMessageToAllPlayers("Spiegeltrick does nothing!", "");
+			gameModel.sendTextMessageToAllPlayers("Mirror Move does nothing!", "");
 	}
 
 	public void pokemonIsDamaged(int turnNumber, int damage) {

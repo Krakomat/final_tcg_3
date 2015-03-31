@@ -17,17 +17,17 @@ public class Script_00056_Onix extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.ROCK);
-		this.addAttack("Steinwurf", att1Cost);
+		this.addAttack("Rock Throw", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
-		this.addAttack("Härtner", att2Cost);
+		this.addAttack("Harden", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Steinwurf"))
+		if (attackName.equals("Rock Throw"))
 			this.steinwurf();
 		else
 			this.haertner();

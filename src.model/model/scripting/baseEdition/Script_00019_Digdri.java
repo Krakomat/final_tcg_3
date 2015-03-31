@@ -18,19 +18,19 @@ public class Script_00019_Digdri extends PokemonCardScript {
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Schlitzer", att1Cost);
+		this.addAttack("Slash", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
-		this.addAttack("Erdbeben", att2Cost);
+		this.addAttack("Earthquake", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Schlitzer"))
+		if (attackName.equals("Slash"))
 			this.schlitzer();
 		else
 			this.erdbeben();

@@ -15,7 +15,7 @@ public class Script_00059_Quapsel extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
-		this.addAttack("Aquaknarre", att1Cost);
+		this.addAttack("Water Gun", att1Cost);
 	}
 
 	@Override

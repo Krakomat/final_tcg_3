@@ -24,8 +24,8 @@ public class Script_00015_Bisaflor extends PokemonCardScript {
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Solarstrahl", att1Cost);
-		this.addPokemonPower("Energietransfer");
+		this.addAttack("Solarbeam", att1Cost);
+		this.addPokemonPower("Energy Trans");
 	}
 
 	@Override

@@ -18,19 +18,19 @@ public class Script_00023_Arkani extends PokemonCardScript {
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Flammenwurf", att1Cost);
+		this.addAttack("Flamethrower", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Bodycheck", att2Cost);
+		this.addAttack("Take Down", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Flammenwurf"))
+		if (attackName.equals("Flamethrower"))
 			this.flammenwurf();
 		else
 			this.bodycheck();

@@ -24,9 +24,9 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.LIGHTNING);
 		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Elektoschock", att1Cost);
+		this.addAttack("Electric Shock", att1Cost);
 
-		this.addPokemonPower("Bruzzeln");
+		this.addPokemonPower("Buzzap");
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 		posList.remove(pCard.getCurrentPosition().getPositionID());
 
 		// Choose a position to attach Lektrobal to:
-		PositionID chosenPosition = player.playerChoosesPositions(posList, 1, true, "Choose a position to attach Lektrobal to!").get(0);
+		PositionID chosenPosition = player.playerChoosesPositions(posList, 1, true, "Choose a position to attach Electrode to!").get(0);
 		Position targetPosition = gameModel.getPosition(chosenPosition);
 		Card targetPokemon = targetPosition.getTopCard();
 
@@ -110,7 +110,7 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 		List<Card> cardMessageList = new ArrayList<>();
 		cardMessageList.add(pCard);
 		cardMessageList.add(targetPokemon);
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches Lektrobal to " + targetPokemon.getName() + "!", cardMessageList, "");
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches Electrode to " + targetPokemon.getName() + "!", cardMessageList, "");
 		gameModel.sendGameModelToAllPlayers("");
 
 		// Choose new active pokemon:

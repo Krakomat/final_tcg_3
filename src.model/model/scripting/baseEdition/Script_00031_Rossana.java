@@ -15,18 +15,18 @@ public class Script_00031_Rossana extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.PSYCHIC);
-		this.addAttack("Duplexhieb", att1Cost);
+		this.addAttack("Double Slap", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.PSYCHIC);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Meditation", att2Cost);
+		this.addAttack("Meditate", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Duplexhieb"))
+		if (attackName.equals("Double Slap"))
 			this.duplexhieb();
 		else
 			this.meditation();

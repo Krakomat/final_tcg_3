@@ -20,19 +20,19 @@ public class Script_00025_Jugong extends PokemonCardScript {
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Aurorastrahl", att1Cost);
+		this.addAttack("Aurora Beam", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Eisstrahl", att2Cost);
+		this.addAttack("Ice Beam", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Aurorastrahl"))
+		if (attackName.equals("Aurora Beam"))
 			this.aurorastrahl();
 		else
 			this.eisstrahl();

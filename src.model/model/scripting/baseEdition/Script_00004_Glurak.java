@@ -26,8 +26,8 @@ public class Script_00004_Glurak extends PokemonCardScript {
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.FIRE);
-		this.addAttack("Feuersturm", att1Cost);
-		this.addPokemonPower("Energieverbrennung");
+		this.addAttack("Fire Spin", att1Cost);
+		this.addPokemonPower("Energy Burn");
 		this.pokemonPowerPosition = null;
 	}
 

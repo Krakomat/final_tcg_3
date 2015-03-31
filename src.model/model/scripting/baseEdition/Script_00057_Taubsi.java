@@ -19,7 +19,7 @@ public class Script_00057_Taubsi extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Wirbelwind", att1Cost);
+		this.addAttack("Whirlwind", att1Cost);
 	}
 
 	@Override

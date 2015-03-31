@@ -17,18 +17,18 @@ public class Script_00036_Magmar extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.FIRE);
-		this.addAttack("Feuerschlag", att1Cost);
+		this.addAttack("Fire Punch", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
-		this.addAttack("Flammenwurf", att2Cost);
+		this.addAttack("Flamethrower", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Feuerschlag"))
+		if (attackName.equals("Fire Punch"))
 			this.feuerschlag();
 		else
 			this.flammenwurf();

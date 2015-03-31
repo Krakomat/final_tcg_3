@@ -15,18 +15,18 @@ public class Script_00007_Nockchan extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.ROCK);
-		this.addAttack("Hieb", att1Cost);
+		this.addAttack("Jab", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Spezialhieb", att2Cost);
+		this.addAttack("Special Punch", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Hieb"))
+		if (attackName.equals("Jab"))
 			this.hieb();
 		else
 			this.spezialhieb();

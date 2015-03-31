@@ -19,8 +19,8 @@ public class Script_00002_Turtok extends PokemonCardScript {
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
-		this.addAttack("Hydropumpe", att1Cost);
-		this.addPokemonPower("Regentanz");
+		this.addAttack("Hydro Pump", att1Cost);
+		this.addPokemonPower("Rain Dance");
 	}
 
 	@Override

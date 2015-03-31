@@ -18,7 +18,7 @@ public class Script_00051_Smogon extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
-		this.addAttack("Fäulnisgas", att1Cost);
+		this.addAttack("Foul Gas", att1Cost);
 	}
 
 	@Override

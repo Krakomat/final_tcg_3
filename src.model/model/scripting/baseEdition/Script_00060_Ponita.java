@@ -16,17 +16,17 @@ public class Script_00060_Ponita extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Schmetterkick", att1Cost);
+		this.addAttack("Smash Kick", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
-		this.addAttack("Flammenpfad", att2Cost);
+		this.addAttack("Flame Tail", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Schmetterkick"))
+		if (attackName.equals("Smash Kick"))
 			this.schmetterkick();
 		else
 			this.flammenpfad();

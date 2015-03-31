@@ -19,19 +19,19 @@ public class Script_00012_Vulnona extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Lockvogel", att1Cost);
+		this.addAttack("Lure", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
 		att2Cost.add(Element.FIRE);
-		this.addAttack("Feuersturm", att2Cost);
+		this.addAttack("Fire Blast", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Lockvogel"))
+		if (attackName.equals("Lure"))
 			this.lockvogel();
 		else
 			this.feuersturm();

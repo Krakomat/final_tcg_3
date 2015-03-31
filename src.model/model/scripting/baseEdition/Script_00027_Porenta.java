@@ -18,26 +18,26 @@ public class Script_00027_Porenta extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Lauchschlag", att1Cost);
+		this.addAttack("Leek Slap", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Topfschmetterer", att2Cost);
+		this.addAttack("Pot Smash", att2Cost);
 
 		this.lauchschlagUsed = false;
 	}
 
 	public boolean attackCanBeExecuted(String attackName) {
-		if (attackName.equals("Lauchschlag") && lauchschlagUsed)
+		if (attackName.equals("Leek Slap") && lauchschlagUsed)
 			return false;
 		return super.attackCanBeExecuted(attackName);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Lauchschlag"))
+		if (attackName.equals("Leek Slap"))
 			this.lauchschlag();
 		else
 			this.topfschmetterer();
@@ -50,14 +50,14 @@ public class Script_00027_Porenta extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if damage is applied:
-		gameModel.sendTextMessageToAllPlayers("If Tails then Lauchschlag does nothing!", "");
+		gameModel.sendTextMessageToAllPlayers("If Tails then Leek Slap does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		else
-			gameModel.sendTextMessageToAllPlayers("Lauchschlag does nothing!", "");
-		gameModel.sendTextMessageToAllPlayers("Lauchschlag can't be used anymore!", "");
+			gameModel.sendTextMessageToAllPlayers("Leek Slap does nothing!", "");
+		gameModel.sendTextMessageToAllPlayers("Leek Slap can't be used anymore!", "");
 	}
 
 	private void topfschmetterer() {

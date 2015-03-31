@@ -16,7 +16,7 @@ public class Script_00028_Fukano extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Funken", att1Cost);
+		this.addAttack("Flare", att1Cost);
 	}
 
 	@Override

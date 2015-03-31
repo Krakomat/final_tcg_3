@@ -15,7 +15,7 @@ public class Script_00052_Machollo extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.ROCK);
-		this.addAttack("Kick", att1Cost);
+		this.addAttack("Low Kick", att1Cost);
 	}
 
 	@Override

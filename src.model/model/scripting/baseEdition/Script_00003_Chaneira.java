@@ -19,19 +19,19 @@ public class Script_00003_Chaneira extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Zähneknirschen", att1Cost);
+		this.addAttack("Scrunch", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Risikotackle", att2Cost);
+		this.addAttack("Double-edge", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Zähneknirschen"))
+		if (attackName.equals("Scrunch"))
 			this.zaehneknirschen();
 		else
 			this.risikotackle();

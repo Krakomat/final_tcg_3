@@ -17,19 +17,19 @@ public class Script_00037_Nidorino extends PokemonCardScript {
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Doppelkick", att1Cost);
+		this.addAttack("Double Kick", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Hornbohrer", att2Cost);
+		this.addAttack("Horn Drill", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Doppelkick"))
+		if (attackName.equals("Double Kick"))
 			this.doppelkick();
 		else
 			this.hornbohrer();

@@ -18,7 +18,7 @@ public class Script_00043_Abra extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.PSYCHIC);
-		this.addAttack("Psyschock", att1Cost);
+		this.addAttack("Psyshock", att1Cost);
 	}
 
 	@Override

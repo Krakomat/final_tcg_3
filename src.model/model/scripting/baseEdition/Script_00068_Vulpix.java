@@ -19,7 +19,7 @@ public class Script_00068_Vulpix extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.FIRE);
 		att1Cost.add(Element.FIRE);
-		this.addAttack("Konfusstrahl", att1Cost);
+		this.addAttack("Confuse Ray", att1Cost);
 	}
 
 	@Override

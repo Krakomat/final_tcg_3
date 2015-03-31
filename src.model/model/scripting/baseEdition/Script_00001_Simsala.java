@@ -23,8 +23,8 @@ public class Script_00001_Simsala extends PokemonCardScript {
 		att1Cost.add(Element.PSYCHIC);
 		att1Cost.add(Element.PSYCHIC);
 		att1Cost.add(Element.PSYCHIC);
-		this.addAttack("Konfusstrahl", att1Cost);
-		this.addPokemonPower("Schadenstausch");
+		this.addAttack("Confuse Ray", att1Cost);
+		this.addPokemonPower("Damage Swap");
 	}
 
 	@Override

@@ -15,18 +15,18 @@ public class Script_00040_Rattikarl extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Biss", att1Cost);
+		this.addAttack("Bite", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Superzahn", att2Cost);
+		this.addAttack("Super Fang", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Biss"))
+		if (attackName.equals("Bite"))
 			this.biss();
 		else
 			this.superzahn();

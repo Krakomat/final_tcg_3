@@ -28,7 +28,7 @@ public class Script_00018_Dragonir extends PokemonCardScript {
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Hyperstrahl", att2Cost);
+		this.addAttack("Hyper Beam", att2Cost);
 	}
 
 	@Override

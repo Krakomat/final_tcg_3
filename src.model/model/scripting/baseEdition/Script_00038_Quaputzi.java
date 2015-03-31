@@ -19,18 +19,18 @@ public class Script_00038_Quaputzi extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.WATER);
 		att1Cost.add(Element.WATER);
-		this.addAttack("Amnesie", att1Cost);
+		this.addAttack("Amnesia", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
-		this.addAttack("Duplexhieb", att2Cost);
+		this.addAttack("Doubleslap", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Amnesie"))
+		if (attackName.equals("Amnesia"))
 			this.amnesie();
 		else
 			this.duplexhieb();
@@ -59,7 +59,7 @@ public class Script_00038_Quaputzi extends PokemonCardScript {
 
 			gameModel.sendGameModelToAllPlayers("");
 		} else
-			gameModel.sendTextMessageToAllPlayers("Amnesie has no effect on " + defendingPokemon.getName() + "!", "");
+			gameModel.sendTextMessageToAllPlayers("Amnesia has no effect on " + defendingPokemon.getName() + "!", "");
 	}
 
 	private void duplexhieb() {
