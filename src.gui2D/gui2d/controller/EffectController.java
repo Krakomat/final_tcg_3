@@ -1,25 +1,38 @@
 package gui2d.controller;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import gui2d.GUI2D;
 
 import com.jme3.audio.AudioNode;
 
 public class EffectController {
-	public static final String BUTTON_CLICKED = "effects/button_click.ogg";
-	public static final String ACTIVATE_TRAINER = "effects/activateTrainer.wav";
-	public static final String COINFLIP = "effects/coinflip.wav";
-	public static final String DAMAGE = "effects/damage.wav";
-	public static final String EVOLVE = "effects/evolve.wav";
-	public static final String ON_BENCH = "effects/onBench.wav";
-	public static final String ON_TURN = "effects/onTurn.wav";
-	public static final String SHUFFLE = "effects/shuffle.wav";
-	public static final String DRAW = "effects/draw.wav";
-
 	public static AudioNode createEffectAudioNode(String effectPath) {
 		AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), effectPath, false);
 		clickSoundNode.setPositional(false);
 		clickSoundNode.setLooping(false);
 		clickSoundNode.setVolume(2);
 		return clickSoundNode;
+	}
+
+	public static synchronized void playSound(final String url) {
+		if (!url.equals("")) {
+			new Thread(new Runnable() {
+				// The wrapper thread is unnecessary, unless it blocks on the
+				// Clip finishing; see comments.
+				public void run() {
+					try {
+						Clip clip = AudioSystem.getClip();
+						AudioInputStream inputStream = AudioSystem.getAudioInputStream(EffectController.class.getResourceAsStream(url));
+						clip.open(inputStream);
+						clip.start();
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
+					}
+				}
+			}).start();
+		}
 	}
 }

@@ -36,13 +36,13 @@ public class Script_00001_Simsala extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 
 		// Flip coin to check if defending pokemon is poisoned:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!");
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
@@ -133,7 +133,7 @@ public class Script_00001_Simsala extends PokemonCardScript {
 			pokemon.setDamageMarks(damage);
 		}
 
-		gameModel.sendTextMessageToAllPlayers("Damage marks have been reordered!");
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendTextMessageToAllPlayers("Damage marks have been reordered!", "");
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

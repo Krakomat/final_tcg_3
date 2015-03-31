@@ -84,8 +84,8 @@ public class BotBorder extends AccountImpl implements Player {
 	}
 
 	@Override
-	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate) {
-		this.botModel.updateGameModel(new LocalPokemonGameModel(gameModelUpdate, this));
+	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound) {
+		this.botModel.updateGameModel(new LocalPokemonGameModel(gameModelUpdate, this, server));
 	}
 
 	@Override
@@ -121,17 +121,17 @@ public class BotBorder extends AccountImpl implements Player {
 	}
 
 	@Override
-	public void playerReceivesGameTextMessage(String message) {
+	public void playerReceivesGameTextMessage(String message, String sound) {
 
 	}
 
 	@Override
-	public void playerReceivesCardMessage(String message, Card card) {
+	public void playerReceivesCardMessage(String message, Card card, String sound) {
 
 	}
 
 	@Override
-	public void playerReceivesCardMessage(String message, List<Card> cardList) {
+	public void playerReceivesCardMessage(String message, List<Card> cardList, String sound) {
 	}
 
 	@Override
@@ -147,5 +147,10 @@ public class BotBorder extends AccountImpl implements Player {
 	@Override
 	public void exit() {
 
+	}
+
+	@Override
+	public void playerReceivesSound(String sound) {
+		
 	}
 }

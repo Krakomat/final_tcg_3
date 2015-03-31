@@ -223,18 +223,29 @@ public class ServerBorder implements Player {
 	}
 
 	@Override
-	public void playerReceivesGameTextMessage(String message) {
-		QueryMessage qMessage = new QueryMessage(Method.PLAYER_REVEIVE_TEXT_MESSAGE, serializer.packString(message));
+	public void playerReceivesSound(String sound) {
+		QueryMessage qMessage = new QueryMessage(Method.PLAYER_RECIEVE_SOUND, serializer.packString(sound));
 		qMessage.logSendMessage("ServerBorder");
 		this.client.send(qMessage);
 	}
 
 	@Override
-	public void playerReceivesCardMessage(String message, Card card) {
+	public void playerReceivesGameTextMessage(String message, String sound) {
+		List<ByteString> parameters = new ArrayList<>();
+		parameters.add(serializer.packString(message));
+		parameters.add(serializer.packString(sound));
+		QueryMessage qMessage = new QueryMessage(Method.PLAYER_REVEIVE_TEXT_MESSAGE, parameters);
+		qMessage.logSendMessage("ServerBorder");
+		this.client.send(qMessage);
+	}
+
+	@Override
+	public void playerReceivesCardMessage(String message, Card card, String sound) {
 		try {
 			List<ByteString> parameters = new ArrayList<>();
 			parameters.add(serializer.packString(message));
 			parameters.add(serializer.packCard(card));
+			parameters.add(serializer.packString(sound));
 			QueryMessage qMessage = new QueryMessage(Method.PLAYER_RECEIVE_CARD_MESSAGE, parameters);
 			qMessage.logSendMessage("ServerBorder");
 			this.client.send(qMessage);
@@ -244,11 +255,12 @@ public class ServerBorder implements Player {
 	}
 
 	@Override
-	public void playerReceivesCardMessage(String message, List<Card> cardList) {
+	public void playerReceivesCardMessage(String message, List<Card> cardList, String sound) {
 		try {
 			List<ByteString> parameters = new ArrayList<>();
 			parameters.add(serializer.packString(message));
 			parameters.add(serializer.packCardList(cardList));
+			parameters.add(serializer.packString(sound));
 			QueryMessage qMessage = new QueryMessage(Method.PLAYER_RECEIVE_CARDS_MESSAGE, parameters);
 			qMessage.logSendMessage("ServerBorder");
 			this.client.send(qMessage);
@@ -258,10 +270,13 @@ public class ServerBorder implements Player {
 	}
 
 	@Override
-	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate) {
+	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound) {
 		QueryMessage qMessage;
 		try {
-			qMessage = new QueryMessage(Method.PLAYER_UPDATE_GAMEMODEL, serializer.packGameModelUpdate(gameModelUpdate));
+			List<ByteString> parameters = new ArrayList<>();
+			parameters.add(serializer.packGameModelUpdate(gameModelUpdate));
+			parameters.add(serializer.packString(sound));
+			qMessage = new QueryMessage(Method.PLAYER_UPDATE_GAMEMODEL, parameters);
 			qMessage.logSendMessage("ServerBorder");
 			this.client.send(qMessage);
 		} catch (IOException e) {

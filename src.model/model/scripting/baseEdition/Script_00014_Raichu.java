@@ -47,13 +47,13 @@ public class Script_00014_Raichu extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
 		// Flip coin to check if active pokemon is protected:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself from all effects!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself from all effects!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!");
+			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
@@ -65,13 +65,13 @@ public class Script_00014_Raichu extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 60, true);
 
 		// Flip coin to check if defending pokemon damages itself:
-		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " damages itself!");
+		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " damages itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.TAILS) {
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!");
+			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!", "");
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 30, true);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

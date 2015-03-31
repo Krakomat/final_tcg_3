@@ -57,8 +57,8 @@ public class Script_00010_Mewto extends PokemonCardScript {
 		costs.add(Element.PSYCHIC);
 		gameModel.getAttackAction().playerPaysEnergy(player, costs, card.getCurrentPosition().getPositionID());
 
-		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!");
+		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

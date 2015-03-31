@@ -26,12 +26,12 @@ public class Script_00055_NidoranM extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if damage is applied:
-		gameModel.sendTextMessageToAllPlayers("If Tails then Hornattacke does nothing!");
+		gameModel.sendTextMessageToAllPlayers("If Tails then Hornattacke does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		else
-			gameModel.sendTextMessageToAllPlayers("Hornattacke does nothing!");
+			gameModel.sendTextMessageToAllPlayers("Hornattacke does nothing!", "");
 	}
 }

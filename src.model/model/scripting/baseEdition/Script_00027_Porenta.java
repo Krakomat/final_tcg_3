@@ -50,14 +50,14 @@ public class Script_00027_Porenta extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if damage is applied:
-		gameModel.sendTextMessageToAllPlayers("If Tails then Lauchschlag does nothing!");
+		gameModel.sendTextMessageToAllPlayers("If Tails then Lauchschlag does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		else
-			gameModel.sendTextMessageToAllPlayers("Lauchschlag does nothing!");
-		gameModel.sendTextMessageToAllPlayers("Lauchschlag can't be used anymore!");
+			gameModel.sendTextMessageToAllPlayers("Lauchschlag does nothing!", "");
+		gameModel.sendTextMessageToAllPlayers("Lauchschlag can't be used anymore!", "");
 	}
 
 	private void topfschmetterer() {

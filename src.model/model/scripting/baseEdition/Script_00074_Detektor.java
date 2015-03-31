@@ -37,7 +37,7 @@ public class Script_00074_Detektor extends TrainerCardScript {
 		// Choose two own cards:
 		List<Card> chosenCards = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 2, true, "Choose 2 cards to discard!");
 		for (Card chosenCard : chosenCards) {
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard);
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
 			gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
 		}
 
@@ -45,7 +45,7 @@ public class Script_00074_Detektor extends TrainerCardScript {
 		List<Card> trainerCards = gameModel.getPosition(ownDiscardPile()).getTrainerCards();
 		Card chosenCard = player.playerChoosesCards(trainerCards, 1, true, "Choose a trainer card to recover!").get(0);
 		// Message clients:
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " recovers " + chosenCard.getName() + " from his discard pile!", chosenCard);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " recovers " + chosenCard.getName() + " from his discard pile!", chosenCard, "");
 		// Move trainer card:
 		gameModel.getAttackAction().moveCard(ownDiscardPile(), ownHand(), chosenCard.getGameID(), true);
 	}

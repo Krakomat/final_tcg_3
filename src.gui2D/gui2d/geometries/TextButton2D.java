@@ -1,5 +1,6 @@
 package gui2d.geometries;
 
+import model.enums.Sounds;
 import gui2d.GUI2D;
 import gui2d.abstracts.Button2D;
 import gui2d.abstracts.SelectableNode;
@@ -68,7 +69,7 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 		this.attachChild(this.textBitmap);
 
 		// Init audio:
-		this.clickSoundNode = EffectController.createEffectAudioNode(EffectController.BUTTON_CLICKED);
+		this.clickSoundNode = EffectController.createEffectAudioNode(Sounds.BUTTON_CLICKED);
 		this.attachChild(this.clickSoundNode);
 	}
 

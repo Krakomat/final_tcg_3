@@ -41,13 +41,13 @@ public class Script_00005_Piepi extends PokemonCardScript {
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
 		// Flip coin to check if defending pokemon is asleep:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is asleep!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is asleep!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!");
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
@@ -69,7 +69,7 @@ public class Script_00005_Piepi extends PokemonCardScript {
 			attackOwner.add(defendingPokemon);
 
 		String attackName = player.playerChoosesAttacks(attackOwner, defendingCardScript.getAttackNames(), 1, true, "Choose an attack to copy!").get(0);
-		gameModel.sendTextMessageToAllPlayers(player.getName() + " chooses " + attackName + "!");
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " chooses " + attackName + "!", "");
 
 		// Set card script for piepi:
 		this.card.setCardScript(copy);

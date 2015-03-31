@@ -14,6 +14,7 @@ import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
@@ -64,7 +65,7 @@ public class AttackAction {
 		int headsCounter = 0;
 		for (int i = 0; i < amount; i++) {
 			Coin c = this.flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin shows " + c);
+			gameModel.sendTextMessageToAllPlayers("Coin shows " + c, "");
 			if (c == Coin.HEADS)
 				headsCounter++;
 		}
@@ -139,8 +140,8 @@ public class AttackAction {
 		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
 		script.pokemonIsDamaged(gameModel.getTurnNumber(), damageAmount, attackerPositionID);
 
-		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!");
-		this.gameModel.sendGameModelToAllPlayers();
+		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");
+		this.gameModel.sendGameModelToAllPlayers(Sounds.DAMAGE);
 		return damageAmount;
 	}
 
@@ -235,8 +236,8 @@ public class AttackAction {
 			newDamageMarks = 0;
 		targetPokemon.setDamageMarks(newDamageMarks);
 
-		this.gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + " is healed for " + amount);
-		this.gameModel.sendGameModelToAllPlayers();
+		this.gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + " is healed for " + amount, "");
+		this.gameModel.sendGameModelToAllPlayers("");
 	}
 
 	/**
@@ -357,7 +358,7 @@ public class AttackAction {
 	}
 
 	/**
-	 * No messages to clients send here!
+	 * Only sound messages send to clients here!
 	 * 
 	 * @param amount
 	 * @param player
@@ -386,6 +387,7 @@ public class AttackAction {
 				else
 					c.setVisibleForPlayerRed(true);
 				this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
+				gameModel.sendSoundToAllPlayers(Sounds.DRAW);
 			} else
 				drawingFinished = true;
 		}
@@ -406,7 +408,7 @@ public class AttackAction {
 		Position hand = gameModel.getPosition(handPos);
 		// Check if player holds too much cards in his hand and force him to destroy some of them then:
 		if (hand.size() > 9) {
-			this.gameModel.sendTextMessageToAllPlayers(player.getName() + " has too much cards in his hand!");
+			this.gameModel.sendTextMessageToAllPlayers(player.getName() + " has too much cards in his hand!", "");
 			int destroyCounter = hand.size() - 9;
 			List<Card> dCardList = player.playerChoosesCards((ArrayList<Card>) hand.getCards(), destroyCounter, true, "Choose " + destroyCounter
 					+ " cards to destroy!");
@@ -420,7 +422,7 @@ public class AttackAction {
 			for (Card card : cardsToRemove) {
 				hand.removeFromPosition(card);
 				card.setCurrentPosition(null);
-				this.gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + card.getName() + " from the game!", card);
+				this.gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + card.getName() + " from the game!", card, "");
 			}
 		}
 	}
@@ -507,12 +509,12 @@ public class AttackAction {
 	public void fullHealPosition(PositionID position) {
 		PokemonCard pokemonCard = (PokemonCard) gameModel.getPosition(position).getTopCard();
 
-		gameModel.sendTextMessageToAllPlayers(pokemonCard.getName() + " is healed fully");
+		gameModel.sendTextMessageToAllPlayers(pokemonCard.getName() + " is healed fully", "");
 
 		if (pokemonCard.getDamageMarks() > 0)
 			pokemonCard.setDamageMarks(0);
 
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	/**
@@ -531,7 +533,7 @@ public class AttackAction {
 	 * @param card
 	 */
 	public void putBasicPokemonOnBench(Player player, PokemonCard card) {
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " sets " + card.getName() + " on his bench!", card);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " sets " + card.getName() + " on his bench!", card, Sounds.ON_BENCH);
 
 		// Get the lowest bench position that is empty:
 		PositionID benchPosition = null;
@@ -547,7 +549,7 @@ public class AttackAction {
 		this.moveCard(sourcePosition, benchPosition, card.getGameID(), true);
 
 		// Update gameModel:
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	/**
@@ -564,7 +566,7 @@ public class AttackAction {
 		List<Card> cardList = new ArrayList<>();
 		cardList.add(oldCard);
 		cardList.add(c);
-		gameModel.sendCardMessageToAllPlayers(oldCard.getName() + " evolves into " + c.getName(), cardList);
+		gameModel.sendCardMessageToAllPlayers(oldCard.getName() + " evolves into " + c.getName(), cardList, Sounds.EVOLVE);
 
 		int damage = oldCard.getDamageMarks();
 		oldCard.resetDynamicAttributes(); // Clean damage and conditions on old card
@@ -574,7 +576,7 @@ public class AttackAction {
 		c.setDamageMarks(damage);
 
 		// Update gameModel:
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public String movePokemonToPosition(PositionID from, PositionID to) {

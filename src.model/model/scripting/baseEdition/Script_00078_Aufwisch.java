@@ -44,7 +44,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 				basicPokemon = (PokemonCard) cards.get(i);
 
 		if (basicPokemon != null) {
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " returns " + basicPokemon.getName() + " to his hand!", basicPokemon);
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " returns " + basicPokemon.getName() + " to his hand!", basicPokemon, "");
 			PositionID playerHand = null;
 			PositionID playerDiscard = null;
 			if (position.getColor() == Color.BLUE) {
@@ -59,7 +59,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 				gameModel.getAttackAction().moveCard(targetPosition, playerDiscard, cards.get(i).getGameID(), true);
 		} else
 			System.err.println("No Basic pokemon on position in method scoopUpPosition");
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
@@ -68,7 +68,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 		if (targetPosition == ownActive()) {
 			PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(Color.BLUE), 1, true, "Choose a new active pokemon!").get(0);
 			Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn);
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
 			gameModel.getAttackAction().movePokemonToPosition(newActive, ownActive());
 		}
 	}

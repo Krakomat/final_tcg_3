@@ -7,6 +7,7 @@ import model.database.Database;
 import model.database.DynamicPokemonCondition;
 import model.enums.Element;
 import model.enums.PokemonCondition;
+import model.enums.Sounds;
 
 import com.jme3.asset.TextureKey;
 import com.jme3.audio.AudioNode;
@@ -21,7 +22,6 @@ import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
-import gui2d.controller.EffectController;
 
 public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 
@@ -171,7 +171,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 		}
 
 		// Init audio:
-		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), EffectController.BUTTON_CLICKED, false);
+		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), Sounds.BUTTON_CLICKED, false);
 		this.clickSoundNode.setPositional(false);
 		this.clickSoundNode.setLooping(false);
 		this.clickSoundNode.setVolume(2);

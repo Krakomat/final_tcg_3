@@ -36,13 +36,13 @@ public class Script_00057_Taubsi extends PokemonCardScript {
 
 		if (gameModel.getFullBenchPositions(player.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			// Let enemy choose bench pokemon and swap it with his active:
-			gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon");
+			gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");
 			PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
 					"Choose a pokemon to swap wtih your active!").get(0);
 			Card newPkm = gameModel.getPosition(chosenPosition).getTopCard();
-			gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!");
+			gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!", "");
 			gameModel.getAttackAction().swapPokemon(defender, chosenPosition);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

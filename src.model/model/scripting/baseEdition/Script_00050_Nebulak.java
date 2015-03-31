@@ -40,13 +40,13 @@ public class Script_00050_Nebulak extends PokemonCardScript {
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
 		// Flip coin to check if defending pokemon is asleep:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is asleep!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is asleep!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!");
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
@@ -60,8 +60,8 @@ public class Script_00050_Nebulak extends PokemonCardScript {
 		costs.add(Element.PSYCHIC);
 		gameModel.getAttackAction().playerPaysEnergy(player, costs, card.getCurrentPosition().getPositionID());
 
-		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " establishes a curse!");
+		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " establishes a curse!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.DESTINY);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

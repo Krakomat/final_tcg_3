@@ -80,7 +80,7 @@ public class Script_00004_Glurak extends PokemonCardScript {
 		pos.setEnergy(providedEnergy);
 		this.pokemonPowerPosition = pos;
 
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
@@ -88,7 +88,7 @@ public class Script_00004_Glurak extends PokemonCardScript {
 			// Reset the provided energy:
 			this.pokemonPowerPosition.setEnergy(new ArrayList<Element>());
 			this.pokemonPowerPosition = null; // reset position
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

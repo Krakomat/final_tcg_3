@@ -65,9 +65,9 @@ public class Script_00039_Porygon extends PokemonCardScript {
 
 			PokemonCard targetPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
 			targetPokemon.setCurrentWeakness(chosenElement);
-			gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + "'s weakness is changed to " + chosenElement.toString());
+			gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + "'s weakness is changed to " + chosenElement.toString(), "");
 		} else
-			gameModel.sendTextMessageToAllPlayers("Umwandlung 1 has no effect on " + defendingPokemon.getName() + "!");
+			gameModel.sendTextMessageToAllPlayers("Umwandlung 1 has no effect on " + defendingPokemon.getName() + "!", "");
 
 	}
 
@@ -87,6 +87,6 @@ public class Script_00039_Porygon extends PokemonCardScript {
 
 		PokemonCard targetPokemon = (PokemonCard) gameModel.getPosition(attacker).getTopCard();
 		targetPokemon.setCurrentResistance(chosenElement);
-		gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + "'s resistance is changed to " + chosenElement.toString());
+		gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + "'s resistance is changed to " + chosenElement.toString(), "");
 	}
 }

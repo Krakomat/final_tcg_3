@@ -43,8 +43,8 @@ public class Script_00056_Onix extends PokemonCardScript {
 	private void haertner() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		Card attackingPokemon = gameModel.getPosition(attacker).getTopCard();
-		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is protects itself!");
+		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is protects itself!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.HARDEN30);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

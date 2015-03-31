@@ -19,6 +19,7 @@ import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
 import gui2d.controller.CameraController;
 import gui2d.controller.DeckEditController;
+import gui2d.controller.EffectController;
 import gui2d.controller.GUI2DController;
 import gui2d.controller.IOController;
 import gui2d.controller.IngameController;
@@ -438,7 +439,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	}
 
 	@Override
-	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor) {
+	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor, String sound) {
 		System.out.println("Started Update from " + Thread.currentThread().getName());
 		for (Position p : gameModel.getGameField().getAllPositions()) {
 			SelectableNode n = ingameController.getPositionGeometry(p.getPositionID(), ownColor);
@@ -447,15 +448,17 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				this.addToUpdateQueue(n);
 			}
 		}
+		EffectController.playSound(sound);
 		System.out.println("Finished Update");
 	}
 
 	@Override
-	public void userReceivesGameTextMessage(String message) {
+	public void userReceivesGameTextMessage(String message, String sound) {
 		TextPanel2D messagePanel = this.ingameController.getMessagePanel();
 		messagePanel.setText(message);
 		messagePanel.setVisible(true);
 		this.addToUpdateQueue(messagePanel);
+		EffectController.playSound(sound);
 		try {
 			Thread.sleep(MESSAGE_TIME);
 		} catch (InterruptedException e) {
@@ -466,7 +469,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	}
 
 	@Override
-	public void userReceivesCardMessage(String message, Card card) {
+	public void userReceivesCardMessage(String message, Card card, String sound) {
 		TextPanel2D messagePanel = this.ingameController.getMessagePanel();
 		CardPanel2D cardMessagePanel = this.ingameController.getCardMessagePanel();
 
@@ -480,6 +483,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		nodeList.add(cardMessagePanel);
 		nodeList.add(messagePanel);
 		this.addToUpdateQueue(nodeList);
+		EffectController.playSound(sound);
 		try {
 			Thread.sleep(MESSAGE_TIME);
 		} catch (InterruptedException e) {
@@ -491,7 +495,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	}
 
 	@Override
-	public void userReceivesCardMessage(String message, List<Card> cardList) {
+	public void userReceivesCardMessage(String message, List<Card> cardList, String sound) {
 		TextPanel2D messagePanel = this.ingameController.getMessagePanel();
 		CardPanel2D cardMessagePanel = this.ingameController.getCardMessagePanel();
 
@@ -503,6 +507,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		nodeList.add(cardMessagePanel);
 		nodeList.add(messagePanel);
 		this.addToUpdateQueue(nodeList);
+		EffectController.playSound(sound);
 		try {
 			Thread.sleep(MESSAGE_TIME);
 		} catch (InterruptedException e) {
@@ -694,5 +699,10 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public void destroy() {
 		super.destroy();
 		System.exit(0);
+	}
+
+	@Override
+	public void playSound(String sound) {
+		EffectController.playSound(sound);
 	}
 }

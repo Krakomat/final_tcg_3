@@ -9,6 +9,7 @@ import model.enums.CardType;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -57,7 +58,7 @@ public class Script_00075_Goere extends TrainerCardScript {
 			}
 
 		// Discard trainer cards:
-		gameModel.sendTextMessageToAllPlayers("Both players shuffle trainer cards into their decks!");
+		gameModel.sendTextMessageToAllPlayers("Both players shuffle trainer cards into their decks!", Sounds.SHUFFLE);
 		playerPutsTrainerCardsOnDeck(player);
 		playerPutsTrainerCardsOnDeck(enemy);
 

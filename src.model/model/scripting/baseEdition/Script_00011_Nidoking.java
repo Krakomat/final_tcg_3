@@ -44,17 +44,17 @@ public class Script_00011_Nidoking extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if defending pokemon damages itself:
-		gameModel.sendTextMessageToAllPlayers("If heads then the attack gets stronger!");
+		gameModel.sendTextMessageToAllPlayers("If heads then the attack gets stronger!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 		} else {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!");
+			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!", "");
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 10, true);
 		}
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	private void toxin() {
@@ -64,8 +64,8 @@ public class Script_00011_Nidoking extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is infected with toxin!");
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is infected with toxin!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.TOXIC);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

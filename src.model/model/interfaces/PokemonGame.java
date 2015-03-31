@@ -146,31 +146,42 @@ public interface PokemonGame {
 	 * 
 	 * @param string
 	 * @param cardList
+	 * @param sound
 	 */
-	void sendCardMessageToAllPlayers(String string, List<Card> cardList);
+	void sendCardMessageToAllPlayers(String string, List<Card> cardList, String sound);
 
 	/**
 	 * Sends a cardMessage to all players.
 	 * 
 	 * @param string
 	 * @param cardList
+	 * @param sound
 	 */
-	void sendCardMessageToAllPlayers(String string, Card card);
+	void sendCardMessageToAllPlayers(String string, Card card, String sound);
 
 	/**
 	 * A new text message is send to all players.
 	 * 
 	 * @param message
+	 * @param sound
 	 */
-	void sendTextMessageToAllPlayers(String message);
+	void sendTextMessageToAllPlayers(String message, String sound);
 
 	/**
 	 * Sends the game model to all players.
 	 * 
 	 * @param string
 	 * @param cardList
+	 * @param sound
 	 */
-	void sendGameModelToAllPlayers();
+	void sendGameModelToAllPlayers(String sound);
+
+	/**
+	 * The player clients have to play the given sound.
+	 * 
+	 * @param sound
+	 */
+	void sendSoundToAllPlayers(String sound);
 
 	/**
 	 * Returns the attackAction instance of this game model.

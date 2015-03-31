@@ -40,7 +40,7 @@ public class Script_00092_EnergieAbsauger extends TrainerCardScript {
 		Card chosenEnergy = player.playerChoosesCards(chooseCardList, 1, true, "Choose an energy card to discard!").get(0);
 
 		// Message clients:
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + chosenEnergy.getName() + " from " + pokemon.getName() + "!", chosenEnergy);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + chosenEnergy.getName() + " from " + pokemon.getName() + "!", chosenEnergy, "");
 		// Discard energy card:
 		gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, chosenEnergy.getGameID());
 		// Discard trainer card:

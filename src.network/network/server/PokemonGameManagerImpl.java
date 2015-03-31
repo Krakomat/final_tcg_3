@@ -20,6 +20,7 @@ import model.enums.GameState;
 import model.enums.PlayerAction;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.enums.TurnState;
 import model.game.PokemonGameModelImpl;
 import model.interfaces.GameModelUpdate;
@@ -282,12 +283,12 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 				// If card is a trainer card then send card message beforehand, so scripts don't need to implement this:
 				if (c instanceof TrainerCard)
-					gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c);
+					gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
 
 				// Execute the card script:
 				c.getCardScript().playFromHand();
 
-				gameModel.sendGameModelToAllPlayers();
+				gameModel.sendGameModelToAllPlayers("");
 				gameModel.cleanDefeatedPositions();
 
 				moveMade = true;
@@ -356,14 +357,14 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				// Check if pokemon is confused and flip a coin, if attacking is allowed or the pokemon hurts itself:
 				boolean attackAllowed = true;
 				if (active.hasCondition(PokemonCondition.CONFUSED)) {
-					gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!");
+					gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!", "");
 					Coin c = gameModel.getAttackAction().flipACoin();
-					gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+					gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 
 					if (c == Coin.TAILS) {
 						attackAllowed = false;
 						// Damage attacker:
-						gameModel.sendTextMessageToAllPlayers(active.getName() + " hurts itself!");
+						gameModel.sendTextMessageToAllPlayers(active.getName() + " hurts itself!", "");
 						gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
 								active.getCurrentPosition().getPositionID(), 20, true);
 					}
@@ -371,9 +372,9 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 				// Check if pokemon is blind and flip a coin, if attacking is allowed:
 				if (attackAllowed && active.hasCondition(PokemonCondition.BLIND)) {
-					gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails");
+					gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails", "");
 					Coin c = gameModel.getAttackAction().flipACoin();
-					gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+					gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 
 					if (c == Coin.TAILS)
 						attackAllowed = false;
@@ -381,7 +382,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 				if (attackAllowed) {
 					// Execute the attack:
-					gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName);
+					gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
 					pScript.executeAttack(attackName);
 				}
 				gameModel.cleanDefeatedPositions();
@@ -425,7 +426,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 					gameModel.playerLoses(player);
 
 				// Execute the power:
-				gameModel.sendCardMessageToAllPlayers(pokemon.getName() + " activates " + powerName + "!", pokemon);
+				gameModel.sendCardMessageToAllPlayers(pokemon.getName() + " activates " + powerName + "!", pokemon, "");
 				pScript.executePokemonPower(powerName);
 
 				moveMade = true; // Let player make his next move

@@ -13,6 +13,7 @@ import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
+import model.scripting.abstracts.ServerCards;
 import common.utilities.Triple;
 
 public class AIUtilities {
@@ -30,7 +31,12 @@ public class AIUtilities {
 			// Check hand:
 			Position handPos = gameModel.getPosition(PositionID.BLUE_HAND);
 			for (int i = 0; i < handPos.getCards().size(); i++) {
-				List<String> actions = gameModel.getPlayerActions(i, PositionID.BLUE_HAND, player);
+				String handCardID = handPos.getCards().get(i).getCardId();
+				List<String> actions = null;
+				if (ServerCards.createInstance().contains(handCardID))
+					actions = server.getPlayerActions(i, PositionID.BLUE_HAND, player);
+				else
+					actions = gameModel.getPlayerActions(i, PositionID.BLUE_HAND, player);
 				if (!actions.isEmpty()) {
 					for (String action : actions)
 						choosableCards.add(new Triple<Position, Integer, String>(handPos, i, action));
@@ -39,7 +45,7 @@ public class AIUtilities {
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
 			List<String> actions = null;
-			if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+			if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
 				actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
 			else
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
@@ -63,7 +69,12 @@ public class AIUtilities {
 			// Check hand:
 			Position handPos = gameModel.getPosition(PositionID.RED_HAND);
 			for (int i = 0; i < handPos.getCards().size(); i++) {
-				List<String> actions = gameModel.getPlayerActions(i, PositionID.RED_HAND, player);
+				String handCardID = handPos.getCards().get(i).getCardId();
+				List<String> actions = null;
+				if (ServerCards.createInstance().contains(handCardID))
+					actions = server.getPlayerActions(i, PositionID.RED_HAND, player);
+				else
+					actions = gameModel.getPlayerActions(i, PositionID.RED_HAND, player);
 				if (!actions.isEmpty()) {
 					for (String action : actions)
 						choosableCards.add(new Triple<Position, Integer, String>(handPos, i, action));
@@ -72,7 +83,7 @@ public class AIUtilities {
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
 			List<String> actions = null;
-			if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+			if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
 				actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
 			else
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);

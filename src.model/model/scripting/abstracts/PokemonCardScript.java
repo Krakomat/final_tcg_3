@@ -200,9 +200,9 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		boolean retreatAllowed = true;
 		// If active pokemon is confused check if it can be retreated by flipping a coin:
 		if (pCard.hasCondition(PokemonCondition.CONFUSED)) {
-			gameModel.sendTextMessageToAllPlayers("Coinflip: " + pCard.getName() + " can't return when tails");
+			gameModel.sendTextMessageToAllPlayers("Coinflip: " + pCard.getName() + " can't return when tails", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 
 			if (c == Coin.TAILS)
 				retreatAllowed = false;
@@ -218,11 +218,11 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			List<Card> cardList = new ArrayList<>();
 			cardList.add(pCard);
 			cardList.add(newActive);
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + pCard.getName() + " with " + newActive.getName(), cardList);
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + pCard.getName() + " with " + newActive.getName(), cardList, "");
 			gameModel.getAttackAction().swapPokemon(pCard.getCurrentPosition().getPositionID(), chosenPosition);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		} else
-			gameModel.sendTextMessageToAllPlayers("Retreat failed!");
+			gameModel.sendTextMessageToAllPlayers("Retreat failed!", "");
 	}
 
 	/**

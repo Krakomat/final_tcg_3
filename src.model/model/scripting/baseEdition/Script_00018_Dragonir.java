@@ -44,7 +44,7 @@ public class Script_00018_Dragonir extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 2 coins...");
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 2 coins...", "");
 		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(2);
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 30, true);
 	}
@@ -72,7 +72,7 @@ public class Script_00018_Dragonir extends PokemonCardScript {
 				discardPile = PositionID.RED_DISCARDPILE;
 
 			gameModel.getAttackAction().moveCard(chosenEnergyCard.getCurrentPosition().getPositionID(), discardPile, chosenEnergyCard.getGameID(), true);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

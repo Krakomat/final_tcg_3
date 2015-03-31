@@ -50,10 +50,10 @@ public abstract class EnergyCardScript extends CardScript {
 			List<Card> cardList = new ArrayList<Card>();
 			cardList.add(basicPkmn);
 			cardList.add(card);
-			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList);
+			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList, "");
 			this.gameModel.getAttackAction().moveCard(card.getCurrentPosition().getPositionID(), chosenPosition, card.getGameID(), false);
 			this.gameModel.setEnergyPlayed(true);
-			this.gameModel.sendGameModelToAllPlayers();
+			this.gameModel.sendGameModelToAllPlayers("");
 
 			EnergyCard eneCard = (EnergyCard) this.card;
 			// Call energy played of all card sscripts:

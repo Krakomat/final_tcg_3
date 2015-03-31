@@ -19,6 +19,7 @@ import model.enums.Element;
 import model.enums.GameState;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.GameField;
 import model.interfaces.GameModelUpdate;
 import model.interfaces.PokemonGame;
@@ -77,12 +78,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 			blueCards.get(i).setCurrentPosition(blueDeck);
 			blueDeck.addToPosition(blueCards.get(i));
 		}
-
+		
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-
+		
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -92,8 +93,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 		for (Player p : this.getPlayerList())
 			p.startGame();
 
-		this.sendGameModelToPlayers(this.getPlayerList());
-		this.sendTextMessageToPlayers(getPlayerList(), "The game has started");
+		this.sendGameModelToPlayers(this.getPlayerList(), "");
+		this.sendTextMessageToPlayers(getPlayerList(), "The game has started", "");
 		this.gameState = GameState.RUNNING;
 
 		this.initDraw();
@@ -108,16 +109,16 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 * draws once more.
 	 */
 	private void initDraw() {
-		this.sendTextMessageToPlayers(getPlayerList(), "Each player shuffles his deck.");
+		this.sendTextMessageToPlayers(getPlayerList(), "Each player shuffles his deck.", Sounds.SHUFFLE);
 		this.timeoutWait(200);
 		Position blueDeck = this.getPosition(PositionID.BLUE_DECK);
 		blueDeck.shuffle();
 		Position redDeck = this.getPosition(PositionID.RED_DECK);
 		redDeck.shuffle();
 
-		this.sendGameModelToPlayers(this.getPlayerList());
+		this.sendGameModelToPlayers(this.getPlayerList(), "");
 
-		this.sendTextMessageToPlayers(getPlayerList(), "Each player draws 7 cards.");
+		this.sendTextMessageToPlayers(getPlayerList(), "Each player draws 7 cards.", "");
 
 		boolean playerBlueHandOk = false, playerRedHandOk = false, bothFinished = false;
 		while (!(bothFinished)) {
@@ -127,7 +128,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 					this.attackAction.playerDrawsCards(1, playerBlue);
 				if (!playerRedHandOk)
 					this.attackAction.playerDrawsCards(1, playerRed);
-				this.sendGameModelToPlayers(this.getPlayerList());
+				this.sendGameModelToPlayers(this.getPlayerList(), "");
 				this.timeoutWait(200);
 			}
 
@@ -139,11 +140,11 @@ public class PokemonGameModelImpl implements PokemonGame {
 				playerRedHandOk = true;
 
 			if (!playerBlueHandOk && !playerRedHandOk)
-				this.sendTextMessageToPlayers(getPlayerList(), "No player has basic pokemon in his hand!");
+				this.sendTextMessageToPlayers(getPlayerList(), "No player has basic pokemon in his hand!", "");
 			else if (!playerBlueHandOk && playerRedHandOk)
-				this.sendTextMessageToPlayers(getPlayerList(), playerBlue.getName() + " has no basic pokemon in his hand!");
+				this.sendTextMessageToPlayers(getPlayerList(), playerBlue.getName() + " has no basic pokemon in his hand!", "");
 			else if (playerBlueHandOk && !playerRedHandOk)
-				this.sendTextMessageToPlayers(getPlayerList(), playerRed.getName() + " has no basic pokemon in his hand!");
+				this.sendTextMessageToPlayers(getPlayerList(), playerRed.getName() + " has no basic pokemon in his hand!", "");
 			else
 				bothFinished = true;
 
@@ -155,26 +156,28 @@ public class PokemonGameModelImpl implements PokemonGame {
 				this.getPosition(PositionID.RED_HAND).setVisible(true, Color.BLUE);
 			}
 			// Update GameModel:
-			this.sendGameModelToPlayers(this.getPlayerList());
+			this.sendGameModelToPlayers(this.getPlayerList(), "");
 
 			if (!playerBlueHandOk || !playerRedHandOk)
 				this.timeoutWait(5000);// Wait so players can look at the hands
 			this.getPosition(PositionID.BLUE_HAND).setVisible(false, Color.RED);
 			this.getPosition(PositionID.RED_HAND).setVisible(false, Color.BLUE);
 			// Update GameModel:
-			this.sendGameModelToPlayers(this.getPlayerList());
+			this.sendGameModelToPlayers(this.getPlayerList(), "");
 
 			// Shuffle hand into deck, if no basic pokemon drawn
 			if (!playerBlueHandOk) {
 				this.attackAction.playerPutsAllHandCardsOnDeck(playerBlue);
 				blueDeck.shuffle();
+				this.sendSoundToAllPlayers(Sounds.SHUFFLE);
 			}
 			if (!playerRedHandOk) {
 				this.attackAction.playerPutsAllHandCardsOnDeck(playerRed);
 				redDeck.shuffle();
+				this.sendSoundToAllPlayers(Sounds.SHUFFLE);
 			}
 			// Update GameModel:
-			this.sendGameModelToPlayers(this.getPlayerList());
+			this.sendGameModelToPlayers(this.getPlayerList(), "");
 		}
 	}
 
@@ -183,7 +186,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 */
 	private void initPrizes() {
 		// System.out.println("Init prizes...");
-		this.sendTextMessageToPlayers(getPlayerList(), "Each player lays down " + GameParameters.PRIZE_NUMBER + " price cards");
+		this.sendTextMessageToPlayers(getPlayerList(), "Each player lays down " + GameParameters.PRIZE_NUMBER + " price cards", "");
 		Position blueDeck = this.getPosition(PositionID.BLUE_DECK);
 		Position redDeck = this.getPosition(PositionID.RED_DECK);
 
@@ -192,7 +195,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			this.attackAction.moveCard(redDeck.getPositionID(), PositionID.valueOf("RED_PRICE_" + i), redDeck.getTopCard().getGameID(), true);
 		}
 		// Update GameModel:
-		this.sendGameModelToPlayers(this.getPlayerList());
+		this.sendGameModelToPlayers(this.getPlayerList(), "");
 		this.timeoutWait(200);
 
 		// System.out.println("Init prizes finished!");
@@ -304,7 +307,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		this.makePositionVisibleForAllPlayers(PositionID.RED_DISCARDPILE);
 
 		// Update GameModel:
-		this.sendGameModelToPlayers(this.getPlayerList());
+		this.sendGameModelToPlayers(this.getPlayerList(), "");
 
 		// System.out.println("Init choose bench Pokemon finished...");
 	}
@@ -329,11 +332,11 @@ public class PokemonGameModelImpl implements PokemonGame {
 		switch (coinflip) {
 		case 0:
 			this.playerOnTurn = playerRed; // Gets switched before the real first turn, because of method nextTurn()!
-			this.sendTextMessageToPlayers(getPlayerList(), "Coin shows 'Heads' - " + playerBlue.getName() + " begins.");
+			this.sendTextMessageToPlayers(getPlayerList(), "Coin shows 'Heads' - " + playerBlue.getName() + " begins.", "");
 			break;
 		case 1:
 			this.playerOnTurn = playerBlue; // Gets switched before the real first turn, because of method nextTurn()!
-			this.sendTextMessageToPlayers(getPlayerList(), "Coin shows 'Tails' - " + playerRed.getName() + " begins.");
+			this.sendTextMessageToPlayers(getPlayerList(), "Coin shows 'Tails' - " + playerRed.getName() + " begins.", "");
 			break;
 		default:
 			System.err.println("Coinflip-Error: Coin shows " + coinflip);
@@ -353,7 +356,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			// Message players for knocked out pokemon:
 			for (PositionID posID : defeatedPositions) {
 				Card card = this.getPosition(posID).getTopCard();
-				this.sendTextMessageToPlayers(getPlayerList(), card.getName() + " is knocked out!");
+				this.sendTextMessageToPlayers(getPlayerList(), card.getName() + " is knocked out!", "");
 			}
 
 			// Count prices for each player:
@@ -383,7 +386,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 				cleanDefeatedPosition(posID);
 
 			// Send gameModel:
-			this.sendGameModelToPlayers(this.getPlayerList());
+			this.sendGameModelToPlayers(this.getPlayerList(), "");
 
 			// Check, if game is ending:
 			GameState state = this.checkForLoser();
@@ -392,7 +395,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (state == GameState.RED_WON)
 				this.playerLoses(playerBlue);
 			if (state == GameState.TIE) {
-				this.sendTextMessageToPlayers(this.getPlayerList(), "Game results in a TIE!");
+				this.sendTextMessageToPlayers(this.getPlayerList(), "Game results in a TIE!", "");
 				this.gameState = GameState.TIE;
 			}
 
@@ -411,7 +414,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 					this.attackAction.movePokemonToPosition(redNewActive, PositionID.RED_ACTIVEPOKEMON);
 
 				// Send gameModel:
-				this.sendGameModelToPlayers(this.getPlayerList());
+				this.sendGameModelToPlayers(this.getPlayerList(), "");
 			}
 		}
 	}
@@ -496,7 +499,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (number > pricePositions.size())
 				number = pricePositions.size();
 			// Message to all players:
-			this.sendTextMessageToPlayers(getPlayerList(), playerBlue.getName() + " chooses " + number + " price cards.");
+			this.sendTextMessageToPlayers(getPlayerList(), playerBlue.getName() + " chooses " + number + " price cards.", "");
 			// Choose price:
 			List<PositionID> chosenPositions = this.playerBlue.playerChoosesPositions(pricePositions, number, true, "Choose " + number + " price cards");
 			for (PositionID posID : chosenPositions) {
@@ -513,7 +516,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (number > pricePositions.size())
 				number = pricePositions.size();
 			// Message to all players:
-			this.sendTextMessageToPlayers(getPlayerList(), playerRed.getName() + " chooses " + number + " price cards.");
+			this.sendTextMessageToPlayers(getPlayerList(), playerRed.getName() + " chooses " + number + " price cards.", "");
 			// Choose price:
 			List<PositionID> chosenPositions = this.playerRed.playerChoosesPositions(pricePositions, number, true, "Choose " + number + " price cards");
 			for (PositionID posID : chosenPositions) {
@@ -587,14 +590,14 @@ public class PokemonGameModelImpl implements PokemonGame {
 			this.playerOnTurn = playerRed;
 		else
 			this.playerOnTurn = playerBlue;
-		this.sendTextMessageToPlayers(getPlayerList(), playerOnTurn.getName() + " 's turn...");
+		this.sendTextMessageToPlayers(getPlayerList(), playerOnTurn.getName() + " 's turn...", Sounds.ON_TURN);
 		this.turnNumber++; // Increase turn number
 
 		// Draw a card or end game if the player is not able to draw:
 		if (this.attackAction.playerDrawsCards(1, playerOnTurn)) {
 			this.energyPlayed = false;
 			// Update GameModel:
-			this.sendGameModelToPlayers(this.getPlayerList());
+			this.sendGameModelToPlayers(this.getPlayerList(), "");
 		} else
 			this.playerLoses(playerOnTurn);
 	}
@@ -652,14 +655,14 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (condition.getRemainingTurns() == 0) {
 				removedConditions.add(condition);
 				if (condition.getCondition().equals(PokemonCondition.PARALYZED))
-					this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " is not paralyzed anymore!");
+					this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " is not paralyzed anymore!", "");
 			}
 		}
 		// Remove conditions:
 		for (DynamicPokemonCondition condition : removedConditions)
 			pokemon.getConditions().remove(condition);
 
-		this.sendGameModelToPlayers(getPlayerList());
+		this.sendGameModelToPlayers(getPlayerList(), "");
 	}
 
 	/**
@@ -682,12 +685,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 			}
 			if (poisonedCondition != null) {
 				// Apply damage:
-				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " is poisoned!");
+				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " is poisoned!", "");
 				this.attackAction.inflictDamageToPosition(Element.COLORLESS, null, positionID, 10, false);
 			}
 			if (toxicCondition != null) {
 				// Apply damage:
-				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " is toxicated!");
+				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " is toxicated!", "");
 				this.attackAction.inflictDamageToPosition(Element.COLORLESS, null, positionID, 20, false);
 			}
 		}
@@ -708,16 +711,16 @@ public class PokemonGameModelImpl implements PokemonGame {
 					asleepCondition = condition;
 			}
 			if (asleepCondition != null) {
-				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: Flip a coin to check if " + pokemon.getName() + " woke up...");
+				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: Flip a coin to check if " + pokemon.getName() + " woke up...", "");
 				Random rand = new SecureRandom();
 				boolean result = rand.nextInt(2) == 1 ? true : false;
 				if (result) {
-					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " woke up...");
+					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " woke up...", "");
 					// Remove condition:
 					pokemon.getConditions().remove(asleepCondition);
-					this.sendGameModelToPlayers(getPlayerList());
+					this.sendGameModelToPlayers(getPlayerList(), "");
 				} else
-					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " is still sleeping...");
+					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " is still sleeping...", "");
 			}
 		}
 	}
@@ -737,11 +740,11 @@ public class PokemonGameModelImpl implements PokemonGame {
 					confusedCondition = condition;
 			}
 			if (confusedCondition != null) {
-				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: If tails, then " + pokemon.getName() + " damages itself...");
+				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: If tails, then " + pokemon.getName() + " damages itself...", "");
 				Random rand = new SecureRandom();
 				boolean result = rand.nextInt(2) == 0 ? true : false;
 				if (!result) {
-					this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " damages itself!");
+					this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " damages itself!", "");
 					this.attackAction.inflictDamageToPosition(Element.COLORLESS, null, positionID, 20, false);
 				}
 			}
@@ -750,7 +753,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	@Override
 	public void executeEndTurn() {
-		this.sendTextMessageToPlayers(getPlayerList(), this.playerOnTurn.getName() + " ends his turn");
+		this.sendTextMessageToPlayers(getPlayerList(), this.playerOnTurn.getName() + " ends his turn", "");
 
 		// Call executeEndTurnActions() for all card scripts in the game model:
 		for (Integer gameID : this.cardMap.keySet()) {
@@ -769,8 +772,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 			this.gameState = GameState.RED_WON;
 		else
 			this.gameState = GameState.BLUE_WON;
-		this.sendGameModelToPlayers(this.getPlayerList());
-		this.sendTextMessageToPlayers(this.getPlayerList(), player.getName() + " loses the game.");
+		this.sendGameModelToPlayers(this.getPlayerList(), "");
+		this.sendTextMessageToPlayers(this.getPlayerList(), player.getName() + " loses the game.", "");
 	}
 
 	public void registerCard(Card card) {
@@ -800,41 +803,51 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	// ------------------------------------------------GameServer Methods:-------------------------------------------------------------------
 	@Override
-	public void sendTextMessageToAllPlayers(String message) {
-		this.sendTextMessageToPlayers(this.getPlayerList(), message);
+	public void sendTextMessageToAllPlayers(String message, String sound) {
+		this.sendTextMessageToPlayers(this.getPlayerList(), message, sound);
 	}
 
 	@Override
-	public void sendCardMessageToAllPlayers(String message, List<Card> cardList) {
-		this.sendCardMessageToPlayers(this.getPlayerList(), message, cardList);
+	public void sendCardMessageToAllPlayers(String message, List<Card> cardList, String sound) {
+		this.sendCardMessageToPlayers(this.getPlayerList(), message, cardList, sound);
 	}
 
 	@Override
-	public void sendCardMessageToAllPlayers(String message, Card card) {
-		playerBlue.playerReceivesCardMessage(message, card);
-		playerRed.playerReceivesCardMessage(message, card);
+	public void sendCardMessageToAllPlayers(String message, Card card, String sound) {
+		playerBlue.playerReceivesCardMessage(message, card, sound);
+		playerRed.playerReceivesCardMessage(message, card, sound);
 	}
 
 	@Override
-	public void sendGameModelToAllPlayers() {
-		this.sendGameModelToPlayers(getPlayerList());
+	public void sendGameModelToAllPlayers(String sound) {
+		this.sendGameModelToPlayers(getPlayerList(), sound);
 	}
 
-	private void sendTextMessageToPlayers(List<Player> playerList, String message) {
+	private void sendTextMessageToPlayers(List<Player> playerList, String message, String sound) {
 		for (Player p : playerList)
-			p.playerReceivesGameTextMessage(message);
+			p.playerReceivesGameTextMessage(message, sound);
 	}
 
-	private void sendCardMessageToPlayers(List<Player> playerList, String message, List<Card> cardList) {
+	private void sendCardMessageToPlayers(List<Player> playerList, String message, List<Card> cardList, String sound) {
 		for (Player p : playerList)
-			p.playerReceivesCardMessage(message, cardList);
+			p.playerReceivesCardMessage(message, cardList, sound);
 	}
 
-	private void sendGameModelToPlayers(List<Player> playerList) {
+	private void sendGameModelToPlayers(List<Player> playerList, String sound) {
 		for (Player p : playerList) {
 			GameModelUpdate updateModel = this.getGameModelForPlayer(p);
-			p.playerUpdatesGameModel(updateModel);
+			p.playerUpdatesGameModel(updateModel, sound);
 		}
+	}
+
+	@Override
+	public void sendSoundToAllPlayers(String sound) {
+		sendSoundToPlayers(getPlayerList(), sound);
+	}
+
+	private void sendSoundToPlayers(List<Player> playerList, String sound) {
+		for (Player p : playerList)
+			p.playerReceivesSound(sound);
 	}
 
 	// ------------------------------------------------/GameServer Methods-------------------------------------------------------------------

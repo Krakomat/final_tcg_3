@@ -1,9 +1,12 @@
 Patch 1.03
+	New Features
+		- Added several sound effects to the game
 	Game
-		- A Pokemon that is Asleep or Paralyzed should not be allowed to retreat. 
+		- A Pokemon that is Asleep or Paralyzed should not be allowed to retreat.
+		- Sandan: Fixed a bug, where the blind condition was not correctly applied at the client
+		- Pokemon Händler: Fixed a bug that prevented this card from being played
 	GUI
 		- Fixed a bug where the music did not switch properly between ingame and lobby controller
-	
 	
 	
 Patch 1.02

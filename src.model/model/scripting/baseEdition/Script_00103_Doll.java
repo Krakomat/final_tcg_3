@@ -50,7 +50,7 @@ public class Script_00103_Doll extends PokemonCardScript {
 
 	public void executePokemonPower(String powerName) {
 		final Player player = this.getCardOwner();
-		gameModel.sendTextMessageToAllPlayers(player.getName() + " discards clefary doll!");
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " discards clefary doll!", "");
 
 		Position pos = this.card.getCurrentPosition();
 		boolean newActive = pos.getPositionID() == PositionID.BLUE_ACTIVEPOKEMON || pos.getPositionID() == PositionID.RED_ACTIVEPOKEMON ? true : false;
@@ -77,7 +77,7 @@ public class Script_00103_Doll extends PokemonCardScript {
 		Position discardPile = gameModel.getPosition(ownDiscardPile(player));
 		discardPile.addToPosition(clefaryDoll);
 		clefaryDoll.setCurrentPosition(discardPile);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Choose new active pokemon:
 		if (newActive) {
@@ -87,8 +87,8 @@ public class Script_00103_Doll extends PokemonCardScript {
 			gameModel.getAttackAction().movePokemonToPosition(chosenPosition, pos.getPositionID());
 
 			// Send gameModel:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " has chosen " + active.getName() + " as his new active pokemon!", active);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " has chosen " + active.getName() + " as his new active pokemon!", active, "");
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

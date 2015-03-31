@@ -8,6 +8,7 @@ import model.database.TrainerCard;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -37,7 +38,7 @@ public class Script_00071_Computersuche extends TrainerCardScript {
 		// Choose two own cards:
 		List<Card> chosenCards = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 2, true, "Choose 2 cards to discard!");
 		for (Card chosenCard : chosenCards) {
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard);
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
 			gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
 		}
 
@@ -45,13 +46,13 @@ public class Script_00071_Computersuche extends TrainerCardScript {
 		List<Card> cards = gameModel.getPosition(ownDeck()).getCards();
 		Card chosenCard = player.playerChoosesCards(cards, 1, true, "Choose a card from your deck!").get(0);
 		// Message clients:
-		gameModel.sendTextMessageToAllPlayers(player.getName() + " got a card of his choice from his deck!");
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " got a card of his choice from his deck!", "");
 		// Move card:
 		gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenCard.getGameID(), true);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Shuffle deck:
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getAttackAction().shufflePosition(ownDeck());
 	}
 

@@ -87,7 +87,7 @@ public class Script_00013_Quappo extends PokemonCardScript {
 				discardPile = PositionID.RED_DISCARDPILE;
 
 			gameModel.getAttackAction().moveCard(chosenEnergyCard.getCurrentPosition().getPositionID(), discardPile, chosenEnergyCard.getGameID(), true);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

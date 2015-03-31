@@ -23,6 +23,7 @@ import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.GameModelUpdate;
 import model.interfaces.Position;
+import model.scripting.abstracts.ServerCards;
 
 public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommunication {
 
@@ -87,15 +88,15 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	}
 
 	@Override
-	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate) {
-		this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this);
-		view.userUpdatesGameModel(this.localGameModel, color);
+	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound) {
+		this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this, server);
+		view.userUpdatesGameModel(this.localGameModel, color, sound);
 	}
 
 	private LocalPokemonGameModel getFreshGameModel() {
 		if (this.localGameModel == null) {
 			GameModelUpdate gameModelUpdate = server.getGameModelForPlayer(self);
-			return new LocalPokemonGameModel(gameModelUpdate, this);
+			return new LocalPokemonGameModel(gameModelUpdate, this, server);
 		}
 		return this.localGameModel;
 	}
@@ -113,14 +114,19 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					// Check hand:
 					Position handPos = localGameModel.getPosition(PositionID.BLUE_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
-						List<String> actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
+						String handCardID = handPos.getCards().get(i).getCardId();
+						List<String> actions = null;
+						if (ServerCards.createInstance().contains(handCardID))
+							actions = server.getPlayerActions(i, PositionID.BLUE_HAND, self);
+						else
+							actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
 					List<String> actions = null;
-					if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+					if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
 						actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
 					else
 						actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
@@ -142,14 +148,19 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					// Check hand:
 					Position handPos = localGameModel.getPosition(PositionID.RED_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
-						List<String> actions = localGameModel.getPlayerActions(i, PositionID.RED_HAND, self);
+						String handCardID = handPos.getCards().get(i).getCardId();
+						List<String> actions = null;
+						if (ServerCards.createInstance().contains(handCardID))
+							actions = server.getPlayerActions(i, PositionID.RED_HAND, self);
+						else
+							actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
 					List<String> actions = null;
-					if (activePosition.getTopCard().getCardId().equals("00027"))// Porenta --> ask server if lauchschlag can be used!
+					if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
 						actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
 					else
 						actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
@@ -255,7 +266,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public void receiveGameDeleted() {
-		view.userReceivesGameTextMessage("The game has been deleted!");
+		view.userReceivesGameTextMessage("The game has been deleted!", "");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -265,18 +276,23 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	}
 
 	@Override
-	public void playerReceivesGameTextMessage(String message) {
-		view.userReceivesGameTextMessage(message);
+	public void playerReceivesSound(String sound) {
+		view.playSound(sound);
 	}
 
 	@Override
-	public void playerReceivesCardMessage(String message, Card card) {
-		view.userReceivesCardMessage(message, card);
+	public void playerReceivesGameTextMessage(String message, String sound) {
+		view.userReceivesGameTextMessage(message, sound);
 	}
 
 	@Override
-	public void playerReceivesCardMessage(String message, List<Card> cardList) {
-		view.userReceivesCardMessage(message, cardList);
+	public void playerReceivesCardMessage(String message, Card card, String sound) {
+		view.userReceivesCardMessage(message, card, sound);
+	}
+
+	@Override
+	public void playerReceivesCardMessage(String message, List<Card> cardList, String sound) {
+		view.userReceivesCardMessage(message, cardList, sound);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class Script_00087_Pokedex extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " rearranges the top 5 cards from his deck!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " rearranges the top 5 cards from his deck!", "");
 		gameModel.getAttackAction().rearrangeCardsFromPosition(ownDeck(), 5);
 		// Discard trainer card!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());

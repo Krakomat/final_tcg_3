@@ -42,7 +42,7 @@ public class Script_00017_Bibor extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 2 coins...");
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 2 coins...", "");
 		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(2);
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 30, true);
 	}
@@ -55,13 +55,13 @@ public class Script_00017_Bibor extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 
 		// Flip coin to check if defending pokemon is poisoned:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is poisoned!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is poisoned!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!");
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

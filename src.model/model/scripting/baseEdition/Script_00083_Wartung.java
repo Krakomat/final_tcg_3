@@ -8,6 +8,7 @@ import model.database.TrainerCard;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -38,17 +39,17 @@ public class Script_00083_Wartung extends TrainerCardScript {
 		List<Card> chosenCards = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 2, true, "Choose 2 cards to shuffle into your deck!");
 
 		// Put onto deck:
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " puts 2 cards onto his deck!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " puts 2 cards onto his deck!", "");
 		for (Card c : chosenCards)
 			gameModel.getAttackAction().moveCard(ownHand(), ownDeck(), c.getGameID(), true);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Shuffle deck:
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getAttackAction().shufflePosition(ownDeck());
 
 		// Draw one card:
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 1 card!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 1 card!", "");
 		gameModel.getAttackAction().playerDrawsCards(1, player);
 	}
 

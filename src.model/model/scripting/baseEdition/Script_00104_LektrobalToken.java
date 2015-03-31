@@ -52,7 +52,7 @@ public class Script_00104_LektrobalToken extends EnergyCardScript {
 			// Add Lektrobal to discard pile:
 			pos.addToPosition(this.lektrobal);
 			this.lektrobal.setCurrentPosition(pos);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

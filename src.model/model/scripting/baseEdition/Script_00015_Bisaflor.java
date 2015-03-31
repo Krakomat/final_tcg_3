@@ -129,7 +129,7 @@ public class Script_00015_Bisaflor extends PokemonCardScript {
 			}
 		}
 
-		gameModel.sendTextMessageToAllPlayers("Energy cards have been reordered!");
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendTextMessageToAllPlayers("Energy cards have been reordered!", "");
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

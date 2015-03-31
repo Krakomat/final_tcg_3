@@ -45,7 +45,7 @@ public class Script_00084_Pluspower extends TrainerCardScript {
 				// Set endTurnActionCounter:
 				this.endTurnActionCounter = -1;
 
-				gameModel.sendGameModelToAllPlayers();
+				gameModel.sendGameModelToAllPlayers("");
 			}
 		}
 	}

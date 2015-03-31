@@ -42,7 +42,7 @@ public class Script_00093_Windhauch extends TrainerCardScript {
 		List<Card> cardList = new ArrayList<>();
 		cardList.add(active);
 		cardList.add(bench);
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + active.getName() + " with " + bench.getName() + "!", cardList);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + active.getName() + " with " + bench.getName() + "!", cardList, "");
 
 		// Execute swap:
 		gameModel.getAttackAction().swapPokemon(chosenBenchPos, activePos);

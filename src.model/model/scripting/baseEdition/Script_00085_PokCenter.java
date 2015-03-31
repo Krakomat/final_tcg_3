@@ -37,8 +37,8 @@ public class Script_00085_PokCenter extends TrainerCardScript {
 				gameModel.getAttackAction().removeAllEnergyFromPosition(posID);
 			}
 			
-			gameModel.sendTextMessageToAllPlayers(pokemon.getName() + " is healed fully");
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendTextMessageToAllPlayers(pokemon.getName() + " is healed fully", "");
+			gameModel.sendGameModelToAllPlayers("");
 		}
 
 		// Discard trainer card:

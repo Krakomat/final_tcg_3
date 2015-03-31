@@ -112,18 +112,25 @@ public class ClientListener implements MessageListener<Client> {
 				case PLAYER_RECEIVE_CARDS_MESSAGE:
 					message = serializer.unpackString(qMessage.getParameters().get(0));
 					cardList = serializer.unpackCardList(qMessage.getParameters().get(1));
-					player.playerReceivesCardMessage(message, cardList);
+					String sound = serializer.unpackString(qMessage.getParameters().get(2));
+					player.playerReceivesCardMessage(message, cardList, sound);
 					break;
 				case PLAYER_RECEIVE_CARD_MESSAGE:
 					message = serializer.unpackString(qMessage.getParameters().get(0));
 					Card c = serializer.unpackCard(qMessage.getParameters().get(1));
-					player.playerReceivesCardMessage(message, c);
+					sound = serializer.unpackString(qMessage.getParameters().get(2));
+					player.playerReceivesCardMessage(message, c, sound);
 					break;
 				case PLAYER_RECEIVE_GAME_DELETED:
 					break;
+				case PLAYER_RECIEVE_SOUND:
+					sound = serializer.unpackString(qMessage.getParameters().get(0));
+					player.playerReceivesSound(sound);
+					break;
 				case PLAYER_REVEIVE_TEXT_MESSAGE:
 					message = serializer.unpackString(qMessage.getParameters().get(0));
-					player.playerReceivesGameTextMessage(message);
+					sound = serializer.unpackString(qMessage.getParameters().get(1));
+					player.playerReceivesGameTextMessage(message, sound);
 					break;
 				case PLAYER_SETCOLOR:
 					color = serializer.unpackColor(qMessage.getParameters().get(0));
@@ -143,7 +150,8 @@ public class ClientListener implements MessageListener<Client> {
 				case PLAYER_UPDATE_GAMEMODEL:
 					GameModelUpdate gameModel;
 					gameModel = serializer.unpackGameModelUpdate(qMessage.getParameters().get(0));
-					this.player.playerUpdatesGameModel(gameModel);
+					sound = serializer.unpackString(qMessage.getParameters().get(1));
+					this.player.playerUpdatesGameModel(gameModel, sound);
 					break;
 				default:
 					throw new IOException("Wrong Method type at ClientListener: " + qMessage.getMethod());

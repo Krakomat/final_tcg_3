@@ -37,7 +37,7 @@ public class Script_00031_Rossana extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 2 coins...");
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 2 coins...", "");
 		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(2);
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 10, true);
 	}

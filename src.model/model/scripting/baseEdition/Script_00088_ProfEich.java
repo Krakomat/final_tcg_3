@@ -26,13 +26,13 @@ public class Script_00088_ProfEich extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " discards all cards!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " discards all cards!", "");
 		// Discard whole hand:
 		gameModel.getAttackAction().playerDiscardsAllCards(getCardOwner());
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Draw 7 cards:
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName()  + " draws 7 cards!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName()  + " draws 7 cards!", "");
 		gameModel.getAttackAction().playerDrawsCards(7, getCardOwner());
 	}
 

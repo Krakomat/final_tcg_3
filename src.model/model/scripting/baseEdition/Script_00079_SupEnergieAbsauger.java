@@ -43,7 +43,7 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 		// Choose energy card:
 		Card chosenEnergy = player.playerChoosesCards(chooseCardList, 1, true, "Choose an energy card to discard!").get(0);
 		// Message clients:
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + chosenEnergy.getName() + " from " + pokemon.getName() + "!", chosenEnergy);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + chosenEnergy.getName() + " from " + pokemon.getName() + "!", chosenEnergy, "");
 
 		// Remove up to 2 energy cards from one of the enemies pokemon:
 		PositionID chosenEnemyPosition = player.playerChoosesPositions(this.getPositionsWithEnergy(enemy), 1, true, "Choose a pokemon to rip enery from!").get(0);
@@ -56,7 +56,7 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 		List<Card> chosenEnemyEnergy = player.playerChoosesCards(chooseEnemyCardList, 2, false, "Choose up to 2 energy cards to discard!");
 		for (Card c : chosenEnemyEnergy) {
 			// Message clients:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + c.getName() + " from " + enemyPokemon.getName() + "!", c);
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + c.getName() + " from " + enemyPokemon.getName() + "!", c, "");
 			// Discard energy card:
 			gameModel.getAttackAction().discardCardToDiscardPile(chosenEnemyPosition, c.getGameID());
 		}

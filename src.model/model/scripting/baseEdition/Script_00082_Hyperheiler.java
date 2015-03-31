@@ -35,7 +35,7 @@ public class Script_00082_Hyperheiler extends TrainerCardScript {
 
 		// Execute heal(messages to clients send there):
 		gameModel.getAttackAction().cureAllConditionsOnPosition(chosenPosition);
-		gameModel.sendCardMessageToAllPlayers("All conditions on " + targetPokemon.getName() + " are cured", targetPokemon);
+		gameModel.sendCardMessageToAllPlayers("All conditions on " + targetPokemon.getName() + " are cured", targetPokemon, "");
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());

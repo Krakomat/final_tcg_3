@@ -51,8 +51,8 @@ public class Script_00030_Bisaknosp extends PokemonCardScript {
 
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!");
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

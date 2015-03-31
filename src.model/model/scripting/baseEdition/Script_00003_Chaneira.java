@@ -42,13 +42,13 @@ public class Script_00003_Chaneira extends PokemonCardScript {
 		Card attackingPokemon = gameModel.getPosition(attacker).getTopCard();
 
 		// Flip coin to check if active pokemon is protected:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!");
+			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.NO_DAMAGE);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

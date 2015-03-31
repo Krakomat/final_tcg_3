@@ -8,6 +8,7 @@ import model.database.TrainerCard;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -36,7 +37,7 @@ public class Script_00077_PokHaendler extends TrainerCardScript {
 
 		// Choose one own pokemon card:
 		Card chosenCard = player.playerChoosesCards(gameModel.getPosition(ownHand()).getPokemonCards(), 1, true, "Choose 1 pokemon to discard!").get(0);
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " shuffles " + chosenCard.getName() + " into his deck!", chosenCard);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " shuffles " + chosenCard.getName() + " into his deck!", chosenCard, "");
 		// Put onto deck:
 		gameModel.getAttackAction().moveCard(ownHand(), ownDeck(), chosenCard.getGameID(), true);
 
@@ -44,13 +45,13 @@ public class Script_00077_PokHaendler extends TrainerCardScript {
 		List<Card> cards = gameModel.getPosition(ownDeck()).getPokemonCards();
 		Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
 		// Message clients:
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
 		// Move card:
 		gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Shuffle deck:
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getAttackAction().shufflePosition(ownDeck());
 	}
 

@@ -94,8 +94,10 @@ public interface Player extends Account {
 	 * The player receives a game message from the server. He displays this message in his view.
 	 * 
 	 * @param message
+	 * @param sound
+	 *            sound that will be played
 	 */
-	public void playerReceivesGameTextMessage(String message);
+	public void playerReceivesGameTextMessage(String message, String sound);
 
 	/**
 	 * The player receives a game message from the server. He displays this message in his view using the given card. For example the card can be displayed along
@@ -104,7 +106,7 @@ public interface Player extends Account {
 	 * @param message
 	 * @param card
 	 */
-	public void playerReceivesCardMessage(String message, Card card);
+	public void playerReceivesCardMessage(String message, Card card, String sound);
 
 	/**
 	 * The player receives a game message from the server. He displays this message in his view using the given card list. For example the cards can be displayed
@@ -112,15 +114,19 @@ public interface Player extends Account {
 	 * 
 	 * @param message
 	 * @param cardList
+	 * @param sound
+	 *            sound that will be played
 	 */
-	public void playerReceivesCardMessage(String message, List<Card> cardList);
+	public void playerReceivesCardMessage(String message, List<Card> cardList, String sound);
 
 	/**
 	 * The player updates his representation of the game field with the given game field.
 	 * 
 	 * @param gameModelUpdate
+	 * @param sound
+	 *            sound that will be played
 	 */
-	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate);
+	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound);
 
 	/**
 	 * Prompts the player to make a move.
@@ -168,4 +174,11 @@ public interface Player extends Account {
 	 * @return
 	 */
 	public List<Integer> playerDistributesDamage(List<Position> positionList, List<Integer> damageList, List<Integer> maxDistList, DistributionMode mode);
+
+	/**
+	 * The player plays the given sound.
+	 * 
+	 * @param sound
+	 */
+	public void playerReceivesSound(String sound);
 }

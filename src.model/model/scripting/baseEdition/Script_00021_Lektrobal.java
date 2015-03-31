@@ -38,13 +38,13 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 50, true);
 
 		// Flip coin to check if defending pokemon damages itself:
-		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " damages itself!");
+		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " damages itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.TAILS) {
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!");
+			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!", "");
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 10, true);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
@@ -110,8 +110,8 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 		List<Card> cardMessageList = new ArrayList<>();
 		cardMessageList.add(pCard);
 		cardMessageList.add(targetPokemon);
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches Lektrobal to " + targetPokemon.getName() + "!", cardMessageList);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches Lektrobal to " + targetPokemon.getName() + "!", cardMessageList, "");
+		gameModel.sendGameModelToAllPlayers("");
 
 		// Choose new active pokemon:
 		if (newActive) {
@@ -121,8 +121,8 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 			gameModel.getAttackAction().movePokemonToPosition(newActivePosition, pos.getPositionID());
 
 			// Send gameModel:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " has chosen " + active.getName() + " as his new active pokemon!", active);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " has chosen " + active.getName() + " as his new active pokemon!", active, "");
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

@@ -50,7 +50,7 @@ public class Script_00080_Defender extends TrainerCardScript {
 				this.endTurnActionCounter = -1;
 				this.chosenPosition = null;
 
-				gameModel.sendGameModelToAllPlayers();
+				gameModel.sendGameModelToAllPlayers("");
 			}
 		}
 	}

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import network.client.Player;
 import network.client.PlayerImpl;
+import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
@@ -23,6 +24,7 @@ import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.CardScriptFactory;
 import model.scripting.abstracts.PokemonCardScript;
+import model.scripting.abstracts.ServerCards;
 
 /**
  * Used by a client to locally store the game model that was send from the server.
@@ -41,7 +43,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 	protected AttackCondition attackCondition;
 	protected Map<Integer, Card> cardMap;
 	protected CardScriptFactory cardScriptFactory;
-
+	protected PokemonGameManager server;
 	private GameField gameField;
 
 	/**
@@ -49,11 +51,12 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 * 
 	 * @param gameModelUpdate
 	 */
-	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client) {
+	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client, PokemonGameManager server) {
 		this.gameField = new GameFieldImpl(gameModelUpdate);
 		this.turnNumber = gameModelUpdate.getTurnNumber();
 		this.gameID = 0; // just a default id
 		this.playerOnTurn = client;
+		this.server = server;
 		if (client.getColor() == Color.BLUE) {
 			this.playerBlue = client;
 			this.playerRed = new PlayerImpl(gameID, "EnemyPlayer", "");
@@ -82,7 +85,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
 		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
 		Card c = handCard ? this.getPosition(position).getCardAtIndex(positionIndex) : this.getPosition(position).getTopCard();
-		ArrayList<PlayerAction> actionList = new ArrayList<PlayerAction>();
+		List<PlayerAction> actionList = new ArrayList<PlayerAction>();
 		Position pos = this.getPosition(position);
 		// If player on turn and position doesn't belong to enemy
 		boolean playerOnTurn = this.getPlayerOnTurn().getColor() == player.getColor();
@@ -90,9 +93,11 @@ public class LocalPokemonGameModel implements PokemonGame {
 		boolean playerOnTurnRed = this.getPlayerOnTurn().getColor() == Color.RED;
 		boolean positionColorBlue = pos.getColor() == Color.BLUE;
 		if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
+			if (ServerCards.createInstance().contains(c.getCardId()))
+				return server.getPlayerActions(positionIndex, position, player); // ask server!
 			actionList = getActionsForSelectedPosition(actionList, c, position, player);
 		}
-		ArrayList<String> stringActionList = new ArrayList<String>();
+		List<String> stringActionList = new ArrayList<String>();
 		for (int i = 0; i < actionList.size(); i++)
 			stringActionList.add(actionList.get(i).toString());
 		return stringActionList;
@@ -108,7 +113,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 * @param player
 	 * @return
 	 */
-	private ArrayList<PlayerAction> getActionsForSelectedPosition(ArrayList<PlayerAction> actionList, Card c, PositionID posID, Player player) {
+	private List<PlayerAction> getActionsForSelectedPosition(List<PlayerAction> actionList, Card c, PositionID posID, Player player) {
 		CardScript script = c.getCardScript();
 
 		// Check playedFromHand
@@ -256,22 +261,22 @@ public class LocalPokemonGameModel implements PokemonGame {
 	}
 
 	@Override
-	public void sendCardMessageToAllPlayers(String string, List<Card> cardList) {
+	public void sendCardMessageToAllPlayers(String string, List<Card> cardList, String sound) {
 		// leave empty
 	}
 
 	@Override
-	public void sendCardMessageToAllPlayers(String string, Card card) {
+	public void sendCardMessageToAllPlayers(String string, Card card, String sound) {
 		// leave empty
 	}
 
 	@Override
-	public void sendTextMessageToAllPlayers(String message) {
+	public void sendTextMessageToAllPlayers(String message, String sound) {
 		// leave empty
 	}
 
 	@Override
-	public void sendGameModelToAllPlayers() {
+	public void sendGameModelToAllPlayers(String sound) {
 		// leave empty
 	}
 
@@ -358,5 +363,10 @@ public class LocalPokemonGameModel implements PokemonGame {
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
 		return script.getAttackNames();
+	}
+
+	@Override
+	public void sendSoundToAllPlayers(String sound) {
+		// leave empty
 	}
 }

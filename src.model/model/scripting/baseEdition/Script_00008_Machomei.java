@@ -64,7 +64,7 @@ public class Script_00008_Machomei extends PokemonCardScript {
 
 	@Override
 	public void executePokemonPower(String powerName) {
-		gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates " + powerName + "!", card);
+		gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates " + powerName + "!", card, "");
 		// Inflict damage:
 		PositionID ownPosition = this.card.getCurrentPosition().getPositionID();
 		gameModel.getAttackAction().inflictDamageToPosition(Element.ROCK, ownPosition, attackerPosition, 10, false);

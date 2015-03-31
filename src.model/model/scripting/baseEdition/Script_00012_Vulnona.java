@@ -48,9 +48,9 @@ public class Script_00012_Vulnona extends PokemonCardScript {
 			PositionID chosenPosition = player.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
 					"Choose a pokemon to swap wtih your active!").get(0);
 			Card newPkm = gameModel.getPosition(chosenPosition).getTopCard();
-			gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!");
+			gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!", "");
 			gameModel.getAttackAction().swapPokemon(defender, chosenPosition);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

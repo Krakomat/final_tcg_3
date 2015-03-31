@@ -33,7 +33,7 @@ public class Script_00089_Beleber extends TrainerCardScript {
 		List<Card> basicPokemon = gameModel.getBasicPokemonOnPosition(ownDiscardPile());
 
 		PokemonCard chosenCard = (PokemonCard) player.playerChoosesCards(basicPokemon, 1, true, "Choose a pokemon to revive!").get(0);
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " revives " + chosenCard.getName(), chosenCard);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " revives " + chosenCard.getName(), chosenCard, "");
 
 		// Put on bench:
 		gameModel.getAttackAction().putBasicPokemonOnBench(player, chosenCard);

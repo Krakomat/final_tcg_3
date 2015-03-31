@@ -40,13 +40,13 @@ public class Script_00033_Kokuna extends PokemonCardScript {
 		Card attackingPokemon = gameModel.getPosition(attacker).getTopCard();
 
 		// Flip coin to check if kokuna protects itself:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " is protects itself!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " is protects itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is protects itself!");
+			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.NO_DAMAGE);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
@@ -58,13 +58,13 @@ public class Script_00033_Kokuna extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
 		// Flip coin to check if defending pokemon is poisoned:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is poisoned!");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is poisoned!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c);
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!");
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-			gameModel.sendGameModelToAllPlayers();
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

@@ -48,9 +48,9 @@ public class Script_00029_Alpollo extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!");
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);
-		gameModel.sendGameModelToAllPlayers();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	private void traumfresser() {

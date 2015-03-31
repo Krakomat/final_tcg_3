@@ -1,5 +1,7 @@
 package gui2d.geometries;
 
+import model.enums.Sounds;
+
 import com.jme3.asset.TextureKey;
 import com.jme3.audio.AudioNode;
 import com.jme3.material.Material;
@@ -13,7 +15,6 @@ import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
-import gui2d.controller.EffectController;
 
 /**
  * Selectable node that represents an image.
@@ -74,7 +75,7 @@ public abstract class Image2D extends Node implements SelectableNode {
 		this.attachChild(glowingNode);
 
 		// Init audio:
-		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), EffectController.BUTTON_CLICKED, false);
+		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), Sounds.BUTTON_CLICKED, false);
 		this.clickSoundNode.setPositional(false);
 		this.clickSoundNode.setLooping(false);
 		this.clickSoundNode.setVolume(2);

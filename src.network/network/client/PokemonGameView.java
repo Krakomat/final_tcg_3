@@ -98,15 +98,17 @@ public interface PokemonGameView {
 	 * @param gameModel
 	 * @param ownColor
 	 *            the color, that the player, who updates this view, has.
+	 * @param sound
 	 */
-	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor);
+	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor, String sound);
 
 	/**
 	 * The user receives a game message from the server. He displays this message in his view.
 	 * 
 	 * @param message
+	 * @param sound
 	 */
-	public void userReceivesGameTextMessage(String message);
+	public void userReceivesGameTextMessage(String message, String sound);
 
 	/**
 	 * The user receives a game message from the server. He displays this message in his view using the given card. For example the card can be displayed along with
@@ -114,8 +116,9 @@ public interface PokemonGameView {
 	 * 
 	 * @param message
 	 * @param card
+	 * @param sound
 	 */
-	public void userReceivesCardMessage(String message, Card card);
+	public void userReceivesCardMessage(String message, Card card, String sound);
 
 	/**
 	 * The user receives a game message from the server. He displays this message in his view using the given card list. For example the cards can be displayed along
@@ -123,8 +126,9 @@ public interface PokemonGameView {
 	 * 
 	 * @param message
 	 * @param cardList
+	 * @param sound
 	 */
-	public void userReceivesCardMessage(String message, List<Card> cardList);
+	public void userReceivesCardMessage(String message, List<Card> cardList, String sound);
 
 	/**
 	 * Sets the given cards choosability (via PosID, index) to the given value.
@@ -152,4 +156,11 @@ public interface PokemonGameView {
 	 * @return
 	 */
 	public List<Integer> userDistributesDamage(List<Position> positionList, List<Integer> damageList, List<Integer> maxDistList, DistributionMode mode);
+
+	/**
+	 * The view plays the given sound.
+	 * 
+	 * @param sound
+	 */
+	public void playSound(String sound);
 }

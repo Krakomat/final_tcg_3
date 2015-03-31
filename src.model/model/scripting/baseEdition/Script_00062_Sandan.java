@@ -27,7 +27,8 @@ public class Script_00062_Sandan extends PokemonCardScript {
 
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is blinded!");
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is blinded!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.BLIND);
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }
