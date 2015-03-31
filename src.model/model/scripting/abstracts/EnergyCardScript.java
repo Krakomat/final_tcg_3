@@ -10,6 +10,7 @@ import model.enums.Color;
 import model.enums.Element;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 
 /**
@@ -50,13 +51,13 @@ public abstract class EnergyCardScript extends CardScript {
 			List<Card> cardList = new ArrayList<Card>();
 			cardList.add(basicPkmn);
 			cardList.add(card);
-			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList, "");
+			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList, Sounds.EQUIP);
 			this.gameModel.getAttackAction().moveCard(card.getCurrentPosition().getPositionID(), chosenPosition, card.getGameID(), false);
 			this.gameModel.setEnergyPlayed(true);
 			this.gameModel.sendGameModelToAllPlayers("");
 
 			EnergyCard eneCard = (EnergyCard) this.card;
-			// Call energy played of all card sscripts:
+			// Call energy played of all card scripts:
 			for (Card c : gameModel.getAllCards())
 				c.getCardScript().energyCardPlayed(eneCard);
 		} else

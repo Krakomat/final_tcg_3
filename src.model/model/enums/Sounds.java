@@ -10,4 +10,5 @@ public class Sounds {
 	public static final String ON_TURN = "/effects/onTurn.wav";
 	public static final String SHUFFLE = "/effects/shuffle.wav";
 	public static final String DRAW = "/effects/draw.wav";
+	public static final String EQUIP = "/effects/equip.wav";
 }
