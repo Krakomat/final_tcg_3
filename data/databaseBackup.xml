@@ -392,7 +392,9 @@
         <HP>80</HP>
         <Weakness>ROCK</Weakness>
         <Resistance/>
-        <RetreatCost/>
+        <RetreatCost>
+            <Element>COLORLESS</Element>
+        </RetreatCost>
         <EvolvesFrom>Voltobal</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
@@ -1620,5 +1622,33 @@
         <ProvidedEnergy>
             <Element>WATER</Element>
         </ProvidedEnergy>
+    </EnergyCard>
+    <PokemonCard>
+        <Card>
+            <Name>Piepi-Puppe</Name>
+            <ID>00103</ID>
+            <Image>/cards/base01/00070.jpg</Image>
+            <Rarity>RARE</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>TOKEN</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>10</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <EnergyCard>
+        <Card>
+            <Name>Lektrobal</Name>
+            <ID>00104</ID>
+            <Image>/cards/base01/00021.jpg</Image>
+            <Rarity>RARE</Rarity>
+            <CardType>ENERGY</CardType>
+            <Edition>TOKEN</Edition>
+        </Card>
+        <BasicEnergy>false</BasicEnergy>
+        <ProvidedEnergy/>
     </EnergyCard>
 </Cards>
