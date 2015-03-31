@@ -285,6 +285,9 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				if (c instanceof TrainerCard)
 					gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
 
+				// Set the turn number for the card:
+				c.setPlayedInTurn(gameModel.getTurnNumber());
+
 				// Execute the card script:
 				c.getCardScript().playFromHand();
 

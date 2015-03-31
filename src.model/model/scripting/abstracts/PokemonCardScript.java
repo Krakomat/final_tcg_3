@@ -74,7 +74,7 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			this.gameModel.getAttackAction().putBasicPokemonOnBench(player, (PokemonCard) card);
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
 			// Evolve pokemon:
-			ArrayList<PositionID> posList = this.gameModel.getPositionsForEvolving((PokemonCard) this.card, player.getColor());
+			List<PositionID> posList = this.gameModel.getPositionsForEvolving((PokemonCard) this.card, player.getColor());
 			PositionID chosenPosID = player.playerChoosesPositions(posList, 1, true, "Choose a position to evolve into " + card.getName()).get(0);
 			this.gameModel.getAttackAction().evolvePokemon(chosenPosID, card.getGameID());
 		} else
