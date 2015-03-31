@@ -244,7 +244,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public List<String> getPokePowerNames(PositionID posID) {
-		return this.server.getPokePowerForPosition(posID);
+		return this.localGameModel.getPokePowerForPosition(posID);
 	}
 
 	@Override

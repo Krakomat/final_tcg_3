@@ -322,7 +322,6 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	@Override
-	@Deprecated
 	public List<String> getAttacksForPosition(PositionID position) {
 		Position pos = this.gameModel.getPosition(position);
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
@@ -397,7 +396,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
 			return new ArrayList<String>(); // position empty or no arena position
 
-		// Get the attacks from the card script:
+		// Get the pokemon power from the card script:
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
 		return script.getPokemonPowerNames();

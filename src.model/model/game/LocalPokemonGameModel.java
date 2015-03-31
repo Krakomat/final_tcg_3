@@ -164,7 +164,6 @@ public class LocalPokemonGameModel implements PokemonGame {
 					}
 				}
 			}
-
 		}
 		return actionList;
 	}
@@ -368,5 +367,16 @@ public class LocalPokemonGameModel implements PokemonGame {
 	@Override
 	public void sendSoundToAllPlayers(String sound) {
 		// leave empty
+	}
+
+	public List<String> getPokePowerForPosition(PositionID posID) {
+		Position pos = this.getPosition(posID);
+		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
+			return new ArrayList<String>(); // position empty or no arena position
+
+		// Get the attacks from the card script:
+		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
+		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
+		return script.getPokemonPowerNames();
 	}
 }
