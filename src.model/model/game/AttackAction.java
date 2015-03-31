@@ -157,12 +157,18 @@ public class AttackAction {
 		if (!defenderPokemon.hasCondition(condition) && !defenderPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			switch (condition) {
 			case ASLEEP:
+				defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
+				defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
+				defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
 				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
 				break;
 			case BLIND:
 				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 				break;
 			case CONFUSED:
+				defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
+				defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
+				defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
 				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
 				break;
 			case DAMAGEINCREASE10:
@@ -188,6 +194,9 @@ public class AttackAction {
 				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 				break;
 			case PARALYZED:
+				defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
+				defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
+				defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
 				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 				break;
 			case POISONED:

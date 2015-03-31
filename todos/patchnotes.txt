@@ -6,6 +6,7 @@ Patch 1.03
 		- Sandan: Fixed a bug, where the blind condition was not correctly applied at the client
 		- Pokemon Händler: Fixed a bug that prevented this card from being played
 		- Fixed a bug where a player can evolve pokemons several times in one turn
+		- Conditions ASLEEP, CONFUSED, PARALYZED now properly overwrite each other
 	GUI
 		- Fixed a bug where the music did not switch properly between ingame and lobby controller
 		- Fixed a bug where hand cards where still shown, even though the players hand is empty

@@ -79,17 +79,10 @@ public class PokemonGameModelImpl implements PokemonGame {
 			blueCards.get(i).setCurrentPosition(blueDeck);
 			blueDeck.addToPosition(blueCards.get(i));
 		}
-		this.addCardOnTopOfPosition("00001", blueDeck);
-		this.addCardOnTopOfPosition("00032", blueDeck);
-		this.addCardOnTopOfPosition("00043", blueDeck);
-
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-		this.addCardOnTopOfPosition("00001", redDeck);
-		this.addCardOnTopOfPosition("00032", redDeck);
-		this.addCardOnTopOfPosition("00043", redDeck);
 
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
@@ -119,9 +112,9 @@ public class PokemonGameModelImpl implements PokemonGame {
 		this.sendTextMessageToPlayers(getPlayerList(), "Each player shuffles his deck.", Sounds.SHUFFLE);
 		this.timeoutWait(200);
 		Position blueDeck = this.getPosition(PositionID.BLUE_DECK);
-		//blueDeck.shuffle();
+		blueDeck.shuffle();
 		Position redDeck = this.getPosition(PositionID.RED_DECK);
-		//redDeck.shuffle();
+		redDeck.shuffle();
 
 		this.sendGameModelToPlayers(this.getPlayerList(), "");
 
