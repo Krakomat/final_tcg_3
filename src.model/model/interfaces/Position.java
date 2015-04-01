@@ -20,6 +20,13 @@ import model.enums.PositionID;
 public interface Position {
 
 	/**
+	 * Creates a copy of this position.
+	 * 
+	 * @return
+	 */
+	public Position copy();
+
+	/**
 	 * Returns true, if this position doesn't contain any cards.
 	 * 
 	 * @return

@@ -16,10 +16,10 @@ public class Card implements Comparable<Card> {
 	protected Edition edition;
 	protected transient CardScript cardScript; // will not be serialized
 
-	private transient Position currentPosition; // will not be serialized. only used at the server
-	private int gameID;
-	private boolean visibleForPlayerBlue, visibleForPlayerRed;
-	private int playedInTurn;
+	protected transient Position currentPosition; // will not be serialized. only used at the server
+	protected int gameID;
+	protected boolean visibleForPlayerBlue, visibleForPlayerRed;
+	protected int playedInTurn;
 
 	public Card() {
 		name = "----";
@@ -33,6 +33,34 @@ public class Card implements Comparable<Card> {
 		setPlayedInTurn(-1);
 	}
 
+	/**
+	 * Copies the given card. The CardScript and Position will not be cloned with this.
+	 * 
+	 * @return
+	 */
+	public Card copy() {
+		Card c = null;
+		if (this instanceof PokemonCard)
+			c = new PokemonCard();
+		else if (this instanceof TrainerCard)
+			c = new TrainerCard();
+		else if (this instanceof EnergyCard)
+			c = new EnergyCard();
+		else
+			c = new Card();
+		c.setName(name);
+		c.setImagePath(imagePath);
+		c.setRarity(rarity);
+		c.setCardId(cardId);
+		c.setCardType(cardType);
+		c.setEdition(edition);
+		c.setGameID(gameID);
+		c.setVisibleForPlayerBlue(visibleForPlayerBlue);
+		c.setVisibleForPlayerRed(visibleForPlayerRed);
+		c.setPlayedInTurn(playedInTurn);
+		return c;
+	}
+
 	public Position getCurrentPosition() {
 		return currentPosition;
 	}
@@ -44,7 +72,7 @@ public class Card implements Comparable<Card> {
 	 */
 	public void setCurrentPosition(Position value) {
 		this.currentPosition = value;
-		if (value != null)
+		if (value != null && this.cardScript != null)
 			this.cardScript.moveToPosition(value.getPositionID());
 	}
 

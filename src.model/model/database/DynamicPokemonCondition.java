@@ -18,6 +18,11 @@ public class DynamicPokemonCondition {
 
 	}
 
+	public DynamicPokemonCondition copy() {
+		DynamicPokemonCondition cond = new DynamicPokemonCondition(condition, remainingTurns);
+		return cond;
+	}
+
 	public PokemonCondition getCondition() {
 		return this.condition;
 	}

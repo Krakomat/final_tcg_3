@@ -624,4 +624,8 @@ public class AttackAction {
 	public void setNoEnergyPayment(boolean flag) {
 		this.noEnergyPayment = flag;
 	}
+
+	public boolean getNoEnergyPayment() {
+		return this.noEnergyPayment;
+	}
 }

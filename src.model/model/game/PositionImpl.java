@@ -41,6 +41,29 @@ public class PositionImpl implements Position {
 		providedEnergy = new ArrayList<Element>();
 	}
 
+	@Override
+	public Position copy() {
+		Position position = new PositionImpl();
+		position.setPositionID(positionID);
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : cardList) {
+			Card copy = c.copy();
+			copy.setCurrentPosition(position);
+			cardList.add(copy);
+		}
+		position.setCards(cardList);
+		position.setColor(color);
+		position.setVisible(visibleForPlayerBlue, Color.BLUE);
+		position.setVisible(visibleForPlayerRed, Color.RED);
+
+		List<Element> pEnergy = new ArrayList<>();
+		for (Element element : this.providedEnergy)
+			pEnergy.add(element);
+		position.setEnergy(pEnergy);
+
+		return null;
+	}
+
 	public boolean isEmpty() {
 		return cards.isEmpty();
 	}

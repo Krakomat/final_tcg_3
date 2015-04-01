@@ -83,6 +83,32 @@ public class LocalPokemonGameModel implements PokemonGame {
 		}
 	}
 
+	/**
+	 * Creates a copy of this local game model.
+	 * 
+	 * @return
+	 */
+	public LocalPokemonGameModel copy() {
+		GameModelUpdate update = new GameModelUpdateImpl();
+		List<Position> pList = new ArrayList<>();
+		for (Position position : gameField.getAllPositions())
+			pList.add(position.copy());
+		update.setPositionList(pList);
+		update.setTurnNumber((short) turnNumber);
+		update.setEnergyPlayAllowed(energyPlayed);
+		update.setRetreatAllowed(retreatExecuted);
+		LocalPokemonGameModel copy = new LocalPokemonGameModel(update, this.playerOnTurn, this.server);
+		AttackAction attackAction = new AttackAction(copy);
+		attackAction.setNoEnergyPayment(this.attackAction.getNoEnergyPayment());
+		copy.setAttackAction(attackAction);
+		copy.gameState = this.gameState;
+		return copy;
+	}
+
+	private void setAttackAction(AttackAction action) {
+		this.attackAction = action;
+	}
+
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
 		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
 		Card c = handCard ? this.getPosition(position).getCardAtIndex(positionIndex) : this.getPosition(position).getTopCard();

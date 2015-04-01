@@ -20,4 +20,10 @@ public class TrainerCard extends Card {
 		this.edition = c.getEdition();
 		this.cardScript = c.getCardScript();
 	}
+	
+	@Override
+	public Card copy() {
+		TrainerCard c = (TrainerCard) super.copy();
+		return c;
+	}
 }

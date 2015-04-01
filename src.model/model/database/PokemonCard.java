@@ -33,6 +33,8 @@ public class PokemonCard extends Card {
 		retreatCosts = new ArrayList<Element>();
 		setCardType(CardType.BASICPOKEMON);// Wert wird später geändert
 		setElement(Element.COLORLESS);// Wert wird später geändert
+		pokemonPowerNames = new ArrayList<>();
+		attackNames = new ArrayList<>();
 	}
 
 	public PokemonCard(Card c) {
@@ -49,6 +51,40 @@ public class PokemonCard extends Card {
 		this.rarity = c.getRarity();
 		this.edition = c.getEdition();
 		this.cardScript = c.getCardScript();
+		pokemonPowerNames = new ArrayList<>();
+		attackNames = new ArrayList<>();
+	}
+
+	@Override
+	public Card copy() {
+		PokemonCard c = (PokemonCard) super.copy();
+		c.setElement(element);
+		c.setHitpoints(hitpoints);
+		c.setWeakness(weakness);
+		c.setResistance(resistance);
+		List<Element> eList = new ArrayList<>();
+		for (Element element : this.retreatCosts)
+			eList.add(element);
+		c.setRetreatCosts(eList);
+		c.setEvolvesFrom(evolvesFrom);
+		c.setDamageMarks(damageMarks);
+		c.setCurrentWeakness(currentWeakness);
+		c.setCurrentResistance(currentResistance);
+		c.setPriceValueable(priceValueable);
+		List<String> aList = new ArrayList<>();
+		for (String string : this.attackNames)
+			aList.add(string);
+		c.setAttackNames(aList);
+		List<String> pList = new ArrayList<>();
+		for (String string : this.pokemonPowerNames)
+			pList.add(string);
+		c.setAttackNames(pList);
+		List<DynamicPokemonCondition> cList = new ArrayList<>();
+		for (DynamicPokemonCondition condition : this.conditions)
+			cList.add(condition.copy());
+		c.setConditions(cList);
+
+		return c;
 	}
 
 	public void resetDynamicAttributes() {

@@ -30,6 +30,17 @@ public class EnergyCard extends Card {
 		this.cardScript = c.getCardScript();
 	}
 
+	@Override
+	public Card copy() {
+		EnergyCard c = (EnergyCard) super.copy();
+		c.setBasisEnergy(basisEnergy);
+		List<Element> pEnergy = new ArrayList<>();
+		for (Element element : this.providedEnergy)
+			pEnergy.add(element);
+		c.setProvidedEnergy(pEnergy);
+		return c;
+	}
+
 	/**
 	 * @return Returns the basisEnergy.
 	 */
