@@ -410,7 +410,6 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-
 				// Get the script:
 				PokemonCard pokemon = null;
 				if (player.getColor() == Color.BLUE)

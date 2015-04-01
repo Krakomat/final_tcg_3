@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ai.interfaces.BotBorder;
 import network.client.Player;
-import network.client.PlayerImpl;
 import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
+import model.enums.AccountType;
 import model.enums.CardType;
 import model.enums.Color;
 import model.enums.GameState;
@@ -59,9 +60,9 @@ public class LocalPokemonGameModel implements PokemonGame {
 		this.server = server;
 		if (client.getColor() == Color.BLUE) {
 			this.playerBlue = client;
-			this.playerRed = new PlayerImpl(gameID, "EnemyPlayer", "");
+			this.playerRed = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
 		} else {
-			this.playerBlue = new PlayerImpl(gameID, "EnemyPlayer", "");
+			this.playerBlue = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
 			this.playerRed = client;
 		}
 		this.gameState = GameState.RUNNING;
@@ -75,10 +76,8 @@ public class LocalPokemonGameModel implements PokemonGame {
 			for (Card c : position.getCards()) {
 				c.setCurrentPositionLocal(position);
 				this.cardMap.put(c.getGameID(), c);
-				if (!c.getCardId().equals("00000")) {
-					CardScript script = this.cardScriptFactory.createScript(c, this);
-					c.setCardScript(script);
-				}
+				CardScript script = this.cardScriptFactory.createScript(c, this);
+				c.setCardScript(script);
 			}
 		}
 	}

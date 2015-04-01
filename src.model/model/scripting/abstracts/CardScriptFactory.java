@@ -4,6 +4,7 @@ import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
+import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
 import model.scripting.baseEdition.*;
 
@@ -33,6 +34,18 @@ public class CardScriptFactory {
 	 */
 	public CardScript createScript(Card card, PokemonGame gameModel) {
 		switch (card.getCardId()) {
+		case "00000":
+			return new CardScript(card, gameModel) {
+				@Override
+				public PlayerAction canBePlayedFromHand() {
+					return null;
+				}
+
+				@Override
+				public void playFromHand() {
+
+				}
+			};
 		case "00001":
 			return new Script_00001_Simsala((PokemonCard) card, gameModel);
 		case "00002":
