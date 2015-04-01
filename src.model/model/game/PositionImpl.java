@@ -46,7 +46,7 @@ public class PositionImpl implements Position {
 		Position position = new PositionImpl();
 		position.setPositionID(positionID);
 		List<Card> cardList = new ArrayList<>();
-		for (Card c : cardList) {
+		for (Card c : this.cards) {
 			Card copy = c.copy();
 			copy.setCurrentPosition(position);
 			cardList.add(copy);
@@ -61,7 +61,7 @@ public class PositionImpl implements Position {
 			pEnergy.add(element);
 		position.setEnergy(pEnergy);
 
-		return null;
+		return position;
 	}
 
 	public boolean isEmpty() {
