@@ -1,4 +1,4 @@
-package ai.util;
+package ai.treebot;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,13 +32,13 @@ import network.tcp.borders.ServerListener;
  * @author Michael
  *
  */
-public class LocalServer implements PokemonGameManager {
+public class TurnSimulator implements PokemonGameManager {
 
 	private LocalPokemonGameModel gameModel;
 
 	private TurnState turnState;
 
-	public LocalServer(LocalPokemonGameModel localGameModel) {
+	public TurnSimulator(LocalPokemonGameModel localGameModel) {
 		this.gameModel = localGameModel;
 		this.turnState = TurnState.TURN_BEGIN;
 	}
