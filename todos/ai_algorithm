@@ -5,7 +5,7 @@ Algorithm(2):
 			
 		Move
 			- GameTreeNode resultingNode
-			- List<Triple<Position, Integer, String>> move
+			- Triple<Position, Integer, String> move
 			- Queue<List<PositionID>> chosenPositionQueue
 			- Queue<List<Integer>> chosenCardsQueue // -->GameID
 			- Queue<List<Element>> chosenElementQueue

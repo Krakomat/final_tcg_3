@@ -1,7 +1,9 @@
 package ai.treebot;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import ai.util.AIUtilities;
 
@@ -29,9 +31,18 @@ import network.server.PokemonGameManager;
 public class PlayerSimulator implements Player {
 	private Color color;
 	private AIUtilities aiUtilities;
+	private Queue<List<PositionID>> chosenPositionQueue;
+	private Queue<List<Integer>> chosenCardsQueue; // -->GameID
+	private Queue<List<Element>> chosenElementQueue;
+	private Queue<List<String>> chosenAttackQueue;
 
-	public PlayerSimulator() {
+	public PlayerSimulator(Color color) {
+		this.color = color;
 		this.aiUtilities = new AIUtilities();
+		this.chosenPositionQueue = new LinkedList<>();
+		this.chosenCardsQueue = new LinkedList<>();
+		this.chosenElementQueue = new LinkedList<>();
+		this.chosenAttackQueue = new LinkedList<>();
 	}
 
 	@Override
@@ -77,32 +88,48 @@ public class PlayerSimulator implements Player {
 	@Override
 	public List<Card> playerChoosesCards(List<Card> cards, int amount, boolean exact, String message) {
 		List<Card> chosenCards = new ArrayList<Card>();
-		for (int i = 0; i < amount && i < cards.size(); i++)
+		List<Integer> storedCards = new ArrayList<>();
+		for (int i = 0; i < amount && i < cards.size(); i++) {
 			chosenCards.add(cards.get(i));
+			storedCards.add(cards.get(i).getGameID());
+		}
+		this.chosenCardsQueue.add(storedCards);
 		return chosenCards;
 	}
 
 	@Override
 	public List<PositionID> playerChoosesPositions(List<PositionID> positionList, int amount, boolean exact, String message) {
 		List<PositionID> chosenPositions = new ArrayList<PositionID>();
-		for (int i = 0; i < amount && i < positionList.size(); i++)
+		List<PositionID> storedPositions = new ArrayList<PositionID>();
+		for (int i = 0; i < amount && i < positionList.size(); i++) {
 			chosenPositions.add(positionList.get(i));
+			storedPositions.add(positionList.get(i));
+		}
+		this.chosenPositionQueue.add(storedPositions);
 		return chosenPositions;
 	}
 
 	@Override
 	public List<Element> playerChoosesElements(List<Element> elements, int amount, boolean exact, String message) {
 		List<Element> chosenElements = new ArrayList<Element>();
-		for (int i = 0; i < amount && i < elements.size(); i++)
+		List<Element> storedElements = new ArrayList<Element>();
+		for (int i = 0; i < amount && i < elements.size(); i++) {
 			chosenElements.add(elements.get(i));
+			storedElements.add(elements.get(i));
+		}
+		this.chosenElementQueue.add(storedElements);
 		return chosenElements;
 	}
 
 	@Override
 	public List<String> playerChoosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact, String message) {
 		List<String> chosenAttacks = new ArrayList<String>();
-		for (int i = 0; i < amount && i < attacks.size(); i++)
+		List<String> storedAttacks = new ArrayList<String>();
+		for (int i = 0; i < amount && i < attacks.size(); i++) {
 			chosenAttacks.add(attacks.get(i));
+			storedAttacks.add(attacks.get(i));
+		}
+		this.chosenAttackQueue.add(storedAttacks);
 		return chosenAttacks;
 	}
 
@@ -218,4 +245,19 @@ public class PlayerSimulator implements Player {
 
 	}
 
+	public Queue<List<PositionID>> getChosenPositionQueue() {
+		return chosenPositionQueue;
+	}
+
+	public Queue<List<Integer>> getChosenCardsQueue() {
+		return chosenCardsQueue;
+	}
+
+	public Queue<List<Element>> getChosenElementQueue() {
+		return chosenElementQueue;
+	}
+
+	public Queue<List<String>> getChosenAttackQueue() {
+		return chosenAttackQueue;
+	}
 }

@@ -78,6 +78,11 @@ public class LocalPokemonGameModel implements PokemonGame {
 				this.cardMap.put(c.getGameID(), c);
 				CardScript script = this.cardScriptFactory.createScript(c, this);
 				c.setCardScript(script);
+				if (c instanceof PokemonCard) {
+					PokemonCardScript pCardScript = (PokemonCardScript) c.getCardScript();
+					((PokemonCard) c).setAttackNames(pCardScript.getAttackNames());
+					((PokemonCard) c).setPokemonPowerNames(pCardScript.getPokemonPowerNames());
+				}
 			}
 		}
 	}
@@ -223,6 +228,22 @@ public class LocalPokemonGameModel implements PokemonGame {
 	@Override
 	public void setPlayerRed(Player playerRed) {
 		this.playerRed = playerRed;
+	}
+
+	/**
+	 * Sets playerOnTurn, playerBlue and playerRed!
+	 * 
+	 * @param playerOnTurn
+	 */
+	public void setPlayerOnTurn(Player playerOnTurn) {
+		this.playerOnTurn = playerOnTurn;
+		if (playerOnTurn.getColor() == Color.BLUE) {
+			this.playerBlue = playerOnTurn;
+			this.playerRed = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
+		} else {
+			this.playerBlue = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
+			this.playerRed = playerOnTurn;
+		}
 	}
 
 	@Override

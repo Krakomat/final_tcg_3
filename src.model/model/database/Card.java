@@ -29,7 +29,7 @@ public class Card implements Comparable<Card> {
 		setVisibleForPlayerBlue(true);
 		setVisibleForPlayerRed(true);
 		imagePath = "/cards/cardBack.jpg";
-
+		cardType = CardType.DUMMY;
 		setPlayedInTurn(-1);
 	}
 

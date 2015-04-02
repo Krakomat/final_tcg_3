@@ -6,6 +6,10 @@ import gui2d.abstracts.SelectableNode;
 import java.util.ArrayList;
 import java.util.List;
 
+import ai.treebot.GameTree;
+import ai.treebot.PlayerSimulator;
+import ai.treebot.TreeBotEvaluator;
+
 import com.jme3.system.JmeContext;
 
 import common.utilities.Pair;
@@ -106,9 +110,13 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				@SuppressWarnings("unused")
-				GameModelUpdate update = server.getGameModelForPlayer(self);
 				localGameModel = getFreshGameModel();
+
+				LocalPokemonGameModel copy = localGameModel.copy();
+				copy.setPlayerOnTurn(new PlayerSimulator(color));
+				@SuppressWarnings("unused")
+				GameTree gameTree = new GameTree(copy, new TreeBotEvaluator(), server);
+
 				if (color == Color.BLUE) {
 					List<Pair<Position, Integer>> choosableCards = new ArrayList<>();
 					// Check hand:

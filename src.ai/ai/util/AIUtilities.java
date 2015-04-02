@@ -7,6 +7,7 @@ import network.client.Player;
 import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
+import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.PlayerAction;
@@ -33,11 +34,9 @@ public class AIUtilities {
 			for (int i = 0; i < handPos.getCards().size(); i++) {
 				String handCardID = handPos.getCards().get(i).getCardId();
 				List<String> actions = null;
-				if (ServerCards.createInstance().contains(handCardID))
-					actions = server.getPlayerActions(i, PositionID.BLUE_HAND, player);
-				else
+				if (!ServerCards.createInstance().contains(handCardID) && !handCardID.equals("00000"))
 					actions = gameModel.getPlayerActions(i, PositionID.BLUE_HAND, player);
-				if (!actions.isEmpty()) {
+				if (actions != null && !actions.isEmpty()) {
 					for (String action : actions)
 						choosableCards.add(new Triple<Position, Integer, String>(handPos, i, action));
 				}
@@ -45,19 +44,19 @@ public class AIUtilities {
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
 			List<String> actions = null;
-			if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
-				actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
-			else
+			if (!ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()) && !activePosition.getTopCard().getCardId().equals("00000"))
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
-			if (!actions.isEmpty()) {
+			if (actions != null && !actions.isEmpty()) {
 				for (String action : actions)
 					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
 			}
 			for (int i = 1; i <= 5; i++) {
 				Position benchPosition = gameModel.getPosition(PositionID.valueOf("BLUE_BENCH_" + i));
 				if (benchPosition.size() > 0) {
-					actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), player);
-					if (!actions.isEmpty()) {
+					String benchID = benchPosition.getTopCard().getCardId();
+					if (!ServerCards.createInstance().contains(benchID) && !benchPosition.equals("00000"))
+						actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), player);
+					if (actions != null && !actions.isEmpty()) {
 						for (String action : actions)
 							choosableCards.add(new Triple<Position, Integer, String>(benchPosition, benchPosition.size() - 1, action));
 					}
@@ -71,11 +70,9 @@ public class AIUtilities {
 			for (int i = 0; i < handPos.getCards().size(); i++) {
 				String handCardID = handPos.getCards().get(i).getCardId();
 				List<String> actions = null;
-				if (ServerCards.createInstance().contains(handCardID))
-					actions = server.getPlayerActions(i, PositionID.RED_HAND, player);
-				else
+				if (!ServerCards.createInstance().contains(handCardID) && !handCardID.equals("00000"))
 					actions = gameModel.getPlayerActions(i, PositionID.RED_HAND, player);
-				if (!actions.isEmpty()) {
+				if (actions != null && !actions.isEmpty()) {
 					for (String action : actions)
 						choosableCards.add(new Triple<Position, Integer, String>(handPos, i, action));
 				}
@@ -83,19 +80,19 @@ public class AIUtilities {
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
 			List<String> actions = null;
-			if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
-				actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
-			else
+			if (!ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()) && !activePosition.getTopCard().getCardId().equals("00000"))
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
-			if (!actions.isEmpty()) {
+			if (actions != null && !actions.isEmpty()) {
 				for (String action : actions)
 					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
 			}
 			for (int i = 1; i <= 5; i++) {
 				Position benchPosition = gameModel.getPosition(PositionID.valueOf("RED_BENCH_" + i));
 				if (benchPosition.size() > 0) {
-					actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), player);
-					if (!actions.isEmpty()) {
+					String benchID = benchPosition.getTopCard().getCardId();
+					if (!ServerCards.createInstance().contains(benchID) && !benchID.equals("00000"))
+						actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), player);
+					if (actions != null && !actions.isEmpty()) {
 						for (String action : actions)
 							choosableCards.add(new Triple<Position, Integer, String>(benchPosition, benchPosition.size() - 1, action));
 					}
@@ -188,5 +185,45 @@ public class AIUtilities {
 		boolean colorlessPayed = chosenEnergy.size() >= colorless;
 
 		return colorPayed && colorlessPayed;
+	}
+
+	/**
+	 * Executes the given move on the given simulator.
+	 * 
+	 * @param move
+	 * @param gameSimulator
+	 * @param executingPlayer
+	 */
+	public void executeMove(Triple<Position, Integer, String> move, PokemonGameManager gameSimulator, Player executingPlayer) {
+		PlayerAction action = PlayerAction.valueOf(move.getAction());
+		switch (action) {
+		case ATTACK_1:
+			gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getKey().getTopCard()).getAttackNames().get(0));
+			break;
+		case ATTACK_2:
+			gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getKey().getTopCard()).getAttackNames().get(1));
+			break;
+		case EVOLVE_POKEMON:
+			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			break;
+		case PLAY_ENERGY_CARD:
+			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			break;
+		case PLAY_TRAINER_CARD:
+			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			break;
+		case POKEMON_POWER:
+			throw new UnsupportedOperationException("PokemonPowers cannot be simulated right now!");
+		case PUT_ON_BENCH:
+			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			break;
+		case RETREAT_POKEMON:
+			gameSimulator.retreatPokemon(executingPlayer);
+			break;
+		case SHOW_CARDS_ON_POSITION:
+			throw new UnsupportedOperationException("SHOW_CARDS_ON_POSITION does not need to be simulated!");
+		default:
+			throw new UnsupportedOperationException("Scheiﬂfehler :D");
+		}
 	}
 }

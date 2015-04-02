@@ -26,7 +26,6 @@ public class TreeBot implements Bot {
 
 	private AIUtilities aiUtilities;
 	private LocalPokemonGameModel gameModel;
-	private Color color;
 
 	public TreeBot() {
 		this.aiUtilities = new AIUtilities();
@@ -46,10 +45,7 @@ public class TreeBot implements Bot {
 	@Override
 	public void makeMove(PokemonGameManager server, Player player) {
 		/*
-		 * TODO:
-		 * 	- Update fresh game model
-		 *  - Create game tree
-		 *  - Get sequence of moves to execute
+		 * TODO: - Update fresh game model - Create game tree - Get sequence of moves to execute
 		 */
 		server.endTurn(player);
 	}
@@ -144,6 +140,6 @@ public class TreeBot implements Bot {
 	}
 
 	public void setColor(Color color) {
-		this.color = color;
+
 	}
 }
