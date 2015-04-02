@@ -45,7 +45,12 @@ public class TreeBot implements Bot {
 
 	@Override
 	public void makeMove(PokemonGameManager server, Player player) {
-		// TODO
+		/*
+		 * TODO:
+		 * 	- Update fresh game model
+		 *  - Create game tree
+		 *  - Get sequence of moves to execute
+		 */
 		server.endTurn(player);
 	}
 

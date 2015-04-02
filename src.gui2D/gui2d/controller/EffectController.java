@@ -9,6 +9,7 @@ import gui2d.GUI2D;
 import com.jme3.audio.AudioNode;
 
 public class EffectController {
+	static int activeThreads = 0;
 	public static AudioNode createEffectAudioNode(String effectPath) {
 		AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), effectPath, false);
 		clickSoundNode.setPositional(false);
@@ -19,7 +20,7 @@ public class EffectController {
 
 	public static synchronized void playSound(final String url) {
 		if (!url.equals("")) {
-			new Thread(new Runnable() {
+			Thread t = new Thread(new Runnable() {
 				// The wrapper thread is unnecessary, unless it blocks on the
 				// Clip finishing; see comments.
 				public void run() {
@@ -28,11 +29,17 @@ public class EffectController {
 						AudioInputStream inputStream = AudioSystem.getAudioInputStream(EffectController.class.getResource(url));
 						clip.open(inputStream);
 						clip.start();
+						while (clip.getMicrosecondLength() > clip.getMicrosecondPosition())
+							;
+						clip.close();
+						clip.stop();
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 					}
 				}
-			}).start();
+			});
+			t.setName("SoundThread");
+			t.start();
 		}
 	}
 }

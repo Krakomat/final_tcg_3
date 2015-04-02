@@ -25,6 +25,7 @@ import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 import ai.interfaces.Bot;
+import ai.treebot.TurnSimulator;
 import ai.util.AIUtilities;
 
 /**
@@ -148,6 +149,14 @@ public class StandardBot implements Bot {
 			List<PositionID> posList = new ArrayList<>();
 			posList.add(chosenPosition);
 			this.choosePositionQueue.add(posList);
+			
+			LocalPokemonGameModel copy = this.gameModel.copy();
+			TurnSimulator simulator = new TurnSimulator(copy);
+			this.choosePositionQueue.add(posList);
+			System.err.println("Starting Simulation...");
+			simulator.playerPlaysCard(player, energyCardIndex);
+			System.err.println("Simulation done successfully...");
+
 			server.playerPlaysCard(player, energyCardIndex);
 			return true; // End makeMove()
 		}
