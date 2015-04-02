@@ -1,5 +1,7 @@
 Patch 1.04
-
+	Music & Sounds
+		- Fixed a bug, where sound effects do not close properly
+		
 Patch 1.03
 	New Features
 		- Added several sound effects to the game
