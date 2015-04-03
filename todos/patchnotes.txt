@@ -1,4 +1,7 @@
 Patch 1.04
+	New Features
+		- New Bot: TreeBot[alpha]
+		
 	Music & Sounds
 		- Fixed a bug, where sound effects do not close properly
 	
