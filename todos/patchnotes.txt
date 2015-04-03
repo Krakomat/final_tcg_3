@@ -7,7 +7,11 @@ Patch 1.04
 	
 	Game
 		- Lass: Fixed an issue, where the delay of waiting for both players was too long.
-		
+		- Swap: Fixed a bug, where after playing the card the energy on certains positions was incorrect
+		- Magikarp: Flail does the right amount of damage now
+	AI
+		- Fixed a bug, where bots payed the wrong amount of energy
+
 Patch 1.03
 	New Features
 		- Added several sound effects to the game

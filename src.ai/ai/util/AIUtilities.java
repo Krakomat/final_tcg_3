@@ -51,6 +51,7 @@ public class AIUtilities {
 					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
 			}
 			for (int i = 1; i <= 5; i++) {
+				actions = null;
 				Position benchPosition = gameModel.getPosition(PositionID.valueOf("BLUE_BENCH_" + i));
 				if (benchPosition.size() > 0) {
 					String benchID = benchPosition.getTopCard().getCardId();
@@ -86,7 +87,9 @@ public class AIUtilities {
 				for (String action : actions)
 					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
 			}
+
 			for (int i = 1; i <= 5; i++) {
+				actions = null;
 				Position benchPosition = gameModel.getPosition(PositionID.valueOf("RED_BENCH_" + i));
 				if (benchPosition.size() > 0) {
 					String benchID = benchPosition.getTopCard().getCardId();
@@ -225,5 +228,110 @@ public class AIUtilities {
 		default:
 			throw new UnsupportedOperationException("Scheiﬂfehler :D");
 		}
+	}
+
+	/**
+	 * Returns the indices of the given energy cards in the given list, if they are not needed to pay the given costs.
+	 * 
+	 * @param attackCosts
+	 * @param energyCards
+	 * @return
+	 */
+	public List<Integer> getUnneccesaryEnergyIndices(List<Element> attackCosts, List<Card> energyCards) {
+		List<Card> chosenCards = new ArrayList<>();
+		List<Card> availableCards = new ArrayList<>();
+		for (Card c : energyCards)
+			availableCards.add(c);
+
+		// Get a copy of the color- and colorless costs:
+		List<Element> colorCosts = new ArrayList<>();
+		int colorless = 0;
+		for (Element element : attackCosts)
+			if (element != Element.COLORLESS)
+				colorCosts.add(element);
+			else
+				colorless++;
+
+		// Pay color costs:
+		for (Element element : colorCosts) {
+			boolean payed = false;
+			for (int i = 0; i < availableCards.size() && !payed; i++) {
+				EnergyCard c = (EnergyCard) availableCards.get(i);
+				if (c.getProvidedEnergy().contains(element)) {
+					payed = true;
+					availableCards.remove(i);
+					i--;
+					chosenCards.add(c);
+				}
+			}
+		}
+
+		// Pay colorless costs with non-basic energy:
+		for (int i = 0; i < colorless; i++) {
+			if (i < availableCards.size()) {
+				EnergyCard c = (EnergyCard) availableCards.get(i);
+				if (c.getProvidedEnergy().size() <= colorless && !c.isBasisEnergy()) {
+					chosenCards.add(c);
+					colorless = colorless - c.getProvidedEnergy().size();
+					availableCards.remove(i);
+					i--;
+				}
+			}
+		}
+
+		// Pay colorless costs with basic energy:
+		for (int i = 0; i < colorless; i++) {
+			if (i < availableCards.size()) {
+				EnergyCard c = (EnergyCard) availableCards.get(i);
+				if (c.getProvidedEnergy().size() <= colorless) {
+					chosenCards.add(c);
+					colorless = colorless - c.getProvidedEnergy().size();
+					availableCards.remove(i);
+					i--;
+				}
+			}
+		}
+
+		List<Integer> remainingIndices = new ArrayList<>();
+		for (int i = 0; i < energyCards.size(); i++)
+			if (!chosenCards.contains(energyCards.get(i)))
+				remainingIndices.add(i);
+		return remainingIndices;
+	}
+
+	/**
+	 * Checks if the given costs can be paid with the given elements.
+	 * 
+	 * @param costs
+	 * @param onField
+	 * @return
+	 */
+	public boolean energyAvailableForAttack(List<Element> costs, ArrayList<Element> onField) {
+		// Check if costs are available at the position:
+		@SuppressWarnings("unchecked")
+		ArrayList<Element> copy = (ArrayList<Element>) onField.clone();
+		ArrayList<Element> colors = new ArrayList<Element>();
+		ArrayList<Element> colorless = new ArrayList<Element>();
+		for (int i = 0; i < costs.size(); i++) {
+			if (costs.get(i).equals(Element.COLORLESS))
+				colorless.add(costs.get(i));
+			else
+				colors.add(costs.get(i));
+		}
+
+		for (int i = 0; i < colors.size(); i++) {
+			Element e = colors.get(i);
+			boolean found = false;
+			for (int j = 0; j < copy.size(); j++) {
+				if (e.equals(copy.get(j)) && !found) {
+					copy.remove(j);
+					found = true;
+				}
+			}
+			if (!found)
+				return false;
+		}
+
+		return colorless.size() <= copy.size();
 	}
 }

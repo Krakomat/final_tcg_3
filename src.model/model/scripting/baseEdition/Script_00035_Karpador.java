@@ -44,6 +44,6 @@ public class Script_00035_Karpador extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		int damageOnAttacker = attackingPokemon.getDamageMarks();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10 * damageOnAttacker, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, damageOnAttacker, true);
 	}
 }

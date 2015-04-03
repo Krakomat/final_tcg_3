@@ -279,6 +279,11 @@ public class AttackAction {
 	public void swapPokemon(PositionID pos1, PositionID pos2) {
 		Position p1 = gameModel.getPosition(pos1);
 		Position p2 = gameModel.getPosition(pos2);
+
+		List<Element> energy1 = p1.getEnergy();
+		p1.setEnergy(p2.getEnergy());
+		p2.setEnergy(energy1);
+
 		List<Card> cardList1 = p1.getCards();
 		p1.setCards(p2.getCards());
 		p2.setCards(cardList1);
@@ -294,6 +299,7 @@ public class AttackAction {
 			this.cureAllConditionsOnPosition(pos2);
 		if (pos2 == PositionID.BLUE_ACTIVEPOKEMON || pos2 == PositionID.RED_ACTIVEPOKEMON)
 			this.cureAllConditionsOnPosition(pos1);
+
 	}
 
 	public String moveCard(PositionID sourcePositionID, PositionID targetPositionID, int cardGameID, boolean onTop) {

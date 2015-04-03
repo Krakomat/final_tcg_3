@@ -111,7 +111,7 @@ public class DummyBot implements Bot {
 		// Pay colorless costs with non-basic energy:
 		for (int i = 0; i < colorless; i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless && !c.isBasisEnergy()) {
+			if (c.getProvidedEnergy().size() <= colorless && !c.isBasisEnergy()) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);
@@ -122,7 +122,7 @@ public class DummyBot implements Bot {
 		// Pay colorless costs with basic energy:
 		for (int i = 0; i < colorless; i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless) {
+			if (c.getProvidedEnergy().size() <= colorless) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);

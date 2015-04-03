@@ -149,7 +149,7 @@ public class StandardBot implements Bot {
 			List<PositionID> posList = new ArrayList<>();
 			posList.add(chosenPosition);
 			this.choosePositionQueue.add(posList);
-			
+
 			LocalPokemonGameModel copy = this.gameModel.copy();
 			TurnSimulator simulator = new TurnSimulator(copy);
 			this.choosePositionQueue.add(posList);
@@ -307,7 +307,7 @@ public class StandardBot implements Bot {
 		// Pay colorless costs with non-basic energy:
 		for (int i = 0; i < colorless; i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless && !c.isBasisEnergy()) {
+			if (c.getProvidedEnergy().size() <= colorless && !c.isBasisEnergy()) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);
@@ -318,7 +318,7 @@ public class StandardBot implements Bot {
 		// Pay colorless costs with basic energy:
 		for (int i = 0; i < colorless; i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless) {
+			if (c.getProvidedEnergy().size() <= colorless) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);

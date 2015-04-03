@@ -115,17 +115,6 @@ public class PositionImpl implements Position {
 		cards = hList;
 	}
 
-	public ArrayList<Card> resetPosition() {
-		ArrayList<Card> temp = new ArrayList<Card>();
-		for (int i = 0; i < cards.size(); i++) {
-			Card c = cards.get(0);
-			this.removeFromPosition(c);
-			c.setCurrentPosition(null);
-			temp.add(c);
-		}
-		return temp;
-	}
-
 	public int size() {
 		return cards.size();
 	}

@@ -135,6 +135,11 @@ public class PlayerSimulator implements Player {
 
 	@Override
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
+		if (energyCards.isEmpty()) {
+			System.err.println("Player pays costs: ");
+			System.err.println("Costs: " + costs);
+			System.err.println("EnergyCards: " + energyCards);
+		}
 		List<Card> chosenCards = new ArrayList<>();
 		List<Card> availableCards = new ArrayList<>();
 		for (Card c : energyCards)
@@ -166,7 +171,7 @@ public class PlayerSimulator implements Player {
 		// Pay colorless costs with non-basic energy:
 		for (int i = 0; i < colorless; i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless && !c.isBasisEnergy()) {
+			if (c.getProvidedEnergy().size() <= colorless && !c.isBasisEnergy()) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);
@@ -177,7 +182,7 @@ public class PlayerSimulator implements Player {
 		// Pay colorless costs with basic energy:
 		for (int i = 0; i < colorless; i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless) {
+			if (c.getProvidedEnergy().size() <= colorless) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);
@@ -185,7 +190,7 @@ public class PlayerSimulator implements Player {
 			}
 		}
 
-		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of StandardBot was not ok! Cost: " + costs + " Payment: "
+		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: "
 				+ chosenCards);
 		return chosenCards;
 	}
