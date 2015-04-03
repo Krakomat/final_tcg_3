@@ -246,18 +246,56 @@ public class PlayerSimulator implements Player {
 	}
 
 	public Queue<List<PositionID>> getChosenPositionQueue() {
-		return chosenPositionQueue;
+		Queue<List<PositionID>> copy = new LinkedList<List<PositionID>>();
+		for (List<PositionID> list : this.chosenPositionQueue) {
+			List<PositionID> copyList = new ArrayList<>();
+			for (PositionID posID : list)
+				copyList.add(posID);
+			copy.add(copyList);
+		}
+		return copy;
 	}
 
 	public Queue<List<Integer>> getChosenCardsQueue() {
-		return chosenCardsQueue;
+		Queue<List<Integer>> copy = new LinkedList<List<Integer>>();
+		for (List<Integer> list : this.chosenCardsQueue) {
+			List<Integer> copyList = new ArrayList<>();
+			for (Integer posID : list)
+				copyList.add(posID);
+			copy.add(copyList);
+		}
+		return copy;
 	}
 
 	public Queue<List<Element>> getChosenElementQueue() {
-		return chosenElementQueue;
+		Queue<List<Element>> copy = new LinkedList<List<Element>>();
+		for (List<Element> list : this.chosenElementQueue) {
+			List<Element> copyList = new ArrayList<>();
+			for (Element posID : list)
+				copyList.add(posID);
+			copy.add(copyList);
+		}
+		return copy;
 	}
 
 	public Queue<List<String>> getChosenAttackQueue() {
-		return chosenAttackQueue;
+		Queue<List<String>> copy = new LinkedList<List<String>>();
+		for (List<String> list : this.chosenAttackQueue) {
+			List<String> copyList = new ArrayList<>();
+			for (String posID : list)
+				copyList.add(posID);
+			copy.add(copyList);
+		}
+		return copy;
+	}
+
+	/**
+	 * Makes all the input queues empty.
+	 */
+	public void flushQueues() {
+		this.chosenAttackQueue.clear();
+		this.chosenCardsQueue.clear();
+		this.chosenElementQueue.clear();
+		this.chosenPositionQueue.clear();
 	}
 }

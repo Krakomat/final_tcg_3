@@ -4,6 +4,7 @@ import java.util.List;
 
 import ai.dummy.DummyBot;
 import ai.standard.StandardBot;
+import ai.treebot.TreeBot;
 import network.client.AccountImpl;
 import network.client.Player;
 import network.server.PokemonGameManager;
@@ -50,6 +51,9 @@ public class BotBorder extends AccountImpl implements Player {
 			break;
 		case BOT_STANDARD:
 			this.botModel = new StandardBot();
+			break;
+		case BOT_TREE:
+			this.botModel = new TreeBot();
 			break;
 		default:
 			break;

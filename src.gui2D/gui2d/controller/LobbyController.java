@@ -20,8 +20,8 @@ import com.jme3.scene.Node;
 
 public class LobbyController extends Node implements GUI2DController {
 
-	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, standardBot, backButton, deckEditorButton,
-			exitButton;
+	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, standardBot, treeBot, backButton,
+			deckEditorButton, exitButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextPanel2D ipAdressPanel, usernamePanel, equipedDeckPanel;
@@ -138,6 +138,23 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(standardBot);
 		this.attachChild(standardBot);
 
+		treeBot = new TextButton2D("treeBot", "Tree Bot", buttonWidth, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				treeBotClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		treeBot.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.35f + buttonHeight / 2, 0);
+		treeBot.setVisible(false);
+		dropInUpdateQueue(treeBot);
+		this.attachChild(treeBot);
+
 		backButton = new TextButton2D("backButton", "Back", buttonWidth, buttonHeight) {
 
 			@Override
@@ -242,6 +259,24 @@ public class LobbyController extends Node implements GUI2DController {
 		this.attachChild(equipedDeckPanel);
 	}
 
+	protected void treeBotClicked() {
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+		GUI2D.getInstance().getPlayer().createGame();
+
+		// Create standard bot and connect him to the server that was created in createGame:
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Player bot = Database.getBot("TreeBot");
+				ClientBorder botBorder = new ClientBorder(bot);
+				bot.setServer(botBorder);
+
+				// Register at server:
+				botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
+			}
+		}).start();
+	}
+
 	protected void standardBotClicked() {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 		GUI2D.getInstance().getPlayer().createGame();
@@ -301,6 +336,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(dummyBotButton);
 		this.standardBot.setVisible(true);
 		this.dropInUpdateQueue(standardBot);
+		this.treeBot.setVisible(true);
+		this.dropInUpdateQueue(treeBot);
 	}
 
 	protected void multiPlayerCreateClicked() {
@@ -378,6 +415,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(dummyBotButton);
 		this.standardBot.setVisible(false);
 		this.dropInUpdateQueue(standardBot);
+		this.treeBot.setVisible(false);
+		this.dropInUpdateQueue(treeBot);
 		this.backButton.setVisible(false);
 		this.dropInUpdateQueue(backButton);
 		this.exitButton.setVisible(false);

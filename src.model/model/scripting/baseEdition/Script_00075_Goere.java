@@ -52,7 +52,7 @@ public class Script_00075_Goere extends TrainerCardScript {
 		// Wait for both players:
 		while (!(playerReady && enemyReady))
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

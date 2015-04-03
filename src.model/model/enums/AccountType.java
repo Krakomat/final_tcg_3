@@ -7,5 +7,5 @@ package model.enums;
  *
  */
 public enum AccountType {
-	REAL_PLAYER, BOT_DUMMY, BOT_STANDARD;
+	REAL_PLAYER, BOT_DUMMY, BOT_STANDARD, BOT_TREE;
 }

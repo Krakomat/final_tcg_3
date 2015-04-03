@@ -101,6 +101,9 @@ public class AccountStorageHelper {
 			case BOT_STANDARD:
 				acc = BotBorder.createBot(id, name, password, AccountType.BOT_STANDARD);
 				break;
+			case BOT_TREE:
+				acc = BotBorder.createBot(id, name, password, AccountType.BOT_TREE);
+				break;
 			default:
 				System.err.println("Wrong AccountType in method parseAccount() of class AccountStorageHelper");
 				break;

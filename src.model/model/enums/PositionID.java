@@ -93,4 +93,56 @@ public enum PositionID {
 		else
 			return PositionID.RED_HAND;
 	}
+
+	/**
+	 * Returns the deck position for the given color.
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public static PositionID getDeckPosition(Color color) {
+		if (color == Color.BLUE)
+			return PositionID.BLUE_DECK;
+		else
+			return PositionID.RED_DECK;
+	}
+
+	/**
+	 * Returns the DiscardPile position for the given color.
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public static PositionID getDiscardPilePosition(Color color) {
+		if (color == Color.BLUE)
+			return PositionID.BLUE_DISCARDPILE;
+		else
+			return PositionID.RED_DISCARDPILE;
+	}
+
+	/**
+	 * Returns the respective prize position for the given player and the given index. Returns null, if the given index is not in the range of 1 to 6.
+	 * 
+	 * @param color
+	 * @param index
+	 * @return
+	 */
+	public static PositionID getPrizePosition(Color color, int index) {
+		switch (index) {
+		case 1:
+			return color == Color.BLUE ? BLUE_PRICE_1 : RED_PRICE_1;
+		case 2:
+			return color == Color.BLUE ? BLUE_PRICE_2 : RED_PRICE_2;
+		case 3:
+			return color == Color.BLUE ? BLUE_PRICE_3 : RED_PRICE_3;
+		case 4:
+			return color == Color.BLUE ? BLUE_PRICE_4 : RED_PRICE_4;
+		case 5:
+			return color == Color.BLUE ? BLUE_PRICE_5 : RED_PRICE_5;
+		case 6:
+			return color == Color.BLUE ? BLUE_PRICE_6 : RED_PRICE_6;
+		default:
+			return null;
+		}
+	}
 }

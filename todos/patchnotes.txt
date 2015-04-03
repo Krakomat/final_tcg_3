@@ -1,6 +1,9 @@
 Patch 1.04
 	Music & Sounds
 		- Fixed a bug, where sound effects do not close properly
+	
+	Game
+		- Lass: Fixed an issue, where the delay of waiting for both players was too long.
 		
 Patch 1.03
 	New Features

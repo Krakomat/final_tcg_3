@@ -61,8 +61,10 @@ public class LocalPokemonGameModel implements PokemonGame {
 		if (client.getColor() == Color.BLUE) {
 			this.playerBlue = client;
 			this.playerRed = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
+			this.playerRed.setColor(Color.RED);
 		} else {
 			this.playerBlue = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
+			this.playerBlue.setColor(Color.BLUE);
 			this.playerRed = client;
 		}
 		this.gameState = GameState.RUNNING;
@@ -240,8 +242,10 @@ public class LocalPokemonGameModel implements PokemonGame {
 		if (playerOnTurn.getColor() == Color.BLUE) {
 			this.playerBlue = playerOnTurn;
 			this.playerRed = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
+			this.playerRed.setColor(Color.RED);
 		} else {
 			this.playerBlue = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
+			this.playerBlue.setColor(Color.BLUE);
 			this.playerRed = playerOnTurn;
 		}
 	}
