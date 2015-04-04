@@ -751,11 +751,6 @@ public class TCGSerializer {
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
-		// Provided energy:
-		b = this.packElementList(pos.getEnergy());
-		packer.packBinaryHeader(b.length());
-		packer.writePayload(b.copyAsBytes());
-
 		packer.close();
 		return new ByteString(out.toByteArray());
 	}
@@ -783,10 +778,6 @@ public class TCGSerializer {
 		// Card list:
 		bString = unpackByteString(unpacker);
 		pos.setCards(unpackCardList(bString));
-
-		// Provided energy:
-		bString = unpackByteString(unpacker);
-		pos.setEnergy(unpackElementList(bString));
 
 		unpacker.close();
 		return pos;

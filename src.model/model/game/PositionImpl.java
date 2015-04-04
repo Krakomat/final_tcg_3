@@ -21,15 +21,11 @@ public class PositionImpl implements Position {
 	private Color color;
 	private boolean visibleForPlayerBlue, visibleForPlayerRed;
 
-	/** Is used when the energy on this position needs to be set manually (see for example Glurak pokemon power). */
-	private List<Element> providedEnergy;
-
 	/**
 	 * Only used for serialization!
 	 */
 	public PositionImpl() {
 		cards = new ArrayList<Card>();
-		providedEnergy = new ArrayList<Element>();
 	}
 
 	public PositionImpl(PositionID id, Color color) {
@@ -38,7 +34,6 @@ public class PositionImpl implements Position {
 		this.color = color;
 		visibleForPlayerBlue = false;
 		visibleForPlayerRed = false;
-		providedEnergy = new ArrayList<Element>();
 	}
 
 	@Override
@@ -55,11 +50,6 @@ public class PositionImpl implements Position {
 		position.setColor(color);
 		position.setVisible(visibleForPlayerBlue, Color.BLUE);
 		position.setVisible(visibleForPlayerRed, Color.RED);
-
-		List<Element> pEnergy = new ArrayList<>();
-		for (Element element : this.providedEnergy)
-			pEnergy.add(element);
-		position.setEnergy(pEnergy);
 
 		return position;
 	}
@@ -85,23 +75,15 @@ public class PositionImpl implements Position {
 	}
 
 	public List<Element> getEnergy() {
-		if (providedEnergy.isEmpty()) {
-			List<Element> energy = new ArrayList<Element>();
-			for (int i = 0; i < cards.size(); i++) {
-				if (cards.get(i) instanceof EnergyCard) {
-					for (int j = 0; j < ((EnergyCard) cards.get(i)).getProvidedEnergy().size(); j++) {
-						energy.add(((EnergyCard) cards.get(i)).getProvidedEnergy().get(j));
-					}
+		List<Element> energy = new ArrayList<Element>();
+		for (int i = 0; i < cards.size(); i++) {
+			if (cards.get(i) instanceof EnergyCard) {
+				for (int j = 0; j < ((EnergyCard) cards.get(i)).getProvidedEnergy().size(); j++) {
+					energy.add(((EnergyCard) cards.get(i)).getProvidedEnergy().get(j));
 				}
 			}
-			return energy;
-		} else
-			return providedEnergy;
-	}
-
-	@Override
-	public void setEnergy(List<Element> providedEnergy) {
-		this.providedEnergy = providedEnergy;
+		}
+		return energy;
 	}
 
 	public void shuffle() {

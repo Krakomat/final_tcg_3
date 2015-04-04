@@ -3,54 +3,60 @@
     <Name>Miki</Name>
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
-    <Deck Name="Blackout">
-        <Card ID="00079">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00102">
-            <Size>12</Size>
-        </Card>
-        <Card ID="00088">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00034">
+    <Deck Name="Brushfire">
+        <Card ID="00024">
             <Size>2</Size>
         </Card>
-        <Card ID="00056">
-            <Size>3</Size>
+        <Card ID="00046">
+            <Size>4</Size>
         </Card>
-        <Card ID="00007">
+        <Card ID="00068">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00069">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>10</Size>
+        </Card>
+        <Card ID="00066">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00055">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00023">
             <Size>1</Size>
         </Card>
-        <Card ID="00027">
+        <Card ID="00012">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00028">
             <Size>2</Size>
         </Card>
         <Card ID="00093">
             <Size>1</Size>
         </Card>
-        <Card ID="00092">
-            <Size>4</Size>
+        <Card ID="00094">
+            <Size>3</Size>
         </Card>
-        <Card ID="00042">
+        <Card ID="00081">
             <Size>2</Size>
         </Card>
-        <Card ID="00097">
-            <Size>16</Size>
+        <Card ID="00092">
+            <Size>1</Size>
         </Card>
-        <Card ID="00065">
-            <Size>3</Size>
+        <Card ID="00075">
+            <Size>1</Size>
         </Card>
-        <Card ID="00062">
-            <Size>3</Size>
+        <Card ID="00098">
+            <Size>18</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
         </Card>
         <Card ID="00084">
             <Size>1</Size>
-        </Card>
-        <Card ID="00063">
-            <Size>4</Size>
-        </Card>
-        <Card ID="00052">
-            <Size>4</Size>
         </Card>
     </Deck>
 </Account>

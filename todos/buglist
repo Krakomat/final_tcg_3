@@ -1,1 +1,2 @@
 - dont play damage sound when defender took 0 damage
+- bug in swap pokemon (setEnergy of position)

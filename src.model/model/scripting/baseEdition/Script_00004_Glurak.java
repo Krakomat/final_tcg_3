@@ -1,7 +1,9 @@
 package model.scripting.baseEdition;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import network.client.Player;
 import model.database.Card;
@@ -16,8 +18,7 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00004_Glurak extends PokemonCardScript {
 
-	/** Used to store the position on which the pokemon power was executed, so that it can be reset at the end of the turn. */
-	private Position pokemonPowerPosition;
+	private Map<Integer, List<Element>> cardGameIDs;
 
 	public Script_00004_Glurak(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
@@ -28,7 +29,7 @@ public class Script_00004_Glurak extends PokemonCardScript {
 		att1Cost.add(Element.FIRE);
 		this.addAttack("Fire Spin", att1Cost);
 		this.addPokemonPower("Energy Burn");
-		this.pokemonPowerPosition = null;
+		this.cardGameIDs = new HashMap<>();
 	}
 
 	@Override
@@ -39,14 +40,8 @@ public class Script_00004_Glurak extends PokemonCardScript {
 
 		// Pay energy:
 		List<Element> costs = new ArrayList<>();
-		if (pokemonPowerPosition == null) {
-			costs.add(Element.FIRE);
-			costs.add(Element.FIRE);
-		} else {
-			// Can be payed by any energy now:
-			costs.add(Element.COLORLESS);
-			costs.add(Element.COLORLESS);
-		}
+		costs.add(Element.FIRE);
+		costs.add(Element.FIRE);
 		gameModel.getAttackAction().playerPaysEnergy(player, costs, card.getCurrentPosition().getPositionID());
 
 		Element attackerElement = ((PokemonCard) this.card).getElement();
@@ -68,26 +63,33 @@ public class Script_00004_Glurak extends PokemonCardScript {
 
 	@Override
 	public void executePokemonPower(String powerName) {
+		this.cardGameIDs = new HashMap<>();
 		// Turn all energy attached to glurak into fire energy:
 		PokemonCard card = (PokemonCard) this.card;
 		Position pos = card.getCurrentPosition();
 
-		List<Element> providedEnergy = new ArrayList<>();
-		for (Card e : pos.getEnergyCards())
-			for (int i = 0; i < ((EnergyCard) e).getProvidedEnergy().size(); i++)
-				providedEnergy.add(Element.FIRE);
-
-		pos.setEnergy(providedEnergy);
-		this.pokemonPowerPosition = pos;
+		for (Card e : pos.getEnergyCards()) {
+			EnergyCard eCard = (EnergyCard) e;
+			List<Element> originalEnergy = new ArrayList<>();
+			for (int i = 0; i < eCard.getProvidedEnergy().size(); i++) {
+				originalEnergy.add(eCard.getProvidedEnergy().remove(i));
+				eCard.getProvidedEnergy().add(i, Element.FIRE);
+			}
+			if (!this.cardGameIDs.containsKey(eCard.getGameID()))
+				this.cardGameIDs.put(eCard.getGameID(), originalEnergy);
+		}
 
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (this.pokemonPowerPosition != null) {
+		if (!this.cardGameIDs.isEmpty()) {
 			// Reset the provided energy:
-			this.pokemonPowerPosition.setEnergy(new ArrayList<Element>());
-			this.pokemonPowerPosition = null; // reset position
+			for (Integer gameID : this.cardGameIDs.keySet()) {
+				EnergyCard eCard = (EnergyCard) gameModel.getCard(gameID);
+				eCard.setProvidedEnergy(this.cardGameIDs.get(gameID));
+			}
+			this.cardGameIDs.clear();
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

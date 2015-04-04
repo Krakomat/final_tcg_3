@@ -280,10 +280,6 @@ public class AttackAction {
 		Position p1 = gameModel.getPosition(pos1);
 		Position p2 = gameModel.getPosition(pos2);
 
-		List<Element> energy1 = p1.getEnergy();
-		p1.setEnergy(p2.getEnergy());
-		p2.setEnergy(energy1);
-
 		List<Card> cardList1 = p1.getCards();
 		p1.setCards(p2.getCards());
 		p2.setCards(cardList1);

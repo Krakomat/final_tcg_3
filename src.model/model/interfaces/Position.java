@@ -77,13 +77,6 @@ public interface Position {
 	public List<Element> getEnergy();
 
 	/**
-	 * Sets the list of provided energy on this position. Doesn't change the energy cards attached to this position.
-	 * 
-	 * @param providedEnergy
-	 */
-	public void setEnergy(List<Element> providedEnergy);
-
-	/**
 	 * Returns the card that is at the given index of the card list of this position.
 	 * 
 	 * @param i

@@ -163,7 +163,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (!playerBlueHandOk || !playerRedHandOk)
 				this.timeoutWait(5000);// Wait so players can look at the hands
 			this.getPosition(PositionID.BLUE_HAND).setVisible(false, Color.RED);
-			this.getPosition(PositionID.RED_HAND).setVisible(false, Color.BLUE);
+			this.getPosition(PositionID.RED_HAND).setVisible(true, Color.BLUE);
 			// Update GameModel:
 			this.sendGameModelToPlayers(this.getPlayerList(), "");
 
@@ -897,7 +897,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 					cardList.add(dummyCard);
 			}
 			position.setCards(cardList);
-			position.setEnergy(pos.getEnergy());
 			gameModelUpdate.add(position);
 		}
 		return gameModelUpdate;
