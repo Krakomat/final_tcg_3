@@ -34,6 +34,16 @@ public class GameTreeMove {
 		this.chosenAttackQueue = chosenAttackQueue;
 	}
 
+	public GameTreeMove(Triple<Position, Integer, String> triple, Queue<List<PositionID>> chosenPositionQueue,
+			Queue<List<Integer>> chosenCardsQueue, Queue<List<Element>> chosenElementQueue, Queue<List<String>> chosenAttackQueue) {
+		this.resultingNode = null;
+		this.move = triple;
+		this.chosenPositionQueue = chosenPositionQueue;
+		this.chosenCardsQueue = chosenCardsQueue;
+		this.chosenElementQueue = chosenElementQueue;
+		this.chosenAttackQueue = chosenAttackQueue;
+	}
+
 	public GameTreeMove(Triple<Position, Integer, String> triple) {
 		this.resultingNode = null;
 		this.move = triple;

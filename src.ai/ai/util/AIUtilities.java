@@ -1,7 +1,9 @@
 package ai.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import ai.treebot.GameTreeMove;
 import network.client.Player;
@@ -38,8 +40,19 @@ public class AIUtilities {
 				if (!ServerCards.createInstance().contains(handCardID) && !handCardID.equals("00000"))
 					actions = gameModel.getPlayerActions(i, PositionID.BLUE_HAND, player);
 				if (actions != null && !actions.isEmpty()) {
-					for (String action : actions)
-						choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action)));
+					for (String action : actions) {
+						if (action.equals(PlayerAction.PLAY_ENERGY_CARD.toString())) {
+							for (PositionID arenaPosition : gameModel.getFullArenaPositions(Color.BLUE)) {
+								Queue<List<PositionID>> posQueue = new LinkedList<>();
+								List<PositionID> posList = new ArrayList<>();
+								posList.add(arenaPosition);
+								posQueue.add(posList);
+								choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action), posQueue, new LinkedList<>(),
+										new LinkedList<>(), new LinkedList<>()));
+							}
+						} else
+							choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action)));
+					}
 				}
 			}
 			// Check active & bench:
@@ -75,8 +88,19 @@ public class AIUtilities {
 				if (!ServerCards.createInstance().contains(handCardID) && !handCardID.equals("00000"))
 					actions = gameModel.getPlayerActions(i, PositionID.RED_HAND, player);
 				if (actions != null && !actions.isEmpty()) {
-					for (String action : actions)
-						choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action)));
+					for (String action : actions) {
+						if (action.equals(PlayerAction.PLAY_ENERGY_CARD.toString())) {
+							for (PositionID arenaPosition : gameModel.getFullArenaPositions(Color.RED)) {
+								Queue<List<PositionID>> posQueue = new LinkedList<>();
+								List<PositionID> posList = new ArrayList<>();
+								posList.add(arenaPosition);
+								posQueue.add(posList);
+								choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action), posQueue, new LinkedList<>(),
+										new LinkedList<>(), new LinkedList<>()));
+							}
+						} else
+							choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action)));
+					}
 				}
 			}
 			// Check active & bench:

@@ -31,7 +31,7 @@ public class Script_00094_Trank extends TrainerCardScript {
 		PositionID chosenPosition = player.playerChoosesPositions(this.getDamagedPositions(), 1, true, "Choose a pokemon to heal!").get(0);
 
 		// Execute heal(messages to clients send there):
-		gameModel.getAttackAction().healPosition(chosenPosition, 10);
+		gameModel.getAttackAction().healPosition(chosenPosition, 20);
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());

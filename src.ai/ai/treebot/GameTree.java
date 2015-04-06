@@ -66,6 +66,10 @@ public class GameTree {
 			player.flushQueues();
 			TurnSimulator simulator = new TurnSimulator(gameModel.copy());
 			System.err.println("Simulating " + move);
+			player.setChosenCardsQueue(move.getChosenCardsQueue());
+			player.setChosenPositionQueue(move.getChosenPositionQueue());
+			player.setChosenElementQueue(move.getChosenElementQueue());
+			player.setChosenAttackQueue(move.getChosenAttackQueue());
 			aiUtilities.executeMove(move, simulator, player);
 			LocalPokemonGameModel resultingGameModel = simulator.getGameModel();
 			childModels.add(resultingGameModel);
