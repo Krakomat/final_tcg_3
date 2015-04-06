@@ -25,6 +25,7 @@ import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 import ai.interfaces.Bot;
+import ai.treebot.GameTreeMove;
 import ai.treebot.TurnSimulator;
 import ai.util.AIUtilities;
 
@@ -66,17 +67,16 @@ public class StandardBot implements Bot {
 	public void makeMove(PokemonGameManager server, Player player) {
 		aiUtilities.sleep(4000);
 		// (Position, positionIndex, Action)
-		List<Triple<Position, Integer, String>> actionList = aiUtilities.computePlayerActions(gameModel, player, server);
-		List<Triple<Position, Integer, String>> energyList = aiUtilities.filterActions(actionList, PlayerAction.PLAY_ENERGY_CARD);
-		List<Triple<Position, Integer, String>> attackList = aiUtilities.filterActions(actionList, PlayerAction.ATTACK_1, PlayerAction.ATTACK_2,
-				PlayerAction.RETREAT_POKEMON);
+		List<GameTreeMove> actionList = aiUtilities.computePlayerActions(gameModel, player, server);
+		List<GameTreeMove> energyList = aiUtilities.filterActions(actionList, PlayerAction.PLAY_ENERGY_CARD);
+		List<GameTreeMove> attackList = aiUtilities.filterActions(actionList, PlayerAction.ATTACK_1, PlayerAction.ATTACK_2, PlayerAction.RETREAT_POKEMON);
 		@SuppressWarnings("unused")
-		List<Triple<Position, Integer, String>> retreatList = aiUtilities.filterActions(attackList, PlayerAction.RETREAT_POKEMON);
+		List<GameTreeMove> retreatList = aiUtilities.filterActions(attackList, PlayerAction.RETREAT_POKEMON);
 
 		if (!actionList.isEmpty()) {
 			Random r = new SecureRandom();
 			int index = r.nextInt(actionList.size());
-			int handCardIndex = actionList.get(index).getValue();
+			int handCardIndex = actionList.get(index).getTriple().getValue();
 			server.playerPlaysCard(player, handCardIndex);
 			return;// End makeMove()
 		}
@@ -88,7 +88,7 @@ public class StandardBot implements Bot {
 		if (!attackList.isEmpty()) {
 			Random r = new SecureRandom();
 			int index = r.nextInt(attackList.size());
-			Triple<Position, Integer, String> attackTriple = attackList.get(index);
+			Triple<Position, Integer, String> attackTriple = attackList.get(index).getTriple();
 			if (attackTriple.getAction().equals(PlayerAction.ATTACK_1.toString()))
 				server.executeAttack(player, ((PokemonCard) attackTriple.getKey().getTopCard()).getAttackNames().get(0));
 			else if (attackTriple.getAction().equals(PlayerAction.ATTACK_2.toString()))

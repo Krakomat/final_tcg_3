@@ -16,7 +16,6 @@ import model.enums.Element;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import ai.interfaces.Bot;
-import ai.treebot.GameTree.GameTreeMove;
 import ai.util.AIUtilities;
 
 /**
@@ -68,7 +67,7 @@ public class TreeBot implements Bot {
 			this.chosenElementQueue = move.getChosenElementQueue();
 			this.chosenPositionQueue = move.getChosenPositionQueue();
 
-			this.aiUtilities.executeMove(move.getTriple(), server, player);
+			this.aiUtilities.executeMove(move, server, player);
 		}
 	}
 

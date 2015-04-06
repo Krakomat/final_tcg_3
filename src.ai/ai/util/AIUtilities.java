@@ -3,6 +3,7 @@ package ai.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import ai.treebot.GameTreeMove;
 import network.client.Player;
 import network.server.PokemonGameManager;
 import model.database.Card;
@@ -26,9 +27,9 @@ public class AIUtilities {
 	 * @param player
 	 * @return
 	 */
-	public List<Triple<Position, Integer, String>> computePlayerActions(LocalPokemonGameModel gameModel, Player player, PokemonGameManager server) {
+	public List<GameTreeMove> computePlayerActions(LocalPokemonGameModel gameModel, Player player, PokemonGameManager server) {
 		if (player.getColor() == Color.BLUE) {
-			List<Triple<Position, Integer, String>> choosableCards = new ArrayList<>();
+			List<GameTreeMove> choosableCards = new ArrayList<>();
 			// Check hand:
 			Position handPos = gameModel.getPosition(PositionID.BLUE_HAND);
 			for (int i = 0; i < handPos.getCards().size(); i++) {
@@ -38,7 +39,7 @@ public class AIUtilities {
 					actions = gameModel.getPlayerActions(i, PositionID.BLUE_HAND, player);
 				if (actions != null && !actions.isEmpty()) {
 					for (String action : actions)
-						choosableCards.add(new Triple<Position, Integer, String>(handPos, i, action));
+						choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action)));
 				}
 			}
 			// Check active & bench:
@@ -48,7 +49,7 @@ public class AIUtilities {
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
 			if (actions != null && !actions.isEmpty()) {
 				for (String action : actions)
-					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
+					choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action)));
 			}
 			for (int i = 1; i <= 5; i++) {
 				actions = null;
@@ -59,13 +60,13 @@ public class AIUtilities {
 						actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), player);
 					if (actions != null && !actions.isEmpty()) {
 						for (String action : actions)
-							choosableCards.add(new Triple<Position, Integer, String>(benchPosition, benchPosition.size() - 1, action));
+							choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(benchPosition, benchPosition.size() - 1, action)));
 					}
 				}
 			}
 			return choosableCards;
 		} else if (player.getColor() == Color.RED) {
-			List<Triple<Position, Integer, String>> choosableCards = new ArrayList<>();
+			List<GameTreeMove> choosableCards = new ArrayList<>();
 			// Check hand:
 			Position handPos = gameModel.getPosition(PositionID.RED_HAND);
 			for (int i = 0; i < handPos.getCards().size(); i++) {
@@ -75,7 +76,7 @@ public class AIUtilities {
 					actions = gameModel.getPlayerActions(i, PositionID.RED_HAND, player);
 				if (actions != null && !actions.isEmpty()) {
 					for (String action : actions)
-						choosableCards.add(new Triple<Position, Integer, String>(handPos, i, action));
+						choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(handPos, i, action)));
 				}
 			}
 			// Check active & bench:
@@ -85,7 +86,7 @@ public class AIUtilities {
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
 			if (actions != null && !actions.isEmpty()) {
 				for (String action : actions)
-					choosableCards.add(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action));
+					choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(activePosition, activePosition.size() - 1, action)));
 			}
 
 			for (int i = 1; i <= 5; i++) {
@@ -97,7 +98,7 @@ public class AIUtilities {
 						actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), player);
 					if (actions != null && !actions.isEmpty()) {
 						for (String action : actions)
-							choosableCards.add(new Triple<Position, Integer, String>(benchPosition, benchPosition.size() - 1, action));
+							choosableCards.add(new GameTreeMove(new Triple<Position, Integer, String>(benchPosition, benchPosition.size() - 1, action)));
 					}
 				}
 			}
@@ -128,19 +129,19 @@ public class AIUtilities {
 	 * @param filterActions
 	 * @return all triples that have been filtered out
 	 */
-	public List<Triple<Position, Integer, String>> filterActions(List<Triple<Position, Integer, String>> actionTriples, PlayerAction... filterActions) {
-		List<Triple<Position, Integer, String>> outList = new ArrayList<>();
+	public List<GameTreeMove> filterActions(List<GameTreeMove> actionTriples, PlayerAction... filterActions) {
+		List<GameTreeMove> outList = new ArrayList<>();
 
 		for (int i = 0; i < actionTriples.size(); i++) {
-			Triple<Position, Integer, String> triple = actionTriples.get(i);
+			GameTreeMove move = actionTriples.get(i);
 			boolean removed = false;
-			String action = triple.getAction();
+			String action = move.getTriple().getAction();
 			for (PlayerAction playerAction : filterActions) {
 				if (action.equals(playerAction.toString()) && !removed) {
 					removed = true;
 					actionTriples.remove(i);
 					i--;
-					outList.add(triple);
+					outList.add(move);
 				}
 			}
 		}
@@ -197,28 +198,28 @@ public class AIUtilities {
 	 * @param gameSimulator
 	 * @param executingPlayer
 	 */
-	public void executeMove(Triple<Position, Integer, String> move, PokemonGameManager gameSimulator, Player executingPlayer) {
-		PlayerAction action = PlayerAction.valueOf(move.getAction());
+	public void executeMove(GameTreeMove move, PokemonGameManager gameSimulator, Player executingPlayer) {
+		PlayerAction action = PlayerAction.valueOf(move.getTriple().getAction());
 		switch (action) {
 		case ATTACK_1:
-			gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getKey().getTopCard()).getAttackNames().get(0));
+			gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getTriple().getKey().getTopCard()).getAttackNames().get(0));
 			break;
 		case ATTACK_2:
-			gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getKey().getTopCard()).getAttackNames().get(1));
+			gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getTriple().getKey().getTopCard()).getAttackNames().get(1));
 			break;
 		case EVOLVE_POKEMON:
-			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			gameSimulator.playerPlaysCard(executingPlayer, move.getTriple().getValue());
 			break;
 		case PLAY_ENERGY_CARD:
-			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			gameSimulator.playerPlaysCard(executingPlayer, move.getTriple().getValue());
 			break;
 		case PLAY_TRAINER_CARD:
-			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			gameSimulator.playerPlaysCard(executingPlayer, move.getTriple().getValue());
 			break;
 		case POKEMON_POWER:
 			throw new UnsupportedOperationException("PokemonPowers cannot be simulated right now!");
 		case PUT_ON_BENCH:
-			gameSimulator.playerPlaysCard(executingPlayer, move.getValue());
+			gameSimulator.playerPlaysCard(executingPlayer, move.getTriple().getValue());
 			break;
 		case RETREAT_POKEMON:
 			gameSimulator.retreatPokemon(executingPlayer);
