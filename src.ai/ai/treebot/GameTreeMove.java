@@ -34,8 +34,8 @@ public class GameTreeMove {
 		this.chosenAttackQueue = chosenAttackQueue;
 	}
 
-	public GameTreeMove(Triple<Position, Integer, String> triple, Queue<List<PositionID>> chosenPositionQueue,
-			Queue<List<Integer>> chosenCardsQueue, Queue<List<Element>> chosenElementQueue, Queue<List<String>> chosenAttackQueue) {
+	public GameTreeMove(Triple<Position, Integer, String> triple, Queue<List<PositionID>> chosenPositionQueue, Queue<List<Integer>> chosenCardsQueue,
+			Queue<List<Element>> chosenElementQueue, Queue<List<String>> chosenAttackQueue) {
 		this.resultingNode = null;
 		this.move = triple;
 		this.chosenPositionQueue = chosenPositionQueue;
@@ -51,6 +51,10 @@ public class GameTreeMove {
 		this.chosenCardsQueue = new LinkedList<>();
 		this.chosenElementQueue = new LinkedList<>();
 		this.chosenAttackQueue = new LinkedList<>();
+	}
+
+	public String toString() {
+		return move.toString() + "; " + chosenCardsQueue + "; " + chosenPositionQueue + "; " + chosenElementQueue + "; " + chosenAttackQueue;
 	}
 
 	public Triple<Position, Integer, String> getTriple() {

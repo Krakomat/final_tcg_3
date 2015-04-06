@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contains all card ids, whose actions have to be determined by the server.
+ * Contains all card ids, whose actions have to be determined by the server. Also these cards cannot be used by the TreeBot!
  * 
  * @author Michael
  *
  */
 public class ServerCards {
-	
+
 	public static List<String> createInstance() {
 		List<String> list = new ArrayList<>();
 		list.add("00027"); // Porenta
