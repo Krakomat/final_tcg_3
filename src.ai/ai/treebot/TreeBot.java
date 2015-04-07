@@ -11,6 +11,7 @@ import network.client.Player;
 import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
+import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
@@ -25,7 +26,11 @@ import ai.util.AIUtilities;
  *
  */
 public class TreeBot implements Bot {
+	private enum BotState {
+		CHOOSE_ACTIVE, NORMAL;
+	}
 
+	private BotState botState;
 	private AIUtilities aiUtilities;
 	private LocalPokemonGameModel gameModel;
 	private Queue<List<PositionID>> chosenPositionQueue;
@@ -49,7 +54,7 @@ public class TreeBot implements Bot {
 
 	@Override
 	public void startGame() {
-
+		this.botState = BotState.CHOOSE_ACTIVE;
 	}
 
 	@Override
@@ -73,17 +78,32 @@ public class TreeBot implements Bot {
 
 	@Override
 	public List<Card> choosesCards(List<Card> cards, int amount, boolean exact) {
-		if (!this.chosenCardsQueue.isEmpty()) {
-			List<Card> cardList = new ArrayList<>();
-			List<Integer> gameIDList = this.chosenCardsQueue.poll();
-			for (Integer id : gameIDList)
-				cardList.add(gameModel.getCard(id));
-			return cardList;
-		} else {
+		if (this.botState == BotState.CHOOSE_ACTIVE) {
 			List<Card> chosenCards = new ArrayList<Card>();
-			for (int i = 0; i < amount && i < cards.size(); i++)
-				chosenCards.add(cards.get(i));
+			/*
+			 * Choose active pokemon: Choose the pokemon with the most HP.
+			 */
+			PokemonCard chosenCard = (PokemonCard) cards.get(0);
+			for (Card card : cards) {
+				if (chosenCard.getHitpoints() < ((PokemonCard) card).getHitpoints())
+					chosenCard = (PokemonCard) card;
+			}
+			chosenCards.add(chosenCard);
+			this.botState = BotState.NORMAL;
 			return chosenCards;
+		} else {
+			if (!this.chosenCardsQueue.isEmpty()) {
+				List<Card> cardList = new ArrayList<>();
+				List<Integer> gameIDList = this.chosenCardsQueue.poll();
+				for (Integer id : gameIDList)
+					cardList.add(gameModel.getCard(id));
+				return cardList;
+			} else {
+				List<Card> chosenCards = new ArrayList<Card>();
+				for (int i = 0; i < amount && i < cards.size(); i++)
+					chosenCards.add(cards.get(i));
+				return chosenCards;
+			}
 		}
 	}
 
