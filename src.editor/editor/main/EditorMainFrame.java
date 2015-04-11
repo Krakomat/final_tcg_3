@@ -195,11 +195,11 @@ public class EditorMainFrame extends JPanel {
 		cardInfoPanel.setBounds(250, 10, 560, 455);
 
 		// adjust size and set layout
-		setPreferredSize(new Dimension(1013, 566));
+		setPreferredSize(new Dimension(713, 566));
 		setLayout(null);
 
 		tabs = new JTabbedPane();
-		tabs.setBounds(250, 10, 700, 540);
+		tabs.setBounds(250, 10, 400, 540);
 		tabs.addTab("Info", cardInfoPanel);
 		tabs.setVisible(false);
 
@@ -245,10 +245,11 @@ public class EditorMainFrame extends JPanel {
 				c.setName(s);
 				c.setImagePath("/cards/cardBack.png");
 				c.setRarity(Rarity.COMMON);
-				c.setEdition(Edition.BASE);
-				pokemonJList.setListData(cardEditorModel.getAllCardsAsString());
-				pokemonJList.setSelectedIndex(cardEditorModel.getAllCards().size() - 1);
-				pokemonJList.ensureIndexIsVisible(cardEditorModel.getAllCards().size() - 1);
+				Edition edition = (Edition) editionChooser.getSelectedItem();
+				c.setEdition(edition);
+				pokemonJList.setListData(cardEditorModel.getAllCardsAsString(edition));
+				pokemonJList.setSelectedIndex(cardEditorModel.getAllCardsAsString(edition).length - 1);
+				pokemonJList.ensureIndexIsVisible(cardEditorModel.getAllCardsAsString(edition).length - 1);
 			}
 		}
 	}
@@ -293,6 +294,6 @@ public class EditorMainFrame extends JPanel {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setResizable(false);
-		frame.setBounds(300, 100, 1013, 600);
+		frame.setBounds(300, 100, 713, 600);
 	}
 }

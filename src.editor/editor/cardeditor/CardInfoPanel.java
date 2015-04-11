@@ -19,7 +19,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import common.utilities.BitmapComponent;
-
 import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
@@ -97,7 +96,7 @@ public class CardInfoPanel extends JPanel {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CardInfoPanel(Card s, String[] pokemonNames) {
 		pokemonCardNames = pokemonNames;
-		String[] editions = { Edition.BASE.toString(), Edition.TOKEN.toString() };
+		String[] editions = { Edition.BASE.toString(), Edition.JUNGLE.toString(), Edition.TOKEN.toString() };
 		String[] hpComboBoxItems = { "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120" };
 		ImageIcon[] typeImages = new ImageIcon[7];
 		typeImages[0] = new BitmapComponent("/tilesets/elements/thumbnails/elektro.png").getImageIcon();
@@ -149,14 +148,14 @@ public class CardInfoPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FileFilter filter = new FileNameExtensionFilter("Final TCG2 Datenbanken", "jpg");
-				JFileChooser chooser = new JFileChooser("images/cards/base01/");
+				JFileChooser chooser = new JFileChooser("images/cards/base02/");
 				chooser.setFileFilter(filter);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int rueckgabeWert = chooser.showOpenDialog(null);
 				if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
 					File f = chooser.getSelectedFile();
 					String s = null;
-					s = "/cards/base01/" + f.getName();
+					s = "/cards/base02/" + f.getName();
 					selectedCard.setImagePath(s);
 					cardImageBitmap.setImage(s);
 				}

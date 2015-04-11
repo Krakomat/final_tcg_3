@@ -2,7 +2,7 @@
 <Cards>
     <PokemonCard>
         <Card>
-            <Name>Simsala</Name>
+            <Name>Alakazam</Name>
             <ID>00001</ID>
             <Image>/cards/base01/00001.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -22,7 +22,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Turtok</Name>
+            <Name>Blastoise</Name>
             <ID>00002</ID>
             <Image>/cards/base01/00002.jpg</Image>
             <Rarity>LEGENDARY</Rarity>
@@ -38,11 +38,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Schillok</EvolvesFrom>
+        <EvolvesFrom>Wartortle</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Chaneira</Name>
+            <Name>Chansey</Name>
             <ID>00003</ID>
             <Image>/cards/base01/00003.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -60,7 +60,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Glurak</Name>
+            <Name>Charizard</Name>
             <ID>00004</ID>
             <Image>/cards/base01/00004.jpg</Image>
             <Rarity>LEGENDARY</Rarity>
@@ -76,11 +76,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Glutexo</EvolvesFrom>
+        <EvolvesFrom>Charmeleon</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Piepi</Name>
+            <Name>Clefairy</Name>
             <ID>00005</ID>
             <Image>/cards/base01/00005.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -98,7 +98,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Garados</Name>
+            <Name>Gyarados</Name>
             <ID>00006</ID>
             <Image>/cards/base01/00006.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -114,11 +114,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Karpador</EvolvesFrom>
+        <EvolvesFrom>Magikarp</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Nockchan</Name>
+            <Name>Hitmonchan</Name>
             <ID>00007</ID>
             <Image>/cards/base01/00007.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -137,7 +137,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Machomei</Name>
+            <Name>Machamp</Name>
             <ID>00008</ID>
             <Image>/cards/base01/00008.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -153,7 +153,7 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Maschock</EvolvesFrom>
+        <EvolvesFrom>Machoke</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -171,11 +171,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Magnetilo</EvolvesFrom>
+        <EvolvesFrom>Magnemite</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Mewtu</Name>
+            <Name>Mewtwo</Name>
             <ID>00010</ID>
             <Image>/cards/base01/00010.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -213,7 +213,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Vulnona</Name>
+            <Name>Ninetales</Name>
             <ID>00012</ID>
             <Image>/cards/base01/00012.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -231,7 +231,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Quappo</Name>
+            <Name>Poliwrath</Name>
             <ID>00013</ID>
             <Image>/cards/base01/00013.jpg</Image>
             <Rarity>HOLO</Rarity>
@@ -247,7 +247,7 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Quaputzi</EvolvesFrom>
+        <EvolvesFrom>Poliwhirl</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -269,7 +269,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Bisaflor</Name>
+            <Name>Venusaur</Name>
             <ID>00015</ID>
             <Image>/cards/base01/00015.jpg</Image>
             <Rarity>LEGENDARY</Rarity>
@@ -284,7 +284,7 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Bisaknosp</EvolvesFrom>
+        <EvolvesFrom>Ivysaur</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -308,7 +308,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Bibor</Name>
+            <Name>Beedrill</Name>
             <ID>00017</ID>
             <Image>/cards/base01/00017.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -320,11 +320,11 @@
         <Weakness>FIRE</Weakness>
         <Resistance>ROCK</Resistance>
         <RetreatCost/>
-        <EvolvesFrom>Kokuna</EvolvesFrom>
+        <EvolvesFrom>Kakuna</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Dragonir</Name>
+            <Name>Dragonair</Name>
             <ID>00018</ID>
             <Image>/cards/base01/00018.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -343,7 +343,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Digdri</Name>
+            <Name>Dugtrio</Name>
             <ID>00019</ID>
             <Image>/cards/base01/00019.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -358,11 +358,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Digda</EvolvesFrom>
+        <EvolvesFrom>Diglett</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Elektek</Name>
+            <Name>Electabuzz</Name>
             <ID>00020</ID>
             <Image>/cards/base01/00020.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -381,7 +381,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Lektrobal</Name>
+            <Name>Electrode</Name>
             <ID>00021</ID>
             <Image>/cards/base01/00021.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -395,11 +395,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Voltobal</EvolvesFrom>
+        <EvolvesFrom>Voltorb</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Tauboga</Name>
+            <Name>Pidgeotto</Name>
             <ID>00022</ID>
             <Image>/cards/base01/00022.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -413,11 +413,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Taubsi</EvolvesFrom>
+        <EvolvesFrom>Pidgey</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Arkani</Name>
+            <Name>Arcanine</Name>
             <ID>00023</ID>
             <Image>/cards/base01/00023.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -433,11 +433,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Fukano</EvolvesFrom>
+        <EvolvesFrom>Growlithe</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Glutexo</Name>
+            <Name>Charmeleon</Name>
             <ID>00024</ID>
             <Image>/cards/base01/00024.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -451,11 +451,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Glumanda</EvolvesFrom>
+        <EvolvesFrom>Charmander</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Jugong</Name>
+            <Name>Dewgong</Name>
             <ID>00025</ID>
             <Image>/cards/base01/00025.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -471,7 +471,7 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Jurob</EvolvesFrom>
+        <EvolvesFrom>Seel</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -493,7 +493,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Porenta</Name>
+            <Name>Farfetch'd</Name>
             <ID>00027</ID>
             <Image>/cards/base01/00027.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -511,7 +511,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Fukano</Name>
+            <Name>Growlithe</Name>
             <ID>00028</ID>
             <Image>/cards/base01/00028.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -529,7 +529,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Alpollo</Name>
+            <Name>Haunter</Name>
             <ID>00029</ID>
             <Image>/cards/base01/00029.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -543,11 +543,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Nebulak</EvolvesFrom>
+        <EvolvesFrom>Gastly</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Bisaknosp</Name>
+            <Name>Ivysaur</Name>
             <ID>00030</ID>
             <Image>/cards/base01/00030.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -561,11 +561,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Bisasam</EvolvesFrom>
+        <EvolvesFrom>Bulbasaur</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Rossana</Name>
+            <Name>Jynx</Name>
             <ID>00031</ID>
             <Image>/cards/base01/00031.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -604,7 +604,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Kokuna</Name>
+            <Name>Kakuna</Name>
             <ID>00033</ID>
             <Image>/cards/base01/00033.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -619,11 +619,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Hornliu</EvolvesFrom>
+        <EvolvesFrom>Weedle</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Maschock</Name>
+            <Name>Machoke</Name>
             <ID>00034</ID>
             <Image>/cards/base01/00034.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -639,11 +639,11 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Machollo</EvolvesFrom>
+        <EvolvesFrom>Machop</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Karpador</Name>
+            <Name>Magikarp</Name>
             <ID>00035</ID>
             <Image>/cards/base01/00035.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -698,7 +698,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Quaputzi</Name>
+            <Name>Poliwhirl</Name>
             <ID>00038</ID>
             <Image>/cards/base01/00038.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -712,7 +712,7 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Quapsel</EvolvesFrom>
+        <EvolvesFrom>Poliwag</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -734,7 +734,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Rattikarl</Name>
+            <Name>Raticate</Name>
             <ID>00040</ID>
             <Image>/cards/base01/00040.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -748,11 +748,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Rattfratz</EvolvesFrom>
+        <EvolvesFrom>Rattata</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Jurob</Name>
+            <Name>Seel</Name>
             <ID>00041</ID>
             <Image>/cards/base01/00041.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -770,7 +770,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Schillok</Name>
+            <Name>Wartortle</Name>
             <ID>00042</ID>
             <Image>/cards/base01/00042.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -784,7 +784,7 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Schiggy</EvolvesFrom>
+        <EvolvesFrom>Squirtle</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -804,7 +804,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Bisasam</Name>
+            <Name>Bulbasaur</Name>
             <ID>00044</ID>
             <Image>/cards/base01/00044.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -822,7 +822,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Raupy</Name>
+            <Name>Caterpie</Name>
             <ID>00045</ID>
             <Image>/cards/base01/00045.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -840,7 +840,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Glumanda</Name>
+            <Name>Charmander</Name>
             <ID>00046</ID>
             <Image>/cards/base01/00046.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -858,7 +858,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Digda</Name>
+            <Name>Diglett</Name>
             <ID>00047</ID>
             <Image>/cards/base01/00047.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -874,7 +874,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Dodu</Name>
+            <Name>Doduo</Name>
             <ID>00048</ID>
             <Image>/cards/base01/00048.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -890,7 +890,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Traumato</Name>
+            <Name>Drowzee</Name>
             <ID>00049</ID>
             <Image>/cards/base01/00049.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -906,7 +906,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Nebulak</Name>
+            <Name>Gastly</Name>
             <ID>00050</ID>
             <Image>/cards/base01/00050.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -922,7 +922,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Smogon</Name>
+            <Name>Koffing</Name>
             <ID>00051</ID>
             <Image>/cards/base01/00051.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -940,7 +940,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Machollo</Name>
+            <Name>Machop</Name>
             <ID>00052</ID>
             <Image>/cards/base01/00052.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -958,7 +958,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Magnetilo</Name>
+            <Name>Magnemite</Name>
             <ID>00053</ID>
             <Image>/cards/base01/00053.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -976,7 +976,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Safcon</Name>
+            <Name>Metapod</Name>
             <ID>00054</ID>
             <Image>/cards/base01/00054.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -991,7 +991,7 @@
             <Element>COLORLESS</Element>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Raupy</EvolvesFrom>
+        <EvolvesFrom>Caterpie</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -1033,7 +1033,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Taubsi</Name>
+            <Name>Pidgey</Name>
             <ID>00057</ID>
             <Image>/cards/base01/00057.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1069,7 +1069,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Quapsel</Name>
+            <Name>Poliwag</Name>
             <ID>00059</ID>
             <Image>/cards/base01/00059.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1087,7 +1087,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Ponita</Name>
+            <Name>Ponyta</Name>
             <ID>00060</ID>
             <Image>/cards/base01/00060.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1105,7 +1105,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Rattfratz</Name>
+            <Name>Rattata</Name>
             <ID>00061</ID>
             <Image>/cards/base01/00061.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1121,7 +1121,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Sandan</Name>
+            <Name>Sandshrew</Name>
             <ID>00062</ID>
             <Image>/cards/base01/00062.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1139,7 +1139,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Schiggy</Name>
+            <Name>Squirtle</Name>
             <ID>00063</ID>
             <Image>/cards/base01/00063.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1171,11 +1171,11 @@
         <RetreatCost>
             <Element>COLORLESS</Element>
         </RetreatCost>
-        <EvolvesFrom>Sterndu</EvolvesFrom>
+        <EvolvesFrom>Staryu</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Sterndu</Name>
+            <Name>Staryu</Name>
             <ID>00065</ID>
             <Image>/cards/base01/00065.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1212,7 +1212,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Voltobal</Name>
+            <Name>Voltorb</Name>
             <ID>00067</ID>
             <Image>/cards/base01/00067.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1248,7 +1248,7 @@
     </PokemonCard>
     <PokemonCard>
         <Card>
-            <Name>Hornliu</Name>
+            <Name>Weedle</Name>
             <ID>00069</ID>
             <Image>/cards/base01/00069.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1266,7 +1266,7 @@
     </PokemonCard>
     <TrainerCard>
         <Card>
-            <Name>Piepi-Puppe</Name>
+            <Name>Clefairy-Doll</Name>
             <ID>00070</ID>
             <Image>/cards/base01/00070.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1276,7 +1276,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Computersuche</Name>
+            <Name>Computer Search</Name>
             <ID>00071</ID>
             <Image>/cards/base01/00071.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1286,7 +1286,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Rückentwicklungs-Spray</Name>
+            <Name>Devolution Spray</Name>
             <ID>00072</ID>
             <Image>/cards/base01/00072.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1296,7 +1296,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Falscher Professor Eich</Name>
+            <Name>Imposter Professor Oak</Name>
             <ID>00073</ID>
             <Image>/cards/base01/00073.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1306,7 +1306,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Detektor</Name>
+            <Name>Item Finder</Name>
             <ID>00074</ID>
             <Image>/cards/base01/00074.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1316,7 +1316,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Göre</Name>
+            <Name>Lass</Name>
             <ID>00075</ID>
             <Image>/cards/base01/00075.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1326,7 +1326,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Pokemon-Züchter</Name>
+            <Name>Pokemon-Breeder</Name>
             <ID>00076</ID>
             <Image>/cards/base01/00076.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1336,7 +1336,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Pokemon-Händler</Name>
+            <Name>Pokemon-Trader</Name>
             <ID>00077</ID>
             <Image>/cards/base01/00077.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1346,7 +1346,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Aufwisch</Name>
+            <Name>Scoop Up</Name>
             <ID>00078</ID>
             <Image>/cards/base01/00078.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1356,7 +1356,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Super Energie-Absauger</Name>
+            <Name>Super Energy Removal</Name>
             <ID>00079</ID>
             <Image>/cards/base01/00079.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1376,7 +1376,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Energiezugewinnung</Name>
+            <Name>Energy Retrieval</Name>
             <ID>00081</ID>
             <Image>/cards/base01/00081.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1386,7 +1386,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Hyperheiler</Name>
+            <Name>Full Heal</Name>
             <ID>00082</ID>
             <Image>/cards/base01/00082.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1396,7 +1396,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Wartung</Name>
+            <Name>Maintenance</Name>
             <ID>00083</ID>
             <Image>/cards/base01/00083.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1426,7 +1426,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Pokemon-Flöte</Name>
+            <Name>Pokemon Flute</Name>
             <ID>00086</ID>
             <Image>/cards/base01/00086.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1446,7 +1446,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Professor Eich</Name>
+            <Name>Professor Oak</Name>
             <ID>00088</ID>
             <Image>/cards/base01/00088.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1456,7 +1456,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Beleber</Name>
+            <Name>Revive</Name>
             <ID>00089</ID>
             <Image>/cards/base01/00089.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1466,7 +1466,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Supertrank</Name>
+            <Name>Super Potion</Name>
             <ID>00090</ID>
             <Image>/cards/base01/00090.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1486,7 +1486,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Energie-Absauger</Name>
+            <Name>Energy Removal</Name>
             <ID>00092</ID>
             <Image>/cards/base01/00092.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1496,7 +1496,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Windhauch</Name>
+            <Name>Gust of Wind</Name>
             <ID>00093</ID>
             <Image>/cards/base01/00093.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1506,7 +1506,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Trank</Name>
+            <Name>Potion</Name>
             <ID>00094</ID>
             <Image>/cards/base01/00094.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1516,7 +1516,7 @@
     </TrainerCard>
     <TrainerCard>
         <Card>
-            <Name>Tausch</Name>
+            <Name>Switch</Name>
             <ID>00095</ID>
             <Image>/cards/base01/00095.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1526,7 +1526,7 @@
     </TrainerCard>
     <EnergyCard>
         <Card>
-            <Name>Doppelte farblose Energie</Name>
+            <Name>Double Colorless Energy</Name>
             <ID>00096</ID>
             <Image>/cards/base01/00096.jpg</Image>
             <Rarity>UNCOMMON</Rarity>
@@ -1541,7 +1541,7 @@
     </EnergyCard>
     <EnergyCard>
         <Card>
-            <Name>Kampf Energie</Name>
+            <Name>Rock Energy</Name>
             <ID>00097</ID>
             <Image>/cards/base01/00097.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1555,7 +1555,7 @@
     </EnergyCard>
     <EnergyCard>
         <Card>
-            <Name>Feuer Energie</Name>
+            <Name>Fire Energy</Name>
             <ID>00098</ID>
             <Image>/cards/base01/00098.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1569,7 +1569,7 @@
     </EnergyCard>
     <EnergyCard>
         <Card>
-            <Name>Grass Energie</Name>
+            <Name>Grass Energy</Name>
             <ID>00099</ID>
             <Image>/cards/base01/00099.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1583,7 +1583,7 @@
     </EnergyCard>
     <EnergyCard>
         <Card>
-            <Name>Elektro Energie</Name>
+            <Name>Lightning Energy</Name>
             <ID>00100</ID>
             <Image>/cards/base01/00100.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1597,7 +1597,7 @@
     </EnergyCard>
     <EnergyCard>
         <Card>
-            <Name>Psycho Energie</Name>
+            <Name>Psychic Energy</Name>
             <ID>00101</ID>
             <Image>/cards/base01/00101.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1611,7 +1611,7 @@
     </EnergyCard>
     <EnergyCard>
         <Card>
-            <Name>Wasser Energie</Name>
+            <Name>Water Energy</Name>
             <ID>00102</ID>
             <Image>/cards/base01/00102.jpg</Image>
             <Rarity>COMMON</Rarity>
@@ -1625,7 +1625,7 @@
     </EnergyCard>
     <PokemonCard>
         <Card>
-            <Name>Piepi-Puppe</Name>
+            <Name>Clefairy Doll</Name>
             <ID>00103</ID>
             <Image>/cards/base01/00070.jpg</Image>
             <Rarity>RARE</Rarity>
@@ -1641,7 +1641,7 @@
     </PokemonCard>
     <EnergyCard>
         <Card>
-            <Name>Lektrobal</Name>
+            <Name>Electrode</Name>
             <ID>00104</ID>
             <Image>/cards/base01/00021.jpg</Image>
             <Rarity>RARE</Rarity>
