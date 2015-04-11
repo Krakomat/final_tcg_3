@@ -286,6 +286,22 @@ public class Database {
 		TextureKey invulnerable = new TextureKey("/tilesets/conditions/invulnerable.png");
 		invulnerable.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.INVULNERABLE.toString(), invulnerable);
+
+		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
+		overgrowth.setGenerateMips(false);
+		assetTextures.put("overgrowth", overgrowth);
+
+		TextureKey zapp = new TextureKey("/decks/zapp.png");
+		zapp.setGenerateMips(false);
+		assetTextures.put("zapp!", zapp);
+
+		TextureKey brushfire = new TextureKey("/decks/brushfire.png");
+		brushfire.setGenerateMips(false);
+		assetTextures.put("brushfire", brushfire);
+
+		TextureKey blackout = new TextureKey("/decks/blackout.png");
+		blackout.setGenerateMips(false);
+		assetTextures.put("blackout", blackout);
 	}
 
 	public static Player getBot(String name) {

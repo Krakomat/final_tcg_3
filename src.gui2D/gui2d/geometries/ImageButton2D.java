@@ -1,11 +1,14 @@
 package gui2d.geometries;
 
+import model.enums.Sounds;
 import gui2d.GUI2D;
 import gui2d.abstracts.Button2D;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
+import gui2d.controller.EffectController;
 
 import com.jme3.asset.TextureKey;
+import com.jme3.audio.AudioNode;
 import com.jme3.scene.Node;
 
 import common.utilities.Lock;
@@ -25,6 +28,7 @@ public abstract class ImageButton2D extends Node implements SelectableNode {
 	private int level;
 	private boolean visible;
 	private Lock lock;
+	private AudioNode clickSoundNode;
 
 	public ImageButton2D(String name, TextureKey texture, float width, float height) {
 		this.name = name;
@@ -68,6 +72,10 @@ public abstract class ImageButton2D extends Node implements SelectableNode {
 		};
 		this.imagePanel.setLocalTranslation(width * 0.1f, height * 0.1f, 0);
 		this.attachChild(imagePanel);
+		
+		// Init audio:
+		this.clickSoundNode = EffectController.createEffectAudioNode(Sounds.BUTTON_CLICKED);
+		this.attachChild(this.clickSoundNode);
 	}
 
 	public void setTexture(TextureKey texture) {
@@ -147,6 +155,21 @@ public abstract class ImageButton2D extends Node implements SelectableNode {
 		}
 		this.button.setSelected(value);
 		this.lock.unlock();
+	}
+
+	@Override
+	public void mousePressed() {
+		this.button.mousePressed();
+	}
+
+	@Override
+	public void mouseReleased() {
+		this.button.mouseReleased();
+	}
+
+	@Override
+	public void audioSelect() {
+		this.clickSoundNode.playInstance();
 	}
 
 	@Override
