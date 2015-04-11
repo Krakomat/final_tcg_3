@@ -37,7 +37,7 @@ public class MusicController extends Node {
 	 *
 	 */
 	public enum MusicType {
-		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC;
+		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC, BOT_CHOOSE_MUSIC;
 	}
 
 	private List<AudioNode> fadeOutList;
@@ -61,6 +61,7 @@ public class MusicController extends Node {
 		List<String> titleMusicList = new ArrayList<>();
 		List<String> lobbyMusicList = new ArrayList<>();
 		List<String> deckEditMusicList = new ArrayList<>();
+		List<String> botChooseMusicList = new ArrayList<>();
 		List<String> ingameMusicList = new ArrayList<>();
 
 		for (int i = 1; i <= TITLE_MUSIC_TRACKS; i++)
@@ -74,6 +75,10 @@ public class MusicController extends Node {
 		for (int i = 1; i <= DECK_EDIT_MUSIC_TRACKS; i++)
 			deckEditMusicList.add("music/deck_editor/track" + i + ".wav");
 		this.musicTrackMap.put(MusicType.DECK_EDIT_MUSIC, deckEditMusicList);
+
+		for (int i = 1; i <= DECK_EDIT_MUSIC_TRACKS; i++)
+			botChooseMusicList.add("music/deck_editor/track" + i + ".wav");
+		this.musicTrackMap.put(MusicType.BOT_CHOOSE_MUSIC, botChooseMusicList);
 
 		for (int i = 1; i <= INGAME_MUSIC_TRACKS; i++)
 			ingameMusicList.add("music/ingame/track" + i + ".wav");

@@ -7,5 +7,5 @@ package gui2d;
  *
  */
 public enum GUI2DMode {
-	START, LOBBY, DECK_EDIT, INGAME;
+	START, LOBBY, DECK_EDIT, INGAME, BOT_CHOOSER;
 }

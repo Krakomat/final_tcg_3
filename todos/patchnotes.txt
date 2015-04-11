@@ -1,6 +1,7 @@
 Patch 1.04
 	New Features
 		- New Bot: TreeBot[alpha]
+		- Bot decks can now be chosen
 		
 	Music & Sounds
 		- Fixed a bug, where sound effects do not close properly
@@ -12,6 +13,7 @@ Patch 1.04
 		- Potion: Now heals for the right amount
 	AI
 		- Fixed a bug, where bots payed the wrong amount of energy
+		- Removed the dummy and standard bot
 		
 Patch 1.03
 	New Features

@@ -323,21 +323,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void singlePlayerClicked() {
-		this.singlePlayerButton.setVisible(false);
-		this.dropInUpdateQueue(singlePlayerButton);
-		this.multiPlayerButton.setVisible(false);
-		this.dropInUpdateQueue(multiPlayerButton);
-		this.deckEditorButton.setVisible(false);
-		this.dropInUpdateQueue(deckEditorButton);
-
-		this.backButton.setVisible(true);
-		this.dropInUpdateQueue(backButton);
-		this.dummyBotButton.setVisible(true);
-		this.dropInUpdateQueue(dummyBotButton);
-		this.standardBot.setVisible(true);
-		this.dropInUpdateQueue(standardBot);
-		this.treeBot.setVisible(true);
-		this.dropInUpdateQueue(treeBot);
+		GUI2D.getInstance().switchMode(GUI2DMode.BOT_CHOOSER);
 	}
 
 	protected void multiPlayerCreateClicked() {
