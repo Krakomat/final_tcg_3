@@ -292,7 +292,7 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void run() {
 				Player bot = Database.getBot("TreeBot");
-				bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.DECK_PATH + deckName)));
+				bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.BOT_DECK_PATH + deckName)));
 				ClientBorder botBorder = new ClientBorder(bot);
 				bot.setServer(botBorder);
 

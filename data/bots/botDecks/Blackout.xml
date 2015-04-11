@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Deck Name="Blackout">
     <Cards>
+        <Card ID="00002">
+            <Size>1</Size>
+        </Card>
         <Card ID="00007">
             <Size>1</Size>
         </Card>
-        <Card ID="00027">
-            <Size>2</Size>
+        <Card ID="00008">
+            <Size>1</Size>
         </Card>
         <Card ID="00034">
             <Size>2</Size>
