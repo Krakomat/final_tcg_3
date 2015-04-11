@@ -46,7 +46,7 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				singlePlayerClicked();
-			}
+			}	
 
 			@Override
 			public void mouseSelectRightClick() {

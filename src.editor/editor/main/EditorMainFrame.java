@@ -3,9 +3,10 @@ package editor.main;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,8 +17,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import common.utilities.BitmapComponent;
 import editor.cardeditor.CardEditorModel;
 import editor.cardeditor.CardInfoPanel;
-import editor.cardeditor.ISelectable;
-import editor.cardeditor.SelectableImagePath;
 import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
@@ -40,25 +39,16 @@ public class EditorMainFrame extends JPanel {
 	private JButton deleteCardButton;
 	private JButton saveButton;
 	private JButton openButton;
+	private JComboBox<Edition> editionChooser;
 
 	private JTabbedPane tabs;
 	private CardInfoPanel cardInfoPanel;
 
 	private CardEditorModel cardEditorModel;
-	private ArrayList<ISelectable> base01Images;
 
 	public EditorMainFrame() {
 		// construct preComponents
 		cardEditorModel = new CardEditorModel();
-
-		File f = new File("images/cards/base01/");
-		File[] fileArray = f.listFiles();
-		base01Images = new ArrayList<ISelectable>();
-		for (int i = 0; i < fileArray.length; i++) {
-			String s = fileArray[i].getName();
-			SelectableImagePath sI = new SelectableImagePath("/cards/" + "base01/" + s);
-			base01Images.add(sI);
-		}
 
 		// construct components
 		pokemonJList = new JList<String>(cardEditorModel.getAllCardsAsString());
@@ -145,6 +135,20 @@ public class EditorMainFrame extends JPanel {
 		});
 		deleteCardButton.setVisible(false);
 
+		this.editionChooser = new JComboBox<Edition>();
+		this.editionChooser.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				Edition edition = (Edition) editionChooser.getSelectedItem();
+				pokemonJList.setListData(cardEditorModel.getAllCardsAsString(edition));
+				pokemonJList.setSelectedIndex(cardEditorModel.getAllCardsAsString(edition).length - 1);
+				pokemonJList.ensureIndexIsVisible(cardEditorModel.getAllCardsAsString(edition).length - 1);
+			}
+		});
+		for (Edition e : Edition.values())
+			this.editionChooser.addItem(e);
+		this.editionChooser.setEnabled(false);
+
 		saveButton = new JButton("Speichern");
 		saveButton.addActionListener(new ActionListener() {
 
@@ -174,6 +178,7 @@ public class EditorMainFrame extends JPanel {
 						newPokemonButton.setEnabled(true);
 						newTrainerCardButton.setEnabled(true);
 						newEnergyCardButton.setEnabled(true);
+						editionChooser.setEnabled(true);
 						tabs.removeAll();
 						cardInfoPanel = new CardInfoPanel(null, cardEditorModel.getPokemonNames());
 						cardInfoPanel.setBounds(250, 10, 360, 455);
@@ -209,12 +214,14 @@ public class EditorMainFrame extends JPanel {
 		add(saveButton);
 		add(openButton);
 		add(tabs);
+		add(editionChooser);
 
 		// set component bounds (only needed by Absolute Positioning)
-		pokemonJScrollPane.setBounds(10, 75, 205, 445);
-		newPokemonButton.setBounds(10, 45, 65, 25);
-		newEnergyCardButton.setBounds(150, 45, 65, 25);
-		newTrainerCardButton.setBounds(80, 45, 65, 25);
+		pokemonJScrollPane.setBounds(10, 105, 205, 415);
+		editionChooser.setBounds(10, 45, 205, 25);
+		newPokemonButton.setBounds(10, 75, 65, 25);
+		newEnergyCardButton.setBounds(150, 75, 65, 25);
+		newTrainerCardButton.setBounds(80, 75, 65, 25);
 		upButton.setBounds(220, 195, 25, 80);
 		downButton.setBounds(220, 280, 25, 80);
 		deleteCardButton.setBounds(10, 525, 60, 25);
@@ -251,7 +258,8 @@ public class EditorMainFrame extends JPanel {
 			deleteCardButton.setVisible(true);
 
 			tabs.removeAll();
-			Card c = cardEditorModel.getAllCards().get(pokemonJList.getSelectedIndex());
+			String cardID = pokemonJList.getSelectedValue().substring(0, 5);
+			Card c = cardEditorModel.getCard(cardID);
 			cardInfoPanel = new CardInfoPanel(c, cardEditorModel.getPokemonNames());
 			cardInfoPanel.setBounds(250, 10, 360, 455);
 			cardInfoPanel.updateEditorBoard(c);

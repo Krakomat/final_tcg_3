@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -51,6 +52,13 @@ public class CardEditorModel {
 
 	public CardEditorModel() {
 		allCards = new ArrayList<Card>();
+	}
+
+	public Card getCard(String id) {
+		for (Card c : this.allCards)
+			if (c.getCardId().equals(id))
+				return c;
+		return null;
 	}
 
 	public void readFromDatabaseFile(File f) throws IOException {
@@ -434,6 +442,24 @@ public class CardEditorModel {
 		String[] s = new String[allCards.size()];
 		for (int i = 0; i < allCards.size(); i++) {
 			s[i] = allCards.get(i).toString();
+		}
+		return s;
+	}
+
+	/**
+	 * The given filter will be applied here!
+	 * 
+	 * @param edition
+	 * @return
+	 */
+	public String[] getAllCardsAsString(Edition edition) {
+		List<Card> cardList = new ArrayList<>();
+		for(Card c : this.allCards)
+			if(c.getEdition().equals(edition))
+				cardList.add(c);
+		String[] s = new String[cardList.size()];
+		for (int i = 0; i < cardList.size(); i++) {
+			s[i] = cardList.get(i).toString();
 		}
 		return s;
 	}

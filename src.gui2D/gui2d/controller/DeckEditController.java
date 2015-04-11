@@ -375,8 +375,8 @@ public class DeckEditController extends Node implements GUI2DController {
 			this.createDeckFromLibrary(loadedDeck);
 			this.account.setDeck(loadedDeck);
 			Account.saveAccount(this.account);
-		} else
-			JOptionPane.showMessageDialog(null, "Failed on loading the deck - File not found or valid!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (loadedDeck != null && !this.checkDeckForCorrectness(loadedDeck.getCards()))
+			JOptionPane.showMessageDialog(null, "Failed on loading the deck - File is not a valid deck!", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	protected void saveDeckButtonClicked() {
