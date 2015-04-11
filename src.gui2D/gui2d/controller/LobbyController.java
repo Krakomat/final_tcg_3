@@ -1,11 +1,14 @@
 package gui2d.controller;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
 import model.database.Database;
+import model.database.Deck;
+import model.game.GameParameters;
 import network.client.Account;
 import network.client.Player;
 import network.tcp.borders.ClientBorder;
@@ -13,6 +16,7 @@ import network.tcp.borders.ServerMain;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
+import gui2d.geometries.ImageButton2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.messages.TextPanel2D;
 
@@ -20,8 +24,8 @@ import com.jme3.scene.Node;
 
 public class LobbyController extends Node implements GUI2DController {
 
-	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, dummyBotButton, standardBot, treeBot, backButton,
-			deckEditorButton, exitButton;
+	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
+	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextPanel2D ipAdressPanel, usernamePanel, equipedDeckPanel;
@@ -103,57 +107,6 @@ public class LobbyController extends Node implements GUI2DController {
 		multiPlayerConnectButton.setVisible(false);
 		dropInUpdateQueue(multiPlayerConnectButton);
 		this.attachChild(multiPlayerConnectButton);
-
-		dummyBotButton = new TextButton2D("dummyBotButton", "Dummy Bot", buttonWidth, buttonHeight) {
-
-			@Override
-			public void mouseSelect() {
-				dummyBotClicked();
-			}
-
-			@Override
-			public void mouseSelectRightClick() {
-				// nothing to do here
-			}
-		};
-		dummyBotButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
-		dummyBotButton.setVisible(false);
-		dropInUpdateQueue(dummyBotButton);
-		this.attachChild(dummyBotButton);
-
-		standardBot = new TextButton2D("standardBot", "Standard Bot", buttonWidth, buttonHeight) {
-
-			@Override
-			public void mouseSelect() {
-				standardBotClicked();
-			}
-
-			@Override
-			public void mouseSelectRightClick() {
-				// nothing to do here
-			}
-		};
-		standardBot.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
-		standardBot.setVisible(false);
-		dropInUpdateQueue(standardBot);
-		this.attachChild(standardBot);
-
-		treeBot = new TextButton2D("treeBot", "Tree Bot", buttonWidth, buttonHeight) {
-
-			@Override
-			public void mouseSelect() {
-				treeBotClicked();
-			}
-
-			@Override
-			public void mouseSelectRightClick() {
-				// nothing to do here
-			}
-		};
-		treeBot.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.35f + buttonHeight / 2, 0);
-		treeBot.setVisible(false);
-		dropInUpdateQueue(treeBot);
-		this.attachChild(treeBot);
 
 		backButton = new TextButton2D("backButton", "Back", buttonWidth, buttonHeight) {
 
@@ -257,17 +210,89 @@ public class LobbyController extends Node implements GUI2DController {
 		equipedDeckPanel.setVisible(false);
 		dropInUpdateQueue(equipedDeckPanel);
 		this.attachChild(equipedDeckPanel);
+
+		float botButtonWidth = screenWidth * 0.1f;
+		float botButtonHeight = botButtonWidth * 1.426f;
+
+		overgrowthButton = new ImageButton2D("overgrowthButton", Database.getAssetKey("overgrowth"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Overgrowth.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		overgrowthButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 2, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		overgrowthButton.setVisible(false);
+		dropInUpdateQueue(overgrowthButton);
+		this.attachChild(overgrowthButton);
+
+		zappButton = new ImageButton2D("zappButton", Database.getAssetKey("zapp!"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Zap!.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		zappButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 1, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		zappButton.setVisible(false);
+		dropInUpdateQueue(zappButton);
+		this.attachChild(zappButton);
+
+		brushfireButton = new ImageButton2D("brushfireButton", Database.getAssetKey("brushfire"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Brushfire.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		brushfireButton.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		brushfireButton.setVisible(false);
+		dropInUpdateQueue(brushfireButton);
+		this.attachChild(brushfireButton);
+
+		blackoutButton = new ImageButton2D("blackoutButton", Database.getAssetKey("blackout"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Blackout.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		blackoutButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		blackoutButton.setVisible(false);
+		dropInUpdateQueue(blackoutButton);
+		this.attachChild(blackoutButton);
 	}
 
-	protected void treeBotClicked() {
+	protected void botClicked(String deckName) {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 		GUI2D.getInstance().getPlayer().createGame();
 
-		// Create standard bot and connect him to the server that was created in createGame:
+		// Create tree bot and connect him to the server that was created in createGame:
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				Player bot = Database.getBot("TreeBot");
+				bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.DECK_PATH + deckName)));
 				ClientBorder botBorder = new ClientBorder(bot);
 				bot.setServer(botBorder);
 
@@ -323,7 +348,23 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void singlePlayerClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.BOT_CHOOSER);
+		this.singlePlayerButton.setVisible(false);
+		this.dropInUpdateQueue(singlePlayerButton);
+		this.multiPlayerButton.setVisible(false);
+		this.dropInUpdateQueue(multiPlayerButton);
+		this.deckEditorButton.setVisible(false);
+		this.dropInUpdateQueue(deckEditorButton);
+
+		this.backButton.setVisible(true);
+		this.dropInUpdateQueue(backButton);
+		this.overgrowthButton.setVisible(true);
+		this.dropInUpdateQueue(overgrowthButton);
+		this.zappButton.setVisible(true);
+		this.dropInUpdateQueue(zappButton);
+		this.brushfireButton.setVisible(true);
+		this.dropInUpdateQueue(brushfireButton);
+		this.blackoutButton.setVisible(true);
+		this.dropInUpdateQueue(blackoutButton);
 	}
 
 	protected void multiPlayerCreateClicked() {
@@ -397,12 +438,6 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(multiPlayerCreateButton);
 		this.multiPlayerConnectButton.setVisible(false);
 		this.dropInUpdateQueue(multiPlayerConnectButton);
-		this.dummyBotButton.setVisible(false);
-		this.dropInUpdateQueue(dummyBotButton);
-		this.standardBot.setVisible(false);
-		this.dropInUpdateQueue(standardBot);
-		this.treeBot.setVisible(false);
-		this.dropInUpdateQueue(treeBot);
 		this.backButton.setVisible(false);
 		this.dropInUpdateQueue(backButton);
 		this.exitButton.setVisible(false);
@@ -415,6 +450,14 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(deckEditorButton);
 		this.equipedDeckPanel.setVisible(false);
 		this.dropInUpdateQueue(equipedDeckPanel);
+		this.overgrowthButton.setVisible(false);
+		this.dropInUpdateQueue(overgrowthButton);
+		this.zappButton.setVisible(false);
+		this.dropInUpdateQueue(zappButton);
+		this.brushfireButton.setVisible(false);
+		this.dropInUpdateQueue(brushfireButton);
+		this.blackoutButton.setVisible(false);
+		this.dropInUpdateQueue(blackoutButton);
 	}
 
 	public void setAccount(Account account) {

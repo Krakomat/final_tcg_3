@@ -17,7 +17,6 @@ import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
-import gui2d.controller.BotController;
 import gui2d.controller.CameraController;
 import gui2d.controller.DeckEditController;
 import gui2d.controller.EffectController;
@@ -67,7 +66,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private IngameController ingameController;
 	private LobbyController lobbyController;
 	private DeckEditController deckEditController;
-	private BotController botController;
 	/** True if this gui is running */
 	private boolean isStarted;
 	/** The player to communicate with */
@@ -112,10 +110,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		deckEditController = new DeckEditController();
 		deckEditController.initSceneGraph();
 		guiNode.attachChild(deckEditController);
-
-		botController = new BotController();
-		botController.initSceneGraph();
-		guiNode.attachChild(botController);
 
 		// Make background:
 		Panel2D background = new Panel2D("Background", Database.getAssetKey("background"), this.resolution.getKey(), this.resolution.getValue()) {
@@ -662,9 +656,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
 			this.currentActiveController = this.lobbyController;
 			break;
-		case BOT_CHOOSER:
-			this.currentActiveController = this.botController;
-			this.musicController.switchMusic(MusicType.BOT_CHOOSE_MUSIC);
 		default:
 			break;
 		}
