@@ -25,7 +25,8 @@ import com.jme3.scene.Node;
 public class LobbyController extends Node implements GUI2DController {
 
 	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
-	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton;
+	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton;
+	private TextPanel2D chooseBotDeckPanel;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextPanel2D ipAdressPanel, usernamePanel, equipedDeckPanel;
@@ -39,6 +40,23 @@ public class LobbyController extends Node implements GUI2DController {
 	public void initSceneGraph() {
 		float buttonWidth = screenWidth * 0.15f;
 		float buttonHeight = buttonWidth / 4;
+
+		chooseBotDeckPanel = new TextPanel2D("chooseBotDeckPanel", "Choose a deck for your enemy:", screenWidth * 0.35f, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				singlePlayerClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		chooseBotDeckPanel.setLocalTranslation(screenWidth * 0.5f - (screenWidth * 0.35f) / 2, screenHeight * 0.75f + buttonHeight / 2, 0);
+		chooseBotDeckPanel.setVisible(false);
+		dropInUpdateQueue(chooseBotDeckPanel);
+		this.attachChild(chooseBotDeckPanel);
 
 		singlePlayerButton = new TextButton2D("singlePlayerButton", "Singleplayer", buttonWidth, buttonHeight) {
 
@@ -226,7 +244,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		overgrowthButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 2, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		overgrowthButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 2.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
 		overgrowthButton.setVisible(false);
 		dropInUpdateQueue(overgrowthButton);
 		this.attachChild(overgrowthButton);
@@ -243,7 +261,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		zappButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 1, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		zappButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 1.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
 		zappButton.setVisible(false);
 		dropInUpdateQueue(zappButton);
 		this.attachChild(zappButton);
@@ -260,7 +278,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		brushfireButton.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		brushfireButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 0.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
 		brushfireButton.setVisible(false);
 		dropInUpdateQueue(brushfireButton);
 		this.attachChild(brushfireButton);
@@ -277,10 +295,27 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		blackoutButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		blackoutButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 0.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
 		blackoutButton.setVisible(false);
 		dropInUpdateQueue(blackoutButton);
 		this.attachChild(blackoutButton);
+
+		lightningBugButton = new ImageButton2D("lightningBugButton", Database.getAssetKey("lightningBug"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Lightning Bug.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		lightningBugButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 1.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		lightningBugButton.setVisible(false);
+		dropInUpdateQueue(lightningBugButton);
+		this.attachChild(lightningBugButton);
 	}
 
 	protected void botClicked(String deckName) {
@@ -365,6 +400,10 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(brushfireButton);
 		this.blackoutButton.setVisible(true);
 		this.dropInUpdateQueue(blackoutButton);
+		this.lightningBugButton.setVisible(true);
+		this.dropInUpdateQueue(lightningBugButton);
+		this.chooseBotDeckPanel.setVisible(true);
+		this.dropInUpdateQueue(chooseBotDeckPanel);
 	}
 
 	protected void multiPlayerCreateClicked() {
@@ -458,6 +497,10 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(brushfireButton);
 		this.blackoutButton.setVisible(false);
 		this.dropInUpdateQueue(blackoutButton);
+		this.lightningBugButton.setVisible(false);
+		this.dropInUpdateQueue(lightningBugButton);
+		this.chooseBotDeckPanel.setVisible(false);
+		this.dropInUpdateQueue(chooseBotDeckPanel);
 	}
 
 	public void setAccount(Account account) {

@@ -302,6 +302,10 @@ public class Database {
 		TextureKey blackout = new TextureKey("/decks/blackout.png");
 		blackout.setGenerateMips(false);
 		assetTextures.put("blackout", blackout);
+
+		TextureKey lightningBug = new TextureKey("/decks/lightning_bug.jpg");
+		lightningBug.setGenerateMips(false);
+		assetTextures.put("lightningBug", lightningBug);
 	}
 
 	public static Player getBot(String name) {
