@@ -57,6 +57,13 @@ public abstract class CardScript {
 	}
 
 	/**
+	 * Will be executed immediately before the player that is on turn next, will start his turn.
+	 */
+	public void executePreTurnActions() {
+		// Only override when needed
+	}
+
+	/**
 	 * Is called whenever the card is being moved to a new position.
 	 * 
 	 * @param targetPosition

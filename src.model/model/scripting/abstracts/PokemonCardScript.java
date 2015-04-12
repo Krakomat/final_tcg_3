@@ -390,4 +390,16 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
+
+	/**
+	 * Is called BEFORE the given pokemon is going to receive a condition. Returns true, if the given condition is allowed to be applied or false, if the condition
+	 * will not be applied.
+	 * 
+	 * @param condition
+	 * @return
+	 */
+	public boolean allowIncomingCondition(PokemonCondition condition) {
+		// Override when needed!
+		return true;
+	}
 }

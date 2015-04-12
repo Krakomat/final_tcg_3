@@ -66,7 +66,8 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 
 		// Check if active position was scooped up - choose a new active pokemon in this case:
 		if (targetPosition == ownActive()) {
-			PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(Color.BLUE), 1, true, "Choose a new active pokemon!").get(0);
+			PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(position.getColor()), 1, true, "Choose a new active pokemon!").get(
+					0);
 			Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
 			gameModel.getAttackAction().movePokemonToPosition(newActive, ownActive());

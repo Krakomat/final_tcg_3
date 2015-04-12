@@ -17,6 +17,7 @@ public class Script_00110_MrMime extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
 		this.addAttack("String Shot", att1Cost);
+		this.addPokemonPower("Invisible Wall");
 	}
 
 	@Override
@@ -42,5 +43,11 @@ public class Script_00110_MrMime extends PokemonCardScript {
 			}
 			return damage;
 		}
+	}
+	
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
 	}
 }

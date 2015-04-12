@@ -157,65 +157,67 @@ public class AttackAction {
 	 */
 	public void inflictConditionToPosition(PositionID targetPosition, PokemonCondition condition) {
 		PokemonCard defenderPokemon = (PokemonCard) gameModel.getPosition(targetPosition).getTopCard();
-		if (!defenderPokemon.hasCondition(condition) && !defenderPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
-			switch (condition) {
-			case ASLEEP:
-				defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
-				defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
-				defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
-				break;
-			case BLIND:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case CONFUSED:
-				defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
-				defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
-				defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
-				break;
-			case DAMAGEINCREASE10:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 1));
-				break;
-			case DESTINY:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case HARDEN30:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case HARDEN20:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case INVULNERABLE:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case KNOCKOUT:
-				defenderPokemon.getConditions().clear(); // Remove all other conditions
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
-				break;
-			case NO_DAMAGE:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case PARALYZED:
-				defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
-				defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
-				defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
-				break;
-			case POISONED:
-				if (defenderPokemon.hasCondition(PokemonCondition.POISONED))
-					this.cureCondition(targetPosition, PokemonCondition.POISONED);
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
-				break;
-			case TOXIC:
-				defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
-				break;
-			}
-		}
-
-		// Call pokemonGotCondition() on defending pokemon script:
 		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
-		script.pokemonGotCondition(gameModel.getTurnNumber(), condition);
+		if (script.allowIncomingCondition(condition)) {
+			if (!defenderPokemon.hasCondition(condition) && !defenderPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
+				switch (condition) {
+				case ASLEEP:
+					defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
+					defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
+					defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
+				case BLIND:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case CONFUSED:
+					defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
+					defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
+					defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
+				case DAMAGEINCREASE10:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 1));
+					break;
+				case DESTINY:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case HARDEN30:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case HARDEN20:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case INVULNERABLE:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case KNOCKOUT:
+					defenderPokemon.getConditions().clear(); // Remove all other conditions
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
+				case NO_DAMAGE:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case PARALYZED:
+					defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
+					defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
+					defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case POISONED:
+					if (defenderPokemon.hasCondition(PokemonCondition.POISONED))
+						this.cureCondition(targetPosition, PokemonCondition.POISONED);
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
+				case TOXIC:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
+				}
+			}
+
+			// Call pokemonGotCondition() on defending pokemon script:
+			script.pokemonGotCondition(gameModel.getTurnNumber(), condition);
+		}
 	}
 
 	/**

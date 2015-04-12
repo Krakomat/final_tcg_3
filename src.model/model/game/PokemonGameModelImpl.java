@@ -604,6 +604,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 			this.sendGameModelToPlayers(this.getPlayerList(), "");
 		} else
 			this.playerLoses(playerOnTurn);
+		
+		// Call executePreTurnActions() for all card scripts in the game model:
+		for (Integer gameID : this.cardMap.keySet()) {
+			Card card = this.cardMap.get(gameID);
+			card.getCardScript().executePreTurnActions();
+		}
 	}
 
 	/**

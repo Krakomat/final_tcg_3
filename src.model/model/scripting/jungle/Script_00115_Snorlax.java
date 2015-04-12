@@ -17,8 +17,11 @@ public class Script_00115_Snorlax extends PokemonCardScript {
 	public Script_00115_Snorlax(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("String Shot", att1Cost);
+		att1Cost.add(Element.COLORLESS);
+		att1Cost.add(Element.COLORLESS);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Bodyslam", att1Cost);
+		this.addPokemonPower("Thick Skin");
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class Script_00115_Snorlax extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 
 		// Flip coin to check if defending pokemon is paralyzed:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
@@ -38,5 +41,22 @@ public class Script_00115_Snorlax extends PokemonCardScript {
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
 			gameModel.sendGameModelToAllPlayers("");
 		}
+	}
+
+	public boolean allowIncomingCondition(PokemonCondition condition) {
+		PokemonCard pCard = (PokemonCard) this.card;
+		if (!pCard.hasCondition(PokemonCondition.ASLEEP) && !pCard.hasCondition(PokemonCondition.CONFUSED) && !pCard.hasCondition(PokemonCondition.PARALYZED)) {
+			if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED
+					|| condition == PokemonCondition.POISONED || condition == PokemonCondition.TOXIC)
+				gameModel.sendTextMessageToAllPlayers("Snorlax thick skin negates the condition effect!", "");
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
 	}
 }
