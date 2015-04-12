@@ -15,6 +15,7 @@ import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
 import model.enums.CardType;
+import model.enums.Edition;
 import model.enums.Element;
 import model.game.GameParameters;
 import network.client.Account;
@@ -32,6 +33,7 @@ public class DeckEditController extends Node implements GUI2DController {
 
 	private TextButton2D backButton, pageLeftButton, pageRightButton, saveDeckButton, loadDeckButton, clearDeckButton;
 	private List<Image2D> filterButtons;
+	private List<Image2D> editionFilterButtons;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private int currentStartIndex;
@@ -153,6 +155,38 @@ public class DeckEditController extends Node implements GUI2DController {
 			this.attachChild(filterButton);
 			this.filterButtons.add(filterButton);
 		}
+
+		editionFilterButtons = new ArrayList<>();
+		for (int i = 0; i < 2; i++) {
+			String texture = "";
+			switch (i) {
+			case 0:
+				texture = Edition.BASE.toString();
+				break;
+			case 1:
+				texture = Edition.JUNGLE.toString();
+				break;
+			}
+			final int index = i;
+			Image2D filterButton = new Image2D("editionFilterButtons" + i, Database.getAssetKey(texture), elementButtonWidth, elementButtonWidth) {
+
+				@Override
+				public void mouseSelect() {
+					elementFilterButtonClicked(index);
+				}
+
+				@Override
+				public void mouseSelectRightClick() {
+					// nothing to do here
+				}
+			};
+			filterButton.setLocalTranslation(screenWidth * 0.01f, screenHeight * 0.82f - elementButtonWidth * i, 0);
+			filterButton.setVisible(false);
+			dropInUpdateQueue(filterButton);
+			this.attachChild(filterButton);
+			this.editionFilterButtons.add(filterButton);
+		}
+
 		saveDeckButton = new TextButton2D("saveDeckButton", "Save", buttonWidth / 2, buttonHeight / 2) {
 
 			@Override
@@ -279,6 +313,13 @@ public class DeckEditController extends Node implements GUI2DController {
 		}
 	}
 
+	protected void elementFilterButtonClicked(int index) {
+		Image2D button = this.editionFilterButtons.get(index);
+		button.setSelected(!button.isSelected());
+		dropInUpdateQueue(button);
+		filterLibrary();
+	}
+
 	protected void filterButtonClicked(int index) {
 		Image2D button = this.filterButtons.get(index);
 		button.setSelected(!button.isSelected());
@@ -300,12 +341,19 @@ public class DeckEditController extends Node implements GUI2DController {
 				selectedButtonIndices.add(i);
 		}
 
+		for (int i = 0; i < 2; i++) {
+			Image2D button = this.editionFilterButtons.get(i);
+			if (button.isSelected())
+				selectedButtonIndices.add(i + 9);
+		}
+
 		if (selectedButtonIndices.isEmpty())
 			for (int i = 0; i < this.fullLibraryCards.size(); i++)
 				this.shownLibraryCards.add(this.fullLibraryCards.get(i));
 		else {
 			// Collect elements:
 			List<Element> selectedButtonElements = new ArrayList<>();
+			List<Edition> selectedButtonEditions = new ArrayList<>();
 			boolean trainerChecked = false;
 			boolean energyChecked = false;
 			for (int i = 0; i < selectedButtonIndices.size(); i++) {
@@ -338,6 +386,12 @@ public class DeckEditController extends Node implements GUI2DController {
 				case 8:
 					energyChecked = true;
 					break;
+				case 9:
+					selectedButtonEditions.add(Edition.BASE);
+					break;
+				case 10:
+					selectedButtonEditions.add(Edition.JUNGLE);
+					break;
 				}
 			}
 
@@ -346,11 +400,14 @@ public class DeckEditController extends Node implements GUI2DController {
 				Card c = Database.createCard(id);
 				if (c instanceof PokemonCard) {
 					PokemonCard p = (PokemonCard) c;
-					if (selectedButtonElements.contains(p.getElement()))
+					if (((selectedButtonElements.isEmpty() && !trainerChecked && !energyChecked) || selectedButtonElements.contains(p.getElement()))
+							&& (selectedButtonEditions.contains(c.getEdition()) || selectedButtonEditions.isEmpty()))
 						this.shownLibraryCards.add(id);
-				} else if (c instanceof TrainerCard && trainerChecked)
+				} else if (c instanceof TrainerCard && (trainerChecked || (selectedButtonElements.isEmpty() && !energyChecked))
+						&& (selectedButtonEditions.contains(c.getEdition()) || selectedButtonEditions.isEmpty()))
 					this.shownLibraryCards.add(id);
-				else if (c instanceof EnergyCard && energyChecked)
+				else if (c instanceof EnergyCard && (energyChecked || (selectedButtonElements.isEmpty() && !trainerChecked))
+						&& (selectedButtonEditions.contains(c.getEdition()) || selectedButtonEditions.isEmpty()))
 					this.shownLibraryCards.add(id);
 			}
 		}
@@ -702,6 +759,20 @@ public class DeckEditController extends Node implements GUI2DController {
 			}).start();
 			dropInUpdateQueue(this.filterButtons.get(i));
 		}
+
+		for (int i = 0; i < this.editionFilterButtons.size(); i++) {
+			Image2D button = this.editionFilterButtons.get(i);
+			button.setVisible(true);
+			this.editionFilterButtons.get(i).setSelected(false);
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					GUI2D.getInstance().getIOController().addShootable(button);
+				}
+			}).start();
+			dropInUpdateQueue(this.editionFilterButtons.get(i));
+		}
+
 		this.filterLibrary(); // updateLibraryImages(); updateButtons();
 	}
 
@@ -761,6 +832,18 @@ public class DeckEditController extends Node implements GUI2DController {
 				}
 			}).start();
 			dropInUpdateQueue(this.filterButtons.get(i));
+		}
+
+		for (int i = 0; i < this.editionFilterButtons.size(); i++) {
+			Image2D button = this.editionFilterButtons.get(i);
+			button.setVisible(false);
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					GUI2D.getInstance().getIOController().removeShootable(button);
+				}
+			}).start();
+			dropInUpdateQueue(this.editionFilterButtons.get(i));
 		}
 	}
 

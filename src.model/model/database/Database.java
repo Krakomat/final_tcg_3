@@ -306,6 +306,14 @@ public class Database {
 		TextureKey lightningBug = new TextureKey("/decks/lightning_bug.jpg");
 		lightningBug.setGenerateMips(false);
 		assetTextures.put("lightningBug", lightningBug);
+
+		TextureKey baseEdition = new TextureKey("/tilesets/buttons/baseLogo.png");
+		baseEdition.setGenerateMips(false);
+		assetTextures.put(Edition.BASE.toString(), baseEdition);
+
+		TextureKey jungleEdition = new TextureKey("/tilesets/buttons/jungleLogo.png");
+		jungleEdition.setGenerateMips(false);
+		assetTextures.put(Edition.JUNGLE.toString(), jungleEdition);
 	}
 
 	public static Player getBot(String name) {

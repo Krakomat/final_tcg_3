@@ -12,7 +12,6 @@ CardEditor:
 		
 DeckEditor:
 	- Make filters glow on mouseOver
-	- Introduce filters for editions
 
 AI:
 	- Standard dummy bot that can play cards

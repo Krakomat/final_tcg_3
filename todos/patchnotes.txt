@@ -1,7 +1,8 @@
-Patch 1.04
+Patch 2.0
 	New Features
 		- New Bot: TreeBot[alpha]
 		- Bot decks can now be chosen
+		- Filter for editions in deckeditor
 		
 	Music & Sounds
 		- Fixed a bug, where sound effects do not close properly
