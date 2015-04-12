@@ -7,6 +7,54 @@ import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
 import model.scripting.baseEdition.*;
+import model.scripting.jungle.Script_00105_Clefable;
+import model.scripting.jungle.Script_00106_Electrode;
+import model.scripting.jungle.Script_00107_Flareon;
+import model.scripting.jungle.Script_00108_Jolteon;
+import model.scripting.jungle.Script_00109_Kangaskhan;
+import model.scripting.jungle.Script_00110_MrMime;
+import model.scripting.jungle.Script_00111_Nidoqueen;
+import model.scripting.jungle.Script_00112_Pidgeot;
+import model.scripting.jungle.Script_00113_Pinsir;
+import model.scripting.jungle.Script_00114_Scyther;
+import model.scripting.jungle.Script_00115_Snorlax;
+import model.scripting.jungle.Script_00116_Vaporeon;
+import model.scripting.jungle.Script_00117_Venomoth;
+import model.scripting.jungle.Script_00118_Victreebel;
+import model.scripting.jungle.Script_00119_Vileplume;
+import model.scripting.jungle.Script_00120_Wigglytuff;
+import model.scripting.jungle.Script_00121_Butterfree;
+import model.scripting.jungle.Script_00122_Dodrio;
+import model.scripting.jungle.Script_00123_Exeggutor;
+import model.scripting.jungle.Script_00124_Fearow;
+import model.scripting.jungle.Script_00125_Gloom;
+import model.scripting.jungle.Script_00126_Lickitung;
+import model.scripting.jungle.Script_00127_Marowack;
+import model.scripting.jungle.Script_00128_Nidorina;
+import model.scripting.jungle.Script_00129_Parasect;
+import model.scripting.jungle.Script_00130_Persian;
+import model.scripting.jungle.Script_00131_Primeape;
+import model.scripting.jungle.Script_00132_Rapidash;
+import model.scripting.jungle.Script_00133_Rhydon;
+import model.scripting.jungle.Script_00134_Seaking;
+import model.scripting.jungle.Script_00135_Tauros;
+import model.scripting.jungle.Script_00136_Weepinbell;
+import model.scripting.jungle.Script_00137_Bellsprout;
+import model.scripting.jungle.Script_00138_Cubone;
+import model.scripting.jungle.Script_00139_Eevee;
+import model.scripting.jungle.Script_00140_Exeggcute;
+import model.scripting.jungle.Script_00141_Goldeen;
+import model.scripting.jungle.Script_00142_Jigglypuff;
+import model.scripting.jungle.Script_00143_Mankey;
+import model.scripting.jungle.Script_00144_Meowth;
+import model.scripting.jungle.Script_00145_NidoranF;
+import model.scripting.jungle.Script_00146_Oddish;
+import model.scripting.jungle.Script_00147_Paras;
+import model.scripting.jungle.Script_00148_Pikachu;
+import model.scripting.jungle.Script_00149_Rhyhorn;
+import model.scripting.jungle.Script_00150_Spearow;
+import model.scripting.jungle.Script_00151_Venonat;
+import model.scripting.jungle.Script_00152_Pokeball;
 
 /**
  * Factory, which generates the {@link CardScript} for a specific card.
@@ -254,6 +302,102 @@ public class CardScriptFactory {
 			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only used locally for Piepi doll
 		case "00104":
 			return new Script_00104_LektrobalToken((EnergyCard) card, gameModel); // Only used locally for Lektrobal token
+		case "00105":
+			return new Script_00105_Clefable((PokemonCard) card, gameModel);
+		case "00106":
+			return new Script_00106_Electrode((PokemonCard) card, gameModel);
+		case "00107":
+			return new Script_00107_Flareon((PokemonCard) card, gameModel);
+		case "00108":
+			return new Script_00108_Jolteon((PokemonCard) card, gameModel);
+		case "00109":
+			return new Script_00109_Kangaskhan((PokemonCard) card, gameModel);
+		case "00110":
+			return new Script_00110_MrMime((PokemonCard) card, gameModel);
+		case "00111":
+			return new Script_00111_Nidoqueen((PokemonCard) card, gameModel);
+		case "00112":
+			return new Script_00112_Pidgeot((PokemonCard) card, gameModel);
+		case "00113":
+			return new Script_00113_Pinsir((PokemonCard) card, gameModel);
+		case "00114":
+			return new Script_00114_Scyther((PokemonCard) card, gameModel);
+		case "00115":
+			return new Script_00115_Snorlax((PokemonCard) card, gameModel);
+		case "00116":
+			return new Script_00116_Vaporeon((PokemonCard) card, gameModel);
+		case "00117":
+			return new Script_00117_Venomoth((PokemonCard) card, gameModel);
+		case "00118":
+			return new Script_00118_Victreebel((PokemonCard) card, gameModel);
+		case "00119":
+			return new Script_00119_Vileplume((PokemonCard) card, gameModel);
+		case "00120":
+			return new Script_00120_Wigglytuff((PokemonCard) card, gameModel);
+		case "00121":
+			return new Script_00121_Butterfree((PokemonCard) card, gameModel);
+		case "00122":
+			return new Script_00122_Dodrio((PokemonCard) card, gameModel);
+		case "00123":
+			return new Script_00123_Exeggutor((PokemonCard) card, gameModel);
+		case "00124":
+			return new Script_00124_Fearow((PokemonCard) card, gameModel);
+		case "00125":
+			return new Script_00125_Gloom((PokemonCard) card, gameModel);
+		case "00126":
+			return new Script_00126_Lickitung((PokemonCard) card, gameModel);
+		case "00127":
+			return new Script_00127_Marowack((PokemonCard) card, gameModel);
+		case "00128":
+			return new Script_00128_Nidorina((PokemonCard) card, gameModel);
+		case "00129":
+			return new Script_00129_Parasect((PokemonCard) card, gameModel);
+		case "00130":
+			return new Script_00130_Persian((PokemonCard) card, gameModel);
+		case "00131":
+			return new Script_00131_Primeape((PokemonCard) card, gameModel);
+		case "00132":
+			return new Script_00132_Rapidash((PokemonCard) card, gameModel);
+		case "00133":
+			return new Script_00133_Rhydon((PokemonCard) card, gameModel);
+		case "00134":
+			return new Script_00134_Seaking((PokemonCard) card, gameModel);
+		case "00135":
+			return new Script_00135_Tauros((PokemonCard) card, gameModel);
+		case "00136":
+			return new Script_00136_Weepinbell((PokemonCard) card, gameModel);
+		case "00137":
+			return new Script_00137_Bellsprout((PokemonCard) card, gameModel);
+		case "00138":
+			return new Script_00138_Cubone((PokemonCard) card, gameModel);
+		case "00139":
+			return new Script_00139_Eevee((PokemonCard) card, gameModel);
+		case "00140":
+			return new Script_00140_Exeggcute((PokemonCard) card, gameModel);
+		case "00141":
+			return new Script_00141_Goldeen((PokemonCard) card, gameModel);
+		case "00142":
+			return new Script_00142_Jigglypuff((PokemonCard) card, gameModel);
+		case "00143":
+			return new Script_00143_Mankey((PokemonCard) card, gameModel);
+		case "00144":
+			return new Script_00144_Meowth((PokemonCard) card, gameModel);
+		case "00145":
+			return new Script_00145_NidoranF((PokemonCard) card, gameModel);
+		case "00146":
+			return new Script_00146_Oddish((PokemonCard) card, gameModel);
+		case "00147":
+			return new Script_00147_Paras((PokemonCard) card, gameModel);
+		case "00148":
+			return new Script_00148_Pikachu((PokemonCard) card, gameModel);
+		case "00149":
+			return new Script_00149_Rhyhorn((PokemonCard) card, gameModel);
+		case "00150":
+			return new Script_00150_Spearow((PokemonCard) card, gameModel);
+		case "00151":
+			return new Script_00151_Venonat((PokemonCard) card, gameModel);
+		case "00152":
+			return new Script_00152_Pokeball((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
