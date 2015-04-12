@@ -122,6 +122,10 @@ public class AttackAction {
 		if (damageAmount < 0)
 			damageAmount = 0;
 
+		// Test if pokemon is able to modify the incoming damage:
+		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
+		damageAmount = script.modifyIncomingDamage(damageAmount);
+
 		// Damage Pokemon:
 		defenderPokemon.setDamageMarks(defenderPokemon.getDamageMarks() + damageAmount);
 
@@ -138,7 +142,6 @@ public class AttackAction {
 		}
 
 		// Call pokemonIsDamaged() on defending pokemon script:
-		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
 		script.pokemonIsDamaged(gameModel.getTurnNumber(), damageAmount, attackerPositionID);
 
 		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");

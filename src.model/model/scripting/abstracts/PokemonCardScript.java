@@ -368,6 +368,16 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
+	 * Is called when the owner pokemon of this script is going to receive the given amount of damage. Some pokemons powers may be able to reduce incoming damage.
+	 * 
+	 * @param damage
+	 */
+	public int modifyIncomingDamage(int damage) {
+		// Override when needed!
+		return damage;
+	}
+
+	/**
 	 * Is called when the owner pokemon of this script got a condition.
 	 * 
 	 * @param turnNumberm
