@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -18,25 +17,37 @@ public class Script_00125_Gloom extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("String Shot", att1Cost);
+		this.addAttack("Poisonpowder", att1Cost);
+
+		List<Element> att2Cost = new ArrayList<>();
+		att2Cost.add(Element.GRASS);
+		att2Cost.add(Element.GRASS);
+		this.addAttack("Foul Odor", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		if (attackName.equals("Poisonpowder"))
+			this.poisonpowder();
+		else
+			this.foulOdor();
+	}
+
+	private void poisonpowder() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
-		}
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
+		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
+		gameModel.sendGameModelToAllPlayers("");
+	}
+
+	private void foulOdor() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
+		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
 	}
 }

@@ -161,7 +161,26 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 
-		return pos.getEnergy().size() >= pCard.getRetreatCosts().size();
+		int costs = pCard.getRetreatCosts().size();
+		for (Card c : gameModel.getAllCards()) {
+			if (c instanceof PokemonCard)
+				costs = ((PokemonCardScript) c.getCardScript()).modifyRetreatCosts(costs, this.getCardOwner().getColor());
+		}
+
+		return pos.getEnergy().size() >= costs;
+	}
+
+	/**
+	 * Is called whenever it is checked if a pokemon may retreat, as well before the retreat process is started. The user may modify the retreat costs(see Dodrios
+	 * pokemon power).
+	 * 
+	 * @param retreatCosts
+	 * @param color
+	 * @return
+	 */
+	public int modifyRetreatCosts(int retreatCosts, Color color) {
+		// Override this, when needed
+		return retreatCosts;
 	}
 
 	/**
@@ -196,8 +215,14 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		else
 			throw new IllegalArgumentException("Error: Wrong Color for the position of the card!");
 
-		// Pay costs:
-		if (pCard.getRetreatCosts().size() > 0)
+		// Calculate & Pay costs:
+		int costs = pCard.getRetreatCosts().size();
+		// Call modifyRetreatCosts() on all pokemon cards in the game
+		for (Card c : gameModel.getAllCards()) {
+			if (c instanceof PokemonCard)
+				costs = ((PokemonCardScript) c.getCardScript()).modifyRetreatCosts(costs, this.getCardOwner().getColor());
+		}
+		if (costs > 0)
 			gameModel.getAttackAction().playerPaysEnergy(player, pCard.getRetreatCosts(),
 					player.getColor() == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
 

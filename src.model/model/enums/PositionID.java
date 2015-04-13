@@ -45,6 +45,41 @@ public enum PositionID {
 	}
 
 	/**
+	 * Returns true if the given position is a bench position.
+	 * 
+	 * @param posID
+	 * @return
+	 */
+	public static boolean isBenchPosition(PositionID posID) {
+		switch (posID) {
+		case BLUE_BENCH_1:
+			return true;
+		case BLUE_BENCH_2:
+			return true;
+		case BLUE_BENCH_3:
+			return true;
+		case BLUE_BENCH_4:
+			return true;
+		case BLUE_BENCH_5:
+			return true;
+		case BLUE_DECK:
+			return true;
+		case RED_BENCH_1:
+			return true;
+		case RED_BENCH_2:
+			return true;
+		case RED_BENCH_3:
+			return true;
+		case RED_BENCH_4:
+			return true;
+		case RED_BENCH_5:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	/**
 	 * Returns the active position for the given color.
 	 * 
 	 * @param color
