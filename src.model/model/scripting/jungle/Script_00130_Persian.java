@@ -59,7 +59,7 @@ public class Script_00130_Persian extends PokemonCardScript {
 	public int modifyIncomingDamage(int damage, Card attacker) {
 		if (attacker != null) {
 			if (attacker.getGameID() == this.defenderGameID && PositionID.isActivePosition(attacker.getCurrentPosition().getPositionID()))
-				return damage - 10;
+				return damage < 10 ? 0 : damage - 10;
 		}
 		return damage;
 	}
