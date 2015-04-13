@@ -3,6 +3,7 @@ package model.scripting.jungle;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
 import model.enums.PokemonCondition;
@@ -32,7 +33,7 @@ public class Script_00110_MrMime extends PokemonCardScript {
 	}
 
 	@Override
-	public int modifyIncomingDamage(int damage) {
+	public int modifyIncomingDamage(int damage, Card attacker) {
 		PokemonCard pCard = (PokemonCard) this.card;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return damage;

@@ -15,6 +15,7 @@ Patch 2.0
 	AI
 		- Fixed a bug, where bots payed the wrong amount of energy
 		- Removed the dummy and standard bot
+		- Pokemon-Händler can now be used by the ai (but in fact the ai won't use it :P)
 		
 Patch 1.03
 	New Features

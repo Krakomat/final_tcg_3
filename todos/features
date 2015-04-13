@@ -17,6 +17,7 @@ AI:
 	- Standard dummy bot that can play cards
 		- Implement intelligent use of retreat/attack
 	- (HARD!) Enhanced bot that knows what he's doing
+	- Add parameter for the rest cards in the bots deck (the bot knows his own cards)
 	
 New Cards:
 	- Jungle

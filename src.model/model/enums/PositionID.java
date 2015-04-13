@@ -45,6 +45,23 @@ public enum PositionID {
 	}
 
 	/**
+	 * Returns true if the given position is an active position.
+	 * 
+	 * @param posID
+	 * @return
+	 */
+	public static boolean isActivePosition(PositionID posID) {
+		switch (posID) {
+		case BLUE_ACTIVEPOKEMON:
+			return true;
+		case RED_ACTIVEPOKEMON:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	/**
 	 * Returns true if the given position is a bench position.
 	 * 
 	 * @param posID

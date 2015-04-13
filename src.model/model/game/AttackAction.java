@@ -124,7 +124,7 @@ public class AttackAction {
 
 		// Test if pokemon is able to modify the incoming damage:
 		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
-		damageAmount = script.modifyIncomingDamage(damageAmount);
+		damageAmount = script.modifyIncomingDamage(damageAmount, attackerPokemon);
 
 		// Damage Pokemon:
 		defenderPokemon.setDamageMarks(defenderPokemon.getDamageMarks() + damageAmount);
