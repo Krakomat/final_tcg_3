@@ -1,5 +1,6 @@
 Patch 2.0
 	New Features
+		- New Card set: JUNGLE
 		- New Bot: TreeBot[alpha]
 		- Bot decks can now be chosen
 		- Filter for editions in deckeditor
