@@ -34,7 +34,6 @@ public class Script_00144_Meowth extends PokemonCardScript {
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " draws a card!", "");
 			gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());
-			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

@@ -24,6 +24,33 @@ public enum Element {
 		return 0;
 	}
 
+	public static int compareElements(Element e1, Element e2) {
+		int v1 = getValue(e1);
+		int v2 = getValue(e2);
+		return v1 < v2 ? -1 : (v1 > v2) ? 1 : 0;
+	}
+
+	private static int getValue(Element e) {
+		switch (e) {
+		case COLORLESS:
+			return 1;
+		case FIRE:
+			return 2;
+		case GRASS:
+			return 3;
+		case LIGHTNING:
+			return 4;
+		case PSYCHIC:
+			return 5;
+		case ROCK:
+			return 6;
+		case WATER:
+			return 7;
+		default:
+			return -1;
+		}
+	}
+
 	public static Element getElement(int value) {
 		if (value == 1)
 			return COLORLESS;

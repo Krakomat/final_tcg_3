@@ -375,7 +375,7 @@ public class AttackAction {
 	}
 
 	/**
-	 * Only sound messages send to clients here!
+	 * Sends gamemodel + sound to clients here!
 	 * 
 	 * @param amount
 	 * @param player
@@ -404,7 +404,7 @@ public class AttackAction {
 				else
 					c.setVisibleForPlayerRed(true);
 				this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
-				gameModel.sendSoundToAllPlayers(Sounds.DRAW);
+				gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
 			} else
 				drawingFinished = true;
 		}
@@ -512,7 +512,7 @@ public class AttackAction {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getGameID() == chosenCard.getGameID()) {
 				list.remove(i);
-				i--;
+				return;
 			}
 		}
 	}

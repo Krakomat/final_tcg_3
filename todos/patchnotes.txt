@@ -1,3 +1,8 @@
+Patch 2.01
+	Game: 
+		- Pokedex: Fixed a bug, when choosing among same card ids
+		- Fixed a bug regarding the sound effect of card draws
+		
 Patch 2.0
 	New Features
 		- New Card set: JUNGLE

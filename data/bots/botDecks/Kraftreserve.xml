@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Kraftreserve">
+    <Cards>
+        <Card ID="00031">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00032">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00043">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00087">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>17</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>11</Size>
+        </Card>
+        <Card ID="00109">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00125">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00128">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00136">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00137">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00145">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00146">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

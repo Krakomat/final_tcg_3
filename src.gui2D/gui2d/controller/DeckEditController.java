@@ -650,6 +650,24 @@ public class DeckEditController extends Node implements GUI2DController {
 		list.sort(new Comparator<String>() {
 			@Override
 			public int compare(String o1, String o2) {
+				Card c1 = Database.createCard(o1);
+				Card c2 = Database.createCard(o2);
+				if (c1 instanceof PokemonCard && !(c2 instanceof PokemonCard))
+					return -1;
+				if (!(c1 instanceof PokemonCard) && c2 instanceof PokemonCard)
+					return 1;
+				if (c1 instanceof TrainerCard && !(c2 instanceof TrainerCard))
+					return -1;
+				if (!(c1 instanceof TrainerCard) && c2 instanceof TrainerCard)
+					return 1;
+				if (c1 instanceof PokemonCard && c2 instanceof PokemonCard) {
+					Element e1 = ((PokemonCard) c1).getElement();
+					Element e2 = ((PokemonCard) c2).getElement();
+					int result = Element.compareElements(e1, e2);
+					if (result != 0)
+						return result;
+				}
+
 				int i = Integer.parseInt(o1);
 				int j = Integer.parseInt(o2);
 				return i < j ? -1 : (i > j) ? 1 : 0;
