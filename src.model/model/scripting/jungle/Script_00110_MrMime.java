@@ -16,8 +16,9 @@ public class Script_00110_MrMime extends PokemonCardScript {
 	public Script_00110_MrMime(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("String Shot", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Meditade", att1Cost);
 		this.addPokemonPower("Invisible Wall");
 	}
 

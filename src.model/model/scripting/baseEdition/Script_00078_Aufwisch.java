@@ -55,8 +55,9 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 				playerDiscard = PositionID.RED_DISCARDPILE;
 			}
 			gameModel.getAttackAction().moveCard(targetPosition, playerHand, basicPokemon.getGameID(), false);
-			for (int i = 0; i < cards.size(); i++)
-				gameModel.getAttackAction().moveCard(targetPosition, playerDiscard, cards.get(i).getGameID(), true);
+			int size = cards.size();
+			for (int i = 0; i < size; i++)
+				gameModel.getAttackAction().moveCard(targetPosition, playerDiscard, cards.get(0).getGameID(), true);
 		} else
 			System.err.println("No Basic pokemon on position in method scoopUpPosition");
 		gameModel.sendGameModelToAllPlayers("");
