@@ -86,7 +86,7 @@ public class AttackAction {
 	 *            amount of damage
 	 * @param applyWeaknessResistance
 	 *            false if weakness/resistance of the defending pokemon should NOT influence the resulting damage.
-	 * @return
+	 * @return the damage that was actually applied to the defending pokemon
 	 */
 	public int inflictDamageToPosition(Element attackElement, PositionID attackerPositionID, PositionID targetPosition, int damageAmount,
 			boolean applyWeaknessResistance) {

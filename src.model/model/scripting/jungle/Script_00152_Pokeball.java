@@ -1,14 +1,15 @@
 package model.scripting.jungle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import network.client.Player;
 import model.database.Card;
-import model.database.PokemonCard;
 import model.database.TrainerCard;
+import model.enums.Coin;
+import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
 
@@ -20,36 +21,45 @@ public class Script_00152_Pokeball extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played, if there is a pokemon with a negative condition in the players arena:
-		if (this.getInfectedPositions().size() > 0)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
 		Player player = this.getCardOwner();
+		gameModel.sendTextMessageToAllPlayers("If heads then " + this.card.getName() + "'s effects will be executed!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+		if (c == Coin.HEADS) {
+			// Choose a card from the deck:
+			List<Card> cards = gameModel.getPosition(ownDeck()).getPokemonCards();
+			Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
+			// Message clients:
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
+			// Move card:
+			gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
 
-		PositionID chosenPosition = player.playerChoosesPositions(getInfectedPositions(), 1, true, "Choose a pokemon to heal!").get(0);
-		Card targetPokemon = gameModel.getPosition(chosenPosition).getTopCard();
+			// Shuffle deck:
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
+			gameModel.getAttackAction().shufflePosition(ownDeck());
 
-		// Execute heal(messages to clients send there):
-		gameModel.getAttackAction().cureAllConditionsOnPosition(chosenPosition);
-		gameModel.sendCardMessageToAllPlayers("All conditions on " + targetPokemon.getName() + " are cured", targetPokemon, "");
-
-		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 
-	private List<PositionID> getInfectedPositions() {
+	private PositionID ownHand() {
 		Player player = this.getCardOwner();
-		List<PositionID> arenaPositions = gameModel.getFullArenaPositions(player.getColor());
-		List<PositionID> damagedPositions = new ArrayList<>();
-		for (PositionID posID : arenaPositions) {
-			PokemonCard topCard = (PokemonCard) gameModel.getPosition(posID).getTopCard();
-			if (topCard.hasNegativeCondition())
-				damagedPositions.add(posID);
-		}
-		return damagedPositions;
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_HAND;
+		else
+			return PositionID.RED_HAND;
+	}
+
+	private PositionID ownDeck() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_DECK;
+		else
+			return PositionID.RED_DECK;
 	}
 }
