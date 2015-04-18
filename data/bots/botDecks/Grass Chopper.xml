@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Grass Chopper">
+    <Cards>
+        <Card ID="00005">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00034">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00052">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00055">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00062">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00079">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00084">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00097">
+            <Size>14</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>14</Size>
+        </Card>
+        <Card ID="00128">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00136">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00137">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00145">
+            <Size>3</Size>
+        </Card>
+    </Cards>
+</Deck>

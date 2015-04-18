@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Hot Water">
+    <Cards>
+        <Card ID="00013">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00024">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00036">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00038">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00046">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00048">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00059">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00077">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00098">
+            <Size>13</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>15</Size>
+        </Card>
+        <Card ID="00122">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00141">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00152">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

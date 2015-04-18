@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Wasserschwall">
+    <Cards>
+        <Card ID="00038">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00041">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00052">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00059">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00097">
+            <Size>14</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>14</Size>
+        </Card>
+        <Card ID="00116">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00130">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00133">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00139">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00144">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00149">
+            <Size>3</Size>
+        </Card>
+    </Cards>
+</Deck>

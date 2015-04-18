@@ -25,7 +25,8 @@ import com.jme3.scene.Node;
 public class LobbyController extends Node implements GUI2DController {
 
 	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
-	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton;
+	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton,
+			psychOutButton, wasserschwallButton;
 	private TextPanel2D chooseBotDeckPanel;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -46,7 +47,7 @@ public class LobbyController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				singlePlayerClicked();
-			}	
+			}
 
 			@Override
 			public void mouseSelectRightClick() {
@@ -316,6 +317,91 @@ public class LobbyController extends Node implements GUI2DController {
 		lightningBugButton.setVisible(false);
 		dropInUpdateQueue(lightningBugButton);
 		this.attachChild(lightningBugButton);
+
+		kraftreserveButton = new ImageButton2D("kraftreserveButton", Database.getAssetKey("kraftreserve"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Kraftreserve.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		kraftreserveButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 2.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		kraftreserveButton.setVisible(false);
+		dropInUpdateQueue(kraftreserveButton);
+		this.attachChild(kraftreserveButton);
+
+		hotWaterButton = new ImageButton2D("hotWaterButton", Database.getAssetKey("hotWater"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Hot Water.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		hotWaterButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 1.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		hotWaterButton.setVisible(false);
+		dropInUpdateQueue(hotWaterButton);
+		this.attachChild(hotWaterButton);
+
+		psychOutButton = new ImageButton2D("psychOutButton", Database.getAssetKey("psychOut"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Psych Out.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		psychOutButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 0.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		psychOutButton.setVisible(false);
+		dropInUpdateQueue(psychOutButton);
+		this.attachChild(psychOutButton);
+
+		grassChopperButton = new ImageButton2D("grassChopperButton", Database.getAssetKey("grassChopper"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Grass Chopper.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		grassChopperButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 0.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		grassChopperButton.setVisible(false);
+		dropInUpdateQueue(grassChopperButton);
+		this.attachChild(grassChopperButton);
+
+		wasserschwallButton = new ImageButton2D("wasserschwallButton", Database.getAssetKey("wasserSchwall"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Wasserschwall.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		wasserschwallButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 1.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		wasserschwallButton.setVisible(false);
+		dropInUpdateQueue(wasserschwallButton);
+		this.attachChild(wasserschwallButton);
 	}
 
 	protected void botClicked(String deckName) {
@@ -402,6 +488,16 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(blackoutButton);
 		this.lightningBugButton.setVisible(true);
 		this.dropInUpdateQueue(lightningBugButton);
+		this.kraftreserveButton.setVisible(true);
+		this.dropInUpdateQueue(kraftreserveButton);
+		this.grassChopperButton.setVisible(true);
+		this.dropInUpdateQueue(grassChopperButton);
+		this.hotWaterButton.setVisible(true);
+		this.dropInUpdateQueue(hotWaterButton);
+		this.psychOutButton.setVisible(true);
+		this.dropInUpdateQueue(psychOutButton);
+		this.wasserschwallButton.setVisible(true);
+		this.dropInUpdateQueue(wasserschwallButton);
 		this.chooseBotDeckPanel.setVisible(true);
 		this.dropInUpdateQueue(chooseBotDeckPanel);
 	}
@@ -499,6 +595,16 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(blackoutButton);
 		this.lightningBugButton.setVisible(false);
 		this.dropInUpdateQueue(lightningBugButton);
+		this.kraftreserveButton.setVisible(false);
+		this.dropInUpdateQueue(kraftreserveButton);
+		this.grassChopperButton.setVisible(false);
+		this.dropInUpdateQueue(grassChopperButton);
+		this.hotWaterButton.setVisible(false);
+		this.dropInUpdateQueue(hotWaterButton);
+		this.psychOutButton.setVisible(false);
+		this.dropInUpdateQueue(psychOutButton);
+		this.wasserschwallButton.setVisible(false);
+		this.dropInUpdateQueue(wasserschwallButton);
 		this.chooseBotDeckPanel.setVisible(false);
 		this.dropInUpdateQueue(chooseBotDeckPanel);
 	}

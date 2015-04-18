@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Psych Out">
+    <Cards>
+        <Card ID="00031">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00032">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00041">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00042">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00043">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00049">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00063">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00064">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00065">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00071">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00080">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>13</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>15</Size>
+        </Card>
+        <Card ID="00120">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00142">
+            <Size>3</Size>
+        </Card>
+    </Cards>
+</Deck>
