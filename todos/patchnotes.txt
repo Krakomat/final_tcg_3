@@ -1,9 +1,13 @@
 Patch 2.01
+	New Features
+		- New decks for the bot added
+		
 	Game: 
 		- Pokedex: Fixed a bug, when choosing among same card ids
-		- Fixed a bug regarding the sound effect of card draws
 		- Scoop Up: Fixed a bug, where multiple cards on a positions couldn't be scooped up properly
-		
+		- Fixed a bug, where cards that return to a players hand would still have damage marks on them
+		- Fixed a bug regarding the sound effect of card draws
+					
 Patch 2.0
 	New Features
 		- New Card set: JUNGLE

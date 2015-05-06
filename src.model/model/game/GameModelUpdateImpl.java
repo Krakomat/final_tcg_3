@@ -9,11 +9,11 @@ import model.interfaces.Position;
 
 public class GameModelUpdateImpl implements GameModelUpdate {
 	private List<Position> updateList;
-	private short turnNumber;
-	private boolean energyPlayAllowed, retreatAllowed;
+	private GameModelParameters gameModelParameters;
 
 	public GameModelUpdateImpl() {
 		updateList = new ArrayList<Position>();
+		gameModelParameters = new GameModelParameters();
 	}
 
 	@Override
@@ -38,29 +38,13 @@ public class GameModelUpdateImpl implements GameModelUpdate {
 		this.updateList = posList;
 	}
 
-	public short getTurnNumber() {
-		return turnNumber;
-	}
-
-	public void setTurnNumber(short turnNumber) {
-		this.turnNumber = turnNumber;
-	}
-
-	public boolean isEnergyPlayAllowed() {
-		return energyPlayAllowed;
-	}
-
-	public void setEnergyPlayAllowed(boolean energyPlayAllowed) {
-		this.energyPlayAllowed = energyPlayAllowed;
+	@Override
+	public GameModelParameters getGameModelParameters() {
+		return gameModelParameters;
 	}
 
 	@Override
-	public boolean isRetreatAllowed() {
-		return retreatAllowed;
-	}
-
-	@Override
-	public void setRetreatAllowed(boolean value) {
-		this.retreatAllowed = value;
+	public void setGameModelParameters(GameModelParameters gameModelParameters) {
+		this.gameModelParameters = gameModelParameters;
 	}
 }

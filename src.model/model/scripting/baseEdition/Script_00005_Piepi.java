@@ -76,9 +76,9 @@ public class Script_00005_Piepi extends PokemonCardScript {
 		copy.setCard(card);
 
 		// Clone attack without payments:
-		gameModel.getAttackAction().setNoEnergyPayment(true);
+		gameModel.getGameModelParameters().setNoEnergyPayment(true);
 		((PokemonCardScript) this.card.getCardScript()).executeAttack(attackName);
-		gameModel.getAttackAction().setNoEnergyPayment(false);
+		gameModel.getGameModelParameters().setNoEnergyPayment(false);
 
 		// Reset card script:
 		this.card.setCardScript(this);

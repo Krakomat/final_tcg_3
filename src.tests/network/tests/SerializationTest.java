@@ -92,9 +92,6 @@ public class SerializationTest {
 
 		update = new GameModelUpdateImpl();
 		update.setPositionList(positionList);
-		update.setTurnNumber((short) 4);
-		update.setEnergyPlayAllowed(true);
-		update.setRetreatAllowed(true);
 		
 		deck = new Deck();
 		deck.setName("TestDeck");
@@ -236,9 +233,9 @@ public class SerializationTest {
 		ByteString b = serializer.packGameModelUpdate(update);
 		GameModelUpdate newUpdate = serializer.unpackGameModelUpdate(b);
 
-		assertTrue(newUpdate.getTurnNumber() == 4);
-		assertTrue(newUpdate.isEnergyPlayAllowed() == true);
-		assertTrue(newUpdate.isRetreatAllowed() == true);
+		assertTrue(newUpdate.getGameModelParameters().getTurnNumber() == update.getGameModelParameters().getTurnNumber());
+		assertTrue(newUpdate.getGameModelParameters().isEnergyPlayed() == update.getGameModelParameters().isEnergyPlayed());
+		assertTrue(newUpdate.getGameModelParameters().isRetreatExecuted() == update.getGameModelParameters().isRetreatExecuted());
 		for (int i = 0; i < newUpdate.getPositionList().size(); i++)
 			this.checkPosition(newUpdate.getPositionList().get(i), update.getPositionList().get(i));
 	}

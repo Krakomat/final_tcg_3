@@ -24,6 +24,7 @@ import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.enums.Rarity;
+import model.game.GameModelParameters;
 import model.game.GameModelUpdateImpl;
 import model.game.PositionImpl;
 import model.interfaces.GameModelUpdate;
@@ -292,7 +293,7 @@ public class TCGSerializer {
 	 * @return
 	 * @throws IOException
 	 */
-	private ByteString unpackByteString(MessageUnpacker unpacker) throws IOException {
+	public ByteString unpackByteString(MessageUnpacker unpacker) throws IOException {
 		int intSize = unpacker.unpackBinaryHeader();
 		byte[] buf = new byte[intSize];
 		unpacker.readPayload(buf);
@@ -814,17 +815,9 @@ public class TCGSerializer {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		MessagePacker packer = MessagePack.newDefaultPacker(out);
 
-		ByteString energyPlay = this.packBool(update.isEnergyPlayAllowed());
-		packer.packBinaryHeader(energyPlay.length());
-		packer.writePayload(energyPlay.copyAsBytes());
-
-		ByteString retreatPlay = this.packBool(update.isRetreatAllowed());
-		packer.packBinaryHeader(retreatPlay.length());
-		packer.writePayload(retreatPlay.copyAsBytes());
-
-		ByteString turnNumber = this.packShort(update.getTurnNumber());
-		packer.packBinaryHeader(turnNumber.length());
-		packer.writePayload(turnNumber.copyAsBytes());
+		ByteString gameModelParameters = update.getGameModelParameters().toByteString();
+		packer.packBinaryHeader(gameModelParameters.length());
+		packer.writePayload(gameModelParameters.copyAsBytes());
 
 		ByteString b = this.packPositionList(update.getPositionList());
 		packer.packBinaryHeader(b.length());
@@ -839,14 +832,8 @@ public class TCGSerializer {
 
 		GameModelUpdate update = new GameModelUpdateImpl();
 
-		ByteString energyPlay = unpackByteString(unpacker);
-		update.setEnergyPlayAllowed(this.unpackBool(energyPlay));
-
-		ByteString retreatPlay = unpackByteString(unpacker);
-		update.setRetreatAllowed(this.unpackBool(retreatPlay));
-
-		ByteString turnNumber = unpackByteString(unpacker);
-		update.setTurnNumber(this.unpackShort(turnNumber));
+		ByteString gameModelParameters = unpackByteString(unpacker);
+		update.setGameModelParameters(new GameModelParameters(gameModelParameters));
 
 		ByteString bString = unpackByteString(unpacker);
 		update.setPositionList(this.unpackPositionList(bString));

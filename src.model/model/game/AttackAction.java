@@ -26,7 +26,6 @@ import model.scripting.abstracts.PokemonCardScript;
  */
 public class AttackAction {
 
-	private boolean noEnergyPayment; // no payment for attacks if true
 	private PokemonGame gameModel;
 
 	/**
@@ -37,7 +36,6 @@ public class AttackAction {
 	 */
 	public AttackAction(PokemonGame gameModel) {
 		this.gameModel = gameModel;
-		this.noEnergyPayment = false;
 	}
 
 	/**
@@ -311,6 +309,9 @@ public class AttackAction {
 		if (targetPositionID != null)
 			target = gameModel.getPosition(targetPositionID);
 		Card c = gameModel.getCard(cardGameID);
+
+		if (c instanceof PokemonCard && !PositionID.isArenaPosition(targetPositionID))
+			((PokemonCard) c).resetDynamicAttributes();
 
 		if (source != null)
 			source.removeFromPosition(c);
@@ -616,7 +617,7 @@ public class AttackAction {
 	 * @return
 	 */
 	public void playerPaysEnergy(Player player, List<Element> costs, PositionID posID) {
-		if (!this.noEnergyPayment) {
+		if (!this.gameModel.getGameModelParameters().isNoEnergyPayment()) {
 			// Let player choose the cards for payment:
 			List<Card> energyCards = this.gameModel.getPosition(posID).getEnergyCards();
 			List<Card> chosenEnergyCards = player.playerPaysEnergyCosts(costs, energyCards);
@@ -626,13 +627,5 @@ public class AttackAction {
 			for (Card c : chosenEnergyCards)
 				this.moveCard(posID, targetPosition, c.getGameID(), true);
 		}
-	}
-
-	public void setNoEnergyPayment(boolean flag) {
-		this.noEnergyPayment = flag;
-	}
-
-	public boolean getNoEnergyPayment() {
-		return this.noEnergyPayment;
 	}
 }

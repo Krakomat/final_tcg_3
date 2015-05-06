@@ -33,7 +33,7 @@ public class EffectController {
 					AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), url, false);
 					clickSoundNode.setPositional(false);
 					clickSoundNode.setLooping(false);
-					clickSoundNode.setVolume(2);
+					clickSoundNode.setVolume(1);
 					if (Thread.currentThread().getName().equals(Threads.RENDER_THREAD.toString()))
 						System.err.println("[RENDER] Error: Called playSound from render thread.");
 

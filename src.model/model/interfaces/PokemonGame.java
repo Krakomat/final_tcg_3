@@ -11,6 +11,7 @@ import model.enums.GameState;
 import model.enums.PositionID;
 import model.game.AttackAction;
 import model.game.AttackCondition;
+import model.game.GameModelParameters;
 
 /**
  * Interface for the overall game model.
@@ -260,4 +261,8 @@ public interface PokemonGame {
 	boolean getRetreatExecuted();
 
 	void setRetreatExecuted(boolean value);
+	
+	GameModelParameters getGameModelParameters();
+	
+	void setGameModelParameters(GameModelParameters gameModelParameters);
 }

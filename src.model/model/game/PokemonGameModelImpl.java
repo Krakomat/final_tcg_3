@@ -31,16 +31,15 @@ import model.scripting.abstracts.PokemonCardScript;
 public class PokemonGameModelImpl implements PokemonGame {
 
 	protected long gameID;
-	protected int cardGameIDCounter, turnNumber;
+	protected int cardGameIDCounter;
 	protected Player playerOnTurn;
 	protected Player playerRed, playerBlue;
 	protected GameField gameField;
-	protected GameState gameState;
-	protected boolean energyPlayed, retreatExecuted;
 	protected AttackAction attackAction;
 	protected AttackCondition attackCondition;
 	protected Map<Integer, Card> cardMap;
 	protected CardScriptFactory cardScriptFactory;
+	protected GameModelParameters gameModelParameters;
 
 	/**
 	 * The given player initializes a new PokemonGameModel with the given id.
@@ -55,23 +54,16 @@ public class PokemonGameModelImpl implements PokemonGame {
 		playerRed = null;
 		playerBlue = null;
 		gameField = new GameFieldImpl();
-		gameState = GameState.PREGAME;
-		turnNumber = 0;
-		energyPlayed = false;
-		retreatExecuted = false;
 		cardMap = new HashMap<>();
 		attackCondition = new AttackCondition(this);
 		attackAction = new AttackAction(this);
 		cardScriptFactory = CardScriptFactory.getInstance();
+		gameModelParameters = new GameModelParameters();
 	}
 
 	@Override
 	public void initNewGame() {
-		this.turnNumber = 0;
-		this.energyPlayed = false;
-		this.retreatExecuted = false;
 		this.gameField = new GameFieldImpl();
-		this.gameState = GameState.PREGAME;
 		this.cardGameIDCounter = 0;
 		List<Card> blueCards = getDeckInstance(playerBlue.getDeck());
 		List<Card> redCards = getDeckInstance(playerRed.getDeck());
@@ -97,7 +89,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 		this.sendGameModelToPlayers(this.getPlayerList(), "");
 		this.sendTextMessageToPlayers(getPlayerList(), "The game has started", "");
-		this.gameState = GameState.RUNNING;
+		this.gameModelParameters.setGameState(GameState.RUNNING);
 
 		this.initDraw();
 		this.initPrizes();
@@ -130,7 +122,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 					this.attackAction.playerDrawsCards(1, playerBlue);
 				if (!playerRedHandOk)
 					this.attackAction.playerDrawsCards(1, playerRed);
-				//this.sendGameModelToPlayers(this.getPlayerList(), "");
+				// this.sendGameModelToPlayers(this.getPlayerList(), "");
 				this.timeoutWait(200);
 			}
 
@@ -398,11 +390,11 @@ public class PokemonGameModelImpl implements PokemonGame {
 				this.playerLoses(playerBlue);
 			if (state == GameState.TIE) {
 				this.sendTextMessageToPlayers(this.getPlayerList(), "Game results in a TIE!", "");
-				this.gameState = GameState.TIE;
+				this.gameModelParameters.setGameState(GameState.TIE);
 			}
 
 			// Choose new active pokemon:
-			if (this.gameState == GameState.RUNNING) {
+			if (this.gameModelParameters.getGameState() == GameState.RUNNING) {
 				PositionID blueNewActive = null;
 				PositionID redNewActive = null;
 				if (this.getPosition(PositionID.BLUE_ACTIVEPOKEMON).isEmpty())
@@ -593,12 +585,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 		else
 			this.playerOnTurn = playerBlue;
 		this.sendTextMessageToPlayers(getPlayerList(), playerOnTurn.getName() + " 's turn...", Sounds.ON_TURN);
-		this.turnNumber++; // Increase turn number
+		this.gameModelParameters.setTurnNumber(this.gameModelParameters.getTurnNumber() + 1); // Increase turn number
 
 		// Draw a card or end game if the player is not able to draw:
 		if (this.attackAction.playerDrawsCards(1, playerOnTurn)) {
-			this.energyPlayed = false;
-			this.retreatExecuted = false;
+			this.gameModelParameters.setEnergyPlayed(false);
+			this.gameModelParameters.setRetreatExecuted(false);
 			// Update GameModel:
 			this.sendGameModelToPlayers(this.getPlayerList(), "");
 		} else
@@ -778,9 +770,9 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 */
 	public void playerLoses(Player player) {
 		if (player.getColor() == Color.BLUE)
-			this.gameState = GameState.RED_WON;
+			this.gameModelParameters.setGameState(GameState.RED_WON);
 		else
-			this.gameState = GameState.BLUE_WON;
+			this.gameModelParameters.setGameState(GameState.BLUE_WON);
 		this.sendGameModelToPlayers(this.getPlayerList(), "");
 		this.sendTextMessageToPlayers(this.getPlayerList(), player.getName() + " loses the game.", "");
 	}
@@ -886,10 +878,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	public GameModelUpdate getGameModelForPlayer(Player player) {
 		GameModelUpdate gameModelUpdate = new GameModelUpdateImpl();
-		gameModelUpdate.setTurnNumber((short) this.turnNumber);
-		gameModelUpdate.setEnergyPlayAllowed(this.energyPlayed);
-		gameModelUpdate.setRetreatAllowed(this.retreatExecuted);
-
+		gameModelUpdate.setGameModelParameters(gameModelParameters);
+		
 		Card dummyCard = new Card();
 		for (Position pos : gameField.getAllPositions()) {
 			Position position = new PositionImpl(pos.getPositionID(), pos.getColor());
@@ -950,7 +940,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	public ArrayList<PositionID> getPositionsForEvolving(PokemonCard c, Color color) {
-		return this.gameField.getPositionsForEvolving(c, color, turnNumber);
+		return this.gameField.getPositionsForEvolving(c, color, gameModelParameters.getTurnNumber());
 	}
 
 	/**
@@ -995,17 +985,17 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	@Override
 	public boolean getEnergyPlayed() {
-		return this.energyPlayed;
+		return this.gameModelParameters.isEnergyPlayed();
 	}
 
 	@Override
 	public void setEnergyPlayed(boolean b) {
-		this.energyPlayed = b;
+		this.gameModelParameters.setEnergyPlayed(b);
 	}
 
 	@Override
 	public int getTurnNumber() {
-		return this.turnNumber;
+		return this.gameModelParameters.getTurnNumber();
 	}
 
 	private List<Player> getPlayerList() {
@@ -1017,7 +1007,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	@Override
 	public GameState getGameState() {
-		return this.gameState;
+		return this.gameModelParameters.getGameState();
 	}
 
 	/**
@@ -1050,11 +1040,21 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	@Override
 	public boolean getRetreatExecuted() {
-		return this.retreatExecuted;
+		return this.gameModelParameters.isRetreatExecuted();
 	}
 
 	@Override
 	public void setRetreatExecuted(boolean value) {
-		this.retreatExecuted = value;
+		this.gameModelParameters.setRetreatExecuted(value);
+	}
+
+	@Override
+	public GameModelParameters getGameModelParameters() {
+		return this.gameModelParameters;
+	}
+
+	@Override
+	public void setGameModelParameters(GameModelParameters gameModelParameters) {
+		this.gameModelParameters = gameModelParameters;
 	}
 }

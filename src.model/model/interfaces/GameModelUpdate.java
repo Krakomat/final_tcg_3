@@ -3,6 +3,7 @@ package model.interfaces;
 import java.util.List;
 
 import model.enums.PositionID;
+import model.game.GameModelParameters;
 
 /**
  * This describes an update for the current game model, that can be send to the clients. It contains the WHOLE game model(meaning a list of {@link Position}s).
@@ -41,45 +42,7 @@ public interface GameModelUpdate {
 	 */
 	public void setPositionList(List<Position> posList);
 
-	/**
-	 * Returns the turn number.
-	 * 
-	 * @return
-	 */
-	public short getTurnNumber();
+	public GameModelParameters getGameModelParameters();
 
-	/**
-	 * Sets the turn number.
-	 * 
-	 * @param turnNumber
-	 */
-	public void setTurnNumber(short turnNumber);
-
-	/**
-	 * Returns the energyPlayedAllowed parameter.
-	 * 
-	 * @return
-	 */
-	public boolean isEnergyPlayAllowed();
-
-	/**
-	 * Sets energyPlayedAllowed parameter.
-	 * 
-	 * @param energyPlayAllowed
-	 */
-	public void setEnergyPlayAllowed(boolean energyPlayAllowed);
-
-	/**
-	 * Returns the retreatAllowed parameter.
-	 * 
-	 * @return
-	 */
-	public boolean isRetreatAllowed();
-
-	/**
-	 * Sets the retreat allowed parameter
-	 * 
-	 * @param value
-	 */
-	public void setRetreatAllowed(boolean value);
+	public void setGameModelParameters(GameModelParameters gameModelParameters);
 }

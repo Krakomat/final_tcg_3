@@ -35,17 +35,15 @@ import model.scripting.abstracts.ServerCards;
  */
 public class LocalPokemonGameModel implements PokemonGame {
 	protected long gameID;
-	protected int turnNumber;
 	protected Player playerOnTurn;
 	protected Player playerRed, playerBlue;
-	protected GameState gameState;
-	protected boolean energyPlayed, retreatExecuted;
 	protected AttackAction attackAction;
 	protected AttackCondition attackCondition;
 	protected Map<Integer, Card> cardMap;
 	protected CardScriptFactory cardScriptFactory;
 	protected PokemonGameManager server;
 	private GameField gameField;
+	protected GameModelParameters gameModelParameters;
 
 	/**
 	 * Constructs a game model from the given {@link GameModelUpdate}.
@@ -53,8 +51,9 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 * @param gameModelUpdate
 	 */
 	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client, PokemonGameManager server) {
+		this.gameModelParameters = new GameModelParameters();
 		this.gameField = new GameFieldImpl(gameModelUpdate);
-		this.turnNumber = gameModelUpdate.getTurnNumber();
+		this.gameModelParameters.setTurnNumber(gameModelUpdate.getGameModelParameters().getTurnNumber());
 		this.gameID = 0; // just a default id
 		this.playerOnTurn = client;
 		this.server = server;
@@ -67,9 +66,9 @@ public class LocalPokemonGameModel implements PokemonGame {
 			this.playerBlue.setColor(Color.BLUE);
 			this.playerRed = client;
 		}
-		this.gameState = GameState.RUNNING;
-		this.energyPlayed = gameModelUpdate.isEnergyPlayAllowed();
-		this.retreatExecuted = gameModelUpdate.isRetreatAllowed();
+		this.gameModelParameters.setGameState(GameState.RUNNING);
+		this.gameModelParameters.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
+		this.gameModelParameters.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.attackAction = new AttackAction(this);
 		this.attackCondition = new AttackCondition(this);
 		this.cardScriptFactory = new CardScriptFactory();
@@ -100,19 +99,9 @@ public class LocalPokemonGameModel implements PokemonGame {
 		for (Position position : gameField.getAllPositions())
 			pList.add(position.copy());
 		update.setPositionList(pList);
-		update.setTurnNumber((short) turnNumber);
-		update.setEnergyPlayAllowed(energyPlayed);
-		update.setRetreatAllowed(retreatExecuted);
 		LocalPokemonGameModel copy = new LocalPokemonGameModel(update, this.playerOnTurn, this.server);
-		AttackAction attackAction = new AttackAction(copy);
-		attackAction.setNoEnergyPayment(this.attackAction.getNoEnergyPayment());
-		copy.setAttackAction(attackAction);
-		copy.gameState = this.gameState;
+		copy.setGameModelParameters(gameModelParameters.copy());
 		return copy;
-	}
-
-	private void setAttackAction(AttackAction action) {
-		this.attackAction = action;
 	}
 
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
@@ -307,7 +296,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public ArrayList<PositionID> getPositionsForEvolving(PokemonCard c, Color color) {
-		return this.gameField.getPositionsForEvolving(c, color, turnNumber);
+		return this.gameField.getPositionsForEvolving(c, color, gameModelParameters.getTurnNumber());
 	}
 
 	@Override
@@ -342,17 +331,17 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public void setEnergyPlayed(boolean b) {
-		this.energyPlayed = b;
+		this.gameModelParameters.setEnergyPlayed(b);
 	}
 
 	@Override
 	public int getTurnNumber() {
-		return turnNumber;
+		return gameModelParameters.getTurnNumber();
 	}
 
 	@Override
 	public GameState getGameState() {
-		return this.gameState;
+		return this.gameModelParameters.getGameState();
 	}
 
 	@Override
@@ -387,7 +376,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public boolean getEnergyPlayed() {
-		return this.energyPlayed;
+		return this.gameModelParameters.isEnergyPlayed();
 	}
 
 	@Override
@@ -433,11 +422,21 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public boolean getRetreatExecuted() {
-		return retreatExecuted;
+		return gameModelParameters.isRetreatExecuted();
 	}
 
 	@Override
 	public void setRetreatExecuted(boolean value) {
-		this.retreatExecuted = value;
+		this.gameModelParameters.setRetreatExecuted(value);
+	}
+
+	@Override
+	public GameModelParameters getGameModelParameters() {
+		return this.gameModelParameters;
+	}
+
+	@Override
+	public void setGameModelParameters(GameModelParameters gameModelParameters) {
+		this.gameModelParameters = gameModelParameters;
 	}
 }
