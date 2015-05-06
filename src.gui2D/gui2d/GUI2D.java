@@ -440,7 +440,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void userUpdatesGameModel(LocalPokemonGameModel gameModel, Color ownColor, String sound) {
-		System.out.println("Started Update from " + Thread.currentThread().getName());
+		// System.out.println("Started Update from " + Thread.currentThread().getName());
 		for (Position p : gameModel.getGameField().getAllPositions()) {
 			SelectableNode n = ingameController.getPositionGeometry(p.getPositionID(), ownColor);
 			if (n != null) {
@@ -449,7 +449,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			}
 		}
 		EffectController.playSound(sound);
-		System.out.println("Finished Update");
+		// System.out.println("Finished Update");
 	}
 
 	@Override
@@ -520,7 +520,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void setCardChoosable(Position position, int i, boolean value) {
-		System.out.println("SetCardChoosable for (" + position.getPositionID() + ", " + i + ")" + " from " + Thread.currentThread().getName());
+		// System.out.println("SetCardChoosable for (" + position.getPositionID() + ", " + i + ")" + " from " + Thread.currentThread().getName());
 
 		SelectableNode node = ingameController.getPositionGeometry(position.getPositionID(), this.player.getColor());
 		if (node instanceof HandCardManager2D) {
@@ -549,7 +549,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void setEndTurnButtonVisible(boolean b) {
-		System.out.println("Setting endTurnButton visible: " + b);
+		// System.out.println("Setting endTurnButton visible: " + b);
 
 		SelectableNode endTurnButton = this.ingameController.getEndTurnButton();
 		endTurnButton.setVisible(b); // button adds/removes itself to shootables in update()!
