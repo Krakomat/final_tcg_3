@@ -96,7 +96,7 @@ public class CardInfoPanel extends JPanel {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CardInfoPanel(Card s, String[] pokemonNames) {
 		pokemonCardNames = pokemonNames;
-		String[] editions = { Edition.BASE.toString(), Edition.JUNGLE.toString(), Edition.TOKEN.toString() };
+		String[] editions = { Edition.BASE.toString(), Edition.JUNGLE.toString(), Edition.FOSSIL.toString(), Edition.TOKEN.toString() };
 		String[] hpComboBoxItems = { "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120" };
 		ImageIcon[] typeImages = new ImageIcon[7];
 		typeImages[0] = new BitmapComponent("/tilesets/elements/thumbnails/elektro.png").getImageIcon();

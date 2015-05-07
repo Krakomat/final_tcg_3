@@ -157,7 +157,7 @@ public class DeckEditController extends Node implements GUI2DController {
 		}
 
 		editionFilterButtons = new ArrayList<>();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 3; i++) {
 			String texture = "";
 			switch (i) {
 			case 0:
@@ -165,6 +165,9 @@ public class DeckEditController extends Node implements GUI2DController {
 				break;
 			case 1:
 				texture = Edition.JUNGLE.toString();
+				break;
+			case 2:
+				texture = Edition.FOSSIL.toString();
 				break;
 			}
 			final int index = i;
@@ -341,7 +344,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				selectedButtonIndices.add(i);
 		}
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 3; i++) {
 			Image2D button = this.editionFilterButtons.get(i);
 			if (button.isSelected())
 				selectedButtonIndices.add(i + 9);
@@ -391,6 +394,9 @@ public class DeckEditController extends Node implements GUI2DController {
 					break;
 				case 10:
 					selectedButtonEditions.add(Edition.JUNGLE);
+					break;
+				case 11:
+					selectedButtonEditions.add(Edition.FOSSIL);
 					break;
 				}
 			}

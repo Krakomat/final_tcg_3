@@ -9,7 +9,7 @@ import model.database.Database;
 
 public enum Edition {
 
-	BASE, JUNGLE, TOKEN;
+	BASE, JUNGLE, FOSSIL, TOKEN;
 
 	public static Booster createBooster(Edition edition) {
 		ArrayList<Card> legendary = new ArrayList<Card>(); // >=1

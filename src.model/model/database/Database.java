@@ -314,7 +314,11 @@ public class Database {
 		TextureKey jungleEdition = new TextureKey("/tilesets/buttons/jungleLogo.png");
 		jungleEdition.setGenerateMips(false);
 		assetTextures.put(Edition.JUNGLE.toString(), jungleEdition);
-		
+
+		TextureKey fossilEdition = new TextureKey("/tilesets/buttons/fossilLogo.png");
+		fossilEdition.setGenerateMips(false);
+		assetTextures.put(Edition.FOSSIL.toString(), fossilEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);
@@ -322,15 +326,15 @@ public class Database {
 		TextureKey kraftreserve = new TextureKey("/decks/kraftreserve.jpg");
 		kraftreserve.setGenerateMips(false);
 		assetTextures.put("kraftreserve", kraftreserve);
-		
+
 		TextureKey psychOut = new TextureKey("/decks/psychOut.jpg");
 		psychOut.setGenerateMips(false);
 		assetTextures.put("psychOut", psychOut);
-		
+
 		TextureKey wasserSchwall = new TextureKey("/decks/wasserSchwall.jpg");
 		wasserSchwall.setGenerateMips(false);
 		assetTextures.put("wasserSchwall", wasserSchwall);
-		
+
 		TextureKey hotWater = new TextureKey("/decks/hotWater.jpg");
 		hotWater.setGenerateMips(false);
 		assetTextures.put("hotWater", hotWater);
