@@ -7,6 +7,52 @@ import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
 import model.scripting.baseEdition.*;
+import model.scripting.fossil.Script_00153_Aerodactyl;
+import model.scripting.fossil.Script_00154_Articuno;
+import model.scripting.fossil.Script_00155_Dragonite;
+import model.scripting.fossil.Script_00157_Haunter;
+import model.scripting.fossil.Script_00158_Hitmonlee;
+import model.scripting.fossil.Script_00159_Hypno;
+import model.scripting.fossil.Script_00160_Kabutops;
+import model.scripting.fossil.Script_00161_Lapras;
+import model.scripting.fossil.Script_00162_Magneton;
+import model.scripting.fossil.Script_00163_Moltres;
+import model.scripting.fossil.Script_00164_Muk;
+import model.scripting.fossil.Script_00165_Raichu;
+import model.scripting.fossil.Script_00166_Zapdos;
+import model.scripting.fossil.Script_00167_Arbok;
+import model.scripting.fossil.Script_00168_Cloyster;
+import model.scripting.fossil.Script_00169_Gastly;
+import model.scripting.fossil.Script_00170_Golbat;
+import model.scripting.fossil.Script_00171_Golduck;
+import model.scripting.fossil.Script_00172_Golem;
+import model.scripting.fossil.Script_00173_Graveler;
+import model.scripting.fossil.Script_00174_Kingler;
+import model.scripting.fossil.Script_00175_Magmar;
+import model.scripting.fossil.Script_00176_Omastar;
+import model.scripting.fossil.Script_00177_Sandslash;
+import model.scripting.fossil.Script_00178_Seadra;
+import model.scripting.fossil.Script_00179_Slowbro;
+import model.scripting.fossil.Script_00180_Tentacruel;
+import model.scripting.fossil.Script_00181_Weezing;
+import model.scripting.fossil.Script_00182_Ekans;
+import model.scripting.fossil.Script_00183_Geodude;
+import model.scripting.fossil.Script_00184_Grimer;
+import model.scripting.fossil.Script_00185_Horsea;
+import model.scripting.fossil.Script_00186_Kabuto;
+import model.scripting.fossil.Script_00187_Krabby;
+import model.scripting.fossil.Script_00188_Omanyte;
+import model.scripting.fossil.Script_00189_Psyduck;
+import model.scripting.fossil.Script_00190_Shellder;
+import model.scripting.fossil.Script_00191_Slowpoke;
+import model.scripting.fossil.Script_00192_Tentacool;
+import model.scripting.fossil.Script_00193_Zubat;
+import model.scripting.fossil.Script_00194_MrFuji;
+import model.scripting.fossil.Script_00195_EnergySearch;
+import model.scripting.fossil.Script_00196_Gambler;
+import model.scripting.fossil.Script_00197_Recycle;
+import model.scripting.fossil.Script_00198_MysteriousFossil;
+import model.scripting.fossil.Script_00199_FossilToken;
 import model.scripting.jungle.Script_00105_Clefable;
 import model.scripting.jungle.Script_00106_Electrode;
 import model.scripting.jungle.Script_00107_Flareon;
@@ -398,6 +444,100 @@ public class CardScriptFactory {
 			return new Script_00151_Venonat((PokemonCard) card, gameModel);
 		case "00152":
 			return new Script_00152_Pokeball((TrainerCard) card, gameModel);
+		case "00153":
+			return new Script_00153_Aerodactyl((PokemonCard) card, gameModel);
+		case "00154":
+			return new Script_00154_Articuno((PokemonCard) card, gameModel);
+		case "00155":
+			return new Script_00155_Dragonite((PokemonCard) card, gameModel);
+		case "00156":
+			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only used locally for Piepi doll
+		case "00157":
+			return new Script_00157_Haunter((PokemonCard) card, gameModel); // Only used locally for Lektrobal token
+		case "00158":
+			return new Script_00158_Hitmonlee((PokemonCard) card, gameModel);
+		case "00159":
+			return new Script_00159_Hypno((PokemonCard) card, gameModel);
+		case "00160":
+			return new Script_00160_Kabutops((PokemonCard) card, gameModel);
+		case "00161":
+			return new Script_00161_Lapras((PokemonCard) card, gameModel);
+		case "00162":
+			return new Script_00162_Magneton((PokemonCard) card, gameModel);
+		case "00163":
+			return new Script_00163_Moltres((PokemonCard) card, gameModel);
+		case "00164":
+			return new Script_00164_Muk((PokemonCard) card, gameModel);
+		case "00165":
+			return new Script_00165_Raichu((PokemonCard) card, gameModel);
+		case "00166":
+			return new Script_00166_Zapdos((PokemonCard) card, gameModel);
+		case "00167":
+			return new Script_00167_Arbok((PokemonCard) card, gameModel);
+		case "00168":
+			return new Script_00168_Cloyster((PokemonCard) card, gameModel);
+		case "00169":
+			return new Script_00169_Gastly((PokemonCard) card, gameModel);
+		case "00170":
+			return new Script_00170_Golbat((PokemonCard) card, gameModel);
+		case "00171":
+			return new Script_00171_Golduck((PokemonCard) card, gameModel);
+		case "00172":
+			return new Script_00172_Golem((PokemonCard) card, gameModel);
+		case "00173":
+			return new Script_00173_Graveler((PokemonCard) card, gameModel);
+		case "00174":
+			return new Script_00174_Kingler((PokemonCard) card, gameModel);
+		case "00175":
+			return new Script_00175_Magmar((PokemonCard) card, gameModel);
+		case "00176":
+			return new Script_00176_Omastar((PokemonCard) card, gameModel);
+		case "00177":
+			return new Script_00177_Sandslash((PokemonCard) card, gameModel);
+		case "00178":
+			return new Script_00178_Seadra((PokemonCard) card, gameModel);
+		case "00179":
+			return new Script_00179_Slowbro((PokemonCard) card, gameModel);
+		case "00180":
+			return new Script_00180_Tentacruel((PokemonCard) card, gameModel);
+		case "00181":
+			return new Script_00181_Weezing((PokemonCard) card, gameModel);
+		case "00182":
+			return new Script_00182_Ekans((PokemonCard) card, gameModel);
+		case "00183":
+			return new Script_00183_Geodude((PokemonCard) card, gameModel);
+		case "00184":
+			return new Script_00184_Grimer((PokemonCard) card, gameModel);
+		case "00185":
+			return new Script_00185_Horsea((PokemonCard) card, gameModel);
+		case "00186":
+			return new Script_00186_Kabuto((PokemonCard) card, gameModel);
+		case "00187":
+			return new Script_00187_Krabby((PokemonCard) card, gameModel);
+		case "00188":
+			return new Script_00188_Omanyte((PokemonCard) card, gameModel);
+		case "00189":
+			return new Script_00189_Psyduck((PokemonCard) card, gameModel);
+		case "00190":
+			return new Script_00190_Shellder((PokemonCard) card, gameModel);
+		case "00191":
+			return new Script_00191_Slowpoke((PokemonCard) card, gameModel);
+		case "00192":
+			return new Script_00192_Tentacool((PokemonCard) card, gameModel);
+		case "00193":
+			return new Script_00193_Zubat((PokemonCard) card, gameModel);
+		case "00194":
+			return new Script_00194_MrFuji((TrainerCard) card, gameModel);
+		case "00195":
+			return new Script_00195_EnergySearch((TrainerCard) card, gameModel);
+		case "00196":
+			return new Script_00196_Gambler((TrainerCard) card, gameModel);
+		case "00197":
+			return new Script_00197_Recycle((TrainerCard) card, gameModel);
+		case "00198":
+			return new Script_00198_MysteriousFossil((TrainerCard) card, gameModel);
+		case "00199":
+			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only used locally for Piepi doll
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
