@@ -16,24 +16,24 @@ public class Script_00161_Lapras extends PokemonCardScript {
 	public Script_00161_Lapras(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		att1Cost.add(Element.WATER);
+		this.addAttack("Water Gun", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att2Cost.add(Element.WATER);
+		att2Cost.add(Element.WATER);
+		this.addAttack("Confuse Ray", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
+		if (attackName.equals("Water Gun"))
+			this.waterGun();
 		else
-			this.foulOdor();
+			this.confuseRay();
 	}
 
-	private void poisonpowder() {
+	private void waterGun() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
@@ -42,7 +42,7 @@ public class Script_00161_Lapras extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void foulOdor() {
+	private void confuseRay() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

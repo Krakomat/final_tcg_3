@@ -17,23 +17,23 @@ public class Script_00182_Ekans extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		this.addAttack("Spit Poison", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Wrap", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
+		if (attackName.equals("Spit Poison"))
+			this.spitPoison();
 		else
-			this.foulOdor();
+			this.wrap();
 	}
 
-	private void poisonpowder() {
+	private void spitPoison() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
@@ -42,7 +42,7 @@ public class Script_00182_Ekans extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void foulOdor() {
+	private void wrap() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

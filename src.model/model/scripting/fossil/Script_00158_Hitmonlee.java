@@ -16,24 +16,26 @@ public class Script_00158_Hitmonlee extends PokemonCardScript {
 	public Script_00158_Hitmonlee(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		att1Cost.add(Element.ROCK);
+		att1Cost.add(Element.ROCK);
+		this.addAttack("Stretch Kick", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att2Cost.add(Element.ROCK);
+		att2Cost.add(Element.ROCK);
+		att2Cost.add(Element.ROCK);
+		this.addAttack("High Jump Kick", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
+		if (attackName.equals("Stretch Kick"))
+			this.stretchKick();
 		else
-			this.foulOdor();
+			this.highJumpKick();
 	}
 
-	private void poisonpowder() {
+	private void stretchKick() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
@@ -42,7 +44,7 @@ public class Script_00158_Hitmonlee extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void foulOdor() {
+	private void highJumpKick() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

@@ -16,24 +16,25 @@ public class Script_00159_Hypno extends PokemonCardScript {
 	public Script_00159_Hypno(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Prophecy", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.PSYCHIC);
+		this.addAttack("Dark Mind", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
+		if (attackName.equals("Prophecy"))
+			this.prophecy();
 		else
-			this.foulOdor();
+			this.darkMind();
 	}
 
-	private void poisonpowder() {
+	private void prophecy() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
@@ -42,7 +43,7 @@ public class Script_00159_Hypno extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void foulOdor() {
+	private void darkMind() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

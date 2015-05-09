@@ -16,24 +16,25 @@ public class Script_00174_Kingler extends PokemonCardScript {
 	public Script_00174_Kingler(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		att1Cost.add(Element.WATER);
+		this.addAttack("Flail", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att2Cost.add(Element.WATER);
+		att2Cost.add(Element.WATER);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Crabhammer", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
+		if (attackName.equals("Flail"))
+			this.flail();
 		else
-			this.foulOdor();
+			this.crabhammer();
 	}
 
-	private void poisonpowder() {
+	private void flail() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
@@ -42,7 +43,7 @@ public class Script_00174_Kingler extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void foulOdor() {
+	private void crabhammer() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

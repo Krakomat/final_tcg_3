@@ -16,24 +16,24 @@ public class Script_00169_Gastly extends PokemonCardScript {
 	public Script_00169_Gastly(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Lick", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.PSYCHIC);
+		this.addAttack("Energy Conversion", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
+		if (attackName.equals("Lick"))
+			this.lick();
 		else
-			this.foulOdor();
+			this.energyConversion();
 	}
 
-	private void poisonpowder() {
+	private void lick() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
@@ -42,7 +42,7 @@ public class Script_00169_Gastly extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void foulOdor() {
+	private void energyConversion() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

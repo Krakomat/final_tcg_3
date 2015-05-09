@@ -16,38 +16,25 @@ public class Script_00165_Raichu extends PokemonCardScript {
 	public Script_00165_Raichu(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
-
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		att1Cost.add(Element.LIGHTNING);
+		att1Cost.add(Element.LIGHTNING);
+		att1Cost.add(Element.LIGHTNING);
+		att1Cost.add(Element.LIGHTNING);
+		this.addAttack("Gigashock", att1Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
-		else
-			this.foulOdor();
+		if (attackName.equals("Gigashock"))
+			this.gigashock();
 	}
 
-	private void poisonpowder() {
+	private void gigashock() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
 		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
 		gameModel.sendGameModelToAllPlayers("");
-	}
-
-	private void foulOdor() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
 	}
 }

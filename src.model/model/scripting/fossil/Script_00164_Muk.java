@@ -17,37 +17,25 @@ public class Script_00164_Muk extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("Poisonpowder", att1Cost);
+		att1Cost.add(Element.GRASS);
+		att1Cost.add(Element.GRASS);
+		this.addAttack("Sludge", att1Cost);
 
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		this.addAttack("Foul Odor", att2Cost);
+		this.addPokemonPower("Toxic Gas");
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Poisonpowder"))
-			this.poisonpowder();
-		else
-			this.foulOdor();
+		if (attackName.equals("Sludge"))
+			this.sludge();
 	}
 
-	private void poisonpowder() {
+	private void sludge() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
 		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
 		gameModel.sendGameModelToAllPlayers("");
-	}
-
-	private void foulOdor() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
 	}
 }
