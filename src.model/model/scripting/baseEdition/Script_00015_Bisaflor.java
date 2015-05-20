@@ -51,6 +51,8 @@ public class Script_00015_Bisaflor extends PokemonCardScript {
 			return false;
 		if (gameModel.getFullArenaPositions(player.getColor()).size() < 2)
 			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
 
 		for (PositionID posID : gameModel.getFullArenaPositions(player.getColor())) {
 			Position pos = gameModel.getPosition(posID);

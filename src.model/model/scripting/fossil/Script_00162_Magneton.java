@@ -3,10 +3,9 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.database.Card;
+import network.client.Player;
 import model.database.PokemonCard;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -37,20 +36,30 @@ public class Script_00162_Magneton extends PokemonCardScript {
 	}
 
 	private void sonicboom() {
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
-	}
-
-	private void selfdestruct() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, false);
+	}
+
+	private void selfdestruct() {
+		Player player = this.getCardOwner();
+		Player enemy = this.getEnemyPlayer();
+
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 100, true);
+
+		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
+		for (PositionID benchPos : enemyBench)
+			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 20, false);
+
+		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
+		for (PositionID benchPos : ownBench)
+			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 20, false);
+
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 100, true);
 	}
 }

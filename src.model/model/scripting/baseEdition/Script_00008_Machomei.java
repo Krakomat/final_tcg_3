@@ -51,6 +51,8 @@ public class Script_00008_Machomei extends PokemonCardScript {
 		PokemonCard pCard = (PokemonCard) this.card;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
 		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor())
 			return false;
 		return true;

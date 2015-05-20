@@ -3,7 +3,6 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
 import model.enums.PokemonCondition;
@@ -27,11 +26,14 @@ public class Script_00185_Horsea extends PokemonCardScript {
 	}
 
 	private void smokescreen() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is blinded!", "");
+		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.BLIND);
 		gameModel.sendGameModelToAllPlayers("");
 	}
 }

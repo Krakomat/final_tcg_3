@@ -20,28 +20,27 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00143_Mankey extends PokemonCardScript {
 
-	private boolean pokemonPowerActivated;
-
 	public Script_00143_Mankey(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		this.addAttack("Scratch", att1Cost);
 		this.addPokemonPower("Peek");
-		this.pokemonPowerActivated = false;
 	}
 
 	@Override
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (pokemonPowerActivated)
+		if (gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().contains(this.card.getGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
+			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
 
 		if (gameModel.getPosition(PositionID.BLUE_DECK).isEmpty() && gameModel.getPosition(PositionID.RED_DECK).isEmpty()
@@ -116,11 +115,13 @@ public class Script_00143_Mankey extends PokemonCardScript {
 			revealedCard.add(gameModel.getPosition(chosenPosition).getCardAtIndex(index));
 		}
 		player.playerChoosesCards(revealedCard, 1, false, "Revealed card on " + chosenPosition);
+		gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().add(this.card.getGameID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (pokemonPowerActivated) {
-			pokemonPowerActivated = false;
+		if (gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().contains(this.card.getGameID())) {
+			gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().remove(new Integer(this.card.getGameID()));
 		}
 	}
 

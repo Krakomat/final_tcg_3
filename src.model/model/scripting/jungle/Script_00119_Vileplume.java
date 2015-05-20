@@ -15,8 +15,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00119_Vileplume extends PokemonCardScript {
 
-	private boolean pokemonPowerActivated;
-
 	public Script_00119_Vileplume(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -26,7 +24,6 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 		this.addAttack("Petal Dance", att1Cost);
 
 		this.addPokemonPower("Heal");
-		this.pokemonPowerActivated = false;
 	}
 
 	@Override
@@ -50,13 +47,15 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 		PokemonCard pCard = (PokemonCard) this.card;
 		Player player = this.getCardOwner();
 
-		if (pokemonPowerActivated)
+		if (gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().contains(this.card.getGameID()))
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
+			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
 
 		for (PositionID posID : gameModel.getFullArenaPositions(player.getColor())) {
@@ -87,12 +86,13 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 			this.gameModel.getAttackAction().healPosition(chosenPosition, 10);
 		}
 
-		pokemonPowerActivated = true;
+		gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().add(this.card.getGameID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (pokemonPowerActivated) {
-			pokemonPowerActivated = false;
+		if (gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().contains(this.card.getGameID())) {
+			gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().remove(new Integer(this.card.getGameID()));
 		}
 	}
 }

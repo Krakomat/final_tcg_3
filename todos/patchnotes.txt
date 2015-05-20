@@ -1,19 +1,26 @@
 Patch 2.01
 	New Features
 		- New decks for the bot added
-		
+		- New Card set: FOSSIL[beta]
 	Game: 
 		- Pokedex: Fixed a bug, when choosing among same card ids
 		- Scoop Up: Fixed a bug, where multiple cards on a positions couldn't be scooped up properly
+		- Clefary Doll: Fixed a bug where the wrong hand position could be chosen in some cases
+		- Mankey: Fixed a bug, where Peek could be activated multiple times a turn
+		- Venomoth: Fixed a bug, where Shift could be activated multiple times a turn
+		- Vileplume: Fixed a bug, where Heal could be activated multiple times a turn
+		- Pidgeot Fixed a bug where the local game model would not recognize the new active pokemon
+		- Scoop Up Fixed a bug where the local game model would not recognize the new active pokemon
+		- Pokeball: Will now be discarded after playing
 		- Fixed a bug, where cards that return to a players hand would still have damage marks on them
 		- Fixed a bug regarding the sound effect of card draws
-					
+		
 Patch 2.0
 	New Features
-		- New Card set: JUNGLE
+		- New Card set: JUNGLE[beta]
 		- New Bot: TreeBot[alpha]
 		- Bot decks can now be chosen
-		- Filter for editions in deckeditor
+		- Filter for editions in deck editor
 		
 	Music & Sounds
 		- Fixed a bug, where sound effects do not close properly

@@ -1,5 +1,6 @@
 package model.scripting.fossil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import network.client.Player;
@@ -27,24 +28,37 @@ public class Script_00196_Gambler extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		Player player = this.getCardOwner();
-		gameModel.sendTextMessageToAllPlayers("If heads then " + this.card.getName() + "'s effects will be executed!", "");
+
+		// Discard trainer card:
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his hand into his deck!", Sounds.SHUFFLE);
+
+		// Shuffle hand into deck:
+		List<Card> handCards = gameModel.getPosition(ownHand()).getCards();
+		List<Card> copyHand = new ArrayList<>();
+		for (Card c : handCards)
+			copyHand.add(c);
+
+		// Move cards:
+		for (Card c : copyHand)
+			gameModel.getAttackAction().moveCard(ownHand(), ownDeck(), c.getGameID(), true);
+
+		gameModel.sendGameModelToAllPlayers("");
+
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " flips a coin...", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			// Choose a card from the deck:
-			List<Card> cards = gameModel.getPosition(ownDeck()).getPokemonCards();
-			Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
-			// Message clients:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
-			// Move card:
-			gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
-
-			// Shuffle deck:
-			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
-			gameModel.getAttackAction().shufflePosition(ownDeck());
-
-			gameModel.sendGameModelToAllPlayers("");
+			// Draw 8 cards:
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 8 cards!", "");
+			gameModel.getAttackAction().playerDrawsCards(8, getCardOwner());
+		} else {
+			// Draw 1 card:
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 1 card!", "");
+			gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());
 		}
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	private PositionID ownHand() {

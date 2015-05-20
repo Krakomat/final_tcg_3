@@ -145,7 +145,7 @@ public class Database {
 			texture.setGenerateMips(false);
 			cardTextures.put(cards.get(i).getCardId(), texture);
 
-			if (c instanceof PokemonCard || c.getCardId().equals("00070")) {
+			if (c instanceof PokemonCard || c.getCardId().equals("00070") || c.getCardId().equals("00199")) {
 				TextureKey thumbnail = new TextureKey(POKEMON_THUMBNAIL_PATH + c.getCardId() + ".jpg");
 				thumbnail.setGenerateMips(false);
 				pokemonThumbnailTextures.put(cards.get(i).getCardId(), thumbnail);

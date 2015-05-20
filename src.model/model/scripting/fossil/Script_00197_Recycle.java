@@ -9,7 +9,6 @@ import model.enums.Coin;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
-import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
 
@@ -21,6 +20,9 @@ public class Script_00197_Recycle extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
+		if (gameModel.getPosition(ownDiscardPile()).getCards().isEmpty())
+			return null;
+
 		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
@@ -31,28 +33,30 @@ public class Script_00197_Recycle extends TrainerCardScript {
 		Coin c = gameModel.getAttackAction().flipACoin();
 		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
-			// Choose a card from the deck:
-			List<Card> cards = gameModel.getPosition(ownDeck()).getPokemonCards();
-			Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
-			// Message clients:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
-			// Move card:
-			gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
+			// Choose a card from the discard pile:
+			List<Card> cards = gameModel.getPosition(ownDiscardPile()).getCards();
+			Card chosenCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your discard pile!").get(0);
 
-			// Shuffle deck:
-			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
-			gameModel.getAttackAction().shufflePosition(ownDeck());
+			// Message clients:
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " puts " + chosenCard.getName() + " on his deck!", chosenCard, "");
+
+			// Move card:
+			gameModel.getAttackAction().moveCard(ownDiscardPile(), ownDeck(), chosenCard.getGameID(), true);
+
+			// Discard trainer card:
+			gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 
 			gameModel.sendGameModelToAllPlayers("");
 		}
+		gameModel.sendTextMessageToAllPlayers("Recycle was not successful!", "");
 	}
 
-	private PositionID ownHand() {
+	private PositionID ownDiscardPile() {
 		Player player = this.getCardOwner();
 		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
+			return PositionID.BLUE_DISCARDPILE;
 		else
-			return PositionID.RED_HAND;
+			return PositionID.RED_DISCARDPILE;
 	}
 
 	private PositionID ownDeck() {

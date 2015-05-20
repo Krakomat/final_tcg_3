@@ -3,10 +3,12 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
+import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
+import model.enums.Color;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -26,6 +28,16 @@ public class Script_00191_Slowpoke extends PokemonCardScript {
 	}
 
 	@Override
+	public boolean attackCanBeExecuted(String attackName) {
+		if (attackName.equals("Spacing Out") && ((PokemonCard) this.card).getDamageMarks() == 0)
+			return false;
+		else if (attackName.equals("Scavenge") && gameModel.getPosition(ownDiscardPile()).getTrainerCards().size() == 0)
+			return false; // no trainer cards in discard pile
+		else
+			return super.attackCanBeExecuted(attackName);
+	}
+
+	@Override
 	public void executeAttack(String attackName) {
 		if (attackName.equals("Spacing Out"))
 			this.spacingOut();
@@ -34,20 +46,49 @@ public class Script_00191_Slowpoke extends PokemonCardScript {
 	}
 
 	private void spacingOut() {
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		Card attacking = gameModel.getPosition(attacker).getTopCard();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		// Flip coin to check if defending pokemon is paralyzed:
+		gameModel.sendTextMessageToAllPlayers("If heads then " + attacking.getName() + " is healed!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+		if (c == Coin.HEADS) {
+			gameModel.getAttackAction().healPosition(attacker, 10);
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 
 	private void scavenge() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+		Player player = this.getCardOwner();
+
+		// Pay energy:
+		List<Element> costs = new ArrayList<>();
+		costs.add(Element.PSYCHIC);
+		gameModel.getAttackAction().playerPaysEnergy(player, costs, card.getCurrentPosition().getPositionID());
+
+		// Choose a trainer card:
+		List<Card> trainerCards = gameModel.getPosition(ownDiscardPile()).getTrainerCards();
+		Card chosenCard = player.playerChoosesCards(trainerCards, 1, true, "Choose a trainer card to recover!").get(0);
+		// Message clients:
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " recovers " + chosenCard.getName() + " from his discard pile!", chosenCard, "");
+		// Move trainer card:
+		gameModel.getAttackAction().moveCard(ownDiscardPile(), ownHand(), chosenCard.getGameID(), true);
+	}
+
+	private PositionID ownDiscardPile() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_DISCARDPILE;
+		else
+			return PositionID.RED_DISCARDPILE;
+	}
+
+	private PositionID ownHand() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_HAND;
+		else
+			return PositionID.RED_HAND;
 	}
 }

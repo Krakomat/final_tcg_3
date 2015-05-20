@@ -44,6 +44,9 @@ public class Script_00115_Snorlax extends PokemonCardScript {
 	}
 
 	public boolean allowIncomingCondition(PokemonCondition condition) {
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return true; // just allow the condition
+
 		PokemonCard pCard = (PokemonCard) this.card;
 		if (!pCard.hasCondition(PokemonCondition.ASLEEP) && !pCard.hasCondition(PokemonCondition.CONFUSED) && !pCard.hasCondition(PokemonCondition.PARALYZED)) {
 			if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED
@@ -53,7 +56,7 @@ public class Script_00115_Snorlax extends PokemonCardScript {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		// Cannot be manually activated!

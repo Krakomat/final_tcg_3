@@ -36,11 +36,10 @@ public class Script_00173_Graveler extends PokemonCardScript {
 	}
 
 	private void harden() {
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		Card attackingPokemon = gameModel.getPosition(attacker).getTopCard();
+		gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is protects itself!", "");
+		gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.HARDEN30);
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
@@ -48,8 +47,6 @@ public class Script_00173_Graveler extends PokemonCardScript {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 	}
 }

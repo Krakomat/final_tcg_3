@@ -72,6 +72,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 			Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
 			gameModel.getAttackAction().movePokemonToPosition(newActive, ownActive());
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

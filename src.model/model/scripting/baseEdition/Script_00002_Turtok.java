@@ -56,6 +56,8 @@ public class Script_00002_Turtok extends PokemonCardScript {
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
 			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
 		return true;
 	}
 

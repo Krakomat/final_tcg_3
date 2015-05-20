@@ -3,10 +3,13 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
+import network.client.Player;
 import model.database.Card;
+import model.database.EnergyCard;
 import model.database.PokemonCard;
+import model.enums.Coin;
+import model.enums.Color;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -36,20 +39,57 @@ public class Script_00163_Moltres extends PokemonCardScript {
 	}
 
 	private void wildfire() {
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		Player player = this.getCardOwner();
+		Player enemy = this.getEnemyPlayer();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		List<Card> energy = this.card.getCurrentPosition().getEnergyCards();
+		List<Card> fireEnergy = new ArrayList<>();
+		for (Card c : energy) {
+			EnergyCard eCard = (EnergyCard) c; // Cast is allowed
+			if (eCard.isBasisEnergy() && eCard.getProvidedEnergy().contains(Element.FIRE))
+				fireEnergy.add(eCard);
+		}
+
+		if (fireEnergy.size() > 0) {
+			List<Card> chosenEnergy = player.playerChoosesCards(fireEnergy, 60, false, "Choose an arbitrary amount of fire energy:");
+			if (chosenEnergy.size() > 0) {
+				this.gameModel.sendTextMessageToAllPlayers(player.getName() + " discards " + chosenEnergy.size() + " fire energy from Moltres!", "");
+				// Discard energy:
+				for (Card c : chosenEnergy)
+					this.gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), c.getGameID());
+				this.gameModel.sendGameModelToAllPlayers("");
+
+				// Discard cards from opponents deck:
+				this.gameModel.sendTextMessageToAllPlayers(enemy.getName() + " discards " + chosenEnergy.size() + " from his deck!", "");
+				for (int i = 0; i < chosenEnergy.size() && this.gameModel.getPosition(enemyDeck()).size() > 0; i++)
+					this.gameModel.getAttackAction().discardCardToDiscardPile(enemyDeck(), gameModel.getPosition(enemyDeck()).getTopCard().getGameID());
+				this.gameModel.sendGameModelToAllPlayers("");
+			} else
+				this.gameModel.sendTextMessageToAllPlayers("Wildfire does nothing!", "");
+		} else
+			this.gameModel.sendTextMessageToAllPlayers("Wildfire does nothing!", "");
 	}
 
 	private void diveBomb() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+
+		// Flip coin to check if damage is applied:
+		gameModel.sendTextMessageToAllPlayers("If Tails then Horn Hazard does nothing!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+		if (c == Coin.HEADS)
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 80, true);
+		else
+			gameModel.sendTextMessageToAllPlayers("Horn Hazard does nothing!", "");
+	}
+
+	private PositionID enemyDeck() {
+		Player enemy = this.getEnemyPlayer();
+		if (enemy.getColor() == Color.BLUE)
+			return PositionID.BLUE_DECK;
+		else
+			return PositionID.RED_DECK;
 	}
 }

@@ -5,12 +5,12 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.TrainerCard;
-import model.enums.Coin;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.enums.Sounds;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00194_MrFuji extends TrainerCardScript {
@@ -21,38 +21,35 @@ public class Script_00194_MrFuji extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
+		Player player = this.getCardOwner();
+		if (this.gameModel.getFullBenchPositions(player.getColor()).size() == 0)
+			return null;
+
 		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
 		Player player = this.getCardOwner();
-		gameModel.sendTextMessageToAllPlayers("If heads then " + this.card.getName() + "'s effects will be executed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
-		if (c == Coin.HEADS) {
-			// Choose a card from the deck:
-			List<Card> cards = gameModel.getPosition(ownDeck()).getPokemonCards();
-			Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
-			// Message clients:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
-			// Move card:
-			gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
+		PositionID targetPosition = player.playerChoosesPositions(gameModel.getFullBenchPositions(player.getColor()), 1, true,
+				"Choose a position to shuffle into your deck!").get(0);
 
-			// Shuffle deck:
-			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
-			gameModel.getAttackAction().shufflePosition(ownDeck());
+		// Scoop up position:
+		Position position = gameModel.getPosition(targetPosition);
+		List<Card> cards = position.getCards();
 
-			gameModel.sendGameModelToAllPlayers("");
-		}
-	}
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses the positions of " + position.getTopCard().getName() + "!", position.getTopCard(), "");
+		PositionID playerDeck = ownDeck();
 
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
+		int size = cards.size();
+		for (int i = 0; i < size; i++)
+			gameModel.getAttackAction().moveCard(targetPosition, playerDeck, cards.get(0).getGameID(), true);
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
+		gameModel.getPosition(playerDeck).shuffle();
+		gameModel.sendGameModelToAllPlayers("");
+
+		// Discard trainer card:
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 	}
 
 	private PositionID ownDeck() {

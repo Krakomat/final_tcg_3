@@ -3,10 +3,9 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.database.Card;
+import network.client.Player;
 import model.database.PokemonCard;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -33,11 +32,10 @@ public class Script_00189_Psyduck extends PokemonCardScript {
 	}
 
 	private void headache() {
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		Player enemy = this.getEnemyPlayer();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
+		gameModel.getGameModelParameters().setAllowedToPlayTrainerCards((short) 2);
+		gameModel.sendTextMessageToAllPlayers(enemy.getName() + " can't play Trainer cards on his next turn!", "");
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
@@ -45,8 +43,9 @@ public class Script_00189_Psyduck extends PokemonCardScript {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 3 coins...", "");
+		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(3);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 10, true);
 	}
 }

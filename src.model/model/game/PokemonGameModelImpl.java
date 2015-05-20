@@ -73,7 +73,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 			blueCards.get(i).setCurrentPosition(blueDeck);
 			blueDeck.addToPosition(blueCards.get(i));
 		}
-
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
@@ -607,6 +606,13 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 * Makes actions that have to be executed between the turns, e.g. applying poison damage. Does nothing, if there is nothing to do in between turns.
 	 */
 	public void betweenTurns() {
+		// Update isAllowedToPlayTrainerCards value in gameModelParameters:
+		short value = gameModelParameters.isAllowedToPlayTrainerCards();
+		if (value > 0) {
+			value--;
+			this.gameModelParameters.setAllowedToPlayTrainerCards(value);
+		}
+
 		List<PositionID> posList = this.getFullArenaPositions(playerBlue.getColor());
 		for (PositionID posID : posList)
 			updateConditions(posID);
@@ -879,7 +885,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	public GameModelUpdate getGameModelForPlayer(Player player) {
 		GameModelUpdate gameModelUpdate = new GameModelUpdateImpl();
 		gameModelUpdate.setGameModelParameters(gameModelParameters);
-		
+
 		Card dummyCard = new Card();
 		for (Position pos : gameField.getAllPositions()) {
 			Position position = new PositionImpl(pos.getPositionID(), pos.getColor());

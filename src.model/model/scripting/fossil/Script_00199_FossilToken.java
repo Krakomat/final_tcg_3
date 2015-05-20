@@ -54,7 +54,7 @@ public class Script_00199_FossilToken extends PokemonCardScript {
 
 	public void executePokemonPower(String powerName) {
 		final Player player = this.getCardOwner();
-		gameModel.sendTextMessageToAllPlayers(player.getName() + " discards Clefary Doll!", "");
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " discards Mysterious Fossil!", "");
 
 		Position pos = this.card.getCurrentPosition();
 		boolean newActive = pos.getPositionID() == PositionID.BLUE_ACTIVEPOKEMON || pos.getPositionID() == PositionID.RED_ACTIVEPOKEMON ? true : false;

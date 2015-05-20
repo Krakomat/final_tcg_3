@@ -3,10 +3,9 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -28,11 +27,18 @@ public class Script_00183_Geodude extends PokemonCardScript {
 	}
 
 	private void stoneBarrage() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		int numberHeads = 0;
+		Coin c = null;
+		do {
+			c = gameModel.getAttackAction().flipACoin();
+			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+			if (c == Coin.HEADS)
+				numberHeads++;
+		} while (c == Coin.HEADS);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 10, true);
 	}
 }

@@ -25,8 +25,6 @@ public enum PositionID {
 			return true;
 		case BLUE_BENCH_5:
 			return true;
-		case BLUE_DECK:
-			return true;
 		case RED_ACTIVEPOKEMON:
 			return true;
 		case RED_BENCH_1:

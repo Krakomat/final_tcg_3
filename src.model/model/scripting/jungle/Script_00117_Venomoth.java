@@ -18,7 +18,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00117_Venomoth extends PokemonCardScript {
 
-	private boolean pokemonPowerActivated;
 	private Element originalType;
 
 	public Script_00117_Venomoth(PokemonCard card, PokemonGame gameModel) {
@@ -27,7 +26,6 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 		att1Cost.add(Element.GRASS);
 		this.addAttack("String Shot", att1Cost);
 		this.addPokemonPower("Shift");
-		this.pokemonPowerActivated = false;
 		this.originalType = ((PokemonCard) this.card).getElement();
 	}
 
@@ -37,13 +35,15 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 
-		if (pokemonPowerActivated)
+		if (gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().contains(this.card.getGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
+			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
 
 		for (PositionID posID : gameModel.getFullBenchPositions(player.getColor())) {
@@ -109,7 +109,8 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 		pokemon.setElement(chosenElement);
 		gameModel.sendTextMessageToAllPlayers(this.card.getName() + "'s new type is " + chosenElement + "!", "");
 
-		pokemonPowerActivated = true;
+		gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().add(this.card.getGameID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void moveToPosition(PositionID targetPosition) {
@@ -120,8 +121,8 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (pokemonPowerActivated) {
-			pokemonPowerActivated = false;
+		if (gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().contains(this.card.getGameID())) {
+			gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().remove(new Integer(this.card.getGameID()));
 		}
 	}
 }

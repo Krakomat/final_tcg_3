@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -12,6 +13,9 @@ import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00157_Haunter extends PokemonCardScript {
+
+	private boolean coinFlipped;
+	private boolean powerActive;
 
 	public Script_00157_Haunter(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
@@ -21,20 +25,69 @@ public class Script_00157_Haunter extends PokemonCardScript {
 		this.addAttack("Nightmare", att1Cost);
 
 		this.addPokemonPower("Transparency");
+		this.powerActive = false;
+		this.coinFlipped = false;
+	}
+
+	public int modifyIncomingDamage(int damage, Card attacker) {
+		if (powerCanBeUsed() && !coinFlipped) {
+			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
+			Coin c = gameModel.getAttackAction().flipACoin();
+			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+			if (c == Coin.HEADS)
+				this.powerActive = true;
+			this.coinFlipped = true;
+			if (this.powerActive)
+				return 0;
+		} else if (powerCanBeUsed() && coinFlipped && powerActive)
+			return 0;
+		return damage;
+	}
+
+	public boolean allowIncomingCondition(PokemonCondition condition) {
+		if (powerCanBeUsed() && !coinFlipped) {
+			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
+			Coin c = gameModel.getAttackAction().flipACoin();
+			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+			if (c == Coin.HEADS)
+				this.powerActive = true;
+			this.coinFlipped = true;
+			if (this.powerActive)
+				return false;
+		} else if (powerCanBeUsed() && coinFlipped && powerActive)
+			return false;
+		return true;
+	}
+
+	public void executeEndTurnActions() {
+		this.powerActive = false;
+		this.coinFlipped = false;
+	}
+
+	private boolean powerCanBeUsed() {
+		PokemonCard pCard = (PokemonCard) this.card;
+
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
+		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			return false;
+		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
+			return false;
+
+		return true;
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
 		if (attackName.equals("Nightmare"))
-			this.dightmare();
+			this.nightmare();
 	}
 
-	private void dightmare() {
+	private void nightmare() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);
 	}
 }

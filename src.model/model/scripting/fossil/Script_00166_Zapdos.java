@@ -3,10 +3,10 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.database.Card;
+import network.client.Player;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -30,11 +30,23 @@ public class Script_00166_Zapdos extends PokemonCardScript {
 	}
 
 	private void thunderstorm() {
+		Player enemyPlayer = this.getCardOwner();
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		int numberOfTails = 0;
+		for (PositionID benchPos : gameModel.getFullBenchPositions(enemyPlayer.getColor())) {
+			Coin c = gameModel.getAttackAction().flipACoin();
+			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+			if (c == Coin.HEADS)
+				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 20, false);
+			else
+				numberOfTails++;
+		}
+
+		if (numberOfTails > 0)
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, numberOfTails * 10, true);
 	}
 }

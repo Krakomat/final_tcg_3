@@ -51,9 +51,8 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 * @param gameModelUpdate
 	 */
 	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client, PokemonGameManager server) {
-		this.gameModelParameters = new GameModelParameters();
+		this.gameModelParameters = new GameModelParameters(gameModelUpdate);
 		this.gameField = new GameFieldImpl(gameModelUpdate);
-		this.gameModelParameters.setTurnNumber(gameModelUpdate.getGameModelParameters().getTurnNumber());
 		this.gameID = 0; // just a default id
 		this.playerOnTurn = client;
 		this.server = server;
@@ -66,9 +65,6 @@ public class LocalPokemonGameModel implements PokemonGame {
 			this.playerBlue.setColor(Color.BLUE);
 			this.playerRed = client;
 		}
-		this.gameModelParameters.setGameState(GameState.RUNNING);
-		this.gameModelParameters.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
-		this.gameModelParameters.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.attackAction = new AttackAction(this);
 		this.attackCondition = new AttackCondition(this);
 		this.cardScriptFactory = new CardScriptFactory();

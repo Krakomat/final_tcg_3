@@ -22,6 +22,10 @@ public abstract class TrainerCardScript extends CardScript {
 		if (!this.cardInHand())
 			return null;
 
+		// Check if flag in gameModelParameters is set:
+		if (gameModel.getGameModelParameters().isAllowedToPlayTrainerCards() > 0)
+			return null;
+
 		return trainerCanBePlayedFromHand();
 	}
 

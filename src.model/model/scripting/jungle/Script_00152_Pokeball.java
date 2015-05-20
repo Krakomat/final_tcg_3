@@ -43,6 +43,9 @@ public class Script_00152_Pokeball extends TrainerCardScript {
 			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 			gameModel.getAttackAction().shufflePosition(ownDeck());
 
+			// Discard trainer card:
+			gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

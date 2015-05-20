@@ -3,12 +3,16 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
+import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
+import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00171_Golduck extends PokemonCardScript {
@@ -35,20 +39,47 @@ public class Script_00171_Golduck extends PokemonCardScript {
 	}
 
 	private void psyshock() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		// Flip coin to check if defending pokemon is paralyzed:
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+		if (c == Coin.HEADS) {
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 
 	private void hyperBeam() {
+		Player player = this.getCardOwner();
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Position defendingPosition = gameModel.getPosition(defender);
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+
+		// Check for energy at enemy position:
+		if (defendingPosition.getEnergyCards().size() > 0) {
+			// Choose one of them and remove it:
+			List<Card> cardList = new ArrayList<>();
+			for (Card c : defendingPosition.getEnergyCards())
+				cardList.add(c);
+
+			Card chosenEnergyCard = player.playerChoosesCards(cardList, 1, true, "Choose one energy card to remove!").get(0);
+			PositionID discardPile = null;
+			if (chosenEnergyCard.getCurrentPosition().getColor() == Color.BLUE)
+				discardPile = PositionID.BLUE_DISCARDPILE;
+			else
+				discardPile = PositionID.RED_DISCARDPILE;
+
+			gameModel.getAttackAction().moveCard(chosenEnergyCard.getCurrentPosition().getPositionID(), discardPile, chosenEnergyCard.getGameID(), true);
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 }

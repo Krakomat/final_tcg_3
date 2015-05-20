@@ -55,6 +55,6 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 		if (player.getColor() == Color.BLUE)
 			return PositionID.BLUE_HAND;
 		else
-			return PositionID.BLUE_HAND;
+			return PositionID.RED_HAND;
 	}
 }

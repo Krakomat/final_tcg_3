@@ -50,7 +50,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			if (!(this.gameModel.getFullBenchPositions(color).size() == 5))
 				return PlayerAction.PUT_ON_BENCH;
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
-			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty())
+			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
+					&& this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty())
 				return PlayerAction.EVOLVE_POKEMON;
 		} else
 			throw new IllegalArgumentException("Error: Wrong CardType for the card in canBePlayedFromHand() of PokemonCardScript: " + this.card.getCardType());
@@ -410,6 +411,16 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	 * @param condition
 	 */
 	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
+		// Override when needed!
+	}
+
+	/**
+	 * Is called when the owner pokemon of this script got its conditions removed.
+	 * 
+	 * @param turnNumberm
+	 * @param condition
+	 */
+	public void pokemonGotConditionsRemoved(int turnNumber) {
 		// Override when needed!
 	}
 

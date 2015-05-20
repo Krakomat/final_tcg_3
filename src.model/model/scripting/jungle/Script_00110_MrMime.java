@@ -35,6 +35,9 @@ public class Script_00110_MrMime extends PokemonCardScript {
 
 	@Override
 	public int modifyIncomingDamage(int damage, Card attacker) {
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return damage; // no modifications allowed
+
 		PokemonCard pCard = (PokemonCard) this.card;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return damage;
@@ -46,7 +49,7 @@ public class Script_00110_MrMime extends PokemonCardScript {
 			return damage;
 		}
 	}
-	
+
 	@Override
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		// Cannot be manually activated!

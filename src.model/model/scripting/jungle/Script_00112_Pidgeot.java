@@ -82,6 +82,7 @@ public class Script_00112_Pidgeot extends PokemonCardScript {
 				Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
 				gameModel.sendCardMessageToAllPlayers(enemy.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
 				gameModel.getAttackAction().movePokemonToPosition(newActive, defender);
+				gameModel.sendGameModelToAllPlayers("");
 			} else {
 				// Enemy loses the game:
 				this.gameModel.sendTextMessageToAllPlayers(enemy.getName() + " has no active pokemon anymore!", "");

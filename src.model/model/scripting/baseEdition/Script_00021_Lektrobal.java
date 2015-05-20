@@ -56,6 +56,9 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
+
 		return true;
 	}
 

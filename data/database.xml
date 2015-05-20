@@ -3306,7 +3306,7 @@
             <Edition>TOKEN</Edition>
         </Card>
         <Type>COLORLESS</Type>
-        <HP>0</HP>
+        <HP>10</HP>
         <Weakness/>
         <Resistance/>
         <RetreatCost/>

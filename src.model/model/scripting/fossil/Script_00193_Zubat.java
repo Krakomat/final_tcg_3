@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -38,17 +39,23 @@ public class Script_00193_Zubat extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		// Flip coin to check if defending pokemon is poisoned:
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+		if (c == Coin.HEADS) {
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 
 	private void leechLife() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+		int damageDealt = this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		if (damageDealt > 0)
+			this.gameModel.getAttackAction().healPosition(attacker, damageDealt);
 	}
 }

@@ -3,8 +3,10 @@ package model.scripting.fossil;
 import java.util.ArrayList;
 import java.util.List;
 
+import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -35,12 +37,30 @@ public class Script_00167_Arbok extends PokemonCardScript {
 	}
 
 	private void terrorStrike() {
+		// Get the player:
+		Player player = this.getCardOwner();
+		Player enemy = this.getEnemyPlayer();
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
+		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
-		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
-		gameModel.sendGameModelToAllPlayers("");
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+
+		if (gameModel.getFullBenchPositions(player.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
+			Coin c = gameModel.getAttackAction().flipACoin();
+			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
+			if (c == Coin.HEADS) {
+				// Let enemy choose bench pokemon and swap it with his active:
+				gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");
+				PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
+						"Choose a pokemon to swap wtih your active!").get(0);
+				Card newPkm = gameModel.getPosition(chosenPosition).getTopCard();
+				gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!", "");
+				gameModel.getAttackAction().swapPokemon(defender, chosenPosition);
+				gameModel.sendGameModelToAllPlayers("");
+			}
+		}
 	}
 
 	private void poisonFang() {
@@ -48,7 +68,6 @@ public class Script_00167_Arbok extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
-		this.gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);
-		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+		this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
 	}
 }
