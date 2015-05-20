@@ -14,6 +14,7 @@ Patch 2.01
 		- Pokeball: Will now be discarded after playing
 		- Fixed a bug, where cards that return to a players hand would still have damage marks on them
 		- Fixed a bug regarding the sound effect of card draws
+		- Fixed a bug in the card draw process
 		
 Patch 2.0
 	New Features

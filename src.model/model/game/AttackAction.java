@@ -405,12 +405,11 @@ public class AttackAction {
 				else
 					c.setVisibleForPlayerRed(true);
 				this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
+				checkAndResolveFullHand(hand.getPositionID(), player);
 				gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
 			} else
 				drawingFinished = true;
 		}
-
-		checkAndResolveFullHand(hand.getPositionID(), player);
 
 		return true;
 	}
