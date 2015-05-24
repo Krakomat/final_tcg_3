@@ -15,6 +15,9 @@ Patch 2.01
 		- Fixed a bug, where cards that return to a players hand would still have damage marks on them
 		- Fixed a bug regarding the sound effect of card draws
 		- Fixed a bug in the card draw process
+	
+	UI
+		- Fixed a bug, where the games crashes after multiple right clicks
 		
 Patch 2.0
 	New Features

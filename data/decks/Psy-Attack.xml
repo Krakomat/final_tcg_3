@@ -7,23 +7,14 @@
         <Card ID="00003">
             <Size>3</Size>
         </Card>
-        <Card ID="00010">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00031">
-            <Size>2</Size>
-        </Card>
         <Card ID="00032">
             <Size>3</Size>
-        </Card>
-        <Card ID="00039">
-            <Size>1</Size>
         </Card>
         <Card ID="00043">
             <Size>4</Size>
         </Card>
         <Card ID="00071">
-            <Size>1</Size>
+            <Size>2</Size>
         </Card>
         <Card ID="00074">
             <Size>1</Size>
@@ -41,7 +32,7 @@
             <Size>1</Size>
         </Card>
         <Card ID="00091">
-            <Size>2</Size>
+            <Size>1</Size>
         </Card>
         <Card ID="00095">
             <Size>1</Size>
@@ -61,8 +52,17 @@
         <Card ID="00115">
             <Size>1</Size>
         </Card>
-        <Card ID="00135">
+        <Card ID="00156">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00157">
             <Size>2</Size>
+        </Card>
+        <Card ID="00169">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00194">
+            <Size>1</Size>
         </Card>
     </Cards>
 </Deck>

@@ -221,6 +221,11 @@ public class CardViewer extends WindowGeometry {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		if(value)
+			GUI2D.getInstance().getIOController().setRightClickAllowed(false);
+		else
+			GUI2D.getInstance().getIOController().setRightClickAllowed(true);
+
 		cardImage.setVisible(value);
 		this.lock.unlock();
 	}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Rainbow">
+    <Cards>
+        <Card ID="00018">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00020">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00026">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00077">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00083">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00098">
+            <Size>7</Size>
+        </Card>
+        <Card ID="00100">
+            <Size>7</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>7</Size>
+        </Card>
+        <Card ID="00107">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00108">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00116">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00120">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00139">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00142">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00155">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00161">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00175">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00195">
+            <Size>3</Size>
+        </Card>
+    </Cards>
+</Deck>

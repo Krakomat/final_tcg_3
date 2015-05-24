@@ -30,7 +30,8 @@ public class IOController {
 	private List<SelectableNode> shootables, rightClickShootables, storedShootables;
 	/** Node on which the mouse is positioned currently */
 	private SelectableNode currentMouseOverNode;
-
+	private boolean rightClickAllowed;
+	
 	private Lock lock;
 
 	public IOController(InputManager inputManager) {
@@ -39,6 +40,7 @@ public class IOController {
 		this.storedShootables = new ArrayList<>();
 		this.rightClickShootables = new ArrayList<>();
 		this.currentMouseOverNode = null;
+		this.setRightClickAllowed(true);
 		this.lock = new Lock();
 	}
 
@@ -98,7 +100,7 @@ public class IOController {
 					} else
 						shotNode.mousePressed();
 				}
-			} else if (name.equals("MouseClickRight")) {
+			} else if (name.equals("MouseClickRight") && rightClickAllowed) {
 				// 1. Reset results list.
 				Vector2f click2d = inputManager.getCursorPosition();
 
@@ -312,5 +314,13 @@ public class IOController {
 		for (SelectableNode node : this.storedShootables)
 			this.shootables.add(node);
 		lock.unlock();
+	}
+
+	public boolean isRightClickAllowed() {
+		return rightClickAllowed;
+	}
+
+	public void setRightClickAllowed(boolean rightClickAllowed) {
+		this.rightClickAllowed = rightClickAllowed;
 	}
 }
