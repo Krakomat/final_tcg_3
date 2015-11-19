@@ -710,6 +710,12 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	@Override
 	public void playAnimation(Animation animation) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Starting animation!");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Animation done!");
 	}
 }

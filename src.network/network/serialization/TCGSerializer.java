@@ -877,13 +877,21 @@ public class TCGSerializer {
 		return deck;
 	}
 
-	public ByteString packAnimation(Animation animation) {
-		// TODO Auto-generated method stub
-		return null;
+	public ByteString packAnimation(Animation animation) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MessagePacker packer = MessagePack.newDefaultPacker(out);
+
+		// Animation:
+		ByteString b = animation.packAnimation();
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		packer.close();
+		return new ByteString(out.toByteArray());
 	}
 
-	public Animation unpackAnimation(ByteString byteString) {
-		// TODO Auto-generated method stub
-		return null;
+	public Animation unpackAnimation(ByteString byteString) throws IOException {
+		Animation animation = Animation.unpackAnimation(byteString);
+		return animation;
 	}
 }

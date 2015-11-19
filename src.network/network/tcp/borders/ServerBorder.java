@@ -233,9 +233,14 @@ public class ServerBorder implements Player {
 
 	@Override
 	public void playerReceivesAnimation(Animation animation) {
-		QueryMessage qMessage = new QueryMessage(Method.PLAYER_RECEIVE_ANIMATION, serializer.packAnimation(animation));
-		qMessage.logSendMessage("ServerBorder");
-		this.client.send(qMessage);
+		QueryMessage qMessage;
+		try {
+			qMessage = new QueryMessage(Method.PLAYER_RECEIVE_ANIMATION, serializer.packAnimation(animation));
+			qMessage.logSendMessage("ServerBorder");
+			this.client.send(qMessage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.waitForResponse();
 		// Continue!
 	}
