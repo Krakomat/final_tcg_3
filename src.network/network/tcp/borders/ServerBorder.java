@@ -1,5 +1,7 @@
 package network.tcp.borders;
 
+import gui2d.animations.Animation;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -227,6 +229,15 @@ public class ServerBorder implements Player {
 		QueryMessage qMessage = new QueryMessage(Method.PLAYER_RECIEVE_SOUND, serializer.packString(sound));
 		qMessage.logSendMessage("ServerBorder");
 		this.client.send(qMessage);
+	}
+
+	@Override
+	public void playerReceivesAnimation(Animation animation) {
+		QueryMessage qMessage = new QueryMessage(Method.PLAYER_RECEIVE_ANIMATION, serializer.packAnimation(animation));
+		qMessage.logSendMessage("ServerBorder");
+		this.client.send(qMessage);
+		this.waitForResponse();
+		// Continue!
 	}
 
 	@Override

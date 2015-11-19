@@ -2,6 +2,7 @@ package network.client;
 
 import gui2d.GUI2D;
 import gui2d.abstracts.SelectableNode;
+import gui2d.animations.Animation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -364,5 +365,10 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	@Override
 	public Account asAccount() {
 		return this;
+	}
+
+	@Override
+	public void playerReceivesAnimation(Animation animation) {
+		this.view.playAnimation(animation);
 	}
 }

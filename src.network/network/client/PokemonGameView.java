@@ -1,5 +1,7 @@
 package network.client;
 
+import gui2d.animations.Animation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,4 +165,11 @@ public interface PokemonGameView {
 	 * @param sound
 	 */
 	public void playSound(String sound);
+
+	/**
+	 * Plays the given animation. Waits, until the animation has finished.
+	 * 
+	 * @param animation
+	 */
+	public void playAnimation(Animation animation);
 }

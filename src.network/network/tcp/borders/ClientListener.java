@@ -1,5 +1,7 @@
 package network.tcp.borders;
 
+import gui2d.animations.Animation;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -152,6 +154,13 @@ public class ClientListener implements MessageListener<Client> {
 					gameModel = serializer.unpackGameModelUpdate(qMessage.getParameters().get(0));
 					sound = serializer.unpackString(qMessage.getParameters().get(1));
 					this.player.playerUpdatesGameModel(gameModel, sound);
+					break;
+				case PLAYER_RECEIVE_ANIMATION:
+					Animation animation = serializer.unpackAnimation(qMessage.getParameters().get(0));
+					this.player.playerReceivesAnimation(animation);
+					// Wait for animation to finish!!
+					response = new RespondMessage(Method.PLAYER_RECEIVE_ANIMATION, serializer.packBool(true));
+					this.clientBorder.getClient().send(response);
 					break;
 				default:
 					throw new IOException("Wrong Method type at ClientListener: " + qMessage.getMethod());

@@ -1,5 +1,7 @@
 package network.client;
 
+import gui2d.animations.Animation;
+
 import java.util.List;
 
 import network.server.PokemonGameManager;
@@ -181,4 +183,12 @@ public interface Player extends Account {
 	 * @param sound
 	 */
 	public void playerReceivesSound(String sound);
+
+	/**
+	 * The player receives an animation and has to delegate this object to its gui, in order to play the animation. After the animation is finished, the player sends
+	 * a {@link RespondMessage} to the server.
+	 * 
+	 * @param animation
+	 */
+	public void playerReceivesAnimation(Animation animation);
 }

@@ -1,5 +1,7 @@
 package network.serialization;
 
+import gui2d.animations.Animation;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.CharacterCodingException;
@@ -873,5 +875,15 @@ public class TCGSerializer {
 
 		unpacker.close();
 		return deck;
+	}
+
+	public ByteString packAnimation(Animation animation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Animation unpackAnimation(ByteString byteString) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

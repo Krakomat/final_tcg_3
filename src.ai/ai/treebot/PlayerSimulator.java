@@ -1,5 +1,7 @@
 package ai.treebot;
 
+import gui2d.animations.Animation;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -343,5 +345,10 @@ public class PlayerSimulator implements Player {
 		this.simulateCardQueue.clear();
 		this.simulateElementQueue.clear();
 		this.simulatePositionQueue.clear();
+	}
+
+	@Override
+	public void playerReceivesAnimation(Animation animation) {
+		
 	}
 }

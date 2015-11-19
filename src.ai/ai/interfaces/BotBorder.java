@@ -1,5 +1,7 @@
 package ai.interfaces;
 
+import gui2d.animations.Animation;
+
 import java.util.List;
 
 import ai.dummy.DummyBot;
@@ -155,6 +157,11 @@ public class BotBorder extends AccountImpl implements Player {
 
 	@Override
 	public void playerReceivesSound(String sound) {
-		
+
+	}
+
+	@Override
+	public void playerReceivesAnimation(Animation animation) {
+
 	}
 }

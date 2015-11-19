@@ -17,6 +17,7 @@ import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
+import gui2d.animations.Animation;
 import gui2d.controller.CameraController;
 import gui2d.controller.DeckEditController;
 import gui2d.controller.EffectController;
@@ -704,5 +705,11 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	@Override
 	public void playSound(String sound) {
 		EffectController.playSound(sound);
+	}
+
+	@Override
+	public void playAnimation(Animation animation) {
+		// TODO Auto-generated method stub
+		
 	}
 }
