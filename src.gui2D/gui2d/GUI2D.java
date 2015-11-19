@@ -712,7 +712,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		// TODO Auto-generated method stub
 		System.out.println("Starting animation!");
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -233,6 +233,7 @@ public class ServerBorder implements Player {
 
 	@Override
 	public void playerReceivesAnimation(Animation animation) {
+		this.respondMessage = null;
 		QueryMessage qMessage;
 		try {
 			qMessage = new QueryMessage(Method.PLAYER_RECEIVE_ANIMATION, serializer.packAnimation(animation));

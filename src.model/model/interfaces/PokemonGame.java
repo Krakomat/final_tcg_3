@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import gui2d.animations.Animation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,6 +180,13 @@ public interface PokemonGame {
 	void sendGameModelToAllPlayers(String sound);
 
 	/**
+	 * Broadcasts the given animation to all clients.
+	 * 
+	 * @param animation
+	 */
+	void sendAnimationToAllPlayers(Animation animation);
+
+	/**
 	 * The player clients have to play the given sound.
 	 * 
 	 * @param sound
@@ -261,8 +270,8 @@ public interface PokemonGame {
 	boolean getRetreatExecuted();
 
 	void setRetreatExecuted(boolean value);
-	
+
 	GameModelParameters getGameModelParameters();
-	
+
 	void setGameModelParameters(GameModelParameters gameModelParameters);
 }

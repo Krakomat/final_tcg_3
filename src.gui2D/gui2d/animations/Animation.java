@@ -41,5 +41,5 @@ public abstract class Animation {
 
 	protected AnimationType animationType;
 
-	public abstract ByteString packAnimation();
+	public abstract ByteString packAnimation() throws IOException;
 }

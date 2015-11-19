@@ -1,5 +1,7 @@
 package model.game;
 
+import gui2d.animations.Animation;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -312,6 +314,11 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public void sendGameModelToAllPlayers(String sound) {
+		// leave empty
+	}
+
+	@Override
+	public void sendAnimationToAllPlayers(Animation animation) {
 		// leave empty
 	}
 

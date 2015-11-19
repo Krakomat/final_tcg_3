@@ -156,6 +156,7 @@ public class ClientListener implements MessageListener<Client> {
 					this.player.playerUpdatesGameModel(gameModel, sound);
 					break;
 				case PLAYER_RECEIVE_ANIMATION:
+					System.out.println("Executing Animation!");
 					Animation animation = serializer.unpackAnimation(qMessage.getParameters().get(0));
 					this.player.playerReceivesAnimation(animation);
 					// Wait for animation to finish!!

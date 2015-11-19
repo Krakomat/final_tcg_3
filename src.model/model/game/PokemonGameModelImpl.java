@@ -1,5 +1,7 @@
 package model.game;
 
+import gui2d.animations.Animation;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,12 +119,15 @@ public class PokemonGameModelImpl implements PokemonGame {
 		while (!(bothFinished)) {
 			// Each player draws 7 cards:
 			for (int i = 0; i < 7; i++) {
-				if (!playerBlueHandOk)
-					this.attackAction.playerDrawsCards(1, playerBlue);
-				if (!playerRedHandOk)
-					this.attackAction.playerDrawsCards(1, playerRed);
+				if (!playerBlueHandOk && !playerRedHandOk)
+					this.attackAction.playersDrawCards(1, playerRed, 1, playerBlue);
+				else {
+					if (!playerBlueHandOk)
+						this.attackAction.playerDrawsCards(1, playerBlue);
+					if (!playerRedHandOk)
+						this.attackAction.playerDrawsCards(1, playerRed);
+				}
 				// this.sendGameModelToPlayers(this.getPlayerList(), "");
-				this.timeoutWait(200);
 			}
 
 			this.timeoutWait(200);
@@ -828,6 +833,34 @@ public class PokemonGameModelImpl implements PokemonGame {
 	@Override
 	public void sendGameModelToAllPlayers(String sound) {
 		this.sendGameModelToPlayers(getPlayerList(), sound);
+	}
+
+	private int playerDone = 0;
+
+	@Override
+	public void sendAnimationToAllPlayers(Animation animation) {
+		List<Player> playerList = getPlayerList();
+		playerDone = 0;
+		int playerSize = playerList.size();
+		for (Player p : playerList) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					p.playerReceivesAnimation(animation);
+					increasePlayerDone();
+				}
+			}).start();
+		}
+		while (playerDone != playerSize)
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	}
+
+	private synchronized int increasePlayerDone() {
+		return playerDone++;
 	}
 
 	private void sendTextMessageToPlayers(List<Player> playerList, String message, String sound) {

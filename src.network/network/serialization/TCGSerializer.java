@@ -878,16 +878,7 @@ public class TCGSerializer {
 	}
 
 	public ByteString packAnimation(Animation animation) throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		MessagePacker packer = MessagePack.newDefaultPacker(out);
-
-		// Animation:
-		ByteString b = animation.packAnimation();
-		packer.packBinaryHeader(b.length());
-		packer.writePayload(b.copyAsBytes());
-
-		packer.close();
-		return new ByteString(out.toByteArray());
+		return animation.packAnimation();
 	}
 
 	public Animation unpackAnimation(ByteString byteString) throws IOException {

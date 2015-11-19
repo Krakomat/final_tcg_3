@@ -1,5 +1,8 @@
 package model.game;
 
+import gui2d.animations.Animation;
+import gui2d.animations.CardDrawAnimation;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -406,12 +409,82 @@ public class AttackAction {
 					c.setVisibleForPlayerRed(true);
 				this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
 				checkAndResolveFullHand(hand.getPositionID(), player);
+
+				// Execute animation:
+				Animation animation = new CardDrawAnimation();
+				gameModel.sendAnimationToAllPlayers(animation);
 				gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
 			} else
 				drawingFinished = true;
 		}
 
 		return true;
+	}
+
+	/**
+	 * Both players draw simultaneously! Use only for initial draw! Sends gamemodel + sound to clients here!
+	 * 
+	 * @param amount
+	 * @param player
+	 * @return
+	 */
+	public void playersDrawCards(int amount1, Player player1, int amount2, Player player2) {
+		{
+			Position deck = null;
+			Position hand = null;
+			if (player1.getColor() == Color.BLUE) {
+				deck = gameModel.getPosition(PositionID.BLUE_DECK);
+				hand = gameModel.getPosition(PositionID.BLUE_HAND);
+			} else {
+				deck = gameModel.getPosition(PositionID.RED_DECK);
+				hand = gameModel.getPosition(PositionID.RED_HAND);
+			}
+
+			boolean drawingFinished = false;
+			for (int i = 0; i < amount1 && !drawingFinished; i++) {
+				Card c = deck.getTopCard();
+				if (c != null) {
+					if (hand.getColor() == Color.BLUE)
+						c.setVisibleForPlayerBlue(true);
+					else
+						c.setVisibleForPlayerRed(true);
+					this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
+					checkAndResolveFullHand(hand.getPositionID(), player1);
+				} else
+					drawingFinished = true;
+			}
+		}
+
+		{
+			Position deck = null;
+			Position hand = null;
+			if (player2.getColor() == Color.BLUE) {
+				deck = gameModel.getPosition(PositionID.BLUE_DECK);
+				hand = gameModel.getPosition(PositionID.BLUE_HAND);
+			} else {
+				deck = gameModel.getPosition(PositionID.RED_DECK);
+				hand = gameModel.getPosition(PositionID.RED_HAND);
+			}
+
+			boolean drawingFinished = false;
+			for (int i = 0; i < amount2 && !drawingFinished; i++) {
+				Card c = deck.getTopCard();
+				if (c != null) {
+					if (hand.getColor() == Color.BLUE)
+						c.setVisibleForPlayerBlue(true);
+					else
+						c.setVisibleForPlayerRed(true);
+					this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
+					checkAndResolveFullHand(hand.getPositionID(), player2);
+				} else
+					drawingFinished = true;
+			}
+		}
+
+		// Execute animation:
+		Animation animation = new CardDrawAnimation();
+		gameModel.sendAnimationToAllPlayers(animation);
+		gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
 	}
 
 	/**
