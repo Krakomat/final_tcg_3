@@ -1,3 +1,11 @@
+Patch 3.00
+	New Features
+		Animations
+			Added the following types of animations to make the gameplay more smooth:
+			- Card draw
+		UI
+			- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
+
 Patch 2.01
 	New Features
 		- New decks for the bot added
