@@ -18,6 +18,8 @@ import model.interfaces.Position;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
 import gui2d.animations.Animation;
+import gui2d.animations.CardDrawAnimationImage;
+import gui2d.controller.AnimationController;
 import gui2d.controller.CameraController;
 import gui2d.controller.DeckEditController;
 import gui2d.controller.EffectController;
@@ -76,6 +78,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private GUI2DController currentActiveController;
 
 	private MusicController musicController;
+	private AnimationController animationController;
 
 	public GUI2D() {
 		isStarted = false;
@@ -144,11 +147,18 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 		this.musicController = new MusicController();
 		this.musicController.switchMusic(MusicType.TITLE_MUSIC);
+
+		this.animationController = new AnimationController();
 		isStarted = true;
 	}
 
-	public void simpleUpdate(float tps) {
-		this.musicController.update(tps * 100); // Transform in ms
+	public void simpleUpdate(float tpf) {
+		this.musicController.update(tpf * 1000); // Transform in ms
+		try {
+			this.animationController.simpleUpdate(tpf * 1000); // Transform in ms
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -709,12 +719,19 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void playAnimation(Animation animation) {
-		// TODO Auto-generated method stub
 		System.out.println("Starting animation!");
+		CardDrawAnimationImage cardDrawAnimation = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), this.resolution.getKey() * 0.06f,
+				this.resolution.getKey() * 0.06f * 1.141f, 0, 0, 500, 300, 200);
+		this.guiNode.attachChild(cardDrawAnimation);
 		try {
-			Thread.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			this.animationController.addAnimation(cardDrawAnimation);
+
+			while (!cardDrawAnimation.animationDone())
+				Thread.sleep(10);
+
+			this.guiNode.detachChild(cardDrawAnimation);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
 		}
 		System.out.println("Animation done!");
 	}
