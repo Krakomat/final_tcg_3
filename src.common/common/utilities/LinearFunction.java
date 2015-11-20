@@ -10,8 +10,6 @@ public class LinearFunction {
 		Preconditions.checkArgument(x1 != x2, "Error: x1 = x2!");
 		this.m = (y2 - y1) / (x2 - x1);
 		this.b = (x1 * y2 - x2 * y1) / (x1 - x2);
-		System.out.println(m);
-		System.out.println(b);
 	}
 
 	public float function(float x) {

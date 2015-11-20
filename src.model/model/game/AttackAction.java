@@ -411,7 +411,7 @@ public class AttackAction {
 				checkAndResolveFullHand(hand.getPositionID(), player);
 
 				// Execute animation:
-				Animation animation = new CardDrawAnimation();
+				Animation animation = new CardDrawAnimation(player.getColor());
 				gameModel.sendAnimationToAllPlayers(animation);
 				gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
 			} else
@@ -482,7 +482,7 @@ public class AttackAction {
 		}
 
 		// Execute animation:
-		Animation animation = new CardDrawAnimation();
+		Animation animation = new CardDrawAnimation(null);
 		gameModel.sendAnimationToAllPlayers(animation);
 		gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
 	}

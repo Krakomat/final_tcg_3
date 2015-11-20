@@ -17,8 +17,8 @@ import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
+import gui2d.animations.AnimateableObject;
 import gui2d.animations.Animation;
-import gui2d.animations.CardDrawAnimationImage;
 import gui2d.controller.AnimationController;
 import gui2d.controller.CameraController;
 import gui2d.controller.DeckEditController;
@@ -682,6 +682,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		this.player = player;
 		this.lobbyController.setAccount(this.player.asAccount());
 		this.deckEditController.setAccount(this.player.asAccount());
+		this.animationController.setPlayerColor(this.player.getColor());
 	}
 
 	/**
@@ -719,20 +720,23 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void playAnimation(Animation animation) {
-		System.out.println("Starting animation!");
-		CardDrawAnimationImage cardDrawAnimation = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), this.resolution.getKey() * 0.06f,
-				this.resolution.getKey() * 0.06f * 1.141f, 0, 0, 500, 300, 200);
-		this.guiNode.attachChild(cardDrawAnimation);
 		try {
-			this.animationController.addAnimation(cardDrawAnimation);
+			this.animationController.setPlayerColor(this.player.getColor());
+			AnimateableObject[] animObjects = this.animationController.addAnimation(animation);
 
-			while (!cardDrawAnimation.animationDone())
-				Thread.sleep(10);
-
-			this.guiNode.detachChild(cardDrawAnimation);
+			boolean animationDone = false;
+			while (!animationDone) {
+				animationDone = true;
+				for (AnimateableObject animObj : animObjects) {
+					if (!animObj.animationDone()) {
+						animationDone = false;
+					}
+				}
+				if (!animationDone)
+					Thread.sleep(10);
+			}
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println("Animation done!");
 	}
 }

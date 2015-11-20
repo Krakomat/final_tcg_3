@@ -146,6 +146,14 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		}).start();
 	}
 
+	public float getxPos() {
+		return this.xPos;
+	}
+
+	public float getyPos() {
+		return this.yPos;
+	}
+
 	@Override
 	public void mouseEnter() {
 		// Do nothing here

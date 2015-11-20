@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageUnpacker;
 
+import model.enums.Color;
 import network.serialization.TCGSerializer;
 import network.tcp.messages.ByteString;
 
@@ -15,10 +16,6 @@ import network.tcp.messages.ByteString;
  *
  */
 public abstract class Animation {
-
-	protected enum AnimationType {
-		CARD_DRAW;
-	}
 
 	public static Animation unpackAnimation(ByteString byteString) throws IOException {
 		TCGSerializer serializer = new TCGSerializer();
@@ -31,7 +28,11 @@ public abstract class Animation {
 		Animation animation = null;
 		switch (animationType) {
 		case CARD_DRAW:
-			animation = new CardDrawAnimation();
+			// Unpack color:
+			bString = serializer.unpackByteString(unpacker);
+			String c = serializer.unpackString(bString);
+			Color color = c.equals("null") ? null : Color.valueOf(c);
+			animation = new CardDrawAnimation(color);
 			break;
 		}
 
@@ -42,4 +43,8 @@ public abstract class Animation {
 	protected AnimationType animationType;
 
 	public abstract ByteString packAnimation() throws IOException;
+
+	public AnimationType getAnimationType() {
+		return animationType;
+	}
 }
