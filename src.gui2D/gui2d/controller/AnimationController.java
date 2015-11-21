@@ -16,6 +16,7 @@ import com.jme3.scene.Spatial;
 import model.database.Database;
 import model.enums.Color;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import common.utilities.Lock;
 
 /**
@@ -109,6 +110,7 @@ public class AnimationController {
 					animObjects[1] = animObj;
 				}
 			}
+			EffectController.playSound(Sounds.DRAW);
 			break;
 		default:
 			System.err.println("Could not parse AnimationType of animation object in addAnimation!");

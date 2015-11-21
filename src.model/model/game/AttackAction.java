@@ -413,7 +413,7 @@ public class AttackAction {
 				// Execute animation:
 				Animation animation = new CardDrawAnimation(player.getColor());
 				gameModel.sendAnimationToAllPlayers(animation);
-				gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
+				gameModel.sendGameModelToAllPlayers("");
 			} else
 				drawingFinished = true;
 		}
@@ -484,7 +484,7 @@ public class AttackAction {
 		// Execute animation:
 		Animation animation = new CardDrawAnimation(null);
 		gameModel.sendAnimationToAllPlayers(animation);
-		gameModel.sendGameModelToAllPlayers(Sounds.DRAW);
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	/**
