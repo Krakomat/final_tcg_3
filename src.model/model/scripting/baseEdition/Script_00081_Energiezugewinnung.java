@@ -23,7 +23,7 @@ public class Script_00081_Energiezugewinnung extends TrainerCardScript {
 	public PlayerAction trainerCanBePlayedFromHand() {
 		// Can be played if the own hand contains at least 2 cards(including this card) and the discardpile contains at least one energy card:
 		Position ownHand = this.card.getCurrentPosition();
-		if (ownHand.size() >= 2 && gameModel.getPosition(ownDiscardPile()).getEnergyCards().size() > 0)
+		if (ownHand.size() >= 2 && gameModel.getPosition(ownDiscardPile()).getBasicEnergyCards().size() > 0)
 			return PlayerAction.PLAY_TRAINER_CARD;
 		return null;
 	}
@@ -41,7 +41,7 @@ public class Script_00081_Energiezugewinnung extends TrainerCardScript {
 		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
 
 		// Choose up to 2 energy cards:
-		List<Card> energyCards = gameModel.getPosition(ownDiscardPile()).getEnergyCards();
+		List<Card> energyCards = gameModel.getPosition(ownDiscardPile()).getBasicEnergyCards();
 		List<Card> chooseCardList = new ArrayList<>();
 		for (Card c : energyCards)
 			chooseCardList.add(c);

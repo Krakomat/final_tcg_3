@@ -112,6 +112,17 @@ public class PositionImpl implements Position {
 	}
 
 	@Override
+	public ArrayList<Card> getBasicEnergyCards() {
+		ArrayList<Card> temp = new ArrayList<Card>();
+		for (int i = 0; i < cards.size(); i++) {
+			if (cards.get(i) instanceof EnergyCard && ((EnergyCard) cards.get(i)).isBasisEnergy()) {
+				temp.add((EnergyCard) cards.get(i));
+			}
+		}
+		return temp;
+	}
+
+	@Override
 	public List<Card> getTrainerCards() {
 		List<Card> temp = new ArrayList<Card>();
 		for (int i = 0; i < cards.size(); i++) {

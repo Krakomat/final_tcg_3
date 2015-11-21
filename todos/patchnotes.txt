@@ -5,7 +5,9 @@ Patch 3.00
 			- Card draw
 		UI
 			- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
-
+		Game:
+			- Energy Retrival: Fixed a bug, where non-basic energy cards could be retrieved
+			
 Patch 2.01
 	New Features
 		- New decks for the bot added

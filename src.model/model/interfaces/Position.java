@@ -136,6 +136,13 @@ public interface Position {
 	public ArrayList<Card> getEnergyCards();
 
 	/**
+	 * Returns all basic {@link EnergyCard}s on this position.
+	 * 
+	 * @return
+	 */
+	public ArrayList<Card> getBasicEnergyCards();
+
+	/**
 	 * Returns all {@link TrainerCard}s on this position.
 	 * 
 	 * @return
