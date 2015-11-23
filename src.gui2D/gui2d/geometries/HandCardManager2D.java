@@ -169,7 +169,7 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 			} else {
 				int j = 0;
 				for (int i = size - 1; i >= 0; i--) {
-					HandCard2D handCard = this.handCards.get(i);
+					HandCard2D handCard = this.handCards.get(j);
 					handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * j, yPos, level);
 					j++;
 				}
@@ -357,7 +357,6 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 			else
 				handCard.setVisible(false);
 		}
-
 		this.lock.unlock();
 	}
 
