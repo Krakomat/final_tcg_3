@@ -140,37 +140,39 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 			float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
 
 			float startPoint = 0;
-			float newStartPoint = 0;
-			float newEnemyStartPoint = 0;
-			if (size % 2 == 0) {
+			if (size % 2 == 0)
 				startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
-				newStartPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 4));
-				newEnemyStartPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 4));
-			} else {
+			else
 				startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
-				newStartPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
-				newEnemyStartPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
-			}
 
 			// Update Linear functions:
 			this.xFunction.clear();
 			if (this.enemyHand) {
-				for (int i = 0; i < size; i++) {
-					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newEnemyStartPoint
-							+ (handCardWidth + epsilon) * (i + 1));
+				for (int i = size - 1; i >= 0; i--) {
+					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, startPoint
+							+ (handCardWidth + epsilon) * (i) + handCardWidth / 2 + epsilon / 2);
 					this.xFunction.add(xFunc);
 				}
 			} else {
 				for (int i = 0; i < size; i++) {
-					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newStartPoint
-							+ (handCardWidth + epsilon) * (i - 1));
+					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, startPoint
+							+ (handCardWidth + epsilon) * (i) - handCardWidth / 2 + epsilon / 2);
 					this.xFunction.add(xFunc);
 				}
 			}
 
-			for (int i = 0; i < size; i++) {
-				HandCard2D handCard = this.handCards.get(i);
-				handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * i, yPos, level);
+			if (!this.enemyHand) {
+				for (int i = 0; i < size; i++) {
+					HandCard2D handCard = this.handCards.get(i);
+					handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * i, yPos, level);
+				}
+			} else {
+				int j = 0;
+				for (int i = size - 1; i >= 0; i--) {
+					HandCard2D handCard = this.handCards.get(i);
+					handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * j, yPos, level);
+					j++;
+				}
 			}
 		}
 
@@ -180,9 +182,23 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 		lock.unlock();
 	}
 
+	public float getXCoordForNewCard() {
+		int screenWidth = GUI2D.getInstance().getResolution().getKey();
+		int size = cards.size() + 1;
+		float epsilon = screenWidth * 0.01f; // distance between two cards
+		float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
+		float startPoint = 0;
+		if (size % 2 == 0)
+			startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+		else
+			startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+		if (!this.enemyHand)
+			return startPoint + (handCardWidth + epsilon) * (size - 1);
+		return startPoint;
+	}
+
 	@Override
 	public void startAnimation() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -203,10 +219,20 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 			this.animationTime = AnimationParameters.CARD_DRAW_TIME;
 
 		int size = cards.size();
-		for (int i = 0; i < size; i++) {
-			HandCard2D handCard = this.handCards.get(i);
-			LinearFunction func = this.xFunction.get(i);
-			handCard.setLocalTranslation(func.function(animationTime), yPos, level);
+		if (!this.enemyHand) {
+			for (int i = 0; i < size; i++) {
+				HandCard2D handCard = this.handCards.get(i);
+				LinearFunction func = this.xFunction.get(i);
+				handCard.setLocalTranslation(func.function(animationTime), yPos, level);
+			}
+		} else {
+			int j = 0;
+			for (int i = size - 1; i >= 0; i--) {
+				HandCard2D handCard = this.handCards.get(i);
+				LinearFunction func = this.xFunction.get(j);
+				handCard.setLocalTranslation(func.function(animationTime), yPos, level);
+				j++;
+			}
 		}
 	}
 

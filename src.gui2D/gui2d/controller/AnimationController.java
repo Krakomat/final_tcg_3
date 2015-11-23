@@ -94,7 +94,7 @@ public class AnimationController {
 
 					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"),
 							gui.getResolution().getKey() * 0.06f, gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x,
-							deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+							deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
 
 					this.animatedObjects.add(animObj);
 					this.animatedObjects.add(hand);
@@ -107,7 +107,7 @@ public class AnimationController {
 
 					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"),
 							gui.getResolution().getKey() * 0.06f, gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x,
-							deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+							deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
 
 					this.animatedObjects.add(animObj);
 					this.animatedObjects.add(hand);
