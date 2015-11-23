@@ -100,7 +100,7 @@ public class Script_00156_Gengar extends PokemonCardScript {
 		if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0) {
 			PositionID benchDefender = player.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
 					"Choose a pokemon that receives the damage!").get(0);
-			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchDefender, 10, true);
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchDefender, 10, false);
 		}
 	}
 

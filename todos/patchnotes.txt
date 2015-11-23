@@ -9,6 +9,8 @@ Patch 3.00
 		Game:
 			- Energy Retrival: Fixed a bug, where non-basic energy cards could be retrieved
 			- Gengar: Fixed a bug where the wrong script was loaded for this card
+			- Gengar: Fixed a bug, where Dark Mind would apply weakness/resistance for the damaged bench pokemon
+			- Hypno: Fixed a bug, where Dark Mind would apply weakness/resistance for the damaged bench pokemon
 		AI:
 			- Some number tweaking to make the AI better overall
 			
