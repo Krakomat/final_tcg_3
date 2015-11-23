@@ -10,6 +10,7 @@ import model.scripting.baseEdition.*;
 import model.scripting.fossil.Script_00153_Aerodactyl;
 import model.scripting.fossil.Script_00154_Articuno;
 import model.scripting.fossil.Script_00155_Dragonite;
+import model.scripting.fossil.Script_00156_Gengar;
 import model.scripting.fossil.Script_00157_Haunter;
 import model.scripting.fossil.Script_00158_Hitmonlee;
 import model.scripting.fossil.Script_00159_Hypno;
@@ -451,9 +452,9 @@ public class CardScriptFactory {
 		case "00155":
 			return new Script_00155_Dragonite((PokemonCard) card, gameModel);
 		case "00156":
-			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only used locally for Piepi doll
+			return new Script_00156_Gengar((PokemonCard) card, gameModel);
 		case "00157":
-			return new Script_00157_Haunter((PokemonCard) card, gameModel); // Only used locally for Lektrobal token
+			return new Script_00157_Haunter((PokemonCard) card, gameModel);
 		case "00158":
 			return new Script_00158_Hitmonlee((PokemonCard) card, gameModel);
 		case "00159":
@@ -537,7 +538,7 @@ public class CardScriptFactory {
 		case "00198":
 			return new Script_00198_MysteriousFossil((TrainerCard) card, gameModel);
 		case "00199":
-			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only used locally for Piepi doll
+			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only used locally for Mysterious Fossil
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}

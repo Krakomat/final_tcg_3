@@ -3,6 +3,7 @@ package gui2d.controller;
 import gui2d.GUI2D;
 import gui2d.animations.AnimateableObject;
 import gui2d.animations.Animation;
+import gui2d.animations.AnimationParameters;
 import gui2d.animations.CardDrawAnimation;
 import gui2d.animations.CardDrawAnimationImage;
 import gui2d.geometries.HandCardManager2D;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 
 import model.database.Database;
 import model.enums.Color;
@@ -51,7 +51,6 @@ public class AnimationController {
 
 		for (int i = 0; i < this.animatedObjects.size(); i++) {
 			if (this.animatedObjects.get(i).animationDone()) {
-				GUI2D.getInstance().getGuiNode().detachChild((Spatial) this.animatedObjects.get(i));
 				this.animatedObjects.remove(i);
 				i--;
 			}
@@ -78,25 +77,29 @@ public class AnimationController {
 				HandCardManager2D hand = (HandCardManager2D) gui.getIngameController().getPositionGeometry(
 						drawColor == Color.BLUE ? PositionID.BLUE_HAND : PositionID.RED_HAND, ownColor);
 
-				animObjects = new AnimateableObject[1];
+				animObjects = new AnimateableObject[2];
 				AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), gui.getResolution().getKey() * 0.06f,
 						gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x, deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(),
-						200);
-				gui.getGuiNode().attachChild((Spatial) animObj);
+						AnimationParameters.CARD_DRAW_TIME);
+
 				this.animatedObjects.add(animObj);
+				this.animatedObjects.add(hand);
 				animObjects[0] = animObj;
+				animObjects[1] = hand;
 			} else {
-				animObjects = new AnimateableObject[2];
+				animObjects = new AnimateableObject[4];
 				{
 					Node deck = (Node) gui.getIngameController().getPositionGeometry(PositionID.BLUE_DECK, ownColor);
 					HandCardManager2D hand = (HandCardManager2D) gui.getIngameController().getPositionGeometry(PositionID.BLUE_HAND, ownColor);
 
 					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"),
 							gui.getResolution().getKey() * 0.06f, gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x,
-							deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(), 200);
-					gui.getGuiNode().attachChild((Spatial) animObj);
+							deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+
 					this.animatedObjects.add(animObj);
+					this.animatedObjects.add(hand);
 					animObjects[0] = animObj;
+					animObjects[1] = hand;
 				}
 				{
 					Node deck = (Node) gui.getIngameController().getPositionGeometry(PositionID.RED_DECK, ownColor);
@@ -104,10 +107,12 @@ public class AnimationController {
 
 					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"),
 							gui.getResolution().getKey() * 0.06f, gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x,
-							deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(), 200);
-					gui.getGuiNode().attachChild((Spatial) animObj);
+							deck.getLocalTranslation().y, hand.getxPos(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+
 					this.animatedObjects.add(animObj);
-					animObjects[1] = animObj;
+					this.animatedObjects.add(hand);
+					animObjects[2] = animObj;
+					animObjects[3] = hand;
 				}
 			}
 			EffectController.playSound(Sounds.DRAW);
@@ -117,6 +122,9 @@ public class AnimationController {
 			break;
 		}
 
+		// Call start animation for objects:
+		for (AnimateableObject animObj : animObjects)
+			animObj.startAnimation();
 		this.lock.unlock();
 		return animObjects;
 	}

@@ -1,8 +1,11 @@
 package gui2d.animations;
 
-import com.jme3.asset.TextureKey;
-import common.utilities.LinearFunction;
+import java.util.concurrent.Callable;
 
+import com.jme3.asset.TextureKey;
+import com.jme3.scene.Spatial;
+
+import common.utilities.LinearFunction;
 import gui2d.GUI2D;
 import gui2d.geometries.Image2D;
 
@@ -44,6 +47,23 @@ public class CardDrawAnimationImage extends Image2D implements AnimateableObject
 	}
 
 	@Override
+	public void resetAnimation() {
+
+	}
+
+	@Override
+	public void startAnimation() {
+		// Add to gui node:
+		final Spatial self = this;
+		GUI2D.getInstance().enqueue(new Callable<Spatial>() {
+			public Spatial call() throws Exception {
+				GUI2D.getInstance().getGuiNode().attachChild(self);
+				return null;
+			}
+		});
+	}
+
+	@Override
 	public boolean animationDone() {
 		return this.animationTime == maxAnimationTime;
 	}
@@ -55,6 +75,8 @@ public class CardDrawAnimationImage extends Image2D implements AnimateableObject
 			this.animationTime = maxAnimationTime;
 
 		this.setLocalTranslation(xFunction.function(animationTime), yFunction.function(animationTime), 0);
-	}
 
+		if (this.animationDone())
+			GUI2D.getInstance().getGuiNode().detachChild((Spatial) this);
+	}
 }

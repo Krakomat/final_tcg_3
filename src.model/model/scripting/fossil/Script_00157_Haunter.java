@@ -71,8 +71,8 @@ public class Script_00157_Haunter extends PokemonCardScript {
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
+//		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
+//			return false;
 
 		return true;
 	}

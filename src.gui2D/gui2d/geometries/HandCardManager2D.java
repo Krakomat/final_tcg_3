@@ -9,9 +9,12 @@ import model.database.Database;
 import com.jme3.asset.TextureKey;
 import com.jme3.scene.Node;
 
+import common.utilities.LinearFunction;
 import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.abstracts.SelectableNode;
+import gui2d.animations.AnimateableObject;
+import gui2d.animations.AnimationParameters;
 import gui2d.controller.IngameController;
 import gui2d.geometries.chooser.CardViewer;
 
@@ -21,17 +24,19 @@ import gui2d.geometries.chooser.CardViewer;
  * @author Michael
  *
  */
-public class HandCardManager2D extends Node implements SelectableNode {
+public class HandCardManager2D extends Node implements SelectableNode, AnimateableObject {
 
 	private List<HandCard2D> handCards;
 	private List<Card> cards;
-
+	private boolean enemyHand;
 	private int level;
 	private float xPos = this.getLocalTranslation().x;
 	private float yPos = this.getLocalTranslation().y;
+	private List<LinearFunction> xFunction;
+	private float animationTime;
 	private Lock lock;
 
-	public HandCardManager2D(String name) {
+	public HandCardManager2D(String name, boolean enemyHand) {
 		this.setName(name);
 		handCards = new ArrayList<>();
 		xPos = 0;
@@ -39,10 +44,13 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		level = 0;
 		cards = new ArrayList<>();
 		lock = new Lock();
+		this.enemyHand = enemyHand;
+		this.xFunction = new ArrayList<>();
+		this.animationTime = 0;
 		initHandCards();
 	}
 
-	public HandCardManager2D(String name, float xPos, float yPos, int zPos) {
+	public HandCardManager2D(String name, float xPos, float yPos, int zPos, boolean enemyHand) {
 		this.setName(name);
 		handCards = new ArrayList<>();
 		this.xPos = xPos;
@@ -50,6 +58,9 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		level = zPos;
 		cards = new ArrayList<>();
 		lock = new Lock();
+		this.enemyHand = enemyHand;
+		this.xFunction = new ArrayList<>();
+		this.animationTime = 0;
 		initHandCards();
 	}
 
@@ -63,10 +74,14 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
 
 		float startPoint = 0;
-		if (size % 2 == 0)
+		float newStartPoint = 0;
+		if (size % 2 == 0) {
 			startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
-		else
+			newStartPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+		} else {
 			startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+			newStartPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+		}
 
 		float height = handCardWidth * 1.141f;
 		for (int i = 0; i < size; i++) {
@@ -87,6 +102,20 @@ public class HandCardManager2D extends Node implements SelectableNode {
 			this.handCards.add(handCard);
 			handCard.setVisible(false);
 			handCard.update();
+		}
+
+		if (this.enemyHand) {
+			for (int i = 0; i < size; i++) {
+				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newStartPoint
+						+ (handCardWidth + epsilon) * (i + 1));
+				this.xFunction.add(xFunc);
+			}
+		} else {
+			for (int i = 0; i < size; i++) {
+				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newStartPoint
+						+ (handCardWidth + epsilon) * (i - 1));
+				this.xFunction.add(xFunc);
+			}
 		}
 	}
 
@@ -111,10 +140,34 @@ public class HandCardManager2D extends Node implements SelectableNode {
 			float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
 
 			float startPoint = 0;
-			if (size % 2 == 0)
+			float newStartPoint = 0;
+			float newEnemyStartPoint = 0;
+			if (size % 2 == 0) {
 				startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
-			else
+				newStartPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 4));
+				newEnemyStartPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 4));
+			} else {
 				startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+				newStartPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+				newEnemyStartPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+			}
+
+			// Update Linear functions:
+			this.xFunction.clear();
+			if (this.enemyHand) {
+				for (int i = 0; i < size; i++) {
+					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newEnemyStartPoint
+							+ (handCardWidth + epsilon) * (i + 1));
+					this.xFunction.add(xFunc);
+				}
+			} else {
+				for (int i = 0; i < size; i++) {
+					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newStartPoint
+							+ (handCardWidth + epsilon) * (i - 1));
+					this.xFunction.add(xFunc);
+				}
+			}
+
 			for (int i = 0; i < size; i++) {
 				HandCard2D handCard = this.handCards.get(i);
 				handCard.setLocalTranslation(startPoint + (handCardWidth + epsilon) * i, yPos, level);
@@ -125,6 +178,36 @@ public class HandCardManager2D extends Node implements SelectableNode {
 		for (int i = 0; i < 9; i++)
 			this.handCards.get(i).update();
 		lock.unlock();
+	}
+
+	@Override
+	public void startAnimation() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resetAnimation() {
+		this.animationTime = 0;
+	}
+
+	@Override
+	public boolean animationDone() {
+		return this.animationTime == AnimationParameters.CARD_DRAW_TIME;
+	}
+
+	@Override
+	public void simpleUpdate(float tpf) {
+		this.animationTime = this.animationTime + tpf;
+		if (this.animationTime > AnimationParameters.CARD_DRAW_TIME)
+			this.animationTime = AnimationParameters.CARD_DRAW_TIME;
+
+		int size = cards.size();
+		for (int i = 0; i < size; i++) {
+			HandCard2D handCard = this.handCards.get(i);
+			LinearFunction func = this.xFunction.get(i);
+			handCard.setLocalTranslation(func.function(animationTime), yPos, level);
+		}
 	}
 
 	public void handCardSelected(int index) {

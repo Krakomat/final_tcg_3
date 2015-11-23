@@ -75,11 +75,11 @@ public class IngameController extends Node implements GUI2DController {
 		float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
 		float handCardHeight = handCardWidth * 1.141f;
 
-		ownHand = new HandCardManager2D("HandCardManager", screenWidth * 0.5f, screenHeight * 0.03f, 0);
+		ownHand = new HandCardManager2D("HandCardManager", screenWidth * 0.5f, screenHeight * 0.03f, 0, false);
 		ownHand.setVisible(false);
 		this.attachChild(ownHand);
 
-		enemyHand = new HandCardManager2D("HandCardManager", screenWidth * 0.5f, screenHeight * 0.85f, 0);
+		enemyHand = new HandCardManager2D("HandCardManager", screenWidth * 0.5f, screenHeight * 0.85f, 0, true);
 		enemyHand.setVisible(false);
 		this.attachChild(enemyHand);
 
@@ -1212,7 +1212,7 @@ public class IngameController extends Node implements GUI2DController {
 			if (p.size() > 0) {
 				hand.setCards(p.getCards());
 				hand.setVisible(true);
-			} else{
+			} else {
 				hand.setCards(new ArrayList<Card>());
 				hand.setVisible(false);
 			}
@@ -1418,7 +1418,7 @@ public class IngameController extends Node implements GUI2DController {
 			if (p.size() > 0) {
 				hand.setCards(p.getCards());
 				hand.setVisible(true);
-			} else{
+			} else {
 				hand.setCards(new ArrayList<Card>());
 				hand.setVisible(false);
 			}

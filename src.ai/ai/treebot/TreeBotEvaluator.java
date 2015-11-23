@@ -69,7 +69,8 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 		PokemonCard ownActive = (PokemonCard) gameModel.getPosition(PositionID.getActivePokemon(color)).getTopCard();
 		value = value - 2 * (ownActive.getDamageMarks() / 10);
 
-		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready:
+		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready, 3 points for each
+		// attack of your active pokemnon that is ready:
 		for (PositionID pos : gameModel.getFullBenchPositions(color)) {
 			Pair<Integer, Integer> analysisResult = this.analyseEnergyOnPosition(gameModel.getPosition(pos));
 			value = value - 2 * analysisResult.getValue();
@@ -79,7 +80,7 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 		Pair<Integer, Integer> analysisResult = this.analyseEnergyOnPosition(gameModel.getPosition(PositionID.getActivePokemon(color)));
 		value = value - 2 * analysisResult.getValue();
 		value = value + 4 * analysisResult.getKey();
-		value = value + this.countAttacksReady(gameModel.getPosition(PositionID.getActivePokemon(color)));
+		value = value + 3 * this.countAttacksReady(gameModel.getPosition(PositionID.getActivePokemon(color)));
 
 		return value;
 	}
