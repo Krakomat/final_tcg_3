@@ -43,7 +43,17 @@ public abstract class Animation {
 			// Unpack damageAmount:
 			bString = serializer.unpackByteString(unpacker);
 			int number = serializer.unpackInt(bString);
-			animation = new DamageAnimation(posID, number);
+			animation = new DamageAnimation(AnimationType.DAMAGE_POSITION, posID, number);
+			break;
+		case HEAL_POSITION:
+			// Unpack positionID:
+			bString = serializer.unpackByteString(unpacker);
+			s = serializer.unpackString(bString);
+			posID = s.equals("null") ? null : PositionID.valueOf(s);
+			// Unpack damageAmount:
+			bString = serializer.unpackByteString(unpacker);
+			number = serializer.unpackInt(bString);
+			animation = new DamageAnimation(AnimationType.HEAL_POSITION, posID, number);
 			break;
 		default:
 			break;

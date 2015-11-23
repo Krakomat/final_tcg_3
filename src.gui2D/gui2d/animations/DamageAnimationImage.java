@@ -6,7 +6,9 @@ import gui2d.GUI2D;
 
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
+import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Spatial;
+
 import common.utilities.LinearFunction;
 
 public class DamageAnimationImage extends BitmapText implements AnimateableObject {
@@ -15,12 +17,12 @@ public class DamageAnimationImage extends BitmapText implements AnimateableObjec
 	private float startX;
 	private LinearFunction yFunction;
 
-	public DamageAnimationImage(BitmapFont font, int amount, float startX, float startY, float finishY, float animationTime) {
+	public DamageAnimationImage(BitmapFont font, ColorRGBA fontColor, int amount, float startX, float startY, float finishY, float animationTime) {
 		super(font);
 		float size = GUI2D.getInstance().getGuiFont().getCharSet().getRenderedSize();
 		this.setSize(size * 3); // font size
 		this.setText(amount + ""); // the text
-		this.setColor(AnimationParameters.DAMAGE_COLOR); // font color
+		this.setColor(fontColor); // font color
 		this.startX = startX;
 		this.animationTime = 0;
 		this.maxAnimationTime = animationTime;

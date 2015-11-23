@@ -16,10 +16,10 @@ public class DamageAnimation extends Animation {
 	private PositionID damagedPosition;
 	private int damageAmount;
 
-	public DamageAnimation(PositionID damagedPosition, int damageAmount) {
+	public DamageAnimation(AnimationType type, PositionID damagedPosition, int damageAmount) {
 		super();
 		Preconditions.checkArgument(damagedPosition != null, "Error: damagedPosition = null!");
-		this.animationType = AnimationType.DAMAGE_POSITION;
+		this.animationType = type;
 		this.damagedPosition = damagedPosition;
 		this.damageAmount = damageAmount;
 	}

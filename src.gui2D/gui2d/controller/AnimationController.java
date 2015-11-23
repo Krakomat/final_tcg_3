@@ -125,12 +125,24 @@ public class AnimationController {
 			animObjects = new AnimateableObject[1];
 			PositionID posID = damageAnimation.getDamagedPosition();
 			SelectableNode node = gui.getIngameController().getPositionGeometry(posID, ownColor);
-			DamageAnimationImage animObj = new DamageAnimationImage(gui.getGuiFont(), damageAnimation.getDamageAmount(), node.getLocalTranslation().x
+			DamageAnimationImage animObj = new DamageAnimationImage(gui.getGuiFont(), AnimationParameters.DAMAGE_COLOR, damageAnimation.getDamageAmount(),
+					node.getLocalTranslation().x + node.getSize().x / 2, node.getLocalTranslation().y + node.getSize().y / 2, node.getLocalTranslation().y
+							+ node.getSize().y / 2 + gui.getResolution().getValue() * 0.12f, AnimationParameters.DAMAGE_TIME);
+			this.animatedObjects.add(animObj);
+			animObjects[0] = animObj;
+			EffectController.playSound(Sounds.DAMAGE);
+			break;
+		case HEAL_POSITION:
+			damageAnimation = (DamageAnimation) animation;
+			animObjects = new AnimateableObject[1];
+			posID = damageAnimation.getDamagedPosition();
+			node = gui.getIngameController().getPositionGeometry(posID, ownColor);
+			animObj = new DamageAnimationImage(gui.getGuiFont(), AnimationParameters.HEAL_COLOR, damageAnimation.getDamageAmount(), node.getLocalTranslation().x
 					+ node.getSize().x / 2, node.getLocalTranslation().y + node.getSize().y / 2, node.getLocalTranslation().y + node.getSize().y / 2
 					+ gui.getResolution().getValue() * 0.12f, AnimationParameters.DAMAGE_TIME);
 			this.animatedObjects.add(animObj);
 			animObjects[0] = animObj;
-			EffectController.playSound(Sounds.DAMAGE);
+			EffectController.playSound(Sounds.HEAL);
 			break;
 		default:
 			System.err.println("Could not parse AnimationType of animation object in addAnimation!");

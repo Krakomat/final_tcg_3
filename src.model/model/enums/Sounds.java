@@ -5,6 +5,7 @@ public class Sounds {
 	public static final String ACTIVATE_TRAINER = "/effects/activateTrainer.wav";
 	public static final String COINFLIP = "/effects/coinflip.wav";
 	public static final String DAMAGE = "/effects/damage.wav";
+	public static final String HEAL = "/effects/heal.wav";
 	public static final String EVOLVE = "/effects/evolve.wav";
 	public static final String ON_BENCH = "/effects/onBench.wav";
 	public static final String ON_TURN = "/effects/onTurn.wav";

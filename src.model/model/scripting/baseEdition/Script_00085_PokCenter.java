@@ -30,13 +30,13 @@ public class Script_00085_PokCenter extends TrainerCardScript {
 		List<PositionID> positionList = this.getDamagedPositions();
 		for (PositionID posID : positionList) {
 			PokemonCard pokemon = (PokemonCard) gameModel.getPosition(posID).getTopCard();
-			
+
 			PokemonCard pokemonCard = (PokemonCard) gameModel.getPosition(posID).getTopCard();
 			if (pokemonCard.getDamageMarks() > 0) {
-				pokemonCard.setDamageMarks(0);
+				gameModel.getAttackAction().fullHealPosition(posID);
 				gameModel.getAttackAction().removeAllEnergyFromPosition(posID);
 			}
-			
+
 			gameModel.sendTextMessageToAllPlayers(pokemon.getName() + " is healed fully", "");
 			gameModel.sendGameModelToAllPlayers("");
 		}

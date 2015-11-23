@@ -1,6 +1,7 @@
 package model.game;
 
 import gui2d.animations.Animation;
+import gui2d.animations.AnimationType;
 import gui2d.animations.CardDrawAnimation;
 import gui2d.animations.DamageAnimation;
 
@@ -148,7 +149,7 @@ public class AttackAction {
 
 		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");
 		// Execute animation:
-		Animation animation = new DamageAnimation(targetPosition, damageAmount);
+		Animation animation = new DamageAnimation(AnimationType.DAMAGE_POSITION, targetPosition, damageAmount);
 		gameModel.sendAnimationToAllPlayers(animation);
 		this.gameModel.sendGameModelToAllPlayers("");
 		return damageAmount;
@@ -257,6 +258,9 @@ public class AttackAction {
 		targetPokemon.setDamageMarks(newDamageMarks);
 
 		this.gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + " is healed for " + amount, "");
+		// Execute animation:
+		Animation animation = new DamageAnimation(AnimationType.HEAL_POSITION, targetPosition, amount);
+		gameModel.sendAnimationToAllPlayers(animation);
 		this.gameModel.sendGameModelToAllPlayers("");
 	}
 
@@ -608,6 +612,9 @@ public class AttackAction {
 		if (pokemonCard.getDamageMarks() > 0)
 			pokemonCard.setDamageMarks(0);
 
+		// Execute animation:
+		Animation animation = new DamageAnimation(AnimationType.HEAL_POSITION, position, pokemonCard.getHitpoints());
+		gameModel.sendAnimationToAllPlayers(animation);
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
