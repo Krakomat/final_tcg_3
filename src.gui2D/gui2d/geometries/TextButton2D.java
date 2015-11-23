@@ -9,6 +9,7 @@ import gui2d.controller.EffectController;
 import com.jme3.audio.AudioNode;
 import com.jme3.font.BitmapText;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 
 import common.utilities.Lock;
@@ -214,5 +215,9 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 		}
 		this.visible = value;
 		this.lock.unlock();
+	}
+
+	public Vector2f getSize() {
+		return new Vector2f(this.width, this.height);
 	}
 }

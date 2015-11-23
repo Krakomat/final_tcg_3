@@ -6,6 +6,7 @@ import com.jme3.asset.TextureKey;
 import com.jme3.audio.AudioNode;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -249,6 +250,10 @@ public abstract class Image2D extends Node implements SelectableNode {
 		}
 		this.visible = value;
 		lock.unlock();
+	}
+
+	public Vector2f getSize() {
+		return new Vector2f(this.imagePanel.getWidth(), this.imagePanel.getHeight());
 	}
 
 	public String getCardId() {

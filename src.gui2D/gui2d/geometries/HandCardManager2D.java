@@ -7,6 +7,7 @@ import model.database.Card;
 import model.database.Database;
 
 import com.jme3.asset.TextureKey;
+import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 
 import common.utilities.LinearFunction;
@@ -363,5 +364,10 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 	@Override
 	public void mouseSelectRightClick() {
 
+	}
+
+	public Vector2f getSize() {
+		// HandCardManager has no size on the screen!
+		return new Vector2f(0, 0);
 	}
 }

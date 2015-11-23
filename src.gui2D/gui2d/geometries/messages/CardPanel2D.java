@@ -7,6 +7,7 @@ import model.database.Database;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
 
+import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 
 import common.utilities.Lock;
@@ -269,5 +270,9 @@ public abstract class CardPanel2D extends Node implements SelectableNode {
 		}
 		this.visible = value;
 		this.lock.unlock();
+	}
+
+	public Vector2f getSize() {
+		return new Vector2f(this.width, this.height);
 	}
 }

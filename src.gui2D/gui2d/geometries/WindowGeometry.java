@@ -2,6 +2,7 @@ package gui2d.geometries;
 
 import com.jme3.font.BitmapText;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 
 import common.utilities.Lock;
@@ -176,5 +177,9 @@ public class WindowGeometry extends Node implements SelectableNode {
 	@Override
 	public int getLevel() {
 		return level;
+	}
+
+	public Vector2f getSize() {
+		return new Vector2f(this.width, this.height);
 	}
 }

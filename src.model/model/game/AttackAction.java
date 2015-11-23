@@ -2,6 +2,7 @@ package model.game;
 
 import gui2d.animations.Animation;
 import gui2d.animations.CardDrawAnimation;
+import gui2d.animations.DamageAnimation;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -146,7 +147,10 @@ public class AttackAction {
 		script.pokemonIsDamaged(gameModel.getTurnNumber(), damageAmount, attackerPositionID);
 
 		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");
-		this.gameModel.sendGameModelToAllPlayers(Sounds.DAMAGE);
+		// Execute animation:
+		Animation animation = new DamageAnimation(targetPosition, damageAmount);
+		gameModel.sendAnimationToAllPlayers(animation);
+		this.gameModel.sendGameModelToAllPlayers("");
 		return damageAmount;
 	}
 

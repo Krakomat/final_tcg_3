@@ -3,11 +3,14 @@ Patch 3.00
 		Animations
 			Added the following types of animations to make the gameplay more smooth:
 			- Card draw
+			- Damage for position
 		UI
 			- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
 		Game:
 			- Energy Retrival: Fixed a bug, where non-basic energy cards could be retrieved
 			- Gengar: Fixed a bug where the wrong script was loaded for this card
+		AI:
+			- Some number tweaking to make the AI better overall
 			
 Patch 2.01
 	New Features

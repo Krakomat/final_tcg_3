@@ -6,6 +6,7 @@ import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageUnpacker;
 
 import model.enums.Color;
+import model.enums.PositionID;
 import network.serialization.TCGSerializer;
 import network.tcp.messages.ByteString;
 
@@ -30,9 +31,21 @@ public abstract class Animation {
 		case CARD_DRAW:
 			// Unpack color:
 			bString = serializer.unpackByteString(unpacker);
-			String c = serializer.unpackString(bString);
-			Color color = c.equals("null") ? null : Color.valueOf(c);
+			String s = serializer.unpackString(bString);
+			Color color = s.equals("null") ? null : Color.valueOf(s);
 			animation = new CardDrawAnimation(color);
+			break;
+		case DAMAGE_POSITION:
+			// Unpack positionID:
+			bString = serializer.unpackByteString(unpacker);
+			s = serializer.unpackString(bString);
+			PositionID posID = s.equals("null") ? null : PositionID.valueOf(s);
+			// Unpack damageAmount:
+			bString = serializer.unpackByteString(unpacker);
+			int number = serializer.unpackInt(bString);
+			animation = new DamageAnimation(posID, number);
+			break;
+		default:
 			break;
 		}
 

@@ -1,11 +1,14 @@
 package gui2d.controller;
 
 import gui2d.GUI2D;
+import gui2d.abstracts.SelectableNode;
 import gui2d.animations.AnimateableObject;
 import gui2d.animations.Animation;
 import gui2d.animations.AnimationParameters;
 import gui2d.animations.CardDrawAnimation;
 import gui2d.animations.CardDrawAnimationImage;
+import gui2d.animations.DamageAnimation;
+import gui2d.animations.DamageAnimationImage;
 import gui2d.geometries.HandCardManager2D;
 
 import java.util.ArrayList;
@@ -116,6 +119,18 @@ public class AnimationController {
 				}
 			}
 			EffectController.playSound(Sounds.DRAW);
+			break;
+		case DAMAGE_POSITION:
+			DamageAnimation damageAnimation = (DamageAnimation) animation;
+			animObjects = new AnimateableObject[1];
+			PositionID posID = damageAnimation.getDamagedPosition();
+			SelectableNode node = gui.getIngameController().getPositionGeometry(posID, ownColor);
+			DamageAnimationImage animObj = new DamageAnimationImage(gui.getGuiFont(), damageAnimation.getDamageAmount(), node.getLocalTranslation().x
+					+ node.getSize().x / 2, node.getLocalTranslation().y + node.getSize().y / 2, node.getLocalTranslation().y + node.getSize().y / 2
+					+ gui.getResolution().getValue() * 0.12f, AnimationParameters.DAMAGE_TIME);
+			this.animatedObjects.add(animObj);
+			animObjects[0] = animObj;
+			EffectController.playSound(Sounds.DAMAGE);
 			break;
 		default:
 			System.err.println("Could not parse AnimationType of animation object in addAnimation!");
