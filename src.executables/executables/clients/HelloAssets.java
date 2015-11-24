@@ -18,7 +18,7 @@ public class HelloAssets extends SimpleApplication {
     @Override
     public void simpleInitApp() { 
         // Load a model from test_data (OgreXML + material + texture)
-        ninja = assetManager.loadModel("assets/models/coin.scene");
+        ninja = assetManager.loadModel("assets/models/coin/coin.scene");
         ninja.scale(1.05f, 1.05f, 1.05f);
         ninja.rotate(180.0f, 0.0f, 0.0f);
         ninja.setLocalTranslation(0.0f, -0.0f, -0.0f);
@@ -29,6 +29,6 @@ public class HelloAssets extends SimpleApplication {
         rootNode.addLight(al); 
     }
     public void simpleUpdate(float tpf){
-    	ninja.rotate(1*tpf, 0, 0);
+    	ninja.rotate(-1*tpf, 0, 0);
     }
 }
