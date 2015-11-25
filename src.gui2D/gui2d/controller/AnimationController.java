@@ -7,6 +7,8 @@ import gui2d.animations.Animation;
 import gui2d.animations.AnimationParameters;
 import gui2d.animations.CardDrawAnimation;
 import gui2d.animations.CardDrawAnimationImage;
+import gui2d.animations.CoinflipAnimation;
+import gui2d.animations.CoinflipAnimationModel;
 import gui2d.animations.DamageAnimation;
 import gui2d.animations.DamageAnimationImage;
 import gui2d.geometries.HandCardManager2D;
@@ -71,6 +73,8 @@ public class AnimationController {
 		GUI2D gui = GUI2D.getInstance();
 		this.lock.lock();
 		AnimateableObject[] animObjects = null;
+		float screenWidth = GUI2D.getInstance().getResolution().getKey();
+		float screenHeight = GUI2D.getInstance().getResolution().getValue();
 		switch (animation.getAnimationType()) {
 		case CARD_DRAW:
 			CardDrawAnimation drawAnimation = (CardDrawAnimation) animation;
@@ -81,9 +85,9 @@ public class AnimationController {
 						drawColor == Color.BLUE ? PositionID.BLUE_HAND : PositionID.RED_HAND, ownColor);
 
 				animObjects = new AnimateableObject[2];
-				AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), gui.getResolution().getKey() * 0.06f,
-						gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x, deck.getLocalTranslation().y, hand.getXCoordForNewCard(),
-						hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+				AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), screenWidth * 0.06f,
+						screenWidth * 0.06f * 1.141f, deck.getLocalTranslation().x, deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(),
+						AnimationParameters.CARD_DRAW_TIME);
 
 				this.animatedObjects.add(animObj);
 				this.animatedObjects.add(hand);
@@ -95,9 +99,9 @@ public class AnimationController {
 					Node deck = (Node) gui.getIngameController().getPositionGeometry(PositionID.BLUE_DECK, ownColor);
 					HandCardManager2D hand = (HandCardManager2D) gui.getIngameController().getPositionGeometry(PositionID.BLUE_HAND, ownColor);
 
-					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"),
-							gui.getResolution().getKey() * 0.06f, gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x,
-							deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), screenWidth * 0.06f,
+							screenWidth * 0.06f * 1.141f, deck.getLocalTranslation().x, deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(),
+							AnimationParameters.CARD_DRAW_TIME);
 
 					this.animatedObjects.add(animObj);
 					this.animatedObjects.add(hand);
@@ -108,9 +112,9 @@ public class AnimationController {
 					Node deck = (Node) gui.getIngameController().getPositionGeometry(PositionID.RED_DECK, ownColor);
 					HandCardManager2D hand = (HandCardManager2D) gui.getIngameController().getPositionGeometry(PositionID.RED_HAND, ownColor);
 
-					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"),
-							gui.getResolution().getKey() * 0.06f, gui.getResolution().getKey() * 0.06f * 1.141f, deck.getLocalTranslation().x,
-							deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(), AnimationParameters.CARD_DRAW_TIME);
+					AnimateableObject animObj = new CardDrawAnimationImage("AnimatedHandCard", Database.getTextureKey("00000"), screenWidth * 0.06f,
+							screenWidth * 0.06f * 1.141f, deck.getLocalTranslation().x, deck.getLocalTranslation().y, hand.getXCoordForNewCard(), hand.getyPos(),
+							AnimationParameters.CARD_DRAW_TIME);
 
 					this.animatedObjects.add(animObj);
 					this.animatedObjects.add(hand);
@@ -127,7 +131,7 @@ public class AnimationController {
 			SelectableNode node = gui.getIngameController().getPositionGeometry(posID, ownColor);
 			DamageAnimationImage animObj = new DamageAnimationImage(gui.getGuiFont(), AnimationParameters.DAMAGE_COLOR, damageAnimation.getDamageAmount(),
 					node.getLocalTranslation().x + node.getSize().x / 2, node.getLocalTranslation().y + node.getSize().y / 2, node.getLocalTranslation().y
-							+ node.getSize().y / 2 + gui.getResolution().getValue() * 0.12f, AnimationParameters.DAMAGE_TIME);
+							+ node.getSize().y / 2 + screenHeight * 0.12f, AnimationParameters.DAMAGE_TIME);
 			this.animatedObjects.add(animObj);
 			animObjects[0] = animObj;
 			EffectController.playSound(Sounds.DAMAGE);
@@ -138,11 +142,18 @@ public class AnimationController {
 			posID = damageAnimation.getDamagedPosition();
 			node = gui.getIngameController().getPositionGeometry(posID, ownColor);
 			animObj = new DamageAnimationImage(gui.getGuiFont(), AnimationParameters.HEAL_COLOR, damageAnimation.getDamageAmount(), node.getLocalTranslation().x
-					+ node.getSize().x / 2, node.getLocalTranslation().y + node.getSize().y / 2, node.getLocalTranslation().y + node.getSize().y / 2
-					+ gui.getResolution().getValue() * 0.12f, AnimationParameters.DAMAGE_TIME);
+					+ node.getSize().x / 2, node.getLocalTranslation().y + node.getSize().y / 2, node.getLocalTranslation().y + node.getSize().y / 2 + screenHeight
+					* 0.12f, AnimationParameters.DAMAGE_TIME);
 			this.animatedObjects.add(animObj);
 			animObjects[0] = animObj;
 			EffectController.playSound(Sounds.HEAL);
+			break;
+		case COIN_FLIP:
+			CoinflipAnimation coinflipAnimation = (CoinflipAnimation) animation;
+			animObjects = new AnimateableObject[1];
+			CoinflipAnimationModel coinflipModel = new CoinflipAnimationModel(coinflipAnimation.isHeads(), -1, 0.25f, 2.0f, AnimationParameters.COIN_FLIP_TIME);
+			this.animatedObjects.add(coinflipModel);
+			animObjects[0] = coinflipModel;
 			break;
 		default:
 			System.err.println("Could not parse AnimationType of animation object in addAnimation!");

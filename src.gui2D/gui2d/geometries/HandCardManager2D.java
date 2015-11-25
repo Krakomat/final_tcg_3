@@ -215,6 +215,11 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 
 	@Override
 	public void simpleUpdate(float tpf) {
+		try {
+			this.lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.animationTime = this.animationTime + tpf;
 		if (this.animationTime > AnimationParameters.CARD_DRAW_TIME)
 			this.animationTime = AnimationParameters.CARD_DRAW_TIME;
@@ -235,6 +240,7 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 				j++;
 			}
 		}
+		lock.unlock();
 	}
 
 	public void handCardSelected(int index) {

@@ -28,7 +28,7 @@ public class MusicController extends Node {
 	static final int DECK_EDIT_MUSIC_TRACKS = 6;
 	static final int INGAME_MUSIC_TRACKS = 13;
 	static final float MUSIC_FADE_TIME = 150;
-	static final float MUSIC_VOLUME = 2f;
+	static final float MUSIC_VOLUME = 1f;
 
 	/**
 	 * Defines the classes of tracks.

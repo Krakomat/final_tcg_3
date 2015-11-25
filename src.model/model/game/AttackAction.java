@@ -3,6 +3,7 @@ package model.game;
 import gui2d.animations.Animation;
 import gui2d.animations.AnimationType;
 import gui2d.animations.CardDrawAnimation;
+import gui2d.animations.CoinflipAnimation;
 import gui2d.animations.DamageAnimation;
 
 import java.security.SecureRandom;
@@ -49,13 +50,20 @@ public class AttackAction {
 	 * @return
 	 */
 	public Coin flipACoin() {
-		gameModel.sendSoundToAllPlayers(Sounds.COINFLIP);
+		// gameModel.sendSoundToAllPlayers(Sounds.COINFLIP);
+
 		Random r = new SecureRandom();
 		int value = r.nextInt(2);
-		if (value == 0)
+		if (value == 0) {
+			// Execute animation:
+			Animation animation = new CoinflipAnimation(true);
+			gameModel.sendAnimationToAllPlayers(animation);
 			return Coin.HEADS;
-		else if (value == 1)
+		} else if (value == 1) {
+			Animation animation = new CoinflipAnimation(false);
+			gameModel.sendAnimationToAllPlayers(animation);
 			return Coin.TAILS;
+		}
 		return null;
 	}
 

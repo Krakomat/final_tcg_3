@@ -5,6 +5,7 @@ Patch 3.00
 			- Card draw
 			- Damage for position
 			- Heal for position
+			- Coinflip
 	UI
 		- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
 	Game:

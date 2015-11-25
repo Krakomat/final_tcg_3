@@ -55,6 +55,12 @@ public abstract class Animation {
 			number = serializer.unpackInt(bString);
 			animation = new DamageAnimation(AnimationType.HEAL_POSITION, posID, number);
 			break;
+		case COIN_FLIP:
+			// Unpack heads:
+			bString = serializer.unpackByteString(unpacker);
+			boolean b = serializer.unpackBool(bString);
+			animation = new CoinflipAnimation(b);
+			break;
 		default:
 			break;
 		}

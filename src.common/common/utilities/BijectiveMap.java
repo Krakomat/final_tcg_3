@@ -55,6 +55,9 @@ public class BijectiveMap<K, V> {
 		return null;
 	}
 
+	public Set<K> keysAsSet(){
+		return this.map.keySet();
+	}
 	public boolean isEmpty() {
 		return map.isEmpty();
 	}

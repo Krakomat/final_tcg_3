@@ -15,7 +15,6 @@ import model.enums.Element;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
-import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
 import gui2d.animations.AnimateableObject;
 import gui2d.animations.Animation;
@@ -42,7 +41,10 @@ import gui2d.geometries.messages.TextPanel2D;
 import com.jme3.app.SimpleApplication;
 import com.jme3.audio.AudioNode;
 import com.jme3.font.BitmapFont;
+import com.jme3.material.Material;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
 
 import common.utilities.Pair;
 import common.utilities.Threads;
@@ -115,35 +117,44 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		deckEditController.initSceneGraph();
 		guiNode.attachChild(deckEditController);
 
-		// Make background:
-		Panel2D background = new Panel2D("Background", Database.getAssetKey("background"), this.resolution.getKey(), this.resolution.getValue()) {
-			@Override
-			public void mouseEnter() {
+		// // Make background:
+		// Panel2D background = new Panel2D("Background", Database.getAssetKey("background"), this.resolution.getKey(), this.resolution.getValue()) {
+		// @Override
+		// public void mouseEnter() {
+		//
+		// }
+		//
+		// @Override
+		// public void mouseExit() {
+		//
+		// }
+		//
+		// @Override
+		// public void mouseSelect() {
+		//
+		// }
+		//
+		// @Override
+		// public void mousePressed() {
+		//
+		// }
+		//
+		// @Override
+		// public void mouseReleased() {
+		//
+		// }
+		// };
+		// background.setLocalTranslation(0, 0, -1);
+		// guiNode.attachChild(background);
 
-			}
-
-			@Override
-			public void mouseExit() {
-
-			}
-
-			@Override
-			public void mouseSelect() {
-
-			}
-
-			@Override
-			public void mousePressed() {
-
-			}
-
-			@Override
-			public void mouseReleased() {
-
-			}
-		};
-		background.setLocalTranslation(0, 0, -1);
-		guiNode.attachChild(background);
+		// Make background
+		Box box = new Box(7.37f, 4.2f, 0.0f);
+		Spatial wall = new Geometry("Box", box);
+		Material mat_brick = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+		mat_brick.setTexture("ColorMap", assetManager.loadTexture(Database.getAssetKey("background")));
+		wall.setMaterial(mat_brick);
+		wall.setLocalTranslation(0.0f, 0.0f, 0.0f);
+		rootNode.attachChild(wall);
 
 		this.musicController = new MusicController();
 		this.musicController.switchMusic(MusicType.TITLE_MUSIC);

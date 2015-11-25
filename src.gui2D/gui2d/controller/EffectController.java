@@ -9,13 +9,14 @@ import com.jme3.scene.Spatial;
 import common.utilities.Threads;
 
 public class EffectController {
+	static final int EFFECT_VOLUME = 2;
 	static int activeThreads = 0;
 
 	public static AudioNode createEffectAudioNode(String effectPath) {
 		AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), effectPath, false);
 		clickSoundNode.setPositional(false);
 		clickSoundNode.setLooping(false);
-		clickSoundNode.setVolume(2);
+		clickSoundNode.setVolume(EFFECT_VOLUME);
 		return clickSoundNode;
 	}
 
