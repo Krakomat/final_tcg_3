@@ -2,12 +2,10 @@ package model.game;
 
 import gui2d.animations.Animation;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import network.client.Player;
 import model.database.Card;
@@ -724,9 +722,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 			}
 			if (asleepCondition != null) {
 				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: Flip a coin to check if " + pokemon.getName() + " woke up...", "");
-				Random rand = new SecureRandom();
-				boolean result = rand.nextInt(2) == 1 ? true : false;
-				if (result) {
+				Coin c = this.attackAction.flipACoin();
+				if (c == Coin.HEADS) {
 					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " woke up...", "");
 					// Remove condition:
 					pokemon.getConditions().remove(asleepCondition);
@@ -753,9 +750,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 			}
 			if (confusedCondition != null) {
 				this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: If tails, then " + pokemon.getName() + " damages itself...", "");
-				Random rand = new SecureRandom();
-				boolean result = rand.nextInt(2) == 0 ? true : false;
-				if (!result) {
+				Coin c = this.attackAction.flipACoin();
+				if (c == Coin.TAILS) {
 					this.sendTextMessageToPlayers(this.getPlayerList(), "Between turns: " + pokemon.getName() + " damages itself!", "");
 					this.attackAction.inflictDamageToPosition(Element.COLORLESS, null, positionID, 20, false);
 				}
