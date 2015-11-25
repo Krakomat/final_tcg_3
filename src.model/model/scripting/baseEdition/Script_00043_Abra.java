@@ -32,7 +32,6 @@ public class Script_00043_Abra extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is paralyzed:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);

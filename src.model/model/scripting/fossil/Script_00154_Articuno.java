@@ -49,7 +49,6 @@ public class Script_00154_Articuno extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is paralyzed:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
@@ -68,7 +67,6 @@ public class Script_00154_Articuno extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 50, true);
 
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
 			for (PositionID benchPos : enemyBench)

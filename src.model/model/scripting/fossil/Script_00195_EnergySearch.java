@@ -10,6 +10,7 @@ import model.database.TrainerCard;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -46,7 +47,7 @@ public class Script_00195_EnergySearch extends TrainerCardScript {
 		}
 
 		// Shuffle:
-		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", "");
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		deck.shuffle();
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());

@@ -42,7 +42,6 @@ public class Script_00054_Safcon extends PokemonCardScript {
 		// Flip coin to check if safcon protects itself:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " is protects itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.NO_DAMAGE);
@@ -60,7 +59,6 @@ public class Script_00054_Safcon extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is poisoned:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);

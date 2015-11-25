@@ -46,7 +46,6 @@ public class Script_00011_Nidoking extends PokemonCardScript {
 		// Flip coin to check if defending pokemon damages itself:
 		gameModel.sendTextMessageToAllPlayers("If heads then the attack gets stronger!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 		} else {

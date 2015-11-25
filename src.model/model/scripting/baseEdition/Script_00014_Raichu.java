@@ -49,7 +49,6 @@ public class Script_00014_Raichu extends PokemonCardScript {
 		// Flip coin to check if active pokemon is protected:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself from all effects!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);
@@ -67,7 +66,6 @@ public class Script_00014_Raichu extends PokemonCardScript {
 		// Flip coin to check if defending pokemon damages itself:
 		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " damages itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.TAILS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!", "");
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 30, true);

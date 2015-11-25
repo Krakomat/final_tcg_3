@@ -49,7 +49,6 @@ public class Script_00124_Fearow extends PokemonCardScript {
 		// Flip coin to check if active pokemon is protected:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself from all effects!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);

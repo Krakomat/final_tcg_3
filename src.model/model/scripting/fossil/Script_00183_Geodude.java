@@ -33,9 +33,9 @@ public class Script_00183_Geodude extends PokemonCardScript {
 
 		int numberHeads = 0;
 		Coin c = null;
+		gameModel.sendTextMessageToAllPlayers("Flip coins until tails occurs...", "");
 		do {
 			c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 			if (c == Coin.HEADS)
 				numberHeads++;
 		} while (c == Coin.HEADS);

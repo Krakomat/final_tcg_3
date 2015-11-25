@@ -49,7 +49,6 @@ public class Script_00167_Arbok extends PokemonCardScript {
 
 		if (gameModel.getFullBenchPositions(player.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 			if (c == Coin.HEADS) {
 				// Let enemy choose bench pokemon and swap it with his active:
 				gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");

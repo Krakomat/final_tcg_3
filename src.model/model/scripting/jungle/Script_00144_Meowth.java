@@ -30,7 +30,6 @@ public class Script_00144_Meowth extends PokemonCardScript {
 		// Flip coin to check if the attacker can draw a card:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + this.getCardOwner().getName() + " draws a card!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " draws a card!", "");
 			gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());

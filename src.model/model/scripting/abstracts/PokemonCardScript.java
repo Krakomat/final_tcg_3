@@ -232,8 +232,6 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		if (pCard.hasCondition(PokemonCondition.CONFUSED)) {
 			gameModel.sendTextMessageToAllPlayers("Coinflip: " + pCard.getName() + " can't return when tails", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
-
 			if (c == Coin.TAILS)
 				retreatAllowed = false;
 		}

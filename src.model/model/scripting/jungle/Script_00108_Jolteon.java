@@ -41,7 +41,6 @@ public class Script_00108_Jolteon extends PokemonCardScript {
 
 		gameModel.sendTextMessageToAllPlayers("If heads then this attack does 20 more damage!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		} else

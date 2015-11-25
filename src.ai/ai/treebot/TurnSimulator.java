@@ -213,8 +213,6 @@ public class TurnSimulator implements PokemonGameManager {
 		if (active.hasCondition(PokemonCondition.CONFUSED)) {
 			gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
-
 			if (c == Coin.TAILS) {
 				attackAllowed = false;
 				// Damage attacker:
@@ -228,8 +226,6 @@ public class TurnSimulator implements PokemonGameManager {
 		if (attackAllowed && active.hasCondition(PokemonCondition.BLIND)) {
 			gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
-
 			if (c == Coin.TAILS)
 				attackAllowed = false;
 		}

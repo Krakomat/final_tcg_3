@@ -43,7 +43,6 @@ public class Script_00005_Piepi extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is asleep:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is asleep!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);

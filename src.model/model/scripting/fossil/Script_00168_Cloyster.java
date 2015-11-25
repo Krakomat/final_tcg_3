@@ -43,7 +43,6 @@ public class Script_00168_Cloyster extends PokemonCardScript {
 
 		gameModel.sendTextMessageToAllPlayers("If Tails then this attack does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");

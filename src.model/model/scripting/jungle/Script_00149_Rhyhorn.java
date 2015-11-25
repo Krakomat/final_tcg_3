@@ -42,7 +42,6 @@ public class Script_00149_Rhyhorn extends PokemonCardScript {
 		// Flip coin to check if active pokemon is protected from attacks:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " can't be attacked next turn!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);

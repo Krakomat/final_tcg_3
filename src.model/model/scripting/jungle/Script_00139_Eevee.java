@@ -41,7 +41,6 @@ public class Script_00139_Eevee extends PokemonCardScript {
 		// Flip coin to check if active pokemon is protected from attacks:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " can't be attacked next turn!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);
@@ -56,7 +55,6 @@ public class Script_00139_Eevee extends PokemonCardScript {
 
 		gameModel.sendTextMessageToAllPlayers("If heads then this attack does 20 more damage!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		} else

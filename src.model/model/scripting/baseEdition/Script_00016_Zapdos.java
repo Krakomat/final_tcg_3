@@ -48,7 +48,6 @@ public class Script_00016_Zapdos extends PokemonCardScript {
 		// Flip coin to check if defending pokemon damages itself:
 		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " damages itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.TAILS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " damages itself!", "");
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 30, true);

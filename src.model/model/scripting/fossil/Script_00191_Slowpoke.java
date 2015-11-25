@@ -52,7 +52,6 @@ public class Script_00191_Slowpoke extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is paralyzed:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attacking.getName() + " is healed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.getAttackAction().healPosition(attacker, 10);
 			gameModel.sendGameModelToAllPlayers("");

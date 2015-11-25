@@ -56,7 +56,6 @@ public class Script_00131_Primeape extends PokemonCardScript {
 		// Flip coin to check if attacking pokemon is confused:
 		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " is confused!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.TAILS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is confused!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);

@@ -44,7 +44,6 @@ public class Script_00126_Lickitung extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is paralyzed:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
@@ -59,7 +58,6 @@ public class Script_00126_Lickitung extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is confused:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);

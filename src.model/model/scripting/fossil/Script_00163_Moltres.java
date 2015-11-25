@@ -76,13 +76,12 @@ public class Script_00163_Moltres extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if damage is applied:
-		gameModel.sendTextMessageToAllPlayers("If Tails then Horn Hazard does nothing!", "");
+		gameModel.sendTextMessageToAllPlayers("If Tails then Dive Bomb does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 80, true);
 		else
-			gameModel.sendTextMessageToAllPlayers("Horn Hazard does nothing!", "");
+			gameModel.sendTextMessageToAllPlayers("Dive Bomb does nothing!", "");
 	}
 
 	private PositionID enemyDeck() {

@@ -31,7 +31,6 @@ public class Script_00197_Recycle extends TrainerCardScript {
 		Player player = this.getCardOwner();
 		gameModel.sendTextMessageToAllPlayers("If heads then " + this.card.getName() + "'s effects will be executed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			// Choose a card from the discard pile:
 			List<Card> cards = gameModel.getPosition(ownDiscardPile()).getCards();

@@ -52,7 +52,6 @@ public class Script_00027_Porenta extends PokemonCardScript {
 		// Flip coin to check if damage is applied:
 		gameModel.sendTextMessageToAllPlayers("If Tails then Leek Slap does nothing!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		else

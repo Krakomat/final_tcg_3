@@ -73,7 +73,6 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is allowed to retreat the next turn:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + player.getName() + " can remove one damage counter from an own pokemon!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			List<PositionID> damagedPositions = new ArrayList<>();
 			for (PositionID posID : gameModel.getFullArenaPositions(player.getColor())) {

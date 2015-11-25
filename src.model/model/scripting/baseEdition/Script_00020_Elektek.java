@@ -44,7 +44,6 @@ public class Script_00020_Elektek extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is paralyzed:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
@@ -61,7 +60,6 @@ public class Script_00020_Elektek extends PokemonCardScript {
 		// Flip coin to check if defending pokemon damages itself:
 		gameModel.sendTextMessageToAllPlayers("If heads then the attack gets stronger!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 		} else {

@@ -42,7 +42,6 @@ public class Script_00128_Nidorina extends PokemonCardScript {
 		// Flip coin to check if defending pokemon is confused:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);

@@ -42,7 +42,6 @@ public class Script_00135_Tauros extends PokemonCardScript {
 
 		gameModel.sendTextMessageToAllPlayers("If heads then this attack does 10 more damage!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 		} else
@@ -61,7 +60,6 @@ public class Script_00135_Tauros extends PokemonCardScript {
 		// Flip coin to check if attacking pokemon is confused:
 		gameModel.sendTextMessageToAllPlayers("If tails then " + attackingPokemon.getName() + " is confused!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.TAILS) {
 			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " is confused!", "");
 			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.CONFUSED);

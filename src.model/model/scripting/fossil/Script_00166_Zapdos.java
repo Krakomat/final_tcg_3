@@ -38,8 +38,8 @@ public class Script_00166_Zapdos extends PokemonCardScript {
 
 		int numberOfTails = 0;
 		for (PositionID benchPos : gameModel.getFullBenchPositions(enemyPlayer.getColor())) {
+			gameModel.sendTextMessageToAllPlayers(gameModel.getPosition(benchPos).getTopCard().getName() + ":", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 			if (c == Coin.HEADS)
 				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 20, false);
 			else

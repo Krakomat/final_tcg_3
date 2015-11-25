@@ -48,7 +48,6 @@ public class Script_00196_Gambler extends TrainerCardScript {
 
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " flips a coin...", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
-		gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 		if (c == Coin.HEADS) {
 			// Draw 8 cards:
 			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 8 cards!", "");

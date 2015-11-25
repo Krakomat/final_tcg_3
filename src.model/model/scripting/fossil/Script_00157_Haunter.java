@@ -33,7 +33,6 @@ public class Script_00157_Haunter extends PokemonCardScript {
 		if (powerCanBeUsed() && !coinFlipped) {
 			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 			if (c == Coin.HEADS)
 				this.powerActive = true;
 			this.coinFlipped = true;
@@ -48,7 +47,6 @@ public class Script_00157_Haunter extends PokemonCardScript {
 		if (powerCanBeUsed() && !coinFlipped) {
 			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin showed " + c, "");
 			if (c == Coin.HEADS)
 				this.powerActive = true;
 			this.coinFlipped = true;
