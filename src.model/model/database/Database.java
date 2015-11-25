@@ -338,6 +338,18 @@ public class Database {
 		TextureKey hotWater = new TextureKey("/decks/hotWater.jpg");
 		hotWater.setGenerateMips(false);
 		assetTextures.put("hotWater", hotWater);
+
+		TextureKey baseBot = new TextureKey("/decks/basic_bot.jpg");
+		baseBot.setGenerateMips(false);
+		assetTextures.put("baseBot", baseBot);
+
+		TextureKey leibwaechter = new TextureKey("/decks/Leibwächter_TCG.jpg");
+		leibwaechter.setGenerateMips(false);
+		assetTextures.put("leibwächter", leibwaechter);
+
+		TextureKey schlossUndRiegel = new TextureKey("/decks/Schloss_und_Riegel_TCG.jpg");
+		schlossUndRiegel.setGenerateMips(false);
+		assetTextures.put("schlossUndRiegel", schlossUndRiegel);
 	}
 
 	public static Player getBot(String name) {

@@ -26,7 +26,7 @@ public class LobbyController extends Node implements GUI2DController {
 
 	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
 	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton,
-			psychOutButton, wasserschwallButton;
+			psychOutButton, wasserschwallButton, baseBotDeckButton, leibwaechterButton, schlossUndRiegelButton;
 	private TextPanel2D chooseBotDeckPanel;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -233,6 +233,23 @@ public class LobbyController extends Node implements GUI2DController {
 		float botButtonWidth = screenWidth * 0.1f;
 		float botButtonHeight = botButtonWidth * 1.426f;
 
+		baseBotDeckButton = new ImageButton2D("baseBotDeckButton", Database.getAssetKey("baseBot"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("BasicBotDeck.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		baseBotDeckButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 3.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		baseBotDeckButton.setVisible(false);
+		dropInUpdateQueue(baseBotDeckButton);
+		this.attachChild(baseBotDeckButton);
+
 		overgrowthButton = new ImageButton2D("overgrowthButton", Database.getAssetKey("overgrowth"), botButtonWidth, botButtonHeight) {
 
 			@Override
@@ -318,6 +335,23 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(lightningBugButton);
 		this.attachChild(lightningBugButton);
 
+		leibwaechterButton = new ImageButton2D("leibwaechterButton", Database.getAssetKey("leibwächter"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Leibwaechter.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		leibwaechterButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 2.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		leibwaechterButton.setVisible(false);
+		dropInUpdateQueue(leibwaechterButton);
+		this.attachChild(leibwaechterButton);
+
 		kraftreserveButton = new ImageButton2D("kraftreserveButton", Database.getAssetKey("kraftreserve"), botButtonWidth, botButtonHeight) {
 
 			@Override
@@ -330,7 +364,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		kraftreserveButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 2.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		kraftreserveButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 3.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
 		kraftreserveButton.setVisible(false);
 		dropInUpdateQueue(kraftreserveButton);
 		this.attachChild(kraftreserveButton);
@@ -347,7 +381,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		hotWaterButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 1.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		hotWaterButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 2.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
 		hotWaterButton.setVisible(false);
 		dropInUpdateQueue(hotWaterButton);
 		this.attachChild(hotWaterButton);
@@ -364,7 +398,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		psychOutButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 0.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		psychOutButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 1.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
 		psychOutButton.setVisible(false);
 		dropInUpdateQueue(psychOutButton);
 		this.attachChild(psychOutButton);
@@ -381,7 +415,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		grassChopperButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 0.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		grassChopperButton.setLocalTranslation(screenWidth * 0.5f - botButtonWidth * 0.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
 		grassChopperButton.setVisible(false);
 		dropInUpdateQueue(grassChopperButton);
 		this.attachChild(grassChopperButton);
@@ -398,10 +432,27 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		wasserschwallButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 1.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		wasserschwallButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 0.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
 		wasserschwallButton.setVisible(false);
 		dropInUpdateQueue(wasserschwallButton);
 		this.attachChild(wasserschwallButton);
+		
+		schlossUndRiegelButton = new ImageButton2D("schlossUndRiegelButton", Database.getAssetKey("schlossUndRiegel"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("SchlossUndRiegel.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		schlossUndRiegelButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 1.5f, screenHeight * 0.097f + botButtonHeight / 2, 0);
+		schlossUndRiegelButton.setVisible(false);
+		dropInUpdateQueue(schlossUndRiegelButton);
+		this.attachChild(schlossUndRiegelButton);
 	}
 
 	protected void botClicked(String deckName) {
@@ -478,6 +529,8 @@ public class LobbyController extends Node implements GUI2DController {
 
 		this.backButton.setVisible(true);
 		this.dropInUpdateQueue(backButton);
+		this.baseBotDeckButton.setVisible(true);
+		this.dropInUpdateQueue(baseBotDeckButton);
 		this.overgrowthButton.setVisible(true);
 		this.dropInUpdateQueue(overgrowthButton);
 		this.zappButton.setVisible(true);
@@ -488,6 +541,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(blackoutButton);
 		this.lightningBugButton.setVisible(true);
 		this.dropInUpdateQueue(lightningBugButton);
+		this.leibwaechterButton.setVisible(true);
+		this.dropInUpdateQueue(leibwaechterButton);
 		this.kraftreserveButton.setVisible(true);
 		this.dropInUpdateQueue(kraftreserveButton);
 		this.grassChopperButton.setVisible(true);
@@ -498,6 +553,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(psychOutButton);
 		this.wasserschwallButton.setVisible(true);
 		this.dropInUpdateQueue(wasserschwallButton);
+		this.schlossUndRiegelButton.setVisible(true);
+		this.dropInUpdateQueue(schlossUndRiegelButton);
 		this.chooseBotDeckPanel.setVisible(true);
 		this.dropInUpdateQueue(chooseBotDeckPanel);
 	}
@@ -585,6 +642,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(deckEditorButton);
 		this.equipedDeckPanel.setVisible(false);
 		this.dropInUpdateQueue(equipedDeckPanel);
+		this.baseBotDeckButton.setVisible(false);
+		this.dropInUpdateQueue(baseBotDeckButton);
 		this.overgrowthButton.setVisible(false);
 		this.dropInUpdateQueue(overgrowthButton);
 		this.zappButton.setVisible(false);
@@ -595,6 +654,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(blackoutButton);
 		this.lightningBugButton.setVisible(false);
 		this.dropInUpdateQueue(lightningBugButton);
+		this.leibwaechterButton.setVisible(false);
+		this.dropInUpdateQueue(leibwaechterButton);
 		this.kraftreserveButton.setVisible(false);
 		this.dropInUpdateQueue(kraftreserveButton);
 		this.grassChopperButton.setVisible(false);
@@ -607,6 +668,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(wasserschwallButton);
 		this.chooseBotDeckPanel.setVisible(false);
 		this.dropInUpdateQueue(chooseBotDeckPanel);
+		this.schlossUndRiegelButton.setVisible(false);
+		this.dropInUpdateQueue(schlossUndRiegelButton);
 	}
 
 	public void setAccount(Account account) {

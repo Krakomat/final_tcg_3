@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Leibwächter">
+    <Cards>
+        <Card ID="00044">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00051">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00056">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00085">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00097">
+            <Size>12</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>16</Size>
+        </Card>
+        <Card ID="00164">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00170">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00173">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00183">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00184">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00193">
+            <Size>4</Size>
+        </Card>
+    </Cards>
+</Deck>

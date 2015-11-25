@@ -6,6 +6,10 @@ Patch 3.00
 			- Damage for position
 			- Heal for position
 			- Coinflip
+		New decks for the bot
+			- Leibwächter
+			- Schloss und Riegel
+			- Basic Bot Deck: Deck that (hopefully) synergieses with the strengths of the bot
 	UI
 		- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
 	Game:
@@ -15,6 +19,8 @@ Patch 3.00
 		- Hypno: Fixed a bug, where Dark Mind would apply weakness/resistance for the damaged bench pokemon
 	AI:
 		- Some number tweaking to make the AI better overall
+	Card Editor:
+		- Replaced the basic edition symbol with a new one
 			
 Patch 2.01
 	New Features
