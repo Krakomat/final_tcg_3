@@ -77,7 +77,6 @@ public class AttackAction {
 		int headsCounter = 0;
 		for (int i = 0; i < amount; i++) {
 			Coin c = this.flipACoin();
-			gameModel.sendTextMessageToAllPlayers("Coin shows " + c, "");
 			if (c == Coin.HEADS)
 				headsCounter++;
 		}

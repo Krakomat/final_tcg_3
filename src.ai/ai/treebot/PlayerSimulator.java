@@ -153,8 +153,11 @@ public class PlayerSimulator implements Player {
 		}
 		List<Card> chosenCards = new ArrayList<>();
 		List<Card> availableCards = new ArrayList<>();
-		for (Card c : energyCards)
+		List<Card> copyOfAvailableCards = new ArrayList<>();
+		for (Card c : energyCards){
 			availableCards.add(c);
+			copyOfAvailableCards.add(c);
+		}
 
 		// Get a copy of the color- and colorless costs:
 		List<Element> colorCosts = new ArrayList<>();
@@ -201,8 +204,9 @@ public class PlayerSimulator implements Player {
 			}
 		}
 
+		// TODO Bug here: When Nockchan[Grass] wants to retreat (cost [Colorless]) then the simulator pays []!
 		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: "
-				+ chosenCards);
+				+ chosenCards + " AvailableCards: " + copyOfAvailableCards);
 		return chosenCards;
 	}
 
@@ -349,6 +353,6 @@ public class PlayerSimulator implements Player {
 
 	@Override
 	public void playerReceivesAnimation(Animation animation) {
-		
+
 	}
 }
