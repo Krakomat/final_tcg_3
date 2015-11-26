@@ -303,19 +303,19 @@ public class Database {
 		lightningBug.setGenerateMips(false);
 		assetTextures.put("lightningBug", lightningBug);
 
-		TextureKey baseEdition = new TextureKey("/tilesets/buttons/baseLogo.png");
+		TextureKey baseEdition = new TextureKey("/tilesets/editions/baseLogo.png");
 		baseEdition.setGenerateMips(false);
 		assetTextures.put(Edition.BASE.toString(), baseEdition);
 
-		TextureKey jungleEdition = new TextureKey("/tilesets/buttons/jungleLogo.png");
+		TextureKey jungleEdition = new TextureKey("/tilesets/editions/jungleLogo.png");
 		jungleEdition.setGenerateMips(false);
 		assetTextures.put(Edition.JUNGLE.toString(), jungleEdition);
 
-		TextureKey fossilEdition = new TextureKey("/tilesets/buttons/fossilLogo.png");
+		TextureKey fossilEdition = new TextureKey("/tilesets/editions/fossilLogo.png");
 		fossilEdition.setGenerateMips(false);
 		assetTextures.put(Edition.FOSSIL.toString(), fossilEdition);
 
-		TextureKey rocketEdition = new TextureKey("/tilesets/buttons/rocketLogo.png");
+		TextureKey rocketEdition = new TextureKey("/tilesets/editions/rocketLogo.png");
 		rocketEdition.setGenerateMips(false);
 		assetTextures.put(Edition.ROCKET.toString(), rocketEdition);
 
