@@ -347,7 +347,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				selectedButtonIndices.add(i);
 		}
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			Image2D button = this.editionFilterButtons.get(i);
 			if (button.isSelected())
 				selectedButtonIndices.add(i + 9);
@@ -400,6 +400,9 @@ public class DeckEditController extends Node implements GUI2DController {
 					break;
 				case 11:
 					selectedButtonEditions.add(Edition.FOSSIL);
+					break;
+				case 12:
+					selectedButtonEditions.add(Edition.ROCKET);
 					break;
 				}
 			}
