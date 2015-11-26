@@ -1,0 +1,1 @@
+In IrfanView select BatchConversion and resize all images for 30%
