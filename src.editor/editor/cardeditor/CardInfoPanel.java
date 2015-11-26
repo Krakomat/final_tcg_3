@@ -148,14 +148,14 @@ public class CardInfoPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FileFilter filter = new FileNameExtensionFilter("Final TCG2 Datenbanken", "jpg");
-				JFileChooser chooser = new JFileChooser("images/cards/base03/");
+				JFileChooser chooser = new JFileChooser("images/cards/base04/");
 				chooser.setFileFilter(filter);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int rueckgabeWert = chooser.showOpenDialog(null);
 				if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
 					File f = chooser.getSelectedFile();
 					String s = null;
-					s = "/cards/base03/" + f.getName();
+					s = "/cards/base04/" + f.getName();
 					selectedCard.setImagePath(s);
 					cardImageBitmap.setImage(s);
 				}
