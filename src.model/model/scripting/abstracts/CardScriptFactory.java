@@ -102,6 +102,72 @@ import model.scripting.jungle.Script_00149_Rhyhorn;
 import model.scripting.jungle.Script_00150_Spearow;
 import model.scripting.jungle.Script_00151_Venonat;
 import model.scripting.jungle.Script_00152_Pokeball;
+import model.scripting.rocket.Script_00200_DarkAlakazam;
+import model.scripting.rocket.Script_00201_DarkArbok;
+import model.scripting.rocket.Script_00202_DarkBlastoise;
+import model.scripting.rocket.Script_00203_DarkCharizard;
+import model.scripting.rocket.Script_00204_DarkDragonite;
+import model.scripting.rocket.Script_00205_DarkDugtrio;
+import model.scripting.rocket.Script_00206_DarkGolbat;
+import model.scripting.rocket.Script_00207_DarkGyarados;
+import model.scripting.rocket.Script_00208_DarkHypno;
+import model.scripting.rocket.Script_00209_DarkMachamp;
+import model.scripting.rocket.Script_00210_DarkMagneton;
+import model.scripting.rocket.Script_00211_DarkSlowbro;
+import model.scripting.rocket.Script_00212_DarkVileplume;
+import model.scripting.rocket.Script_00213_DarkWeezing;
+import model.scripting.rocket.Script_00214_HereComesTeamRocket;
+import model.scripting.rocket.Script_00215_RocketsSneakAttack;
+import model.scripting.rocket.Script_00216_RainbowEnergy;
+import model.scripting.rocket.Script_00217_DarkCharmeleon;
+import model.scripting.rocket.Script_00218_DarkDragonair;
+import model.scripting.rocket.Script_00219_DarkElectrode;
+import model.scripting.rocket.Script_00220_DarkFlareon;
+import model.scripting.rocket.Script_00221_DarkGloom;
+import model.scripting.rocket.Script_00222_DarkGolduck;
+import model.scripting.rocket.Script_00223_DarkJolteon;
+import model.scripting.rocket.Script_00224_DarkKadabra;
+import model.scripting.rocket.Script_00225_DarkMachoke;
+import model.scripting.rocket.Script_00226_DarkMuk;
+import model.scripting.rocket.Script_00227_DarkPersian;
+import model.scripting.rocket.Script_00228_DarkPrimeape;
+import model.scripting.rocket.Script_00229_DarkRapidash;
+import model.scripting.rocket.Script_00230_DarkVaporeon;
+import model.scripting.rocket.Script_00231_DarkWartortle;
+import model.scripting.rocket.Script_00232_Magikarp;
+import model.scripting.rocket.Script_00233_Porygon;
+import model.scripting.rocket.Script_00234_Abra;
+import model.scripting.rocket.Script_00235_Charmander;
+import model.scripting.rocket.Script_00236_DarkRaticate;
+import model.scripting.rocket.Script_00237_Diglett;
+import model.scripting.rocket.Script_00238_Dratini;
+import model.scripting.rocket.Script_00239_Drowzee;
+import model.scripting.rocket.Script_00240_Eevee;
+import model.scripting.rocket.Script_00241_Ekans;
+import model.scripting.rocket.Script_00242_Grimer;
+import model.scripting.rocket.Script_00243_Koffing;
+import model.scripting.rocket.Script_00244_Machop;
+import model.scripting.rocket.Script_00245_Magnemite;
+import model.scripting.rocket.Script_00246_Mankey;
+import model.scripting.rocket.Script_00247_Meowth;
+import model.scripting.rocket.Script_00248_Oddish;
+import model.scripting.rocket.Script_00249_Ponyta;
+import model.scripting.rocket.Script_00250_Psyduck;
+import model.scripting.rocket.Script_00251_Rattata;
+import model.scripting.rocket.Script_00252_Slowpoke;
+import model.scripting.rocket.Script_00253_Squirtle;
+import model.scripting.rocket.Script_00254_Voltorb;
+import model.scripting.rocket.Script_00255_Zubat;
+import model.scripting.rocket.Script_00256_TheBosssWay;
+import model.scripting.rocket.Script_00257_Challenge;
+import model.scripting.rocket.Script_00258_Digger;
+import model.scripting.rocket.Script_00259_ImposterOaksRevenge;
+import model.scripting.rocket.Script_00260_NightlyGarbageRun;
+import model.scripting.rocket.Script_00261_GoopGasAttack;
+import model.scripting.rocket.Script_00262_Sleep;
+import model.scripting.rocket.Script_00263_FullHealEnergy;
+import model.scripting.rocket.Script_00264_PotionEnergy;
+import model.scripting.rocket.Script_00265_DarkRaichu;
 
 /**
  * Factory, which generates the {@link CardScript} for a specific card.
@@ -539,6 +605,138 @@ public class CardScriptFactory {
 			return new Script_00198_MysteriousFossil((TrainerCard) card, gameModel);
 		case "00199":
 			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only used locally for Mysterious Fossil
+		case "00200":
+			return new Script_00200_DarkAlakazam((PokemonCard) card, gameModel);
+		case "00201":
+			return new Script_00201_DarkArbok((PokemonCard) card, gameModel);
+		case "00202":
+			return new Script_00202_DarkBlastoise((PokemonCard) card, gameModel);
+		case "00203":
+			return new Script_00203_DarkCharizard((PokemonCard) card, gameModel);
+		case "00204":
+			return new Script_00204_DarkDragonite((PokemonCard) card, gameModel);
+		case "00205":
+			return new Script_00205_DarkDugtrio((PokemonCard) card, gameModel);
+		case "00206":
+			return new Script_00206_DarkGolbat((PokemonCard) card, gameModel);
+		case "00207":
+			return new Script_00207_DarkGyarados((PokemonCard) card, gameModel);
+		case "00208":
+			return new Script_00208_DarkHypno((PokemonCard) card, gameModel);
+		case "00209":
+			return new Script_00209_DarkMachamp((PokemonCard) card, gameModel);
+		case "00210":
+			return new Script_00210_DarkMagneton((PokemonCard) card, gameModel);
+		case "00211":
+			return new Script_00211_DarkSlowbro((PokemonCard) card, gameModel);
+		case "00212":
+			return new Script_00212_DarkVileplume((PokemonCard) card, gameModel);
+		case "00213":
+			return new Script_00213_DarkWeezing((PokemonCard) card, gameModel);
+		case "00214":
+			return new Script_00214_HereComesTeamRocket((TrainerCard) card, gameModel);
+		case "00215":
+			return new Script_00215_RocketsSneakAttack((TrainerCard) card, gameModel);
+		case "00216":
+			return new Script_00216_RainbowEnergy((EnergyCard) card, gameModel);
+		case "00217":
+			return new Script_00217_DarkCharmeleon((PokemonCard) card, gameModel);
+		case "00218":
+			return new Script_00218_DarkDragonair((PokemonCard) card, gameModel);
+		case "00219":
+			return new Script_00219_DarkElectrode((PokemonCard) card, gameModel);
+		case "00220":
+			return new Script_00220_DarkFlareon((PokemonCard) card, gameModel);
+		case "00221":
+			return new Script_00221_DarkGloom((PokemonCard) card, gameModel);
+		case "00222":
+			return new Script_00222_DarkGolduck((PokemonCard) card, gameModel);
+		case "00223":
+			return new Script_00223_DarkJolteon((PokemonCard) card, gameModel);
+		case "00224":
+			return new Script_00224_DarkKadabra((PokemonCard) card, gameModel);
+		case "00225":
+			return new Script_00225_DarkMachoke((PokemonCard) card, gameModel);
+		case "00226":
+			return new Script_00226_DarkMuk((PokemonCard) card, gameModel);
+		case "00227":
+			return new Script_00227_DarkPersian((PokemonCard) card, gameModel);
+		case "00228":
+			return new Script_00228_DarkPrimeape((PokemonCard) card, gameModel);
+		case "00229":
+			return new Script_00229_DarkRapidash((PokemonCard) card, gameModel);
+		case "00230":
+			return new Script_00230_DarkVaporeon((PokemonCard) card, gameModel);
+		case "00231":
+			return new Script_00231_DarkWartortle((PokemonCard) card, gameModel);
+		case "00232":
+			return new Script_00232_Magikarp((PokemonCard) card, gameModel);
+		case "00233":
+			return new Script_00233_Porygon((PokemonCard) card, gameModel);
+		case "00234":
+			return new Script_00234_Abra((PokemonCard) card, gameModel);
+		case "00235":
+			return new Script_00235_Charmander((PokemonCard) card, gameModel);
+		case "00236":
+			return new Script_00236_DarkRaticate((PokemonCard) card, gameModel);
+		case "00237":
+			return new Script_00237_Diglett((PokemonCard) card, gameModel);
+		case "00238":
+			return new Script_00238_Dratini((PokemonCard) card, gameModel);
+		case "00239":
+			return new Script_00239_Drowzee((PokemonCard) card, gameModel);
+		case "00240":
+			return new Script_00240_Eevee((PokemonCard) card, gameModel);
+		case "00241":
+			return new Script_00241_Ekans((PokemonCard) card, gameModel);
+		case "00242":
+			return new Script_00242_Grimer((PokemonCard) card, gameModel);
+		case "00243":
+			return new Script_00243_Koffing((PokemonCard) card, gameModel);
+		case "00244":
+			return new Script_00244_Machop((PokemonCard) card, gameModel);
+		case "00245":
+			return new Script_00245_Magnemite((PokemonCard) card, gameModel);
+		case "00246":
+			return new Script_00246_Mankey((PokemonCard) card, gameModel);
+		case "00247":
+			return new Script_00247_Meowth((PokemonCard) card, gameModel);
+		case "00248":
+			return new Script_00248_Oddish((PokemonCard) card, gameModel);
+		case "00249":
+			return new Script_00249_Ponyta((PokemonCard) card, gameModel);
+		case "00250":
+			return new Script_00250_Psyduck((PokemonCard) card, gameModel);
+		case "00251":
+			return new Script_00251_Rattata((PokemonCard) card, gameModel);
+		case "00252":
+			return new Script_00252_Slowpoke((PokemonCard) card, gameModel);
+		case "00253":
+			return new Script_00253_Squirtle((PokemonCard) card, gameModel);
+		case "00254":
+			return new Script_00254_Voltorb((PokemonCard) card, gameModel);
+		case "00255":
+			return new Script_00255_Zubat((PokemonCard) card, gameModel);
+		case "00256":
+			return new Script_00256_TheBosssWay((TrainerCard) card, gameModel);
+		case "00257":
+			return new Script_00257_Challenge((TrainerCard) card, gameModel);
+		case "00258":
+			return new Script_00258_Digger((TrainerCard) card, gameModel);
+		case "00259":
+			return new Script_00259_ImposterOaksRevenge((TrainerCard) card, gameModel);
+		case "00260":
+			return new Script_00260_NightlyGarbageRun((TrainerCard) card, gameModel);
+		case "00261":
+			return new Script_00261_GoopGasAttack((TrainerCard) card, gameModel);
+		case "00262":
+			return new Script_00262_Sleep((TrainerCard) card, gameModel);
+		case "00263":
+			return new Script_00263_FullHealEnergy((EnergyCard) card, gameModel);
+		case "00264":
+			return new Script_00264_PotionEnergy((EnergyCard) card, gameModel);
+		case "00265":
+			return new Script_00265_DarkRaichu((PokemonCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
