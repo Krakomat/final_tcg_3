@@ -1,5 +1,5 @@
 package model.enums;
 
 public enum Edition {
-	BASE, JUNGLE, FOSSIL, TOKEN;
+	BASE, JUNGLE, FOSSIL, ROCKET, TOKEN;
 }

@@ -315,6 +315,10 @@ public class Database {
 		fossilEdition.setGenerateMips(false);
 		assetTextures.put(Edition.FOSSIL.toString(), fossilEdition);
 
+		TextureKey rocketEdition = new TextureKey("/tilesets/buttons/rocketLogo.png");
+		rocketEdition.setGenerateMips(false);
+		assetTextures.put(Edition.ROCKET.toString(), rocketEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);

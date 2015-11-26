@@ -157,7 +157,7 @@ public class DeckEditController extends Node implements GUI2DController {
 		}
 
 		editionFilterButtons = new ArrayList<>();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			String texture = "";
 			switch (i) {
 			case 0:
@@ -168,6 +168,9 @@ public class DeckEditController extends Node implements GUI2DController {
 				break;
 			case 2:
 				texture = Edition.FOSSIL.toString();
+				break;
+			case 3:
+				texture = Edition.ROCKET.toString();
 				break;
 			}
 			final int index = i;
