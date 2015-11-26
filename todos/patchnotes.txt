@@ -25,7 +25,8 @@ Patch 3.00
 		- Some number tweaking to make the AI better overall
 	Card Editor:
 		- Replaced the basic edition symbol with a new one
-			
+		- Fixed a bug, where cards with the same name could be added more than 4 times as long as they don't have the same id
+		
 Patch 2.01
 	New Features
 		- New decks for the bot added

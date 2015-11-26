@@ -535,9 +535,11 @@ public class DeckEditController extends Node implements GUI2DController {
 			return true;
 
 		int counter = 0;
-		for (String id : this.deckCards)
-			if (id.equals(cardId))
+		for (String id : this.deckCards) {
+			Card deckCard = Database.createCard(id);
+			if (deckCard.getName().equals(c.getName()))
 				counter++;
+		}
 		if (counter >= 4)
 			return false;
 		return true;
