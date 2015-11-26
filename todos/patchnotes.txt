@@ -10,7 +10,7 @@ Patch 3.00
 		New decks for the bot
 			- Leibwächter
 			- Schloss und Riegel
-			- Basic Bot Deck: Deck that (hopefully) synergieses with the strengths of the bot
+			- Basic Bot Deck: Deck that (hopefully) synergyzes with the strengths of the bot
 	UI
 		- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
 	Game:
@@ -21,6 +21,7 @@ Patch 3.00
 		- Gengar: Fixed a bug, where Dark Mind would apply weakness/resistance for the damaged bench pokemon
 		- Hypno: Fixed a bug, where Dark Mind would apply weakness/resistance for the damaged bench pokemon
 		- Energy Search: Fixed a bug where the shuffle sound did not play
+		- Pokemon Center: Full heal message does now only occur one time instead of two
 	AI:
 		- Some number tweaking to make the AI better overall
 	Card Editor:
