@@ -8,4 +8,5 @@ public class AnimationParameters {
 	public static final ColorRGBA DAMAGE_COLOR = ColorRGBA.Red;
 	public static final ColorRGBA HEAL_COLOR = ColorRGBA.Green;
 	public static final int COIN_FLIP_TIME = 3000;
+	public static final int CARD_MOVE_TIME = 500;
 }

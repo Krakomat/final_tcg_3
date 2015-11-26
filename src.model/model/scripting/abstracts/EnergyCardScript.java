@@ -1,5 +1,8 @@
 package model.scripting.abstracts;
 
+import gui2d.animations.Animation;
+import gui2d.animations.CardMoveAnimation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +44,7 @@ public abstract class EnergyCardScript extends CardScript {
 
 	@Override
 	public void playFromHand() {
+		PositionID startPosID = this.card.getCurrentPosition().getPositionID();
 		Player player = this.card.getCurrentPosition().getColor() == Color.BLUE ? this.gameModel.getPlayerBlue() : this.gameModel.getPlayerRed();
 		if (player == null)
 			throw new IllegalArgumentException("Error: Couldn't find player in playFromHand of EnergyCardScript for id: " + card.getCardId());
@@ -51,9 +55,14 @@ public abstract class EnergyCardScript extends CardScript {
 			List<Card> cardList = new ArrayList<Card>();
 			cardList.add(basicPkmn);
 			cardList.add(card);
-			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList, Sounds.EQUIP);
+			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList, "");
 			this.gameModel.getAttackAction().moveCard(card.getCurrentPosition().getPositionID(), chosenPosition, card.getGameID(), false);
 			this.gameModel.setEnergyPlayed(true);
+
+			// Execute animation:
+			Animation animation = new CardMoveAnimation(startPosID, chosenPosition, card.getCardId(), Sounds.EQUIP);
+			gameModel.sendAnimationToAllPlayers(animation);
+
 			this.gameModel.sendGameModelToAllPlayers("");
 
 			EnergyCard eneCard = (EnergyCard) this.card;

@@ -7,6 +7,8 @@ import gui2d.animations.Animation;
 import gui2d.animations.AnimationParameters;
 import gui2d.animations.CardDrawAnimation;
 import gui2d.animations.CardDrawAnimationImage;
+import gui2d.animations.CardMoveAnimation;
+import gui2d.animations.CardMoveAnimationImage;
 import gui2d.animations.CoinflipAnimation;
 import gui2d.animations.CoinflipAnimationModel;
 import gui2d.animations.DamageAnimation;
@@ -154,6 +156,18 @@ public class AnimationController {
 			CoinflipAnimationModel coinflipModel = new CoinflipAnimationModel(coinflipAnimation.isHeads(), -1, 0.25f, 2.0f, AnimationParameters.COIN_FLIP_TIME);
 			this.animatedObjects.add(coinflipModel);
 			animObjects[0] = coinflipModel;
+			break;
+		case CARD__MOVE:
+			CardMoveAnimation moveAnimation = (CardMoveAnimation) animation;
+			Node from = (Node) gui.getIngameController().getPositionGeometry(moveAnimation.getFromPosition(), ownColor);
+			Node to = (Node) gui.getIngameController().getPositionGeometry(moveAnimation.getToPosition(), ownColor);
+
+			animObjects = new AnimateableObject[1];
+			CardMoveAnimationImage moveImage = new CardMoveAnimationImage(from, to, "AnimatedMovingCard", Database.getTextureKey(moveAnimation.getCardID()),
+					screenWidth * 0.06f, screenWidth * 0.06f * 1.141f, moveAnimation.getSoundEffect());
+
+			this.animatedObjects.add(moveImage);
+			animObjects[0] = moveImage;
 			break;
 		default:
 			System.err.println("Could not parse AnimationType of animation object in addAnimation!");

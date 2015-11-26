@@ -3,6 +3,7 @@ package model.game;
 import gui2d.animations.Animation;
 import gui2d.animations.AnimationType;
 import gui2d.animations.CardDrawAnimation;
+import gui2d.animations.CardMoveAnimation;
 import gui2d.animations.CoinflipAnimation;
 import gui2d.animations.DamageAnimation;
 
@@ -641,7 +642,7 @@ public class AttackAction {
 	 * @param card
 	 */
 	public void putBasicPokemonOnBench(Player player, PokemonCard card) {
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " sets " + card.getName() + " on his bench!", card, Sounds.ON_BENCH);
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " sets " + card.getName() + " on his bench!", card, "");
 
 		// Get the lowest bench position that is empty:
 		PositionID benchPosition = null;
@@ -656,6 +657,10 @@ public class AttackAction {
 		// Move pokemon to bench:
 		this.moveCard(sourcePosition, benchPosition, card.getGameID(), true);
 
+		// Execute animation:
+		Animation animation = new CardMoveAnimation(sourcePosition, benchPosition, card.getCardId(), Sounds.ON_BENCH);
+		gameModel.sendAnimationToAllPlayers(animation);
+
 		// Update gameModel:
 		gameModel.sendGameModelToAllPlayers("");
 	}
@@ -669,12 +674,13 @@ public class AttackAction {
 	public void evolvePokemon(PositionID chosenPosition, int cardGameID) {
 		PokemonCard c = (PokemonCard) gameModel.getCard(cardGameID);
 		Position pos = c.getCurrentPosition();
+		PositionID startPosID = pos.getPositionID();
 		PokemonCard oldCard = (PokemonCard) gameModel.getPosition(chosenPosition).getTopCard();
 
 		List<Card> cardList = new ArrayList<>();
 		cardList.add(oldCard);
 		cardList.add(c);
-		gameModel.sendCardMessageToAllPlayers(oldCard.getName() + " evolves into " + c.getName(), cardList, Sounds.EVOLVE);
+		gameModel.sendCardMessageToAllPlayers(oldCard.getName() + " evolves into " + c.getName(), cardList, "");
 
 		int damage = oldCard.getDamageMarks();
 		oldCard.resetDynamicAttributes(); // Clean damage and conditions on old card
@@ -683,18 +689,28 @@ public class AttackAction {
 		// Add the remaining damage marks to the evolved pokemon:
 		c.setDamageMarks(damage);
 
+		// Execute animation:
+		Animation animation = new CardMoveAnimation(startPosID, chosenPosition, c.getCardId(), Sounds.EVOLVE);
+		gameModel.sendAnimationToAllPlayers(animation);
+
 		// Update gameModel:
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public String movePokemonToPosition(PositionID from, PositionID to) {
 		List<Card> cardList = new ArrayList<>();
+		String topCardID = gameModel.getPosition(from).getTopCard().getCardId();
 		for (Card c : gameModel.getPosition(from).getCards())
 			cardList.add(c);
 
 		int cardListSize = cardList.size();
 		for (int i = 0; i < cardListSize; i++)
 			this.moveCard(from, to, cardList.get(i).getGameID(), true);
+
+		// Execute animation:
+		Animation animation = new CardMoveAnimation(from, to, topCardID, "");
+		gameModel.sendAnimationToAllPlayers(animation);
+
 		return "";
 	}
 

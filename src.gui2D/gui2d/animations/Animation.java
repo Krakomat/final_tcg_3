@@ -61,6 +61,23 @@ public abstract class Animation {
 			boolean b = serializer.unpackBool(bString);
 			animation = new CoinflipAnimation(b);
 			break;
+		case CARD__MOVE:
+			// Unpack from positionID:
+			bString = serializer.unpackByteString(unpacker);
+			s = serializer.unpackString(bString);
+			PositionID from = s.equals("null") ? null : PositionID.valueOf(s);
+			// Unpack to positionID:
+			bString = serializer.unpackByteString(unpacker);
+			s = serializer.unpackString(bString);
+			PositionID to = s.equals("null") ? null : PositionID.valueOf(s);
+			// Unpack cardID:
+			bString = serializer.unpackByteString(unpacker);
+			String id = serializer.unpackString(bString);
+			// Unpack sound:
+			bString = serializer.unpackByteString(unpacker);
+			String sound = serializer.unpackString(bString);
+			animation = new CardMoveAnimation(from, to, id, sound);
+			break;
 		default:
 			break;
 		}
