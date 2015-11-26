@@ -37,6 +37,7 @@ public class TreeBot implements Bot {
 	private Queue<List<Integer>> chosenCardsQueue; // -->GameID
 	private Queue<List<Element>> chosenElementQueue;
 	private Queue<List<String>> chosenAttackQueue;
+	private Color botColor;
 
 	public TreeBot() {
 		this.aiUtilities = new AIUtilities();
@@ -112,10 +113,30 @@ public class TreeBot implements Bot {
 		if (!this.chosenPositionQueue.isEmpty()) {
 			return this.chosenPositionQueue.poll();
 		} else {
-			List<PositionID> chosenPositions = new ArrayList<PositionID>();
-			for (int i = 0; i < amount && i < positionList.size(); i++)
-				chosenPositions.add(positionList.get(i));
-			return chosenPositions;
+			PositionID activePosition = this.botColor == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON;
+			if (this.gameModel.getPosition(activePosition).isEmpty() && amount == 1 && exact) {
+				TreeBotEvaluator evaluator = new TreeBotEvaluator();
+				// Choose new active pokemon:
+				int value = Integer.MIN_VALUE;
+				PositionID chosenPosition = null;
+				for (PositionID benchPos : positionList) {
+					LocalPokemonGameModel copy = gameModel.copy();
+					copy.getAttackAction().movePokemonToPosition(benchPos, activePosition);
+					int v = evaluator.evaluateGameModel(copy);
+					if (v > value) {
+						value = v;
+						chosenPosition = benchPos;
+					}
+				}
+				List<PositionID> chosenPositions = new ArrayList<PositionID>();
+				chosenPositions.add(chosenPosition);
+				return chosenPositions;
+			} else {
+				List<PositionID> chosenPositions = new ArrayList<PositionID>();
+				for (int i = 0; i < amount && i < positionList.size(); i++)
+					chosenPositions.add(positionList.get(i));
+				return chosenPositions;
+			}
 		}
 	}
 
@@ -201,6 +222,6 @@ public class TreeBot implements Bot {
 	}
 
 	public void setColor(Color color) {
-
+		this.botColor = color;
 	}
 }
