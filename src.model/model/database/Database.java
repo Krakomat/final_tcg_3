@@ -173,10 +173,6 @@ public class Database {
 		asset2.setGenerateMips(false);
 		assetTextures.put("hp_empty", asset2);
 
-		TextureKey numberBg = new TextureKey("/tilesets/backgrounds/numberBackground.png");
-		numberBg.setGenerateMips(false);
-		assetTextures.put("number_background", numberBg);
-
 		TextureKey windowBgFull = new TextureKey("/tilesets/windows/WindowBG.png");
 		windowBgFull.setGenerateMips(false);
 		assetTextures.put("window_bg", windowBgFull);
