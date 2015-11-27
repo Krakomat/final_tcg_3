@@ -8,7 +8,6 @@ import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.enums.Coin;
-import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
@@ -82,13 +81,5 @@ public class Script_00163_Moltres extends PokemonCardScript {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 80, true);
 		else
 			gameModel.sendTextMessageToAllPlayers("Dive Bomb does nothing!", "");
-	}
-
-	private PositionID enemyDeck() {
-		Player enemy = this.getEnemyPlayer();
-		if (enemy.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

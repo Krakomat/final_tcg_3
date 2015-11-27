@@ -5,7 +5,6 @@ import java.util.List;
 
 import network.client.Player;
 import model.database.PokemonCard;
-import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
@@ -55,21 +54,5 @@ public class Script_00159_Hypno extends PokemonCardScript {
 					"Choose a pokemon that receives the damage!").get(0);
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchDefender, 10, false);
 		}
-	}
-	
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
-	}
-
-	private PositionID enemyDeck() {
-		Player enemy = this.getEnemyPlayer();
-		if (enemy.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

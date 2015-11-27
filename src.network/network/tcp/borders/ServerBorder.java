@@ -202,6 +202,23 @@ public class ServerBorder implements Player {
 	}
 
 	@Override
+	public boolean playerDecidesYesOrNo(String question) {
+		QueryMessage qMessage;
+		List<ByteString> parameters = new ArrayList<>();
+		parameters.add(serializer.packString(question));
+		qMessage = new QueryMessage(Method.PLAYER_ANSWERS_YES_NO, parameters);
+		qMessage.logSendMessage("ServerBorder");
+		this.respondMessage = null;
+		this.client.send(qMessage);
+
+		this.waitForResponse();
+
+		RespondMessage rMessage = this.respondMessage;
+		boolean answer = serializer.unpackBool(rMessage.getParameters().get(0));
+		return answer;
+	}
+
+	@Override
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
 		QueryMessage qMessage;
 		try {

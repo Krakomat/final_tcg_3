@@ -169,12 +169,4 @@ public class Script_00076_PokZuechter extends TrainerCardScript {
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.BLUE_HAND;
-	}
 }

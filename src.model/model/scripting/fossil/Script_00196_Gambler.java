@@ -7,9 +7,7 @@ import network.client.Player;
 import model.database.Card;
 import model.database.TrainerCard;
 import model.enums.Coin;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
@@ -58,21 +56,5 @@ public class Script_00196_Gambler extends TrainerCardScript {
 			gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());
 		}
 		gameModel.sendGameModelToAllPlayers("");
-	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

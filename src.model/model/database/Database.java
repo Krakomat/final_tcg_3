@@ -283,6 +283,10 @@ public class Database {
 		invulnerable.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.INVULNERABLE.toString(), invulnerable);
 
+		TextureKey retaliation = new TextureKey("/tilesets/conditions/retaliation.png");
+		retaliation.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.RETALIATION.toString(), retaliation);
+
 		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
 		overgrowth.setGenerateMips(false);
 		assetTextures.put("overgrowth", overgrowth);

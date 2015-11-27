@@ -5,9 +5,7 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -51,21 +49,5 @@ public class Script_00083_Wartung extends TrainerCardScript {
 		// Draw one card:
 		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 1 card!", "");
 		gameModel.getAttackAction().playerDrawsCards(1, player);
-	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.BLUE_HAND;
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

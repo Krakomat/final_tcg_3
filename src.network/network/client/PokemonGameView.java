@@ -172,4 +172,12 @@ public interface PokemonGameView {
 	 * @param animation
 	 */
 	public void playAnimation(Animation animation);
+
+	/**
+	 * Pops a window where the user has to choose either yes or no.
+	 * 
+	 * @param question
+	 * @return
+	 */
+	public boolean userAnswersQuestion(String question);
 }

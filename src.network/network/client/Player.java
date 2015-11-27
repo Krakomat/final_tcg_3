@@ -191,4 +191,12 @@ public interface Player extends Account {
 	 * @param animation
 	 */
 	public void playerReceivesAnimation(Animation animation);
+
+	/**
+	 * The player gives a yes/no answer to the given question.
+	 * 
+	 * @param question
+	 * @return
+	 */
+	public boolean playerDecidesYesOrNo(String question);
 }

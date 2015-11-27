@@ -7,9 +7,7 @@ import network.client.Player;
 import model.database.Card;
 import model.database.EnergyCard;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -52,21 +50,5 @@ public class Script_00195_EnergySearch extends TrainerCardScript {
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 		gameModel.sendGameModelToAllPlayers("");
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
-	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
 	}
 }

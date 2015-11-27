@@ -6,9 +6,7 @@ import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
 
@@ -47,13 +45,5 @@ public class Script_00089_Beleber extends TrainerCardScript {
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
-	}
-
-	private PositionID ownDiscardPile() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
 	}
 }

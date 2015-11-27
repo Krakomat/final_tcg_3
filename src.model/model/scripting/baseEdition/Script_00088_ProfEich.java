@@ -1,10 +1,7 @@
 package model.scripting.baseEdition;
 
-import network.client.Player;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -34,13 +31,5 @@ public class Script_00088_ProfEich extends TrainerCardScript {
 		// Draw 7 cards:
 		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName()  + " draws 7 cards!", "");
 		gameModel.getAttackAction().playerDrawsCards(7, getCardOwner());
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

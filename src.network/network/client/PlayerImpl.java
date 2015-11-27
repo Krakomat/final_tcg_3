@@ -79,6 +79,11 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	}
 
 	@Override
+	public boolean playerDecidesYesOrNo(String question) {
+		return view.userAnswersQuestion(question);
+	}
+
+	@Override
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
 		return view.userPaysEnergyCosts(costs, energyCards);
 	}

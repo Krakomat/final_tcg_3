@@ -5,7 +5,6 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.enums.Sounds;
@@ -50,13 +49,5 @@ public class Script_00194_MrFuji extends TrainerCardScript {
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

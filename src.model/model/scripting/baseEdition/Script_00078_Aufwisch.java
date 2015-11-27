@@ -75,12 +75,4 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
-
-	private PositionID ownActive() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_ACTIVEPOKEMON;
-		else
-			return PositionID.RED_ACTIVEPOKEMON;
-	}
 }

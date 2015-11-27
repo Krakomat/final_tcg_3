@@ -160,6 +160,9 @@ public class AttackAction {
 		Animation animation = new DamageAnimation(AnimationType.DAMAGE_POSITION, targetPosition, damageAmount);
 		gameModel.sendAnimationToAllPlayers(animation);
 		this.gameModel.sendGameModelToAllPlayers("");
+
+		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
+			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, damageAmount, true);
 		return damageAmount;
 	}
 
@@ -225,6 +228,11 @@ public class AttackAction {
 					break;
 				case TOXIC:
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
+				case RETALIATION:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				default:
 					break;
 				}
 			}
@@ -730,8 +738,13 @@ public class AttackAction {
 
 			// Move cards from position to discard pile:
 			PositionID targetPosition = player.getColor() == Color.BLUE ? PositionID.BLUE_DISCARDPILE : PositionID.RED_DISCARDPILE;
-			for (Card c : chosenEnergyCards)
+			for (Card c : chosenEnergyCards) {
 				this.moveCard(posID, targetPosition, c.getGameID(), true);
+
+				// Execute animation:
+				Animation animation = new CardMoveAnimation(posID, targetPosition, c.getCardId(), "");
+				gameModel.sendAnimationToAllPlayers(animation);
+			}
 		}
 	}
 }

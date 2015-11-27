@@ -21,7 +21,8 @@ public class GameModelParameters {
 	private boolean noEnergyPayment; // no payment for attacks if true
 	private short allowedToPlayTrainerCards;
 	private List<Integer> power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
-			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite;
+			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite,
+			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander;
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
@@ -37,6 +38,9 @@ public class GameModelParameters {
 		this.power_Activated_00117_Venomoth = new ArrayList<>();
 		this.power_Activated_00119_Vileplume = new ArrayList<>();
 		this.power_Activated_00188_Omanite = new ArrayList<>();
+		this.power_Activated_00251_Rattata = new ArrayList<>();
+		this.power_Activated_00239_Drowzee = new ArrayList<>();
+		this.power_Activated_00235_Charmander = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
 	}
 
@@ -54,6 +58,9 @@ public class GameModelParameters {
 		this.setPower_Activated_00117_Venomoth(gameModelUpdate.getGameModelParameters().isPower_Activated_00117_Venomoth());
 		this.setPower_Activated_00119_Vileplume(gameModelUpdate.getGameModelParameters().isPower_Activated_00119_Vileplume());
 		this.setPower_Activated_00188_Omanite(gameModelUpdate.getGameModelParameters().getPower_Activated_00188_Omanite());
+		this.setPower_Activated_00251_Rattata(gameModelUpdate.getGameModelParameters().getPower_Activated_00251_Rattata());
+		this.setPower_Activated_00239_Drowzee(gameModelUpdate.getGameModelParameters().getPower_Activated_00239_Drowzee());
+		this.setPower_Activated_00235_Charmander(gameModelUpdate.getGameModelParameters().getPower_Activated_00235_Charmander());
 		this.setAllowedToPlayTrainerCards(gameModelUpdate.getGameModelParameters().isAllowedToPlayTrainerCards());
 	}
 
@@ -72,6 +79,9 @@ public class GameModelParameters {
 		copy.setPower_Activated_00117_Venomoth(this.isPower_Activated_00117_Venomoth());
 		copy.setPower_Activated_00119_Vileplume(this.isPower_Activated_00119_Vileplume());
 		copy.setPower_Activated_00188_Omanite(this.getPower_Activated_00188_Omanite());
+		copy.setPower_Activated_00251_Rattata(this.getPower_Activated_00251_Rattata());
+		copy.setPower_Activated_00239_Drowzee(this.getPower_Activated_00239_Drowzee());
+		copy.setPower_Activated_00235_Charmander(this.getPower_Activated_00235_Charmander());
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
 		return copy;
 	}
@@ -131,6 +141,18 @@ public class GameModelParameters {
 		// power_Activated_00188_Omanite:
 		bString = serializer.unpackByteString(unpacker);
 		this.power_Activated_00188_Omanite = serializer.unpackIntList(bString);
+
+		// power_Activated_00251_Rattata:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00251_Rattata = serializer.unpackIntList(bString);
+
+		// power_Activated_00239_Drowzee:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00239_Drowzee = serializer.unpackIntList(bString);
+
+		// power_Activated_00235_Charmander:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00235_Charmander = serializer.unpackIntList(bString);
 
 		// allowedToPlayTrainerCards:
 		bString = serializer.unpackByteString(unpacker);
@@ -206,6 +228,21 @@ public class GameModelParameters {
 
 		// power_Activated_00188_Omanite:
 		b = serializer.packIntList(power_Activated_00188_Omanite);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00251_Rattata:
+		b = serializer.packIntList(power_Activated_00251_Rattata);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00239_Drowzee:
+		b = serializer.packIntList(power_Activated_00239_Drowzee);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00235_Charmander:
+		b = serializer.packIntList(power_Activated_00235_Charmander);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -328,5 +365,29 @@ public class GameModelParameters {
 
 	public void setAllowedToPlayTrainerCards(short allowedToPlayTrainerCards) {
 		this.allowedToPlayTrainerCards = allowedToPlayTrainerCards;
+	}
+
+	public List<Integer> getPower_Activated_00251_Rattata() {
+		return power_Activated_00251_Rattata;
+	}
+
+	public void setPower_Activated_00251_Rattata(List<Integer> power_Activated_00251_Rattata) {
+		this.power_Activated_00251_Rattata = power_Activated_00251_Rattata;
+	}
+
+	public List<Integer> getPower_Activated_00239_Drowzee() {
+		return power_Activated_00239_Drowzee;
+	}
+
+	public void setPower_Activated_00239_Drowzee(List<Integer> power_Activated_00239_Drowzee) {
+		this.power_Activated_00239_Drowzee = power_Activated_00239_Drowzee;
+	}
+
+	public List<Integer> getPower_Activated_00235_Charmander() {
+		return power_Activated_00235_Charmander;
+	}
+
+	public void setPower_Activated_00235_Charmander(List<Integer> power_Activated_00235_Charmander) {
+		this.power_Activated_00235_Charmander = power_Activated_00235_Charmander;
 	}
 }

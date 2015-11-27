@@ -1,10 +1,7 @@
 package model.scripting.baseEdition;
 
-import network.client.Player;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -30,13 +27,5 @@ public class Script_00087_Pokedex extends TrainerCardScript {
 		gameModel.getAttackAction().rearrangeCardsFromPosition(ownDeck(), 5);
 		// Discard trainer card!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

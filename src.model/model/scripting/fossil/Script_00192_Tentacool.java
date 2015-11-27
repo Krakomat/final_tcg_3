@@ -86,14 +86,6 @@ public class Script_00192_Tentacool extends PokemonCardScript {
 		}
 	}
 
-	private PositionID ownActive() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_ACTIVEPOKEMON;
-		else
-			return PositionID.RED_ACTIVEPOKEMON;
-	}
-
 	@Override
 	public void executeAttack(String attackName) {
 		if (attackName.equals("Acid"))

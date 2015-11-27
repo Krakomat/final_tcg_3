@@ -77,6 +77,11 @@ public class PokemonGameModelImpl implements PokemonGame {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
+		this.addCardOnTopOfPosition("00229", blueDeck);
+		this.addCardOnTopOfPosition("00249", blueDeck);
+		this.addCardOnTopOfPosition("00098", blueDeck);
+		this.addCardOnTopOfPosition("00098", blueDeck);
+		this.addCardOnTopOfPosition("00098", blueDeck);
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -105,7 +110,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		this.sendTextMessageToPlayers(getPlayerList(), "Each player shuffles his deck.", Sounds.SHUFFLE);
 		this.timeoutWait(200);
 		Position blueDeck = this.getPosition(PositionID.BLUE_DECK);
-		blueDeck.shuffle();
+		//blueDeck.shuffle();
 		Position redDeck = this.getPosition(PositionID.RED_DECK);
 		redDeck.shuffle();
 
@@ -1091,5 +1096,10 @@ public class PokemonGameModelImpl implements PokemonGame {
 	@Override
 	public void setGameModelParameters(GameModelParameters gameModelParameters) {
 		this.gameModelParameters = gameModelParameters;
+	}
+
+	@Override
+	public GameField getGameField() {
+		return gameField;
 	}
 }

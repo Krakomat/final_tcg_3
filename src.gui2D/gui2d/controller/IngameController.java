@@ -13,6 +13,7 @@ import gui2d.geometries.chooser.CardChooseWindow;
 import gui2d.geometries.chooser.CardViewer;
 import gui2d.geometries.chooser.DistributionChooser;
 import gui2d.geometries.chooser.ElementChooseWindow;
+import gui2d.geometries.chooser.QuestionChooseWindow;
 import gui2d.geometries.messages.CardPanel2D;
 import gui2d.geometries.messages.TextPanel2D;
 
@@ -55,6 +56,7 @@ public class IngameController extends Node implements GUI2DController {
 	private CardChooseWindow cardChooseWindow;
 	private ElementChooseWindow elementChooseWindow;
 	private AttackChooseWindow attackChooseWindow;
+	private QuestionChooseWindow questionChooseWindow;
 	private DistributionChooser distributionChooser;
 
 	/* View Window: */
@@ -498,6 +500,12 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().getGuiNode().attachChild(attackChooseWindow);
 		attackChooseWindow.setVisible(false);
 
+		questionChooseWindow = new QuestionChooseWindow("QuestionChooseWindow", "Question", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
+				.getResolution().getValue() * 0.2f);
+		questionChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.45f, 1);
+		GUI2D.getInstance().getGuiNode().attachChild(questionChooseWindow);
+		questionChooseWindow.setVisible(false);
+
 		distributionChooser = new DistributionChooser("DistributionChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
 				.getResolution().getValue() * 0.8f);
 		distributionChooser.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
@@ -548,6 +556,7 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().addToUpdateQueue(cardChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(elementChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(attackChooseWindow);
+				GUI2D.getInstance().addToUpdateQueue(questionChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(messagePanel);
 				GUI2D.getInstance().addToUpdateQueue(cardMessagePanel);
 				GUI2D.getInstance().addToUpdateQueue(distributionChooser);
@@ -1630,6 +1639,10 @@ public class IngameController extends Node implements GUI2DController {
 
 	public AttackChooseWindow getAttackChooseWindow() {
 		return attackChooseWindow;
+	}
+
+	public QuestionChooseWindow getQuestionChooseWindow() {
+		return questionChooseWindow;
 	}
 
 	public DistributionChooser getDistributionChooser() {

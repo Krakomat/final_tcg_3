@@ -14,7 +14,7 @@ public class WindowGeometry extends Node implements SelectableNode {
 
 	protected Window2D window;
 	private BitmapText title;
-	private String titleText;
+	protected String titleText;
 	protected boolean visible;
 	protected int level;
 	protected float width, height;

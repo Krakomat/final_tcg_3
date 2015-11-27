@@ -5,9 +5,7 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -48,21 +46,5 @@ public class Script_00074_Detektor extends TrainerCardScript {
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " recovers " + chosenCard.getName() + " from his discard pile!", chosenCard, "");
 		// Move trainer card:
 		gameModel.getAttackAction().moveCard(ownDiscardPile(), ownHand(), chosenCard.getGameID(), true);
-	}
-
-	private PositionID ownDiscardPile() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
-	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
 	}
 }

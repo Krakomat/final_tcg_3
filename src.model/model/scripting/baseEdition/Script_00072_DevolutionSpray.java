@@ -8,7 +8,6 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
 import model.enums.CardType;
-import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -52,14 +51,6 @@ public class Script_00072_DevolutionSpray extends TrainerCardScript {
 		basicPokemon.setDamageMarks(damage);
 		if (basicPokemon.getHitpoints() == basicPokemon.getDamageMarks())
 			gameModel.getAttackAction().inflictConditionToPosition(chosenPosition, PokemonCondition.KNOCKOUT);
-	}
-
-	private PositionID ownDiscardPile() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
 	}
 
 	/**

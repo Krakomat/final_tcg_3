@@ -7,7 +7,6 @@ import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
-import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -74,21 +73,5 @@ public class Script_00169_Gastly extends PokemonCardScript {
 		}
 
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 10, true);
-	}
-
-	private PositionID ownDiscardPile() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
-	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
 	}
 }

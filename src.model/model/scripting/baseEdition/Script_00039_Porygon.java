@@ -68,7 +68,6 @@ public class Script_00039_Porygon extends PokemonCardScript {
 			gameModel.sendTextMessageToAllPlayers(targetPokemon.getName() + "'s weakness is changed to " + chosenElement.toString(), "");
 		} else
 			gameModel.sendTextMessageToAllPlayers("Conversion 1 has no effect on " + defendingPokemon.getName() + "!", "");
-
 	}
 
 	private void umwandlung2() {

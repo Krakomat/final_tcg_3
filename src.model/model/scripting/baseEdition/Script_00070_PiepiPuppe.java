@@ -1,12 +1,9 @@
 package model.scripting.baseEdition;
 
-import network.client.Player;
 import model.database.Database;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -48,13 +45,5 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 
 		// Set doll onto bench:
 		doll.getCardScript().playFromHand();
-	}
-
-	private PositionID ownHand() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
 	}
 }

@@ -145,6 +145,11 @@ public class PlayerSimulator implements Player {
 	}
 
 	@Override
+	public boolean playerDecidesYesOrNo(String question) {
+		return true; // always answer 'yes'
+	}
+
+	@Override
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
 		if (energyCards.isEmpty()) {
 			System.err.println("Player pays costs: ");
@@ -154,7 +159,7 @@ public class PlayerSimulator implements Player {
 		List<Card> chosenCards = new ArrayList<>();
 		List<Card> availableCards = new ArrayList<>();
 		List<Card> copyOfAvailableCards = new ArrayList<>();
-		for (Card c : energyCards){
+		for (Card c : energyCards) {
 			availableCards.add(c);
 			copyOfAvailableCards.add(c);
 		}

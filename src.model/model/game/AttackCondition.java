@@ -123,4 +123,41 @@ public class AttackCondition {
 			return true;
 		return false;
 	}
+
+	/**
+	 * Returns true, if the given player has at least one prize card left.
+	 * 
+	 * @param player
+	 * @return
+	 */
+	public boolean playerHasPrizecardsLeft(Player player) {
+		if (player.getColor() == Color.BLUE) {
+			if (!gameModel.getPosition(PositionID.BLUE_PRICE_1).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.BLUE_PRICE_2).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.BLUE_PRICE_3).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.BLUE_PRICE_4).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.BLUE_PRICE_5).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.BLUE_PRICE_6).isEmpty())
+				return true;
+		} else {
+			if (!gameModel.getPosition(PositionID.RED_PRICE_1).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.RED_PRICE_2).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.RED_PRICE_3).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.RED_PRICE_4).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.RED_PRICE_5).isEmpty())
+				return true;
+			if (!gameModel.getPosition(PositionID.RED_PRICE_6).isEmpty())
+				return true;
+		}
+		return false;
+	}
 }

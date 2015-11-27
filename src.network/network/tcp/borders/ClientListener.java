@@ -60,6 +60,12 @@ public class ClientListener implements MessageListener<Client> {
 					RespondMessage response = new RespondMessage(Method.PLAYER_CHOOSE_ATTACK, serializer.packStringList(answerAttackList));
 					this.clientBorder.getClient().send(response);
 					break;
+				case PLAYER_ANSWERS_YES_NO:
+					String question = serializer.unpackString(qMessage.getParameters().get(0));
+					boolean answer = player.playerDecidesYesOrNo(question);
+					response = new RespondMessage(Method.PLAYER_ANSWERS_YES_NO, serializer.packBool(answer));
+					this.clientBorder.getClient().send(response);
+					break;
 				case PLAYER_CHOOSE_CARDS:
 					List<Card> cardList = serializer.unpackCardList(qMessage.getParameters().get(0));
 					amount = serializer.unpackInt(qMessage.getParameters().get(1));

@@ -22,6 +22,7 @@ Patch 3.00
 		- Hypno: Fixed a bug, where Dark Mind would apply weakness/resistance for the damaged bench pokemon
 		- Energy Search: Fixed a bug where the shuffle sound did not play
 		- Pokemon Center: Full heal message does now only occur one time instead of two
+		- Hitmonlee: Fixed a bug, where weakness/resistance would be applied in stretch kick
 	AI:
 		- Some number tweaking to make the AI better overall
 	Card Editor:

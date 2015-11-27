@@ -274,4 +274,6 @@ public interface PokemonGame {
 	GameModelParameters getGameModelParameters();
 
 	void setGameModelParameters(GameModelParameters gameModelParameters);
+	
+	GameField getGameField();
 }

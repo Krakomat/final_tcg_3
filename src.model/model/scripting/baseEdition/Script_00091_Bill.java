@@ -1,10 +1,7 @@
 package model.scripting.baseEdition;
 
-import network.client.Player;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -30,13 +27,5 @@ public class Script_00091_Bill extends TrainerCardScript {
 		// Discard trainer card before drawing!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

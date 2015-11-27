@@ -85,6 +85,11 @@ public class BotBorder extends AccountImpl implements Player {
 	}
 
 	@Override
+	public boolean playerDecidesYesOrNo(String question) {
+		return true; // Always answer 'Yes'
+	}
+
+	@Override
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
 		return this.botModel.paysEnergyCosts(costs, energyCards);
 	}

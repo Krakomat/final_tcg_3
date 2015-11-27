@@ -1,11 +1,8 @@
 package model.scripting.baseEdition;
 
-import network.client.Player;
 import model.database.TrainerCard;
-import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PokemonCondition;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
 
@@ -48,13 +45,5 @@ public class Script_00084_Pluspower extends TrainerCardScript {
 				gameModel.sendGameModelToAllPlayers("");
 			}
 		}
-	}
-
-	private PositionID ownActive() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_ACTIVEPOKEMON;
-		else
-			return PositionID.RED_ACTIVEPOKEMON;
 	}
 }

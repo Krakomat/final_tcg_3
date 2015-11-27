@@ -42,7 +42,7 @@ public class Script_00158_Hitmonlee extends PokemonCardScript {
 		if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0) {
 			PositionID defender = player.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
 					"Choose a pokemon that receives the damage!").get(0);
-			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, false);
 		}
 	}
 

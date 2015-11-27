@@ -6,9 +6,7 @@ import network.client.Player;
 import model.database.Card;
 import model.database.TrainerCard;
 import model.enums.Coin;
-import model.enums.Color;
 import model.enums.PlayerAction;
-import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
 
@@ -48,21 +46,5 @@ public class Script_00197_Recycle extends TrainerCardScript {
 			gameModel.sendGameModelToAllPlayers("");
 		}
 		gameModel.sendTextMessageToAllPlayers("Recycle was not successful!", "");
-	}
-
-	private PositionID ownDiscardPile() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
-	}
-
-	private PositionID ownDeck() {
-		Player player = this.getCardOwner();
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DECK;
-		else
-			return PositionID.RED_DECK;
 	}
 }

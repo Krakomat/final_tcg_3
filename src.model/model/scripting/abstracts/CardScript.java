@@ -112,4 +112,52 @@ public abstract class CardScript {
 	public void setCard(Card c) {
 		this.card = c;
 	}
+
+	protected PositionID ownDeck() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_DECK;
+		else
+			return PositionID.RED_DECK;
+	}
+
+	protected PositionID enemyDeck() {
+		Player enemy = this.getEnemyPlayer();
+		if (enemy.getColor() == Color.BLUE)
+			return PositionID.BLUE_DECK;
+		else
+			return PositionID.RED_DECK;
+	}
+
+	protected PositionID ownActive() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_ACTIVEPOKEMON;
+		else
+			return PositionID.RED_ACTIVEPOKEMON;
+	}
+
+	protected PositionID enemyActive() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.RED_ACTIVEPOKEMON;
+		else
+			return PositionID.BLUE_ACTIVEPOKEMON;
+	}
+
+	protected PositionID ownDiscardPile() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_DISCARDPILE;
+		else
+			return PositionID.RED_DISCARDPILE;
+	}
+
+	protected PositionID ownHand() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.BLUE_HAND;
+		else
+			return PositionID.RED_HAND;
+	}
 }

@@ -35,6 +35,7 @@ import gui2d.geometries.chooser.CardChooseWindow;
 import gui2d.geometries.chooser.ChooseGeometryChecker;
 import gui2d.geometries.chooser.DistributionChooser;
 import gui2d.geometries.chooser.ElementChooseWindow;
+import gui2d.geometries.chooser.QuestionChooseWindow;
 import gui2d.geometries.messages.CardPanel2D;
 import gui2d.geometries.messages.TextPanel2D;
 
@@ -340,6 +341,33 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			}
 		}).start();
 		return chosenAttacks;
+	}
+
+	@Override
+	public boolean userAnswersQuestion(String question) {
+		QuestionChooseWindow questionChooseWindow = this.ingameController.getQuestionChooseWindow();
+		questionChooseWindow.setVisible(true);
+		questionChooseWindow.setData(question);
+		this.addToUpdateQueue(questionChooseWindow); // waits for update queue here
+
+		while (!questionChooseWindow.choosingFinished()) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		boolean chosenAnswer = questionChooseWindow.getAnswer();
+		questionChooseWindow.unregisterShootables(ioController);
+		questionChooseWindow.setVisible(false);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				addToUpdateQueue(questionChooseWindow); // waits for update queue here
+			}
+		}).start();
+		return chosenAnswer;
 	}
 
 	@Override
