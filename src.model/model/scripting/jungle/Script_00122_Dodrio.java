@@ -34,6 +34,12 @@ public class Script_00122_Dodrio extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10 + damageMarks, true);
 	}
 
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
+
 	public int modifyRetreatCosts(int retreatCosts, Color color) {
 		if (color != this.getCardOwner().getColor())
 			return retreatCosts;

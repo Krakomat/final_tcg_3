@@ -33,10 +33,6 @@ public class Script_00156_Gengar extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 		if (this.getDamagedEnemyPositions().isEmpty())
@@ -44,7 +40,7 @@ public class Script_00156_Gengar extends PokemonCardScript {
 		if (this.gameModel.getFullArenaPositions(enemy.getColor()).size() < 2)
 			return false;
 
-		return true;
+		return super.pokemonPowerCanBeExecuted(powerName);
 	}
 
 	@Override

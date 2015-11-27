@@ -23,6 +23,12 @@ public class Script_00186_Kabuto extends PokemonCardScript {
 	}
 
 	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
+
+	@Override
 	public int modifyIncomingDamage(int damage, Card attacker) {
 		if (!kabutoArmorCanBeExecuted())
 			return damage;

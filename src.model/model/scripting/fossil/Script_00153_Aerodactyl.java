@@ -22,6 +22,11 @@ public class Script_00153_Aerodactyl extends PokemonCardScript {
 
 		this.addPokemonPower("Prehistoric Power");
 	}
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
 
 	@Override
 	public void executeAttack(String attackName) {

@@ -41,22 +41,18 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return false;
 
 		for (PositionID posID : gameModel.getFullBenchPositions(player.getColor())) {
 			Position pos = gameModel.getPosition(posID);
 			PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 			if (pokemon.getElement() != Element.COLORLESS)
-				return true;
+				return super.pokemonPowerCanBeExecuted(powerName);
 		}
 		for (PositionID posID : gameModel.getFullArenaPositions(enemy.getColor())) {
 			Position pos = gameModel.getPosition(posID);
 			PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 			if (pokemon.getElement() != Element.COLORLESS)
-				return true;
+				return super.pokemonPowerCanBeExecuted(powerName);
 		}
 
 		return false;

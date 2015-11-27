@@ -35,11 +35,7 @@ public class Script_00179_Slowbro extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
 		if (gameModel.getFullArenaPositions(player.getColor()).size() < 2)
-			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
 		if (pCard.getHitpoints() == pCard.getDamageMarks() + 10) // Slowbro would get knocked out
 			return false;
@@ -47,7 +43,7 @@ public class Script_00179_Slowbro extends PokemonCardScript {
 			Position pos = gameModel.getPosition(posID);
 			PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 			if (pokemon.getDamageMarks() > 0 && pokemon.getGameID() != this.card.getGameID())
-				return true;
+				return super.pokemonPowerCanBeExecuted(powerName);
 		}
 		return false;
 	}

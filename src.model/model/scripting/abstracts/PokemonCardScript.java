@@ -191,8 +191,11 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	 * @return
 	 */
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
-		// Override this, when needed
-		return false;
+		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
+			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
+		return true;
 	}
 
 	/**

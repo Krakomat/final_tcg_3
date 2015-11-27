@@ -26,6 +26,12 @@ public class Script_00164_Muk extends PokemonCardScript {
 	}
 
 	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
+
+	@Override
 	public void executeAttack(String attackName) {
 		if (attackName.equals("Sludge"))
 			this.sludge();

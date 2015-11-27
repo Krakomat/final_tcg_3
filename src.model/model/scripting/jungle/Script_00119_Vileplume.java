@@ -53,16 +53,12 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return false;
 
 		for (PositionID posID : gameModel.getFullArenaPositions(player.getColor())) {
 			Position pos = gameModel.getPosition(posID);
 			PokemonCard pokemon = (PokemonCard) pos.getTopCard();
 			if (pokemon.getDamageMarks() > 0)
-				return true;
+				return super.pokemonPowerCanBeExecuted(powerName);
 		}
 		return false;
 	}

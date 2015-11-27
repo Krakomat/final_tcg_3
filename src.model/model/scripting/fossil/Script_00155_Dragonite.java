@@ -34,13 +34,9 @@ public class Script_00155_Dragonite extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return false;
 		if (!PositionID.isBenchPosition(pCard.getCurrentPosition().getPositionID()))
 			return false;
-		return true;
+		return super.pokemonPowerCanBeExecuted(powerName);
 	}
 
 	@Override

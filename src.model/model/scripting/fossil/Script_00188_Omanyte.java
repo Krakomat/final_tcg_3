@@ -24,6 +24,12 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 		this.addPokemonPower("Clairvoyance");
 	}
 
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
+
 	public void moveToPosition(PositionID targetPosition) {
 		super.moveToPosition(targetPosition);
 

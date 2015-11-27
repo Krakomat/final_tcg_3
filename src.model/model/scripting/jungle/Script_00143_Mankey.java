@@ -38,10 +38,6 @@ public class Script_00143_Mankey extends PokemonCardScript {
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
-			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return false;
 
 		if (gameModel.getPosition(PositionID.BLUE_DECK).isEmpty() && gameModel.getPosition(PositionID.RED_DECK).isEmpty()
 				&& gameModel.getPosition(getEnemyHand()).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_1).isEmpty()
@@ -53,7 +49,7 @@ public class Script_00143_Mankey extends PokemonCardScript {
 				&& gameModel.getPosition(PositionID.RED_PRICE_6).isEmpty())
 			return false;
 
-		return true;
+		return super.pokemonPowerCanBeExecuted(powerName);
 	}
 
 	@Override
