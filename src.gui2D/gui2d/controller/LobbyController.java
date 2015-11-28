@@ -26,7 +26,7 @@ public class LobbyController extends Node implements GUI2DController {
 
 	private TextButton2D singlePlayerButton, multiPlayerButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
 	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton,
-			psychOutButton, wasserschwallButton, baseBotDeckButton, leibwaechterButton, schlossUndRiegelButton;
+			psychOutButton, wasserschwallButton, baseBotDeckButton, leibwaechterButton, schlossUndRiegelButton, aergerButton, verwuestungButton;
 	private TextPanel2D chooseBotDeckPanel;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -335,6 +335,40 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(lightningBugButton);
 		this.attachChild(lightningBugButton);
 		
+		aergerButton = new ImageButton2D("aergerButton", Database.getAssetKey("aerger"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Aerger.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		aergerButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 2.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		aergerButton.setVisible(false);
+		dropInUpdateQueue(aergerButton);
+		this.attachChild(aergerButton);
+
+		verwuestungButton = new ImageButton2D("verwuestungButton", Database.getAssetKey("verwuestung"), botButtonWidth, botButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				botClicked("Verwuestung.xml");
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		verwuestungButton.setLocalTranslation(screenWidth * 0.5f + botButtonWidth * 3.5f, screenHeight * 0.35f + botButtonHeight / 2, 0);
+		verwuestungButton.setVisible(false);
+		dropInUpdateQueue(verwuestungButton);
+		this.attachChild(verwuestungButton);
+
 		schlossUndRiegelButton = new ImageButton2D("schlossUndRiegelButton", Database.getAssetKey("schlossUndRiegel"), botButtonWidth, botButtonHeight) {
 
 			@Override
@@ -541,6 +575,10 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(blackoutButton);
 		this.lightningBugButton.setVisible(true);
 		this.dropInUpdateQueue(lightningBugButton);
+		this.aergerButton.setVisible(true);
+		this.dropInUpdateQueue(aergerButton);
+		this.verwuestungButton.setVisible(true);
+		this.dropInUpdateQueue(verwuestungButton);
 		this.leibwaechterButton.setVisible(true);
 		this.dropInUpdateQueue(leibwaechterButton);
 		this.kraftreserveButton.setVisible(true);
@@ -654,6 +692,10 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(blackoutButton);
 		this.lightningBugButton.setVisible(false);
 		this.dropInUpdateQueue(lightningBugButton);
+		this.aergerButton.setVisible(false);
+		this.dropInUpdateQueue(aergerButton);
+		this.verwuestungButton.setVisible(false);
+		this.dropInUpdateQueue(verwuestungButton);
 		this.leibwaechterButton.setVisible(false);
 		this.dropInUpdateQueue(leibwaechterButton);
 		this.kraftreserveButton.setVisible(false);

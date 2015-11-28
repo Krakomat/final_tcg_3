@@ -10,6 +10,8 @@ Patch 3.00
 		New decks for the bot
 			- Leibwächter
 			- Schloss und Riegel
+			- Ärger
+			- Verwüstung
 			- Basic Bot Deck: Deck that (hopefully) synergyzes with the strengths of the bot
 		New Card set: ROCKET
 	UI

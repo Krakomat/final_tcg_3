@@ -314,6 +314,14 @@ public class Database {
 		lightningBug.setGenerateMips(false);
 		assetTextures.put("lightningBug", lightningBug);
 
+		TextureKey aerger = new TextureKey("/decks/aerger.jpg");
+		aerger.setGenerateMips(false);
+		assetTextures.put("aerger", aerger);
+
+		TextureKey verwuestung = new TextureKey("/decks/verwuestung.jpg");
+		verwuestung.setGenerateMips(false);
+		assetTextures.put("verwuestung", verwuestung);
+
 		TextureKey baseEdition = new TextureKey("/tilesets/editions/baseLogo.png");
 		baseEdition.setGenerateMips(false);
 		assetTextures.put(Edition.BASE.toString(), baseEdition);
