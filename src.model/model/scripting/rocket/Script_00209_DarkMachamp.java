@@ -3,11 +3,14 @@ package model.scripting.rocket;
 import java.util.ArrayList;
 import java.util.List;
 
+import network.client.Player;
+import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00209_DarkMachamp extends PokemonCardScript {
@@ -15,47 +18,59 @@ public class Script_00209_DarkMachamp extends PokemonCardScript {
 	public Script_00209_DarkMachamp(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.COLORLESS);
-		att1Cost.add(Element.COLORLESS);
-		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Wing Attack", att1Cost);
+		att1Cost.add(Element.ROCK);
+		att1Cost.add(Element.ROCK);
+		this.addAttack("Mega Punch", att1Cost);
 
-		this.addPokemonPower("Prehistoric Power");
+		List<Element> att2Cost = new ArrayList<>();
+		att2Cost.add(Element.ROCK);
+		att2Cost.add(Element.ROCK);
+		att2Cost.add(Element.ROCK);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Fling", att2Cost);
 	}
+
+	public boolean attackCanBeExecuted(String attackName) {
+		if (attackName.equals("Fling")) {
+			// Cannot be used if the enemy has no benched pokemon
+			if (gameModel.getFullBenchPositions(getEnemyPlayer().getColor()).isEmpty())
+				return false;
+		}
+		return super.attackCanBeExecuted(attackName);
+	};
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Wing Attack"))
-			this.wingAttack();
+		if (attackName.equals("Mega Punch"))
+			this.MegaPunch();
+		else
+			this.Fling();
 	}
 
-	public void moveToPosition(PositionID targetPosition) {
-		super.moveToPosition(targetPosition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (!PositionID.isArenaPosition(targetPosition))
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
-	}
-
-	public void playFromHand() {
-		super.playFromHand();
-
-		// Add gameID to the power list of Aerodactyl:
-		this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().add(this.card.getGameID());
-	}
-
-	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
-		super.pokemonGotCondition(turnNumber, condition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED)
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
-	}
-
-	private void wingAttack() {
+	private void MegaPunch() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
+	}
+
+	private void Fling() {
+		Player player = this.getCardOwner();
+		PositionID targetPosition = this.enemyActive();
+
+		// Scoop up position:
+		Position position = gameModel.getPosition(targetPosition);
+		List<Card> cards = position.getCards();
+
+		gameModel.sendCardMessageToAllPlayers(this.getEnemyPlayer().getName() + " shuffles " + position.getTopCard().getName() + "into his deck!",
+				position.getTopCard(), "");
+		PositionID playerDeck = enemyDeck();
+
+		int size = cards.size();
+		for (int i = 0; i < size; i++)
+			gameModel.getAttackAction().moveCard(targetPosition, playerDeck, cards.get(0).getGameID(), true);
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
+		gameModel.getPosition(playerDeck).shuffle();
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

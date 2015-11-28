@@ -1,7 +1,12 @@
 package model.scripting.baseEdition;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.database.Card;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
@@ -23,10 +28,15 @@ public class Script_00073_FalscherProfEich extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " discards all cards!", "");
-		// Discard whole hand:
-		gameModel.getAttackAction().playerDiscardsAllCards(getEnemyPlayer());
-		gameModel.sendGameModelToAllPlayers("");
+		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " shuffles his hand into his deck!", "");
+		List<Card> list = gameModel.getPosition(enemyHand()).getCards();
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : list)
+			cardList.add(c);
+		for (Card c : cardList)
+			gameModel.getAttackAction().moveCard(enemyHand(), enemyDeck(), c.getGameID(), true);
+		gameModel.getAttackAction().shufflePosition(enemyDeck());
+		gameModel.sendGameModelToAllPlayers(Sounds.SHUFFLE);
 
 		// Draw 7 cards:
 		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " draws 7 cards!", "");

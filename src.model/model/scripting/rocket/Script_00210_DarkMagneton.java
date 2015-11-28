@@ -1,12 +1,17 @@
 package model.scripting.rocket;
 
+import gui2d.animations.Animation;
+import gui2d.animations.CardMoveAnimation;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import network.client.Player;
+import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
@@ -17,45 +22,50 @@ public class Script_00210_DarkMagneton extends PokemonCardScript {
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.COLORLESS);
 		att1Cost.add(Element.COLORLESS);
-		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Wing Attack", att1Cost);
+		this.addAttack("Sonicboom", att1Cost);
 
-		this.addPokemonPower("Prehistoric Power");
+		List<Element> att2Cost = new ArrayList<>();
+		att2Cost.add(Element.LIGHTNING);
+		att2Cost.add(Element.LIGHTNING);
+		this.addAttack("Magnetic Lines", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Wing Attack"))
-			this.wingAttack();
+		if (attackName.equals("Sonicboom"))
+			this.Sonicboom();
+		else
+			this.MagneticLines();
 	}
 
-	public void moveToPosition(PositionID targetPosition) {
-		super.moveToPosition(targetPosition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (!PositionID.isArenaPosition(targetPosition))
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
+	private void Sonicboom() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, false);
 	}
 
-	public void playFromHand() {
-		super.playFromHand();
-
-		// Add gameID to the power list of Aerodactyl:
-		this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().add(this.card.getGameID());
-	}
-
-	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
-		super.pokemonGotCondition(turnNumber, condition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED)
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
-	}
-
-	private void wingAttack() {
+	private void MagneticLines() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
+
+		if (gameModel.getPosition(enemyActive()).getBasicEnergyCards().size() > 0 && gameModel.getFullBenchPositions(this.getEnemyPlayer().getColor()).size() > 0) {
+			Player player = this.getCardOwner();
+			Card c = player.playerChoosesCards(gameModel.getPosition(enemyActive()).getBasicEnergyCards(), 1, true,
+					"Choose a energy card to move from the defending pokemon!").get(0);
+
+			PositionID posID = player.playerChoosesPositions(gameModel.getFullBenchPositions(this.getEnemyPlayer().getColor()), 1, true,
+					"Choose a pokemon to attach " + c.getName() + " to!").get(0);
+
+			gameModel.sendTextMessageToAllPlayers(player.getName() + " moves an energy card from the defending pokemon!", "");
+			gameModel.getAttackAction().moveCard(defender, posID, c.getGameID(), false);
+
+			// Execute animation:
+			Animation animation = new CardMoveAnimation(defender, posID, c.getCardId(), Sounds.EQUIP);
+			gameModel.sendAnimationToAllPlayers(animation);
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 }

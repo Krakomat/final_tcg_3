@@ -6,7 +6,6 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -32,40 +31,55 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 
 	public void moveToPosition(PositionID targetPosition) {
 		super.moveToPosition(targetPosition);
-
-		// Remove gameID to the power list of Omanite:
-		if (!PositionID.isArenaPosition(targetPosition)) {
-			this.gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().remove(new Integer(this.card.getGameID()));
-		} else if (!gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().contains(this.card.getGameID()))
-			gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().add(new Integer(this.card.getGameID()));
 		checkOmanitePower();
 	}
 
 	public void playFromHand() {
 		super.playFromHand();
-
-		if (!gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().contains(this.card.getGameID()))
-			gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().add(new Integer(this.card.getGameID()));
 		checkOmanitePower();
 	}
 
 	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
 		super.pokemonGotCondition(turnNumber, condition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED) {
-			gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().remove(new Integer(this.card.getGameID()));
-		}
 		checkOmanitePower();
 	}
 
 	public void pokemonGotConditionsRemoved(int turnNumber) {
-		if (!gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().contains(this.card.getGameID()))
-			gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().add(new Integer(this.card.getGameID()));
+		super.pokemonGotConditionsRemoved(turnNumber);
+		checkOmanitePower();
+	}
+
+	public void executeEndTurnActions() {
+		super.executeEndTurnActions();
+		checkOmanitePower();
+	}
+
+	public void executePreTurnActions() {
+		super.executePreTurnActions();
 		checkOmanitePower();
 	}
 
 	private void checkOmanitePower() {
+		boolean powerAllowed = true;
+		PokemonCard pCard = (PokemonCard) this.card;
+		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			powerAllowed = false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			powerAllowed = false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			powerAllowed = false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			powerAllowed = false;
+		if (this.card.getCurrentPosition().getPositionID() != null && !PositionID.isArenaPosition(this.card.getCurrentPosition().getPositionID()))
+			powerAllowed = false;
+
+		if (powerAllowed) {
+			if (!gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().contains(this.card.getGameID()))
+				gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().add(new Integer(this.card.getGameID()));
+		} else {
+			gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().remove(new Integer(this.card.getGameID()));
+		}
+
 		boolean playerHasPower = false;
 		Player player = this.getCardOwner();
 
@@ -103,13 +117,5 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 		waterCounter = waterCounter % 3;
 
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10 + (10 * waterCounter), true);
-	}
-
-	private PositionID enemyHand() {
-		Player enemy = getEnemyPlayer();
-		if (enemy.getColor() == Color.BLUE)
-			return PositionID.BLUE_HAND;
-		else
-			return PositionID.RED_HAND;
 	}
 }

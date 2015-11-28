@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Element {
-	WATER, FIRE, COLORLESS, LIGHTNING, GRASS, PSYCHIC, ROCK;
+	WATER, FIRE, COLORLESS, LIGHTNING, GRASS, PSYCHIC, ROCK, RAINBOW;
 
 	public static int valueOf(Element element) {
 		if (element.equals(COLORLESS))
@@ -21,6 +21,8 @@ public enum Element {
 			return 6;
 		if (element.equals(PSYCHIC))
 			return 7;
+		if (element.equals(RAINBOW))
+			return 8;
 		return 0;
 	}
 
@@ -46,6 +48,8 @@ public enum Element {
 			return 6;
 		case WATER:
 			return 7;
+		case RAINBOW:
+			return 8;
 		default:
 			return -1;
 		}
@@ -66,6 +70,8 @@ public enum Element {
 			return ROCK;
 		if (value == 7)
 			return PSYCHIC;
+		if (value == 8)
+			return RAINBOW;
 		return null;
 	}
 

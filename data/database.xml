@@ -3607,7 +3607,9 @@
             <Edition>ROCKET</Edition>
         </Card>
         <BasicEnergy>false</BasicEnergy>
-        <ProvidedEnergy/>
+        <ProvidedEnergy>
+            <Element>RAINBOW</Element>
+        </ProvidedEnergy>
     </EnergyCard>
     <PokemonCard>
         <Card>

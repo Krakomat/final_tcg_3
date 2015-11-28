@@ -45,6 +45,10 @@ public class Script_00115_Snorlax extends PokemonCardScript {
 	public boolean allowIncomingCondition(PokemonCondition condition) {
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return true; // just allow the condition
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return true;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			return true;
 
 		PokemonCard pCard = (PokemonCard) this.card;
 		if (!pCard.hasCondition(PokemonCondition.ASLEEP) && !pCard.hasCondition(PokemonCondition.CONFUSED) && !pCard.hasCondition(PokemonCondition.PARALYZED)) {

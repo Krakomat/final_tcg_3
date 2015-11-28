@@ -138,8 +138,10 @@ public class AttackAction {
 		damageAmount = script.modifyIncomingDamage(damageAmount, attackerPokemon);
 
 		// Test if attacker pokemon is able to modify the outgoing damage:
-		PokemonCardScript attackerScript = (PokemonCardScript) attackerPokemon.getCardScript();
-		damageAmount = attackerScript.modifyOutgoingDamage(damageAmount);
+		if (attackerPokemon != null) {
+			PokemonCardScript attackerScript = (PokemonCardScript) attackerPokemon.getCardScript();
+			damageAmount = attackerScript.modifyOutgoingDamage(damageAmount);
+		}
 
 		// Damage Pokemon:
 		defenderPokemon.setDamageMarks(defenderPokemon.getDamageMarks() + damageAmount);
@@ -234,6 +236,9 @@ public class AttackAction {
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case RETALIATION:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case POKEMON_POWER_BLOCK:
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 					break;
 				default:

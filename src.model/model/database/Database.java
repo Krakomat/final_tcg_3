@@ -226,6 +226,9 @@ public class Database {
 		TextureKey water = new TextureKey("/tilesets/elements/wasser.png");
 		water.setGenerateMips(false);
 		assetTextures.put(Element.WATER.toString(), water);
+		TextureKey rainbow = new TextureKey("/tilesets/elements/rainbow.png");
+		rainbow.setGenerateMips(false);
+		assetTextures.put(Element.RAINBOW.toString(), rainbow);
 
 		TextureKey trainerSymbol = new TextureKey("/tilesets/other/trainer.png");
 		trainerSymbol.setGenerateMips(false);
@@ -286,6 +289,10 @@ public class Database {
 		TextureKey retaliation = new TextureKey("/tilesets/conditions/retaliation.png");
 		retaliation.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.RETALIATION.toString(), retaliation);
+
+		TextureKey ppBlock = new TextureKey("/tilesets/conditions/ppBlock.png");
+		ppBlock.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.POKEMON_POWER_BLOCK.toString(), ppBlock);
 
 		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
 		overgrowth.setGenerateMips(false);

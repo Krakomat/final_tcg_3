@@ -24,6 +24,10 @@ public class Script_00152_Pokeball extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
+		// Discard trainer card before choosing!
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.sendGameModelToAllPlayers("");
+
 		Player player = this.getCardOwner();
 		gameModel.sendTextMessageToAllPlayers("If heads then " + this.card.getName() + "'s effects will be executed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
@@ -39,9 +43,6 @@ public class Script_00152_Pokeball extends TrainerCardScript {
 			// Shuffle deck:
 			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 			gameModel.getAttackAction().shufflePosition(ownDeck());
-
-			// Discard trainer card:
-			gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 
 			gameModel.sendGameModelToAllPlayers("");
 		}

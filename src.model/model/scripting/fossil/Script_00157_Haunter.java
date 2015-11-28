@@ -67,7 +67,11 @@ public class Script_00157_Haunter extends PokemonCardScript {
 
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			return false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			return false;
 
 		return true;

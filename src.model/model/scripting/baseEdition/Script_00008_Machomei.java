@@ -55,6 +55,10 @@ public class Script_00008_Machomei extends PokemonCardScript {
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor())
 			return false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			return false;
 		return true;
 	}
 

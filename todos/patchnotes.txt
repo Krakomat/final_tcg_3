@@ -11,9 +11,11 @@ Patch 3.00
 			- Leibwächter
 			- Schloss und Riegel
 			- Basic Bot Deck: Deck that (hopefully) synergyzes with the strengths of the bot
+		New Card set: ROCKET
 	UI
 		- Fixed a bug, where the tpf value was wrongly converted to miliseconds	
 	Game:
+		- Fixed several bugs involving passive pokemon powers like Aerodactyl's Prehistoric Power
 		- Removed the message that notifies the player of the coinflip results when coins had to be thrown
 		- Fixed a bug, where a pokemon that is asleep could attack
 		- Energy Retrival: Fixed a bug, where non-basic energy cards could be retrieved
@@ -34,6 +36,7 @@ Patch 3.00
 		- Krabby: Fixed a game breaking bug with the Call for family attack
 		- Pokemon Flute: Fixed a game breaking bug
 		- Beleber: Fixed a game breaking bug
+		- Falscher Professor Eich: Fixed a bug, where the enemy player discards his cards instead of shuffling them into his deck
 	AI:
 		- Some number tweaking to make the AI better overall
 	Card Editor:
@@ -43,7 +46,7 @@ Patch 3.00
 Patch 2.01
 	New Features
 		- New decks for the bot added
-		- New Card set: FOSSIL[beta]
+		- New Card set: FOSSIL
 	Game: 
 		- Pokedex: Fixed a bug, when choosing among same card ids
 		- Scoop Up: Fixed a bug, where multiple cards on a positions couldn't be scooped up properly

@@ -22,39 +22,69 @@ public class Script_00153_Aerodactyl extends PokemonCardScript {
 
 		this.addPokemonPower("Prehistoric Power");
 	}
+
 	@Override
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		// Cannot be manually activated!
 		return false;
 	}
 
-	@Override
-	public void executeAttack(String attackName) {
-		if (attackName.equals("Wing Attack"))
-			this.wingAttack();
-	}
-
 	public void moveToPosition(PositionID targetPosition) {
 		super.moveToPosition(targetPosition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (!PositionID.isArenaPosition(targetPosition))
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
+		checkPower();
 	}
 
 	public void playFromHand() {
 		super.playFromHand();
-
-		// Add gameID to the power list of Aerodactyl:
-		this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().add(this.card.getGameID());
+		checkPower();
 	}
 
 	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
 		super.pokemonGotCondition(turnNumber, condition);
+		checkPower();
+	}
 
-		// Remove gameID to the power list of Aerodactyl:
-		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED)
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
+	public void pokemonGotConditionsRemoved(int turnNumber) {
+		super.pokemonGotConditionsRemoved(turnNumber);
+		checkPower();
+	}
+
+	public void executeEndTurnActions() {
+		super.executeEndTurnActions();
+		checkPower();
+	}
+
+	public void executePreTurnActions() {
+		super.executePreTurnActions();
+		checkPower();
+	}
+
+	private void checkPower() {
+		boolean powerAllowed = true;
+		PokemonCard pCard = (PokemonCard) this.card;
+		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			powerAllowed = false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			powerAllowed = false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			powerAllowed = false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			powerAllowed = false;
+		if (this.card.getCurrentPosition().getPositionID() != null && !PositionID.isArenaPosition(this.card.getCurrentPosition().getPositionID()))
+			powerAllowed = false;
+
+		if (powerAllowed) {
+			if (!gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().contains(this.card.getGameID()))
+				gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().add(new Integer(this.card.getGameID()));
+		} else {
+			gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
+		}
+	}
+
+	@Override
+	public void executeAttack(String attackName) {
+		if (attackName.equals("Wing Attack"))
+			this.wingAttack();
 	}
 
 	private void wingAttack() {

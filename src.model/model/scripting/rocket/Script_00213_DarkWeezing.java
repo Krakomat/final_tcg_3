@@ -3,7 +3,10 @@ package model.scripting.rocket;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
+import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -15,47 +18,65 @@ public class Script_00213_DarkWeezing extends PokemonCardScript {
 	public Script_00213_DarkWeezing(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
+		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.COLORLESS);
-		att1Cost.add(Element.COLORLESS);
-		att1Cost.add(Element.COLORLESS);
-		this.addAttack("Wing Attack", att1Cost);
+		this.addAttack("Mass Explosion", att1Cost);
 
-		this.addPokemonPower("Prehistoric Power");
+		List<Element> att2Cost = new ArrayList<>();
+		att2Cost.add(Element.GRASS);
+		att2Cost.add(Element.GRASS);
+		att2Cost.add(Element.GRASS);
+		this.addAttack("Stun Gas", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Wing Attack"))
-			this.wingAttack();
+		if (attackName.equals("Mass Explosion"))
+			this.MassExplosion();
+		else
+			this.StunGas();
 	}
 
-	public void moveToPosition(PositionID targetPosition) {
-		super.moveToPosition(targetPosition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (!PositionID.isArenaPosition(targetPosition))
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
-	}
-
-	public void playFromHand() {
-		super.playFromHand();
-
-		// Add gameID to the power list of Aerodactyl:
-		this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().add(this.card.getGameID());
-	}
-
-	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
-		super.pokemonGotCondition(turnNumber, condition);
-
-		// Remove gameID to the power list of Aerodactyl:
-		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED)
-			this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
-	}
-
-	private void wingAttack() {
+	private void MassExplosion() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
+
+		List<PositionID> koffingList = getKoffingsFromPlay();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, koffingList.size() * 20, true);
+
+		for (PositionID posID : koffingList) {
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, posID, 20, false);
+		}
+	}
+
+	private List<PositionID> getKoffingsFromPlay() {
+		List<PositionID> posList = new ArrayList<>();
+		for (PositionID posID : gameModel.getFullArenaPositions(Color.BLUE)) {
+			String name = gameModel.getPosition(posID).getTopCard().getName();
+			if (name.equals("Koffing") || name.equals("Weezing") || name.equals("Dark Weezing"))
+				posList.add(posID);
+		}
+		return posList;
+	}
+
+	private void StunGas() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+
+		// Flip coin to check if defending pokemon is poisoned:
+		gameModel.sendTextMessageToAllPlayers("Check coinflip for condition!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		if (c == Coin.HEADS) {
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
+		} else {
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+		}
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

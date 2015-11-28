@@ -70,12 +70,4 @@ public class EnergyCard extends Card {
 	public void setProvidedEnergy(List<Element> providedEnergy) {
 		this.providedEnergy = providedEnergy;
 	}
-
-	public boolean providesEnergy(Element element) {
-		for (int i = 0; i < providedEnergy.size(); i++)
-			if (providedEnergy.get(i).equals(element))
-				return true;
-		return false;
-	}
-
 }

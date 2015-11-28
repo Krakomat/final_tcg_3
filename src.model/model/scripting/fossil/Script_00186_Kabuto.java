@@ -46,6 +46,10 @@ public class Script_00186_Kabuto extends PokemonCardScript {
 			return false;
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			return false;
 		return true;
 	}
 

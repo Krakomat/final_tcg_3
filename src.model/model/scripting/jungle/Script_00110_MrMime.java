@@ -37,6 +37,10 @@ public class Script_00110_MrMime extends PokemonCardScript {
 	public int modifyIncomingDamage(int damage, Card attacker) {
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return damage; // no modifications allowed
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return damage;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			return damage;
 
 		PokemonCard pCard = (PokemonCard) this.card;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))

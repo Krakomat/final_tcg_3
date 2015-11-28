@@ -6,6 +6,7 @@ import java.util.List;
 import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.Element;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -42,6 +43,10 @@ public class Script_00122_Dodrio extends PokemonCardScript {
 
 	public int modifyRetreatCosts(int retreatCosts, Color color) {
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return retreatCosts;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return retreatCosts;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			return retreatCosts;
 		if (color != this.getCardOwner().getColor())
 			return retreatCosts;

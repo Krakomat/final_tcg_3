@@ -168,4 +168,12 @@ public abstract class CardScript {
 		else
 			return PositionID.RED_HAND;
 	}
+	
+	protected PositionID enemyHand() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.RED_HAND;
+		else
+			return PositionID.BLUE_HAND;
+	}
 }

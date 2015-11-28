@@ -2,8 +2,14 @@ package model.scripting.rocket;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import network.client.Player;
+import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
+import model.enums.PokemonCondition;
+import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
@@ -11,29 +17,65 @@ public class Script_00251_Rattata extends PokemonCardScript {
 
 	public Script_00251_Rattata(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
+		this.addPokemonPower("Trickery");
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Quick Attack", att1Cost);
+	}
 
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		PokemonCard pCard = (PokemonCard) this.card;
+		Player enemy = this.getEnemyPlayer();
+
+		if (gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().contains(this.card.getGameID()))
+			return false;
+		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
+			return false;
+		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			return false;
+		if (this.gameModel.getFullArenaPositions(enemy.getColor()).size() < 2)
+			return false;
+		if (this.gameModel.getPosition(ownDeck()).size() == 0 || !gameModel.getAttackCondition().playerHasPrizecardsLeft(this.getCardOwner()))
+			return false;
+		return super.pokemonPowerCanBeExecuted(powerName);
+	}
+
+	public void executeEndTurnActions() {
+		if (gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().contains(this.card.getGameID())) {
+			gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().remove(new Integer(this.card.getGameID()));
+		}
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+
+		gameModel.sendTextMessageToAllPlayers("If heads then this attack does 10 more damage!", "");
+		Coin c = gameModel.getAttackAction().flipACoin();
+		if (c == Coin.HEADS) {
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+		} else
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 	}
 
-	private void donnerwelle() {
+	@Override
+	public void executePokemonPower(String powerName) {
+		Player player = this.getCardOwner();
+		ArrayList<PositionID> pricePositions = gameModel.getGameField().getNonEmptyPriceList(player.getColor());
 
-	}
+		PositionID chosenPrizePosition = player.playerChoosesPositions(pricePositions, 1, true, "Choose prize card...").get(0);
+		this.gameModel.sendTextMessageToAllPlayers(player.getName() + " switches prize card with his top deck card!", "");
 
-	private void finale() {
+		// Swap with top deck card:
+		Card prize = gameModel.getPosition(chosenPrizePosition).removeTopCard();
+		Card topDeck = gameModel.getPosition(ownDeck()).removeTopCard();
+		gameModel.getAttackAction().moveCard(chosenPrizePosition, ownDeck(), prize.getGameID(), true);
+		gameModel.getAttackAction().moveCard(ownDeck(), chosenPrizePosition, topDeck.getGameID(), true);
 
+		gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().add(this.card.getGameID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

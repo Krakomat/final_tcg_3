@@ -75,6 +75,7 @@ public class CardInfoPanel extends JPanel {
 	private JLabel lightningLabel;
 	private JLabel fireLabel;
 	private JLabel rockLabel;
+	private JLabel rainbowLabel;
 	@SuppressWarnings("rawtypes")
 	private JComboBox colorlessComboBox;
 	@SuppressWarnings("rawtypes")
@@ -89,6 +90,8 @@ public class CardInfoPanel extends JPanel {
 	private JComboBox lightningComboBox;
 	@SuppressWarnings("rawtypes")
 	private JComboBox psychicComboBox;
+	@SuppressWarnings("rawtypes")
+	private JComboBox rainbowComboBox;
 
 	private Card selectedCard;
 	private String[] pokemonCardNames;
@@ -124,6 +127,7 @@ public class CardInfoPanel extends JPanel {
 		String[] rockComboBoxItems = { "0", "1", "2" };
 		String[] lightningComboBoxItems = { "0", "1", "2" };
 		String[] psychicComboBoxItems = { "0", "1", "2" };
+		String[] rainbowComboBoxItems = { "0", "1", "2" };
 
 		this.setLayout(null);
 
@@ -205,6 +209,7 @@ public class CardInfoPanel extends JPanel {
 		grassLabel = new JLabel("Pflanze:");
 		waterLabel = new JLabel("Wasser:");
 		psychicLabel = new JLabel("Psycho:");
+		rainbowLabel = new JLabel("Rainbow:");
 		lightningLabel = new JLabel("Elektro:");
 		fireLabel = new JLabel("Feuer:");
 		rockLabel = new JLabel("Boden:");
@@ -222,6 +227,8 @@ public class CardInfoPanel extends JPanel {
 		lightningComboBox.addActionListener(listener);
 		psychicComboBox = new JComboBox(psychicComboBoxItems);
 		psychicComboBox.addActionListener(listener);
+		rainbowComboBox = new JComboBox(rainbowComboBoxItems);
+		rainbowComboBox.addActionListener(listener);
 
 		add(cardImageBitmap);
 		add(chooseImageButton);
@@ -252,6 +259,7 @@ public class CardInfoPanel extends JPanel {
 		add(grassLabel);
 		add(waterLabel);
 		add(psychicLabel);
+		add(rainbowLabel);
 		add(lightningLabel);
 		add(fireLabel);
 		add(rockLabel);
@@ -262,6 +270,7 @@ public class CardInfoPanel extends JPanel {
 		add(rockComboBox);
 		add(lightningComboBox);
 		add(psychicComboBox);
+		add(rainbowComboBox);
 
 		cardImageBitmap.setBounds(5, 5, 120, 150);
 		chooseImageButton.setBounds(5, 160, 120, 25);
@@ -292,6 +301,7 @@ public class CardInfoPanel extends JPanel {
 		grassLabel.setBounds(10, 425, 100, 25);
 		waterLabel.setBounds(10, 395, 100, 25);
 		psychicLabel.setBounds(180, 395, 100, 25);
+		rainbowLabel.setBounds(180, 425, 100, 25);
 		lightningLabel.setBounds(180, 365, 100, 25);
 		fireLabel.setBounds(10, 365, 100, 25);
 		rockLabel.setBounds(180, 335, 100, 25);
@@ -302,6 +312,7 @@ public class CardInfoPanel extends JPanel {
 		rockComboBox.setBounds(290, 335, 45, 25);
 		lightningComboBox.setBounds(290, 365, 45, 25);
 		psychicComboBox.setBounds(290, 395, 45, 25);
+		rainbowComboBox.setBounds(290, 425, 45, 25);
 	}
 
 	protected void updateCard(Card c) {
@@ -423,6 +434,7 @@ public class CardInfoPanel extends JPanel {
 			int grass = Integer.parseInt((String) grassComboBox.getSelectedItem());
 			int rock = Integer.parseInt((String) rockComboBox.getSelectedItem());
 			int psychic = Integer.parseInt((String) psychicComboBox.getSelectedItem());
+			int rainbow = Integer.parseInt((String) rainbowComboBox.getSelectedItem());
 			ArrayList<Element> energy = new ArrayList<Element>();
 			for (int i = 0; i < colorless; i++)
 				energy.add(Element.COLORLESS);
@@ -438,6 +450,8 @@ public class CardInfoPanel extends JPanel {
 				energy.add(Element.ROCK);
 			for (int i = 0; i < psychic; i++)
 				energy.add(Element.PSYCHIC);
+			for (int i = 0; i < rainbow; i++)
+				energy.add(Element.RAINBOW);
 			p.setProvidedEnergy(energy);
 		}
 		updateEditorBoard(c);
@@ -550,6 +564,7 @@ public class CardInfoPanel extends JPanel {
 				int grass = 0;
 				int rock = 0;
 				int psychic = 0;
+				int rainbow = 0;
 				for (int i = 0; i < p.getProvidedEnergy().size(); i++) {
 					Element e = p.getProvidedEnergy().get(i);
 					if (e.equals(Element.COLORLESS))
@@ -566,6 +581,8 @@ public class CardInfoPanel extends JPanel {
 						rock++;
 					else if (e.equals(Element.PSYCHIC))
 						psychic++;
+					else if (e.equals(Element.RAINBOW))
+						rainbow++;
 				}
 				colorlessComboBox.setSelectedItem(String.valueOf(colorless));
 				fireComboBox.setSelectedItem(String.valueOf(fire));
@@ -574,6 +591,7 @@ public class CardInfoPanel extends JPanel {
 				rockComboBox.setSelectedItem(String.valueOf(rock));
 				lightningComboBox.setSelectedItem(String.valueOf(lightning));
 				psychicComboBox.setSelectedItem(String.valueOf(psychic));
+				rainbowComboBox.setSelectedItem(String.valueOf(rainbow));
 				showEnergyProperties();
 			}
 		} else
@@ -597,6 +615,7 @@ public class CardInfoPanel extends JPanel {
 		grassLabel.setVisible(true);
 		waterLabel.setVisible(true);
 		psychicLabel.setVisible(true);
+		rainbowLabel.setVisible(true);
 		lightningLabel.setVisible(true);
 		fireLabel.setVisible(true);
 		rockLabel.setVisible(true);
@@ -607,6 +626,7 @@ public class CardInfoPanel extends JPanel {
 		rockComboBox.setVisible(true);
 		lightningComboBox.setVisible(true);
 		psychicComboBox.setVisible(true);
+		rainbowComboBox.setVisible(true);
 	}
 
 	private void showTrainerProperties() {
@@ -678,6 +698,7 @@ public class CardInfoPanel extends JPanel {
 		grassLabel.setVisible(false);
 		waterLabel.setVisible(false);
 		psychicLabel.setVisible(false);
+		rainbowLabel.setVisible(false);
 		lightningLabel.setVisible(false);
 		fireLabel.setVisible(false);
 		rockLabel.setVisible(false);
@@ -688,5 +709,6 @@ public class CardInfoPanel extends JPanel {
 		rockComboBox.setVisible(false);
 		lightningComboBox.setVisible(false);
 		psychicComboBox.setVisible(false);
+		rainbowComboBox.setVisible(false);
 	}
 }

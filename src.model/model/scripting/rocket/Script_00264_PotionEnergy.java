@@ -9,4 +9,12 @@ public class Script_00264_PotionEnergy extends EnergyCardScript {
 	public Script_00264_PotionEnergy(EnergyCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 	}
+
+	@Override
+	public void playFromHand() {
+		super.playFromHand();
+
+		// Clean conditions on pokemon:
+		gameModel.getAttackAction().healPosition(this.card.getCurrentPosition().getPositionID(), 10);
+	}
 }

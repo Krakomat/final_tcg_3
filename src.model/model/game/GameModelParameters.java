@@ -19,10 +19,11 @@ public class GameModelParameters {
 	private GameState gameState;
 	private boolean energyPlayed, retreatExecuted;
 	private boolean noEnergyPayment; // no payment for attacks if true
-	private short allowedToPlayTrainerCards;
+	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
 	private List<Integer> power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
 			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite,
-			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra;
+			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra,
+			power_Activated_00221_DarkGloom, power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume;
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
@@ -42,7 +43,11 @@ public class GameModelParameters {
 		this.power_Activated_00239_Drowzee = new ArrayList<>();
 		this.power_Activated_00235_Charmander = new ArrayList<>();
 		this.power_Activated_00224_DarkKadabra = new ArrayList<>();
+		this.power_Activated_00221_DarkGloom = new ArrayList<>();
+		this.power_Activated_00218_DarkDragonair = new ArrayList<>();
+		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
+		this.allowedToPlayPokemonPower = 0;
 	}
 
 	public GameModelParameters(GameModelUpdate gameModelUpdate) {
@@ -63,7 +68,11 @@ public class GameModelParameters {
 		this.setPower_Activated_00239_Drowzee(gameModelUpdate.getGameModelParameters().getPower_Activated_00239_Drowzee());
 		this.setPower_Activated_00235_Charmander(gameModelUpdate.getGameModelParameters().getPower_Activated_00235_Charmander());
 		this.setPower_Activated_00224_DarkKadabra(gameModelUpdate.getGameModelParameters().getPower_Activated_00224_DarkKadabra());
+		this.setPower_Activated_00221_DarkGloom(gameModelUpdate.getGameModelParameters().getPower_Activated_00221_DarkGloom());
+		this.setPower_Activated_00218_DarkDragonair(gameModelUpdate.getGameModelParameters().getPower_Activated_00218_DarkDragonair());
+		this.setPower_Activated_00212_DarkVileplume(gameModelUpdate.getGameModelParameters().getPower_Activated_00212_DarkVileplume());
 		this.setAllowedToPlayTrainerCards(gameModelUpdate.getGameModelParameters().isAllowedToPlayTrainerCards());
+		this.setAllowedToPlayPokemonPower(gameModelUpdate.getGameModelParameters().isAllowedToPlayPokemonPower());
 	}
 
 	public GameModelParameters copy() {
@@ -85,7 +94,11 @@ public class GameModelParameters {
 		copy.setPower_Activated_00239_Drowzee(this.getPower_Activated_00239_Drowzee());
 		copy.setPower_Activated_00235_Charmander(this.getPower_Activated_00235_Charmander());
 		copy.setPower_Activated_00224_DarkKadabra(this.getPower_Activated_00224_DarkKadabra());
+		copy.setPower_Activated_00221_DarkGloom(this.getPower_Activated_00221_DarkGloom());
+		copy.setPower_Activated_00218_DarkDragonair(this.getPower_Activated_00218_DarkDragonair());
+		copy.setPower_Activated_00212_DarkVileplume(this.getPower_Activated_00212_DarkVileplume());
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
+		copy.setAllowedToPlayPokemonPower(this.isAllowedToPlayPokemonPower());
 		return copy;
 	}
 
@@ -161,9 +174,25 @@ public class GameModelParameters {
 		bString = serializer.unpackByteString(unpacker);
 		this.power_Activated_00224_DarkKadabra = serializer.unpackIntList(bString);
 
+		// power_Activated_00221_DarkGloom:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00221_DarkGloom = serializer.unpackIntList(bString);
+
+		// power_Activated_00218_DarkDragonair:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00218_DarkDragonair = serializer.unpackIntList(bString);
+
+		// power_Activated_00212_DarkVileplume:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00212_DarkVileplume = serializer.unpackIntList(bString);
+
 		// allowedToPlayTrainerCards:
 		bString = serializer.unpackByteString(unpacker);
 		this.allowedToPlayTrainerCards = serializer.unpackShort(bString);
+
+		// allowedToPlayPokemonPower:
+		bString = serializer.unpackByteString(unpacker);
+		this.allowedToPlayPokemonPower = serializer.unpackShort(bString);
 
 		unpacker.close();
 	}
@@ -258,8 +287,28 @@ public class GameModelParameters {
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
+		// power_Activated_00221_DarkGloom:
+		b = serializer.packIntList(power_Activated_00221_DarkGloom);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00218_DarkDragonair:
+		b = serializer.packIntList(power_Activated_00218_DarkDragonair);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00212_DarkVileplume:
+		b = serializer.packIntList(power_Activated_00212_DarkVileplume);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
 		// allowedToPlayTrainerCards:
 		b = serializer.packShort(allowedToPlayTrainerCards);
+		packer.packBinaryHeader(energyPayment.length());
+		packer.writePayload(energyPayment.copyAsBytes());
+
+		// allowedToPlayPokemonPower:
+		b = serializer.packShort(allowedToPlayPokemonPower);
 		packer.packBinaryHeader(energyPayment.length());
 		packer.writePayload(energyPayment.copyAsBytes());
 
@@ -409,5 +458,37 @@ public class GameModelParameters {
 
 	public void setPower_Activated_00224_DarkKadabra(List<Integer> power_Activated_00224_DarkKadabra) {
 		this.power_Activated_00224_DarkKadabra = power_Activated_00224_DarkKadabra;
+	}
+
+	public List<Integer> getPower_Activated_00221_DarkGloom() {
+		return power_Activated_00221_DarkGloom;
+	}
+
+	public void setPower_Activated_00221_DarkGloom(List<Integer> power_Activated_00221_DarkGloom) {
+		this.power_Activated_00221_DarkGloom = power_Activated_00221_DarkGloom;
+	}
+
+	public List<Integer> getPower_Activated_00218_DarkDragonair() {
+		return power_Activated_00218_DarkDragonair;
+	}
+
+	public void setPower_Activated_00218_DarkDragonair(List<Integer> power_Activated_00218_DarkDragonair) {
+		this.power_Activated_00218_DarkDragonair = power_Activated_00218_DarkDragonair;
+	}
+
+	public List<Integer> getPower_Activated_00212_DarkVileplume() {
+		return power_Activated_00212_DarkVileplume;
+	}
+
+	public void setPower_Activated_00212_DarkVileplume(List<Integer> power_Activated_00212_DarkVileplume) {
+		this.power_Activated_00212_DarkVileplume = power_Activated_00212_DarkVileplume;
+	}
+
+	public short isAllowedToPlayPokemonPower() {
+		return allowedToPlayPokemonPower;
+	}
+
+	public void setAllowedToPlayPokemonPower(short allowedToPlayPokemonPower) {
+		this.allowedToPlayPokemonPower = allowedToPlayPokemonPower;
 	}
 }

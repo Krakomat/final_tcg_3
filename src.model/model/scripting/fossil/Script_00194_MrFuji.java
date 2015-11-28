@@ -37,7 +37,7 @@ public class Script_00194_MrFuji extends TrainerCardScript {
 		Position position = gameModel.getPosition(targetPosition);
 		List<Card> cards = position.getCards();
 
-		gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses the positions of " + position.getTopCard().getName() + "!", position.getTopCard(), "");
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses the position of " + position.getTopCard().getName() + "!", position.getTopCard(), "");
 		PositionID playerDeck = ownDeck();
 
 		int size = cards.size();

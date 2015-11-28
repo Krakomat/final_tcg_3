@@ -77,8 +77,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-		this.addCardOnTopOfPosition("00234", blueDeck);
-		this.addCardOnTopOfPosition("00224", blueDeck);
+
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -107,7 +106,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		this.sendTextMessageToPlayers(getPlayerList(), "Each player shuffles his deck.", Sounds.SHUFFLE);
 		this.timeoutWait(200);
 		Position blueDeck = this.getPosition(PositionID.BLUE_DECK);
-		//blueDeck.shuffle();
+		blueDeck.shuffle();
 		Position redDeck = this.getPosition(PositionID.RED_DECK);
 		redDeck.shuffle();
 
@@ -618,6 +617,13 @@ public class PokemonGameModelImpl implements PokemonGame {
 		if (value > 0) {
 			value--;
 			this.gameModelParameters.setAllowedToPlayTrainerCards(value);
+		}
+
+		// Update isAllowedToPlayPokemonPower value in gameModelParameters:
+		short ppValue = gameModelParameters.isAllowedToPlayPokemonPower();
+		if (ppValue > 0) {
+			ppValue--;
+			this.gameModelParameters.setAllowedToPlayPokemonPower(ppValue);
 		}
 
 		List<PositionID> posList = this.getFullArenaPositions(playerBlue.getColor());

@@ -50,8 +50,10 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			if (!(this.gameModel.getFullBenchPositions(color).size() == 5))
 				return PlayerAction.PUT_ON_BENCH;
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
-			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
-					&& this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty())
+			if (this.gameModel.getTurnNumber() > 1
+					&& !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
+					&& (this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty() || (!this.gameModel.getGameModelParameters()
+							.getPower_Active_00153_Aerodactyl().isEmpty() && !this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())))
 				return PlayerAction.EVOLVE_POKEMON;
 		} else
 			throw new IllegalArgumentException("Error: Wrong CardType for the card in canBePlayedFromHand() of PokemonCardScript: " + this.card.getCardType());
@@ -129,6 +131,15 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 					found = true;
 				}
 			}
+			// Try to pay with rainbow energy:
+			if (!found) {
+				for (int j = 0; j < copy.size(); j++) {
+					if (copy.get(j).equals(Element.RAINBOW) && !found) {
+						copy.remove(j);
+						found = true;
+					}
+				}
+			}
 			if (!found)
 				return false;
 		}
@@ -195,6 +206,10 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			return false;
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			return false;
 		return true;
 	}
 
@@ -253,6 +268,13 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + pCard.getName() + " with " + newActive.getName(), cardList, "");
 			gameModel.getAttackAction().swapPokemon(pCard.getCurrentPosition().getPositionID(), chosenPosition);
 			gameModel.sendGameModelToAllPlayers("");
+
+			// Check all scripts, if there is any interaction after retreating a pokemon (see 00205_DarkDugrtrio):
+			for (Card c : gameModel.getAllCards()) {
+				if (c instanceof PokemonCard)
+					((PokemonCardScript) c.getCardScript()).pokemonRetreated(pCard.getCurrentPosition().getPositionID());
+			}
+
 		} else
 			gameModel.sendTextMessageToAllPlayers("Retreat failed!", "");
 	}
@@ -428,10 +450,19 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	/**
 	 * Is called when the owner pokemon of this script got its conditions removed.
 	 * 
-	 * @param turnNumberm
+	 * @param turnNumber
 	 * @param condition
 	 */
 	public void pokemonGotConditionsRemoved(int turnNumber) {
+		// Override when needed!
+	}
+
+	/**
+	 * Is called whenever a pokemon retreated!
+	 * 
+	 * @param newPositionOfRetreatedPkmn
+	 */
+	public void pokemonRetreated(PositionID newPositionOfRetreatedPkmn) {
 		// Override when needed!
 	}
 
