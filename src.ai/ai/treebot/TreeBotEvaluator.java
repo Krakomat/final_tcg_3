@@ -59,15 +59,15 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 			value = value + 10 * gameModel.getPosition(pos).getPokemonCards().size();
 		value = value + 10 * gameModel.getPosition(PositionID.getActivePokemon(color)).getPokemonCards().size();
 
-		// Loose 1 point for each damage mark on your own field:
+		// Loose 2 point for each damage mark on your own field:
 		for (PositionID pos : gameModel.getFullBenchPositions(color)) {
 			PokemonCard pokemon = (PokemonCard) gameModel.getPosition(pos).getTopCard();
-			value = value - pokemon.getDamageMarks() / 10;
+			value = value - 2 * (pokemon.getDamageMarks() / 10);
 		}
 
-		// Loose 2 points for each damage mark on your own active pokemon:
+		// Loose 4 points for each damage mark on your own active pokemon:
 		PokemonCard ownActive = (PokemonCard) gameModel.getPosition(PositionID.getActivePokemon(color)).getTopCard();
-		value = value - 2 * (ownActive.getDamageMarks() / 10);
+		value = value - 4 * (ownActive.getDamageMarks() / 10);
 
 		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready, 3 points for each
 		// attack of your active pokemnon that is ready:

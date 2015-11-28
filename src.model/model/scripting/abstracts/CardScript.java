@@ -153,6 +153,14 @@ public abstract class CardScript {
 			return PositionID.RED_DISCARDPILE;
 	}
 
+	protected PositionID enemyDiscardPile() {
+		Player player = this.getCardOwner();
+		if (player.getColor() == Color.BLUE)
+			return PositionID.RED_DISCARDPILE;
+		else
+			return PositionID.BLUE_DISCARDPILE;
+	}
+
 	protected PositionID ownHand() {
 		Player player = this.getCardOwner();
 		if (player.getColor() == Color.BLUE)

@@ -7,7 +7,6 @@ import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
-import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -71,13 +70,9 @@ public class Script_00171_Golduck extends PokemonCardScript {
 				cardList.add(c);
 
 			Card chosenEnergyCard = player.playerChoosesCards(cardList, 1, true, "Choose one energy card to remove!").get(0);
-			PositionID discardPile = null;
-			if (chosenEnergyCard.getCurrentPosition().getColor() == Color.BLUE)
-				discardPile = PositionID.BLUE_DISCARDPILE;
-			else
-				discardPile = PositionID.RED_DISCARDPILE;
+			PositionID discardPile = enemyDiscardPile();
 
-			gameModel.getAttackAction().moveCard(chosenEnergyCard.getCurrentPosition().getPositionID(), discardPile, chosenEnergyCard.getGameID(), true);
+			gameModel.getAttackAction().moveCard(defender, discardPile, chosenEnergyCard.getGameID(), true);
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

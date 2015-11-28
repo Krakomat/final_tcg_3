@@ -23,6 +23,17 @@ Patch 3.00
 		- Energy Search: Fixed a bug where the shuffle sound did not play
 		- Pokemon Center: Full heal message does now only occur one time instead of two
 		- Hitmonlee: Fixed a bug, where weakness/resistance would be applied in stretch kick
+		- Super Energy Drain: Fixed a bug, where the initial payed energy card would not be discarded.
+		- Dragonair: Fixed a game breaking bug with the hyperbeam attack
+		- Golduck: Fixed a game breaking bug with the hyperbeam attack
+		- Quappo: Fixed a game breaking bug with the strudel attack
+		- Marowack: Fixed a game breaking bug with the Call for friend attack
+		- Bellsprout: Fixed a game breaking bug with the Call for family attack
+		- NidoranF: Fixed a game breaking bug with the Call for family attack
+		- Oddish: Fixed a game breaking bug with the sprout attack
+		- Krabby: Fixed a game breaking bug with the Call for family attack
+		- Pokemon Flute: Fixed a game breaking bug
+		- Beleber: Fixed a game breaking bug
 	AI:
 		- Some number tweaking to make the AI better overall
 	Card Editor:

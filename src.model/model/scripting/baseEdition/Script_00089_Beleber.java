@@ -33,15 +33,16 @@ public class Script_00089_Beleber extends TrainerCardScript {
 		PokemonCard chosenCard = (PokemonCard) player.playerChoosesCards(basicPokemon, 1, true, "Choose a pokemon to revive!").get(0);
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " revives " + chosenCard.getName(), chosenCard, "");
 
+		PokemonCard realCard = (PokemonCard) gameModel.getCard(chosenCard.getGameID());
 		// Put on bench:
-		gameModel.getAttackAction().putBasicPokemonOnBench(player, chosenCard);
+		gameModel.getAttackAction().putBasicPokemonOnBench(player, realCard);
 
 		// Apply damage marks(do not use inflictDamage of attackAction):
-		int hp = chosenCard.getHitpoints();
+		int hp = realCard.getHitpoints();
 		hp = hp / 2;
 		if (hp % 2 == 1)
 			hp = hp - 5; // round down to nearest 10
-		chosenCard.setDamageMarks(hp);
+		realCard.setDamageMarks(hp);
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());

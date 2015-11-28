@@ -6,7 +6,6 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
@@ -69,7 +68,6 @@ public class Script_00013_Quappo extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Position defendingPosition = gameModel.getPosition(defender);
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 
 		// Check for energy at enemy position:
@@ -80,13 +78,9 @@ public class Script_00013_Quappo extends PokemonCardScript {
 				cardList.add(c);
 
 			Card chosenEnergyCard = player.playerChoosesCards(cardList, 1, true, "Choose one energy card to remove!").get(0);
-			PositionID discardPile = null;
-			if (chosenEnergyCard.getCurrentPosition().getColor() == Color.BLUE)
-				discardPile = PositionID.BLUE_DISCARDPILE;
-			else
-				discardPile = PositionID.RED_DISCARDPILE;
+			PositionID discardPile = enemyDiscardPile();
 
-			gameModel.getAttackAction().moveCard(chosenEnergyCard.getCurrentPosition().getPositionID(), discardPile, chosenEnergyCard.getGameID(), true);
+			gameModel.getAttackAction().moveCard(defender, discardPile, chosenEnergyCard.getGameID(), true);
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

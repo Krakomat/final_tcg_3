@@ -133,9 +133,13 @@ public class AttackAction {
 		if (damageAmount < 0)
 			damageAmount = 0;
 
-		// Test if pokemon is able to modify the incoming damage:
+		// Test if defender pokemon is able to modify the incoming damage:
 		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
 		damageAmount = script.modifyIncomingDamage(damageAmount, attackerPokemon);
+
+		// Test if attacker pokemon is able to modify the outgoing damage:
+		PokemonCardScript attackerScript = (PokemonCardScript) attackerPokemon.getCardScript();
+		damageAmount = attackerScript.modifyOutgoingDamage(damageAmount);
 
 		// Damage Pokemon:
 		defenderPokemon.setDamageMarks(defenderPokemon.getDamageMarks() + damageAmount);
@@ -400,6 +404,12 @@ public class AttackAction {
 			discardPileID = PositionID.RED_DISCARDPILE;
 
 		this.moveCard(posID, discardPileID, gameID, true);
+
+		Card card = gameModel.getCard(gameID);
+
+		// Execute animation:
+		Animation animation = new CardMoveAnimation(posID, discardPileID, card.getCardId(), "");
+		gameModel.sendAnimationToAllPlayers(animation);
 	}
 
 	/**
@@ -598,7 +608,8 @@ public class AttackAction {
 		}
 		for (int i = 0; i < amountOfCards - 1; i++) {
 			Card chosenCard = attacker.playerChoosesCards(cards, 1, true, "Put a card on the deck.").get(0);
-			pos.addToPosition(chosenCard);
+			Card realCard = gameModel.getCard(chosenCard.getGameID());
+			pos.addToPosition(realCard);
 			this.removeCardFromList(cards, chosenCard);
 		}
 		pos.addToPosition(cards.get(0));

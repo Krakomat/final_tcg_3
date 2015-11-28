@@ -77,11 +77,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-		this.addCardOnTopOfPosition("00229", blueDeck);
-		this.addCardOnTopOfPosition("00249", blueDeck);
-		this.addCardOnTopOfPosition("00098", blueDeck);
-		this.addCardOnTopOfPosition("00098", blueDeck);
-		this.addCardOnTopOfPosition("00098", blueDeck);
+		this.addCardOnTopOfPosition("00234", blueDeck);
+		this.addCardOnTopOfPosition("00224", blueDeck);
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -281,11 +278,13 @@ public class PokemonGameModelImpl implements PokemonGame {
 		// Both players have chosen:
 		for (int i = 0; i < blueChosenBench.size(); i++) {
 			this.attackAction.moveCard(PositionID.BLUE_HAND, PositionID.getBenchPosition(Color.BLUE, i + 1), blueChosenBench.get(i).getGameID(), true);
-			blueChosenBench.get(i).setPlayedInTurn(0);
+			Card realCard = this.getCard(blueChosenBench.get(i).getGameID());
+			realCard.setPlayedInTurn(0);
 		}
 		for (int i = 0; i < redChosenBench.size(); i++) {
 			this.attackAction.moveCard(PositionID.RED_HAND, PositionID.getBenchPosition(Color.RED, i + 1), redChosenBench.get(i).getGameID(), true);
-			redChosenBench.get(i).setPlayedInTurn(0);
+			Card realCard = this.getCard(redChosenBench.get(i).getGameID());
+			realCard.setPlayedInTurn(0);
 		}
 
 		// Update GameModel:

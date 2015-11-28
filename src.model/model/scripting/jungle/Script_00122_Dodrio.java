@@ -41,6 +41,8 @@ public class Script_00122_Dodrio extends PokemonCardScript {
 	}
 
 	public int modifyRetreatCosts(int retreatCosts, Color color) {
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return retreatCosts;
 		if (color != this.getCardOwner().getColor())
 			return retreatCosts;
 		if (!PositionID.isBenchPosition(this.card.getCurrentPosition().getPositionID()))

@@ -172,6 +172,7 @@ public class PlayerSimulator implements Player {
 				colorCosts.add(element);
 			else
 				colorless++;
+		int colorlessAtStart = colorless;
 
 		// Pay color costs:
 		for (Element element : colorCosts) {
@@ -209,9 +210,9 @@ public class PlayerSimulator implements Player {
 			}
 		}
 
-		// TODO Bug here: When Nockchan[Grass] wants to retreat (cost [Colorless]) then the simulator pays []!
+		// TODO Bug here!s
 		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: "
-				+ chosenCards + " AvailableCards: " + copyOfAvailableCards);
+				+ chosenCards + " AvailableCards: " + copyOfAvailableCards + " colorlessAtStart: " + colorlessAtStart + ", colorless: " + colorless);
 		return chosenCards;
 	}
 

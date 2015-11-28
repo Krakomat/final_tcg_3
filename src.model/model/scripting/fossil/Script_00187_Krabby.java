@@ -50,7 +50,8 @@ public class Script_00187_Krabby extends PokemonCardScript {
 
 		if (bellsproutBasicPokemon.size() > 0) {
 			Card chosenCard = this.getCardOwner().playerChoosesCards(bellsproutBasicPokemon, 1, true, "Choose a pokemon to put on your bench!").get(0);
-			gameModel.getAttackAction().putBasicPokemonOnBench(getCardOwner(), (PokemonCard) chosenCard);
+			Card realCard = gameModel.getCard(chosenCard.getGameID());
+			gameModel.getAttackAction().putBasicPokemonOnBench(getCardOwner(), (PokemonCard) realCard);
 		} else
 			gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + "'s deck contains no Bellsprout!", "");
 

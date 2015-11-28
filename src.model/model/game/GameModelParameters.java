@@ -22,7 +22,7 @@ public class GameModelParameters {
 	private short allowedToPlayTrainerCards;
 	private List<Integer> power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
 			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite,
-			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander;
+			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra;
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
@@ -41,6 +41,7 @@ public class GameModelParameters {
 		this.power_Activated_00251_Rattata = new ArrayList<>();
 		this.power_Activated_00239_Drowzee = new ArrayList<>();
 		this.power_Activated_00235_Charmander = new ArrayList<>();
+		this.power_Activated_00224_DarkKadabra = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
 	}
 
@@ -61,6 +62,7 @@ public class GameModelParameters {
 		this.setPower_Activated_00251_Rattata(gameModelUpdate.getGameModelParameters().getPower_Activated_00251_Rattata());
 		this.setPower_Activated_00239_Drowzee(gameModelUpdate.getGameModelParameters().getPower_Activated_00239_Drowzee());
 		this.setPower_Activated_00235_Charmander(gameModelUpdate.getGameModelParameters().getPower_Activated_00235_Charmander());
+		this.setPower_Activated_00224_DarkKadabra(gameModelUpdate.getGameModelParameters().getPower_Activated_00224_DarkKadabra());
 		this.setAllowedToPlayTrainerCards(gameModelUpdate.getGameModelParameters().isAllowedToPlayTrainerCards());
 	}
 
@@ -82,6 +84,7 @@ public class GameModelParameters {
 		copy.setPower_Activated_00251_Rattata(this.getPower_Activated_00251_Rattata());
 		copy.setPower_Activated_00239_Drowzee(this.getPower_Activated_00239_Drowzee());
 		copy.setPower_Activated_00235_Charmander(this.getPower_Activated_00235_Charmander());
+		copy.setPower_Activated_00224_DarkKadabra(this.getPower_Activated_00224_DarkKadabra());
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
 		return copy;
 	}
@@ -153,6 +156,10 @@ public class GameModelParameters {
 		// power_Activated_00235_Charmander:
 		bString = serializer.unpackByteString(unpacker);
 		this.power_Activated_00235_Charmander = serializer.unpackIntList(bString);
+
+		// power_Activated_00224_DarkKadabra:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00224_DarkKadabra = serializer.unpackIntList(bString);
 
 		// allowedToPlayTrainerCards:
 		bString = serializer.unpackByteString(unpacker);
@@ -243,6 +250,11 @@ public class GameModelParameters {
 
 		// power_Activated_00235_Charmander:
 		b = serializer.packIntList(power_Activated_00235_Charmander);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00224_DarkKadabra:
+		b = serializer.packIntList(power_Activated_00224_DarkKadabra);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -389,5 +401,13 @@ public class GameModelParameters {
 
 	public void setPower_Activated_00235_Charmander(List<Integer> power_Activated_00235_Charmander) {
 		this.power_Activated_00235_Charmander = power_Activated_00235_Charmander;
+	}
+
+	public List<Integer> getPower_Activated_00224_DarkKadabra() {
+		return power_Activated_00224_DarkKadabra;
+	}
+
+	public void setPower_Activated_00224_DarkKadabra(List<Integer> power_Activated_00224_DarkKadabra) {
+		this.power_Activated_00224_DarkKadabra = power_Activated_00224_DarkKadabra;
 	}
 }
