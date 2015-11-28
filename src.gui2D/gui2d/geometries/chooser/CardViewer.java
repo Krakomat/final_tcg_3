@@ -71,7 +71,7 @@ public class CardViewer extends WindowGeometry {
 		okButton.setLocalTranslation(xPos + width * 0.40f, yPos + height * 0.05f, level + 0.00001f);
 		this.attachChild(okButton);
 
-		this.cardImage = new Image2D(name, Database.getTextureKey("00000"), width * 0.50f, height * 0.7f) {
+		this.cardImage = new Image2D(name, Database.getTextureKey("00000"), width * 0.55f, height * 0.75f) {
 			@Override
 			public void mouseSelect() {
 			}
@@ -80,7 +80,7 @@ public class CardViewer extends WindowGeometry {
 			public void mouseSelectRightClick() {
 			}
 		};
-		cardImage.setLocalTranslation(xPos + width * 0.25f, yPos + height * 0.2f, level + 0.00001f);
+		cardImage.setLocalTranslation(xPos + width * 0.225f, yPos + height * 0.175f, level + 0.00001f);
 		this.attachChild(cardImage);
 	}
 

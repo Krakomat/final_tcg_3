@@ -6,13 +6,13 @@ Patch 3.00
 			- Damage for position
 			- Heal for position
 			- Coinflip
-			- Several situation, where cards are being moved
+			- Several situations, where cards are being moved
 		New decks for the bot
 			- Leibwächter
 			- Schloss und Riegel
 			- Ärger
 			- Verwüstung
-			- Basic Bot Deck: Deck that (hopefully) synergyzes with the strengths of the bot
+			- Basic Bot Deck: Deck that (hopefully) synergizes with the strengths of the bot
 		New Card set: ROCKET
 	UI
 		- Fixed a bug, where the tpf value was wrongly converted to miliseconds	

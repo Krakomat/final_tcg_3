@@ -89,7 +89,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void simpleInitApp() {
-		this.settings.setMinResolution(1280, 720);
 		this.setPauseOnLostFocus(false);
 		Thread.currentThread().setName(Threads.RENDER_THREAD.toString());
 		GUI2D = this;
