@@ -27,7 +27,6 @@ import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.CardScriptFactory;
 import model.scripting.abstracts.PokemonCardScript;
-import model.scripting.abstracts.ServerCards;
 
 /**
  * Used by a client to locally store the game model that was send from the server.
@@ -113,8 +112,6 @@ public class LocalPokemonGameModel implements PokemonGame {
 		boolean playerOnTurnRed = this.getPlayerOnTurn().getColor() == Color.RED;
 		boolean positionColorBlue = pos.getColor() == Color.BLUE;
 		if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
-			if (ServerCards.createInstance().contains(c.getCardId()))
-				return server.getPlayerActions(positionIndex, position, player); // ask server!
 			actionList = getActionsForSelectedPosition(actionList, c, position, player);
 		}
 		List<String> stringActionList = new ArrayList<String>();

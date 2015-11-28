@@ -20,7 +20,7 @@ public class GameModelParameters {
 	private boolean energyPlayed, retreatExecuted;
 	private boolean noEnergyPayment; // no payment for attacks if true
 	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
-	private List<Integer> power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
+	private List<Integer> lauchschlagUsed_00027_Porenta, power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
 			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite,
 			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra,
 			power_Activated_00221_DarkGloom, power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume;
@@ -31,6 +31,7 @@ public class GameModelParameters {
 		energyPlayed = false;
 		retreatExecuted = false;
 		this.noEnergyPayment = false;
+		this.lauchschlagUsed_00027_Porenta = new ArrayList<>();
 		this.power_Active_00164_Muk = new ArrayList<>();
 		this.power_Active_00153_Aerodactyl = new ArrayList<>();
 		this.power_Activated_00143_Mankey = new ArrayList<>();
@@ -56,6 +57,7 @@ public class GameModelParameters {
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
 		this.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.setNoEnergyPayment(gameModelUpdate.getGameModelParameters().isNoEnergyPayment());
+		this.setLauchschlagUsed_00027_Porenta(gameModelUpdate.getGameModelParameters().getLauchschlagUsed_00027_Porenta());
 		this.setPower_Active_00164_Muk(gameModelUpdate.getGameModelParameters().getPower_Active_00164_Muk());
 		this.setPower_Active_00153_Aerodactyl(gameModelUpdate.getGameModelParameters().getPower_Active_00153_Aerodactyl());
 		this.setPower_Activated_00143_Mankey(gameModelUpdate.getGameModelParameters().isPower_Activated_00143_Mankey());
@@ -82,6 +84,7 @@ public class GameModelParameters {
 		copy.setGameState(gameState);
 		copy.setNoEnergyPayment(noEnergyPayment);
 		copy.setRetreatExecuted(retreatExecuted);
+		copy.setLauchschlagUsed_00027_Porenta(this.getLauchschlagUsed_00027_Porenta());
 		copy.setPower_Active_00164_Muk(this.getPower_Active_00164_Muk());
 		copy.setPower_Active_00153_Aerodactyl(this.getPower_Active_00153_Aerodactyl());
 		copy.setPower_Activated_00143_Mankey(this.isPower_Activated_00143_Mankey());
@@ -125,6 +128,10 @@ public class GameModelParameters {
 		// noEnergyPayment:
 		bString = serializer.unpackByteString(unpacker);
 		this.noEnergyPayment = serializer.unpackBool(bString);
+
+		// lauchschlagUsed_00027_Porenta
+		bString = serializer.unpackByteString(unpacker);
+		this.lauchschlagUsed_00027_Porenta = serializer.unpackIntList(bString);
 
 		// power_Active_00164_Muk
 		bString = serializer.unpackByteString(unpacker);
@@ -227,8 +234,13 @@ public class GameModelParameters {
 		packer.packBinaryHeader(energyPayment.length());
 		packer.writePayload(energyPayment.copyAsBytes());
 
+		// lauchschlagUsed_00027_Porenta
+		ByteString b = serializer.packIntList(lauchschlagUsed_00027_Porenta);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
 		// power_Active_00164_Muk
-		ByteString b = serializer.packIntList(power_Active_00164_Muk);
+		b = serializer.packIntList(power_Active_00164_Muk);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -490,5 +502,13 @@ public class GameModelParameters {
 
 	public void setAllowedToPlayPokemonPower(short allowedToPlayPokemonPower) {
 		this.allowedToPlayPokemonPower = allowedToPlayPokemonPower;
+	}
+
+	public List<Integer> getLauchschlagUsed_00027_Porenta() {
+		return lauchschlagUsed_00027_Porenta;
+	}
+
+	public void setLauchschlagUsed_00027_Porenta(List<Integer> lauchschlagUsed_00027_Porenta) {
+		this.lauchschlagUsed_00027_Porenta = lauchschlagUsed_00027_Porenta;
 	}
 }

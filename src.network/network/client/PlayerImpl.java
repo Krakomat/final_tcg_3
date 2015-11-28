@@ -24,7 +24,6 @@ import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.GameModelUpdate;
 import model.interfaces.Position;
-import model.scripting.abstracts.ServerCards;
 
 public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommunication {
 
@@ -119,22 +118,15 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					// Check hand:
 					Position handPos = localGameModel.getPosition(PositionID.BLUE_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
-						String handCardID = handPos.getCards().get(i).getCardId();
 						List<String> actions = null;
-						if (ServerCards.createInstance().contains(handCardID))
-							actions = server.getPlayerActions(i, PositionID.BLUE_HAND, self);
-						else
-							actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
+						actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
 					List<String> actions = null;
-					if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
-						actions = server.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
-					else
-						actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
+					actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {
@@ -153,22 +145,15 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					// Check hand:
 					Position handPos = localGameModel.getPosition(PositionID.RED_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
-						String handCardID = handPos.getCards().get(i).getCardId();
 						List<String> actions = null;
-						if (ServerCards.createInstance().contains(handCardID))
-							actions = server.getPlayerActions(i, PositionID.RED_HAND, self);
-						else
-							actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
+						actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
 					// Check active & bench:
 					Position activePosition = localGameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
 					List<String> actions = null;
-					if (ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()))
-						actions = server.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
-					else
-						actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
+					actions = localGameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, self);
 					if (!actions.isEmpty())
 						choosableCards.add(new Pair<Position, Integer>(activePosition, activePosition.size() - 1));
 					for (int i = 1; i <= 5; i++) {

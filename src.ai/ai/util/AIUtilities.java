@@ -17,7 +17,6 @@ import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
-import model.scripting.abstracts.ServerCards;
 import common.utilities.Triple;
 
 public class AIUtilities {
@@ -37,7 +36,7 @@ public class AIUtilities {
 			for (int i = 0; i < handPos.getCards().size(); i++) {
 				String handCardID = handPos.getCards().get(i).getCardId();
 				List<String> actions = null;
-				if (!ServerCards.createInstance().contains(handCardID) && !handCardID.equals("00000"))
+				if (!handCardID.equals("00000"))
 					actions = gameModel.getPlayerActions(i, PositionID.BLUE_HAND, player);
 				if (actions != null && !actions.isEmpty()) {
 					for (String action : actions) {
@@ -58,7 +57,7 @@ public class AIUtilities {
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON);
 			List<String> actions = null;
-			if (!ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()) && !activePosition.getTopCard().getCardId().equals("00000"))
+			if (!activePosition.getTopCard().getCardId().equals("00000"))
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.BLUE_ACTIVEPOKEMON, player);
 			if (actions != null && !actions.isEmpty()) {
 				for (String action : actions)
@@ -69,7 +68,7 @@ public class AIUtilities {
 				Position benchPosition = gameModel.getPosition(PositionID.valueOf("BLUE_BENCH_" + i));
 				if (benchPosition.size() > 0) {
 					String benchID = benchPosition.getTopCard().getCardId();
-					if (!ServerCards.createInstance().contains(benchID) && !benchPosition.equals("00000"))
+					if (!benchID.equals("00000"))
 						actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("BLUE_BENCH_" + i), player);
 					if (actions != null && !actions.isEmpty()) {
 						for (String action : actions)
@@ -85,7 +84,7 @@ public class AIUtilities {
 			for (int i = 0; i < handPos.getCards().size(); i++) {
 				String handCardID = handPos.getCards().get(i).getCardId();
 				List<String> actions = null;
-				if (!ServerCards.createInstance().contains(handCardID) && !handCardID.equals("00000"))
+				if (!handCardID.equals("00000"))
 					actions = gameModel.getPlayerActions(i, PositionID.RED_HAND, player);
 				if (actions != null && !actions.isEmpty()) {
 					for (String action : actions) {
@@ -106,7 +105,7 @@ public class AIUtilities {
 			// Check active & bench:
 			Position activePosition = gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON);
 			List<String> actions = null;
-			if (!ServerCards.createInstance().contains(activePosition.getTopCard().getCardId()) && !activePosition.getTopCard().getCardId().equals("00000"))
+			if (!activePosition.getTopCard().getCardId().equals("00000"))
 				actions = gameModel.getPlayerActions(activePosition.size() - 1, PositionID.RED_ACTIVEPOKEMON, player);
 			if (actions != null && !actions.isEmpty()) {
 				for (String action : actions)
@@ -118,7 +117,7 @@ public class AIUtilities {
 				Position benchPosition = gameModel.getPosition(PositionID.valueOf("RED_BENCH_" + i));
 				if (benchPosition.size() > 0) {
 					String benchID = benchPosition.getTopCard().getCardId();
-					if (!ServerCards.createInstance().contains(benchID) && !benchID.equals("00000"))
+					if (!benchID.equals("00000"))
 						actions = gameModel.getPlayerActions(benchPosition.size() - 1, PositionID.valueOf("RED_BENCH_" + i), player);
 					if (actions != null && !actions.isEmpty()) {
 						for (String action : actions)
