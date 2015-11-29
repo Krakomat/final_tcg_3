@@ -19,12 +19,12 @@ public class FileChooseWindow extends ChooseWindow {
 		this.attacks = new ArrayList<>();
 		lock = new Lock();
 		this.imageList = new ArrayList<TextButton2D>();
-		float imageWidth = this.width * 0.35f;
-		float imageHeight = imageWidth * 0.15f;
+		float imageWidth = this.width * 0.40f;
+		float imageHeight = imageWidth * 0.10f;
 		// Create new images:
-		for (int i = 0; i < 20; i++) {
-			float imageXPos = this.width * 0.05f + (imageWidth * 1.05f) * (i / 10);
-			float imageYPos = this.height * 0.30f + (imageHeight * 1.10f) * (i%10);
+		for (int i = 0; i < 30; i++) {
+			float imageXPos = this.width * 0.05f + (imageWidth * 1.15f) * (i / 15);
+			float imageYPos = this.height * 0.175f + (imageHeight * 1.10f) * (i%15);
 
 			// Create image:
 			final int index = i;
