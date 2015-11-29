@@ -1,3 +1,6 @@
+Patch 4.00
+	Deck Editor
+		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
 Patch 3.00
 	New Features
 		Animations

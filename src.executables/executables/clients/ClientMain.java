@@ -1,6 +1,5 @@
 package executables.clients;
 
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -22,10 +21,10 @@ public class ClientMain {
 
 		view.setShowSettings(false);
 		AppSettings settings = new AppSettings(true);
-		// settings.put("Width", 1280);
-		// settings.put("Height", 720);
-		settings.put("Width", (int) (Toolkit.getDefaultToolkit().getScreenSize().width * 0.9f));
-		settings.put("Height", (int) (Toolkit.getDefaultToolkit().getScreenSize().height * 0.9f));
+		 settings.put("Width", 1280);
+		 settings.put("Height", 720);
+		// settings.put("Width", (int) (Toolkit.getDefaultToolkit().getScreenSize().width * 0.9f));
+		// settings.put("Height", (int) (Toolkit.getDefaultToolkit().getScreenSize().height * 0.9f));
 		settings.setTitle("Final TCG 3 Version " + ClientMain.VERSION);
 		settings.put("VSync", true);
 		settings.put("Samples", 16);

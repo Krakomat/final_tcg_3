@@ -86,6 +86,17 @@ public interface PokemonGameView {
 	public ArrayList<String> userChoosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact, String message);
 
 	/**
+	 * The user chooses a set of strings out of the given possibilities.
+	 * 
+	 * @param possibilities
+	 * @param i
+	 * @param b
+	 * @param string
+	 * @return
+	 */
+	public List<String> userChoosesStrings(List<String> possibilities, int i, boolean b, String string);
+
+	/**
 	 * The user chooses energy cards from the given array list such that the given costs can be payed with those.
 	 * 
 	 * @param costs

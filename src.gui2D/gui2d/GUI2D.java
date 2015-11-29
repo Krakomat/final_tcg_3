@@ -35,6 +35,7 @@ import gui2d.geometries.chooser.CardChooseWindow;
 import gui2d.geometries.chooser.ChooseGeometryChecker;
 import gui2d.geometries.chooser.DistributionChooser;
 import gui2d.geometries.chooser.ElementChooseWindow;
+import gui2d.geometries.chooser.FileChooseWindow;
 import gui2d.geometries.chooser.QuestionChooseWindow;
 import gui2d.geometries.messages.CardPanel2D;
 import gui2d.geometries.messages.TextPanel2D;
@@ -337,6 +338,47 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			@Override
 			public void run() {
 				addToUpdateQueue(attackChooseWindow); // waits for update queue here
+			}
+		}).start();
+		return chosenAttacks;
+	}
+
+	@Override
+	public List<String> userChoosesStrings(List<String> possibilities, int amount, boolean exact, String message) {
+		FileChooseWindow fileChooseWindow = this.ingameController.getFileChooseWindow();
+
+		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
+			@Override
+			public boolean checkSelectionIsOk() {
+				return (fileChooseWindow.getChosenIndices().size() == fileChooseWindow.getChooseAmount())
+						|| (fileChooseWindow.getChosenIndices().size() <= fileChooseWindow.getChooseAmount() && !fileChooseWindow.isChooseExactly());
+			}
+		};
+		fileChooseWindow.setVisible(true);
+		fileChooseWindow.setData(message, possibilities, amount, exact, checker);
+		this.getIOController().storeShootables();
+
+		this.addToUpdateQueue(fileChooseWindow); // waits for update queue here
+
+		while (!fileChooseWindow.choosingFinished()) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		this.getIOController().restoreShootables();
+		List<Integer> indices = fileChooseWindow.getChosenIndices();
+		ArrayList<String> chosenAttacks = new ArrayList<String>();
+		for (Integer i : indices)
+			chosenAttacks.add(possibilities.get(i));
+
+		fileChooseWindow.unregisterShootables(ioController);
+		fileChooseWindow.setVisible(false);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				addToUpdateQueue(fileChooseWindow); // waits for update queue here
 			}
 		}).start();
 		return chosenAttacks;

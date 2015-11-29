@@ -1,5 +1,7 @@
 package gui2d.controller;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -214,7 +216,12 @@ public class DeckEditController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
-				loadDeckButtonClicked();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						loadDeckButtonClicked();
+					}
+				}).start();
 			}
 
 			@Override
@@ -438,7 +445,7 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	protected void loadDeckButtonClicked() {
-		Deck loadedDeck = Deck.loadDeckDialog();
+		Deck loadedDeck = loadDeckDialog();
 		if (loadedDeck != null && this.checkDeckForCorrectness(loadedDeck.getCards())) {
 			this.clearDeck();
 			this.createDeckFromLibrary(loadedDeck);
@@ -446,6 +453,49 @@ public class DeckEditController extends Node implements GUI2DController {
 			Account.saveAccount(this.account);
 		} else if (loadedDeck != null && !this.checkDeckForCorrectness(loadedDeck.getCards()))
 			JOptionPane.showMessageDialog(null, "Failed on loading the deck - File is not a valid deck!", "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public Deck loadDeckDialog() {
+		File[] files = finder(GameParameters.DECK_PATH);
+		Object[] possibilities = new Object[files.length];
+		for (int i = 0; i < files.length; i++) {
+			String file = files[i].getName();
+			possibilities[i] = file.substring(0, file.length() - 4);
+		}
+		List<String> fileNames = new ArrayList<>();
+		for (Object file : possibilities)
+			fileNames.add((String) file);
+		List<String> list = GUI2D.getInstance().userChoosesStrings(fileNames, 1, false, "Choose a deck to load!");
+		if (!list.isEmpty()) {
+			String s = list.get(0);
+			// String s = (String) JOptionPane.showInputDialog(null, "Choose the deck to load:", "Load Deck", JOptionPane.PLAIN_MESSAGE, null, possibilities,
+			// possibilities[1]);
+			if (s != null) {
+				// Search index:
+				int index = -1;
+				for (int i = 0; i < files.length; i++) {
+					String file = files[i].getName().substring(0, (files[i].getName().length() - 4));
+					if (file.equals(s))
+						index = i;
+				}
+				// Load deck
+				File deckFile = files[index];
+				Deck deck = Deck.readFromDatabaseFile(deckFile);
+				return deck;
+			}
+		}
+		return null;
+	}
+
+	private static File[] finder(String dirName) {
+		File dir = new File(dirName);
+
+		return dir.listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String filename) {
+				return filename.endsWith(".xml");
+			}
+		});
+
 	}
 
 	protected void saveDeckButtonClicked() {
