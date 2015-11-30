@@ -675,14 +675,6 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 					e1.printStackTrace();
 				}
 			}
-
-			// // Critical start:
-			// try {
-			// node = ((HandCardManager2D) node).getHandCard(i);
-			// } catch (IndexOutOfBoundsException e) {
-			// e.printStackTrace();
-			// }
-			// // Critical end
 			((HandCardManager2D) node).setIndexGlowing(i);
 		} else {
 			node.setGlowing(value);
@@ -699,6 +691,11 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		endTurnButton.setVisible(b); // button adds/removes itself to shootables in update()!
 		// Start writing:
 		this.addToUpdateQueue(endTurnButton);
+
+		SelectableNode surrenderButton = this.ingameController.getSurrenderButton();
+		surrenderButton.setVisible(b); // button adds/removes itself to shootables in update()!
+		// Start writing:
+		this.addToUpdateQueue(surrenderButton);
 
 		HandCardManager2D ownHand = this.ingameController.getOwnHand();
 		ownHand.setScrollButtonsActivated(b);

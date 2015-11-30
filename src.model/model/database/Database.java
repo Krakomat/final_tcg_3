@@ -205,6 +205,10 @@ public class Database {
 		buttonBgPressed.setGenerateMips(false);
 		assetTextures.put("button_pressed", buttonBgPressed);
 
+		TextureKey surrender = new TextureKey("/tilesets/other/surrender.png");
+		surrender.setGenerateMips(false);
+		assetTextures.put("surrender", surrender);
+
 		TextureKey lightning = new TextureKey("/tilesets/elements/elektro.png");
 		lightning.setGenerateMips(false);
 		assetTextures.put(Element.LIGHTNING.toString(), lightning);

@@ -4,6 +4,7 @@ Patch 3.50
 		- Added a frameworkwise solution for saving decks --> Removed swing mask for saving decks
 		- Added a frameworkwise solution for connecting to a game via IP4 --> Removed respective swing mask
 	Game: 
+		- Players may now surrender the game
 		- Players may now hold an unlimited amount of hand cards
 		- Players can choose multiple prize cards now, when more than 1 pokemon was knocked out simultaneously
 		- 00260_NightlyGarbageRun: Fixed a bug regarding the animation
@@ -13,6 +14,7 @@ Patch 3.50
 	AI:
 		- Fixed a crash bug
 	UI:
+		- Added a 'surrender' button
 		- Reworked HandCardManager to support unlimited hand cards for players
 		- Damagae animation does not play, when pokemon receives 0 damage
 		

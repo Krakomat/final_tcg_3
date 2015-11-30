@@ -438,6 +438,14 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	@Override
+	public void surrender(Player player) {
+		this.gameModel.sendTextMessageToAllPlayers(player.getName() + " surrenders!", "");
+		this.gameModel.playerLoses(player);
+		this.turnState = TurnState.TURN_END;
+		this.moveMade = true;
+	}
+
+	@Override
 	public GameModelUpdate getGameModelForPlayer(Player player) {
 		return gameModel.getGameModelForPlayer(player);
 	}

@@ -324,4 +324,9 @@ public class TurnSimulator implements PokemonGameManager {
 		throw new UnsupportedOperationException("setListener");
 	}
 
+	@Override
+	public void surrender(Player player) {
+		
+	}
+
 }

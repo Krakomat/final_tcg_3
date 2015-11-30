@@ -122,4 +122,11 @@ public interface PokemonGameManager {
 	 * @param listener
 	 */
 	public void setListener(ServerListener listener);
+
+	/**
+	 * The player with the given color surrenders.
+	 * 
+	 * @param player
+	 */
+	public void surrender(Player player);
 }

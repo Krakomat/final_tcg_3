@@ -118,6 +118,10 @@ public class ServerListener implements MessageListener<HostedConnection> {
 					player = this.connectionMap.get(source.getId());
 					this.gameManager.retreatPokemon(player);
 					break;
+				case SERVER_SURRENDER:
+					player = this.connectionMap.get(source.getId());
+					this.gameManager.surrender(player);
+					break;
 				default:
 					try {
 						throw new IOException("Wrong Method type at ServerListener: " + qMessage.getMethod());

@@ -6,6 +6,7 @@ import gui2d.geometries.ArenaGeometry2D;
 import gui2d.geometries.HandCard2D;
 import gui2d.geometries.HandCardManager2D;
 import gui2d.geometries.Image2D;
+import gui2d.geometries.ImageButton2D;
 import gui2d.geometries.ImageCounter2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.chooser.AttackChooseWindow;
@@ -46,6 +47,7 @@ public class IngameController extends Node implements GUI2DController {
 	private ImageCounter2D ownDeck, enemyDeck, ownGraveyard, enemyGraveyard;
 	private List<Image2D> ownPrize, enemyPrize;
 	private TextButton2D endTurnButton, attack1Button, attack2Button, retreatButton, playButton, pokePowerButton;
+	private ImageButton2D surrenderButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 
@@ -485,6 +487,22 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(pokePowerButton);
 		this.attachChild(pokePowerButton);
 
+		surrenderButton = new ImageButton2D("surrenderButton", Database.getAssetKey("surrender"), screenWidth * 0.03f, screenWidth * 0.03f) {
+
+			@Override
+			public void mouseSelectRightClick() {
+			}
+
+			@Override
+			public void mouseSelect() {
+				surrenderButtonClicked();
+			}
+		};
+		surrenderButton.setLocalTranslation(screenWidth * 0.97f, screenHeight - screenWidth * 0.03f, 0);
+		surrenderButton.setVisible(false);
+		dropInUpdateQueue(surrenderButton);
+		this.attachChild(surrenderButton);
+
 		// Init Choose windows:
 		cardChooseWindow = new CardChooseWindow("CardChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
 				.getResolution().getValue() * 0.8f);
@@ -695,6 +713,27 @@ public class IngameController extends Node implements GUI2DController {
 		});
 		t.setName("EndTurnButtonThread");
 		t.start();
+	}
+
+	protected void surrenderButtonClicked() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean answer = GUI2D.getInstance().userAnswersQuestion("Do you really want to surrender?");
+				if (answer) {
+					GUI2D.getInstance().setEndTurnButtonVisible(false);
+					resetGlowingSelected();
+					resetButtons();
+					GUI2D.getInstance().getPlayer().sendSurrenderToServer();
+				}
+			}
+		});
+		t.setName("SurrenderButtonThread");
+		t.start();
+	}
+
+	public ImageButton2D getSurrenderButton() {
+		return surrenderButton;
 	}
 
 	public void resetGlowingSelected() {
@@ -1646,6 +1685,9 @@ public class IngameController extends Node implements GUI2DController {
 
 		pokePowerButton.setVisible(false);
 		dropInUpdateQueue(pokePowerButton);
+
+		surrenderButton.setVisible(false);
+		dropInUpdateQueue(surrenderButton);
 	}
 
 	public CardChooseWindow getCardChooseWindow() {

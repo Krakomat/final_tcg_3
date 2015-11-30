@@ -88,6 +88,12 @@ public interface GuiToPlayerCommunication {
 	public void sendEndTurnToServer();
 
 	/**
+	 * The player surrenders.
+	 * 
+	 */
+	public void sendSurrenderToServer();
+
+	/**
 	 * A new server is created using the localhost adress. Also this player connects to the created server.
 	 */
 	public void createGame();

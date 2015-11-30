@@ -309,6 +309,11 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	}
 
 	@Override
+	public void sendSurrenderToServer() {
+		this.server.surrender(this);
+	}
+
+	@Override
 	public void createGame() {
 		System.out.println("[Server] Starting server...!");
 

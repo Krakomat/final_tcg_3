@@ -182,6 +182,13 @@ public class ClientBorder implements PokemonGameManager {
 	}
 
 	@Override
+	public void surrender(Player player) {
+		QueryMessage message = new QueryMessage(Method.SERVER_SURRENDER);
+		message.logSendMessage("ClientBorder");
+		myClient.send(message);
+	}
+
+	@Override
 	public GameModelUpdate getGameModelForPlayer(Player player) {
 		List<ByteString> parameters = new ArrayList<>();
 		QueryMessage message = new QueryMessage(Method.SERVER_GET_GAME_MODEL_FOR_PLAYER, parameters);
