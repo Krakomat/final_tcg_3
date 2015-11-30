@@ -2,6 +2,7 @@ Patch 3.50
 	Deck Editor:
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
 		- Added a frameworkwise solution for saving decks --> Removed swing mask for saving decks
+		- Added a frameworkwise solution for connecting to a game via IP4 --> Removed respective swing mask
 	Game: 
 		- Players may now hold an unlimited amount of hand cards
 		- Players can choose multiple prize cards now, when more than 1 pokemon was knocked out simultaneously

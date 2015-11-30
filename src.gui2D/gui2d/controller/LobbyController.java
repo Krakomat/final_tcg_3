@@ -4,8 +4,6 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import javax.swing.JOptionPane;
-
 import model.database.Database;
 import model.database.Deck;
 import model.game.GameParameters;
@@ -114,7 +112,12 @@ public class LobbyController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
-				multiPlayerConnectClicked();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						multiPlayerConnectClicked();
+					}
+				}).start();
 			}
 
 			@Override
@@ -603,7 +606,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void multiPlayerConnectClicked() {
-		String ipAdress = JOptionPane.showInputDialog("IP4 adress:");
+		String ipAdress = GUI2D.getInstance().userTypesName("192.168.178.", "IP4 adress:");
 		if (ipAdress != null) {
 			GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 			GUI2D.getInstance().getPlayer().connectToGame(ipAdress);
