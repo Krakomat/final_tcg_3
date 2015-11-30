@@ -162,9 +162,11 @@ public class AttackAction {
 		script.pokemonIsDamaged(gameModel.getTurnNumber(), damageAmount, attackerPositionID);
 
 		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");
-		// Execute animation:
-		Animation animation = new DamageAnimation(AnimationType.DAMAGE_POSITION, targetPosition, damageAmount);
-		gameModel.sendAnimationToAllPlayers(animation);
+		if (damageAmount > 0) {
+			// Execute animation:
+			Animation animation = new DamageAnimation(AnimationType.DAMAGE_POSITION, targetPosition, damageAmount);
+			gameModel.sendAnimationToAllPlayers(animation);
+		}
 		this.gameModel.sendGameModelToAllPlayers("");
 
 		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
