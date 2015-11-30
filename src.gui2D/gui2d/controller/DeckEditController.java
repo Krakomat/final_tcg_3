@@ -199,7 +199,12 @@ public class DeckEditController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
-				saveDeckButtonClicked();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						saveDeckButtonClicked();
+					}
+				}).start();
 			}
 
 			@Override
@@ -499,18 +504,14 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	protected void saveDeckButtonClicked() {
-		String deckName = JOptionPane.showInputDialog("Deck Name:");
+		String deckName = GUI2D.getInstance().userTypesName("Name", "Type in a name:");
 		if (deckName != null) {
-			if (!deckName.equals("")) {
-				Deck d = new Deck();
-				d.setCards(deckCards);
-				d.setName(deckName);
-				d.saveDeck(GameParameters.DECK_PATH);
-				this.account.setDeck(d);
-				Account.saveAccount(this.account);
-				JOptionPane.showMessageDialog(null, "Saved deck under name " + deckName + "!", "Success", JOptionPane.INFORMATION_MESSAGE);
-			} else
-				JOptionPane.showMessageDialog(null, "Deck name is not valid!", "Error", JOptionPane.ERROR_MESSAGE);
+			Deck d = new Deck();
+			d.setCards(deckCards);
+			d.setName(deckName);
+			d.saveDeck(GameParameters.DECK_PATH);
+			this.account.setDeck(d);
+			Account.saveAccount(this.account);
 		}
 	}
 

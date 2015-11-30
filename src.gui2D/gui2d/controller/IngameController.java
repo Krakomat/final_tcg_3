@@ -14,6 +14,7 @@ import gui2d.geometries.chooser.CardViewer;
 import gui2d.geometries.chooser.DistributionChooser;
 import gui2d.geometries.chooser.ElementChooseWindow;
 import gui2d.geometries.chooser.FileChooseWindow;
+import gui2d.geometries.chooser.FileNameChooseWindow;
 import gui2d.geometries.chooser.QuestionChooseWindow;
 import gui2d.geometries.messages.CardPanel2D;
 import gui2d.geometries.messages.TextPanel2D;
@@ -60,6 +61,7 @@ public class IngameController extends Node implements GUI2DController {
 	private QuestionChooseWindow questionChooseWindow;
 	private DistributionChooser distributionChooser;
 	private FileChooseWindow fileChooseWindow;
+	private FileNameChooseWindow fileNameChooseWindow;
 
 	/* View Window: */
 	private CardViewer cardViewer;
@@ -508,6 +510,12 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().getGuiNode().attachChild(fileChooseWindow);
 		fileChooseWindow.setVisible(false);
 
+		fileNameChooseWindow = new FileNameChooseWindow("FileNameChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.3f, GUI2D.getInstance()
+				.getResolution().getValue() * 0.3f);
+		fileNameChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.35f, GUI2D.getInstance().getResolution().getValue() * 0.35f, 1);
+		GUI2D.getInstance().getGuiNode().attachChild(fileNameChooseWindow);
+		fileNameChooseWindow.setVisible(false);
+
 		questionChooseWindow = new QuestionChooseWindow("QuestionChooseWindow", "Question", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
 				.getResolution().getValue() * 0.2f);
 		questionChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.45f, 1);
@@ -565,6 +573,7 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().addToUpdateQueue(elementChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(attackChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(fileChooseWindow);
+				GUI2D.getInstance().addToUpdateQueue(fileNameChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(questionChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(messagePanel);
 				GUI2D.getInstance().addToUpdateQueue(cardMessagePanel);
@@ -1677,5 +1686,9 @@ public class IngameController extends Node implements GUI2DController {
 
 	public FileChooseWindow getFileChooseWindow() {
 		return fileChooseWindow;
+	}
+
+	public FileNameChooseWindow getFileNameChooseWindow() {
+		return fileNameChooseWindow;
 	}
 }

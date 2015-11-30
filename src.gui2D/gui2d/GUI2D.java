@@ -36,6 +36,7 @@ import gui2d.geometries.chooser.ChooseGeometryChecker;
 import gui2d.geometries.chooser.DistributionChooser;
 import gui2d.geometries.chooser.ElementChooseWindow;
 import gui2d.geometries.chooser.FileChooseWindow;
+import gui2d.geometries.chooser.FileNameChooseWindow;
 import gui2d.geometries.chooser.QuestionChooseWindow;
 import gui2d.geometries.messages.CardPanel2D;
 import gui2d.geometries.messages.TextPanel2D;
@@ -382,6 +383,44 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			}
 		}).start();
 		return chosenAttacks;
+	}
+
+	@Override
+	public String userTypesName(String defaultString, String questionText) {
+		FileNameChooseWindow fileNameChooseWindow = this.ingameController.getFileNameChooseWindow();
+
+		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
+			@Override
+			public boolean checkSelectionIsOk() {
+				return (fileNameChooseWindow.getChosenIndices().size() == fileNameChooseWindow.getChooseAmount())
+						|| (fileNameChooseWindow.getChosenIndices().size() <= fileNameChooseWindow.getChooseAmount() && !fileNameChooseWindow.isChooseExactly());
+			}
+		};
+		fileNameChooseWindow.setVisible(true);
+		fileNameChooseWindow.setData("", defaultString, questionText, checker);
+		this.getIOController().storeShootables();
+
+		this.addToUpdateQueue(fileNameChooseWindow); // waits for update queue here
+
+		while (!fileNameChooseWindow.choosingFinished()) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		this.getIOController().restoreShootables();
+
+		String name = fileNameChooseWindow.getChosenText();
+		fileNameChooseWindow.unregisterShootables(ioController);
+		fileNameChooseWindow.setVisible(false);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				addToUpdateQueue(fileNameChooseWindow); // waits for update queue here
+			}
+		}).start();
+		return name;
 	}
 
 	@Override

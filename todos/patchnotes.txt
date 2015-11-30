@@ -1,6 +1,8 @@
 Patch 4.00
 	Deck Editor
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
+		- Added a frameworkwise solution for saving decks --> Removed swing mask for saving decks
+	
 Patch 3.00
 	New Features
 		Animations

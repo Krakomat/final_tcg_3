@@ -3,16 +3,24 @@ package gui2d.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui2d.abstracts.KeyShootable;
 import gui2d.abstracts.SelectableNode;
 
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
+import com.jme3.input.RawInputListener;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseAxisTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.input.event.JoyAxisEvent;
+import com.jme3.input.event.JoyButtonEvent;
+import com.jme3.input.event.KeyInputEvent;
+import com.jme3.input.event.MouseButtonEvent;
+import com.jme3.input.event.MouseMotionEvent;
+import com.jme3.input.event.TouchEvent;
 import com.jme3.math.Vector2f;
 
 import common.utilities.Lock;
@@ -31,12 +39,13 @@ public class IOController {
 	/** Node on which the mouse is positioned currently */
 	private SelectableNode currentMouseOverNode;
 	private boolean rightClickAllowed;
-	
+	private List<KeyShootable> keyShootables;
 	private Lock lock;
 
 	public IOController(InputManager inputManager) {
 		this.inputManager = inputManager;
 		this.shootables = new ArrayList<>();
+		this.keyShootables = new ArrayList<>();
 		this.storedShootables = new ArrayList<>();
 		this.rightClickShootables = new ArrayList<>();
 		this.currentMouseOverNode = null;
@@ -63,7 +72,56 @@ public class IOController {
 		inputManager.addListener(analogListener, "RotateLeft");
 		inputManager.addListener(analogListener, "RotateUp");
 		inputManager.addListener(analogListener, "RotateDown");
+
+		inputManager.addMapping("KeyInput", new KeyTrigger(KeyInput.KEY_A)); // Trigger: Return
+		inputManager.addRawInputListener(keyListener);
 	}
+
+	protected RawInputListener keyListener = new RawInputListener() {
+
+		@Override
+		public void beginInput() {
+		}
+
+		@Override
+		public void endInput() {
+		}
+
+		@Override
+		public void onJoyAxisEvent(JoyAxisEvent evt) {
+		}
+
+		@Override
+		public void onJoyButtonEvent(JoyButtonEvent evt) {
+		}
+
+		@Override
+		public void onKeyEvent(KeyInputEvent evt) {
+			try {
+				lock.lock();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (!evt.isReleased()) {
+				for (KeyShootable shootable : keyShootables)
+					shootable.keyPressed(evt);
+			}
+			lock.unlock();
+		}
+
+		@Override
+		public void onMouseButtonEvent(MouseButtonEvent evt) {
+		}
+
+		@Override
+		public void onMouseMotionEvent(MouseMotionEvent evt) {
+		}
+
+		@Override
+		public void onTouchEvent(TouchEvent evt) {
+		}
+
+	};
 
 	/** Defining the "MouseClick" action: Determine what was hit and how to respond. */
 	protected ActionListener actionListener = new ActionListener() {
@@ -169,6 +227,52 @@ public class IOController {
 			}
 		}
 	};
+
+	public boolean hasKeyShootable(KeyShootable node) {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		boolean b = this.keyShootables.contains(node);
+		lock.unlock();
+		return b;
+	}
+
+	/**
+	 * Adds a keyshootable.
+	 * 
+	 * @param node
+	 */
+	public synchronized void addKeyShootable(KeyShootable node) {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (!this.keyShootables.contains(node))
+			this.keyShootables.add(node);
+
+		lock.unlock();
+	}
+
+	/**
+	 * Removes a keyshootable.
+	 * 
+	 * @param node
+	 */
+	public synchronized void removeKeyShootable(KeyShootable node) {
+		try {
+			lock.lock();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		if (this.keyShootables.contains(node))
+			this.keyShootables.remove(node);
+
+		lock.unlock();
+	}
 
 	public boolean hasShootable(SelectableNode node) {
 		try {
