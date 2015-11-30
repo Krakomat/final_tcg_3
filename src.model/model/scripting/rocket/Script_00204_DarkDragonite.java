@@ -33,15 +33,19 @@ public class Script_00204_DarkDragonite extends PokemonCardScript {
 		Player player = this.getCardOwner();
 		if (this.gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() == 0
 				&& this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty() && gameModel.getFullBenchPositions(player.getColor()).size() < 5) {
-			List<Card> cards = player.playerChoosesCards(getBasicPokemonFromDeck(), 2, false, "Choose up to 2 pokemon cards from your deck to put on your bench!");
+			if (!getBasicPokemonFromDeck().isEmpty()) {
+				List<Card> cards = player.playerChoosesCards(getBasicPokemonFromDeck(), 2, false,
+						"Choose up to 2 pokemon cards from your deck to put on your bench!");
 
-			if (!cards.isEmpty()) {
-				gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates Summon Minions!", card, "");
-				for (Card card : cards) {
-					PokemonCard realCard = (PokemonCard) gameModel.getCard(card.getGameID());
-					gameModel.getAttackAction().putBasicPokemonOnBench(player, realCard);
+				if (!cards.isEmpty()) {
+					gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates Summon Minions!", card, "");
+					for (Card card : cards) {
+						PokemonCard realCard = (PokemonCard) gameModel.getCard(card.getGameID());
+						gameModel.getAttackAction().putBasicPokemonOnBench(player, realCard);
+					}
 				}
-			}
+			} else
+				gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + "'s deck does not contain basic pokemon cards!", "");
 		}
 	}
 

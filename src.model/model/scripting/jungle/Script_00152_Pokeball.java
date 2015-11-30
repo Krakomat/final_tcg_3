@@ -34,11 +34,14 @@ public class Script_00152_Pokeball extends TrainerCardScript {
 		if (c == Coin.HEADS) {
 			// Choose a card from the deck:
 			List<Card> cards = gameModel.getPosition(ownDeck()).getPokemonCards();
-			Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
-			// Message clients:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
-			// Move card:
-			gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
+			if (!cards.isEmpty()) {
+				Card chosenDeckCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your deck!").get(0);
+				// Message clients:
+				gameModel.sendCardMessageToAllPlayers(player.getName() + " gets " + chosenDeckCard.getName() + " from his deck!", chosenDeckCard, "");
+				// Move card:
+				gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), chosenDeckCard.getGameID(), true);
+			} else
+				gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + "'s deck does not contain pokemon cards!", "");
 
 			// Shuffle deck:
 			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);

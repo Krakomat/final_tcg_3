@@ -5,6 +5,11 @@ Patch 4.00
 	Game: 
 		- Players can choose multiple prize cards now, when more than 1 pokemon was knocked out simultaneously
 		- 00260_NightlyGarbageRun: Fixed a bug regarding the animation
+		- 00152_Pokeball: Fixed a bug, that occured when the own deck did not contain any pokemon cards
+		- 00077_PokemonHaendler: Fixed several bugs
+		- 00204_Dark Dragonite: Fixed a bug, that occured when the own deck did not contain any basic pokemon cards
+	AI:
+		- Fixed a crash bug
 		
 Patch 3.00
 	New Features

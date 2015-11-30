@@ -67,6 +67,8 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 
 		// Loose 4 points for each damage mark on your own active pokemon:
 		PokemonCard ownActive = (PokemonCard) gameModel.getPosition(PositionID.getActivePokemon(color)).getTopCard();
+		if (ownActive == null)
+			return Integer.MIN_VALUE; // Lost game without own active!
 		value = value - 4 * (ownActive.getDamageMarks() / 10);
 
 		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready, 3 points for each
