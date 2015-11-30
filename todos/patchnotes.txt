@@ -1,8 +1,11 @@
 Patch 4.00
-	Deck Editor
+	Deck Editor:
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
 		- Added a frameworkwise solution for saving decks --> Removed swing mask for saving decks
-	
+	Game: 
+		- Players can choose multiple prize cards now, when more than 1 pokemon was knocked out simultaneously
+		- 00260_NightlyGarbageRun: Fixed a bug regarding the animation
+		
 Patch 3.00
 	New Features
 		Animations

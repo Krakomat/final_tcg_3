@@ -3,63 +3,81 @@
     <Name>Miki</Name>
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
-    <Deck Name="Starter Deck">
-        <Card ID="00008">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00024">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00046">
-            <Size>4</Size>
-        </Card>
-        <Card ID="00047">
+    <Deck Name="ElektroPower">
+        <Card ID="00245">
             <Size>3</Size>
         </Card>
-        <Card ID="00034">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00028">
+        <Card ID="00165">
             <Size>1</Size>
         </Card>
-        <Card ID="00026">
+        <Card ID="00088">
             <Size>1</Size>
         </Card>
-        <Card ID="00060">
+        <Card ID="00166">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00265">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00100">
+            <Size>24</Size>
+        </Card>
+        <Card ID="00106">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00148">
             <Size>4</Size>
         </Card>
-        <Card ID="00093">
+        <Card ID="00080">
             <Size>1</Size>
         </Card>
-        <Card ID="00061">
+        <Card ID="00020">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00084">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00260">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00162">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00219">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00233">
             <Size>2</Size>
+        </Card>
+        <Card ID="00014">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00256">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00210">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00254">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00215">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00016">
+            <Size>1</Size>
         </Card>
         <Card ID="00094">
             <Size>2</Size>
         </Card>
         <Card ID="00091">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00081">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00092">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00097">
-            <Size>14</Size>
-        </Card>
-        <Card ID="00087">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00098">
-            <Size>14</Size>
-        </Card>
-        <Card ID="00095">
             <Size>2</Size>
         </Card>
-        <Card ID="00052">
-            <Size>3</Size>
+        <Card ID="00075">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
         </Card>
     </Deck>
 </Account>

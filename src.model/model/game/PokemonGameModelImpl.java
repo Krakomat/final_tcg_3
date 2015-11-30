@@ -500,14 +500,15 @@ public class PokemonGameModelImpl implements PokemonGame {
 			// Message to all players:
 			this.sendTextMessageToPlayers(getPlayerList(), playerBlue.getName() + " chooses " + number + " price cards.", "");
 			// Choose price:
-			List<PositionID> chosenPositions = this.playerBlue.playerChoosesPositions(pricePositions, number, true, "Choose " + number + " price cards");
-			for (PositionID posID : chosenPositions) {
+			for (int i = 0; i < number; i++) {
+				PositionID posID = this.playerBlue.playerChoosesPositions(pricePositions, number, true, "Choose a price card!").get(0);
 				// Get card:
 				Card c = this.getPosition(posID).getTopCard();
 				// Move price card:
 				this.attackAction.moveCard(posID, PositionID.BLUE_HAND, c.getGameID(), true);
 				c.setVisibleForPlayerBlue(true);
 				this.attackAction.checkAndResolveFullHand(PositionID.BLUE_HAND, playerBlue);
+				pricePositions = gameField.getNonEmptyPriceList(playerColor);
 			}
 		} else if (playerColor == Color.RED) {
 			ArrayList<PositionID> pricePositions = gameField.getNonEmptyPriceList(playerColor);
@@ -517,14 +518,15 @@ public class PokemonGameModelImpl implements PokemonGame {
 			// Message to all players:
 			this.sendTextMessageToPlayers(getPlayerList(), playerRed.getName() + " chooses " + number + " price cards.", "");
 			// Choose price:
-			List<PositionID> chosenPositions = this.playerRed.playerChoosesPositions(pricePositions, number, true, "Choose " + number + " price cards");
-			for (PositionID posID : chosenPositions) {
+			for (int i = 0; i < number; i++) {
+				PositionID posID = this.playerRed.playerChoosesPositions(pricePositions, number, true, "Choose a price card!").get(0);
 				// Get card:
 				Card c = this.getPosition(posID).getTopCard();
 				// Move price card:
 				this.attackAction.moveCard(posID, PositionID.RED_HAND, c.getGameID(), true);
 				c.setVisibleForPlayerRed(true);
 				this.attackAction.checkAndResolveFullHand(PositionID.RED_HAND, playerRed);
+				pricePositions = gameField.getNonEmptyPriceList(playerColor);
 			}
 		} else
 			System.err.println("Error in method playerTakesPrice(...) of class PokemonGameManagerImpl: Wrong color set");

@@ -48,7 +48,7 @@ public class Script_00260_NightlyGarbageRun extends TrainerCardScript {
 					gameModel.getAttackAction().moveCard(ownDiscardPile(), ownDeck(), card.getGameID(), true);
 
 					// Execute animation:
-					Animation animation = new CardMoveAnimation(ownDiscardPile(), ownHand(), card.getCardId(), "");
+					Animation animation = new CardMoveAnimation(ownDiscardPile(), ownDeck(), card.getCardId(), "");
 					gameModel.sendAnimationToAllPlayers(animation);
 					gameModel.getAttackAction().shufflePosition(ownDeck());
 					gameModel.sendGameModelToAllPlayers(Sounds.SHUFFLE);
