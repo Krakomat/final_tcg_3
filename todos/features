@@ -4,7 +4,6 @@ View:
 	
 GameModel: 
 	- time counter for each turn
-	- Add a concede feature, so players can give up
 	- Implement timer for (single) actions for a client
 			
 DeckEditor:
