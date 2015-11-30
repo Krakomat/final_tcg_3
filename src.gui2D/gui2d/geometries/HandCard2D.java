@@ -12,10 +12,12 @@ import gui2d.abstracts.SelectableNode;
  */
 public abstract class HandCard2D extends Image2D implements SelectableNode {
 	private int index;
+	private int currentScrollIndex;
 
 	public HandCard2D(String name, TextureKey texture, float width, float height, int index) {
 		super(name, texture, width, height);
 		this.setIndex(index);
+		this.currentScrollIndex = 0;
 	}
 
 	public abstract void mouseSelect();
@@ -28,5 +30,13 @@ public abstract class HandCard2D extends Image2D implements SelectableNode {
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public int getCurrentScrollIndex() {
+		return currentScrollIndex;
+	}
+
+	public void setCurrentScrollIndex(int currentScrollIndex) {
+		this.currentScrollIndex = currentScrollIndex;
 	}
 }

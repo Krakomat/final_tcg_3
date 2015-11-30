@@ -71,7 +71,6 @@ public class Script_00112_Pidgeot extends PokemonCardScript {
 			int size = cards.size();
 			for (int i = 0; i < size; i++)
 				gameModel.getAttackAction().moveCard(defender, playerHand, cards.get(0).getGameID(), true);
-			gameModel.getAttackAction().checkAndResolveFullHand(playerHand, enemy);
 
 			gameModel.sendGameModelToAllPlayers("");
 

@@ -602,10 +602,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void run() {
 				final HandCard2D handGeo = (HandCard2D) currentlySelected; // has to be a handcard!
+				int modeledIndex = handGeo.getIndex() + handGeo.getCurrentScrollIndex();
 				GUI2D.getInstance().setEndTurnButtonVisible(false);
 				resetGlowingSelected();
 				resetButtons();
-				GUI2D.getInstance().getPlayer().playHandCard(handGeo.getIndex());
+				GUI2D.getInstance().getPlayer().playHandCard(modeledIndex);
 			}
 		});
 		t.setName("PlayButtonThread");
@@ -701,7 +702,7 @@ public class IngameController extends Node implements GUI2DController {
 		for (SelectableNode node : this.getSelectableNodes()) {
 			if (node.isGlowing())
 				GUI2D.getInstance().getIOController().removeShootable(node);
-
+			ownHand.clearGlowing();
 			node.setSelected(false);
 			node.setGlowing(false);
 			GUI2D.getInstance().getIOController().removeRightShootable(node);
@@ -731,7 +732,7 @@ public class IngameController extends Node implements GUI2DController {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				List<PlayerAction> actionList = GUI2D.getInstance().getPlayer().getPlayerActionsForHandCard(handGeo.getIndex());
+				List<PlayerAction> actionList = GUI2D.getInstance().getPlayer().getPlayerActionsForHandCard(handGeo.getIndex() + handGeo.getCurrentScrollIndex());
 				resetButtons();
 				for (PlayerAction action : actionList)
 					makeButtonForActionVisible(action, handGeo);
@@ -1690,5 +1691,13 @@ public class IngameController extends Node implements GUI2DController {
 
 	public FileNameChooseWindow getFileNameChooseWindow() {
 		return fileNameChooseWindow;
+	}
+
+	public HandCardManager2D getOwnHand() {
+		return ownHand;
+	}
+
+	public HandCardManager2D getEnemyHand() {
+		return enemyHand;
 	}
 }

@@ -157,7 +157,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (!playerBlueHandOk || !playerRedHandOk)
 				this.timeoutWait(5000);// Wait so players can look at the hands
 			this.getPosition(PositionID.BLUE_HAND).setVisible(false, Color.RED);
-			this.getPosition(PositionID.RED_HAND).setVisible(true, Color.BLUE);
+			this.getPosition(PositionID.RED_HAND).setVisible(false, Color.BLUE);
 			// Update GameModel:
 			this.sendGameModelToPlayers(this.getPlayerList(), "");
 
@@ -506,7 +506,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 				// Move price card:
 				this.attackAction.moveCard(posID, PositionID.BLUE_HAND, c.getGameID(), true);
 				c.setVisibleForPlayerBlue(true);
-				this.attackAction.checkAndResolveFullHand(PositionID.BLUE_HAND, playerBlue);
 				pricePositions = gameField.getNonEmptyPriceList(playerColor);
 			}
 		} else if (playerColor == Color.RED) {
@@ -524,7 +523,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 				// Move price card:
 				this.attackAction.moveCard(posID, PositionID.RED_HAND, c.getGameID(), true);
 				c.setVisibleForPlayerRed(true);
-				this.attackAction.checkAndResolveFullHand(PositionID.RED_HAND, playerRed);
 				pricePositions = gameField.getNonEmptyPriceList(playerColor);
 			}
 		} else

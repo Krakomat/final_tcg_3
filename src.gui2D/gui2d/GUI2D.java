@@ -192,6 +192,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		cardChooseWindow.setData(message, cards, amount, exact, checker);
 
 		this.addToUpdateQueue(cardChooseWindow); // waits for update queue here
+		this.getIOController().storeShootables();
 
 		while (!cardChooseWindow.choosingFinished()) {
 			try {
@@ -200,6 +201,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				e.printStackTrace();
 			}
 		}
+		this.getIOController().restoreShootables();
+
 		List<Integer> indices = cardChooseWindow.getChosenIndices();
 		ArrayList<Card> chosenCards = new ArrayList<Card>();
 		for (Integer i : indices)
@@ -278,6 +281,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		elementChooseWindow.setData(message, elements, amount, exact, checker);
 
 		this.addToUpdateQueue(elementChooseWindow); // waits for update queue here
+		this.getIOController().storeShootables();
 
 		while (!elementChooseWindow.choosingFinished()) {
 			try {
@@ -286,6 +290,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				e.printStackTrace();
 			}
 		}
+		this.getIOController().restoreShootables();
+
 		List<Integer> indices = elementChooseWindow.getChosenIndices();
 		ArrayList<Element> chosenElements = new ArrayList<Element>();
 		for (Integer i : indices)
@@ -318,6 +324,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		};
 		attackChooseWindow.setVisible(true);
 		attackChooseWindow.setData(message, attackOwner, attacks, amount, exact, checker);
+		this.getIOController().storeShootables();
 
 		this.addToUpdateQueue(attackChooseWindow); // waits for update queue here
 
@@ -328,6 +335,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				e.printStackTrace();
 			}
 		}
+		this.getIOController().restoreShootables();
+
 		List<Integer> indices = attackChooseWindow.getChosenIndices();
 		ArrayList<String> chosenAttacks = new ArrayList<String>();
 		for (Integer i : indices)
@@ -428,6 +437,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		QuestionChooseWindow questionChooseWindow = this.ingameController.getQuestionChooseWindow();
 		questionChooseWindow.setVisible(true);
 		questionChooseWindow.setData(question);
+		this.getIOController().storeShootables();
+
 		this.addToUpdateQueue(questionChooseWindow); // waits for update queue here
 
 		while (!questionChooseWindow.choosingFinished()) {
@@ -437,6 +448,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				e.printStackTrace();
 			}
 		}
+		this.getIOController().restoreShootables();
 
 		boolean chosenAnswer = questionChooseWindow.getAnswer();
 		questionChooseWindow.unregisterShootables(ioController);
@@ -655,7 +667,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		SelectableNode node = ingameController.getPositionGeometry(position.getPositionID(), this.player.getColor());
 		if (node instanceof HandCardManager2D) {
 			// It may happen that the hand card manager is not ready for being updated, so we have to wait until he is.
-			while (((HandCardManager2D) node).getHandCard2Ds().size() <= i) {
+			while (((HandCardManager2D) node).getHandCard2Ds().size() <= i && i < HandCardManager2D.MAX_HAND_CARDS) {
 				try {
 					System.err.println("Warning: HandCardManager is not updated for index " + i + "!");
 					Thread.sleep(10);
@@ -664,17 +676,19 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				}
 			}
 
-			// Critical start:
-			try {
-				node = ((HandCardManager2D) node).getHandCard(i);
-			} catch (IndexOutOfBoundsException e) {
-				e.printStackTrace();
-			}
-			// Critical end
+			// // Critical start:
+			// try {
+			// node = ((HandCardManager2D) node).getHandCard(i);
+			// } catch (IndexOutOfBoundsException e) {
+			// e.printStackTrace();
+			// }
+			// // Critical end
+			((HandCardManager2D) node).setIndexGlowing(i);
+		} else {
+			node.setGlowing(value);
+			ioController.addShootable(node);
+			this.addToUpdateQueue(node);
 		}
-		node.setGlowing(true);
-		ioController.addShootable(node);
-		this.addToUpdateQueue(node);
 	}
 
 	@Override
@@ -685,6 +699,14 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		endTurnButton.setVisible(b); // button adds/removes itself to shootables in update()!
 		// Start writing:
 		this.addToUpdateQueue(endTurnButton);
+
+		HandCardManager2D ownHand = this.ingameController.getOwnHand();
+		ownHand.setScrollButtonsActivated(b);
+		this.addToUpdateQueue(ownHand);
+		
+		HandCardManager2D enemyHand = this.ingameController.getEnemyHand();
+		enemyHand.setScrollButtonsActivated(b);
+		this.addToUpdateQueue(enemyHand);
 	}
 
 	public void setButtonVisible(SelectableNode button, boolean value) {

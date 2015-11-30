@@ -447,7 +447,6 @@ public class AttackAction {
 				else
 					c.setVisibleForPlayerRed(true);
 				this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
-				checkAndResolveFullHand(hand.getPositionID(), player);
 
 				// Execute animation:
 				Animation animation = new CardDrawAnimation(player.getColor());
@@ -488,7 +487,6 @@ public class AttackAction {
 					else
 						c.setVisibleForPlayerRed(true);
 					this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
-					checkAndResolveFullHand(hand.getPositionID(), player1);
 				} else
 					drawingFinished = true;
 			}
@@ -514,7 +512,6 @@ public class AttackAction {
 					else
 						c.setVisibleForPlayerRed(true);
 					this.moveCard(deck.getPositionID(), hand.getPositionID(), c.getGameID(), true);
-					checkAndResolveFullHand(hand.getPositionID(), player2);
 				} else
 					drawingFinished = true;
 			}
@@ -526,35 +523,35 @@ public class AttackAction {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	/**
-	 * Checks if the given player has too much cards on the given position. If this is the case, the player chooses cards until the position has not too much cards
-	 * anymore.
-	 * 
-	 * @param handPos
-	 * @param player
-	 */
-	public void checkAndResolveFullHand(PositionID handPos, Player player) {
-		Position hand = gameModel.getPosition(handPos);
-		// Check if player holds too much cards in his hand and force him to destroy some of them then:
-		if (hand.size() > 9) {
-			this.gameModel.sendTextMessageToAllPlayers(player.getName() + " has too much cards in his hand!", "");
-			int destroyCounter = hand.size() - 9;
-			List<Card> dCardList = player.playerChoosesCards((ArrayList<Card>) hand.getCards(), destroyCounter, true, "Choose " + destroyCounter
-					+ " cards to destroy!");
-			List<Card> cardsToRemove = new ArrayList<>();
-			for (Card c : dCardList) {
-				for (Card card : hand.getCards()) {
-					if (card.getGameID() == c.getGameID())
-						cardsToRemove.add(card);
-				}
-			}
-			for (Card card : cardsToRemove) {
-				hand.removeFromPosition(card);
-				card.setCurrentPosition(null);
-				this.gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + card.getName() + " from the game!", card, "");
-			}
-		}
-	}
+	// /**
+	// * Checks if the given player has too much cards on the given position. If this is the case, the player chooses cards until the position has not too much cards
+	// * anymore.
+	// *
+	// * @param handPos
+	// * @param player
+	// */
+	// public void checkAndResolveFullHand(PositionID handPos, Player player) {
+	// Position hand = gameModel.getPosition(handPos);
+	// // Check if player holds too much cards in his hand and force him to destroy some of them then:
+	// if (hand.size() > 9) {
+	// this.gameModel.sendTextMessageToAllPlayers(player.getName() + " has too much cards in his hand!", "");
+	// int destroyCounter = hand.size() - 9;
+	// List<Card> dCardList = player.playerChoosesCards((ArrayList<Card>) hand.getCards(), destroyCounter, true, "Choose " + destroyCounter
+	// + " cards to destroy!");
+	// List<Card> cardsToRemove = new ArrayList<>();
+	// for (Card c : dCardList) {
+	// for (Card card : hand.getCards()) {
+	// if (card.getGameID() == c.getGameID())
+	// cardsToRemove.add(card);
+	// }
+	// }
+	// for (Card card : cardsToRemove) {
+	// hand.removeFromPosition(card);
+	// card.setCurrentPosition(null);
+	// this.gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + card.getName() + " from the game!", card, "");
+	// }
+	// }
+	// }
 
 	/**
 	 * No messages to clients send here!

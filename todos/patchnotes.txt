@@ -1,8 +1,9 @@
-Patch 4.00
+Patch 3.50
 	Deck Editor:
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
 		- Added a frameworkwise solution for saving decks --> Removed swing mask for saving decks
 	Game: 
+		- Players may now hold an unlimited amount of hand cards
 		- Players can choose multiple prize cards now, when more than 1 pokemon was knocked out simultaneously
 		- 00260_NightlyGarbageRun: Fixed a bug regarding the animation
 		- 00152_Pokeball: Fixed a bug, that occured when the own deck did not contain any pokemon cards
@@ -10,6 +11,8 @@ Patch 4.00
 		- 00204_Dark Dragonite: Fixed a bug, that occured when the own deck did not contain any basic pokemon cards
 	AI:
 		- Fixed a crash bug
+	UI:
+		- Reworked HandCardManager to support unlimited hand cards for players
 		
 Patch 3.00
 	New Features

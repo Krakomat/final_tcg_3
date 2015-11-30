@@ -3,7 +3,6 @@ View:
 	- Rework distribution view, s.t. the minus button can be pressed so long until the resources on the pokemon are gone and not just once. Also add a balance counter.
 	
 GameModel: 
-	- Make players be able to hold arbitrary numbers of hand cards
 	- time counter for each turn
 	- Add a concede feature, so players can give up
 	- Implement timer for (single) actions for a client

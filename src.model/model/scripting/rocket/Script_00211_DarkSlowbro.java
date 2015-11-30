@@ -45,8 +45,6 @@ public class Script_00211_DarkSlowbro extends PokemonCardScript {
 					// Execute animation:
 					Animation animation = new CardMoveAnimation(ownDiscardPile(), ownHand(), card.getCardId(), "");
 					gameModel.sendAnimationToAllPlayers(animation);
-
-					gameModel.getAttackAction().checkAndResolveFullHand(ownHand(), player);
 					gameModel.sendGameModelToAllPlayers("");
 				}
 			}
