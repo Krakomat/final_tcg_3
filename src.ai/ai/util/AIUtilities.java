@@ -265,7 +265,7 @@ public class AIUtilities {
 		List<Card> chosenCards = new ArrayList<>();
 		List<Card> availableCards = new ArrayList<>();
 		for (Card c : energyCards)
-			availableCards.add(c);
+			availableCards.add(0, c); // Add in reverse, s.t. the oldest energy cards will be checked first!
 
 		// Get a copy of the color- and colorless costs:
 		List<Element> colorCosts = new ArrayList<>();
