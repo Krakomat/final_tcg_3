@@ -12,7 +12,7 @@ import model.database.Database;
 import network.tcp.messages.MessageRegister;
 
 public class ClientMain {
-	public static final String VERSION = "3.00";
+	public static final String VERSION = "3.50";
 
 	public static void main(String[] args) {
 		Database.init();
