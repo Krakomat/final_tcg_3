@@ -78,7 +78,7 @@ public class GameTree {
 			System.err.println("Computed value " + modelValue);
 			// Create new Node:
 			GameTreeNode resultingChildNode = new GameTreeNode(modelValue, new ArrayList<>(), rootNode);
-			if (modelValue > this.maximumNode.getValue())
+			if (modelValue >= this.maximumNode.getValue())
 				this.maximumNode = resultingChildNode;
 			// Create Move object:
 			GameTreeMove moveEdge = new GameTreeMove(resultingChildNode, move.getTriple(), player.getChosenPositionQueue(), player.getChosenCardsQueue(),

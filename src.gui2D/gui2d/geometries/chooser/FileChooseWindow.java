@@ -24,7 +24,7 @@ public class FileChooseWindow extends ChooseWindow {
 		// Create new images:
 		for (int i = 0; i < 30; i++) {
 			float imageXPos = this.width * 0.05f + (imageWidth * 1.15f) * (i / 15);
-			float imageYPos = this.height * 0.175f + (imageHeight * 1.10f) * (i%15);
+			float imageYPos = this.height * 0.875f - (imageHeight * 1.10f) * (i % 15);
 
 			// Create image:
 			final int index = i;

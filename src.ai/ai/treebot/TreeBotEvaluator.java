@@ -9,6 +9,7 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.Element;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
@@ -71,8 +72,27 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 			return Integer.MIN_VALUE; // Lost game without own active!
 		value = value - 4 * (ownActive.getDamageMarks() / 10);
 
-		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready, 3 points for each
-		// attack of your active pokemnon that is ready:
+		// Loose 1 point for each negative condition on your active pokemon:
+		if (ownActive.hasCondition(PokemonCondition.ASLEEP) || ownActive.hasCondition(PokemonCondition.BLIND) || ownActive.hasCondition(PokemonCondition.CONFUSED)
+				|| ownActive.hasCondition(PokemonCondition.PARALYZED) || ownActive.hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			value = value - 1;
+
+		// Loose 2 points if your active pokemon is poisoned:
+		if (ownActive.hasCondition(PokemonCondition.POISONED))
+			value = value - 2;
+		// Loose 3 points if your active pokemon is toxic:
+		if (ownActive.hasCondition(PokemonCondition.TOXIC))
+			value = value - 3;
+
+		// Gain 1 point for each negative condition on your active pokemon:
+		if (ownActive.hasCondition(PokemonCondition.DAMAGEINCREASE10) || ownActive.hasCondition(PokemonCondition.DESTINY)
+				|| ownActive.hasCondition(PokemonCondition.HARDEN20) || ownActive.hasCondition(PokemonCondition.HARDEN30)
+				|| ownActive.hasCondition(PokemonCondition.INVULNERABLE) || ownActive.hasCondition(PokemonCondition.NO_DAMAGE)
+				|| ownActive.hasCondition(PokemonCondition.RETALIATION))
+			value = value - 1;
+
+		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready, 3 points for
+		// each attack of your active pokemon that is ready:
 		for (PositionID pos : gameModel.getFullBenchPositions(color)) {
 			Pair<Integer, Integer> analysisResult = this.analyseEnergyOnPosition(gameModel.getPosition(pos));
 			value = value - 2 * analysisResult.getValue();

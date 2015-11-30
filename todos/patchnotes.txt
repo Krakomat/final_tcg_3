@@ -13,6 +13,7 @@ Patch 3.50
 		- 00204_Dark Dragonite: Fixed a bug, that occured when the own deck did not contain any basic pokemon cards
 	AI:
 		- Fixed a crash bug
+		- Uses conditions smarter
 	UI:
 		- Added a 'surrender' button
 		- Reworked HandCardManager to support unlimited hand cards for players
