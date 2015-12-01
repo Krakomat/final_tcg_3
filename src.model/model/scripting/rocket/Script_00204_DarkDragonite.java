@@ -28,6 +28,12 @@ public class Script_00204_DarkDragonite extends PokemonCardScript {
 	}
 
 	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
+
+	@Override
 	public void playFromHand() {
 		super.playFromHand();
 		Player player = this.getCardOwner();

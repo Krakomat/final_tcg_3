@@ -28,6 +28,12 @@ public class Script_00211_DarkSlowbro extends PokemonCardScript {
 	}
 
 	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
+	}
+
+	@Override
 	public void playFromHand() {
 		super.playFromHand();
 

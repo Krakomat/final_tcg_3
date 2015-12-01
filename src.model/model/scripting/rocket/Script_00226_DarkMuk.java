@@ -22,6 +22,7 @@ public class Script_00226_DarkMuk extends PokemonCardScript {
 
 		this.addPokemonPower("Sticky Goo");
 	}
+
 	@Override
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		// Cannot be manually activated!
