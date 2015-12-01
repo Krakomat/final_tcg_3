@@ -1,5 +1,6 @@
 package gui2d.geometries;
 
+import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
@@ -51,8 +52,9 @@ public class WindowGeometry extends Node implements SelectableNode {
 		this.attachChild(window);
 
 		// Window text:
-		this.title = new BitmapText(GUI2D.getInstance().getGuiFont(), false);
-		this.title.setSize(GUI2D.getInstance().getGuiFont().getCharSet().getRenderedSize()); // font size
+		BitmapFont myFont = GUI2D.getInstance().getAssetManager().loadFont("assets/Fonts/DejaVuSans.fnt");
+		this.title = new BitmapText(myFont, false);
+		this.title.setSize(myFont.getCharSet().getRenderedSize()); // font size
 		this.title.setText(this.titleText); // the text
 		this.title.setColor(ColorRGBA.Black); // font color
 

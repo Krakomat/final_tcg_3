@@ -5,6 +5,7 @@ import gui2d.GUI2D;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
 
+import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
@@ -68,8 +69,9 @@ public abstract class TextPanel2D extends Node implements SelectableNode {
 		this.attachChild(panel);
 
 		// Button text:
-		this.textBitmap = new BitmapText(GUI2D.getInstance().getGuiFont(), false);
-		this.textBitmap.setSize(GUI2D.getInstance().getGuiFont().getCharSet().getRenderedSize()); // font size
+		BitmapFont myFont = GUI2D.getInstance().getAssetManager().loadFont("assets/Fonts/DejaVuSans.fnt");
+		this.textBitmap = new BitmapText(myFont, false);
+		this.textBitmap.setSize(myFont.getCharSet().getRenderedSize()); // font size
 		this.textBitmap.setText(this.text); // the text
 		this.textBitmap.setColor(ColorRGBA.Black); // font color
 
@@ -81,10 +83,10 @@ public abstract class TextPanel2D extends Node implements SelectableNode {
 
 	private void adjustTextSize() {
 		// Adjust size:
-		while (this.textBitmap.getLineHeight() > height * 0.5f && this.textBitmap.getLineWidth() > width * 0.5f)
+		while (this.textBitmap.getLineHeight() > height * 0.5f && this.textBitmap.getLineWidth() > width * 0.3f)
 			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
 
-		while (this.textBitmap.getLineHeight() < height * 0.5f && this.textBitmap.getLineWidth() < width * 0.5f)
+		while (this.textBitmap.getLineHeight() < height * 0.5f && this.textBitmap.getLineWidth() < width * 0.3f)
 			this.textBitmap.setSize(this.textBitmap.getSize() + 0.001f);
 	}
 
