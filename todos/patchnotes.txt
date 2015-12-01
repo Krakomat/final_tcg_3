@@ -25,6 +25,7 @@ Patch 3.50
 		- Added a 'surrender' button
 		- Reworked HandCardManager to support unlimited hand cards for players
 		- Damage animation does not play, when pokemon receives 0 damage
+		- Adjusted the size of the text on buttons and images
 		
 Patch 3.00
 	New Features

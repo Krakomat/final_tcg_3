@@ -58,12 +58,7 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 		this.textBitmap.setText(this.text); // the text
 		this.textBitmap.setColor(ColorRGBA.Black); // font color
 
-		// Adjust size:
-		while (this.textBitmap.getLineHeight() > height && this.textBitmap.getLineWidth() > width * 0.5f)
-			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
-
-		while (this.textBitmap.getLineHeight() < height && this.textBitmap.getLineWidth() < width * 0.5f)
-			this.textBitmap.setSize(this.textBitmap.getSize() + 0.001f);
+		this.adjustTextSize();
 
 		this.textBitmap.setLocalTranslation(width * 0.50f - this.textBitmap.getLineWidth() / 2, height * 0.50f + this.textBitmap.getLineHeight() / 2,
 				this.level + 0.00001f);
@@ -72,6 +67,15 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 		// Init audio:
 		this.clickSoundNode = EffectController.createEffectAudioNode(Sounds.BUTTON_CLICKED);
 		this.attachChild(this.clickSoundNode);
+	}
+
+	private void adjustTextSize() {
+		// Adjust size:
+		while (this.textBitmap.getLineHeight() > height * 0.7f && this.textBitmap.getLineWidth() > width * 0.5f)
+			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
+
+		while (this.textBitmap.getLineHeight() < height * 0.7f && this.textBitmap.getLineWidth() < width * 0.5f)
+			this.textBitmap.setSize(this.textBitmap.getSize() + 0.001f);
 	}
 
 	/**
@@ -102,12 +106,7 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 
 			textBitmap.setText(text);
 
-			// Adjust size:
-			while (this.textBitmap.getLineHeight() > height && this.textBitmap.getLineWidth() > width * 0.5f)
-				this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
-
-			while (this.textBitmap.getLineHeight() < height && this.textBitmap.getLineWidth() < width * 0.5f)
-				this.textBitmap.setSize(this.textBitmap.getSize() + 0.001f);
+			this.adjustTextSize();
 
 			this.textBitmap.setLocalTranslation(width * 0.50f - this.textBitmap.getLineWidth() / 2, height * 0.50f + this.textBitmap.getLineHeight() / 2,
 					this.level + 0.00001f);
