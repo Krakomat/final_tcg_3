@@ -1,7 +1,9 @@
 package gui2d.controller;
 
 import gui2d.GUI2D;
+import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
+import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.ArenaGeometry2D;
 import gui2d.geometries.HandCard2D;
 import gui2d.geometries.HandCardManager2D;
@@ -46,11 +48,11 @@ public class IngameController extends Node implements GUI2DController {
 	private List<ArenaGeometry2D> ownBench, enemyBench;
 	private ImageCounter2D ownDeck, enemyDeck, ownGraveyard, enemyGraveyard;
 	private List<Image2D> ownPrize, enemyPrize;
-	private TextButton2D endTurnButton, attack1Button, attack2Button, retreatButton, playButton, pokePowerButton;
+	private TextButton2D endTurnButton, attack1Button, attack2Button, retreatButton, playButton, pokePowerButton, returnToLobbyButton;
 	private ImageButton2D surrenderButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
-
+	private Image2D resultScreen;
 	/** Currently selected node */
 	private SelectableNode currentlySelected;
 	/** True if a position has to be selected */
@@ -584,6 +586,39 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().getGuiNode().attachChild(cardMessagePanel);
 		cardMessagePanel.setVisible(false);
 
+		this.resultScreen = new Image2D("Result", Database.getAssetKey("win"), this.screenWidth * 0.3f, this.screenHeight * 0.3f) {
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+
+			}
+		};
+		this.resultScreen.setLocalTranslation(screenWidth * 0.35f, screenHeight * 0.35f, 0.2f);
+		this.resultScreen.setVisible(false);
+		dropInUpdateQueue(this.resultScreen);
+		this.attachChild(this.resultScreen);
+
+		returnToLobbyButton = new TextButton2D("returnToLobbyButton", "Return to Lobby", buttonWidth, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				returnToLobbyButtonClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		returnToLobbyButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.25f, 0);
+		returnToLobbyButton.setVisible(false);
+		dropInUpdateQueue(returnToLobbyButton);
+		this.attachChild(returnToLobbyButton);
+
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -597,6 +632,17 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().addToUpdateQueue(cardMessagePanel);
 				GUI2D.getInstance().addToUpdateQueue(distributionChooser);
 				GUI2D.getInstance().addToUpdateQueue(cardViewer);
+			}
+		}).start();
+	}
+
+	protected void returnToLobbyButtonClicked() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				GUI2D.getInstance().setButtonVisible(resultScreen, false);
+				GUI2D.getInstance().setButtonVisible(returnToLobbyButton, false);
+				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY);
 			}
 		}).start();
 	}
@@ -732,6 +778,20 @@ public class IngameController extends Node implements GUI2DController {
 		t.start();
 	}
 
+	public void playerWon() {
+		this.resultScreen.setTexture(Database.getAssetKey("win"));
+		GUI2D.getInstance().setButtonVisible(this.resultScreen, true);
+		GUI2D.getInstance().setButtonVisible(returnToLobbyButton, true);
+		GUI2D.getInstance().getMusicController().switchMusic(MusicType.VICTORY_MUSIC);
+	}
+
+	public void playerLost() {
+		this.resultScreen.setTexture(Database.getAssetKey("lose"));
+		GUI2D.getInstance().setButtonVisible(this.resultScreen, true);
+		GUI2D.getInstance().setButtonVisible(returnToLobbyButton, true);
+		GUI2D.getInstance().getMusicController().switchMusic(MusicType.LOSS_MUSIC);
+	}
+
 	public ImageButton2D getSurrenderButton() {
 		return surrenderButton;
 	}
@@ -760,6 +820,7 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().setButtonVisible(playButton, false);
 		GUI2D.getInstance().setButtonVisible(retreatButton, false);
 		GUI2D.getInstance().setButtonVisible(pokePowerButton, false);
+		GUI2D.getInstance().setButtonVisible(returnToLobbyButton, false);
 	}
 
 	/**

@@ -161,6 +161,14 @@ public class Database {
 	private static void loadAssets() {
 		assetTextures = new HashMap<String, TextureKey>();
 
+		TextureKey win = new TextureKey("tilesets/windows/win.png");
+		win.setGenerateMips(false);
+		assetTextures.put("win", win);
+
+		TextureKey lose = new TextureKey("tilesets/windows/lose.png");
+		lose.setGenerateMips(false);
+		assetTextures.put("lose", lose);
+
 		TextureKey bg = new TextureKey("tilesets/backgrounds/bg.jpg");
 		bg.setGenerateMips(false);
 		assetTextures.put("background", bg);

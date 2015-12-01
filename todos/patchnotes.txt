@@ -6,6 +6,9 @@ Patch 3.50
 	Game: 
 		- Players may now surrender the game
 		- Players may now hold an unlimited amount of hand cards
+		- Added a victory/loss screen at the end of the game
+		- Players can now press the new 'Return to Lobby' button after the game to get back to the lobby
+		- Players won't be kicked after 4 seconds when the game ends
 		- Players can choose multiple prize cards now, when more than 1 pokemon was knocked out simultaneously
 		- 00260_NightlyGarbageRun: Fixed a bug regarding the animation
 		- 00152_Pokeball: Fixed a bug, that occured when the own deck did not contain any pokemon cards

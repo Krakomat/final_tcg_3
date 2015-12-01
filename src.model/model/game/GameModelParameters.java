@@ -53,7 +53,7 @@ public class GameModelParameters {
 
 	public GameModelParameters(GameModelUpdate gameModelUpdate) {
 		this.setTurnNumber(gameModelUpdate.getGameModelParameters().getTurnNumber());
-		this.setGameState(GameState.RUNNING);
+		this.setGameState(gameModelUpdate.getGameModelParameters().getGameState());
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
 		this.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.setNoEnergyPayment(gameModelUpdate.getGameModelParameters().isNoEnergyPayment());

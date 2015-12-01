@@ -12,6 +12,7 @@ import model.database.EnergyCard;
 import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
+import model.enums.GameState;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
 import model.interfaces.Position;
@@ -591,6 +592,16 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			}
 		}
 		EffectController.playSound(sound);
+
+		// Check if game is finished:
+		if (gameModel.getGameState() == GameState.BLUE_WON || gameModel.getGameState() == GameState.RED_WON) {
+			if ((this.getPlayer().getColor() == Color.BLUE && gameModel.getGameState() == GameState.BLUE_WON)
+					|| (this.getPlayer().getColor() == Color.RED && gameModel.getGameState() == GameState.RED_WON)) {
+				this.getIngameController().playerWon();
+			}else{
+				this.getIngameController().playerLost();
+			}
+		}
 		// System.out.println("Finished Update");
 	}
 
@@ -700,7 +711,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		HandCardManager2D ownHand = this.ingameController.getOwnHand();
 		ownHand.setScrollButtonsActivated(b);
 		this.addToUpdateQueue(ownHand);
-		
+
 		HandCardManager2D enemyHand = this.ingameController.getEnemyHand();
 		enemyHand.setScrollButtonsActivated(b);
 		this.addToUpdateQueue(enemyHand);
@@ -719,7 +730,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	@Override
 	public void stopGame() {
-		this.switchMode(GUI2DMode.LOBBY);
+		//this.switchMode(GUI2DMode.LOBBY);
 	}
 
 	@Override

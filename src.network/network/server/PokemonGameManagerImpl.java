@@ -122,8 +122,6 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 			}
 		} while (gameModel.getGameState() == GameState.RUNNING); // while game not finished
 
-		this.timeoutWait(4000); // Wait 4 seconds
-
 		// Destroy server and clients:
 		this.serverMain.exit();
 	}

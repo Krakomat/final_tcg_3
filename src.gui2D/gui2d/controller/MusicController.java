@@ -27,6 +27,8 @@ public class MusicController extends Node {
 	static final int LOBBY_MUSIC_TRACKS = 1;
 	static final int DECK_EDIT_MUSIC_TRACKS = 6;
 	static final int INGAME_MUSIC_TRACKS = 13;
+	static final int VICTORY_MUSIC_TRACKS = 1;
+	static final int LOSS_MUSIC_TRACKS = 1;
 	static final float MUSIC_FADE_TIME = 150;
 	static final float MUSIC_VOLUME = 1f;
 
@@ -37,7 +39,7 @@ public class MusicController extends Node {
 	 *
 	 */
 	public enum MusicType {
-		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC;
+		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC, VICTORY_MUSIC, LOSS_MUSIC;
 	}
 
 	private List<AudioNode> fadeOutList;
@@ -62,6 +64,8 @@ public class MusicController extends Node {
 		List<String> lobbyMusicList = new ArrayList<>();
 		List<String> deckEditMusicList = new ArrayList<>();
 		List<String> ingameMusicList = new ArrayList<>();
+		List<String> victoryMusicList = new ArrayList<>();
+		List<String> lossMusicList = new ArrayList<>();
 
 		for (int i = 1; i <= TITLE_MUSIC_TRACKS; i++)
 			titleMusicList.add("music/title/track" + i + ".wav");
@@ -78,6 +82,14 @@ public class MusicController extends Node {
 		for (int i = 1; i <= INGAME_MUSIC_TRACKS; i++)
 			ingameMusicList.add("music/ingame/track" + i + ".wav");
 		this.musicTrackMap.put(MusicType.INGAME_MUSIC, ingameMusicList);
+
+		for (int i = 1; i <= VICTORY_MUSIC_TRACKS; i++)
+			victoryMusicList.add("music/duelwin.wav");
+		this.musicTrackMap.put(MusicType.VICTORY_MUSIC, victoryMusicList);
+
+		for (int i = 1; i <= LOSS_MUSIC_TRACKS; i++)
+			lossMusicList.add("music/duellose.wav");
+		this.musicTrackMap.put(MusicType.LOSS_MUSIC, lossMusicList);
 	}
 
 	private AudioNode createAudioNode(String trackPath) {
