@@ -15,6 +15,7 @@ Patch 3.50
 		- 00077_PokemonHaendler: Fixed several bugs
 		- 00204_Dark Dragonite: Fixed a bug, that occured when the own deck did not contain any basic pokemon cards
 		- 00204_Dark Dragonite: PokemonPower may not be manually activated
+		- 00204_Dark Dragonite: Deck is now being shuffled correctly
 		- 00211_DarkSlowbro: PokemonPower may not be manually activated
 		- 00206_DarkGolbat: PokemonPower may not be manually activated
 	AI:

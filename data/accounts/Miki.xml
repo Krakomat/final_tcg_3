@@ -4,6 +4,9 @@
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
     <Deck Name="Rainbow">
+        <Card ID="00109">
+            <Size>2</Size>
+        </Card>
         <Card ID="00107">
             <Size>1</Size>
         </Card>
@@ -28,9 +31,6 @@
         <Card ID="00204">
             <Size>1</Size>
         </Card>
-        <Card ID="00026">
-            <Size>2</Size>
-        </Card>
         <Card ID="00081">
             <Size>1</Size>
         </Card>
@@ -49,9 +49,6 @@
         <Card ID="00077">
             <Size>1</Size>
         </Card>
-        <Card ID="00155">
-            <Size>1</Size>
-        </Card>
         <Card ID="00116">
             <Size>1</Size>
         </Card>
@@ -59,7 +56,7 @@
             <Size>4</Size>
         </Card>
         <Card ID="00238">
-            <Size>2</Size>
+            <Size>3</Size>
         </Card>
         <Card ID="00257">
             <Size>1</Size>

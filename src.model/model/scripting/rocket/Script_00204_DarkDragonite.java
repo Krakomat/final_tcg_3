@@ -10,6 +10,7 @@ import model.enums.CardType;
 import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
@@ -52,6 +53,11 @@ public class Script_00204_DarkDragonite extends PokemonCardScript {
 				}
 			} else
 				gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + "'s deck does not contain basic pokemon cards!", "");
+
+			// Shuffle deck:
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
+			gameModel.getAttackAction().shufflePosition(ownDeck());
+			this.gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 

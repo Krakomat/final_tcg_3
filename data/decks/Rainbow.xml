@@ -4,9 +4,6 @@
         <Card ID="00020">
             <Size>2</Size>
         </Card>
-        <Card ID="00026">
-            <Size>2</Size>
-        </Card>
         <Card ID="00076">
             <Size>1</Size>
         </Card>
@@ -46,14 +43,14 @@
         <Card ID="00108">
             <Size>1</Size>
         </Card>
+        <Card ID="00109">
+            <Size>2</Size>
+        </Card>
         <Card ID="00116">
             <Size>1</Size>
         </Card>
         <Card ID="00139">
             <Size>4</Size>
-        </Card>
-        <Card ID="00155">
-            <Size>1</Size>
         </Card>
         <Card ID="00161">
             <Size>2</Size>
@@ -80,7 +77,7 @@
             <Size>1</Size>
         </Card>
         <Card ID="00238">
-            <Size>2</Size>
+            <Size>3</Size>
         </Card>
         <Card ID="00256">
             <Size>1</Size>
