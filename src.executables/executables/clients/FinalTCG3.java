@@ -11,7 +11,7 @@ import gui2d.GUI2D;
 import model.database.Database;
 import network.tcp.messages.MessageRegister;
 
-public class ClientMain {
+public class FinalTCG3 {
 	public static final String VERSION = "3.50";
 
 	public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class ClientMain {
 		settings.put("Height", 720);
 		// settings.put("Width", (int) (Toolkit.getDefaultToolkit().getScreenSize().width * 0.9f));
 		// settings.put("Height", (int) (Toolkit.getDefaultToolkit().getScreenSize().height * 0.9f));
-		settings.setTitle("Final TCG 3 Version " + ClientMain.VERSION);
+		settings.setTitle("Final TCG 3 Version " + FinalTCG3.VERSION);
 		settings.put("VSync", true);
 		settings.put("Samples", 16);
 		settings.setFullscreen(false);
