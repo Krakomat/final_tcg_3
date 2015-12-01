@@ -20,7 +20,7 @@ Patch 3.50
 	UI:
 		- Added a 'surrender' button
 		- Reworked HandCardManager to support unlimited hand cards for players
-		- Damagae animation does not play, when pokemon receives 0 damage
+		- Damage animation does not play, when pokemon receives 0 damage
 		
 Patch 3.00
 	New Features
