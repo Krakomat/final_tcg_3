@@ -65,7 +65,6 @@ public class StandardBot implements Bot {
 
 	@Override
 	public void makeMove(PokemonGameManager server, Player player) {
-		aiUtilities.sleep(4000);
 		// (Position, positionIndex, Action)
 		List<GameTreeMove> actionList = aiUtilities.computePlayerActions(gameModel, player, server);
 		List<GameTreeMove> energyList = aiUtilities.filterActions(actionList, PlayerAction.PLAY_ENERGY_CARD);
