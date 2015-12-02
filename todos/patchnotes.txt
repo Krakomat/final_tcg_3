@@ -19,6 +19,7 @@ Patch 3.50
 		- 00211_DarkSlowbro: PokemonPower may not be manually activated
 		- 00206_DarkGolbat: PokemonPower may not be manually activated
 	AI:
+		- Removed the standard bot deck from singleplayer
 		- Fixed a crash bug
 		- Uses conditions smarter
 	UI:
