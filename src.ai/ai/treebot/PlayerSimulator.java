@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Queue;
 
 import ai.util.AIUtilities;
+import arenaMode.model.ArenaFighterCode;
 
 import com.google.common.base.Preconditions;
 
@@ -360,5 +361,25 @@ public class PlayerSimulator implements Player {
 	@Override
 	public void playerReceivesAnimation(Animation animation) {
 
+	}
+
+	@Override
+	public List<ArenaFighterCode> getDefeatedArenaFighters() {
+		return null;
+	}
+
+	@Override
+	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters) {
+		
+	}
+
+	@Override
+	public List<String> getUnlockedCards() {
+		return null;
+	}
+
+	@Override
+	public void setUnlockedCards(List<String> unlockedCards) {
+		
 	}
 }

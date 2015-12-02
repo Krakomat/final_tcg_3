@@ -24,6 +24,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import ai.interfaces.BotBorder;
+import arenaMode.model.ArenaFighterCode;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
@@ -109,14 +110,57 @@ public class AccountStorageHelper {
 				break;
 			}
 			acc.setDeck(deck);
+
+			List<ArenaFighterCode> defeatedFighters = new ArrayList<>();
+			Element arenaFighterElement = (Element) parentElement.getElementsByTagName("DefeatedArenaFighters").item(0);
+			defeatedFighters = parseDefeatedFighters(arenaFighterElement);
+			acc.setDefeatedArenaFighters(defeatedFighters);
+
+			List<String> unlockedCards = new ArrayList<>();
+			Element unlockedCardsElement = (Element) parentElement.getElementsByTagName("UnlockedCards").item(0);
+			unlockedCards = parseUnlockedCards(unlockedCardsElement);
+			acc.setUnlockedCards(unlockedCards);
+
 			return acc;
 		} else
 			return null;
 	}
 
+	private static List<ArenaFighterCode> parseDefeatedFighters(Element arenaFighterElement) {
+		List<ArenaFighterCode> arenaFighterCodes = new ArrayList<>();
+		NodeList fighterList = arenaFighterElement.getElementsByTagName("DefeatedFighter");
+		for (int i = 0; i < fighterList.getLength(); i++) {
+
+			// get the employee element
+			Element el = (Element) fighterList.item(i);
+
+			// get the Employee object
+			String id = el.getAttribute("ID");
+			ArenaFighterCode code = ArenaFighterCode.valueOf(id);
+			arenaFighterCodes.add(code);
+		}
+		return arenaFighterCodes;
+	}
+
+	private static List<String> parseUnlockedCards(Element unlockedCardsElement) {
+		List<String> unlockedCards = new ArrayList<>();
+		NodeList cardList = unlockedCardsElement.getElementsByTagName("UnlockedCard");
+		for (int i = 0; i < cardList.getLength(); i++) {
+
+			// get the employee element
+			Element el = (Element) cardList.item(i);
+
+			// get the Employee object
+			String id = el.getAttribute("ID");
+			unlockedCards.add(id);
+		}
+		return unlockedCards;
+	}
+
 	/**
-	 * I take a xml element and the tag name, look for the tag and get the text content i.e for <employee><name>John</name></employee> xml snippet if the Element
-	 * points to employee node and tagName is name I will return John
+	 * I take a xml element and the tag name, look for the tag and get the text
+	 * content i.e for <employee><name>John</name></employee> xml snippet if the
+	 * Element points to employee node and tagName is name I will return John
 	 * 
 	 * @param ele
 	 * @param tagName
@@ -164,7 +208,8 @@ public class AccountStorageHelper {
 	}
 
 	/**
-	 * Using JAXP in implementation independent manner create a document object using which we create a xml tree in memory
+	 * Using JAXP in implementation independent manner create a document object
+	 * using which we create a xml tree in memory
 	 */
 	static Document createDocument() {
 
@@ -249,6 +294,22 @@ public class AccountStorageHelper {
 			deckElement.appendChild(cardElement);
 		}
 		element.appendChild(deckElement);
+
+		Element defeatedFightersElement = dom.createElement("DefeatedArenaFighters");
+		for (ArenaFighterCode code : acc.getDefeatedArenaFighters()) {
+			Element defeatedFighter = dom.createElement("DefeatedFighter");
+			defeatedFighter.setAttribute("ID", code.toString());
+			defeatedFightersElement.appendChild(defeatedFighter);
+		}
+		element.appendChild(defeatedFightersElement);
+
+		Element unlockedCardsElement = dom.createElement("UnlockedCards");
+		for (String cardID : acc.getUnlockedCards()) {
+			Element unlockedCard = dom.createElement("UnlockedCard");
+			unlockedCard.setAttribute("ID", cardID);
+			unlockedCardsElement.appendChild(unlockedCard);
+		}
+		element.appendChild(unlockedCardsElement);
 
 		return element;
 	}

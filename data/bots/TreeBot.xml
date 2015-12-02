@@ -55,4 +55,6 @@
 			</Card>
 		</Cards>
 	</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
 </Account>

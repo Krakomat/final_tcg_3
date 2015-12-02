@@ -1,5 +1,8 @@
 package network.client;
 
+import java.util.List;
+
+import arenaMode.model.ArenaFighterCode;
 import model.database.Deck;
 import model.enums.AccountType;
 
@@ -9,6 +12,8 @@ public abstract class AccountImpl implements Account {
 	protected String name, password;
 	protected Deck deck;
 	protected AccountType accountType;
+	protected List<ArenaFighterCode> defeatedArenaFighters;
+	protected List<String> unlockedCards;
 
 	public AccountImpl(long id, String name, String password) {
 		super();
@@ -17,6 +22,8 @@ public abstract class AccountImpl implements Account {
 		this.password = password;
 		deck = null;
 		accountType = null; // is set in an upper level constructor
+		unlockedCards = null;
+		defeatedArenaFighters = null;
 	}
 
 	@Override
@@ -47,5 +54,21 @@ public abstract class AccountImpl implements Account {
 	@Override
 	public AccountType getAccountType() {
 		return this.accountType;
+	}
+
+	public List<ArenaFighterCode> getDefeatedArenaFighters() {
+		return defeatedArenaFighters;
+	}
+
+	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters) {
+		this.defeatedArenaFighters = defeatedArenaFighters;
+	}
+
+	public List<String> getUnlockedCards() {
+		return unlockedCards;
+	}
+
+	public void setUnlockedCards(List<String> unlockedCards) {
+		this.unlockedCards = unlockedCards;
 	}
 }

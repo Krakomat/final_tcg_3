@@ -15,6 +15,7 @@ import model.enums.PokemonCondition;
 
 import com.jme3.asset.TextureKey;
 
+import arenaMode.model.ArenaFighterCode;
 import editor.cardeditor.CardEditorModel;
 
 public class Database {
@@ -52,7 +53,9 @@ public class Database {
 	}
 
 	/**
-	 * Sucht in der Datenbank nach der Karte mit übergebener ID und gibt diese zurück. Gibt null zurück, falls die Karte sich nicht in der Datenbank befindet.
+	 * Sucht in der Datenbank nach der Karte mit übergebener ID und gibt diese
+	 * zurück. Gibt null zurück, falls die Karte sich nicht in der Datenbank
+	 * befindet.
 	 * 
 	 * @param id
 	 *            ID der gesuchten Karte
@@ -125,7 +128,8 @@ public class Database {
 	}
 
 	/**
-	 * For each card created in the init()-method, the respective texture is loaded and stored in a ArrayList.
+	 * For each card created in the init()-method, the respective texture is
+	 * loaded and stored in a ArrayList.
 	 */
 	private static void loadTextures() {
 		cardTextures = new HashMap<String, TextureKey>();
@@ -413,6 +417,27 @@ public class Database {
 		TextureKey vertaniaArena = new TextureKey("/tilesets/arenas/vertaniaArena.jpg");
 		vertaniaArena.setGenerateMips(false);
 		assetTextures.put("Vertania City Arena", vertaniaArena);
+
+		TextureKey redCharacter = new TextureKey("/tilesets/characters/Red.png");
+		redCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.MAMORIA_RED.toString(), redCharacter);
+		TextureKey redCharacterThumb = new TextureKey("/tilesets/characters/Red_thumb.png");
+		redCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.MAMORIA_RED.toString() + "THUMB", redCharacterThumb);
+
+		TextureKey brendanCharacter = new TextureKey("/tilesets/characters/Brendan.png");
+		brendanCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.MAMORIA_BRENDAN.toString(), brendanCharacter);
+		TextureKey brendanCharacterThumb = new TextureKey("/tilesets/characters/Brendan_thumb.png");
+		brendanCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.MAMORIA_BRENDAN.toString() + "THUMB", brendanCharacterThumb);
+
+		TextureKey rockoCharacter = new TextureKey("/tilesets/characters/Rocko.png");
+		rockoCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.MAMORIA_ROCKO.toString(), rockoCharacter);
+		TextureKey rockoCharacterThumb = new TextureKey("/tilesets/characters/Rocko_thumb.png");
+		rockoCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.MAMORIA_ROCKO.toString() + "THUMB", rockoCharacterThumb);
 	}
 
 	public static Player getBot(String name) {
@@ -439,8 +464,9 @@ public class Database {
 	}
 
 	/**
-	 * Reads the account folder for player files. Returns the player if only one player file is contained in the account folder. Returns null, if no account is
-	 * contained in the folder.
+	 * Reads the account folder for player files. Returns the player if only one
+	 * player file is contained in the account folder. Returns null, if no
+	 * account is contained in the folder.
 	 * 
 	 * @return
 	 * @throws IOException

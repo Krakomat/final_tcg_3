@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.jme3.network.HostedConnection;
 
+import arenaMode.model.ArenaFighterCode;
 import model.database.Card;
 import model.database.Deck;
 import model.enums.AccountType;
@@ -403,5 +404,25 @@ public class ServerBorder implements Player {
 	@Override
 	public void exit() {
 		// Do nothing here
+	}
+
+	@Override
+	public List<ArenaFighterCode> getDefeatedArenaFighters() {
+		return null;
+	}
+
+	@Override
+	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters) {
+		
+	}
+
+	@Override
+	public List<String> getUnlockedCards() {
+		return null;
+	}
+
+	@Override
+	public void setUnlockedCards(List<String> unlockedCards) {
+		
 	}
 }

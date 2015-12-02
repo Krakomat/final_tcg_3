@@ -185,4 +185,6 @@
             <Size>1</Size>
         </Card>
     </Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
 </Account>

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.w3c.dom.Document;
 
+import arenaMode.model.ArenaFighterCode;
 import model.database.Database;
 import model.database.Deck;
 import model.enums.AccountType;
@@ -60,8 +61,17 @@ public interface Account {
 	 */
 	public AccountType getAccountType();
 
+	public List<ArenaFighterCode> getDefeatedArenaFighters();
+
+	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters);
+
+	public List<String> getUnlockedCards();
+
+	public void setUnlockedCards(List<String> unlockedCards);
+
 	/**
-	 * Reads the given folder and returns a list of accounts, that this file stores.
+	 * Reads the given folder and returns a list of accounts, that this file
+	 * stores.
 	 * 
 	 * @param path
 	 *            folder that contains account files
