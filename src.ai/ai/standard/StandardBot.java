@@ -163,7 +163,8 @@ public class StandardBot implements Bot {
 	}
 
 	/**
-	 * Checks if the bot has an energy card for the given element in his hand and returns its index, if this is true. Returns -1 if this is not true.
+	 * Checks if the bot has an energy card for the given element in his hand
+	 * and returns its index, if this is true. Returns -1 if this is not true.
 	 * 
 	 * @param element
 	 * @return
@@ -181,7 +182,8 @@ public class StandardBot implements Bot {
 	}
 
 	/**
-	 * Computes a map of pairs that contains all positions of this bot(key) and their missing amount of energy(value).
+	 * Computes a map of pairs that contains all positions of this bot(key) and
+	 * their missing amount of energy(value).
 	 * 
 	 * @return
 	 */
@@ -212,7 +214,8 @@ public class StandardBot implements Bot {
 					if (element == Element.COLORLESS)
 						colorless++;
 				if (costs.size() > 0) {
-					// We potentially found some missing energy --> Try to pay the rest via colorless:
+					// We potentially found some missing energy --> Try to pay
+					// the rest via colorless:
 					if (energyContained.size() < colorless || energyContained.size() == 0) {
 						// Found you!
 						resultMap.put(position.getPositionID(), costs);
@@ -325,8 +328,7 @@ public class StandardBot implements Bot {
 			}
 		}
 
-		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of StandardBot was not ok! Cost: " + costs + " Payment: "
-				+ chosenCards);
+		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of StandardBot was not ok! Cost: " + costs + " Payment: " + chosenCards);
 		return chosenCards;
 	}
 

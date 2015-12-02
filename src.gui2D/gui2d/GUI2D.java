@@ -856,7 +856,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
           }
         }
         if (!animationDone)
-          Thread.sleep(10);
+					Thread.sleep(10);
       }
       for (AnimateableObject animObj : animObjects) {
         animObj.resetAnimation();
