@@ -558,7 +558,7 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(multiPlayerConnectButton);
 	}
 	protected void arenaModeClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.START);
+		GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY);
 	}
 
 	protected void singlePlayerClicked() {
@@ -651,7 +651,7 @@ public class LobbyController extends Node implements GUI2DController {
 		this.hide();
 		this.singlePlayerButton.setVisible(true);
 		this.dropInUpdateQueue(singlePlayerButton);
-		this.arenaButton.setVisible(false);
+		this.arenaButton.setVisible(true);
 		this.dropInUpdateQueue(arenaButton);
 		this.multiPlayerButton.setVisible(true);
 		this.dropInUpdateQueue(multiPlayerButton);

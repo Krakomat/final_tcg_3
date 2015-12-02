@@ -381,6 +381,38 @@ public class Database {
 		TextureKey schlossUndRiegel = new TextureKey("/decks/Schloss_und_Riegel_TCG.jpg");
 		schlossUndRiegel.setGenerateMips(false);
 		assetTextures.put("schlossUndRiegel", schlossUndRiegel);
+
+		TextureKey mamoriaArena = new TextureKey("/tilesets/arenas/mamoriaArena.jpg");
+		mamoriaArena.setGenerateMips(false);
+		assetTextures.put("Mamoria City Arena", mamoriaArena);
+
+		TextureKey azuriaArena = new TextureKey("/tilesets/arenas/azuriaArena.jpg");
+		azuriaArena.setGenerateMips(false);
+		assetTextures.put("Azuria City Arena", azuriaArena);
+
+		TextureKey oraniaArena = new TextureKey("/tilesets/arenas/oraniaArena.jpg");
+		oraniaArena.setGenerateMips(false);
+		assetTextures.put("Orania City Arena", oraniaArena);
+
+		TextureKey prismaniaArena = new TextureKey("/tilesets/arenas/prismaniaArena.jpg");
+		prismaniaArena.setGenerateMips(false);
+		assetTextures.put("Prismania City Arena", prismaniaArena);
+
+		TextureKey fuchsaniaArena = new TextureKey("/tilesets/arenas/fuchsaniaArena.png");
+		fuchsaniaArena.setGenerateMips(false);
+		assetTextures.put("Fuchsania City Arena", fuchsaniaArena);
+
+		TextureKey saffroniaArena = new TextureKey("/tilesets/arenas/saffroniaArena.jpg");
+		saffroniaArena.setGenerateMips(false);
+		assetTextures.put("Saffronia City Arena", saffroniaArena);
+
+		TextureKey zinnoberinselArena = new TextureKey("/tilesets/arenas/zinnoberinselArena.jpg");
+		zinnoberinselArena.setGenerateMips(false);
+		assetTextures.put("Zinnoberinsel Arena", zinnoberinselArena);
+
+		TextureKey vertaniaArena = new TextureKey("/tilesets/arenas/vertaniaArena.jpg");
+		vertaniaArena.setGenerateMips(false);
+		assetTextures.put("Vertania City Arena", vertaniaArena);
 	}
 
 	public static Player getBot(String name) {

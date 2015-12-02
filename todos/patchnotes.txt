@@ -1,3 +1,13 @@
+Patch 4.00
+	New Features:
+		Arena Mode
+			- A single player adventure, where the player travels through the different arena in Kanto
+			- New cards that are associated with the respective master of each arena can be unlocked by defeating the master and his/her servants
+			- All  encounters feature new unique bot decks
+			- The first arena (Mamoria City Arena) is already unlocked, further ones come through the next patches
+		New Card sets: 
+			- ROCKO
+
 Patch 3.50
 	Deck Editor:
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
