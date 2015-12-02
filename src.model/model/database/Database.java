@@ -434,10 +434,10 @@ public class Database {
 
 		TextureKey rockoCharacter = new TextureKey("/tilesets/characters/Rocko.png");
 		rockoCharacter.setGenerateMips(false);
-		assetTextures.put(ArenaFighterCode.MAMORIA_ROCKO.toString(), rockoCharacter);
+		assetTextures.put(ArenaFighterCode.MAMORIA_BROCK.toString(), rockoCharacter);
 		TextureKey rockoCharacterThumb = new TextureKey("/tilesets/characters/Rocko_thumb.png");
 		rockoCharacterThumb.setGenerateMips(false);
-		assetTextures.put(ArenaFighterCode.MAMORIA_ROCKO.toString() + "THUMB", rockoCharacterThumb);
+		assetTextures.put(ArenaFighterCode.MAMORIA_BROCK.toString() + "THUMB", rockoCharacterThumb);
 	}
 
 	public static Player getBot(String name) {

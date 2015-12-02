@@ -13,9 +13,9 @@ public class ArenaFighterFactory {
 		case MAMORIA_RED:
 			return new ArenaFighter(code, "Red", "RockTrainer_1.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString() + "_THUMB"), new ArrayList<>());
-		case MAMORIA_ROCKO:// TODO set deck
-			return new ArenaFighter(code, "Rocko", "RockTrainer_1.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_ROCKO.toString()),
-					Database.getAssetKey(ArenaFighterCode.MAMORIA_ROCKO.toString() + "_THUMB"), new ArrayList<>());
+		case MAMORIA_BROCK:// TODO set deck
+			return new ArenaFighter(code, "Rocko", "RockTrainer_1.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
+					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), new ArrayList<>());
 		default:
 			break;
 		}
