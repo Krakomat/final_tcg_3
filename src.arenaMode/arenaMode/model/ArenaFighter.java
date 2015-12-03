@@ -42,6 +42,22 @@ public class ArenaFighter {
 		return lockedCards;
 	}
 
+	/**
+	 * Returns a list of the card ids that the given account has yet to unlock.
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public List<String> getUnlockedCards(Account account) {
+		List<String> unlockedCards = account.getUnlockedCards();
+		List<String> lockedCards = new ArrayList<>();
+		for (String cardID : unlockableCards) {
+			if (unlockedCards.contains(cardID))
+				lockedCards.add(cardID);
+		}
+		return lockedCards;
+	}
+
 	public TextureKey getCharacterModel() {
 		return characterModel;
 	}

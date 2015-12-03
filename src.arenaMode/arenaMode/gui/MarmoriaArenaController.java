@@ -364,7 +364,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 			this.deckDescription.setText("Deck: " + fighter.getDeck().getName());
 			this.deckDescription.setVisible(true);
 			this.dropInUpdateQueue(deckDescription);
-			this.unlockedCardsDescription.setText("Cards unlocked: " + +fighter.getLockedCards(account).size() + "/" + fighter.getUnlockableCards().size());
+			this.unlockedCardsDescription.setText("Cards unlocked: " + +fighter.getUnlockedCards(account).size() + "/" + fighter.getUnlockableCards().size());
 			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK))
 				this.unlockedCardsDescription.setVisible(true);
 			else
