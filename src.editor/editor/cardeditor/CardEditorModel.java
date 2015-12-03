@@ -182,6 +182,7 @@ public class CardEditorModel {
 
 	private TrainerCard parseTrainer(Element tCardElement) {
 		TrainerCard trainerCard = new TrainerCard(parseCard(tCardElement));
+		trainerCard.setStadiumCard(Boolean.valueOf(getTextValue(tCardElement, "StadiumCard")));
 
 		return trainerCard;
 	}
@@ -231,7 +232,8 @@ public class CardEditorModel {
 	}
 
 	/**
-	 * Using JAXP in implementation independent manner create a document object using which we create a xml tree in memory
+	 * Using JAXP in implementation independent manner create a document object
+	 * using which we create a xml tree in memory
 	 */
 	private void createDocument() {
 
@@ -299,6 +301,11 @@ public class CardEditorModel {
 	private Element createTrainerCardElement(TrainerCard card) {
 		Element element = dom.createElement("TrainerCard");
 		element.appendChild(createCardElement(card));
+
+		Element stadiumCardElement = dom.createElement("StadiumCard");
+		stadiumCardElement.appendChild(dom.createTextNode(String.valueOf(card.isStadiumCard())));
+		element.appendChild(stadiumCardElement);
+
 		return element;
 	}
 
@@ -454,8 +461,8 @@ public class CardEditorModel {
 	 */
 	public String[] getAllCardsAsString(Edition edition) {
 		List<Card> cardList = new ArrayList<>();
-		for(Card c : this.allCards)
-			if(c.getEdition().equals(edition))
+		for (Card c : this.allCards)
+			if (c.getEdition().equals(edition))
 				cardList.add(c);
 		String[] s = new String[cardList.size()];
 		for (int i = 0; i < cardList.size(); i++) {
@@ -465,8 +472,9 @@ public class CardEditorModel {
 	}
 
 	/**
-	 * I take a xml element and the tag name, look for the tag and get the text content i.e for <employee><name>John</name></employee> xml snippet if the Element
-	 * points to employee node and tagName is name I will return John
+	 * I take a xml element and the tag name, look for the tag and get the text
+	 * content i.e for <employee><name>John</name></employee> xml snippet if the
+	 * Element points to employee node and tagName is name I will return John
 	 * 
 	 * @param ele
 	 * @param tagName

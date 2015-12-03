@@ -88,6 +88,7 @@ public class Database {
 			p.setCardType(c.getCardType());
 			p.setEdition(c.getEdition());
 			p.setRarity(c.getRarity());
+			p.setStadiumCard(((TrainerCard) c).isStadiumCard());
 			return p;
 		} else {
 			EnergyCard p = new EnergyCard();

@@ -1273,6 +1273,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1283,6 +1284,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1293,6 +1295,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1303,6 +1306,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1313,6 +1317,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1323,6 +1328,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1333,6 +1339,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1343,6 +1350,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1353,6 +1361,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1363,6 +1372,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1373,6 +1383,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1383,6 +1394,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1393,6 +1405,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1403,6 +1416,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1413,6 +1427,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1423,6 +1438,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1433,6 +1449,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1443,6 +1460,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1453,6 +1471,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1463,6 +1482,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1473,6 +1493,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1483,6 +1504,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1493,6 +1515,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1503,6 +1526,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1513,6 +1537,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -1523,6 +1548,7 @@
             <CardType>TRAINER</CardType>
             <Edition>BASE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <EnergyCard>
         <Card>
@@ -2504,6 +2530,7 @@
             <CardType>TRAINER</CardType>
             <Edition>JUNGLE</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <PokemonCard>
         <Card>
@@ -3255,6 +3282,7 @@
             <CardType>TRAINER</CardType>
             <Edition>FOSSIL</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -3265,6 +3293,7 @@
             <CardType>TRAINER</CardType>
             <Edition>FOSSIL</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -3275,6 +3304,7 @@
             <CardType>TRAINER</CardType>
             <Edition>FOSSIL</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -3285,6 +3315,7 @@
             <CardType>TRAINER</CardType>
             <Edition>FOSSIL</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -3295,6 +3326,7 @@
             <CardType>TRAINER</CardType>
             <Edition>FOSSIL</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <PokemonCard>
         <Card>
@@ -3586,6 +3618,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -3596,6 +3629,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <EnergyCard>
         <Card>
@@ -4315,6 +4349,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -4325,6 +4360,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -4335,6 +4371,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -4345,6 +4382,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -4355,6 +4393,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -4365,6 +4404,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <TrainerCard>
         <Card>
@@ -4375,6 +4415,7 @@
             <CardType>TRAINER</CardType>
             <Edition>ROCKET</Edition>
         </Card>
+        <StadiumCard>false</StadiumCard>
     </TrainerCard>
     <EnergyCard>
         <Card>
@@ -4422,4 +4463,432 @@
         </RetreatCost>
         <EvolvesFrom>Pikachu</EvolvesFrom>
     </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Rhydon</Name>
+            <ID>00266</ID>
+            <Image>/cards/05_Brock/00266.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <TrainerCard>
+        <Card>
+            <Name>Brock</Name>
+            <ID>00267</ID>
+            <Image>/cards/05_Brock/00267.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>TRAINER</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <StadiumCard>false</StadiumCard>
+    </TrainerCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Golem</Name>
+            <ID>00268</ID>
+            <Image>/cards/05_Brock/00268.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Onix</Name>
+            <ID>00269</ID>
+            <Image>/cards/05_Brock/00269.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Rhyhorn</Name>
+            <ID>00270</ID>
+            <Image>/cards/05_Brock/00270.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Sandslash</Name>
+            <ID>00271</ID>
+            <Image>/cards/05_Brock/00271.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Zubat</Name>
+            <ID>00272</ID>
+            <Image>/cards/05_Brock/00272.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Geodude</Name>
+            <ID>00273</ID>
+            <Image>/cards/05_Brock/00273.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Golbat</Name>
+            <ID>00274</ID>
+            <Image>/cards/05_Brock/00274.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Graveler</Name>
+            <ID>00275</ID>
+            <Image>/cards/05_Brock/00275.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Lickitung</Name>
+            <ID>00276</ID>
+            <Image>/cards/05_Brock/00276.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Geodude</Name>
+            <ID>00277</ID>
+            <Image>/cards/05_Brock/00277.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Mankey</Name>
+            <ID>00278</ID>
+            <Image>/cards/05_Brock/00278.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Mankey</Name>
+            <ID>00279</ID>
+            <Image>/cards/05_Brock/00279.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Onix</Name>
+            <ID>00280</ID>
+            <Image>/cards/05_Brock/00280.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Rhyhorn</Name>
+            <ID>00281</ID>
+            <Image>/cards/05_Brock/00281.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Sandshrew</Name>
+            <ID>00282</ID>
+            <Image>/cards/05_Brock/00282.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Sandshrew</Name>
+            <ID>00283</ID>
+            <Image>/cards/05_Brock/00283.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Zubat</Name>
+            <ID>00284</ID>
+            <Image>/cards/05_Brock/00284.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <TrainerCard>
+        <Card>
+            <Name>Brock's Training Method</Name>
+            <ID>00285</ID>
+            <Image>/cards/05_Brock/00285.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>TRAINER</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <StadiumCard>false</StadiumCard>
+    </TrainerCard>
+    <TrainerCard>
+        <Card>
+            <Name>Pewter City Gym</Name>
+            <ID>00286</ID>
+            <Image>/cards/05_Brock/00286.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>TRAINER</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <StadiumCard>true</StadiumCard>
+    </TrainerCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Dugtrio</Name>
+            <ID>00287</ID>
+            <Image>/cards/05_Brock/00287.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Graveler</Name>
+            <ID>00288</ID>
+            <Image>/cards/05_Brock/00288.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Primeape</Name>
+            <ID>00289</ID>
+            <Image>/cards/05_Brock/00289.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Sandslash</Name>
+            <ID>00290</ID>
+            <Image>/cards/05_Brock/00290.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Diglett</Name>
+            <ID>00291</ID>
+            <Image>/cards/05_Brock/00291.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <PokemonCard>
+        <Card>
+            <Name>Brock's Geodude</Name>
+            <ID>00292</ID>
+            <Image>/cards/05_Brock/00292.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>BASICPOKEMON</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <Type>COLORLESS</Type>
+        <HP>0</HP>
+        <Weakness/>
+        <Resistance/>
+        <RetreatCost/>
+        <EvolvesFrom/>
+    </PokemonCard>
+    <TrainerCard>
+        <Card>
+            <Name>Brock's Protection</Name>
+            <ID>00293</ID>
+            <Image>/cards/05_Brock/00293.jpg</Image>
+            <Rarity>COMMON</Rarity>
+            <CardType>TRAINER</CardType>
+            <Edition>BROCK</Edition>
+        </Card>
+        <StadiumCard>false</StadiumCard>
+    </TrainerCard>
 </Cards>

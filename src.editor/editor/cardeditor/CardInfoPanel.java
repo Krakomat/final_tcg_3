@@ -67,6 +67,7 @@ public class CardInfoPanel extends JPanel {
 	private JComboBox evolvesFromComboBox;
 	private JLabel nameTextField;
 	private JCheckBox basicEnergyCheckBox;
+	private JCheckBox stadiumCardCheckBox;
 	private JLabel provideLabel;
 	private JLabel colorlessLabel;
 	private JLabel grassLabel;
@@ -99,7 +100,8 @@ public class CardInfoPanel extends JPanel {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CardInfoPanel(Card s, String[] pokemonNames) {
 		pokemonCardNames = pokemonNames;
-		String[] editions = { Edition.BASE.toString(), Edition.JUNGLE.toString(), Edition.FOSSIL.toString(), Edition.ROCKET.toString(), Edition.TOKEN.toString() };
+		String[] editions = { Edition.BASE.toString(), Edition.JUNGLE.toString(), Edition.FOSSIL.toString(), Edition.ROCKET.toString(), Edition.BROCK.toString(),
+				Edition.TOKEN.toString() };
 		String[] hpComboBoxItems = { "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120" };
 		ImageIcon[] typeImages = new ImageIcon[7];
 		typeImages[0] = new BitmapComponent("/tilesets/elements/thumbnails/elektro.png").getImageIcon();
@@ -152,14 +154,14 @@ public class CardInfoPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FileFilter filter = new FileNameExtensionFilter("Final TCG2 Datenbanken", "jpg");
-				JFileChooser chooser = new JFileChooser("images/cards/base04/");
+				JFileChooser chooser = new JFileChooser("images/cards/05_Brock/");
 				chooser.setFileFilter(filter);
 				chooser.setAcceptAllFileFilterUsed(false);
 				int rueckgabeWert = chooser.showOpenDialog(null);
 				if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
 					File f = chooser.getSelectedFile();
 					String s = null;
-					s = "/cards/base04/" + f.getName();
+					s = "/cards/05_Brock/" + f.getName();
 					selectedCard.setImagePath(s);
 					cardImageBitmap.setImage(s);
 				}
@@ -204,6 +206,8 @@ public class CardInfoPanel extends JPanel {
 		nameTextField = new JLabel();
 		basicEnergyCheckBox = new JCheckBox("Basis-Energie");
 		basicEnergyCheckBox.addActionListener(listener);
+		stadiumCardCheckBox = new JCheckBox("Stadion-Karte");
+		stadiumCardCheckBox.addActionListener(listener);
 		provideLabel = new JLabel("Liefert:");
 		colorlessLabel = new JLabel("Farblos:");
 		grassLabel = new JLabel("Pflanze:");
@@ -254,6 +258,7 @@ public class CardInfoPanel extends JPanel {
 		add(evolvesFromComboBox);
 		add(nameTextField);
 		add(basicEnergyCheckBox);
+		add(stadiumCardCheckBox);
 		add(provideLabel);
 		add(colorlessLabel);
 		add(grassLabel);
@@ -296,6 +301,7 @@ public class CardInfoPanel extends JPanel {
 		evolvesFromComboBox.setBounds(255, 245, 100, 25);
 		nameTextField.setBounds(255, 5, 100, 25);
 		basicEnergyCheckBox.setBounds(10, 280, 105, 25);
+		stadiumCardCheckBox.setBounds(10, 280, 105, 25);
 		provideLabel.setBounds(10, 305, 100, 25);
 		colorlessLabel.setBounds(10, 335, 100, 25);
 		grassLabel.setBounds(10, 425, 100, 25);
@@ -420,6 +426,7 @@ public class CardInfoPanel extends JPanel {
 			p.setRarity(Rarity.valueOf((String) rarityComboBox.getSelectedItem()));
 			p.setEdition(Edition.valueOf((String) editionComboBox.getSelectedItem()));
 			p.setName(nameTextField.getText());
+			p.setStadiumCard(stadiumCardCheckBox.isSelected());
 		} else {
 			EnergyCard p = (EnergyCard) c;
 			p.setImagePath(cardImageBitmap.getPfad());
@@ -549,6 +556,7 @@ public class CardInfoPanel extends JPanel {
 				rarityComboBox.setSelectedItem(p.getRarity().toString());
 				editionComboBox.setSelectedItem(p.getEdition().toString());
 				cardImageBitmap.setImage(p.getImagePath());
+				stadiumCardCheckBox.setSelected(p.isStadiumCard());
 				showTrainerProperties();
 			} else {
 				EnergyCard p = (EnergyCard) c;
@@ -639,6 +647,7 @@ public class CardInfoPanel extends JPanel {
 		rarityComboBox.setVisible(true);
 		editionComboBox.setVisible(true);
 		nameTextField.setVisible(true);
+		stadiumCardCheckBox.setVisible(true);
 	}
 
 	private void showPokemonProperties() {
@@ -693,6 +702,7 @@ public class CardInfoPanel extends JPanel {
 		evolvesFromComboBox.setVisible(false);
 		nameTextField.setVisible(false);
 		basicEnergyCheckBox.setVisible(false);
+		stadiumCardCheckBox.setVisible(false);
 		provideLabel.setVisible(false);
 		colorlessLabel.setVisible(false);
 		grassLabel.setVisible(false);

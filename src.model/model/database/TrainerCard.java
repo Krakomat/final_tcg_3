@@ -3,6 +3,7 @@ package model.database;
 import model.enums.CardType;
 
 public class TrainerCard extends Card {
+	private boolean stadiumCard;
 
 	public TrainerCard() {
 		super();
@@ -20,10 +21,19 @@ public class TrainerCard extends Card {
 		this.edition = c.getEdition();
 		this.cardScript = c.getCardScript();
 	}
-	
+
 	@Override
 	public Card copy() {
 		TrainerCard c = (TrainerCard) super.copy();
+		c.setStadiumCard(this.stadiumCard);
 		return c;
+	}
+
+	public boolean isStadiumCard() {
+		return stadiumCard;
+	}
+
+	public void setStadiumCard(boolean stadiumCard) {
+		this.stadiumCard = stadiumCard;
 	}
 }
