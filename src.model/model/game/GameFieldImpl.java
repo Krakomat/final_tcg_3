@@ -13,9 +13,9 @@ import model.interfaces.Position;
 
 public class GameFieldImpl implements GameField {
 
-	private Position blueHand, blueBench1, blueBench2, blueBench3, blueBench4, blueBench5, blueActive, blueDiscardPile, bluePrice1, bluePrice2, bluePrice3,
-			bluePrice4, bluePrice5, bluePrice6, blueDeck, redHand, redBench1, redBench2, redBench3, redBench4, redBench5, redActive, redDiscardPile, redPrice1,
-			redPrice2, redPrice3, redPrice4, redPrice5, redPrice6, redDeck;
+	private Position blueHand, blueBench1, blueBench2, blueBench3, blueBench4, blueBench5, blueActive, blueDiscardPile, bluePrice1, bluePrice2, bluePrice3, bluePrice4, bluePrice5,
+			bluePrice6, blueDeck, redHand, redBench1, redBench2, redBench3, redBench4, redBench5, redActive, redDiscardPile, redPrice1, redPrice2, redPrice3, redPrice4, redPrice5,
+			redPrice6, redDeck, stadium;
 
 	public GameFieldImpl() {
 		initPositions();
@@ -53,6 +53,8 @@ public class GameFieldImpl implements GameField {
 		redPrice5 = gameModelUpdate.getPosition(PositionID.RED_PRICE_5);
 		redPrice6 = gameModelUpdate.getPosition(PositionID.RED_PRICE_6);
 		redDeck = gameModelUpdate.getPosition(PositionID.RED_DECK);
+
+		stadium = gameModelUpdate.getPosition(PositionID.STADIUM);
 	}
 
 	private void initPositions() {
@@ -87,6 +89,8 @@ public class GameFieldImpl implements GameField {
 		redPrice5 = new PositionImpl(PositionID.RED_PRICE_5, Color.RED);
 		redPrice6 = new PositionImpl(PositionID.RED_PRICE_6, Color.RED);
 		redDeck = new PositionImpl(PositionID.RED_DECK, Color.RED);
+
+		stadium = new PositionImpl(PositionID.STADIUM, Color.WHITE);
 	}
 
 	public ArrayList<Position> getAllPositions() {
@@ -122,6 +126,8 @@ public class GameFieldImpl implements GameField {
 		list.add(redPrice5);
 		list.add(redPrice6);
 		list.add(redDeck);
+
+		list.add(stadium);
 		return list;
 	}
 
@@ -366,6 +372,16 @@ public class GameFieldImpl implements GameField {
 	}
 
 	@Override
+	public Position getStadium() {
+		return stadium;
+	}
+
+	@Override
+	public void setStadium(Position stadium) {
+		this.stadium = stadium;
+	}
+
+	@Override
 	public ArrayList<PositionID> getNonEmptyPriceList(Color color) {
 		ArrayList<PositionID> posList = new ArrayList<>();
 		if (color == Color.BLUE) {
@@ -461,6 +477,8 @@ public class GameFieldImpl implements GameField {
 			return this.getRedPrice5();
 		case RED_PRICE_6:
 			return this.getRedPrice6();
+		case STADIUM:
+			return this.getStadium();
 		default:
 			return null;
 		}

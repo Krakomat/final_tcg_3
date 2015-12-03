@@ -63,7 +63,7 @@ public class Script_00171_Golduck extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
 		// Check for energy at enemy position:
-		if (defendingPosition.getEnergyCards().size() > 0) {
+		if (defendingPosition.getEnergyCards().size() > 0 && !((PokemonCard) defendingPosition.getTopCard()).hasCondition(PokemonCondition.BROCKS_PROTECTION)) {
 			// Choose one of them and remove it:
 			List<Card> cardList = new ArrayList<>();
 			for (Card c : defendingPosition.getEnergyCards())

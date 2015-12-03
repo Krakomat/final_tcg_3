@@ -25,10 +25,13 @@ public class MusicController extends Node {
 
 	static final int TITLE_MUSIC_TRACKS = 1;
 	static final int LOBBY_MUSIC_TRACKS = 1;
-	static final int DECK_EDIT_MUSIC_TRACKS = 6;
-	static final int INGAME_MUSIC_TRACKS = 13;
+	static final int DECK_EDIT_MUSIC_TRACKS = 2;
+	static final int INGAME_MUSIC_TRACKS = 4;
 	static final int VICTORY_MUSIC_TRACKS = 1;
 	static final int LOSS_MUSIC_TRACKS = 1;
+	static final int ARENA_MASTER_MUSIC_TRACKS = 1;
+	static final int ARENA_SERVANT_MUSIC_TRACKS = 1;
+	static final int FINAL_BOSS_MUSIC_TRACKS = 1;
 	static final float MUSIC_FADE_TIME = 150;
 	static final float MUSIC_VOLUME = 1f;
 
@@ -39,7 +42,7 @@ public class MusicController extends Node {
 	 *
 	 */
 	public enum MusicType {
-		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC, VICTORY_MUSIC, LOSS_MUSIC;
+		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC, VICTORY_MUSIC, LOSS_MUSIC, ARENA_SERVANT_MUSIC, ARENA_MASTER_MUSIC, FINAL_BOSS_MUSIC;
 	}
 
 	private List<AudioNode> fadeOutList;
@@ -66,6 +69,9 @@ public class MusicController extends Node {
 		List<String> ingameMusicList = new ArrayList<>();
 		List<String> victoryMusicList = new ArrayList<>();
 		List<String> lossMusicList = new ArrayList<>();
+		List<String> arenaServantMusic = new ArrayList<>();
+		List<String> arenaMasterMusic = new ArrayList<>();
+		List<String> finalBossMusic = new ArrayList<>();
 
 		for (int i = 1; i <= TITLE_MUSIC_TRACKS; i++)
 			titleMusicList.add("music/title/track" + i + ".wav");
@@ -90,6 +96,18 @@ public class MusicController extends Node {
 		for (int i = 1; i <= LOSS_MUSIC_TRACKS; i++)
 			lossMusicList.add("music/duellose.wav");
 		this.musicTrackMap.put(MusicType.LOSS_MUSIC, lossMusicList);
+
+		for (int i = 1; i <= ARENA_SERVANT_MUSIC_TRACKS; i++)
+			arenaServantMusic.add("music/ingame/track4.wav");
+		this.musicTrackMap.put(MusicType.ARENA_SERVANT_MUSIC, arenaServantMusic);
+
+		for (int i = 1; i <= ARENA_MASTER_MUSIC_TRACKS; i++)
+			arenaMasterMusic.add("music/arena_master.wav");
+		this.musicTrackMap.put(MusicType.ARENA_MASTER_MUSIC, arenaMasterMusic);
+
+		for (int i = 1; i <= FINAL_BOSS_MUSIC_TRACKS; i++)
+			finalBossMusic.add("music/final_boss.wav");
+		this.musicTrackMap.put(MusicType.FINAL_BOSS_MUSIC, finalBossMusic);
 	}
 
 	private AudioNode createAudioNode(String trackPath) {

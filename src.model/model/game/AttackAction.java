@@ -39,7 +39,8 @@ public class AttackAction {
 	 * Constructor for this class.
 	 * 
 	 * @param gameModel
-	 *            this has to be a {@link PokemonGameModel}, which can be manipulated by this class.
+	 *            this has to be a {@link PokemonGameModel}, which can be
+	 *            manipulated by this class.
 	 */
 	public AttackAction(PokemonGame gameModel) {
 		this.gameModel = gameModel;
@@ -69,7 +70,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Flips the given amount of coins and returns the number of heads. Does send messages to the clients!
+	 * Flips the given amount of coins and returns the number of heads. Does
+	 * send messages to the clients!
 	 * 
 	 * @param amount
 	 * @return
@@ -85,22 +87,24 @@ public class AttackAction {
 	}
 
 	/**
-	 * Damages the given position for the given amount. Messages are being send to clients here!
+	 * Damages the given position for the given amount. Messages are being send
+	 * to clients here!
 	 * 
 	 * @param attackElement
 	 *            element of the attacking pokemon
 	 * @param attackerPositionID
-	 *            position of the attacking pokemon. Allowed to be null, if no pokemon is responsible for the damage(e.g. for poisondamage).
+	 *            position of the attacking pokemon. Allowed to be null, if no
+	 *            pokemon is responsible for the damage(e.g. for poisondamage).
 	 * @param targetPosition
 	 *            defending position. Has to be an arena position.
 	 * @param damageAmount
 	 *            amount of damage
 	 * @param applyWeaknessResistance
-	 *            false if weakness/resistance of the defending pokemon should NOT influence the resulting damage.
+	 *            false if weakness/resistance of the defending pokemon should
+	 *            NOT influence the resulting damage.
 	 * @return the damage that was actually applied to the defending pokemon
 	 */
-	public int inflictDamageToPosition(Element attackElement, PositionID attackerPositionID, PositionID targetPosition, int damageAmount,
-			boolean applyWeaknessResistance) {
+	public int inflictDamageToPosition(Element attackElement, PositionID attackerPositionID, PositionID targetPosition, int damageAmount, boolean applyWeaknessResistance) {
 		PokemonCard defenderPokemon = (PokemonCard) gameModel.getPosition(targetPosition).getTopCard();
 		PokemonCard attackerPokemon = null;
 		if (attackerPositionID != null)
@@ -134,8 +138,12 @@ public class AttackAction {
 			damageAmount = 0;
 
 		// Test if defender pokemon is able to modify the incoming damage:
-		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
-		damageAmount = script.modifyIncomingDamage(damageAmount, attackerPokemon);
+		for (Card c : gameModel.getAllCards()) {
+			if (c instanceof PokemonCard) {
+				PokemonCardScript script = (PokemonCardScript) c.getCardScript();
+				damageAmount = script.modifyIncomingDamage(damageAmount, attackerPokemon, targetPosition);
+			}
+		}
 
 		// Test if attacker pokemon is able to modify the outgoing damage:
 		if (attackerPokemon != null) {
@@ -159,6 +167,7 @@ public class AttackAction {
 		}
 
 		// Call pokemonIsDamaged() on defending pokemon script:
+		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
 		script.pokemonIsDamaged(gameModel.getTurnNumber(), damageAmount, attackerPositionID);
 
 		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");
@@ -175,7 +184,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Inflicts the given condition to the target position. No messages to clients here!
+	 * Inflicts the given condition to the target position. No messages to
+	 * clients here!
 	 * 
 	 * @param targetPosition
 	 * @param condition
@@ -217,7 +227,8 @@ public class AttackAction {
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 					break;
 				case KNOCKOUT:
-					defenderPokemon.getConditions().clear(); // Remove all other conditions
+					defenderPokemon.getConditions().clear(); // Remove all other
+																// conditions
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case NO_DAMAGE:
@@ -243,6 +254,9 @@ public class AttackAction {
 				case POKEMON_POWER_BLOCK:
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 					break;
+				case BROCKS_PROTECTION:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					break;
 				default:
 					break;
 				}
@@ -254,12 +268,13 @@ public class AttackAction {
 	}
 
 	/**
-	 * Removes all instances of the given condition from the given position. No messages to clients are being send here!
+	 * Removes all instances of the given condition from the given position. No
+	 * messages to clients are being send here!
 	 * 
 	 * @param posID
 	 * @param condition
 	 */
-	private void cureCondition(PositionID posID, PokemonCondition condition) {
+	public void cureCondition(PositionID posID, PokemonCondition condition) {
 		PokemonCard targetPokemon = (PokemonCard) gameModel.getPosition(posID).getTopCard();
 		List<DynamicPokemonCondition> conditions = targetPokemon.getConditions();
 		for (int i = 0; i < conditions.size(); i++) {
@@ -272,7 +287,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Heals the pokemon at the given position for the given amount. Sends messages to the clients here!
+	 * Heals the pokemon at the given position for the given amount. Sends
+	 * messages to the clients here!
 	 * 
 	 * @param targetPosition
 	 * @param amount
@@ -311,8 +327,9 @@ public class AttackAction {
 	}
 
 	/**
-	 * Swaps pokemons at the given positions. Do NOT use this in order to swap a pokemon from a non-arena position like the discardpile! No game model update send to
-	 * players here!
+	 * Swaps pokemons at the given positions. Do NOT use this in order to swap a
+	 * pokemon from a non-arena position like the discardpile! No game model
+	 * update send to players here!
 	 * 
 	 * @param pos1
 	 * @param pos2
@@ -379,7 +396,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Removes all energy cards from the given position. No messages send to clients here!
+	 * Removes all energy cards from the given position. No messages send to
+	 * clients here!
 	 * 
 	 * @param targetPosition
 	 * @return
@@ -397,7 +415,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Moves the given card to its owners discard pile. No messages to the client are send here!
+	 * Moves the given card to its owners discard pile. No messages to the
+	 * client are send here!
 	 * 
 	 * @param posID
 	 * @param gameID
@@ -407,7 +426,7 @@ public class AttackAction {
 		Position position = gameModel.getPosition(posID);
 		if (position.getColor() == Color.BLUE)
 			discardPileID = PositionID.BLUE_DISCARDPILE;
-		else
+		else if (position.getColor() == Color.RED)
 			discardPileID = PositionID.RED_DISCARDPILE;
 
 		this.moveCard(posID, discardPileID, gameID, true);
@@ -462,7 +481,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Both players draw simultaneously! Use only for initial draw! Sends gamemodel + sound to clients here!
+	 * Both players draw simultaneously! Use only for initial draw! Sends
+	 * gamemodel + sound to clients here!
 	 * 
 	 * @param amount
 	 * @param player
@@ -629,7 +649,8 @@ public class AttackAction {
 	}
 
 	/**
-	 * Moves the given pokemon card to the players bench. Sends client messages here!
+	 * Moves the given pokemon card to the players bench. Sends client messages
+	 * here!
 	 * 
 	 * @param player
 	 * @param card
@@ -676,7 +697,8 @@ public class AttackAction {
 		gameModel.sendCardMessageToAllPlayers(oldCard.getName() + " evolves into " + c.getName(), cardList, "");
 
 		int damage = oldCard.getDamageMarks();
-		oldCard.resetDynamicAttributes(); // Clean damage and conditions on old card
+		oldCard.resetDynamicAttributes(); // Clean damage and conditions on old
+											// card
 		this.moveCard(pos.getPositionID(), chosenPosition, cardGameID, true);
 
 		// Add the remaining damage marks to the evolved pokemon:

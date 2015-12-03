@@ -12,6 +12,7 @@ import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessagePacker;
 import org.msgpack.core.MessageUnpacker;
 
+import common.utilities.Pair;
 import model.database.Card;
 import model.database.Deck;
 import model.database.DynamicPokemonCondition;
@@ -884,5 +885,59 @@ public class TCGSerializer {
 	public Animation unpackAnimation(ByteString byteString) throws IOException {
 		Animation animation = Animation.unpackAnimation(byteString);
 		return animation;
+	}
+
+	public ByteString packIntPair(Pair<Integer, Integer> pair) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MessagePacker packer = MessagePack.newDefaultPacker(out);
+
+		ByteString b = packInt(pair.getKey());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		b = packInt(pair.getValue());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		packer.close();
+		return new ByteString(out.toByteArray());
+	}
+
+	public Pair<Integer, Integer> unpackIntPair(ByteString b) throws IOException {
+		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
+		ByteString bString = unpackByteString(unpacker);
+		int key = unpackInt(bString);
+		bString = unpackByteString(unpacker);
+		int value = unpackInt(bString);
+		Pair<Integer, Integer> pair = new Pair<Integer, Integer>(key, value);
+		unpacker.close();
+		return pair;
+	}
+
+	public ByteString packIntPairList(List<Pair<Integer, Integer>> list) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MessagePacker packer = MessagePack.newDefaultPacker(out);
+
+		packer.packArrayHeader(list.size());
+		for (Pair<Integer, Integer> c : list) {
+			ByteString b = packIntPair(c);
+			packer.packBinaryHeader(b.length());
+			packer.writePayload(b.copyAsBytes());
+		}
+		packer.close();
+		return new ByteString(out.toByteArray());
+	}
+
+	public List<Pair<Integer, Integer>> unpackIntegerPairList(ByteString b) throws IOException {
+		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
+
+		List<Pair<Integer, Integer>> ints = new ArrayList<>();
+		int size = unpacker.unpackArrayHeader();
+		for (int i = 0; i < size; i++) {
+			ByteString bString = unpackByteString(unpacker);
+			ints.add(unpackIntPair(bString));
+		}
+		unpacker.close();
+		return ints;
 	}
 }

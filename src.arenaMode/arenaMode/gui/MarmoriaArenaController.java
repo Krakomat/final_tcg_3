@@ -70,6 +70,11 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				GUI2D.getInstance().registerFighterAsOpponent(currentSelectedFighter);
 				GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+				if (currentSelectedFighter == brock)
+					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_MASTER_MUSIC);
+				else
+					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_SERVANT_MUSIC);
+
 				GUI2D.getInstance().setNextMode(GUI2DMode.MAMORIA_CITY_ARENA);
 				GUI2D.getInstance().getPlayer().createGame();
 
@@ -78,7 +83,6 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						System.out.println(currentSelectedFighter);
 						Player bot = Database.getBot("TreeBot");
 						bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.ARENA_DECK_PATH + currentSelectedFighter.getDeck().getName() + ".xml")));
 						ClientBorder botBorder = new ClientBorder(bot);

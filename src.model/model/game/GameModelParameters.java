@@ -9,6 +9,7 @@ import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessagePacker;
 import org.msgpack.core.MessageUnpacker;
 
+import common.utilities.Pair;
 import network.serialization.TCGSerializer;
 import network.tcp.messages.ByteString;
 import model.enums.GameState;
@@ -21,9 +22,10 @@ public class GameModelParameters {
 	private boolean noEnergyPayment; // no payment for attacks if true
 	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
 	private List<Integer> lauchschlagUsed_00027_Porenta, power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
-			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite,
-			power_Activated_00251_Rattata, power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra,
-			power_Activated_00221_DarkGloom, power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume;
+			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite, power_Activated_00251_Rattata,
+			power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra, power_Activated_00221_DarkGloom,
+			power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume;
+	private List<Pair<Integer, Integer>> lieLowUsed_00287_BrocksDugtrio, tunnelingUsed_00269_BrocksOnix;
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
@@ -47,6 +49,8 @@ public class GameModelParameters {
 		this.power_Activated_00221_DarkGloom = new ArrayList<>();
 		this.power_Activated_00218_DarkDragonair = new ArrayList<>();
 		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
+		this.lieLowUsed_00287_BrocksDugtrio = new ArrayList<>();
+		this.tunnelingUsed_00269_BrocksOnix = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
 		this.allowedToPlayPokemonPower = 0;
 	}
@@ -73,6 +77,8 @@ public class GameModelParameters {
 		this.setPower_Activated_00221_DarkGloom(gameModelUpdate.getGameModelParameters().getPower_Activated_00221_DarkGloom());
 		this.setPower_Activated_00218_DarkDragonair(gameModelUpdate.getGameModelParameters().getPower_Activated_00218_DarkDragonair());
 		this.setPower_Activated_00212_DarkVileplume(gameModelUpdate.getGameModelParameters().getPower_Activated_00212_DarkVileplume());
+		this.setLieLowUsed_00287_BrocksDugtrio(gameModelUpdate.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio());
+		this.setTunnelingUsed_00269_BrocksOnix(gameModelUpdate.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix());
 		this.setAllowedToPlayTrainerCards(gameModelUpdate.getGameModelParameters().isAllowedToPlayTrainerCards());
 		this.setAllowedToPlayPokemonPower(gameModelUpdate.getGameModelParameters().isAllowedToPlayPokemonPower());
 	}
@@ -100,6 +106,8 @@ public class GameModelParameters {
 		copy.setPower_Activated_00221_DarkGloom(this.getPower_Activated_00221_DarkGloom());
 		copy.setPower_Activated_00218_DarkDragonair(this.getPower_Activated_00218_DarkDragonair());
 		copy.setPower_Activated_00212_DarkVileplume(this.getPower_Activated_00212_DarkVileplume());
+		copy.setLieLowUsed_00287_BrocksDugtrio(this.getLieLowUsed_00287_BrocksDugtrio());
+		copy.setTunnelingUsed_00269_BrocksOnix(this.getTunnelingUsed_00269_BrocksOnix());
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
 		copy.setAllowedToPlayPokemonPower(this.isAllowedToPlayPokemonPower());
 		return copy;
@@ -192,6 +200,14 @@ public class GameModelParameters {
 		// power_Activated_00212_DarkVileplume:
 		bString = serializer.unpackByteString(unpacker);
 		this.power_Activated_00212_DarkVileplume = serializer.unpackIntList(bString);
+
+		// lieLowUsed_00287_BrocksDugtrio:
+		bString = serializer.unpackByteString(unpacker);
+		this.lieLowUsed_00287_BrocksDugtrio = serializer.unpackIntegerPairList(bString);
+
+		// tunnelingUsed_00269_BrocksOnix:
+		bString = serializer.unpackByteString(unpacker);
+		this.tunnelingUsed_00269_BrocksOnix = serializer.unpackIntegerPairList(bString);
 
 		// allowedToPlayTrainerCards:
 		bString = serializer.unpackByteString(unpacker);
@@ -311,6 +327,16 @@ public class GameModelParameters {
 
 		// power_Activated_00212_DarkVileplume:
 		b = serializer.packIntList(power_Activated_00212_DarkVileplume);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// lieLowUsed_00287_BrocksDugtrio:
+		b = serializer.packIntPairList(lieLowUsed_00287_BrocksDugtrio);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// tunnelingUsed_00269_BrocksOnix:
+		b = serializer.packIntPairList(tunnelingUsed_00269_BrocksOnix);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -510,5 +536,21 @@ public class GameModelParameters {
 
 	public void setLauchschlagUsed_00027_Porenta(List<Integer> lauchschlagUsed_00027_Porenta) {
 		this.lauchschlagUsed_00027_Porenta = lauchschlagUsed_00027_Porenta;
+	}
+
+	public List<Pair<Integer, Integer>> getLieLowUsed_00287_BrocksDugtrio() {
+		return lieLowUsed_00287_BrocksDugtrio;
+	}
+
+	public void setLieLowUsed_00287_BrocksDugtrio(List<Pair<Integer, Integer>> lieLowUsed_00287_BrocksDugtrio) {
+		this.lieLowUsed_00287_BrocksDugtrio = lieLowUsed_00287_BrocksDugtrio;
+	}
+
+	public List<Pair<Integer, Integer>> getTunnelingUsed_00269_BrocksOnix() {
+		return tunnelingUsed_00269_BrocksOnix;
+	}
+
+	public void setTunnelingUsed_00269_BrocksOnix(List<Pair<Integer, Integer>> tunnelingUsed_00269_BrocksOnix) {
+		this.tunnelingUsed_00269_BrocksOnix = tunnelingUsed_00269_BrocksOnix;
 	}
 }

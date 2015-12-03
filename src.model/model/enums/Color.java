@@ -7,5 +7,5 @@ package model.enums;
  *
  */
 public enum Color {
-	BLUE, RED;
+	BLUE, RED, WHITE;
 }

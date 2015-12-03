@@ -50,10 +50,10 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			if (!(this.gameModel.getFullBenchPositions(color).size() == 5))
 				return PlayerAction.PUT_ON_BENCH;
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
-			if (this.gameModel.getTurnNumber() > 1
-					&& !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
-					&& (this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty() || (!this.gameModel.getGameModelParameters()
-							.getPower_Active_00153_Aerodactyl().isEmpty() && !this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())))
+			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
+					&& (this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty()
+							|| (!this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty()
+									&& !this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())))
 				return PlayerAction.EVOLVE_POKEMON;
 		} else
 			throw new IllegalArgumentException("Error: Wrong CardType for the card in canBePlayedFromHand() of PokemonCardScript: " + this.card.getCardType());
@@ -85,8 +85,9 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Returns true, if the given attack can be executed, namely if the cost of the attack are available at the card, the pokemon is not paralyzed and if the attack
-	 * itself is not blocked.
+	 * Returns true, if the given attack can be executed, namely if the cost of
+	 * the attack are available at the card, the pokemon is not paralyzed and if
+	 * the attack itself is not blocked.
 	 * 
 	 * @param attackName
 	 * @return
@@ -169,7 +170,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		if (gameModel.getFullBenchPositions(this.getCardOwner().getColor()).isEmpty())
 			return false;
 
-		// A Pokemon that is Asleep or Paralyzed should not be allowed to retreat:
+		// A Pokemon that is Asleep or Paralyzed should not be allowed to
+		// retreat:
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 
@@ -183,8 +185,9 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Is called whenever it is checked if a pokemon may retreat, as well before the retreat process is started. The user may modify the retreat costs(see Dodrios
-	 * pokemon power).
+	 * Is called whenever it is checked if a pokemon may retreat, as well before
+	 * the retreat process is started. The user may modify the retreat costs(see
+	 * Dodrios pokemon power).
 	 * 
 	 * @param retreatCosts
 	 * @param color
@@ -214,14 +217,16 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Executes the given attack. No need to check, if it is allowed to execute the attack.
+	 * Executes the given attack. No need to check, if it is allowed to execute
+	 * the attack.
 	 * 
 	 * @param attackName
 	 */
 	public abstract void executeAttack(String attackName);
 
 	/**
-	 * Retreats the pokemon. No need to check, if it is allowed to execute retreat.
+	 * Retreats the pokemon. No need to check, if it is allowed to execute
+	 * retreat.
 	 */
 	public void executeRetreat() {
 		PokemonCard pCard = (PokemonCard) card;
@@ -246,7 +251,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 					player.getColor() == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
 
 		boolean retreatAllowed = true;
-		// If active pokemon is confused check if it can be retreated by flipping a coin:
+		// If active pokemon is confused check if it can be retreated by
+		// flipping a coin:
 		if (pCard.hasCondition(PokemonCondition.CONFUSED)) {
 			gameModel.sendTextMessageToAllPlayers("Coinflip: " + pCard.getName() + " can't return when tails", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
@@ -256,8 +262,7 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 
 		if (retreatAllowed) {
 			// Choose bench position:
-			PositionID chosenPosition = player.playerChoosesPositions(gameModel.getFullBenchPositions(player.getColor()), 1, true, "Choose a new active pokemon!")
-					.get(0);
+			PositionID chosenPosition = player.playerChoosesPositions(gameModel.getFullBenchPositions(player.getColor()), 1, true, "Choose a new active pokemon!").get(0);
 
 			// Swap pokemon:
 			Card newActive = gameModel.getPosition(chosenPosition).getTopCard();
@@ -269,7 +274,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			gameModel.getAttackAction().swapPokemon(pCard.getCurrentPosition().getPositionID(), chosenPosition);
 			gameModel.sendGameModelToAllPlayers("");
 
-			// Check all scripts, if there is any interaction after retreating a pokemon (see 00205_DarkDugrtrio):
+			// Check all scripts, if there is any interaction after retreating a
+			// pokemon (see 00205_DarkDugrtrio):
 			for (Card c : gameModel.getAllCards()) {
 				if (c instanceof PokemonCard)
 					((PokemonCardScript) c.getCardScript()).pokemonRetreated(pCard.getCurrentPosition().getPositionID());
@@ -280,7 +286,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Executes the given Pokemon power. No need to check, if it is allowed to execute the pokemon power.
+	 * Executes the given Pokemon power. No need to check, if it is allowed to
+	 * execute the pokemon power.
 	 * 
 	 * @param powerName
 	 */
@@ -312,7 +319,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Returns the position in the attackList of the given attack name. Returns -1, if the name is not contained in the list.
+	 * Returns the position in the attackList of the given attack name. Returns
+	 * -1, if the name is not contained in the list.
 	 * 
 	 * @param attName
 	 * @return
@@ -322,7 +330,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Returns the attack costs for the given attack. Returns null, if a wrong attack name was given to this script.
+	 * Returns the attack costs for the given attack. Returns null, if a wrong
+	 * attack name was given to this script.
 	 * 
 	 * @param attackName
 	 * @return
@@ -346,7 +355,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Returns the position in the pokemonPowerList of the given PokemonPower name. Returns -1, if the name is not contained in the list.
+	 * Returns the position in the pokemonPowerList of the given PokemonPower
+	 * name. Returns -1, if the name is not contained in the list.
 	 * 
 	 * @param attName
 	 * @return
@@ -382,7 +392,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Decreases the amount of rounds attacks are blocked by 1. Removes blocked attacks, if the round number is 0.
+	 * Decreases the amount of rounds attacks are blocked by 1. Removes blocked
+	 * attacks, if the round number is 0.
 	 */
 	public void decreaseBlockingTimeForAttacks() {
 		List<String> removedAttacks = new ArrayList<>();
@@ -410,25 +421,30 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	 * @param turnNumber
 	 * @param damage
 	 * @param source
-	 *            position of the pokemon that attacked this pokemon, may be null!
+	 *            position of the pokemon that attacked this pokemon, may be
+	 *            null!
 	 */
 	public void pokemonIsDamaged(int turnNumber, int damage, PositionID source) {
 		// Override when needed!
 	}
 
 	/**
-	 * Is called when the owner pokemon of this script is going to receive the given amount of damage. Some pokemons powers may be able to reduce incoming damage.
+	 * Is called whenever an arbitrary pokemon is going to receive the given
+	 * amount of damage. Some pokemon powers may be able to reduce incoming
+	 * damage.
 	 * 
 	 * @param damage
 	 * @param attacker
 	 */
-	public int modifyIncomingDamage(int damage, Card attacker) {
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
 		// Override when needed!
 		return damage;
 	}
 
 	/**
-	 * Is called when the owner pokemon of this script is going to apply the given amount of damage. Some pokemons powers may be able to increasy outgoing damage.
+	 * Is called when the owner pokemon of this script is going to apply the
+	 * given amount of damage. Some pokemons powers may be able to increasy
+	 * outgoing damage.
 	 * 
 	 * @param damageAmount
 	 */
@@ -448,7 +464,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Is called when the owner pokemon of this script got its conditions removed.
+	 * Is called when the owner pokemon of this script got its conditions
+	 * removed.
 	 * 
 	 * @param turnNumber
 	 * @param condition
@@ -471,8 +488,9 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	}
 
 	/**
-	 * Is called BEFORE the given pokemon is going to receive a condition. Returns true, if the given condition is allowed to be applied or false, if the condition
-	 * will not be applied.
+	 * Is called BEFORE the given pokemon is going to receive a condition.
+	 * Returns true, if the given condition is allowed to be applied or false,
+	 * if the condition will not be applied.
 	 * 
 	 * @param condition
 	 * @return

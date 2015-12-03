@@ -2,6 +2,7 @@ package model.scripting.brock;
 
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.TrainerCardScript;
 
@@ -18,6 +19,7 @@ public class Script_00286_PewterCityGym extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
-
+		gameModel.getPosition(PositionID.STADIUM).setColor(this.getCardOwner().getColor());
+		// TODO
 	}
 }

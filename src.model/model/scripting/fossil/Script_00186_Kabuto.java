@@ -29,8 +29,8 @@ public class Script_00186_Kabuto extends PokemonCardScript {
 	}
 
 	@Override
-	public int modifyIncomingDamage(int damage, Card attacker) {
-		if (!kabutoArmorCanBeExecuted())
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
+		if (!kabutoArmorCanBeExecuted() && this.card.getCurrentPosition().getPositionID() == defender && gameModel.getPosition(defender).getTopCard() == this.card)
 			return damage;
 		else {
 			int newDamage = damage / 2;

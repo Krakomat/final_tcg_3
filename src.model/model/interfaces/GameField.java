@@ -15,7 +15,8 @@ import model.enums.PositionID;
  */
 public interface GameField {
 	/**
-	 * Returns a lisz with all price positions, that are not empty for the given player.
+	 * Returns a lisz with all price positions, that are not empty for the given
+	 * player.
 	 * 
 	 * @param color
 	 * @return
@@ -146,8 +147,13 @@ public interface GameField {
 
 	public void setRedPrice6(Position redPrice6);
 
+	public Position getStadium();
+
+	public void setStadium(Position stadium);
+
 	/**
-	 * Returns all bench positions with cards on them from the players arena fields.
+	 * Returns all bench positions with cards on them from the players arena
+	 * fields.
 	 * 
 	 * @param playerColor
 	 * @param playerBlue
@@ -167,8 +173,10 @@ public interface GameField {
 	ArrayList<PositionID> getFullArenaPositions(Color playerColor, Player playerBlue, Player playerRed);
 
 	/**
-	 * Returns an array list of the positionsIDs, if the given card can be put on a basic pokemon(in the arena of the given player), which evolves into the given
-	 * card. Also checks, evolution is allowed in this turn(one cannot put a pokemon on the bench and evolve it in the same turn).
+	 * Returns an array list of the positionsIDs, if the given card can be put
+	 * on a basic pokemon(in the arena of the given player), which evolves into
+	 * the given card. Also checks, evolution is allowed in this turn(one cannot
+	 * put a pokemon on the bench and evolve it in the same turn).
 	 * 
 	 * @param c
 	 * @param color

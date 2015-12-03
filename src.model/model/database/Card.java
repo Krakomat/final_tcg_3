@@ -16,7 +16,8 @@ public class Card implements Comparable<Card> {
 	protected Edition edition;
 	protected transient CardScript cardScript; // will not be serialized
 
-	protected transient Position currentPosition; // will not be serialized. only used at the server
+	protected transient Position currentPosition; // will not be serialized.
+													// only used at the server
 	protected int gameID;
 	protected boolean visibleForPlayerBlue, visibleForPlayerRed;
 	protected int playedInTurn;
@@ -34,7 +35,8 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * Copies the given card. The CardScript and Position will not be cloned with this.
+	 * Copies the given card. The CardScript and Position will not be cloned
+	 * with this.
 	 * 
 	 * @return
 	 */
@@ -66,19 +68,25 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * Sets the current position for this card. Also call moveToPosition() method of the cards card script, if the position is != null.
+	 * Sets the current position for this card. Also call moveToPosition()
+	 * method of the cards card script, if the position is != null.
 	 * 
 	 * @param value
 	 */
 	public void setCurrentPosition(Position value) {
+		if (this.cardScript != null && this.currentPosition != null) {
+			this.cardScript.leavePosition(this.currentPosition.getPositionID());
+		}
 		this.currentPosition = value;
-		if (value != null && this.cardScript != null)
+		if (value != null && this.cardScript != null) {
 			this.cardScript.moveToPosition(value.getPositionID());
+		}
 	}
 
 	/**
-	 * Sets the current position for this card. WARNING: Do not use this method at the server. This method is only being used for the construction of the local game
-	 * model.
+	 * Sets the current position for this card. WARNING: Do not use this method
+	 * at the server. This method is only being used for the construction of the
+	 * local game model.
 	 * 
 	 * @param value
 	 */

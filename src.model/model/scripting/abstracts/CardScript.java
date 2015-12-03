@@ -24,15 +24,17 @@ public abstract class CardScript {
 	}
 
 	/**
-	 * Returns a {@link PlayerAction}, if the card can be played from the respective players hand, null otherwise. Returns also null, if the card is not in the
-	 * players hand!
+	 * Returns a {@link PlayerAction}, if the card can be played from the
+	 * respective players hand, null otherwise. Returns also null, if the card
+	 * is not in the players hand!
 	 * 
 	 * @return
 	 */
 	public abstract PlayerAction canBePlayedFromHand();
 
 	/**
-	 * Returns true, if this card is in either the hand of player blue or player red.
+	 * Returns true, if this card is in either the hand of player blue or player
+	 * red.
 	 * 
 	 * @return
 	 */
@@ -49,17 +51,28 @@ public abstract class CardScript {
 	public abstract void playFromHand();
 
 	/**
-	 * Is called, if the card has any actions that are executed only at the end of a players turn(e.g. Pluspower has to be discarded from the pokemon at the end of
-	 * the players turn).
+	 * Is called, if the card has any actions that are executed only at the end
+	 * of a players turn(e.g. Pluspower has to be discarded from the pokemon at
+	 * the end of the players turn).
 	 */
 	public void executeEndTurnActions() {
 		// Only override when needed
 	}
 
 	/**
-	 * Will be executed immediately before the player that is on turn next, will start his turn.
+	 * Will be executed immediately before the player that is on turn next, will
+	 * start his turn.
 	 */
 	public void executePreTurnActions() {
+		// Only override when needed
+	}
+
+	/**
+	 * Is called whenever the card is leaving its current position.
+	 * 
+	 * @param targetPosition
+	 */
+	public void leavePosition(PositionID oldPosition) {
 		// Only override when needed
 	}
 
@@ -79,6 +92,15 @@ public abstract class CardScript {
 	 */
 	public void energyCardPlayed(EnergyCard energyCard) {
 		// Only override when needed
+	}
+
+	/**
+	 * Returns the positionID on which the card is at right now.
+	 * 
+	 * @return
+	 */
+	protected PositionID getCurrentPositionID() {
+		return this.card.getCurrentPosition().getPositionID();
 	}
 
 	/**
@@ -168,7 +190,7 @@ public abstract class CardScript {
 		else
 			return PositionID.RED_HAND;
 	}
-	
+
 	protected PositionID enemyHand() {
 		Player player = this.getCardOwner();
 		if (player.getColor() == Color.BLUE)

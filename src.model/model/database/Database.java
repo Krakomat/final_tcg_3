@@ -150,7 +150,7 @@ public class Database {
 			texture.setGenerateMips(false);
 			cardTextures.put(cards.get(i).getCardId(), texture);
 
-			if (c instanceof PokemonCard || c.getCardId().equals("00070") || c.getCardId().equals("00199")) {
+			if (c instanceof PokemonCard || c.getCardId().equals("00070") || c.getCardId().equals("00199") || (c instanceof TrainerCard && ((TrainerCard) c).isStadiumCard())) {
 				TextureKey thumbnail = new TextureKey(POKEMON_THUMBNAIL_PATH + c.getCardId() + ".jpg");
 				thumbnail.setGenerateMips(false);
 				pokemonThumbnailTextures.put(cards.get(i).getCardId(), thumbnail);
@@ -310,6 +310,10 @@ public class Database {
 		TextureKey ppBlock = new TextureKey("/tilesets/conditions/ppBlock.png");
 		ppBlock.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.POKEMON_POWER_BLOCK.toString(), ppBlock);
+
+		TextureKey brocksProtection = new TextureKey("/tilesets/conditions/brocksProtection.jpg");
+		brocksProtection.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.BROCKS_PROTECTION.toString(), brocksProtection);
 
 		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
 		overgrowth.setGenerateMips(false);

@@ -7,6 +7,7 @@ import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -57,7 +58,7 @@ public class Script_00018_Dragonir extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
 		// Check for energy at enemy position:
-		if (defendingPosition.getEnergyCards().size() > 0) {
+		if (defendingPosition.getEnergyCards().size() > 0 && !((PokemonCard) defendingPosition.getTopCard()).hasCondition(PokemonCondition.BROCKS_PROTECTION)) {
 			// Choose one of them and remove it:
 			List<Card> cardList = new ArrayList<>();
 			for (Card c : defendingPosition.getEnergyCards())

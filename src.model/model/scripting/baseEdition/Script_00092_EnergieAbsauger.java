@@ -5,8 +5,10 @@ import java.util.List;
 
 import network.client.Player;
 import model.database.Card;
+import model.database.PokemonCard;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -20,7 +22,8 @@ public class Script_00092_EnergieAbsauger extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played, if there is a pokemon with energy in the enemies arena:
+		// Can be played, if there is a pokemon with energy in the enemies
+		// arena:
 		if (this.getPositionsWithEnergy().size() > 0)
 			return PlayerAction.PLAY_TRAINER_CARD;
 		return null;
@@ -53,7 +56,7 @@ public class Script_00092_EnergieAbsauger extends TrainerCardScript {
 		List<PositionID> energyPositions = new ArrayList<>();
 		for (PositionID posID : arenaPositions) {
 			Position pos = gameModel.getPosition(posID);
-			if (pos.getEnergyCards().size() > 0)
+			if (pos.getEnergyCards().size() > 0 && !((PokemonCard) pos.getTopCard()).hasCondition(PokemonCondition.BROCKS_PROTECTION))
 				energyPositions.add(posID);
 		}
 		return energyPositions;
