@@ -37,7 +37,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00290");
 			return new ArenaFighter(code, "Red", "Fighting Spirit.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString() + "_THUMB"), lockedCards);
-		case MAMORIA_BROCK:// TODO set deck
+		case MAMORIA_BROCK:
 			lockedCards.add("00266");
 			lockedCards.add("00267");
 			lockedCards.add("00268");
@@ -46,7 +46,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00271");
 			lockedCards.add("00287");
 			lockedCards.add("00293");
-			return new ArenaFighter(code, "Rocko", "Fighting Spirit.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
+			return new ArenaFighter(code, "Rocko", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), lockedCards);
 		default:
 			break;
