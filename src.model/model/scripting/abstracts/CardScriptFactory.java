@@ -7,6 +7,34 @@ import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
 import model.scripting.baseEdition.*;
+import model.scripting.brock.Script_00266_BrocksRhydon;
+import model.scripting.brock.Script_00267_Brock;
+import model.scripting.brock.Script_00268_BrocksGolem;
+import model.scripting.brock.Script_00269_BrocksOnix;
+import model.scripting.brock.Script_00270_BrocksRhyhorn;
+import model.scripting.brock.Script_00271_BrocksSandslash;
+import model.scripting.brock.Script_00272_BrocksZubat;
+import model.scripting.brock.Script_00273_BrocksGeodude;
+import model.scripting.brock.Script_00274_BrocksGolbat;
+import model.scripting.brock.Script_00275_BrocksGraveler;
+import model.scripting.brock.Script_00276_BrocksLickitung;
+import model.scripting.brock.Script_00277_BrocksGeodude;
+import model.scripting.brock.Script_00278_BrocksMankey;
+import model.scripting.brock.Script_00279_BrocksMankey;
+import model.scripting.brock.Script_00280_BrocksOnix;
+import model.scripting.brock.Script_00281_BrocksRhyhorn;
+import model.scripting.brock.Script_00282_BrocksSandshrew;
+import model.scripting.brock.Script_00283_BrocksSandshrew;
+import model.scripting.brock.Script_00284_BrocksZubat;
+import model.scripting.brock.Script_00285_BrocksTrainingMethod;
+import model.scripting.brock.Script_00286_PewterCityGym;
+import model.scripting.brock.Script_00287_BrocksDugtrio;
+import model.scripting.brock.Script_00288_BrocksGraveler;
+import model.scripting.brock.Script_00289_BrocksPrimeape;
+import model.scripting.brock.Script_00290_BrocksSandslash;
+import model.scripting.brock.Script_00291_BrocksDiglett;
+import model.scripting.brock.Script_00292_BrocksGeodude;
+import model.scripting.brock.Script_00293_BrocksProtection;
 import model.scripting.fossil.Script_00153_Aerodactyl;
 import model.scripting.fossil.Script_00154_Articuno;
 import model.scripting.fossil.Script_00155_Dragonite;
@@ -187,7 +215,8 @@ public class CardScriptFactory {
 	}
 
 	/**
-	 * Creates the {@link CardScript} for the given cardID, using the given {@link PokemonGame}.
+	 * Creates the {@link CardScript} for the given cardID, using the given
+	 * {@link PokemonGame}.
 	 * 
 	 * @param cardID
 	 * @param pokemonGame_game
@@ -412,9 +441,19 @@ public class CardScriptFactory {
 		case "00102":
 			return new Script_00102_WaterEnergy((EnergyCard) card, gameModel);
 		case "00103":
-			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only used locally for Piepi doll
+			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only
+																			// used
+																			// locally
+																			// for
+																			// Piepi
+																			// doll
 		case "00104":
-			return new Script_00104_LektrobalToken((EnergyCard) card, gameModel); // Only used locally for Lektrobal token
+			return new Script_00104_LektrobalToken((EnergyCard) card, gameModel); // Only
+																					// used
+																					// locally
+																					// for
+																					// Lektrobal
+																					// token
 		case "00105":
 			return new Script_00105_Clefable((PokemonCard) card, gameModel);
 		case "00106":
@@ -604,7 +643,12 @@ public class CardScriptFactory {
 		case "00198":
 			return new Script_00198_MysteriousFossil((TrainerCard) card, gameModel);
 		case "00199":
-			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only used locally for Mysterious Fossil
+			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only
+																				// used
+																				// locally
+																				// for
+																				// Mysterious
+																				// Fossil
 		case "00200":
 			return new Script_00200_DarkAlakazam((PokemonCard) card, gameModel);
 		case "00201":
@@ -737,6 +781,62 @@ public class CardScriptFactory {
 			return new Script_00264_PotionEnergy((EnergyCard) card, gameModel);
 		case "00265":
 			return new Script_00265_DarkRaichu((PokemonCard) card, gameModel);
+		case "00266":
+			return new Script_00266_BrocksRhydon((PokemonCard) card, gameModel);
+		case "00267":
+			return new Script_00267_Brock((TrainerCard) card, gameModel);
+		case "00268":
+			return new Script_00268_BrocksGolem((PokemonCard) card, gameModel);
+		case "00269":
+			return new Script_00269_BrocksOnix((PokemonCard) card, gameModel);
+		case "00270":
+			return new Script_00270_BrocksRhyhorn((PokemonCard) card, gameModel);
+		case "00271":
+			return new Script_00271_BrocksSandslash((PokemonCard) card, gameModel);
+		case "00272":
+			return new Script_00272_BrocksZubat((PokemonCard) card, gameModel);
+		case "00273":
+			return new Script_00273_BrocksGeodude((PokemonCard) card, gameModel);
+		case "00274":
+			return new Script_00274_BrocksGolbat((PokemonCard) card, gameModel);
+		case "00275":
+			return new Script_00275_BrocksGraveler((PokemonCard) card, gameModel);
+		case "00276":
+			return new Script_00276_BrocksLickitung((PokemonCard) card, gameModel);
+		case "00277":
+			return new Script_00277_BrocksGeodude((PokemonCard) card, gameModel);
+		case "00278":
+			return new Script_00278_BrocksMankey((PokemonCard) card, gameModel);
+		case "00279":
+			return new Script_00279_BrocksMankey((PokemonCard) card, gameModel);
+		case "00280":
+			return new Script_00280_BrocksOnix((PokemonCard) card, gameModel);
+		case "00281":
+			return new Script_00281_BrocksRhyhorn((PokemonCard) card, gameModel);
+		case "00282":
+			return new Script_00282_BrocksSandshrew((PokemonCard) card, gameModel);
+		case "00283":
+			return new Script_00283_BrocksSandshrew((PokemonCard) card, gameModel);
+		case "00284":
+			return new Script_00284_BrocksZubat((PokemonCard) card, gameModel);
+		case "00285":
+			return new Script_00285_BrocksTrainingMethod((TrainerCard) card, gameModel);
+		case "00286":
+			return new Script_00286_PewterCityGym((TrainerCard) card, gameModel);
+		case "00287":
+			return new Script_00287_BrocksDugtrio((PokemonCard) card, gameModel);
+		case "00288":
+			return new Script_00288_BrocksGraveler((PokemonCard) card, gameModel);
+		case "00289":
+			return new Script_00289_BrocksPrimeape((PokemonCard) card, gameModel);
+		case "00290":
+			return new Script_00290_BrocksSandslash((PokemonCard) card, gameModel);
+		case "00291":
+			return new Script_00291_BrocksDiglett((PokemonCard) card, gameModel);
+		case "00292":
+			return new Script_00292_BrocksGeodude((PokemonCard) card, gameModel);
+		case "00293":
+			return new Script_00293_BrocksProtection((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
