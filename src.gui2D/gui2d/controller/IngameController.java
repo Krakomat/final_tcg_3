@@ -52,7 +52,7 @@ public class IngameController extends Node implements GUI2DController {
 	private ImageButton2D surrenderButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
-	private Image2D resultScreen;
+	private Image2D resultScreen, reward1, reward2, reward3;
 	/** Currently selected node */
 	private SelectableNode currentlySelected;
 	/** True if a position has to be selected */
@@ -71,7 +71,7 @@ public class IngameController extends Node implements GUI2DController {
 	private CardViewer cardViewer;
 
 	/* Message Panels: */
-	private TextPanel2D messagePanel;
+	private TextPanel2D messagePanel, rewardMessagePanel;
 	private CardPanel2D cardMessagePanel;
 
 	public IngameController() {
@@ -82,7 +82,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	public void initSceneGraph() {
-		float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
+		float handCardWidth = screenWidth * 0.06f; // Size of one single hand
+													// card
 		float handCardHeight = handCardWidth * 1.141f;
 
 		ownHand = new HandCardManager2D("HandCardManager", screenWidth * 0.5f, screenHeight * 0.03f, 0, false);
@@ -506,56 +507,54 @@ public class IngameController extends Node implements GUI2DController {
 		this.attachChild(surrenderButton);
 
 		// Init Choose windows:
-		cardChooseWindow = new CardChooseWindow("CardChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.8f);
+		cardChooseWindow = new CardChooseWindow("CardChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.8f);
 		cardChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(cardChooseWindow);
 		cardChooseWindow.setVisible(false);
 
-		elementChooseWindow = new ElementChooseWindow("ElementChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.8f);
+		elementChooseWindow = new ElementChooseWindow("ElementChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.8f);
 		elementChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(elementChooseWindow);
 		elementChooseWindow.setVisible(false);
 
-		attackChooseWindow = new AttackChooseWindow("AttackChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.8f);
+		attackChooseWindow = new AttackChooseWindow("AttackChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.8f);
 		attackChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(attackChooseWindow);
 		attackChooseWindow.setVisible(false);
 
-		fileChooseWindow = new FileChooseWindow("FileChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.8f);
+		fileChooseWindow = new FileChooseWindow("FileChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.8f);
 		fileChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(fileChooseWindow);
 		fileChooseWindow.setVisible(false);
 
-		fileNameChooseWindow = new FileNameChooseWindow("FileNameChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.3f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.3f);
+		fileNameChooseWindow = new FileNameChooseWindow("FileNameChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.3f,
+				GUI2D.getInstance().getResolution().getValue() * 0.3f);
 		fileNameChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.35f, GUI2D.getInstance().getResolution().getValue() * 0.35f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(fileNameChooseWindow);
 		fileNameChooseWindow.setVisible(false);
 
-		questionChooseWindow = new QuestionChooseWindow("QuestionChooseWindow", "Question", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.2f);
+		questionChooseWindow = new QuestionChooseWindow("QuestionChooseWindow", "Question", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.2f);
 		questionChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.45f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(questionChooseWindow);
 		questionChooseWindow.setVisible(false);
 
-		distributionChooser = new DistributionChooser("DistributionChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance()
-				.getResolution().getValue() * 0.8f);
+		distributionChooser = new DistributionChooser("DistributionChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.8f);
 		distributionChooser.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(distributionChooser);
 		distributionChooser.setVisible(false);
 
-		cardViewer = new CardViewer("CardViewer", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
-				GUI2D.getInstance().getResolution().getValue() * 0.8f);
+		cardViewer = new CardViewer("CardViewer", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance().getResolution().getValue() * 0.8f);
 		cardViewer.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(cardViewer);
 		cardViewer.setVisible(false);
 
-		messagePanel = new TextPanel2D("MessagePanel", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
-				GUI2D.getInstance().getResolution().getValue() * 0.10f) {
+		messagePanel = new TextPanel2D("MessagePanel", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f, GUI2D.getInstance().getResolution().getValue() * 0.10f) {
 			@Override
 			public void mouseSelect() {
 				// Do nothing here!
@@ -570,8 +569,23 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().getGuiNode().attachChild(messagePanel);
 		messagePanel.setVisible(false);
 
-		cardMessagePanel = new CardPanel2D("CardMessaPanel", GUI2D.getInstance().getResolution().getKey() * 0.24f,
-				GUI2D.getInstance().getResolution().getValue() * 0.22f) {
+		rewardMessagePanel = new TextPanel2D("rewardMessagePanel", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
+				GUI2D.getInstance().getResolution().getValue() * 0.10f) {
+			@Override
+			public void mouseSelect() {
+				// Do nothing here!
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		rewardMessagePanel.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.73f, 0);
+		GUI2D.getInstance().getGuiNode().attachChild(rewardMessagePanel);
+		rewardMessagePanel.setVisible(false);
+
+		cardMessagePanel = new CardPanel2D("CardMessaPanel", GUI2D.getInstance().getResolution().getKey() * 0.24f, GUI2D.getInstance().getResolution().getValue() * 0.22f) {
 			@Override
 			public void mouseSelect() {
 				// Do nothing here!
@@ -602,6 +616,54 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(this.resultScreen);
 		this.attachChild(this.resultScreen);
 
+		this.reward1 = new Image2D("reward1", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f) {
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+
+			}
+		};
+		this.reward1.setLocalTranslation(screenWidth * 0.35f, screenHeight * 0.35f, 0.2f);
+		this.reward1.setVisible(false);
+		dropInUpdateQueue(this.reward1);
+		this.attachChild(this.reward1);
+
+		this.reward2 = new Image2D("reward2", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f) {
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+
+			}
+		};
+		this.reward2.setLocalTranslation(screenWidth * 0.45f, screenHeight * 0.35f, 0.2f);
+		this.reward2.setVisible(false);
+		dropInUpdateQueue(this.reward2);
+		this.attachChild(this.reward2);
+
+		this.reward3 = new Image2D("reward3", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f) {
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+
+			}
+		};
+		this.reward3.setLocalTranslation(screenWidth * 0.55f, screenHeight * 0.35f, 0.2f);
+		this.reward3.setVisible(false);
+		dropInUpdateQueue(this.reward3);
+		this.attachChild(this.reward3);
+
 		returnToLobbyButton = new TextButton2D("returnToLobbyButton", "Return to Lobby", buttonWidth, buttonHeight) {
 
 			@Override
@@ -629,6 +691,7 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().addToUpdateQueue(fileNameChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(questionChooseWindow);
 				GUI2D.getInstance().addToUpdateQueue(messagePanel);
+				GUI2D.getInstance().addToUpdateQueue(rewardMessagePanel);
 				GUI2D.getInstance().addToUpdateQueue(cardMessagePanel);
 				GUI2D.getInstance().addToUpdateQueue(distributionChooser);
 				GUI2D.getInstance().addToUpdateQueue(cardViewer);
@@ -641,6 +704,11 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void run() {
 				GUI2D.getInstance().setButtonVisible(resultScreen, false);
+				GUI2D.getInstance().setButtonVisible(reward1, false);
+				GUI2D.getInstance().setButtonVisible(reward2, false);
+				GUI2D.getInstance().setButtonVisible(reward3, false);
+				GUI2D.getInstance().setButtonVisible(messagePanel, false);
+				GUI2D.getInstance().setButtonVisible(rewardMessagePanel, false);
 				GUI2D.getInstance().setButtonVisible(returnToLobbyButton, false);
 				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY);
 			}
@@ -665,7 +733,7 @@ public class IngameController extends Node implements GUI2DController {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				final HandCard2D handGeo = (HandCard2D) currentlySelected; // has to be a handcard!
+				final HandCard2D handGeo = (HandCard2D) currentlySelected;
 				int modeledIndex = handGeo.getIndex() + handGeo.getCurrentScrollIndex();
 				GUI2D.getInstance().setEndTurnButtonVisible(false);
 				resetGlowingSelected();
@@ -711,7 +779,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Executes the first attack of the ownActive pokemon. Note that the attack has to exist as a precondition.
+	 * Executes the first attack of the ownActive pokemon. Note that the attack
+	 * has to exist as a precondition.
 	 */
 	protected void attack1Clicked() {
 		Thread t = new Thread(new Runnable() {
@@ -728,7 +797,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Executes the second attack of the ownActive pokemon. Note that the attack has to exist as a precondition.
+	 * Executes the second attack of the ownActive pokemon. Note that the attack
+	 * has to exist as a precondition.
 	 */
 	protected void attack2Clicked() {
 		Thread t = new Thread(new Runnable() {
@@ -779,13 +849,33 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	public void playerWon() {
-		this.resultScreen.setTexture(Database.getAssetKey("win"));
-		GUI2D.getInstance().setButtonVisible(this.resultScreen, true);
+		List<String> unlockedCards = GUI2D.getInstance().playerWon();
+		if (unlockedCards.isEmpty()) {
+			this.resultScreen.setTexture(Database.getAssetKey("win"));
+			GUI2D.getInstance().setButtonVisible(this.resultScreen, true);
+		} else if (unlockedCards.size() == 1) {
+			this.rewardMessagePanel.setText("Victory! You unlocked the following cards:");
+			this.rewardMessagePanel.setVisible(true);
+			GUI2D.getInstance().setButtonVisible(this.rewardMessagePanel, true);
+			this.reward2.setTexture(Database.getTextureKey(unlockedCards.get(0)));
+			GUI2D.getInstance().setButtonVisible(this.reward2, true);
+		} else if (unlockedCards.size() == 3) {
+			this.rewardMessagePanel.setText("Victory! You unlocked the following cards:");
+			this.rewardMessagePanel.setVisible(true);
+			GUI2D.getInstance().setButtonVisible(this.rewardMessagePanel, true);
+			this.reward1.setTexture(Database.getTextureKey(unlockedCards.get(0)));
+			GUI2D.getInstance().setButtonVisible(this.reward1, true);
+			this.reward2.setTexture(Database.getTextureKey(unlockedCards.get(1)));
+			GUI2D.getInstance().setButtonVisible(this.reward2, true);
+			this.reward3.setTexture(Database.getTextureKey(unlockedCards.get(2)));
+			GUI2D.getInstance().setButtonVisible(this.reward3, true);
+		}
 		GUI2D.getInstance().setButtonVisible(returnToLobbyButton, true);
 		GUI2D.getInstance().getMusicController().switchMusic(MusicType.VICTORY_MUSIC);
 	}
 
 	public void playerLost() {
+		GUI2D.getInstance().playerLost();
 		this.resultScreen.setTexture(Database.getAssetKey("lose"));
 		GUI2D.getInstance().setButtonVisible(this.resultScreen, true);
 		GUI2D.getInstance().setButtonVisible(returnToLobbyButton, true);
@@ -824,7 +914,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any {@link HandCard2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any
+	 * {@link HandCard2D} in the scenegraph.
 	 * 
 	 * @param handGeo
 	 */
@@ -862,8 +953,7 @@ public class IngameController extends Node implements GUI2DController {
 		switch (action) {
 		case ATTACK_1:
 			Color color = GUI2D.getInstance().getPlayer().getColor();
-			List<String> attackNames = GUI2D.getInstance().getPlayer()
-					.getAttackNames(color == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
+			List<String> attackNames = GUI2D.getInstance().getPlayer().getAttackNames(color == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
 			attack1Button.setText(attackNames.get(0));
 			GUI2D.getInstance().setButtonVisible(attack1Button, true);
 			break;
@@ -906,7 +996,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any {@link ArenaGeometry2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any
+	 * {@link ArenaGeometry2D} in the scenegraph.
 	 * 
 	 * @param arenaGeo
 	 */
@@ -915,10 +1006,10 @@ public class IngameController extends Node implements GUI2DController {
 			@Override
 			public void run() {
 				if (!isPositionSelectionMode()) {
-					// Only execute when no positions have to be selected by the user
+					// Only execute when no positions have to be selected by the
+					// user
 					Color ownColor = GUI2D.getInstance().getPlayer().getColor();
-					List<PlayerAction> actionList = GUI2D.getInstance().getPlayer()
-							.getPlayerActionsForArenaPosition(getPositionIDForArenaGeometry(arenaGeo, ownColor));
+					List<PlayerAction> actionList = GUI2D.getInstance().getPlayer().getPlayerActionsForArenaPosition(getPositionIDForArenaGeometry(arenaGeo, ownColor));
 					resetButtons();
 					for (PlayerAction action : actionList)
 						makeButtonForActionVisible(action, arenaGeo);
@@ -947,7 +1038,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any {@link ImageButtonCounter2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any
+	 * {@link ImageButtonCounter2D} in the scenegraph.
 	 * 
 	 * @param stackGeo
 	 */
@@ -956,7 +1048,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any {@link Image2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any
+	 * {@link Image2D} in the scenegraph.
 	 * 
 	 * @param stackGeo
 	 */
@@ -1151,7 +1244,8 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Returns the positionID for the given arena position. Positions allowed here are active, bench and price position nodes!
+	 * Returns the positionID for the given arena position. Positions allowed
+	 * here are active, bench and price position nodes!
 	 * 
 	 * @param node
 	 * @param color
@@ -1309,7 +1403,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					deck.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					deck.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					deck.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1326,7 +1423,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					discardPile.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					discardPile.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					discardPile.setTexture(Database.getTextureKey("00000")); // Top
+																				// Card
+																				// not
+																				// visible
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1352,7 +1452,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1365,7 +1468,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1378,7 +1484,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1391,7 +1500,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1404,7 +1516,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1417,7 +1532,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1515,7 +1633,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					deck.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					deck.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					deck.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1532,7 +1653,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					discardPile.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					discardPile.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					discardPile.setTexture(Database.getTextureKey("00000")); // Top
+																				// Card
+																				// not
+																				// visible
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1558,7 +1682,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1571,7 +1698,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1584,7 +1714,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1597,7 +1730,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1610,7 +1746,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1623,7 +1762,10 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top Card not visible
+					price.setTexture(Database.getTextureKey("00000")); // Top
+																		// Card
+																		// not
+																		// visible
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else

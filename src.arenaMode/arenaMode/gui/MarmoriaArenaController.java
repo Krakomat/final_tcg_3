@@ -68,6 +68,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
+				GUI2D.getInstance().registerFighterAsOpponent(currentSelectedFighter);
 				GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 				GUI2D.getInstance().setNextMode(GUI2DMode.MAMORIA_CITY_ARENA);
 				GUI2D.getInstance().getPlayer().createGame();
@@ -313,6 +314,9 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 	@Override
 	public void restart() {
 		currentSelectedFighter = null;
+		red = ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_RED);
+		brendan = ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BRENDAN);
+		brock = ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BROCK);
 		this.backButton.setVisible(true);
 		this.dropInUpdateQueue(backButton);
 		this.deckDescription.setVisible(false);

@@ -3,8 +3,12 @@ package arenaMode.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.msgpack.core.Preconditions;
+
 import com.jme3.scene.Node;
 
+import arenaMode.model.ArenaFighter;
+import arenaMode.model.ArenaFighterCode;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
@@ -16,7 +20,7 @@ import gui2d.geometries.messages.TextPanel2D;
 import model.database.Database;
 import network.client.Account;
 
-public class ArenaChooseController extends Node implements GUI2DController {
+public class ArenaChooseController extends Node implements GUI2DController, ArenaReward {
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextButton2D backButton, enterArenaButton, scrollLeftButton, scrollRightButton;
@@ -231,5 +235,64 @@ public class ArenaChooseController extends Node implements GUI2DController {
 	@Override
 	public MusicType getAmbientMusic() {
 		return MusicType.LOBBY_MUSIC;
+	}
+
+	@Override
+	public List<String> unlockReward(ArenaFighter fighter) {
+		List<String> rewards = new ArrayList<>();
+		switch (fighter.getCode()) {
+		case MAMORIA_BRENDAN:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BRENDAN))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.MAMORIA_BRENDAN);
+			break;
+		case MAMORIA_BROCK:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK)) {
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.MAMORIA_BROCK);
+				// 3 rewards for beating the master the first time!
+				for (int i = 0; i < 3; i++) {
+					String reward = fighter.createReward(account);
+					if (reward != null) {
+						rewards.add(reward);
+						account.getUnlockedCards().add(reward);
+					}
+				}
+			}
+			break;
+		case MAMORIA_RED:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_RED))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.MAMORIA_RED);
+			break;
+		default:
+			break;
+		}
+		GUI2D.getInstance().getDeckEditController().setAccount(account);
+		Account.saveAccount(account);
+		int rewardSize = rewards.size();
+		Preconditions.checkArgument(rewardSize == 0 || rewardSize == 1 || rewardSize == 3);
+		return rewards;
 	}
 }

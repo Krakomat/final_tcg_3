@@ -52,6 +52,7 @@ import com.jme3.scene.shape.Box;
 
 import arenaMode.gui.ArenaChooseController;
 import arenaMode.gui.MarmoriaArenaController;
+import arenaMode.model.ArenaFighter;
 import common.utilities.Pair;
 import common.utilities.Threads;
 
@@ -79,6 +80,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private ArenaChooseController arenaController;
 	private MarmoriaArenaController mamoriaArenaController;
 	private DeckEditController deckEditController;
+
 	/** True if this gui is running */
 	private boolean isStarted;
 	/** The player to communicate with */
@@ -86,6 +88,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	/** Resolution of the screen in form of (width, height) */
 	private Pair<Integer, Integer> resolution;
 	private GUI2DController currentActiveController, nextController;
+	private ArenaFighter currentOpponent;
 
 	private MusicController musicController;
 	private AnimationController animationController;
@@ -116,6 +119,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		titleController.restart();
 		currentActiveController = this.titleController;
 		nextController = null;
+		currentOpponent = null;
 
 		lobbyController = new LobbyController();
 		lobbyController.initSceneGraph();
@@ -765,6 +769,10 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		return this.ingameController;
 	}
 
+	public DeckEditController getDeckEditController() {
+		return deckEditController;
+	}
+
 	public synchronized void addToUpdateQueue(SelectableNode node) {
 		if (Thread.currentThread().getName().equals(Threads.RENDER_THREAD.toString()))
 			System.err.println("[RENDER] Error: Called addToUpdateQueue from render thread.");
@@ -948,5 +956,22 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	public void registerFighterAsOpponent(ArenaFighter fighter) {
+		this.currentOpponent = fighter;
+	}
+
+	public List<String> playerWon() {
+		if (currentOpponent != null) {
+			List<String> reward = this.arenaController.unlockReward(currentOpponent);
+			this.currentOpponent = null;
+			return reward;
+		}
+		return null;
+	}
+
+	public void playerLost() {
+		this.currentOpponent = null;
 	}
 }

@@ -1,8 +1,10 @@
 package arenaMode.model;
 
 import java.io.File;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.jme3.asset.TextureKey;
 
@@ -80,5 +82,14 @@ public class ArenaFighter {
 
 	public List<String> getUnlockableCards() {
 		return unlockableCards;
+	}
+
+	public String createReward(Account account) {
+		if (this.getLockedCards(account).size() > 0) {
+			Random r = new SecureRandom();
+			int index = r.nextInt(this.getLockedCards(account).size());
+			return this.getLockedCards(account).get(index);
+		}
+		return null;
 	}
 }
