@@ -355,6 +355,10 @@ public class Database {
 		rocketEdition.setGenerateMips(false);
 		assetTextures.put(Edition.ROCKET.toString(), rocketEdition);
 
+		TextureKey brockEdition = new TextureKey("/tilesets/editions/brockLogo.png");
+		brockEdition.setGenerateMips(false);
+		assetTextures.put(Edition.BROCK.toString(), brockEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);

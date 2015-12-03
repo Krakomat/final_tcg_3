@@ -31,6 +31,9 @@ import gui2d.geometries.chooser.CardViewer;
 
 import com.jme3.scene.Node;
 
+import arenaMode.model.ArenaFighter;
+import arenaMode.model.ArenaFighterFactory;
+
 public class DeckEditController extends Node implements GUI2DController {
 
 	private TextButton2D backButton, pageLeftButton, pageRightButton, saveDeckButton, loadDeckButton, clearDeckButton;
@@ -159,7 +162,7 @@ public class DeckEditController extends Node implements GUI2DController {
 		}
 
 		editionFilterButtons = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			String texture = "";
 			switch (i) {
 			case 0:
@@ -173,6 +176,9 @@ public class DeckEditController extends Node implements GUI2DController {
 				break;
 			case 3:
 				texture = Edition.ROCKET.toString();
+				break;
+			case 4:
+				texture = Edition.BROCK.toString();
 				break;
 			}
 			final int index = i;
@@ -359,7 +365,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				selectedButtonIndices.add(i);
 		}
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			Image2D button = this.editionFilterButtons.get(i);
 			if (button.isSelected())
 				selectedButtonIndices.add(i + 9);
@@ -415,6 +421,9 @@ public class DeckEditController extends Node implements GUI2DController {
 					break;
 				case 12:
 					selectedButtonEditions.add(Edition.ROCKET);
+					break;
+				case 13:
+					selectedButtonEditions.add(Edition.BROCK);
 					break;
 				}
 			}
@@ -944,6 +953,15 @@ public class DeckEditController extends Node implements GUI2DController {
 
 		this.fullLibraryCards = Database.getFullCardLibrary().getUniqueCards();
 		this.shownLibraryCards = Database.getFullCardLibrary().getUniqueCards();
+
+		// Filter locked cards!
+		for (ArenaFighter fighter : ArenaFighterFactory.getAllArenaFighters()) {
+			for (String card : fighter.getLockedCards(account)) {
+				this.fullLibraryCards.remove(card);
+				this.shownLibraryCards.remove(card);
+			}
+		}
+
 		this.sortCardIdList(shownLibraryCards);
 	}
 
