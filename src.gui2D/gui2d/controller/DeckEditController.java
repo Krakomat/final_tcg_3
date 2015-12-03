@@ -285,8 +285,8 @@ public class DeckEditController extends Node implements GUI2DController {
 					}).start();
 				}
 			};
-			deckImage.setLocalTranslation(screenWidth * 0.70f + (deckImageWidth + deckImageBorder) * (i % 6), screenHeight * 0.85f
-					- (deckImageHeight + deckImageBorder) * (i / 6), 0);
+			deckImage.setLocalTranslation(screenWidth * 0.70f + (deckImageWidth + deckImageBorder) * (i % 6), screenHeight * 0.85f - (deckImageHeight + deckImageBorder) * (i / 6),
+					0);
 			deckImage.setVisible(false);
 			dropInUpdateQueue(deckImage);
 			this.attachChild(deckImage);
@@ -322,8 +322,8 @@ public class DeckEditController extends Node implements GUI2DController {
 					}).start();
 				}
 			};
-			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 5), screenHeight * 0.7f
-					- (libraryImageHeight + libraryImageBorder) * (i / 5), 0);
+			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 5),
+					screenHeight * 0.7f - (libraryImageHeight + libraryImageBorder) * (i / 5), 0);
 			libraryImage.setVisible(false);
 			dropInUpdateQueue(libraryImage);
 			this.attachChild(libraryImage);
@@ -473,7 +473,9 @@ public class DeckEditController extends Node implements GUI2DController {
 		List<String> list = GUI2D.getInstance().userChoosesStrings(fileNames, 1, false, "Choose a deck to load!");
 		if (!list.isEmpty()) {
 			String s = list.get(0);
-			// String s = (String) JOptionPane.showInputDialog(null, "Choose the deck to load:", "Load Deck", JOptionPane.PLAIN_MESSAGE, null, possibilities,
+			// String s = (String) JOptionPane.showInputDialog(null, "Choose the
+			// deck to load:", "Load Deck", JOptionPane.PLAIN_MESSAGE, null,
+			// possibilities,
 			// possibilities[1]);
 			if (s != null) {
 				// Search index:
@@ -564,7 +566,8 @@ public class DeckEditController extends Node implements GUI2DController {
 	private void moveCardFromLibraryToDeck(int index) {
 		String cardID = this.shownLibraryCards.get(index);
 
-		// Only transfer if deck is not full and card is contained no more than 4 times
+		// Only transfer if deck is not full and card is contained no more than
+		// 4 times
 		if (this.deckCards.size() < 60 && checkCardCanBeAddedToDeck(cardID)) {
 			if (index >= this.shownLibraryCards.size())
 				System.err.println("Error: Index too big in moveCardFromLibraryToDeck: " + index);
@@ -597,7 +600,8 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Moves all cards of the given deck from the library into the deck. Only call, if deckCards is empty and the size of the given deck is <= 60.
+	 * Moves all cards of the given deck from the library into the deck. Only
+	 * call, if deckCards is empty and the size of the given deck is <= 60.
 	 * 
 	 */
 	private void createDeckFromLibrary(Deck deck) {
@@ -635,7 +639,8 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Moves all cards from the deck into the library. Does NOT update the visualization!
+	 * Moves all cards from the deck into the library. Does NOT update the
+	 * visualization!
 	 * 
 	 */
 	private void clearDeck() {
@@ -801,7 +806,8 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * (Re-)Starts this node by setting the two main buttons visible and setting the rest invisible.
+	 * (Re-)Starts this node by setting the two main buttons visible and setting
+	 * the rest invisible.
 	 */
 	public void restart() {
 		this.currentStartIndex = 0;
@@ -946,5 +952,10 @@ public class DeckEditController extends Node implements GUI2DController {
 		for (int i = 0; i < list.size(); i++)
 			clone.add(new String(list.get(i).toString()));
 		return clone;
+	}
+
+	@Override
+	public MusicType getAmbientMusic() {
+		return MusicType.DECK_EDIT_MUSIC;
 	}
 }

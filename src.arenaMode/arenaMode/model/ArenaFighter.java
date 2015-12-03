@@ -1,12 +1,14 @@
 package arenaMode.model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jme3.asset.TextureKey;
 
 import model.database.Deck;
 import model.game.GameParameters;
+import network.client.Account;
 
 public class ArenaFighter {
 	private TextureKey characterModel, characterThumb;
@@ -22,6 +24,22 @@ public class ArenaFighter {
 		this.characterModel = characterModel;
 		this.characterThumb = characterThumb;
 		this.unlockableCards = unlockableCards;
+	}
+
+	/**
+	 * Returns a list of the card ids that the given account has yet to unlock.
+	 * 
+	 * @param account
+	 * @return
+	 */
+	public List<String> getLockedCards(Account account) {
+		List<String> unlockedCards = account.getUnlockedCards();
+		List<String> lockedCards = new ArrayList<>();
+		for (String cardID : unlockableCards) {
+			if (!unlockedCards.contains(cardID))
+				lockedCards.add(cardID);
+		}
+		return lockedCards;
 	}
 
 	public TextureKey getCharacterModel() {

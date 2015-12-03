@@ -13,6 +13,7 @@ import model.game.GameParameters;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
+import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.TextButton2D;
 
 import com.jme3.scene.Node;
@@ -94,8 +95,7 @@ public class TitleController extends Node implements GUI2DController {
 						Deck deck = Deck.readFromDatabaseFile(deckFile);
 						player.setDeck(deck);
 						Account.saveAccount(player);
-						JOptionPane.showMessageDialog(null, "Saved your account with the name " + accountName + " on this PC!", "Success",
-								JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Saved your account with the name " + accountName + " on this PC!", "Success", JOptionPane.INFORMATION_MESSAGE);
 					} else
 						JOptionPane.showMessageDialog(null, "Account name is not valid!", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -112,7 +112,8 @@ public class TitleController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * (Re-)Starts this node by setting the two main buttons visible and setting the rest invisible.
+	 * (Re-)Starts this node by setting the two main buttons visible and setting
+	 * the rest invisible.
 	 */
 	public void restart() {
 		this.hide();
@@ -130,5 +131,10 @@ public class TitleController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(startButton);
 		this.titleImage.setVisible(false);
 		this.dropInUpdateQueue(titleImage);
+	}
+
+	@Override
+	public MusicType getAmbientMusic() {
+		return MusicType.TITLE_MUSIC;
 	}
 }

@@ -388,7 +388,7 @@ public class Database {
 
 		TextureKey mamoriaArena = new TextureKey("/tilesets/arenas/mamoriaArena.jpg");
 		mamoriaArena.setGenerateMips(false);
-		assetTextures.put("Mamoria City Arena", mamoriaArena);
+		assetTextures.put("Marmoria City Arena", mamoriaArena);
 
 		TextureKey azuriaArena = new TextureKey("/tilesets/arenas/azuriaArena.jpg");
 		azuriaArena.setGenerateMips(false);

@@ -1803,4 +1803,9 @@ public class IngameController extends Node implements GUI2DController {
 	public HandCardManager2D getEnemyHand() {
 		return enemyHand;
 	}
+
+	@Override
+	public MusicType getAmbientMusic() {
+		return MusicType.INGAME_MUSIC;
+	}
 }

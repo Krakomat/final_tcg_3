@@ -14,6 +14,7 @@ import network.tcp.borders.ServerMain;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
+import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.ImageButton2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.messages.TextPanel2D;
@@ -23,8 +24,8 @@ import com.jme3.scene.Node;
 public class LobbyController extends Node implements GUI2DController {
 
 	private TextButton2D singlePlayerButton, multiPlayerButton, arenaButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
-	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton,
-			psychOutButton, wasserschwallButton, leibwaechterButton, schlossUndRiegelButton, aergerButton, verwuestungButton;
+	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton, psychOutButton,
+			wasserschwallButton, leibwaechterButton, schlossUndRiegelButton, aergerButton, verwuestungButton;
 	private TextPanel2D chooseBotDeckPanel;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -337,7 +338,7 @@ public class LobbyController extends Node implements GUI2DController {
 		lightningBugButton.setVisible(false);
 		dropInUpdateQueue(lightningBugButton);
 		this.attachChild(lightningBugButton);
-		
+
 		aergerButton = new ImageButton2D("aergerButton", Database.getAssetKey("aerger"), botButtonWidth, botButtonHeight) {
 
 			@Override
@@ -473,7 +474,7 @@ public class LobbyController extends Node implements GUI2DController {
 		wasserschwallButton.setVisible(false);
 		dropInUpdateQueue(wasserschwallButton);
 		this.attachChild(wasserschwallButton);
-		
+
 		leibwaechterButton = new ImageButton2D("leibwaechterButton", Database.getAssetKey("leibwächter"), botButtonWidth, botButtonHeight) {
 
 			@Override
@@ -496,7 +497,8 @@ public class LobbyController extends Node implements GUI2DController {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 		GUI2D.getInstance().getPlayer().createGame();
 
-		// Create tree bot and connect him to the server that was created in createGame:
+		// Create tree bot and connect him to the server that was created in
+		// createGame:
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -515,7 +517,8 @@ public class LobbyController extends Node implements GUI2DController {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 		GUI2D.getInstance().getPlayer().createGame();
 
-		// Create standard bot and connect him to the server that was created in createGame:
+		// Create standard bot and connect him to the server that was created in
+		// createGame:
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -557,6 +560,7 @@ public class LobbyController extends Node implements GUI2DController {
 		this.multiPlayerConnectButton.setVisible(true);
 		this.dropInUpdateQueue(multiPlayerConnectButton);
 	}
+
 	protected void arenaModeClicked() {
 		GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY);
 	}
@@ -622,7 +626,8 @@ public class LobbyController extends Node implements GUI2DController {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
 		GUI2D.getInstance().getPlayer().createGame();
 
-		// Create dummy bot and connect him to the server that was created in createGame:
+		// Create dummy bot and connect him to the server that was created in
+		// createGame:
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -645,7 +650,8 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * (Re-)Starts this node by setting the two main buttons visible and setting the rest invisible.
+	 * (Re-)Starts this node by setting the two main buttons visible and setting
+	 * the rest invisible.
 	 */
 	public void restart() {
 		this.hide();
@@ -733,5 +739,10 @@ public class LobbyController extends Node implements GUI2DController {
 			this.equipedDeckPanel.setText("Deck: " + account.getDeck().getName());
 			this.dropInUpdateQueue(equipedDeckPanel);
 		}
+	}
+
+	@Override
+	public MusicType getAmbientMusic() {
+		return MusicType.LOBBY_MUSIC;
 	}
 }

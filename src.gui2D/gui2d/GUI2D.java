@@ -51,7 +51,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 
 import arenaMode.gui.ArenaChooseController;
-import arenaMode.gui.MamoriaArenaController;
+import arenaMode.gui.MarmoriaArenaController;
 import common.utilities.Pair;
 import common.utilities.Threads;
 
@@ -77,7 +77,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private IngameController ingameController;
 	private LobbyController lobbyController;
 	private ArenaChooseController arenaController;
-	private MamoriaArenaController mamoriaArenaController;
+	private MarmoriaArenaController mamoriaArenaController;
 	private DeckEditController deckEditController;
 	/** True if this gui is running */
 	private boolean isStarted;
@@ -85,7 +85,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private GuiToPlayerCommunication player;
 	/** Resolution of the screen in form of (width, height) */
 	private Pair<Integer, Integer> resolution;
-	private GUI2DController currentActiveController;
+	private GUI2DController currentActiveController, nextController;
 
 	private MusicController musicController;
 	private AnimationController animationController;
@@ -115,6 +115,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		guiNode.attachChild(titleController);
 		titleController.restart();
 		currentActiveController = this.titleController;
+		nextController = null;
 
 		lobbyController = new LobbyController();
 		lobbyController.initSceneGraph();
@@ -124,7 +125,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		arenaController.initSceneGraph();
 		guiNode.attachChild(arenaController);
 
-		mamoriaArenaController = new MamoriaArenaController();
+		mamoriaArenaController = new MarmoriaArenaController();
 		mamoriaArenaController.initSceneGraph();
 		guiNode.attachChild(mamoriaArenaController);
 
@@ -813,37 +814,68 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	 */
 	public void switchMode(GUI2DMode newMode) {
 		this.currentActiveController.hide();
-		switch (newMode) {
+		if (nextController == null) {
+			switch (newMode) {
+			case START:
+				this.currentActiveController = this.titleController;
+				break;
+			case DECK_EDIT:
+				this.currentActiveController = this.deckEditController;
+				this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				break;
+			case INGAME:
+				this.currentActiveController = this.ingameController;
+				this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				break;
+			case LOBBY:
+				if (this.currentActiveController != this.titleController && this.currentActiveController != this.arenaController)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				this.currentActiveController = this.lobbyController;
+				break;
+			case ARENA_CHOOSE_LOBBY:
+				if (this.currentActiveController != this.lobbyController)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				this.currentActiveController = this.arenaController;
+				break;
+			case MAMORIA_CITY_ARENA:
+				this.currentActiveController = this.mamoriaArenaController;
+				// TODO make marmoria music
+				// this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
+				break;
+			default:
+				break;
+			}
+		} else {
+			this.currentActiveController = nextController;
+			this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+			this.nextController = null;
+		}
+		this.currentActiveController.restart();
+	}
+
+	public void setNextMode(GUI2DMode nextMode) {
+		switch (nextMode) {
 		case START:
-			this.currentActiveController = this.titleController;
+			this.nextController = this.titleController;
 			break;
 		case DECK_EDIT:
-			this.currentActiveController = this.deckEditController;
-			this.musicController.switchMusic(MusicType.DECK_EDIT_MUSIC);
+			this.nextController = this.deckEditController;
 			break;
 		case INGAME:
-			this.currentActiveController = this.ingameController;
-			this.musicController.switchMusic(MusicType.INGAME_MUSIC);
+			this.nextController = this.ingameController;
 			break;
 		case LOBBY:
-			if (this.currentActiveController != this.titleController && this.currentActiveController != this.arenaController)
-				this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
-			this.currentActiveController = this.lobbyController;
+			this.nextController = this.lobbyController;
 			break;
 		case ARENA_CHOOSE_LOBBY:
-			if (this.currentActiveController != this.lobbyController)
-				this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
-			this.currentActiveController = this.arenaController;
+			this.nextController = this.arenaController;
 			break;
 		case MAMORIA_CITY_ARENA:
-			this.currentActiveController = this.mamoriaArenaController;
-			// TODO make mamoria music
-			// this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
+			this.nextController = this.mamoriaArenaController;
 			break;
 		default:
 			break;
 		}
-		this.currentActiveController.restart();
 	}
 
 	/**

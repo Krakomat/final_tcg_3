@@ -9,6 +9,7 @@ import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
 import gui2d.controller.GUI2DController;
+import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.Image2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.messages.TextPanel2D;
@@ -29,7 +30,7 @@ public class ArenaChooseController extends Node implements GUI2DController {
 		screenWidth = GUI2D.getInstance().getResolution().getKey();
 		screenHeight = GUI2D.getInstance().getResolution().getValue();
 		enabledArenaNames = new ArrayList<>();
-		this.enabledArenaNames.add("Mamoria City Arena");
+		this.enabledArenaNames.add("Marmoria City Arena");
 		currentArenaIndex = 0;
 	}
 
@@ -206,7 +207,7 @@ public class ArenaChooseController extends Node implements GUI2DController {
 		// TODO only activate enabled arenas!
 		currentArenaIndex = 0;
 		this.enabledArenaNames = new ArrayList<>();
-		this.enabledArenaNames.add("Mamoria City Arena");
+		this.enabledArenaNames.add("Marmoria City Arena");
 		// this.enabledArenaNames.add("Azuria City Arena");
 		// this.enabledArenaNames.add("Orania City Arena");
 		// this.enabledArenaNames.add("Prismania City Arena");
@@ -225,5 +226,10 @@ public class ArenaChooseController extends Node implements GUI2DController {
 		});
 		t.setName("Helper Thread dropInUpdateQueue");
 		t.start();
+	}
+
+	@Override
+	public MusicType getAmbientMusic() {
+		return MusicType.LOBBY_MUSIC;
 	}
 }

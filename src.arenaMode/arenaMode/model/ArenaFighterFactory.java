@@ -8,13 +8,13 @@ public class ArenaFighterFactory {
 	public static ArenaFighter createFighter(ArenaFighterCode code) {
 		switch (code) {
 		case MAMORIA_BRENDAN:
-			return new ArenaFighter(code, "Brendan", "RockTrainer_2.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString()),
+			return new ArenaFighter(code, "Brendan", "Rock Solid.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString() + "_THUMB"), new ArrayList<>());
 		case MAMORIA_RED:
-			return new ArenaFighter(code, "Red", "RockTrainer_1.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
+			return new ArenaFighter(code, "Red", "Fighting Spirit.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString() + "_THUMB"), new ArrayList<>());
 		case MAMORIA_BROCK:// TODO set deck
-			return new ArenaFighter(code, "Rocko", "RockTrainer_1.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
+			return new ArenaFighter(code, "Rocko", "Fighting Spirit.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), new ArrayList<>());
 		default:
 			break;

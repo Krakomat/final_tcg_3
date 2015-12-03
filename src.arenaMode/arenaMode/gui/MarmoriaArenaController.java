@@ -1,31 +1,46 @@
 package arenaMode.gui;
 
+import java.io.File;
+
 import com.jme3.scene.Node;
 
+import arenaMode.model.ArenaFighter;
 import arenaMode.model.ArenaFighterCode;
+import arenaMode.model.ArenaFighterFactory;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
 import gui2d.controller.GUI2DController;
+import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.Image2D;
+import gui2d.geometries.Text2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.messages.TextPanel2D;
 import model.database.Database;
+import model.database.Deck;
+import model.game.GameParameters;
 import network.client.Account;
+import network.client.Player;
+import network.tcp.borders.ClientBorder;
+import network.tcp.borders.ServerMain;
 
-public class MamoriaArenaController extends Node implements GUI2DController {
+public class MarmoriaArenaController extends Node implements GUI2DController {
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextButton2D backButton, fightButton;
 	private Image2D redThumb, brendanThumb, brockThumb, arenaImage, fighterImage;
 	private TextPanel2D fighterNamePanel;
+	private Text2D deckDescription, unlockedCardsDescription;
 	private Account account;
-	private ArenaFighterCode currentSelectedCode;
+	private ArenaFighter currentSelectedFighter, red, brendan, brock;
 
-	public MamoriaArenaController() {
+	public MarmoriaArenaController() {
 		screenWidth = GUI2D.getInstance().getResolution().getKey();
 		screenHeight = GUI2D.getInstance().getResolution().getValue();
-		currentSelectedCode = null;
+		currentSelectedFighter = null;
+		red = ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_RED);
+		brendan = ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BRENDAN);
+		brock = ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BROCK);
 	}
 
 	public void initSceneGraph() {
@@ -53,7 +68,25 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
-				// TODO
+				GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+				GUI2D.getInstance().setNextMode(GUI2DMode.MAMORIA_CITY_ARENA);
+				GUI2D.getInstance().getPlayer().createGame();
+
+				// Create tree bot and connect him to the server that was
+				// created in createGame:
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						System.out.println(currentSelectedFighter);
+						Player bot = Database.getBot("TreeBot");
+						bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.ARENA_DECK_PATH + currentSelectedFighter.getDeck().getName() + ".xml")));
+						ClientBorder botBorder = new ClientBorder(bot);
+						bot.setServer(botBorder);
+
+						// Register at server:
+						botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
+					}
+				}).start();
 			}
 
 			@Override
@@ -69,7 +102,7 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 		float imageWidth = screenWidth * 0.35f;
 		float thumbWidth = screenWidth * 0.125f;
 		float thumbHeight = screenWidth * 0.125f;
-		arenaImage = new Image2D("arenaImage", Database.getAssetKey("Mamoria City Arena"), imageWidth, thumbHeight) {
+		arenaImage = new Image2D("arenaImage", Database.getAssetKey("Marmoria City Arena"), imageWidth, thumbHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -101,7 +134,7 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 					dropInUpdateQueue(brendanThumb);
 					brockThumb.setSelected(false);
 					dropInUpdateQueue(brockThumb);
-					updateFighterImage(ArenaFighterCode.MAMORIA_RED);
+					updateFighterImage(red);
 				}
 			}
 
@@ -130,7 +163,7 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 					dropInUpdateQueue(redThumb);
 					brockThumb.setSelected(false);
 					dropInUpdateQueue(brockThumb);
-					updateFighterImage(ArenaFighterCode.MAMORIA_BRENDAN);
+					updateFighterImage(brendan);
 				}
 			}
 
@@ -159,7 +192,7 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 					dropInUpdateQueue(redThumb);
 					brendanThumb.setSelected(false);
 					dropInUpdateQueue(brendanThumb);
-					updateFighterImage(ArenaFighterCode.MAMORIA_BROCK);
+					updateFighterImage(brock);
 				}
 			}
 
@@ -209,12 +242,50 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 		fighterNamePanel.setVisible(false);
 		dropInUpdateQueue(fighterNamePanel);
 		this.attachChild(fighterNamePanel);
+
+		deckDescription = new Text2D("deckDescription", "Deck: ", imageWidth, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		deckDescription.setLocalTranslation(screenWidth * 0.2f - imageWidth / 2, screenHeight * 0.705f - thumbHeight, 0);
+		deckDescription.setVisible(false);
+		dropInUpdateQueue(deckDescription);
+		this.attachChild(deckDescription);
+
+		unlockedCardsDescription = new Text2D("unlockedCardsDescription", "Cards unlocked: ", imageWidth, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		unlockedCardsDescription.setLocalTranslation(screenWidth * 0.2f - imageWidth / 2, screenHeight * 0.605f - thumbHeight, 0);
+		unlockedCardsDescription.setVisible(false);
+		dropInUpdateQueue(unlockedCardsDescription);
+		this.attachChild(unlockedCardsDescription);
 	}
 
 	@Override
 	public void hide() {
 		this.backButton.setVisible(false);
 		this.dropInUpdateQueue(backButton);
+		this.deckDescription.setVisible(false);
+		this.dropInUpdateQueue(deckDescription);
+		this.unlockedCardsDescription.setVisible(false);
+		this.dropInUpdateQueue(unlockedCardsDescription);
 		this.fighterNamePanel.setVisible(false);
 		this.dropInUpdateQueue(fighterNamePanel);
 		this.fightButton.setVisible(false);
@@ -241,9 +312,13 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 
 	@Override
 	public void restart() {
-		currentSelectedCode = null;
+		currentSelectedFighter = null;
 		this.backButton.setVisible(true);
 		this.dropInUpdateQueue(backButton);
+		this.deckDescription.setVisible(false);
+		this.dropInUpdateQueue(deckDescription);
+		this.unlockedCardsDescription.setVisible(false);
+		this.dropInUpdateQueue(unlockedCardsDescription);
 		this.fighterNamePanel.setVisible(false);
 		this.dropInUpdateQueue(fighterNamePanel);
 		this.fightButton.setVisible(false);
@@ -253,10 +328,12 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 		this.redThumb.setVisible(true);
 		this.redThumb.setSelected(false);
 		this.dropInUpdateQueue(redThumb);
-		this.brendanThumb.setVisible(true);
+		if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_RED))
+			this.brendanThumb.setVisible(true);
 		this.brendanThumb.setSelected(false);
 		this.dropInUpdateQueue(brendanThumb);
-		this.brockThumb.setVisible(true);
+		if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BRENDAN))
+			this.brockThumb.setVisible(true);
 		this.brockThumb.setSelected(false);
 		this.dropInUpdateQueue(brockThumb);
 		this.fighterImage.setVisible(false);
@@ -265,23 +342,34 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 			@Override
 			public void run() {
 				GUI2D.getInstance().getIOController().addShootable(redThumb);
-				GUI2D.getInstance().getIOController().addShootable(brendanThumb);
-				GUI2D.getInstance().getIOController().addShootable(brockThumb);
+				if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_RED))
+					GUI2D.getInstance().getIOController().addShootable(brendanThumb);
+				if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BRENDAN))
+					GUI2D.getInstance().getIOController().addShootable(brockThumb);
 			}
 		}).start();
 	}
 
-	private void updateFighterImage(ArenaFighterCode code) {
-		currentSelectedCode = code;
-		if (currentSelectedCode != null) {
-			fighterImage.setTexture(Database.getAssetKey(currentSelectedCode.toString()));
+	private void updateFighterImage(ArenaFighter fighter) {
+		currentSelectedFighter = fighter;
+		if (currentSelectedFighter != null) {
+			fighterImage.setTexture(Database.getAssetKey(currentSelectedFighter.getCode().toString()));
 			this.fighterImage.setVisible(true);
 			dropInUpdateQueue(fighterImage);
 			this.fightButton.setVisible(true);
 			this.dropInUpdateQueue(fightButton);
-			// TODO set name
+			this.fighterNamePanel.setText(fighter.getName());
 			this.fighterNamePanel.setVisible(true);
 			this.dropInUpdateQueue(fighterNamePanel);
+			this.deckDescription.setText("Deck: " + fighter.getDeck().getName());
+			this.deckDescription.setVisible(true);
+			this.dropInUpdateQueue(deckDescription);
+			this.unlockedCardsDescription.setText("Cards unlocked: " + +fighter.getLockedCards(account).size() + "/" + fighter.getUnlockableCards().size());
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK))
+				this.unlockedCardsDescription.setVisible(true);
+			else
+				this.unlockedCardsDescription.setVisible(false);
+			this.dropInUpdateQueue(unlockedCardsDescription);
 		} else {
 			this.fighterImage.setVisible(false);
 			dropInUpdateQueue(fighterImage);
@@ -289,6 +377,10 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 			this.dropInUpdateQueue(fightButton);
 			this.fighterNamePanel.setVisible(false);
 			this.dropInUpdateQueue(fighterNamePanel);
+			this.deckDescription.setVisible(false);
+			this.dropInUpdateQueue(deckDescription);
+			this.unlockedCardsDescription.setVisible(false);
+			this.dropInUpdateQueue(unlockedCardsDescription);
 		}
 	}
 
@@ -305,5 +397,10 @@ public class MamoriaArenaController extends Node implements GUI2DController {
 		});
 		t.setName("Helper Thread dropInUpdateQueue");
 		t.start();
+	}
+
+	@Override
+	public MusicType getAmbientMusic() {
+		return MusicType.LOBBY_MUSIC;
 	}
 }
