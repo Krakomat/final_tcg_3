@@ -69,13 +69,7 @@
         </Card>
     </Deck>
     <DefeatedArenaFighters>
-        <DefeatedFighter ID="MAMORIA_RED"/>
-        <DefeatedFighter ID="MAMORIA_BRENDAN"/>
-        <DefeatedFighter ID="MAMORIA_BROCK"/>
     </DefeatedArenaFighters>
     <UnlockedCards>
-        <UnlockedCard ID="00267"/>
-        <UnlockedCard ID="00268"/>
-        <UnlockedCard ID="00269"/>
     </UnlockedCards>
 </Account>
