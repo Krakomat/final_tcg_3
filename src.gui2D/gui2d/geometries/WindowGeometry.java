@@ -64,6 +64,11 @@ public class WindowGeometry extends Node implements SelectableNode {
 
 		while (this.title.getLineHeight() < (height * 0.047) && this.title.getLineWidth() < width * 0.90f)
 			this.title.setSize(this.title.getSize() + 0.001f);
+		
+		while(this.title.getLineHeight() > height * 0.047)
+			this.title.setSize(this.title.getSize() - 0.001f);
+		while(this.title.getLineWidth() > width * 0.90f)
+			this.title.setSize(this.title.getSize() - 0.001f);
 
 		this.title.setLocalTranslation(width * 0.02f, height * 0.97f + this.title.getLineHeight() / 2, 0.00001f);
 		this.attachChild(this.title);

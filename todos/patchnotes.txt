@@ -10,6 +10,7 @@ Patch 4.00
 		UI:
 			- Reduced the amount of music tracks used in the different modes
 			- Added support for gym cards
+			- Adjusted button, panel and window text size
 			
 Patch 3.50
 	Deck Editor:

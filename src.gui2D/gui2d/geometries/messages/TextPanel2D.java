@@ -71,7 +71,8 @@ public abstract class TextPanel2D extends Node implements SelectableNode {
 		// Button text:
 		BitmapFont myFont = GUI2D.getInstance().getAssetManager().loadFont("assets/Fonts/DejaVuSans.fnt");
 		this.textBitmap = new BitmapText(myFont, false);
-		this.textBitmap.setSize(myFont.getCharSet().getRenderedSize()); // font size
+		this.textBitmap.setSize(myFont.getCharSet().getRenderedSize()); // font
+																		// size
 		this.textBitmap.setText(this.text); // the text
 		this.textBitmap.setColor(ColorRGBA.Black); // font color
 
@@ -88,6 +89,11 @@ public abstract class TextPanel2D extends Node implements SelectableNode {
 
 		while (this.textBitmap.getLineHeight() < height * 0.5f && this.textBitmap.getLineWidth() < width * 0.3f)
 			this.textBitmap.setSize(this.textBitmap.getSize() + 0.001f);
+		
+		while(this.textBitmap.getLineHeight() > height * 0.8f)
+			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
+		while(this.textBitmap.getLineWidth() > width * 0.8f)
+			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
 	}
 
 	/**

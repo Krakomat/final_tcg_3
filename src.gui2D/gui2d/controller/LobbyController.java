@@ -494,7 +494,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void botClicked(String deckName) {
-		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 		GUI2D.getInstance().getPlayer().createGame();
 
 		// Create tree bot and connect him to the server that was created in
@@ -514,7 +514,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void standardBotClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 		GUI2D.getInstance().getPlayer().createGame();
 
 		// Create standard bot and connect him to the server that was created in
@@ -562,7 +562,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void arenaModeClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY);
+		GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY, true);
 	}
 
 	protected void singlePlayerClicked() {
@@ -610,20 +610,20 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void multiPlayerCreateClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 		GUI2D.getInstance().getPlayer().createGame();
 	}
 
 	protected void multiPlayerConnectClicked() {
 		String ipAdress = GUI2D.getInstance().userTypesName("192.168.178.", "IP4 adress:");
 		if (ipAdress != null) {
-			GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+			GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 			GUI2D.getInstance().getPlayer().connectToGame(ipAdress);
 		}
 	}
 
 	protected void dummyBotClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 		GUI2D.getInstance().getPlayer().createGame();
 
 		// Create dummy bot and connect him to the server that was created in
@@ -646,7 +646,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void deckEditorButtonClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.DECK_EDIT);
+		GUI2D.getInstance().switchMode(GUI2DMode.DECK_EDIT, true);
 	}
 
 	/**

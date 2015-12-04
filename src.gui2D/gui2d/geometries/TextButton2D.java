@@ -78,6 +78,11 @@ public abstract class TextButton2D extends Node implements SelectableNode {
 
 		while (this.textBitmap.getLineHeight() < height * 0.5f && this.textBitmap.getLineWidth() < width * 0.3f)
 			this.textBitmap.setSize(this.textBitmap.getSize() + 0.001f);
+		
+		while(this.textBitmap.getLineHeight() > height * 0.8f)
+			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
+		while(this.textBitmap.getLineWidth() > width * 0.8f)
+			this.textBitmap.setSize(this.textBitmap.getSize() - 0.001f);
 	}
 
 	/**

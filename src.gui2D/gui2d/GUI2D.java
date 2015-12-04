@@ -824,7 +824,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	 * 
 	 * @param newMode
 	 */
-	public void switchMode(GUI2DMode newMode) {
+	public void switchMode(GUI2DMode newMode, boolean changeMusic) {
 		this.currentActiveController.hide();
 		if (nextController == null) {
 			switch (newMode) {
@@ -833,26 +833,26 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				break;
 			case DECK_EDIT:
 				this.currentActiveController = this.deckEditController;
-				this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				if (changeMusic)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				break;
 			case INGAME:
 				this.currentActiveController = this.ingameController;
-				this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				if (changeMusic)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				break;
 			case LOBBY:
-				if (this.currentActiveController != this.titleController && this.currentActiveController != this.arenaController)
+				if (this.currentActiveController != this.titleController && this.currentActiveController != this.arenaController && changeMusic)
 					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				this.currentActiveController = this.lobbyController;
 				break;
 			case ARENA_CHOOSE_LOBBY:
-				if (this.currentActiveController != this.lobbyController)
+				if (this.currentActiveController != this.lobbyController && changeMusic)
 					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				this.currentActiveController = this.arenaController;
 				break;
 			case MAMORIA_CITY_ARENA:
 				this.currentActiveController = this.mamoriaArenaController;
-				// TODO make marmoria music
-				// this.musicController.switchMusic(MusicType.LOBBY_MUSIC);
 				break;
 			default:
 				break;

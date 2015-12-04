@@ -63,7 +63,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 			@Override
 			public void mouseSelect() {
-				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY);
+				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 			}
 
 			@Override
@@ -80,7 +80,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 			@Override
 			public void mouseSelect() {
-				GUI2D.getInstance().switchMode(GUI2DMode.MAMORIA_CITY_ARENA);
+				GUI2D.getInstance().switchMode(GUI2DMode.MAMORIA_CITY_ARENA, true);
 			}
 
 			@Override

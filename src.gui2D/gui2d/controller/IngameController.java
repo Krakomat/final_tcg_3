@@ -725,7 +725,7 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setButtonVisible(messagePanel, false);
 				GUI2D.getInstance().setButtonVisible(rewardMessagePanel, false);
 				GUI2D.getInstance().setButtonVisible(returnToLobbyButton, false);
-				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY);
+				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 			}
 		}).start();
 	}

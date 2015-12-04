@@ -51,7 +51,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 
 			@Override
 			public void mouseSelect() {
-				GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY);
+				GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY, true);
 			}
 
 			@Override
@@ -69,7 +69,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				GUI2D.getInstance().registerFighterAsOpponent(currentSelectedFighter);
-				GUI2D.getInstance().switchMode(GUI2DMode.INGAME);
+				GUI2D.getInstance().switchMode(GUI2DMode.INGAME, false);
 				if (currentSelectedFighter == brock)
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_MASTER_MUSIC);
 				else
