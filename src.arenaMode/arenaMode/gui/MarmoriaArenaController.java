@@ -1,6 +1,8 @@
 package arenaMode.gui;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jme3.scene.Node;
 
@@ -25,6 +27,14 @@ import network.tcp.borders.ClientBorder;
 import network.tcp.borders.ServerMain;
 
 public class MarmoriaArenaController extends Node implements GUI2DController {
+	public static List<ArenaFighter> getArenaFighters() {
+		List<ArenaFighter> list = new ArrayList<>();
+		list.add(ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_RED));
+		list.add(ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BRENDAN));
+		list.add(ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BROCK));
+		return list;
+	}
+
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private TextButton2D backButton, fightButton;

@@ -264,9 +264,9 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			}
 			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK)) {
 				account.getDefeatedArenaFighters().add(ArenaFighterCode.MAMORIA_BROCK);
-				// 3 rewards for beating the master the first time!
-				for (int i = 0; i < 3; i++) {
-					String reward = fighter.createReward(account);
+				// 1 reward per fighter for beating the master the first time!
+				for (ArenaFighter f : MarmoriaArenaController.getArenaFighters()) {
+					String reward = f.createReward(account);
 					if (reward != null) {
 						rewards.add(reward);
 						account.getUnlockedCards().add(reward);

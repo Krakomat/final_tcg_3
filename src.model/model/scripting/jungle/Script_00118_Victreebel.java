@@ -86,6 +86,7 @@ public class Script_00118_Victreebel extends PokemonCardScript {
 		if (changeRetreatInGameModel) {
 			gameModel.setRetreatExecuted(true);
 			changeRetreatInGameModel = false;
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

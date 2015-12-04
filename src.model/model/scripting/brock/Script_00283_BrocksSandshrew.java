@@ -39,6 +39,7 @@ public class Script_00283_BrocksSandshrew extends PokemonCardScript {
 		if (changeRetreatInGameModel) {
 			gameModel.setRetreatExecuted(true);
 			changeRetreatInGameModel = false;
+			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

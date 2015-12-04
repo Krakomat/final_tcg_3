@@ -11,7 +11,8 @@ Patch 4.00
 			- Reduced the amount of music tracks used in the different modes
 			- Added support for gym cards
 			- Adjusted button, panel and window text size
-			
+		Game:
+			- 00118_Victreebel: Fixed a bug, where the retreat button would appear, even if the pokemon was not allowed to retreat
 Patch 3.50
 	Deck Editor:
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
