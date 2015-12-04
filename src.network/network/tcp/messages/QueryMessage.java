@@ -56,7 +56,8 @@ public class QueryMessage extends AbstractMessage {
 	}
 
 	/**
-	 * Returns the weight of this message in bytes. Allowed are not more than about 32000 bytes.
+	 * Returns the weight of this message in bytes. Allowed are not more than
+	 * about 32000 bytes.
 	 * 
 	 * @return
 	 */

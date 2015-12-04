@@ -397,35 +397,35 @@ public class Database {
 
 		TextureKey mamoriaArena = new TextureKey("/tilesets/arenas/mamoriaArena.jpg");
 		mamoriaArena.setGenerateMips(false);
-		assetTextures.put("Marmoria City Arena", mamoriaArena);
+		assetTextures.put("Pewter City Gym", mamoriaArena);
 
 		TextureKey azuriaArena = new TextureKey("/tilesets/arenas/azuriaArena.jpg");
 		azuriaArena.setGenerateMips(false);
-		assetTextures.put("Azuria City Arena", azuriaArena);
+		assetTextures.put("Cerulean City Gym", azuriaArena);
 
 		TextureKey oraniaArena = new TextureKey("/tilesets/arenas/oraniaArena.jpg");
 		oraniaArena.setGenerateMips(false);
-		assetTextures.put("Orania City Arena", oraniaArena);
+		assetTextures.put("Vermilion City Gym", oraniaArena);
 
 		TextureKey prismaniaArena = new TextureKey("/tilesets/arenas/prismaniaArena.jpg");
 		prismaniaArena.setGenerateMips(false);
-		assetTextures.put("Prismania City Arena", prismaniaArena);
+		assetTextures.put("Celadon City Gym", prismaniaArena);
 
 		TextureKey fuchsaniaArena = new TextureKey("/tilesets/arenas/fuchsaniaArena.png");
 		fuchsaniaArena.setGenerateMips(false);
-		assetTextures.put("Fuchsania City Arena", fuchsaniaArena);
+		assetTextures.put("Fuchsia City Gym", fuchsaniaArena);
 
 		TextureKey saffroniaArena = new TextureKey("/tilesets/arenas/saffroniaArena.jpg");
 		saffroniaArena.setGenerateMips(false);
-		assetTextures.put("Saffronia City Arena", saffroniaArena);
+		assetTextures.put("Saffron City Gym", saffroniaArena);
 
 		TextureKey zinnoberinselArena = new TextureKey("/tilesets/arenas/zinnoberinselArena.jpg");
 		zinnoberinselArena.setGenerateMips(false);
-		assetTextures.put("Zinnoberinsel Arena", zinnoberinselArena);
+		assetTextures.put("Cinnabar City Gym", zinnoberinselArena);
 
 		TextureKey vertaniaArena = new TextureKey("/tilesets/arenas/vertaniaArena.jpg");
 		vertaniaArena.setGenerateMips(false);
-		assetTextures.put("Vertania City Arena", vertaniaArena);
+		assetTextures.put("Viridian City Gym", vertaniaArena);
 
 		TextureKey redCharacter = new TextureKey("/tilesets/characters/Red.png");
 		redCharacter.setGenerateMips(false);

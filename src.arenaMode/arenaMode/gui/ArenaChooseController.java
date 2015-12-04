@@ -34,7 +34,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 		screenWidth = GUI2D.getInstance().getResolution().getKey();
 		screenHeight = GUI2D.getInstance().getResolution().getValue();
 		enabledArenaNames = new ArrayList<>();
-		this.enabledArenaNames.add("Marmoria City Arena");
+		this.enabledArenaNames.add("Pewter City Gym");
 		currentArenaIndex = 0;
 	}
 
@@ -211,14 +211,14 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 		// TODO only activate enabled arenas!
 		currentArenaIndex = 0;
 		this.enabledArenaNames = new ArrayList<>();
-		this.enabledArenaNames.add("Marmoria City Arena");
-		// this.enabledArenaNames.add("Azuria City Arena");
-		// this.enabledArenaNames.add("Orania City Arena");
-		// this.enabledArenaNames.add("Prismania City Arena");
-		// this.enabledArenaNames.add("Fuchsania City Arena");
-		// this.enabledArenaNames.add("Saffronia City Arena");
-		// this.enabledArenaNames.add("Zinnoberinsel Arena");
-		// this.enabledArenaNames.add("Vertania City Arena");
+		this.enabledArenaNames.add("Pewter City Gym");
+		// this.enabledArenaNames.add("Cerulean City Gym");
+		// this.enabledArenaNames.add("Vermilion City Gym");
+		// this.enabledArenaNames.add("Celadon City Gym");
+		// this.enabledArenaNames.add("Fuchsia City Gym");
+		// this.enabledArenaNames.add("Saffron City Gym");
+		// this.enabledArenaNames.add("Cinnabar City Gym");
+		// this.enabledArenaNames.add("Viridian City Gym");
 	}
 
 	private void dropInUpdateQueue(SelectableNode node) {

@@ -107,7 +107,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 		float imageWidth = screenWidth * 0.35f;
 		float thumbWidth = screenWidth * 0.125f;
 		float thumbHeight = screenWidth * 0.125f;
-		arenaImage = new Image2D("arenaImage", Database.getAssetKey("Marmoria City Arena"), imageWidth, thumbHeight) {
+		arenaImage = new Image2D("arenaImage", Database.getAssetKey("Pewter City Gym"), imageWidth, thumbHeight) {
 
 			@Override
 			public void mouseSelect() {

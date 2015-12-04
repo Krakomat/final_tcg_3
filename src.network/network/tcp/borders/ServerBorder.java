@@ -342,7 +342,6 @@ public class ServerBorder implements Player {
 
 	@Override
 	public void receiveGameDeleted() {
-		// TODO Auto-generated method stub
 
 	}
 
