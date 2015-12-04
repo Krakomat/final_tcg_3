@@ -76,7 +76,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
-		}
+		}	
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -290,6 +290,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		this.makePositionVisibleForAllPlayers(PositionID.RED_BENCH_5);
 		this.makePositionVisibleForAllPlayers(PositionID.BLUE_DISCARDPILE);
 		this.makePositionVisibleForAllPlayers(PositionID.RED_DISCARDPILE);
+		this.makePositionVisibleForAllPlayers(PositionID.STADIUM);
 
 		// Update GameModel:
 		this.sendGameModelToPlayers(this.getPlayerList(), "");
@@ -1093,5 +1094,10 @@ public class PokemonGameModelImpl implements PokemonGame {
 	@Override
 	public GameField getGameField() {
 		return gameField;
+	}
+
+	@Override
+	public Card getCurrentStadium() {
+		return this.getPosition(PositionID.STADIUM).getTopCard();
 	}
 }

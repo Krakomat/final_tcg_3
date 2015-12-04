@@ -24,13 +24,16 @@ import model.game.GameModelParameters;
 public interface PokemonGame {
 
 	/**
-	 * Starts a new game by setting all positions to their default status. Furthermore instances of cards of both players decks are created, assigned with game ids
-	 * and set on their respective deck positions. The game is started then.
+	 * Starts a new game by setting all positions to their default status.
+	 * Furthermore instances of cards of both players decks are created,
+	 * assigned with game ids and set on their respective deck positions. The
+	 * game is started then.
 	 */
 	void initNewGame();
 
 	/**
-	 * Creates an instance of a {@link GameModelUpdate}, which represents everything the given player is able to see on the board/hands.
+	 * Creates an instance of a {@link GameModelUpdate}, which represents
+	 * everything the given player is able to see on the board/hands.
 	 * 
 	 * @param player
 	 * @return
@@ -47,7 +50,8 @@ public interface PokemonGame {
 	Position getPosition(PositionID posID);
 
 	/**
-	 * Returns the player, who is currently on turn. Returns null if no player is on turn.
+	 * Returns the player, who is currently on turn. Returns null if no player
+	 * is on turn.
 	 * 
 	 * @return player on turn
 	 */
@@ -89,7 +93,8 @@ public interface PokemonGame {
 	List<Card> getAllCards();
 
 	/**
-	 * Gets the card with the given game id. Returns null, if no such card was found.
+	 * Gets the card with the given game id. Returns null, if no such card was
+	 * found.
 	 * 
 	 * @param cardGameID
 	 * @return
@@ -97,21 +102,25 @@ public interface PokemonGame {
 	Card getCard(int cardGameID);
 
 	/**
-	 * Registers the given card at this game model. Has to be called whenever a card is dynamically created in a running game.
+	 * Registers the given card at this game model. Has to be called whenever a
+	 * card is dynamically created in a running game.
 	 * 
 	 * @param card
 	 */
 	void registerCard(Card card);
 
 	/**
-	 * Unregisters the given card from this game model. Has to be called whenever a card that was dynamically created in a running game is removed.
+	 * Unregisters the given card from this game model. Has to be called
+	 * whenever a card that was dynamically created in a running game is
+	 * removed.
 	 * 
 	 * @param card
 	 */
 	void unregisterCard(Card card);
 
 	/**
-	 * Collects all basic pokemon on the given position in an ArrayList and returns them.
+	 * Collects all basic pokemon on the given position in an ArrayList and
+	 * returns them.
 	 * 
 	 * @param posID
 	 * @return
@@ -127,7 +136,8 @@ public interface PokemonGame {
 	ArrayList<PositionID> getFullArenaPositions(Color playerColor);
 
 	/**
-	 * Returns all bench positions with cards on them from the players arena fields.
+	 * Returns all bench positions with cards on them from the players arena
+	 * fields.
 	 * 
 	 * @param playerColor
 	 * @return
@@ -135,8 +145,10 @@ public interface PokemonGame {
 	ArrayList<PositionID> getFullBenchPositions(Color playerColor);
 
 	/**
-	 * Returns an array list of the positionsIDs, if the given card can be put on a basic pokemon(in the arena of the given player), which evolves into the given
-	 * card. Also checks, evolution is allowed in this turn(one cannot put a pokemon on the bench and evolve it in the same turn).
+	 * Returns an array list of the positionsIDs, if the given card can be put
+	 * on a basic pokemon(in the arena of the given player), which evolves into
+	 * the given card. Also checks, evolution is allowed in this turn(one cannot
+	 * put a pokemon on the bench and evolve it in the same turn).
 	 * 
 	 * @param c
 	 * @param color
@@ -229,17 +241,20 @@ public interface PokemonGame {
 	GameState getGameState();
 
 	/**
-	 * Actions that are executed, when a player has ended his turn. Should be called before {@link #betweenTurns()} and {@link #nextTurn()}.
+	 * Actions that are executed, when a player has ended his turn. Should be
+	 * called before {@link #betweenTurns()} and {@link #nextTurn()}.
 	 */
 	void executeEndTurn();
 
 	/**
-	 * Switches the turns. Should be called after a players turn has ended and also after {@link #executeEndTurn()}.
+	 * Switches the turns. Should be called after a players turn has ended and
+	 * also after {@link #executeEndTurn()}.
 	 */
 	void nextTurn();
 
 	/**
-	 * Executes actions that occur between players turns. Should be called after {@link #executeEndTurn()} and before {@link #nextTurn()}.
+	 * Executes actions that occur between players turns. Should be called after
+	 * {@link #executeEndTurn()} and before {@link #nextTurn()}.
 	 */
 	void betweenTurns();
 
@@ -251,8 +266,9 @@ public interface PokemonGame {
 	long getGameID();
 
 	/**
-	 * Checks for defeated pokemon and cleans up the arena positions. Players select price cards here. Also the game state is being changed here, if the game has a
-	 * looser.
+	 * Checks for defeated pokemon and cleans up the arena positions. Players
+	 * select price cards here. Also the game state is being changed here, if
+	 * the game has a looser.
 	 */
 	void cleanDefeatedPositions();
 
@@ -274,6 +290,14 @@ public interface PokemonGame {
 	GameModelParameters getGameModelParameters();
 
 	void setGameModelParameters(GameModelParameters gameModelParameters);
-	
+
 	GameField getGameField();
+
+	/**
+	 * Returns the current stadium card in game or null, if there is none such
+	 * card.
+	 * 
+	 * @return
+	 */
+	Card getCurrentStadium();
 }

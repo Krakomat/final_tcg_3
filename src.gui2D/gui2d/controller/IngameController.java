@@ -24,6 +24,7 @@ import gui2d.geometries.messages.TextPanel2D;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import model.database.Card;
 import model.database.Database;
@@ -33,7 +34,11 @@ import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.interfaces.Position;
 
+import com.jme3.material.Material;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
 
 /**
  * Manages all elements ingame.
@@ -48,6 +53,8 @@ public class IngameController extends Node implements GUI2DController {
 	private List<ArenaGeometry2D> ownBench, enemyBench;
 	private ImageCounter2D ownDeck, enemyDeck, ownGraveyard, enemyGraveyard;
 	private List<Image2D> ownPrize, enemyPrize;
+	private Spatial stadiumNode;
+	private Material stadiumMat;
 	private TextButton2D endTurnButton, attack1Button, attack2Button, retreatButton, playButton, pokePowerButton, returnToLobbyButton;
 	private ImageButton2D surrenderButton;
 	/** Resolution variable */
@@ -697,6 +704,14 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().addToUpdateQueue(cardViewer);
 			}
 		}).start();
+
+		// Make stadium
+		Box stadium = new Box(5.83f, 2.41f, 0.0f);
+		stadiumNode = new Geometry("Box", stadium);
+		stadiumMat = new Material(GUI2D.getInstance().getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+		stadiumMat.setTexture("ColorMap", GUI2D.getInstance().getAssetManager().loadTexture(Database.getPokemonThumbnailKey("00286")));
+		stadiumNode.setMaterial(stadiumMat);
+		stadiumNode.setLocalTranslation(0.0f, 0.12f, 0.1f);
 	}
 
 	protected void returnToLobbyButtonClicked() {
@@ -1403,10 +1418,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					deck.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					deck.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					deck.setTexture(Database.getTextureKey("00000"));
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1423,10 +1435,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					discardPile.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					discardPile.setTexture(Database.getTextureKey("00000")); // Top
-																				// Card
-																				// not
-																				// visible
+					discardPile.setTexture(Database.getTextureKey("00000"));
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1452,10 +1461,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1468,10 +1474,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1484,10 +1487,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1500,10 +1500,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1516,10 +1513,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1532,10 +1526,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1633,10 +1624,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					deck.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					deck.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					deck.setTexture(Database.getTextureKey("00000"));
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1653,10 +1641,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					discardPile.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					discardPile.setTexture(Database.getTextureKey("00000")); // Top
-																				// Card
-																				// not
-																				// visible
+					discardPile.setTexture(Database.getTextureKey("00000"));
 				List<String> cardIds = new ArrayList<>();
 				for (int i = 0; i < p.getCards().size(); i++)
 					cardIds.add(p.getCards().get(i).getCardId());
@@ -1682,10 +1667,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1698,10 +1680,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1714,10 +1693,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1730,10 +1706,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1746,10 +1719,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1762,10 +1732,7 @@ public class IngameController extends Node implements GUI2DController {
 				if (c.getGameID() != -1)
 					price.setTexture(Database.getTextureKey(c.getCardId()));
 				else
-					price.setTexture(Database.getTextureKey("00000")); // Top
-																		// Card
-																		// not
-																		// visible
+					price.setTexture(Database.getTextureKey("00000"));
 				price.setCardId(c.getCardId());
 				price.setVisible(true);
 			} else
@@ -1775,6 +1742,28 @@ public class IngameController extends Node implements GUI2DController {
 			break;
 		}
 		return n;
+	}
+
+	public void updateStadium(Position p) {
+		if (p.isEmpty()) {
+			GUI2D.getInstance().enqueue(new Callable<Spatial>() {
+				@Override
+				public Spatial call() throws Exception {
+					GUI2D.getInstance().getRootNode().detachChild(stadiumNode);
+					return null;
+				}
+			});
+		} else {
+			GUI2D.getInstance().enqueue(new Callable<Spatial>() {
+				@Override
+				public Spatial call() throws Exception {
+					Card stadium = p.getTopCard();
+					stadiumMat.setTexture("ColorMap", GUI2D.getInstance().getAssetManager().loadTexture(Database.getPokemonThumbnailKey(stadium.getCardId())));
+					GUI2D.getInstance().getRootNode().attachChild(stadiumNode);
+					return null;
+				}
+			});
+		}
 	}
 
 	public List<SelectableNode> getSelectableNodes() {

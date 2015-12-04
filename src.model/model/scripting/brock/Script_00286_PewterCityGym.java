@@ -1,5 +1,6 @@
 package model.scripting.brock;
 
+import model.database.Card;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
@@ -14,12 +15,18 @@ public class Script_00286_PewterCityGym extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
+		if (!gameModel.getPosition(PositionID.STADIUM).isEmpty()) {
+			Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
+			// Discard previous stadium card:
+			gameModel.getAttackAction().discardCardToDiscardPile(PositionID.STADIUM, stadium.getGameID());
+		}
 		gameModel.getPosition(PositionID.STADIUM).setColor(this.getCardOwner().getColor());
-		// TODO
+		gameModel.getAttackAction().moveCard(getCurrentPositionID(), PositionID.STADIUM, this.card.getGameID(), true);
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

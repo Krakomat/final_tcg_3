@@ -29,7 +29,8 @@ import model.scripting.abstracts.CardScriptFactory;
 import model.scripting.abstracts.PokemonCardScript;
 
 /**
- * Used by a client to locally store the game model that was send from the server.
+ * Used by a client to locally store the game model that was send from the
+ * server.
  * 
  * @author Michael
  *
@@ -121,7 +122,8 @@ public class LocalPokemonGameModel implements PokemonGame {
 	}
 
 	/**
-	 * Adds actions to the given list, which are dependent to the position, the selected card is on. Only is called, if the given player is on turn.
+	 * Adds actions to the given list, which are dependent to the position, the
+	 * selected card is on. Only is called, if the given player is on turn.
 	 * 
 	 * @param actionList
 	 * @param game
@@ -396,7 +398,8 @@ public class LocalPokemonGameModel implements PokemonGame {
 	public List<String> getAttacksForPosition(PositionID position) {
 		Position pos = this.getPosition(position);
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
-			return new ArrayList<String>(); // position empty or no arena position
+			return new ArrayList<String>(); // position empty or no arena
+											// position
 
 		// Get the attacks from the card script:
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
@@ -412,7 +415,8 @@ public class LocalPokemonGameModel implements PokemonGame {
 	public List<String> getPokePowerForPosition(PositionID posID) {
 		Position pos = this.getPosition(posID);
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
-			return new ArrayList<String>(); // position empty or no arena position
+			return new ArrayList<String>(); // position empty or no arena
+											// position
 
 		// Get the attacks from the card script:
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
@@ -438,5 +442,10 @@ public class LocalPokemonGameModel implements PokemonGame {
 	@Override
 	public void setGameModelParameters(GameModelParameters gameModelParameters) {
 		this.gameModelParameters = gameModelParameters;
+	}
+
+	@Override
+	public Card getCurrentStadium() {
+		return this.getPosition(PositionID.STADIUM).getTopCard();
 	}
 }

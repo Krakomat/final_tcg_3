@@ -597,10 +597,14 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		// System.out.println("Started Update from " +
 		// Thread.currentThread().getName());
 		for (Position p : gameModel.getGameField().getAllPositions()) {
-			SelectableNode n = ingameController.getPositionGeometry(p.getPositionID(), ownColor);
-			if (n != null) {
-				n = ingameController.updateGeometry(n, p);
-				this.addToUpdateQueue(n);
+			if (p.getPositionID() != PositionID.STADIUM) {
+				SelectableNode n = ingameController.getPositionGeometry(p.getPositionID(), ownColor);
+				if (n != null) {
+					n = ingameController.updateGeometry(n, p);
+					this.addToUpdateQueue(n);
+				}
+			} else {
+				ingameController.updateStadium(p);
 			}
 		}
 		EffectController.playSound(sound);

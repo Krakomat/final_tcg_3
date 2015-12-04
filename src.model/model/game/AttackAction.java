@@ -115,7 +115,10 @@ public class AttackAction {
 			// Calculate real damage:
 			if (attackElement.equals(defenderPokemon.getCurrentWeakness()))
 				damageAmount = damageAmount * 2; // Double damage when weakness
-			if (attackElement.equals(defenderPokemon.getCurrentResistance()))
+			// Don't apply resistance, if Pewter City Gym is in play and the
+			// attacker has Brock in its name:
+			if (attackElement.equals(defenderPokemon.getCurrentResistance())
+					&& !(gameModel.getCurrentStadium() != null && gameModel.getCurrentStadium().getCardId().equals("00286") && attackerPokemon.getName().contains("Brock")))
 				damageAmount = damageAmount - 30; // Reduce damage
 		}
 
