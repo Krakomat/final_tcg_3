@@ -12,7 +12,8 @@ import network.tcp.messages.QueryMessage;
 import network.tcp.messages.RespondMessage;
 
 /**
- * Representation of a Server that is created by the main application of the server program. Maintains a single game currently.
+ * Representation of a Server that is created by the main application of the
+ * server program. Maintains a single game currently.
  * 
  * @author Michael
  *

@@ -166,6 +166,18 @@ public class Database {
 	private static void loadAssets() {
 		assetTextures = new HashMap<String, TextureKey>();
 
+		TextureKey attack = new TextureKey("tilesets/other/attack_enabled.png");
+		attack.setGenerateMips(false);
+		assetTextures.put("attack", attack);
+
+		TextureKey swap = new TextureKey("tilesets/other/swap_enabled.png");
+		swap.setGenerateMips(false);
+		assetTextures.put("swap", swap);
+
+		TextureKey pokemonPower = new TextureKey("tilesets/other/pokemonPower_enabled.png");
+		pokemonPower.setGenerateMips(false);
+		assetTextures.put("pokemonPower", pokemonPower);
+
 		TextureKey win = new TextureKey("tilesets/windows/win.png");
 		win.setGenerateMips(false);
 		assetTextures.put("win", win);

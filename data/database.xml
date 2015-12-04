@@ -901,7 +901,9 @@
         <HP>50</HP>
         <Weakness>PSYCHIC</Weakness>
         <Resistance/>
-        <RetreatCost/>
+        <RetreatCost>
+            <Element>COLORLESS</Element>
+        </RetreatCost>
         <EvolvesFrom/>
     </PokemonCard>
     <PokemonCard>

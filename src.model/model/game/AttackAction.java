@@ -564,9 +564,22 @@ public class AttackAction {
 			discardPilePos = PositionID.RED_DISCARDPILE;
 		}
 		List<Card> handCards = gameModel.getPosition(handPos).getCards();
-		while (!handCards.isEmpty()) {
-			this.moveCard(handPos, discardPilePos, handCards.get(0).getGameID(), true);
+		while (!handCards.isEmpty() && !handContainsOnlyDummyCards(handCards)) {
+			Card realCard = null;
+			for (Card c : handCards)
+				if (c.getGameID() != -1) {
+					realCard = c;
+					break;
+				}
+			this.moveCard(handPos, discardPilePos, realCard.getGameID(), true);
 		}
+	}
+
+	private boolean handContainsOnlyDummyCards(List<Card> handCards) {
+		for (Card c : handCards)
+			if (c.getGameID() != -1)
+				return false;
+		return true;
 	}
 
 	public String playerPutsAllHandCardsOnDeck(Player player) {

@@ -4,15 +4,20 @@ Patch 4.00
 			- A single player adventure, where the player travels through the different arena in Kanto
 			- New cards that are associated with the respective master of each arena can be unlocked by defeating the master and his/her servants
 			- All  encounters feature new unique bot decks
-			- The first arena (Marmoria City Arena) is already unlocked, further ones come with future releases
+			- The first arena (Pewter City Gym) is already unlocked, further ones come with future releases
+		Improved control UI
 		New Card sets: 
 			- BROCK
-		UI:
-			- Reduced the amount of music tracks used in the different modes
-			- Added support for gym cards
-			- Adjusted button, panel and window text size
-		Game:
-			- 00118_Victreebel: Fixed a bug, where the retreat button would appear, even if the pokemon was not allowed to retreat
+	UI:
+		- Reduced the amount of music tracks used in the different modes
+		- Added support for gym cards
+		- Adjusted button, panel and window text size
+	AI:
+		- Fixed a bug, where the game freezes when two draw mechanical cards were in the AIs hand
+	Game:
+		- 00118_Victreebel: Fixed a bug, where the retreat button would appear, even if the pokemon was not allowed to retreat
+		- 00049_Drowzee: Fixed a bug, where Drowzee could retreat for free
+		
 Patch 3.50
 	Deck Editor:
 		- Added a frameworkwise solution for loading decks --> Removed swing mask for loading decks
