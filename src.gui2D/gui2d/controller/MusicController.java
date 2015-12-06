@@ -33,7 +33,7 @@ public class MusicController extends Node {
 	static final int ARENA_SERVANT_MUSIC_TRACKS = 1;
 	static final int FINAL_BOSS_MUSIC_TRACKS = 1;
 	static final float MUSIC_FADE_TIME = 150;
-	static final float MUSIC_VOLUME = 1f;
+	static final float MUSIC_VOLUME = 0.5f;
 
 	/**
 	 * Defines the classes of tracks.
