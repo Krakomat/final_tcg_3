@@ -12,6 +12,7 @@ Patch 4.00
 		- Reduced the amount of music tracks used in the different modes
 		- Added support for gym cards
 		- Adjusted button, panel and window text size
+		- Damage/Heal Animation has updated font
 	AI:
 		- Fixed a bug, where the game freezes when two draw mechanical cards were in the AIs hand
 	Game:
