@@ -51,6 +51,7 @@ public class GameTree {
 	 * @param rootNode
 	 */
 	private void computeGameTree(GameTreeNode rootNode, LocalPokemonGameModel gameModel, PokemonGameManager server, int depth) {
+		System.err.println("");
 		System.err.println("Calling computeGameTree for depth " + depth);
 		Preconditions.checkArgument(rootNode.getMoves().isEmpty(), "Error: root node has moves!");
 		Color playerColor = gameModel.getPlayerOnTurn().getColor();
@@ -65,7 +66,7 @@ public class GameTree {
 			// Flush queues:
 			player.flushQueues();
 			TurnSimulator simulator = new TurnSimulator(gameModel.copy());
-			System.err.println("Simulating " + move);
+			System.err.print("Simulating " + move + " ---> ");
 			player.setChosenCardsQueue(move.getChosenCardsQueue());
 			player.setChosenPositionQueue(move.getChosenPositionQueue());
 			player.setChosenElementQueue(move.getChosenElementQueue());
@@ -95,7 +96,7 @@ public class GameTree {
 				PlayerAction action = PlayerAction.valueOf(move.getTriple().getAction());
 				if (!action.equals(PlayerAction.ATTACK_1) && !action.equals(PlayerAction.ATTACK_2)) {
 					GameTreeNode childNode = move.getResultingNode();
-					this.computeGameTree(childNode, childModels.get(i), server, depth + 1);
+					this.computeGameTree(childNode, childModels.get(i).copy(), server, depth + 1);
 				}
 			}
 		}

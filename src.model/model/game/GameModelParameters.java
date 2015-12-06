@@ -61,24 +61,61 @@ public class GameModelParameters {
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
 		this.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.setNoEnergyPayment(gameModelUpdate.getGameModelParameters().isNoEnergyPayment());
-		this.setLauchschlagUsed_00027_Porenta(gameModelUpdate.getGameModelParameters().getLauchschlagUsed_00027_Porenta());
-		this.setPower_Active_00164_Muk(gameModelUpdate.getGameModelParameters().getPower_Active_00164_Muk());
-		this.setPower_Active_00153_Aerodactyl(gameModelUpdate.getGameModelParameters().getPower_Active_00153_Aerodactyl());
-		this.setPower_Activated_00143_Mankey(gameModelUpdate.getGameModelParameters().isPower_Activated_00143_Mankey());
-		this.setPower_Activated_00155_Dragonite(gameModelUpdate.getGameModelParameters().isPower_Activated_00155_Dragonite());
-		this.setPower_Activated_00156_Gengar(gameModelUpdate.getGameModelParameters().getPower_Activated_00156_Gengar());
-		this.setPower_Activated_00117_Venomoth(gameModelUpdate.getGameModelParameters().isPower_Activated_00117_Venomoth());
-		this.setPower_Activated_00119_Vileplume(gameModelUpdate.getGameModelParameters().isPower_Activated_00119_Vileplume());
-		this.setPower_Activated_00188_Omanite(gameModelUpdate.getGameModelParameters().getPower_Activated_00188_Omanite());
-		this.setPower_Activated_00251_Rattata(gameModelUpdate.getGameModelParameters().getPower_Activated_00251_Rattata());
-		this.setPower_Activated_00239_Drowzee(gameModelUpdate.getGameModelParameters().getPower_Activated_00239_Drowzee());
-		this.setPower_Activated_00235_Charmander(gameModelUpdate.getGameModelParameters().getPower_Activated_00235_Charmander());
-		this.setPower_Activated_00224_DarkKadabra(gameModelUpdate.getGameModelParameters().getPower_Activated_00224_DarkKadabra());
-		this.setPower_Activated_00221_DarkGloom(gameModelUpdate.getGameModelParameters().getPower_Activated_00221_DarkGloom());
-		this.setPower_Activated_00218_DarkDragonair(gameModelUpdate.getGameModelParameters().getPower_Activated_00218_DarkDragonair());
-		this.setPower_Activated_00212_DarkVileplume(gameModelUpdate.getGameModelParameters().getPower_Activated_00212_DarkVileplume());
-		this.setLieLowUsed_00287_BrocksDugtrio(gameModelUpdate.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio());
-		this.setTunnelingUsed_00269_BrocksOnix(gameModelUpdate.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix());
+		this.lauchschlagUsed_00027_Porenta = new ArrayList<>();
+		this.power_Active_00164_Muk = new ArrayList<>();
+		this.power_Active_00153_Aerodactyl = new ArrayList<>();
+		this.power_Activated_00143_Mankey = new ArrayList<>();
+		this.power_Activated_00155_Dragonite = new ArrayList<>();
+		this.power_Activated_00156_Gengar = new ArrayList<>();
+		this.power_Activated_00117_Venomoth = new ArrayList<>();
+		this.power_Activated_00119_Vileplume = new ArrayList<>();
+		this.power_Activated_00188_Omanite = new ArrayList<>();
+		this.power_Activated_00251_Rattata = new ArrayList<>();
+		this.power_Activated_00239_Drowzee = new ArrayList<>();
+		this.power_Activated_00235_Charmander = new ArrayList<>();
+		this.power_Activated_00224_DarkKadabra = new ArrayList<>();
+		this.power_Activated_00221_DarkGloom = new ArrayList<>();
+		this.power_Activated_00218_DarkDragonair = new ArrayList<>();
+		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
+		this.lieLowUsed_00287_BrocksDugtrio = new ArrayList<>();
+		this.tunnelingUsed_00269_BrocksOnix = new ArrayList<>();
+		for (Integer i : gameModelUpdate.getGameModelParameters().getLauchschlagUsed_00027_Porenta())
+			this.lauchschlagUsed_00027_Porenta.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Active_00164_Muk())
+			this.power_Active_00164_Muk.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Active_00153_Aerodactyl())
+			this.power_Active_00153_Aerodactyl.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().isPower_Activated_00143_Mankey())
+			this.power_Activated_00143_Mankey.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().isPower_Activated_00155_Dragonite())
+			this.power_Activated_00155_Dragonite.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00156_Gengar())
+			this.power_Activated_00156_Gengar.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().isPower_Activated_00117_Venomoth())
+			this.power_Activated_00117_Venomoth.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().isPower_Activated_00119_Vileplume())
+			this.power_Activated_00119_Vileplume.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00188_Omanite())
+			this.power_Activated_00188_Omanite.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00251_Rattata())
+			this.power_Activated_00251_Rattata.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00239_Drowzee())
+			this.power_Activated_00239_Drowzee.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00235_Charmander())
+			this.power_Activated_00235_Charmander.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00224_DarkKadabra())
+			this.power_Activated_00224_DarkKadabra.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00221_DarkGloom())
+			this.power_Activated_00221_DarkGloom.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00218_DarkDragonair())
+			this.power_Activated_00218_DarkDragonair.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00212_DarkVileplume())
+			this.power_Activated_00212_DarkVileplume.add(i);
+		for (Pair<Integer, Integer> i : gameModelUpdate.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio())
+			this.lieLowUsed_00287_BrocksDugtrio.add(i);
+		for (Pair<Integer, Integer> i : gameModelUpdate.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix())
+			this.tunnelingUsed_00269_BrocksOnix.add(i);
+
 		this.setAllowedToPlayTrainerCards(gameModelUpdate.getGameModelParameters().isAllowedToPlayTrainerCards());
 		this.setAllowedToPlayPokemonPower(gameModelUpdate.getGameModelParameters().isAllowedToPlayPokemonPower());
 	}
@@ -90,24 +127,42 @@ public class GameModelParameters {
 		copy.setGameState(gameState);
 		copy.setNoEnergyPayment(noEnergyPayment);
 		copy.setRetreatExecuted(retreatExecuted);
-		copy.setLauchschlagUsed_00027_Porenta(this.getLauchschlagUsed_00027_Porenta());
-		copy.setPower_Active_00164_Muk(this.getPower_Active_00164_Muk());
-		copy.setPower_Active_00153_Aerodactyl(this.getPower_Active_00153_Aerodactyl());
-		copy.setPower_Activated_00143_Mankey(this.isPower_Activated_00143_Mankey());
-		copy.setPower_Activated_00155_Dragonite(this.isPower_Activated_00155_Dragonite());
-		copy.setPower_Activated_00156_Gengar(this.getPower_Activated_00156_Gengar());
-		copy.setPower_Activated_00117_Venomoth(this.isPower_Activated_00117_Venomoth());
-		copy.setPower_Activated_00119_Vileplume(this.isPower_Activated_00119_Vileplume());
-		copy.setPower_Activated_00188_Omanite(this.getPower_Activated_00188_Omanite());
-		copy.setPower_Activated_00251_Rattata(this.getPower_Activated_00251_Rattata());
-		copy.setPower_Activated_00239_Drowzee(this.getPower_Activated_00239_Drowzee());
-		copy.setPower_Activated_00235_Charmander(this.getPower_Activated_00235_Charmander());
-		copy.setPower_Activated_00224_DarkKadabra(this.getPower_Activated_00224_DarkKadabra());
-		copy.setPower_Activated_00221_DarkGloom(this.getPower_Activated_00221_DarkGloom());
-		copy.setPower_Activated_00218_DarkDragonair(this.getPower_Activated_00218_DarkDragonair());
-		copy.setPower_Activated_00212_DarkVileplume(this.getPower_Activated_00212_DarkVileplume());
-		copy.setLieLowUsed_00287_BrocksDugtrio(this.getLieLowUsed_00287_BrocksDugtrio());
-		copy.setTunnelingUsed_00269_BrocksOnix(this.getTunnelingUsed_00269_BrocksOnix());
+		for (Integer i : this.getLauchschlagUsed_00027_Porenta())
+			copy.getLauchschlagUsed_00027_Porenta().add(i);
+		for (Integer i : this.getPower_Active_00164_Muk())
+			copy.getPower_Active_00164_Muk().add(i);
+		for (Integer i : this.getPower_Active_00153_Aerodactyl())
+			copy.getPower_Active_00153_Aerodactyl().add(i);
+		for (Integer i : this.isPower_Activated_00143_Mankey())
+			copy.isPower_Activated_00143_Mankey().add(i);
+		for (Integer i : this.isPower_Activated_00155_Dragonite())
+			copy.isPower_Activated_00155_Dragonite().add(i);
+		for (Integer i : this.getPower_Activated_00156_Gengar())
+			copy.getPower_Activated_00156_Gengar().add(i);
+		for (Integer i : this.isPower_Activated_00117_Venomoth())
+			copy.isPower_Activated_00117_Venomoth().add(i);
+		for (Integer i : this.isPower_Activated_00119_Vileplume())
+			copy.isPower_Activated_00119_Vileplume().add(i);
+		for (Integer i : this.getPower_Activated_00188_Omanite())
+			copy.getPower_Activated_00188_Omanite().add(i);
+		for (Integer i : this.getPower_Activated_00251_Rattata())
+			copy.getPower_Activated_00251_Rattata().add(i);
+		for (Integer i : this.getPower_Activated_00239_Drowzee())
+			copy.getPower_Activated_00239_Drowzee().add(i);
+		for (Integer i : this.getPower_Activated_00235_Charmander())
+			copy.getPower_Activated_00235_Charmander().add(i);
+		for (Integer i : this.getPower_Activated_00224_DarkKadabra())
+			copy.getPower_Activated_00224_DarkKadabra().add(i);
+		for (Integer i : this.getPower_Activated_00221_DarkGloom())
+			copy.getPower_Activated_00221_DarkGloom().add(i);
+		for (Integer i : this.getPower_Activated_00218_DarkDragonair())
+			copy.getPower_Activated_00218_DarkDragonair().add(i);
+		for (Integer i : this.getPower_Activated_00212_DarkVileplume())
+			copy.getPower_Activated_00212_DarkVileplume().add(i);
+		for (Pair<Integer, Integer> i : this.getLieLowUsed_00287_BrocksDugtrio())
+			copy.getLieLowUsed_00287_BrocksDugtrio().add(i);
+		for (Pair<Integer, Integer> i : this.getTunnelingUsed_00269_BrocksOnix())
+			copy.getTunnelingUsed_00269_BrocksOnix().add(i);
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
 		copy.setAllowedToPlayPokemonPower(this.isAllowedToPlayPokemonPower());
 		return copy;
