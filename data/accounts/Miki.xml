@@ -89,6 +89,39 @@
             <Size>3</Size>
         </Card>
     </Deck>
-    <DefeatedArenaFighters/>
-    <UnlockedCards/>
+    <DefeatedArenaFighters>
+        <DefeatedFighter ID="MAMORIA_RED"/>
+        <DefeatedFighter ID="MAMORIA_BRENDAN"/>
+        <DefeatedFighter ID="MAMORIA_BROCK"/>
+    </DefeatedArenaFighters>
+    <UnlockedCards>
+        <UnlockedCard ID="00266"/>
+        <UnlockedCard ID="00267"/>
+        <UnlockedCard ID="00268"/>
+        <UnlockedCard ID="00269"/>
+        <UnlockedCard ID="00270"/>
+        <UnlockedCard ID="00271"/>
+        <UnlockedCard ID="00272"/>
+        <UnlockedCard ID="00273"/>
+        <UnlockedCard ID="00274"/>
+        <UnlockedCard ID="00275"/>
+        <UnlockedCard ID="00276"/>
+        <UnlockedCard ID="00277"/>
+        <UnlockedCard ID="00278"/>
+        <UnlockedCard ID="00279"/>
+        <UnlockedCard ID="00280"/>
+        <UnlockedCard ID="00281"/>
+        <UnlockedCard ID="00282"/>
+        <UnlockedCard ID="00283"/>
+        <UnlockedCard ID="00284"/>
+        <UnlockedCard ID="00285"/>
+        <UnlockedCard ID="00286"/>
+        <UnlockedCard ID="00287"/>
+        <UnlockedCard ID="00288"/>
+        <UnlockedCard ID="00289"/>
+        <UnlockedCard ID="00290"/>
+        <UnlockedCard ID="00291"/>
+        <UnlockedCard ID="00292"/>
+        <UnlockedCard ID="00293"/>
+    </UnlockedCards>
 </Account>
