@@ -9,6 +9,7 @@ import model.database.Deck;
 import model.game.GameParameters;
 import network.client.Account;
 import network.client.Player;
+import network.server.PokemonGameManagerFactory;
 import network.tcp.borders.ClientBorder;
 import network.tcp.borders.ServerMain;
 import gui2d.GUI2D;
@@ -495,7 +496,7 @@ public class LobbyController extends Node implements GUI2DController {
 
 	protected void botClicked(String deckName) {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
-		GUI2D.getInstance().getPlayer().createGame();
+		GUI2D.getInstance().getPlayer().createLocalGame();
 
 		// Create tree bot and connect him to the server that was created in
 		// createGame:
@@ -504,11 +505,10 @@ public class LobbyController extends Node implements GUI2DController {
 			public void run() {
 				Player bot = Database.getBot("TreeBot");
 				bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.BOT_DECK_PATH + deckName)));
-				ClientBorder botBorder = new ClientBorder(bot);
-				bot.setServer(botBorder);
+				bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
 
 				// Register at server:
-				botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
+				PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME.connectAsLocalPlayer(bot, ServerMain.GAME_PW);
 			}
 		}).start();
 	}

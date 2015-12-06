@@ -913,6 +913,10 @@ public class PokemonGameModelImpl implements PokemonGame {
 			if (c != null) {
 				this.assignGameID(c);
 				c.setCardScript(this.cardScriptFactory.createScript(c, this));
+				if (c instanceof PokemonCard) {
+					((PokemonCard) c).setAttackNames(((PokemonCardScript) c.getCardScript()).getAttackNames());
+					((PokemonCard) c).setPokemonPowerNames(((PokemonCardScript) c.getCardScript()).getPokemonPowerNames());
+				}
 				cardList.add(c);
 				this.cardMap.put(c.getGameID(), c);
 			} else
@@ -928,13 +932,17 @@ public class PokemonGameModelImpl implements PokemonGame {
 		Card dummyCard = new Card();
 		for (Position pos : gameField.getAllPositions()) {
 			Position position = new PositionImpl(pos.getPositionID(), pos.getColor());
+			position.setVisible(pos.isVisibleForPlayer(Color.BLUE), Color.BLUE);
+			position.setVisible(pos.isVisibleForPlayer(Color.RED), Color.RED);
 			List<Card> cardList = new ArrayList<Card>();
 			for (Card c : pos.getCards()) {
 				// Check visibility:
 				boolean isVisible = (player.getColor() == Color.BLUE && c.isVisibleForPlayerBlue()) || (player.getColor() == Color.RED && c.isVisibleForPlayerRed());
-				if (isVisible)
-					cardList.add(c);
-				else
+				if (isVisible) {
+					Card copy = c.copy();
+					copy.setCardScript(CardScriptFactory.getInstance().createScript(c, this));
+					cardList.add(copy);
+				} else
 					cardList.add(dummyCard);
 			}
 			position.setCards(cardList);

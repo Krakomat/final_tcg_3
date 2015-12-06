@@ -78,7 +78,7 @@ public class PokemonCard extends Card {
 		List<String> pList = new ArrayList<>();
 		for (String string : this.pokemonPowerNames)
 			pList.add(string);
-		c.setAttackNames(pList);
+		c.setPokemonPowerNames(pList);
 		List<DynamicPokemonCondition> cList = new ArrayList<>();
 		for (DynamicPokemonCondition condition : this.conditions)
 			cList.add(condition.copy());

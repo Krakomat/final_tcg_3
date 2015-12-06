@@ -30,7 +30,8 @@ import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.PokemonCardScript;
 
 /**
- * Controls the general flow of the game. Does not change the game model, but only calls its game model instance to perform changes on the game model.
+ * Controls the general flow of the game. Does not change the game model, but
+ * only calls its game model instance to perform changes on the game model.
  * 
  * @author Michael
  *
@@ -42,7 +43,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	private boolean moveMade;
 	private PokemonGame gameModel;
 	private ServerListener serverListener;
-	private ServerMain serverMain; // only used for destroying the server from here
+	private ServerMain serverMain; // only used for destroying the server from
+									// here
 
 	PokemonGameManagerImpl(long id, String name, String password, ServerMain serverMain) {
 		this.gameModel = new PokemonGameModelImpl(id);
@@ -50,6 +52,14 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		this.password = password;
 		this.moveMade = false;
 		this.serverMain = serverMain;
+	}
+
+	public PokemonGameManagerImpl(long id, String name, String password) {
+		this.gameModel = new PokemonGameModelImpl(id);
+		this.name = name;
+		this.password = password;
+		this.moveMade = false;
+		this.serverMain = null;
 	}
 
 	/**
@@ -66,7 +76,9 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Starts the game. Returns true, if startup was successful, false otherwise. Also starts a new Thread, which controls the overall game flow.
+	 * Starts the game. Returns true, if startup was successful, false
+	 * otherwise. Also starts a new Thread, which controls the overall game
+	 * flow.
 	 * 
 	 * @return
 	 */
@@ -89,7 +101,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Controls the overall game flow. Is started when everything is already set up, meaning, that all positions are empty except for the decks.
+	 * Controls the overall game flow. Is started when everything is already set
+	 * up, meaning, that all positions are empty except for the decks.
 	 */
 	protected void runGame() {
 		this.timeoutWait(200);
@@ -120,10 +133,13 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				gameModel.executeEndTurn();
 				gameModel.betweenTurns();
 			}
-		} while (gameModel.getGameState() == GameState.RUNNING); // while game not finished
+		} while (gameModel.getGameState() == GameState.RUNNING); // while game
+																	// not
+																	// finished
 
 		// Destroy server and clients:
-		this.serverMain.exit();
+		if (serverMain != null)
+			this.serverMain.exit();
 	}
 
 	/**
@@ -165,8 +181,31 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		return false; // bad password
 	}
 
+	@Override
+	public boolean connectAsLocalPlayer(Player player, String password) {
+		if (this.checkPassword(password)) {
+			if (this.isFull())
+				return false; // game full
+			if (gameModel.getPlayerBlue() == null) {
+				player.setColor(Color.BLUE); // assign color
+				gameModel.setPlayerBlue(player);
+			} else if (gameModel.getPlayerRed() == null) {
+				player.setColor(Color.RED); // assign color
+				gameModel.setPlayerRed(player);
+			} else
+				System.err.println("Fatal error in connectAsPlayer!");
+
+			// Start game automatically when game is full:
+			if (this.isFull())
+				this.startGame(); // Creates a new Thread
+			return true;
+		}
+		return false; // bad password
+	}
+
 	/**
-	 * Checks if the given password matches with the password of the game and returns true, if that is the case.
+	 * Checks if the given password matches with the password of the game and
+	 * returns true, if that is the case.
 	 * 
 	 * @param password
 	 * @return
@@ -196,7 +235,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Adds actions to the given list, which are dependent to the position, the selected card is on. Only is called, if the given player is on turn.
+	 * Adds actions to the given list, which are dependent to the position, the
+	 * selected card is on. Only is called, if the given player is on turn.
 	 * 
 	 * @param actionList
 	 * @param game
@@ -279,7 +319,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				if (c.getCardScript().canBePlayedFromHand() == null)
 					gameModel.playerLoses(player);
 
-				// If card is a trainer card then send card message beforehand, so scripts don't need to implement this:
+				// If card is a trainer card then send card message beforehand,
+				// so scripts don't need to implement this:
 				if (c instanceof TrainerCard)
 					gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
 
@@ -326,7 +367,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	public List<String> getAttacksForPosition(PositionID position) {
 		Position pos = this.gameModel.getPosition(position);
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
-			return new ArrayList<String>(); // position empty or no arena position
+			return new ArrayList<String>(); // position empty or no arena
+											// position
 
 		// Get the attacks from the card script:
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
@@ -354,7 +396,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				if (!pScript.attackCanBeExecuted(attackName))
 					gameModel.playerLoses(player);
 
-				// Check if pokemon is confused and flip a coin, if attacking is allowed or the pokemon hurts itself:
+				// Check if pokemon is confused and flip a coin, if attacking is
+				// allowed or the pokemon hurts itself:
 				boolean attackAllowed = true;
 				if (active.hasCondition(PokemonCondition.CONFUSED)) {
 					gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!", "");
@@ -368,7 +411,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 					}
 				}
 
-				// Check if pokemon is blind and flip a coin, if attacking is allowed:
+				// Check if pokemon is blind and flip a coin, if attacking is
+				// allowed:
 				if (attackAllowed && active.hasCondition(PokemonCondition.BLIND)) {
 					gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails", "");
 					Coin c = gameModel.getAttackAction().flipACoin();
@@ -391,7 +435,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	public List<String> getPokePowerForPosition(PositionID posID) {
 		Position pos = this.gameModel.getPosition(posID);
 		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
-			return new ArrayList<String>(); // position empty or no arena position
+			return new ArrayList<String>(); // position empty or no arena
+											// position
 
 		// Get the pokemon power from the card script:
 		PokemonCard pokemon = (PokemonCard) pos.getTopCard();

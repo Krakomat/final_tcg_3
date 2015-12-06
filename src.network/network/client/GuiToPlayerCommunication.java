@@ -22,7 +22,8 @@ public interface GuiToPlayerCommunication {
 	public Color getColor();
 
 	/**
-	 * The user decided to play the given card from his hand. This is being send to the server, which executes this move.
+	 * The user decided to play the given card from his hand. This is being send
+	 * to the server, which executes this move.
 	 * 
 	 * @param index
 	 *            index of the hand card
@@ -30,7 +31,8 @@ public interface GuiToPlayerCommunication {
 	public void playHandCard(int index);
 
 	/**
-	 * Returns a list of {@PlayerAction}s that can be used for the given hand card.
+	 * Returns a list of {@PlayerAction}s that can be used for the given hand
+	 * card.
 	 * 
 	 * @param index
 	 * @return
@@ -53,7 +55,8 @@ public interface GuiToPlayerCommunication {
 	public List<String> getAttackNames(PositionID posID);
 
 	/**
-	 * The user decided to attack with his active pokemon and the attack represented by the given index.
+	 * The user decided to attack with his active pokemon and the attack
+	 * represented by the given index.
 	 * 
 	 * @param i
 	 */
@@ -75,7 +78,8 @@ public interface GuiToPlayerCommunication {
 	public void pokemonPower(PositionID positionIDForArenaGeometry);
 
 	/**
-	 * Returns a list of {@PlayerAction}s that can be used for the given arena position.
+	 * Returns a list of {@PlayerAction}s that can be used for the given arena
+	 * position.
 	 * 
 	 * @param positionID
 	 * @return
@@ -94,9 +98,16 @@ public interface GuiToPlayerCommunication {
 	public void sendSurrenderToServer();
 
 	/**
-	 * A new server is created using the localhost adress. Also this player connects to the created server.
+	 * A new server is created using the localhost adress. Also this player
+	 * connects to the created server.
 	 */
 	public void createGame();
+
+	/**
+	 * A new server is created using the localhost adress. Also this player
+	 * connects to the created server. Only for local games.
+	 */
+	public void createLocalGame();
 
 	/**
 	 * The player connects to the game with localhost adresses.
@@ -113,7 +124,8 @@ public interface GuiToPlayerCommunication {
 	public String getName();
 
 	/**
-	 * Returns this instance as an account object. Used for the deck editor controller.
+	 * Returns this instance as an account object. Used for the deck editor
+	 * controller.
 	 * 
 	 * @return
 	 */

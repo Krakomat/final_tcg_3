@@ -972,7 +972,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			this.currentOpponent = null;
 			return reward;
 		}
-		return null;
+		return new ArrayList<String>();
 	}
 
 	public void playerLost() {

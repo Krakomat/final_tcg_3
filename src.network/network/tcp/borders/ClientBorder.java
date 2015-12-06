@@ -20,7 +20,8 @@ import network.tcp.messages.QueryMessage;
 import network.tcp.messages.RespondMessage;
 
 /**
- * Simulates an artificial server for the client, so messages from the client to the server are being transfered by this class.
+ * Simulates an artificial server for the client, so messages from the client to
+ * the server are being transfered by this class.
  * 
  * @author Michael
  *
@@ -68,6 +69,11 @@ public class ClientBorder implements PokemonGameManager {
 		boolean returnStatement = serializer.unpackBool(response.getParameters().get(0));
 
 		return returnStatement;
+	}
+
+	@Override
+	public boolean connectAsLocalPlayer(Player player, String password) {
+		return false;
 	}
 
 	@Override

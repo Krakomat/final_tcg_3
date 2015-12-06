@@ -49,6 +49,11 @@ public class TurnSimulator implements PokemonGameManager {
 	}
 
 	@Override
+	public boolean connectAsLocalPlayer(Player player, String password) {
+		throw new UnsupportedOperationException("connectAsLocalPlayer");
+	}
+
+	@Override
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
 		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
 		Card c = handCard ? gameModel.getPosition(position).getCardAtIndex(positionIndex) : gameModel.getPosition(position).getTopCard();
@@ -328,5 +333,4 @@ public class TurnSimulator implements PokemonGameManager {
 	public void surrender(Player player) {
 		
 	}
-
 }

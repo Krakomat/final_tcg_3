@@ -11,6 +11,7 @@ import com.jme3.system.JmeContext;
 
 import common.utilities.Pair;
 import network.server.PokemonGameManager;
+import network.server.PokemonGameManagerFactory;
 import network.tcp.borders.ClientBorder;
 import network.tcp.borders.ServerMain;
 import model.database.Card;
@@ -341,6 +342,21 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 		this.setServer(playerBorder);
 
 		playerBorder.connectAsPlayer(this, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
+	}
+
+	@Override
+	public void createLocalGame() {
+		System.out.println("[Server] Starting server...!");
+
+		System.out.println("[Server] Calling start...!");
+		PokemonGameManager server = PokemonGameManagerFactory.createNewGame(name, ServerMain.GAME_PW);
+		System.out.println("[Server] Start sucessful!");
+
+		System.out.println("[Server] Started!");
+
+		this.setServer(server);
+
+		server.connectAsLocalPlayer(this, ServerMain.GAME_PW);
 	}
 
 	@Override

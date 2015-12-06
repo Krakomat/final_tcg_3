@@ -79,6 +79,7 @@ public class Database {
 			p.setWeakness(((PokemonCard) c).getWeakness());
 			p.setResistance(((PokemonCard) c).getResistance());
 			p.setRetreatCosts(((PokemonCard) c).getRetreatCosts());
+			p.setAttackNames(((PokemonCard) c).getAttackNames());
 			return p;
 		} else if (c instanceof TrainerCard) {
 			TrainerCard p = new TrainerCard();

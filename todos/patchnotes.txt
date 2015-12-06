@@ -17,6 +17,8 @@ Patch 4.00
 	Game:
 		- 00118_Victreebel: Fixed a bug, where the retreat button would appear, even if the pokemon was not allowed to retreat
 		- 00049_Drowzee: Fixed a bug, where Drowzee could retreat for free
+	Network:
+		- Added support for local games in single player mode: Single player games are no longer played via the network layer
 		
 Patch 3.50
 	Deck Editor:

@@ -23,7 +23,7 @@ import model.database.Deck;
 import model.game.GameParameters;
 import network.client.Account;
 import network.client.Player;
-import network.tcp.borders.ClientBorder;
+import network.server.PokemonGameManagerFactory;
 import network.tcp.borders.ServerMain;
 
 public class MarmoriaArenaController extends Node implements GUI2DController {
@@ -86,7 +86,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_SERVANT_MUSIC);
 
 				GUI2D.getInstance().setNextMode(GUI2DMode.MAMORIA_CITY_ARENA);
-				GUI2D.getInstance().getPlayer().createGame();
+				GUI2D.getInstance().getPlayer().createLocalGame();
 
 				// Create tree bot and connect him to the server that was
 				// created in createGame:
@@ -95,11 +95,10 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 					public void run() {
 						Player bot = Database.getBot("TreeBot");
 						bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.ARENA_DECK_PATH + currentSelectedFighter.getDeck().getName() + ".xml")));
-						ClientBorder botBorder = new ClientBorder(bot);
-						bot.setServer(botBorder);
+						bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
 
 						// Register at server:
-						botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
+						PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME.connectAsLocalPlayer(bot, ServerMain.GAME_PW);
 					}
 				}).start();
 			}
