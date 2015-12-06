@@ -46,7 +46,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00271");
 			lockedCards.add("00287");
 			lockedCards.add("00293");
-			return new ArenaFighter(code, "Rocko", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
+			return new ArenaFighter(code, "Brock", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), lockedCards);
 		default:
 			break;

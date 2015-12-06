@@ -56,12 +56,15 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 	public void initSceneGraph() {
 		float buttonWidth = screenWidth * 0.15f;
 		float buttonHeight = buttonWidth / 4;
+		float imageWidth = screenWidth * 0.35f;
+		float thumbWidth = screenWidth * 0.125f;
+		float thumbHeight = screenWidth * 0.125f;
 
 		backButton = new TextButton2D("backButton", "Back", buttonWidth, buttonHeight) {
 
 			@Override
 			public void mouseSelect() {
-				GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY, true);
+				GUI2D.getInstance().switchMode(GUI2DMode.ARENA_CHOOSE_LOBBY, false);
 			}
 
 			@Override
@@ -74,7 +77,7 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(backButton);
 		this.attachChild(backButton);
 
-		fightButton = new TextButton2D("fightButton", "Fight", screenWidth * 0.25f, buttonHeight) {
+		fightButton = new TextButton2D("fightButton", "Fight", imageWidth, buttonHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -108,14 +111,11 @@ public class MarmoriaArenaController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		fightButton.setLocalTranslation(screenWidth * 0.7f, 0, 0);
+		fightButton.setLocalTranslation(screenWidth * 0.2f - imageWidth / 2, screenHeight * 0.4f - thumbHeight, 0);
 		fightButton.setVisible(false);
 		dropInUpdateQueue(fightButton);
 		this.attachChild(fightButton);
 
-		float imageWidth = screenWidth * 0.35f;
-		float thumbWidth = screenWidth * 0.125f;
-		float thumbHeight = screenWidth * 0.125f;
 		arenaImage = new Image2D("arenaImage", Database.getAssetKey("Pewter City Gym"), imageWidth, thumbHeight) {
 
 			@Override
