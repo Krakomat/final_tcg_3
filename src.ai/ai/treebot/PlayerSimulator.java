@@ -382,4 +382,9 @@ public class PlayerSimulator implements Player {
 	public void setUnlockedCards(List<String> unlockedCards) {
 		
 	}
+
+	@Override
+	public void setBotDifficulty(int diff) {
+		
+	}
 }

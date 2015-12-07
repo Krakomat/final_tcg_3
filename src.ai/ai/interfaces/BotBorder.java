@@ -6,6 +6,7 @@ import java.util.List;
 
 import ai.dummy.DummyBot;
 import ai.standard.StandardBot;
+import ai.treebot.GameTree;
 import ai.treebot.TreeBot;
 import network.client.AccountImpl;
 import network.client.Player;
@@ -168,5 +169,10 @@ public class BotBorder extends AccountImpl implements Player {
 	@Override
 	public void playerReceivesAnimation(Animation animation) {
 
+	}
+
+	@Override
+	public void setBotDifficulty(int diff) {
+		GameTree.TREE_DEPTH = diff;
 	}
 }

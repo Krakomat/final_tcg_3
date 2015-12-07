@@ -93,6 +93,9 @@
         <DefeatedFighter ID="MAMORIA_RED"/>
         <DefeatedFighter ID="MAMORIA_BRENDAN"/>
         <DefeatedFighter ID="MAMORIA_BROCK"/>
+        <DefeatedFighter ID="AZURIA_LYRA"/>
+        <DefeatedFighter ID="AZURIA_MAY"/>
+        <DefeatedFighter ID="AZURIA_MISTY"/>
     </DefeatedArenaFighters>
     <UnlockedCards>
         <UnlockedCard ID="00266"/>

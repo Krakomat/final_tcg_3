@@ -18,7 +18,7 @@ import model.game.LocalPokemonGameModel;
  *
  */
 public class GameTree {
-	static final int TREE_DEPTH = 20;
+	public static int TREE_DEPTH = 5;
 
 	private GameTreeNode rootNode;
 	private GameModelEvaluator evaluator;

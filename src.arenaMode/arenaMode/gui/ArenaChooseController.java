@@ -80,7 +80,10 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 			@Override
 			public void mouseSelect() {
-				GUI2D.getInstance().switchMode(GUI2DMode.MAMORIA_CITY_ARENA, true);
+				if (enabledArenaNames.get(currentArenaIndex).equals("Pewter City Gym"))
+					GUI2D.getInstance().switchMode(GUI2DMode.MAMORIA_CITY_ARENA, true);
+				if (enabledArenaNames.get(currentArenaIndex).equals("Cerulean City Gym"))
+					GUI2D.getInstance().switchMode(GUI2DMode.AZURIA_CITY_ARENA, true);
 			}
 
 			@Override
@@ -208,11 +211,11 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 	public void setAccount(Account asAccount) {
 		this.account = asAccount;
-		// TODO only activate enabled arenas!
 		currentArenaIndex = 0;
 		this.enabledArenaNames = new ArrayList<>();
 		this.enabledArenaNames.add("Pewter City Gym");
-		// this.enabledArenaNames.add("Cerulean City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK))
+			this.enabledArenaNames.add("Cerulean City Gym");
 		// this.enabledArenaNames.add("Vermilion City Gym");
 		// this.enabledArenaNames.add("Celadon City Gym");
 		// this.enabledArenaNames.add("Fuchsia City Gym");
@@ -286,6 +289,53 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_RED))
 				account.getDefeatedArenaFighters().add(ArenaFighterCode.MAMORIA_RED);
 			break;
+
+		case AZURIA_LYRA:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_LYRA))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.AZURIA_LYRA);
+			break;
+		case AZURIA_MISTY:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY)) {
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.AZURIA_MISTY);
+				// 1 reward per fighter for beating the master the first time!
+				for (ArenaFighter f : MarmoriaArenaController.getArenaFighters()) {
+					String reward = f.createReward(account);
+					if (reward != null) {
+						rewards.add(reward);
+						account.getUnlockedCards().add(reward);
+					}
+				}
+			}
+			break;
+		case AZURIA_MAY:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MAY))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.AZURIA_MAY);
+			break;
+
 		default:
 			break;
 		}

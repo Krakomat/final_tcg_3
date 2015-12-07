@@ -382,4 +382,9 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	public void playerReceivesAnimation(Animation animation) {
 		this.view.playAnimation(animation);
 	}
+
+	@Override
+	public void setBotDifficulty(int diff) {
+		throw new UnsupportedOperationException();
+	}
 }

@@ -27,8 +27,9 @@ import network.tcp.messages.QueryMessage;
 import network.tcp.messages.RespondMessage;
 
 /**
- * Simulates an artificial Player for the game manager. If the game manager calls some operation on the player, it is being send to the respective hosted connection,
- * which receives the message via the client listener.
+ * Simulates an artificial Player for the game manager. If the game manager
+ * calls some operation on the player, it is being send to the respective hosted
+ * connection, which receives the message via the client listener.
  * 
  * @author Michael
  *
@@ -412,7 +413,7 @@ public class ServerBorder implements Player {
 
 	@Override
 	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters) {
-		
+
 	}
 
 	@Override
@@ -422,6 +423,11 @@ public class ServerBorder implements Player {
 
 	@Override
 	public void setUnlockedCards(List<String> unlockedCards) {
-		
+
+	}
+
+	@Override
+	public void setBotDifficulty(int diff) {
+		throw new UnsupportedOperationException();
 	}
 }

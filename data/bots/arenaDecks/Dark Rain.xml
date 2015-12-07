@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Dark Rain">
+    <Cards>
+        <Card ID="00006">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00063">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>9</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>13</Size>
+        </Card>
+        <Card ID="00161">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00171">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00174">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00187">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00202">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00207">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00216">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00222">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00231">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00232">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00250">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00253">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

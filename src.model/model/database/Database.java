@@ -460,6 +460,27 @@ public class Database {
 		TextureKey rockoCharacterThumb = new TextureKey("/tilesets/characters/Rocko_thumb.png");
 		rockoCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_BROCK.toString() + "THUMB", rockoCharacterThumb);
+
+		TextureKey lyraCharacter = new TextureKey("/tilesets/characters/Lyra.png");
+		lyraCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.AZURIA_LYRA.toString(), lyraCharacter);
+		TextureKey lyraCharacterThumb = new TextureKey("/tilesets/characters/Lyra_thumb.png");
+		lyraCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.AZURIA_LYRA.toString() + "THUMB", lyraCharacterThumb);
+
+		TextureKey mayCharacter = new TextureKey("/tilesets/characters/May.png");
+		mayCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.AZURIA_MAY.toString(), mayCharacter);
+		TextureKey mayCharacterThumb = new TextureKey("/tilesets/characters/May_thumb.png");
+		mayCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.AZURIA_MAY.toString() + "THUMB", mayCharacterThumb);
+
+		TextureKey mistyCharacter = new TextureKey("/tilesets/characters/Misty.png");
+		mistyCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.AZURIA_MISTY.toString(), mistyCharacter);
+		TextureKey mistyCharacterThumb = new TextureKey("/tilesets/characters/Misty_thumb.png");
+		mistyCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.AZURIA_MISTY.toString() + "THUMB", mistyCharacterThumb);
 	}
 
 	public static Player getBot(String name) {

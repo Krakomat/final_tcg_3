@@ -51,6 +51,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 
 import arenaMode.gui.ArenaChooseController;
+import arenaMode.gui.AzuriaArenaController;
 import arenaMode.gui.MarmoriaArenaController;
 import arenaMode.model.ArenaFighter;
 import common.utilities.Pair;
@@ -79,6 +80,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private LobbyController lobbyController;
 	private ArenaChooseController arenaController;
 	private MarmoriaArenaController mamoriaArenaController;
+	private AzuriaArenaController azuriaArenaController;
 	private DeckEditController deckEditController;
 
 	/** True if this gui is running */
@@ -132,6 +134,10 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		mamoriaArenaController = new MarmoriaArenaController();
 		mamoriaArenaController.initSceneGraph();
 		guiNode.attachChild(mamoriaArenaController);
+
+		azuriaArenaController = new AzuriaArenaController();
+		azuriaArenaController.initSceneGraph();
+		guiNode.attachChild(azuriaArenaController);
 
 		deckEditController = new DeckEditController();
 		deckEditController.initSceneGraph();
@@ -854,6 +860,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			case MAMORIA_CITY_ARENA:
 				this.currentActiveController = this.mamoriaArenaController;
 				break;
+			case AZURIA_CITY_ARENA:
+				this.currentActiveController = this.azuriaArenaController;
+				break;
 			default:
 				break;
 			}
@@ -885,6 +894,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		case MAMORIA_CITY_ARENA:
 			this.nextController = this.mamoriaArenaController;
 			break;
+		case AZURIA_CITY_ARENA:
+			this.nextController = this.azuriaArenaController;
+			break;
 		default:
 			break;
 		}
@@ -900,6 +912,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		this.lobbyController.setAccount(this.player.asAccount());
 		this.arenaController.setAccount(this.player.asAccount());
 		this.mamoriaArenaController.setAccount(this.player.asAccount());
+		this.azuriaArenaController.setAccount(this.player.asAccount());
 		this.deckEditController.setAccount(this.player.asAccount());
 		this.animationController.setPlayerColor(this.player.getColor());
 	}
