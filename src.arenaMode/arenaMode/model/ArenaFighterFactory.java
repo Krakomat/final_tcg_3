@@ -49,12 +49,44 @@ public class ArenaFighterFactory {
 			return new ArenaFighter(code, "Brock", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), lockedCards);
 		case AZURIA_LYRA:
+			lockedCards.add("00306");
+			lockedCards.add("00307");
+			lockedCards.add("00308");
+			lockedCards.add("00309");
+			lockedCards.add("00310");
+			lockedCards.add("00311");
+			lockedCards.add("00314");
+			lockedCards.add("00318");
+			lockedCards.add("00319");
+			lockedCards.add("00320");
+			lockedCards.add("00321");
+			lockedCards.add("00322");
+			lockedCards.add("00323");
 			return new ArenaFighter(code, "Lyra", "Dark Rain.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString() + "_THUMB"), lockedCards);
 		case AZURIA_MAY:
+			lockedCards.add("00301");
+			lockedCards.add("00302");
+			lockedCards.add("00303");
+			lockedCards.add("00304");
+			lockedCards.add("00305");
+			lockedCards.add("00312");
+			lockedCards.add("00313");
+			lockedCards.add("00317");
+			lockedCards.add("00325");
 			return new ArenaFighter(code, "May", "Raindrops.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString() + "_THUMB"), lockedCards);
 		case AZURIA_MISTY:
+			lockedCards.add("00294");
+			lockedCards.add("00295");
+			lockedCards.add("00296");
+			lockedCards.add("00297");
+			lockedCards.add("00298");
+			lockedCards.add("00299");
+			lockedCards.add("00300");
+			lockedCards.add("00315");
+			lockedCards.add("00316");
+			lockedCards.add("00324");
 			return new ArenaFighter(code, "Misty", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "_THUMB"), lockedCards);
 		default:
