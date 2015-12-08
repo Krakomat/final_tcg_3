@@ -20,6 +20,7 @@ Patch 4.00
 		- 00049_Drowzee: Fixed a bug, where Drowzee could retreat for free
 		- 00204_DarkDragonite: Fixed a bug, where the player takes 2 pokemon to his bench, even though the bench is almost full
 		- 00081_Energiezugewinnung: Fixed a bug, where the discarded energy could be retrieved again
+		- 00038_Quaputzi: Fixed a bug where blocked attacks were only stored on server side
 	Network:
 		- Added support for local games in single player mode: Single player games are no longer played via the network layer
 		

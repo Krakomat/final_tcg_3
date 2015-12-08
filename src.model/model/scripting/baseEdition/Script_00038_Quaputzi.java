@@ -3,6 +3,7 @@ package model.scripting.baseEdition;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.utilities.Triple;
 import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
@@ -53,9 +54,7 @@ public class Script_00038_Quaputzi extends PokemonCardScript {
 			gameModel.sendTextMessageToAllPlayers(chosenAttack + " of " + defendingPokemon.getName() + " is blocked!", "");
 
 			// Block attack:
-			PokemonCard pokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
-			PokemonCardScript cardScript = (PokemonCardScript) pokemon.getCardScript();
-			cardScript.blockAttack(chosenAttack, 2);
+			gameModel.getGameModelParameters().getBlockedAttacks().add(new Triple<Integer, String, Integer>(defendingPokemon.getGameID(), chosenAttack, 2));
 
 			gameModel.sendGameModelToAllPlayers("");
 		} else

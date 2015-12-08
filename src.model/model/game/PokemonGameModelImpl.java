@@ -646,16 +646,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 * attacks.
 	 */
 	private void updateBlockedAttacks() {
-		for (PositionID posID : this.getFullArenaPositions(Color.BLUE)) {
-			PokemonCard pokemon = (PokemonCard) this.getPosition(posID).getTopCard();
-			PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
-			script.decreaseBlockingTimeForAttacks(); // Call here
-		}
-		for (PositionID posID : this.getFullArenaPositions(Color.RED)) {
-			PokemonCard pokemon = (PokemonCard) this.getPosition(posID).getTopCard();
-			PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
-			script.decreaseBlockingTimeForAttacks(); // Call here
-		}
+		this.gameModelParameters.updateBlockedAttacks();
 	}
 
 	/**

@@ -13,6 +13,7 @@ import org.msgpack.core.MessagePacker;
 import org.msgpack.core.MessageUnpacker;
 
 import common.utilities.Pair;
+import common.utilities.Triple;
 import model.database.Card;
 import model.database.Deck;
 import model.database.DynamicPokemonCondition;
@@ -939,5 +940,65 @@ public class TCGSerializer {
 		}
 		unpacker.close();
 		return ints;
+	}
+
+	public ByteString packTriple(Triple<Integer, String, Integer> triple) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MessagePacker packer = MessagePack.newDefaultPacker(out);
+
+		ByteString b = packInt(triple.getKey());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		b = packString(triple.getValue());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		b = packInt(triple.getAction());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		packer.close();
+		return new ByteString(out.toByteArray());
+	}
+
+	public Triple<Integer, String, Integer> unpackTriple(ByteString b) throws IOException {
+		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
+		ByteString bString = unpackByteString(unpacker);
+		int key = unpackInt(bString);
+		bString = unpackByteString(unpacker);
+		String value = unpackString(bString);
+		bString = unpackByteString(unpacker);
+		int action = unpackInt(bString);
+		Triple<Integer, String, Integer> triple = new Triple<Integer, String, Integer>(key, value, action);
+		unpacker.close();
+		return triple;
+	}
+
+	public List<Triple<Integer, String, Integer>> unpackBlockedAttacksList(ByteString b) throws IOException {
+		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
+
+		List<Triple<Integer, String, Integer>> ints = new ArrayList<>();
+		int size = unpacker.unpackArrayHeader();
+		for (int i = 0; i < size; i++) {
+			ByteString bString = unpackByteString(unpacker);
+			ints.add(unpackTriple(bString));
+		}
+		unpacker.close();
+		return ints;
+	}
+
+	public ByteString packBlockedAttacksList(List<Triple<Integer, String, Integer>> blockedAttacks) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MessagePacker packer = MessagePack.newDefaultPacker(out);
+
+		packer.packArrayHeader(blockedAttacks.size());
+		for (Triple<Integer, String, Integer> c : blockedAttacks) {
+			ByteString b = packTriple(c);
+			packer.packBinaryHeader(b.length());
+			packer.writePayload(b.copyAsBytes());
+		}
+		packer.close();
+		return new ByteString(out.toByteArray());
 	}
 }

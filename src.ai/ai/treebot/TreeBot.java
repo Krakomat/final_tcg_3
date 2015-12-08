@@ -73,7 +73,10 @@ public class TreeBot implements Bot {
 			this.chosenElementQueue = move.getChosenElementQueue();
 			this.chosenPositionQueue = move.getChosenPositionQueue();
 
+			System.err.println("Executing move: " + move.toString());
 			this.aiUtilities.executeMove(move, server, player);
+			System.err.println("---------------------------------------------------------");
+			System.err.println("---------------------------------------------------------");
 		}
 	}
 
@@ -195,9 +198,9 @@ public class TreeBot implements Bot {
 		}
 
 		// Pay colorless costs with non-basic energy:
-		for (int i = 0; i < colorless; i++) {
+		for (int i = 0; i < availableCards.size(); i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless && !c.isBasisEnergy()) {
+			if (!c.isBasisEnergy()) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);
@@ -206,9 +209,9 @@ public class TreeBot implements Bot {
 		}
 
 		// Pay colorless costs with basic energy:
-		for (int i = 0; i < colorless; i++) {
+		for (int i = 0; i < availableCards.size(); i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
-			if (c.getProvidedEnergy().size() >= colorless) {
+			if (c.getProvidedEnergy().size() <= colorless) {
 				chosenCards.add(c);
 				colorless = colorless - c.getProvidedEnergy().size();
 				availableCards.remove(i);
@@ -216,8 +219,7 @@ public class TreeBot implements Bot {
 			}
 		}
 
-		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of StandardBot was not ok! Cost: " + costs + " Payment: "
-				+ chosenCards);
+		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of TreeBot was not ok! Cost: " + costs + " Payment: " + chosenCards);
 		return chosenCards;
 	}
 

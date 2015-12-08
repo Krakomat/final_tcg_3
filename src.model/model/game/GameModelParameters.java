@@ -10,6 +10,7 @@ import org.msgpack.core.MessagePacker;
 import org.msgpack.core.MessageUnpacker;
 
 import common.utilities.Pair;
+import common.utilities.Triple;
 import network.serialization.TCGSerializer;
 import network.tcp.messages.ByteString;
 import model.enums.GameState;
@@ -26,6 +27,7 @@ public class GameModelParameters {
 			power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra, power_Activated_00221_DarkGloom,
 			power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume;
 	private List<Pair<Integer, Integer>> lieLowUsed_00287_BrocksDugtrio, tunnelingUsed_00269_BrocksOnix;
+	private List<Triple<Integer, String, Integer>> blockedAttacks;
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
@@ -33,6 +35,7 @@ public class GameModelParameters {
 		energyPlayed = false;
 		retreatExecuted = false;
 		this.noEnergyPayment = false;
+		this.blockedAttacks = new ArrayList<>();
 		this.lauchschlagUsed_00027_Porenta = new ArrayList<>();
 		this.power_Active_00164_Muk = new ArrayList<>();
 		this.power_Active_00153_Aerodactyl = new ArrayList<>();
@@ -61,6 +64,10 @@ public class GameModelParameters {
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
 		this.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.setNoEnergyPayment(gameModelUpdate.getGameModelParameters().isNoEnergyPayment());
+		this.blockedAttacks = new ArrayList<>();
+		for (Triple<Integer, String, Integer> i : gameModelUpdate.getGameModelParameters().getBlockedAttacks())
+			this.blockedAttacks.add(i);
+
 		this.lauchschlagUsed_00027_Porenta = new ArrayList<>();
 		this.power_Active_00164_Muk = new ArrayList<>();
 		this.power_Active_00153_Aerodactyl = new ArrayList<>();
@@ -127,6 +134,9 @@ public class GameModelParameters {
 		copy.setGameState(gameState);
 		copy.setNoEnergyPayment(noEnergyPayment);
 		copy.setRetreatExecuted(retreatExecuted);
+		for (Triple<Integer, String, Integer> i : this.getBlockedAttacks())
+			copy.getBlockedAttacks().add(i);
+
 		for (Integer i : this.getLauchschlagUsed_00027_Porenta())
 			copy.getLauchschlagUsed_00027_Porenta().add(i);
 		for (Integer i : this.getPower_Active_00164_Muk())
@@ -191,6 +201,10 @@ public class GameModelParameters {
 		// noEnergyPayment:
 		bString = serializer.unpackByteString(unpacker);
 		this.noEnergyPayment = serializer.unpackBool(bString);
+
+		// blockedAttacks
+		bString = serializer.unpackByteString(unpacker);
+		this.blockedAttacks = serializer.unpackBlockedAttacksList(bString);
 
 		// lauchschlagUsed_00027_Porenta
 		bString = serializer.unpackByteString(unpacker);
@@ -305,8 +319,13 @@ public class GameModelParameters {
 		packer.packBinaryHeader(energyPayment.length());
 		packer.writePayload(energyPayment.copyAsBytes());
 
+		// blockedAttacks
+		ByteString b = serializer.packBlockedAttacksList(blockedAttacks);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
 		// lauchschlagUsed_00027_Porenta
-		ByteString b = serializer.packIntList(lauchschlagUsed_00027_Porenta);
+		b = serializer.packIntList(lauchschlagUsed_00027_Porenta);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -607,5 +626,32 @@ public class GameModelParameters {
 
 	public void setTunnelingUsed_00269_BrocksOnix(List<Pair<Integer, Integer>> tunnelingUsed_00269_BrocksOnix) {
 		this.tunnelingUsed_00269_BrocksOnix = tunnelingUsed_00269_BrocksOnix;
+	}
+
+	public List<Triple<Integer, String, Integer>> getBlockedAttacks() {
+		return blockedAttacks;
+	}
+
+	public void setBlockedAttacks(List<Triple<Integer, String, Integer>> blockedAttacks) {
+		this.blockedAttacks = blockedAttacks;
+	}
+
+	public void updateBlockedAttacks() {
+		List<Triple<Integer, String, Integer>> blockedAttacksNew = new ArrayList<>();
+		for (Triple<Integer, String, Integer> attack : this.blockedAttacks) {
+			if (attack.getAction() != 1) {
+				blockedAttacksNew.add(new Triple<Integer, String, Integer>(attack.getKey(), attack.getValue(), attack.getAction() - 1));
+			}
+		}
+		this.blockedAttacks = blockedAttacksNew;
+	}
+
+	public boolean attackIsBlocked(String attackName, int gameID) {
+		for (Triple<Integer, String, Integer> attack : this.blockedAttacks) {
+			if (attack.getValue().equals(attackName) && attack.getKey() == gameID) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

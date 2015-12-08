@@ -7,7 +7,6 @@ import model.enums.CardType;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.interfaces.Position;
-import model.scripting.abstracts.PokemonCardScript;
 
 public class PokemonCard extends Card {
 
@@ -92,7 +91,6 @@ public class PokemonCard extends Card {
 		conditions = new ArrayList<DynamicPokemonCondition>();
 		currentWeakness = weakness;
 		currentResistance = resistance;
-		((PokemonCardScript) this.cardScript).clearBlockedAttacks();
 	}
 
 	public ArrayList<PokemonCondition> nextTurn() {

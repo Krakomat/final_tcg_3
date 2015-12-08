@@ -28,14 +28,12 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	private Map<String, List<Element>> attackCosts;
 	private List<String> attackNames;
 	protected List<String> pokemonPowers;
-	private Map<String, Integer> blockedAttacks;
 
 	public PokemonCardScript(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		this.attackCosts = new HashMap<String, List<Element>>();
 		this.attackNames = new ArrayList<>();
 		this.pokemonPowers = new ArrayList<>();
-		this.blockedAttacks = new HashMap<>();
 	}
 
 	@Override
@@ -94,7 +92,7 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	 */
 	public boolean attackCanBeExecuted(String attackName) {
 		// Check if attack is blocked:
-		if (this.blockedAttacks.containsKey(attackName))
+		if (gameModel.getGameModelParameters().attackIsBlocked(attackName, this.card.getGameID()))
 			return false;
 
 		// If pokemon is paralyzed or asleep, the it cannot attack:
@@ -246,9 +244,12 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			if (c instanceof PokemonCard)
 				costs = ((PokemonCardScript) c.getCardScript()).modifyRetreatCosts(costs, this.getCardOwner().getColor());
 		}
-		if (costs > 0)
-			gameModel.getAttackAction().playerPaysEnergy(player, pCard.getRetreatCosts(),
-					player.getColor() == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
+		if (costs > 0) {
+			List<Element> elementCosts = new ArrayList<>();
+			for (int i = 0; i < costs; i++)
+				elementCosts.add(Element.COLORLESS);
+			gameModel.getAttackAction().playerPaysEnergy(player, elementCosts, player.getColor() == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
+		}
 
 		boolean retreatAllowed = true;
 		// If active pokemon is confused check if it can be retreated by
@@ -372,47 +373,6 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	 */
 	public List<String> getPokemonPowerNames() {
 		return pokemonPowers;
-	}
-
-	/**
-	 * Blocks the given attack for the given amount of rounds.
-	 * 
-	 * @param chosenAttack
-	 * @param rounds
-	 */
-	public void blockAttack(String chosenAttack, int rounds) {
-		blockedAttacks.put(chosenAttack, rounds);
-	}
-
-	/**
-	 * Unblocks all blocked attacks.
-	 */
-	public void clearBlockedAttacks() {
-		this.blockedAttacks = new HashMap<>();
-	}
-
-	/**
-	 * Decreases the amount of rounds attacks are blocked by 1. Removes blocked
-	 * attacks, if the round number is 0.
-	 */
-	public void decreaseBlockingTimeForAttacks() {
-		List<String> removedAttacks = new ArrayList<>();
-		Map<String, Integer> replacedAttacks = new HashMap<>();
-
-		for (String att : blockedAttacks.keySet()) {
-			int rounds = blockedAttacks.get(att);
-			rounds = rounds - 1;
-			if (rounds == 0)
-				removedAttacks.add(att);
-			else
-				replacedAttacks.put(att, rounds);
-		}
-
-		for (String att : removedAttacks)
-			this.blockedAttacks.remove(att);
-
-		for (String att : replacedAttacks.keySet())
-			this.blockedAttacks.replace(att, replacedAttacks.get(att));
 	}
 
 	/**
