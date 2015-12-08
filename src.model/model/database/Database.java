@@ -376,6 +376,10 @@ public class Database {
 		brockEdition.setGenerateMips(false);
 		assetTextures.put(Edition.BROCK.toString(), brockEdition);
 
+		TextureKey mistyEdition = new TextureKey("/tilesets/editions/mistyLogo.png");
+		mistyEdition.setGenerateMips(false);
+		assetTextures.put(Edition.MISTY.toString(), mistyEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);

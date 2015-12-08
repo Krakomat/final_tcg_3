@@ -130,6 +130,38 @@ import model.scripting.jungle.Script_00149_Rhyhorn;
 import model.scripting.jungle.Script_00150_Spearow;
 import model.scripting.jungle.Script_00151_Venonat;
 import model.scripting.jungle.Script_00152_Pokeball;
+import model.scripting.misty.Script_00294_MistysSeadra;
+import model.scripting.misty.Script_00295_MistysTentacruel;
+import model.scripting.misty.Script_00296_Misty;
+import model.scripting.misty.Script_00297_MistysCloyster;
+import model.scripting.misty.Script_00298_MistysGoldeen;
+import model.scripting.misty.Script_00299_MistysPoliwrath;
+import model.scripting.misty.Script_00300_MistysTentacool;
+import model.scripting.misty.Script_00301_MistysPoliwhirl;
+import model.scripting.misty.Script_00302_MistysPsyduck;
+import model.scripting.misty.Script_00303_MistysSeaking;
+import model.scripting.misty.Script_00304_MistysStarmie;
+import model.scripting.misty.Script_00305_MistysTentacool;
+import model.scripting.misty.Script_00306_MistysGoldeen;
+import model.scripting.misty.Script_00307_MistysHorsea;
+import model.scripting.misty.Script_00308_MistysPoliwag;
+import model.scripting.misty.Script_00309_MistysSeel;
+import model.scripting.misty.Script_00310_MistysShellder;
+import model.scripting.misty.Script_00311_MistysStaryu;
+import model.scripting.misty.Script_00312_CelureanCityGym;
+import model.scripting.misty.Script_00313_MistysWrath;
+import model.scripting.misty.Script_00314_MistysDuel;
+import model.scripting.misty.Script_00315_MistysGolduck;
+import model.scripting.misty.Script_00316_MistysGyarados;
+import model.scripting.misty.Script_00317_MistysDewgong;
+import model.scripting.misty.Script_00318_MistysHorsea;
+import model.scripting.misty.Script_00319_MistysMagikarp;
+import model.scripting.misty.Script_00320_MistysPoliwag;
+import model.scripting.misty.Script_00321_MistysPsyduck;
+import model.scripting.misty.Script_00322_MistysSeel;
+import model.scripting.misty.Script_00323_MistysStaryu;
+import model.scripting.misty.Script_00324_MistysWish;
+import model.scripting.misty.Script_00325_MistysTears;
 import model.scripting.rocket.Script_00200_DarkAlakazam;
 import model.scripting.rocket.Script_00201_DarkArbok;
 import model.scripting.rocket.Script_00202_DarkBlastoise;
@@ -441,19 +473,9 @@ public class CardScriptFactory {
 		case "00102":
 			return new Script_00102_WaterEnergy((EnergyCard) card, gameModel);
 		case "00103":
-			return new Script_00103_Doll((PokemonCard) card, gameModel); // Only
-																			// used
-																			// locally
-																			// for
-																			// Piepi
-																			// doll
+			return new Script_00103_Doll((PokemonCard) card, gameModel);
 		case "00104":
-			return new Script_00104_LektrobalToken((EnergyCard) card, gameModel); // Only
-																					// used
-																					// locally
-																					// for
-																					// Lektrobal
-																					// token
+			return new Script_00104_LektrobalToken((EnergyCard) card, gameModel);
 		case "00105":
 			return new Script_00105_Clefable((PokemonCard) card, gameModel);
 		case "00106":
@@ -643,12 +665,7 @@ public class CardScriptFactory {
 		case "00198":
 			return new Script_00198_MysteriousFossil((TrainerCard) card, gameModel);
 		case "00199":
-			return new Script_00199_FossilToken((PokemonCard) card, gameModel); // Only
-																				// used
-																				// locally
-																				// for
-																				// Mysterious
-																				// Fossil
+			return new Script_00199_FossilToken((PokemonCard) card, gameModel);
 		case "00200":
 			return new Script_00200_DarkAlakazam((PokemonCard) card, gameModel);
 		case "00201":
@@ -837,6 +854,70 @@ public class CardScriptFactory {
 			return new Script_00292_BrocksGeodude((PokemonCard) card, gameModel);
 		case "00293":
 			return new Script_00293_BrocksProtection((TrainerCard) card, gameModel);
+		case "00294":
+			return new Script_00294_MistysSeadra((PokemonCard) card, gameModel);
+		case "00295":
+			return new Script_00295_MistysTentacruel((PokemonCard) card, gameModel);
+		case "00296":
+			return new Script_00296_Misty((TrainerCard) card, gameModel);
+		case "00297":
+			return new Script_00297_MistysCloyster((PokemonCard) card, gameModel);
+		case "00298":
+			return new Script_00298_MistysGoldeen((PokemonCard) card, gameModel);
+		case "00299":
+			return new Script_00299_MistysPoliwrath((PokemonCard) card, gameModel);
+		case "00300":
+			return new Script_00300_MistysTentacool((PokemonCard) card, gameModel);
+		case "00301":
+			return new Script_00301_MistysPoliwhirl((PokemonCard) card, gameModel);
+		case "00302":
+			return new Script_00302_MistysPsyduck((PokemonCard) card, gameModel);
+		case "00303":
+			return new Script_00303_MistysSeaking((PokemonCard) card, gameModel);
+		case "00304":
+			return new Script_00304_MistysStarmie((PokemonCard) card, gameModel);
+		case "00305":
+			return new Script_00305_MistysTentacool((PokemonCard) card, gameModel);
+		case "00306":
+			return new Script_00306_MistysGoldeen((PokemonCard) card, gameModel);
+		case "00307":
+			return new Script_00307_MistysHorsea((PokemonCard) card, gameModel);
+		case "00308":
+			return new Script_00308_MistysPoliwag((PokemonCard) card, gameModel);
+		case "00309":
+			return new Script_00309_MistysSeel((PokemonCard) card, gameModel);
+		case "00310":
+			return new Script_00310_MistysShellder((PokemonCard) card, gameModel);
+		case "00311":
+			return new Script_00311_MistysStaryu((PokemonCard) card, gameModel);
+		case "00312":
+			return new Script_00312_CelureanCityGym((TrainerCard) card, gameModel);
+		case "00313":
+			return new Script_00313_MistysWrath((TrainerCard) card, gameModel);
+		case "00314":
+			return new Script_00314_MistysDuel((TrainerCard) card, gameModel);
+		case "00315":
+			return new Script_00315_MistysGolduck((PokemonCard) card, gameModel);
+		case "00316":
+			return new Script_00316_MistysGyarados((PokemonCard) card, gameModel);
+		case "00317":
+			return new Script_00317_MistysDewgong((PokemonCard) card, gameModel);
+		case "00318":
+			return new Script_00318_MistysHorsea((PokemonCard) card, gameModel);
+		case "00319":
+			return new Script_00319_MistysMagikarp((PokemonCard) card, gameModel);
+		case "00320":
+			return new Script_00320_MistysPoliwag((PokemonCard) card, gameModel);
+		case "00321":
+			return new Script_00321_MistysPsyduck((PokemonCard) card, gameModel);
+		case "00322":
+			return new Script_00322_MistysSeel((PokemonCard) card, gameModel);
+		case "00323":
+			return new Script_00323_MistysStaryu((PokemonCard) card, gameModel);
+		case "00324":
+			return new Script_00324_MistysWish((TrainerCard) card, gameModel);
+		case "00325":
+			return new Script_00325_MistysTears((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
