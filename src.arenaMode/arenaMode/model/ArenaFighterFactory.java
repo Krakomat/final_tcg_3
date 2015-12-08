@@ -87,7 +87,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00315");
 			lockedCards.add("00316");
 			lockedCards.add("00324");
-			return new ArenaFighter(code, "Misty", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
+			return new ArenaFighter(code, "Misty", "Misty's Raindance.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "_THUMB"), lockedCards);
 		default:
 			break;
