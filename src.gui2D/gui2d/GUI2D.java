@@ -51,9 +51,10 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 
 import arenaMode.gui.ArenaChooseController;
-import arenaMode.gui.AzuriaArenaController;
-import arenaMode.gui.MarmoriaArenaController;
+import arenaMode.gui.ArenaController;
 import arenaMode.model.ArenaFighter;
+import arenaMode.model.ArenaFighterCode;
+import arenaMode.model.ArenaFighterFactory;
 import common.utilities.Pair;
 import common.utilities.Threads;
 
@@ -79,8 +80,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private IngameController ingameController;
 	private LobbyController lobbyController;
 	private ArenaChooseController arenaController;
-	private MarmoriaArenaController mamoriaArenaController;
-	private AzuriaArenaController azuriaArenaController;
+	private ArenaController mamoriaArenaController, azuriaArenaController, oraniaArenaController;
 	private DeckEditController deckEditController;
 
 	/** True if this gui is running */
@@ -131,13 +131,20 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		arenaController.initSceneGraph();
 		guiNode.attachChild(arenaController);
 
-		mamoriaArenaController = new MarmoriaArenaController();
+		mamoriaArenaController = new ArenaController(GUI2DMode.MAMORIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_RED),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BRENDAN), ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BROCK), "Pewter City Gym");
 		mamoriaArenaController.initSceneGraph();
 		guiNode.attachChild(mamoriaArenaController);
 
-		azuriaArenaController = new AzuriaArenaController();
+		azuriaArenaController = new ArenaController(GUI2DMode.AZURIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_LYRA),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MAY), ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MISTY), "Cerulean City Gym");
 		azuriaArenaController.initSceneGraph();
 		guiNode.attachChild(azuriaArenaController);
+
+		oraniaArenaController = new ArenaController(GUI2DMode.ORANIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.ORANIA_LEAF),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.ORANIA_NATE), ArenaFighterFactory.createFighter(ArenaFighterCode.ORANIA_LTSURGE), "Vermilion City Gym");
+		oraniaArenaController.initSceneGraph();
+		guiNode.attachChild(oraniaArenaController);
 
 		deckEditController = new DeckEditController();
 		deckEditController.initSceneGraph();
@@ -173,9 +180,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public ArrayList<Card> userChoosesCards(List<Card> cards, int amount, boolean exact, String message) {
 		CardChooseWindow cardChooseWindow = this.ingameController.getCardChooseWindow();
 		/*
-		 * No need to wait for update queue or game model update, since waiting
-		 * for update queue is being done by #addToUpdateQueue and the game
-		 * model is irrelevant for card choose models.
+		 * No need to wait for update queue or game model update, since waiting for update queue is being done by #addToUpdateQueue and the game model is irrelevant for card choose
+		 * models.
 		 */
 		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
 			@Override
@@ -220,10 +226,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public List<PositionID> userChoosesPositions(List<PositionID> positionList, int amount, boolean exact, String message) {
 		TextPanel2D messagePanel = this.ingameController.getMessagePanel();
 		/*
-		 * Currently only one position is being chosen here. This is valid,
-		 * since no card script in this game forces the player to select
-		 * multiple positions at once. If there is a card added to the game that
-		 * does this, this method has to be rewritten.
+		 * Currently only one position is being chosen here. This is valid, since no card script in this game forces the player to select multiple positions at once. If there is a
+		 * card added to the game that does this, this method has to be rewritten.
 		 */
 
 		// Set all positions in the list glowing & selectable
@@ -269,9 +273,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public List<Element> userChoosesElements(List<Element> elements, int amount, boolean exact, String message) {
 		ElementChooseWindow elementChooseWindow = this.ingameController.getElementChooseWindow();
 		/*
-		 * No need to wait for update queue or game model update, since waiting
-		 * for update queue is being done by #addToUpdateQueue and the game
-		 * model is irrelevant for card choose models.
+		 * No need to wait for update queue or game model update, since waiting for update queue is being done by #addToUpdateQueue and the game model is irrelevant for card choose
+		 * models.
 		 */
 		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
 			@Override
@@ -317,9 +320,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public ArrayList<String> userChoosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact, String message) {
 		AttackChooseWindow attackChooseWindow = this.ingameController.getAttackChooseWindow();
 		/*
-		 * No need to wait for update queue or game model update, since waiting
-		 * for update queue is being done by #addToUpdateQueue and the game
-		 * model is irrelevant for card choose models.
+		 * No need to wait for update queue or game model update, since waiting for update queue is being done by #addToUpdateQueue and the game model is irrelevant for card choose
+		 * models.
 		 */
 		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
 			@Override
@@ -479,9 +481,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public List<Card> userPaysEnergyCosts(List<Element> costs, List<Card> energyCards) {
 		CardChooseWindow cardChooseWindow = this.ingameController.getCardChooseWindow();
 		/*
-		 * No need to wait for update queue or game model update, since waiting
-		 * for update queue is being done by #addToUpdateQueue and the game
-		 * model is irrelevant for card choose models.
+		 * No need to wait for update queue or game model update, since waiting for update queue is being done by #addToUpdateQueue and the game model is irrelevant for card choose
+		 * models.
 		 */
 		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
 			public boolean checkSelectionIsOk() {
@@ -561,9 +562,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public List<Integer> userDistributesDamage(List<Position> positionList, List<Integer> damageList, List<Integer> maxDistList, DistributionMode mode) {
 		DistributionChooser distributionChooser = this.ingameController.getDistributionChooser();
 		/*
-		 * No need to wait for update queue or game model update, since waiting
-		 * for update queue is being done by #addToUpdateQueue and the game
-		 * model is irrelevant for card choose models.
+		 * No need to wait for update queue or game model update, since waiting for update queue is being done by #addToUpdateQueue and the game model is irrelevant for card choose
+		 * models.
 		 */
 		ChooseGeometryChecker checker = new ChooseGeometryChecker() {
 			@Override
@@ -863,6 +863,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			case AZURIA_CITY_ARENA:
 				this.currentActiveController = this.azuriaArenaController;
 				break;
+			case ORANIA_CITY_ARENA:
+				this.currentActiveController = this.oraniaArenaController;
+				break;
 			default:
 				break;
 			}
@@ -897,6 +900,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		case AZURIA_CITY_ARENA:
 			this.nextController = this.azuriaArenaController;
 			break;
+		case ORANIA_CITY_ARENA:
+			this.nextController = this.oraniaArenaController;
+			break;
 		default:
 			break;
 		}
@@ -913,6 +919,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		this.arenaController.setAccount(this.player.asAccount());
 		this.mamoriaArenaController.setAccount(this.player.asAccount());
 		this.azuriaArenaController.setAccount(this.player.asAccount());
+		this.oraniaArenaController.setAccount(this.player.asAccount());
 		this.deckEditController.setAccount(this.player.asAccount());
 		this.animationController.setPlayerColor(this.player.getColor());
 	}
@@ -990,5 +997,17 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	public void playerLost() {
 		this.currentOpponent = null;
+	}
+
+	public ArenaController getMamoriaArenaController() {
+		return mamoriaArenaController;
+	}
+
+	public ArenaController getAzuriaArenaController() {
+		return azuriaArenaController;
+	}
+
+	public ArenaController getOraniaArenaController() {
+		return oraniaArenaController;
 	}
 }

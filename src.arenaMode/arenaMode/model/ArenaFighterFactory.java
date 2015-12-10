@@ -89,6 +89,15 @@ public class ArenaFighterFactory {
 			lockedCards.add("00324");
 			return new ArenaFighter(code, Database.getBot("Misty"), Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "_THUMB"), lockedCards);
+		case ORANIA_LEAF:
+			return new ArenaFighter(code, Database.getBot("Leaf"), Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString()),
+					Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString() + "_THUMB"), lockedCards);
+		case ORANIA_NATE:
+			return new ArenaFighter(code, Database.getBot("Nate"), Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString()),
+					Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString() + "_THUMB"), lockedCards);
+		case ORANIA_LTSURGE:
+			return new ArenaFighter(code, Database.getBot("Nate"), Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString()),
+					Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString() + "_THUMB"), lockedCards);
 		default:
 			break;
 		}
@@ -103,6 +112,9 @@ public class ArenaFighterFactory {
 		erg.add(createFighter(ArenaFighterCode.AZURIA_LYRA));
 		erg.add(createFighter(ArenaFighterCode.AZURIA_MAY));
 		erg.add(createFighter(ArenaFighterCode.AZURIA_MISTY));
+		erg.add(createFighter(ArenaFighterCode.ORANIA_LEAF));
+		erg.add(createFighter(ArenaFighterCode.ORANIA_NATE));
+		erg.add(createFighter(ArenaFighterCode.ORANIA_LTSURGE));
 		return erg;
 	}
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighter;
-import arenaMode.model.ArenaFighterCode;
 import arenaMode.model.ArenaFighterFactory;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
@@ -23,14 +22,7 @@ import network.client.Player;
 import network.server.PokemonGameManagerFactory;
 import network.tcp.borders.ServerMain;
 
-public class AzuriaArenaController extends Node implements GUI2DController {
-	public static List<ArenaFighter> getArenaFighters() {
-		List<ArenaFighter> list = new ArrayList<>();
-		list.add(ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_LYRA));
-		list.add(ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MAY));
-		list.add(ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MISTY));
-		return list;
-	}
+public class ArenaController extends Node implements GUI2DController {
 
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -39,15 +31,19 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 	private TextPanel2D fighterNamePanel;
 	private Text2D deckDescription, unlockedCardsDescription;
 	private Account account;
-	private ArenaFighter currentSelectedFighter, red, brendan, brock;
+	private ArenaFighter currentSelectedFighter, first, second, third;
+	private GUI2DMode arenaMode;
+	private String imageAssetKey;
 
-	public AzuriaArenaController() {
+	public ArenaController(GUI2DMode arenaMode, ArenaFighter first, ArenaFighter second, ArenaFighter third, String imageAssetKey) {
 		screenWidth = GUI2D.getInstance().getResolution().getKey();
 		screenHeight = GUI2D.getInstance().getResolution().getValue();
 		currentSelectedFighter = null;
-		red = ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_LYRA);
-		brendan = ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MAY);
-		brock = ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MISTY);
+		this.arenaMode = arenaMode;
+		this.first = first;
+		this.second = second;
+		this.third = third;
+		this.imageAssetKey = imageAssetKey;
 	}
 
 	public void initSceneGraph() {
@@ -80,12 +76,12 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 			public void mouseSelect() {
 				GUI2D.getInstance().registerFighterAsOpponent(currentSelectedFighter);
 				GUI2D.getInstance().switchMode(GUI2DMode.INGAME, false);
-				if (currentSelectedFighter == brock)
+				if (currentSelectedFighter == third)
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_MASTER_MUSIC);
 				else
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_SERVANT_MUSIC);
 
-				GUI2D.getInstance().setNextMode(GUI2DMode.AZURIA_CITY_ARENA);
+				GUI2D.getInstance().setNextMode(arenaMode);
 				GUI2D.getInstance().getPlayer().createLocalGame();
 
 				// Create tree bot and connect him to the server that was
@@ -94,10 +90,6 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 					@Override
 					public void run() {
 						Player bot = Database.getBot(currentSelectedFighter.getName());
-						if (currentSelectedFighter == brendan)
-							bot.setBotDifficulty(3);
-						else
-							bot.setBotDifficulty(5);
 						bot.setDeck(currentSelectedFighter.getDeck());
 						bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
 
@@ -117,7 +109,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(fightButton);
 		this.attachChild(fightButton);
 
-		arenaImage = new Image2D("arenaImage", Database.getAssetKey("Cerulean City Gym"), imageWidth, thumbHeight) {
+		arenaImage = new Image2D("arenaImage", Database.getAssetKey(imageAssetKey), imageWidth, thumbHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -134,7 +126,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(arenaImage);
 		this.attachChild(arenaImage);
 
-		redThumb = new Image2D("redThumb", Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA + "THUMB"), thumbWidth, thumbHeight) {
+		redThumb = new Image2D("redThumb", Database.getAssetKey(first.getCode() + "THUMB"), thumbWidth, thumbHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -149,7 +141,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 					dropInUpdateQueue(brendanThumb);
 					brockThumb.setSelected(false);
 					dropInUpdateQueue(brockThumb);
-					updateFighterImage(red);
+					updateFighterImage(first);
 				}
 			}
 
@@ -163,7 +155,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(redThumb);
 		this.attachChild(redThumb);
 
-		brendanThumb = new Image2D("brendanThumb", Database.getAssetKey(ArenaFighterCode.AZURIA_MAY + "THUMB"), thumbWidth, thumbHeight) {
+		brendanThumb = new Image2D("brendanThumb", Database.getAssetKey(second.getCode() + "THUMB"), thumbWidth, thumbHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -178,7 +170,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 					dropInUpdateQueue(redThumb);
 					brockThumb.setSelected(false);
 					dropInUpdateQueue(brockThumb);
-					updateFighterImage(brendan);
+					updateFighterImage(second);
 				}
 			}
 
@@ -192,7 +184,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(brendanThumb);
 		this.attachChild(brendanThumb);
 
-		brockThumb = new Image2D("brockThumb", Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY + "THUMB"), thumbWidth, thumbHeight) {
+		brockThumb = new Image2D("brockThumb", Database.getAssetKey(third.getCode() + "THUMB"), thumbWidth, thumbHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -207,7 +199,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 					dropInUpdateQueue(redThumb);
 					brendanThumb.setSelected(false);
 					dropInUpdateQueue(brendanThumb);
-					updateFighterImage(brock);
+					updateFighterImage(third);
 				}
 			}
 
@@ -224,7 +216,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 		float fighterImageWidth = screenWidth * 0.25f;
 		float fighterImageHeight = screenHeight * 0.8f;
 
-		fighterImage = new Image2D("fighterImage", Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString()), fighterImageWidth, fighterImageHeight) {
+		fighterImage = new Image2D("fighterImage", Database.getAssetKey(first.getCode().toString()), fighterImageWidth, fighterImageHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -328,9 +320,9 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 	@Override
 	public void restart() {
 		currentSelectedFighter = null;
-		red = ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_LYRA);
-		brendan = ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MAY);
-		brock = ArenaFighterFactory.createFighter(ArenaFighterCode.AZURIA_MISTY);
+		first = ArenaFighterFactory.createFighter(first.getCode());
+		second = ArenaFighterFactory.createFighter(second.getCode());
+		third = ArenaFighterFactory.createFighter(third.getCode());
 		this.backButton.setVisible(true);
 		this.dropInUpdateQueue(backButton);
 		this.deckDescription.setVisible(false);
@@ -346,11 +338,11 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 		this.redThumb.setVisible(true);
 		this.redThumb.setSelected(false);
 		this.dropInUpdateQueue(redThumb);
-		if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_LYRA))
+		if (account.getDefeatedArenaFighters().contains(first.getCode()))
 			this.brendanThumb.setVisible(true);
 		this.brendanThumb.setSelected(false);
 		this.dropInUpdateQueue(brendanThumb);
-		if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MAY))
+		if (account.getDefeatedArenaFighters().contains(second.getCode()))
 			this.brockThumb.setVisible(true);
 		this.brockThumb.setSelected(false);
 		this.dropInUpdateQueue(brockThumb);
@@ -360,9 +352,9 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 			@Override
 			public void run() {
 				GUI2D.getInstance().getIOController().addShootable(redThumb);
-				if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_LYRA))
+				if (account.getDefeatedArenaFighters().contains(first.getCode()))
 					GUI2D.getInstance().getIOController().addShootable(brendanThumb);
-				if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MAY))
+				if (account.getDefeatedArenaFighters().contains(second.getCode()))
 					GUI2D.getInstance().getIOController().addShootable(brockThumb);
 			}
 		}).start();
@@ -383,7 +375,7 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 			this.deckDescription.setVisible(true);
 			this.dropInUpdateQueue(deckDescription);
 			this.unlockedCardsDescription.setText("Cards unlocked: " + +fighter.getUnlockedCards(account).size() + "/" + fighter.getUnlockableCards().size());
-			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY))
+			if (account.getDefeatedArenaFighters().contains(third.getCode()))
 				this.unlockedCardsDescription.setVisible(true);
 			else
 				this.unlockedCardsDescription.setVisible(false);
@@ -420,5 +412,16 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 	@Override
 	public MusicType getAmbientMusic() {
 		return MusicType.LOBBY_MUSIC;
+	}
+
+	public List<ArenaFighter> getArenaFighters() {
+		ArenaFighter first = ArenaFighterFactory.createFighter(this.first.getCode());
+		ArenaFighter second = ArenaFighterFactory.createFighter(this.second.getCode());
+		ArenaFighter third = ArenaFighterFactory.createFighter(this.third.getCode());
+		List<ArenaFighter> list = new ArrayList<>();
+		list.add(first);
+		list.add(second);
+		list.add(third);
+		return list;
 	}
 }

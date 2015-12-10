@@ -84,6 +84,8 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 					GUI2D.getInstance().switchMode(GUI2DMode.MAMORIA_CITY_ARENA, true);
 				if (enabledArenaNames.get(currentArenaIndex).equals("Cerulean City Gym"))
 					GUI2D.getInstance().switchMode(GUI2DMode.AZURIA_CITY_ARENA, true);
+				if (enabledArenaNames.get(currentArenaIndex).equals("Vermilion City Gym"))
+					GUI2D.getInstance().switchMode(GUI2DMode.ORANIA_CITY_ARENA, true);
 			}
 
 			@Override
@@ -274,7 +276,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK)) {
 				account.getDefeatedArenaFighters().add(ArenaFighterCode.MAMORIA_BROCK);
 				// 1 reward per fighter for beating the master the first time!
-				for (ArenaFighter f : MarmoriaArenaController.getArenaFighters()) {
+				for (ArenaFighter f : GUI2D.getInstance().getMamoriaArenaController().getArenaFighters()) {
 					String reward = f.createReward(account);
 					if (reward != null) {
 						rewards.add(reward);
@@ -320,7 +322,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY)) {
 				account.getDefeatedArenaFighters().add(ArenaFighterCode.AZURIA_MISTY);
 				// 1 reward per fighter for beating the master the first time!
-				for (ArenaFighter f : MarmoriaArenaController.getArenaFighters()) {
+				for (ArenaFighter f : GUI2D.getInstance().getAzuriaArenaController().getArenaFighters()) {
 					String reward = f.createReward(account);
 					if (reward != null) {
 						rewards.add(reward);
@@ -341,7 +343,51 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MAY))
 				account.getDefeatedArenaFighters().add(ArenaFighterCode.AZURIA_MAY);
 			break;
-
+		case ORANIA_LEAF:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_LTSURGE)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_LEAF))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.ORANIA_LEAF);
+			break;
+		case ORANIA_LTSURGE:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_LTSURGE)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_LTSURGE)) {
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.ORANIA_LTSURGE);
+				// 1 reward per fighter for beating the master the first time!
+				for (ArenaFighter f : GUI2D.getInstance().getAzuriaArenaController().getArenaFighters()) {
+					String reward = f.createReward(account);
+					if (reward != null) {
+						rewards.add(reward);
+						account.getUnlockedCards().add(reward);
+					}
+				}
+			}
+			break;
+		case ORANIA_NATE:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_LTSURGE)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_NATE))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.ORANIA_NATE);
+			break;
 		default:
 			break;
 		}

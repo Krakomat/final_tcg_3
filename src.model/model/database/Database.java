@@ -489,6 +489,27 @@ public class Database {
 		TextureKey mistyCharacterThumb = new TextureKey("/tilesets/characters/Misty_thumb.png");
 		mistyCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_MISTY.toString() + "THUMB", mistyCharacterThumb);
+
+		TextureKey leafCharacter = new TextureKey("/tilesets/characters/Leaf.png");
+		leafCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.ORANIA_LEAF.toString(), leafCharacter);
+		TextureKey leafCharacterThumb = new TextureKey("/tilesets/characters/Leaf_thumb.png");
+		leafCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.ORANIA_LEAF.toString() + "THUMB", leafCharacterThumb);
+
+		TextureKey nateCharacter = new TextureKey("/tilesets/characters/Nate.png");
+		nateCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.ORANIA_NATE.toString(), nateCharacter);
+		TextureKey nateCharacterThumb = new TextureKey("/tilesets/characters/Nate_thumb.png");
+		nateCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.ORANIA_NATE.toString() + "THUMB", nateCharacterThumb);
+
+		TextureKey ltSurgeCharacter = new TextureKey("/tilesets/characters/MajorBob.png");
+		ltSurgeCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.ORANIA_LTSURGE.toString(), ltSurgeCharacter);
+		TextureKey ltSurgeCharacterThumb = new TextureKey("/tilesets/characters/MajorBob_thumb.png");
+		ltSurgeCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.ORANIA_LTSURGE.toString() + "THUMB", ltSurgeCharacterThumb);
 	}
 
 	public static Player getBot(String name) {

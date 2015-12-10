@@ -96,6 +96,9 @@
         <DefeatedFighter ID="AZURIA_LYRA"/>
         <DefeatedFighter ID="AZURIA_MAY"/>
         <DefeatedFighter ID="AZURIA_MISTY"/>
+        <DefeatedFighter ID="ORANIA_LEAF"/>
+        <DefeatedFighter ID="ORANIA_NATE"/>
+        <DefeatedFighter ID="ORANIA_LTSURGE"/>
     </DefeatedArenaFighters>
     <UnlockedCards>
         <UnlockedCard ID="00266"/>

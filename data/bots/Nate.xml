@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Nate</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Kaminari">
+    <Cards>
+        <Card ID="00020">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00074">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00078">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00080">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00084">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00100">
+            <Size>21</Size>
+        </Card>
+        <Card ID="00108">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00139">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00148">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00165">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00166">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00223">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00257">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00265">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

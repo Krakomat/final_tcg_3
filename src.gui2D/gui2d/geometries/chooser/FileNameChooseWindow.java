@@ -204,6 +204,8 @@ public class FileNameChooseWindow extends ChooseWindow implements KeyShootable {
 		switch (keyCode) {
 		case 52:// Point
 			return true;
+		case KeyInput.KEY_SPACE:
+			return true;
 		case KeyInput.KEY_MINUS:
 			return true;
 		case KeyInput.KEY_BACK:
