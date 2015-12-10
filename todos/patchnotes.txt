@@ -4,10 +4,14 @@ Patch 4.00
 			- A single player adventure, where the player travels through the different arena in Kanto
 			- New cards that are associated with the respective master of each arena can be unlocked by defeating the master and his/her servants
 			- All  encounters feature new unique bot decks
+			New Arenas:
+				- Pewter City Gym
+				- Celurean City Gym
 			- The first arena (Pewter City Gym) is already unlocked, further ones come with future releases
 		Improved control UI
 		New Card sets: 
 			- BROCK
+			- MISTY
 	UI:
 		- Reduced the amount of music tracks used in the different modes
 		- Added support for gym cards
