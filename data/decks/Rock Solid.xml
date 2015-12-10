@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Rock Solid">
+    <Cards>
+        <Card ID="00019">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00048">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00080">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00084">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00097">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00122">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00127">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00133">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00138">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00149">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00172">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00173">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00183">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00205">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00237">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00260">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

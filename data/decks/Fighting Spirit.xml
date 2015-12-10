@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Fighting Spirit">
+    <Cards>
+        <Card ID="00007">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00008">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00027">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00034">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00082">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00097">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00109">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00131">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00158">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00228">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00244">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00246">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>4</Size>
+        </Card>
+    </Cards>
+</Deck>
