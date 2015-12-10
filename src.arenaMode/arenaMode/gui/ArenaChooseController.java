@@ -216,12 +216,18 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 		this.enabledArenaNames.add("Pewter City Gym");
 		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.MAMORIA_BROCK))
 			this.enabledArenaNames.add("Cerulean City Gym");
-		// this.enabledArenaNames.add("Vermilion City Gym");
-		// this.enabledArenaNames.add("Celadon City Gym");
-		// this.enabledArenaNames.add("Fuchsia City Gym");
-		// this.enabledArenaNames.add("Saffron City Gym");
-		// this.enabledArenaNames.add("Cinnabar City Gym");
-		// this.enabledArenaNames.add("Viridian City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY))
+			this.enabledArenaNames.add("Vermilion City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
+			this.enabledArenaNames.add("Celadon City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
+			this.enabledArenaNames.add("Fuchsia City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
+			this.enabledArenaNames.add("Saffron City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
+			this.enabledArenaNames.add("Cinnabar City Gym");
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
+			this.enabledArenaNames.add("Viridian City Gym");
 	}
 
 	private void dropInUpdateQueue(SelectableNode node) {
