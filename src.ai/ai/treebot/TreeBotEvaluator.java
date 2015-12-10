@@ -23,8 +23,8 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 	}
 
 	@Override
-	public int evaluateGameModel(LocalPokemonGameModel gameModel) {
-		int value = 0;
+	public float evaluateGameModel(LocalPokemonGameModel gameModel) {
+		float value = 0;
 		Color color = gameModel.getPlayerOnTurn().getColor();
 
 		value = value + this.evaluatePlayerModel(gameModel, color); // own evaluation
@@ -40,8 +40,8 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 	 * @param color
 	 * @return
 	 */
-	private int evaluatePlayerModel(LocalPokemonGameModel gameModel, Color color) {
-		int value = 0;
+	private float evaluatePlayerModel(LocalPokemonGameModel gameModel, Color color) {
+		float value = 0;
 
 		// Loose 20 points for each of your remaining prize cards:
 		value = value - 20 * gameModel.getGameField().getNonEmptyPriceList(color).size();

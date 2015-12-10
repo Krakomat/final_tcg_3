@@ -15,5 +15,5 @@ public interface GameModelEvaluator {
 	 * @param gameModel
 	 * @return
 	 */
-	public int evaluateGameModel(LocalPokemonGameModel gameModel);
+	public float evaluateGameModel(LocalPokemonGameModel gameModel);
 }

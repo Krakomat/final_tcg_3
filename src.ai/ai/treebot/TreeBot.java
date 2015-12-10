@@ -62,7 +62,7 @@ public class TreeBot implements Bot {
 	public void makeMove(PokemonGameManager server, Player player) {
 		LocalPokemonGameModel copy = gameModel.copy();
 		copy.setPlayerOnTurn(new PlayerSimulator(player.getColor()));
-		GameTree gameTree = new GameTree(copy, new TreeBotEvaluator(), server);
+		GameTree gameTree = new GameTree(copy, new NeoTreeBotEvaluator(), server);
 		GameTreeMove move = gameTree.computeMove();
 		if (move == null)
 			server.endTurn(player);
@@ -118,14 +118,14 @@ public class TreeBot implements Bot {
 		} else {
 			PositionID activePosition = this.botColor == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON;
 			if (this.gameModel.getPosition(activePosition).isEmpty() && amount == 1 && exact) {
-				TreeBotEvaluator evaluator = new TreeBotEvaluator();
+				NeoTreeBotEvaluator evaluator = new NeoTreeBotEvaluator();
 				// Choose new active pokemon:
-				int value = Integer.MIN_VALUE;
+				float value = Float.MIN_VALUE;
 				PositionID chosenPosition = null;
 				for (PositionID benchPos : positionList) {
 					LocalPokemonGameModel copy = gameModel.copy();
 					copy.getAttackAction().movePokemonToPosition(benchPos, activePosition);
-					int v = evaluator.evaluateGameModel(copy);
+					float v = evaluator.evaluateGameModel(copy);
 					if (v > value) {
 						value = v;
 						chosenPosition = benchPos;

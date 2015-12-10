@@ -1,6 +1,7 @@
 package model.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import network.client.Player;
 import model.database.PokemonCard;
@@ -15,13 +16,20 @@ import model.enums.PositionID;
  */
 public interface GameField {
 	/**
-	 * Returns a lisz with all price positions, that are not empty for the given
-	 * player.
+	 * Returns a list with all price positions, that are not empty for the given player.
 	 * 
 	 * @param color
 	 * @return
 	 */
 	public ArrayList<PositionID> getNonEmptyPriceList(Color color);
+
+	/**
+	 * Returns a list with all price positions, that are empty for the given player.
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public List<PositionID> getEmptyPriceList(Color color);
 
 	public ArrayList<Position> getAllPositions();
 
@@ -152,8 +160,7 @@ public interface GameField {
 	public void setStadium(Position stadium);
 
 	/**
-	 * Returns all bench positions with cards on them from the players arena
-	 * fields.
+	 * Returns all bench positions with cards on them from the players arena fields.
 	 * 
 	 * @param playerColor
 	 * @param playerBlue
@@ -173,10 +180,8 @@ public interface GameField {
 	ArrayList<PositionID> getFullArenaPositions(Color playerColor, Player playerBlue, Player playerRed);
 
 	/**
-	 * Returns an array list of the positionsIDs, if the given card can be put
-	 * on a basic pokemon(in the arena of the given player), which evolves into
-	 * the given card. Also checks, evolution is allowed in this turn(one cannot
-	 * put a pokemon on the bench and evolve it in the same turn).
+	 * Returns an array list of the positionsIDs, if the given card can be put on a basic pokemon(in the arena of the given player), which evolves into the given card. Also checks,
+	 * evolution is allowed in this turn(one cannot put a pokemon on the bench and evolve it in the same turn).
 	 * 
 	 * @param c
 	 * @param color

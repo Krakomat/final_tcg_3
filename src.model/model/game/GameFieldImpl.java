@@ -1,6 +1,7 @@
 package model.game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import network.client.Player;
 import model.database.Card;
@@ -409,6 +410,39 @@ public class GameFieldImpl implements GameField {
 			if (!this.redPrice5.isEmpty())
 				posList.add(this.redPrice5.getPositionID());
 			if (!this.redPrice6.isEmpty())
+				posList.add(this.redPrice6.getPositionID());
+		}
+		return posList;
+	}
+
+	@Override
+	public List<PositionID> getEmptyPriceList(Color color) {
+		ArrayList<PositionID> posList = new ArrayList<>();
+		if (color == Color.BLUE) {
+			if (this.bluePrice1.isEmpty())
+				posList.add(this.bluePrice1.getPositionID());
+			if (this.bluePrice2.isEmpty())
+				posList.add(this.bluePrice2.getPositionID());
+			if (this.bluePrice3.isEmpty())
+				posList.add(this.bluePrice3.getPositionID());
+			if (this.bluePrice4.isEmpty())
+				posList.add(this.bluePrice4.getPositionID());
+			if (this.bluePrice5.isEmpty())
+				posList.add(this.bluePrice5.getPositionID());
+			if (this.bluePrice6.isEmpty())
+				posList.add(this.bluePrice6.getPositionID());
+		} else {
+			if (this.redPrice1.isEmpty())
+				posList.add(this.redPrice1.getPositionID());
+			if (this.redPrice2.isEmpty())
+				posList.add(this.redPrice2.getPositionID());
+			if (this.redPrice3.isEmpty())
+				posList.add(this.redPrice3.getPositionID());
+			if (this.redPrice4.isEmpty())
+				posList.add(this.redPrice4.getPositionID());
+			if (this.redPrice5.isEmpty())
+				posList.add(this.redPrice5.getPositionID());
+			if (this.redPrice6.isEmpty())
 				posList.add(this.redPrice6.getPositionID());
 		}
 		return posList;

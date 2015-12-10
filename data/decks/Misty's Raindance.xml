@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Misty's Raindance">
+    <Cards>
+        <Card ID="00002">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00042">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00063">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00075">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00076">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00077">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>23</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00294">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00296">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00304">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00307">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00311">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00312">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00313">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00314">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>

@@ -9,17 +9,17 @@ import java.util.List;
  *
  */
 public class GameTreeNode {
-	private final int value;
+	private final float value;
 	private final List<GameTreeMove> moves;
 	private final GameTreeNode parentNode;
 
-	public GameTreeNode(int value, List<GameTreeMove> moves, GameTreeNode parentNode) {
+	public GameTreeNode(float value, List<GameTreeMove> moves, GameTreeNode parentNode) {
 		this.value = value;
 		this.moves = moves;
 		this.parentNode = parentNode;
 	}
 
-	public int getValue() {
+	public float getValue() {
 		return value;
 	}
 

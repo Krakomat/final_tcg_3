@@ -75,7 +75,7 @@ public class GameTree {
 			LocalPokemonGameModel resultingGameModel = simulator.getGameModel();
 			childModels.add(resultingGameModel);
 
-			int modelValue = this.evaluator.evaluateGameModel(resultingGameModel);
+			float modelValue = this.evaluator.evaluateGameModel(resultingGameModel);
 			System.err.println("Computed value " + modelValue);
 			// Create new Node:
 			GameTreeNode resultingChildNode = new GameTreeNode(modelValue, new ArrayList<>(), rootNode);
