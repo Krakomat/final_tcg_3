@@ -26,6 +26,8 @@ public class Script_00314_MistysDuel extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
+		// Discard trainer card:
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.sendTextMessageToAllPlayers("If 'Heads', then " + getCardOwner().getName() + " gets the effects of Misty's Duel!", "");
 		Player player = null;
 		PositionID hand = null;
@@ -50,11 +52,8 @@ public class Script_00314_MistysDuel extends TrainerCardScript {
 		gameModel.getAttackAction().shufflePosition(deck);
 		gameModel.sendGameModelToAllPlayers(Sounds.SHUFFLE);
 
-		// Draw 7 cards:
+		// Draw 5 cards:
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " draws 5 cards!", "");
 		gameModel.getAttackAction().playerDrawsCards(5, player);
-		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
-
 	}
 }

@@ -91,7 +91,7 @@ public class Script_00289_BrocksPrimeape extends PokemonCardScript {
 			return false;
 		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			return false;
-		if (((PokemonCard) this.card).getHitpoints() != 10)
+		if (((PokemonCard) this.card).getHitpoints() - ((PokemonCard) this.card).getDamageMarks() != 10)
 			return false;
 		return true;
 	}
