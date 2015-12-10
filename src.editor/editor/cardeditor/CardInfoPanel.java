@@ -31,7 +31,7 @@ import model.enums.Rarity;
 public class CardInfoPanel extends JPanel {
 
 	private static final long serialVersionUID = -1116467881966333698L;
-	private static final String EDITION_FOLDER = "06_Misty";
+	private static final String EDITION_FOLDER = "07_LtSurge";
 	private volatile boolean updateFlag;
 
 	private BitmapComponent cardImageBitmap;
@@ -101,7 +101,7 @@ public class CardInfoPanel extends JPanel {
 	public CardInfoPanel(Card s, String[] pokemonNames) {
 		pokemonCardNames = pokemonNames;
 		String[] editions = { Edition.BASE.toString(), Edition.JUNGLE.toString(), Edition.FOSSIL.toString(), Edition.ROCKET.toString(), Edition.BROCK.toString(),
-				Edition.MISTY.toString(), Edition.TOKEN.toString() };
+				Edition.MISTY.toString(), Edition.LT_SURGE.toString(), Edition.TOKEN.toString() };
 		String[] hpComboBoxItems = { "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120" };
 		ImageIcon[] typeImages = new ImageIcon[7];
 		typeImages[0] = new BitmapComponent("/tilesets/elements/thumbnails/elektro.png").getImageIcon();

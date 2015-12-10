@@ -130,6 +130,31 @@ import model.scripting.jungle.Script_00149_Rhyhorn;
 import model.scripting.jungle.Script_00150_Spearow;
 import model.scripting.jungle.Script_00151_Venonat;
 import model.scripting.jungle.Script_00152_Pokeball;
+import model.scripting.ltSurge.Script_00326_LtSurgesElectabuzz;
+import model.scripting.ltSurge.Script_00327_LtSurgesFearow;
+import model.scripting.ltSurge.Script_00328_LtSurgesMagneton;
+import model.scripting.ltSurge.Script_00329_LtSurge;
+import model.scripting.ltSurge.Script_00330_LtSurgesElectabuzz;
+import model.scripting.ltSurge.Script_00331_LtSurgesRaichu;
+import model.scripting.ltSurge.Script_00332_LtSurgesMagnemite;
+import model.scripting.ltSurge.Script_00333_LtSurgesRaticate;
+import model.scripting.ltSurge.Script_00334_LtSurgesSpearow;
+import model.scripting.ltSurge.Script_00335_LtSurgesMagnemite;
+import model.scripting.ltSurge.Script_00336_LtSurgesPikachu;
+import model.scripting.ltSurge.Script_00337_LtSurgesRattata;
+import model.scripting.ltSurge.Script_00338_LtSurgesSpearow;
+import model.scripting.ltSurge.Script_00339_LtSurgesVoltorb;
+import model.scripting.ltSurge.Script_00340_LtSurgesTreaty;
+import model.scripting.ltSurge.Script_00341_SecretMission;
+import model.scripting.ltSurge.Script_00342_VermillionCityGym;
+import model.scripting.ltSurge.Script_00343_LtSurgesRaichu;
+import model.scripting.ltSurge.Script_00344_LtSurgesJolteon;
+import model.scripting.ltSurge.Script_00345_LtSurgesEevee;
+import model.scripting.ltSurge.Script_00346_LtSurgesElectrode;
+import model.scripting.ltSurge.Script_00347_LtSurgesRaticate;
+import model.scripting.ltSurge.Script_00348_LtSurgesPikachu;
+import model.scripting.ltSurge.Script_00349_LtSurgesRattata;
+import model.scripting.ltSurge.Script_00350_LtSurgesVoltorb;
 import model.scripting.misty.Script_00294_MistysSeadra;
 import model.scripting.misty.Script_00295_MistysTentacruel;
 import model.scripting.misty.Script_00296_Misty;
@@ -918,6 +943,56 @@ public class CardScriptFactory {
 			return new Script_00324_MistysWish((TrainerCard) card, gameModel);
 		case "00325":
 			return new Script_00325_MistysTears((TrainerCard) card, gameModel);
+		case "00326":
+			return new Script_00326_LtSurgesElectabuzz((PokemonCard) card, gameModel);
+		case "00327":
+			return new Script_00327_LtSurgesFearow((PokemonCard) card, gameModel);
+		case "00328":
+			return new Script_00328_LtSurgesMagneton((PokemonCard) card, gameModel);
+		case "00329":
+			return new Script_00329_LtSurge((TrainerCard) card, gameModel);
+		case "00330":
+			return new Script_00330_LtSurgesElectabuzz((PokemonCard) card, gameModel);
+		case "00331":
+			return new Script_00331_LtSurgesRaichu((PokemonCard) card, gameModel);
+		case "00332":
+			return new Script_00332_LtSurgesMagnemite((PokemonCard) card, gameModel);
+		case "00333":
+			return new Script_00333_LtSurgesRaticate((PokemonCard) card, gameModel);
+		case "00334":
+			return new Script_00334_LtSurgesSpearow((PokemonCard) card, gameModel);
+		case "00335":
+			return new Script_00335_LtSurgesMagnemite((PokemonCard) card, gameModel);
+		case "00336":
+			return new Script_00336_LtSurgesPikachu((PokemonCard) card, gameModel);
+		case "00337":
+			return new Script_00337_LtSurgesRattata((PokemonCard) card, gameModel);
+		case "00338":
+			return new Script_00338_LtSurgesSpearow((PokemonCard) card, gameModel);
+		case "00339":
+			return new Script_00339_LtSurgesVoltorb((PokemonCard) card, gameModel);
+		case "00340":
+			return new Script_00340_LtSurgesTreaty((TrainerCard) card, gameModel);
+		case "00341":
+			return new Script_00341_SecretMission((TrainerCard) card, gameModel);
+		case "00342":
+			return new Script_00342_VermillionCityGym((TrainerCard) card, gameModel);
+		case "00343":
+			return new Script_00343_LtSurgesRaichu((PokemonCard) card, gameModel);
+		case "00344":
+			return new Script_00344_LtSurgesJolteon((PokemonCard) card, gameModel);
+		case "00345":
+			return new Script_00345_LtSurgesEevee((PokemonCard) card, gameModel);
+		case "00346":
+			return new Script_00346_LtSurgesElectrode((PokemonCard) card, gameModel);
+		case "00347":
+			return new Script_00347_LtSurgesRaticate((PokemonCard) card, gameModel);
+		case "00348":
+			return new Script_00348_LtSurgesPikachu((PokemonCard) card, gameModel);
+		case "00349":
+			return new Script_00349_LtSurgesRattata((PokemonCard) card, gameModel);
+		case "00350":
+			return new Script_00350_LtSurgesVoltorb((PokemonCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}

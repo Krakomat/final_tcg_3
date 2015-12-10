@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Lt. Surge</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Lt. Surge's Charging Center">
+    <Cards>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00100">
+            <Size>25</Size>
+        </Card>
+        <Card ID="00327">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00328">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00329">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00330">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00331">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00332">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00334">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00335">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00336">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00338">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00342">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

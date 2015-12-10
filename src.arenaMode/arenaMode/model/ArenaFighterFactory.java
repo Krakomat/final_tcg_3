@@ -90,13 +90,38 @@ public class ArenaFighterFactory {
 			return new ArenaFighter(code, Database.getBot("Misty"), Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "_THUMB"), lockedCards);
 		case ORANIA_LEAF:
+			lockedCards.add("00335");
+			lockedCards.add("00336");
+			lockedCards.add("00337");
+			lockedCards.add("00338");
+			lockedCards.add("00339");
+			lockedCards.add("00348");
+			lockedCards.add("00349");
+			lockedCards.add("00350");
 			return new ArenaFighter(code, Database.getBot("Leaf"), Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString()),
 					Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString() + "_THUMB"), lockedCards);
 		case ORANIA_NATE:
+			lockedCards.add("00332");
+			lockedCards.add("00333");
+			lockedCards.add("00334");
+			lockedCards.add("00340");
+			lockedCards.add("00341");
+			lockedCards.add("00342");
+			lockedCards.add("00345");
+			lockedCards.add("00346");
+			lockedCards.add("00347");
 			return new ArenaFighter(code, Database.getBot("Nate"), Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString()),
 					Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString() + "_THUMB"), lockedCards);
 		case ORANIA_LTSURGE:
-			return new ArenaFighter(code, Database.getBot("Nate"), Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString()),
+			lockedCards.add("00326");
+			lockedCards.add("00327");
+			lockedCards.add("00328");
+			lockedCards.add("00329");
+			lockedCards.add("00330");
+			lockedCards.add("00331");
+			lockedCards.add("00343");
+			lockedCards.add("00344");
+			return new ArenaFighter(code, Database.getBot("Lt. Surge"), Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString()),
 					Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString() + "_THUMB"), lockedCards);
 		default:
 			break;

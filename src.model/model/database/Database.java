@@ -384,6 +384,10 @@ public class Database {
 		mistyEdition.setGenerateMips(false);
 		assetTextures.put(Edition.MISTY.toString(), mistyEdition);
 
+		TextureKey ltSurgeEdition = new TextureKey("/tilesets/editions/LtSurgeLogo.png");
+		ltSurgeEdition.setGenerateMips(false);
+		assetTextures.put(Edition.LT_SURGE.toString(), ltSurgeEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);
