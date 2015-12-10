@@ -20,7 +20,7 @@ public class GameModelParameters {
 	private int turnNumber;
 	private GameState gameState;
 	private boolean energyPlayed, retreatExecuted;
-	private boolean noEnergyPayment; // no payment for attacks if true
+	private boolean noEnergyPayment, activated_00296_Misty; // no payment for attacks if true
 	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
 	private List<Integer> lauchschlagUsed_00027_Porenta, power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
 			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite, power_Activated_00251_Rattata,
@@ -35,6 +35,7 @@ public class GameModelParameters {
 		energyPlayed = false;
 		retreatExecuted = false;
 		this.noEnergyPayment = false;
+		this.activated_00296_Misty = false;
 		this.blockedAttacks = new ArrayList<>();
 		this.lauchschlagUsed_00027_Porenta = new ArrayList<>();
 		this.power_Active_00164_Muk = new ArrayList<>();
@@ -64,6 +65,7 @@ public class GameModelParameters {
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
 		this.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
 		this.setNoEnergyPayment(gameModelUpdate.getGameModelParameters().isNoEnergyPayment());
+		this.setActivated_00296_Misty(gameModelUpdate.getGameModelParameters().isActivated_00296_Misty());
 		this.blockedAttacks = new ArrayList<>();
 		for (Triple<Integer, String, Integer> i : gameModelUpdate.getGameModelParameters().getBlockedAttacks())
 			this.blockedAttacks.add(i);
@@ -133,6 +135,7 @@ public class GameModelParameters {
 		copy.setEnergyPlayed(energyPlayed);
 		copy.setGameState(gameState);
 		copy.setNoEnergyPayment(noEnergyPayment);
+		copy.setActivated_00296_Misty(activated_00296_Misty);
 		copy.setRetreatExecuted(retreatExecuted);
 		for (Triple<Integer, String, Integer> i : this.getBlockedAttacks())
 			copy.getBlockedAttacks().add(i);
@@ -201,6 +204,10 @@ public class GameModelParameters {
 		// noEnergyPayment:
 		bString = serializer.unpackByteString(unpacker);
 		this.noEnergyPayment = serializer.unpackBool(bString);
+
+		// activated_00296_Misty:
+		bString = serializer.unpackByteString(unpacker);
+		this.activated_00296_Misty = serializer.unpackBool(bString);
 
 		// blockedAttacks
 		bString = serializer.unpackByteString(unpacker);
@@ -308,6 +315,11 @@ public class GameModelParameters {
 		ByteString energy = serializer.packBool(energyPlayed);
 		packer.packBinaryHeader(energy.length());
 		packer.writePayload(energy.copyAsBytes());
+
+		// activated_00296_Misty:
+		ByteString mistyActive = serializer.packBool(activated_00296_Misty);
+		packer.packBinaryHeader(mistyActive.length());
+		packer.writePayload(mistyActive.copyAsBytes());
 
 		// retreatExecuted:
 		ByteString retreat = serializer.packBool(retreatExecuted);
@@ -653,5 +665,13 @@ public class GameModelParameters {
 			}
 		}
 		return false;
+	}
+
+	public boolean isActivated_00296_Misty() {
+		return activated_00296_Misty;
+	}
+
+	public void setActivated_00296_Misty(boolean activated_00296_Misty) {
+		this.activated_00296_Misty = activated_00296_Misty;
 	}
 }

@@ -328,6 +328,10 @@ public class Database {
 		brocksProtection.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.BROCKS_PROTECTION.toString(), brocksProtection);
 
+		TextureKey noEnergy = new TextureKey("/tilesets/conditions/noEnergy.png");
+		noEnergy.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.NO_ENERGY.toString(), noEnergy);
+
 		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
 		overgrowth.setGenerateMips(false);
 		assetTextures.put("overgrowth", overgrowth);

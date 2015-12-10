@@ -50,7 +50,7 @@ public class Script_00266_BrocksRhydon extends PokemonCardScript {
 
 	@Override
 	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
-		if (benchGuardCanBeExecuted() && gameModel.getFullArenaPositions(getCardOwner().getColor()).contains(defender)
+		if (benchGuardCanBeExecuted() && gameModel.getFullBenchPositions(getCardOwner().getColor()).contains(defender)
 				&& defender != this.card.getCurrentPosition().getPositionID()) {
 			Player player = getCardOwner();
 			Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
@@ -67,8 +67,6 @@ public class Script_00266_BrocksRhydon extends PokemonCardScript {
 
 	private boolean benchGuardCanBeExecuted() {
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return false;
-		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor())
 			return false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return false;

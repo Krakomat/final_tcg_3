@@ -3,10 +3,10 @@ package model.scripting.misty;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
-import model.database.Card;
+import gui2d.animations.Animation;
+import gui2d.animations.AnimationType;
+import gui2d.animations.DamageAnimation;
 import model.database.PokemonCard;
-import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -18,58 +18,68 @@ public class Script_00311_MistysStaryu extends PokemonCardScript {
 	public Script_00311_MistysStaryu(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
-
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att1Cost.add(Element.WATER);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Swift", att1Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
-	}
+		PositionID attackerPositionID = this.card.getCurrentPosition().getPositionID();
+		PositionID targetPosition = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		int damageAmount = 20;
+		PokemonCard defenderPokemon = (PokemonCard) gameModel.getPosition(targetPosition).getTopCard();
+		PokemonCard attackerPokemon = null;
+		if (attackerPositionID != null)
+			attackerPokemon = (PokemonCard) gameModel.getPosition(attackerPositionID).getTopCard();
 
-	private void donnerwelle() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		// Check boosts on attacker:
+		if (attackerPokemon != null && attackerPokemon.hasCondition(PokemonCondition.DAMAGEINCREASE10))
+			damageAmount = damageAmount + 10;
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
+		// Check Misty:
+		if (attackerPokemon != null && attackerPokemon.getName().contains("Misty") && gameModel.getGameModelParameters().isActivated_00296_Misty())
+			damageAmount = damageAmount + 20;
+
+		// Normalize damage:
+		if (damageAmount < 0)
+			damageAmount = 0;
+
+		// Test if attacker pokemon is able to modify the outgoing damage:
+		if (attackerPokemon != null) {
+			PokemonCardScript attackerScript = (PokemonCardScript) attackerPokemon.getCardScript();
+			damageAmount = attackerScript.modifyOutgoingDamage(damageAmount);
 		}
-	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
+		// Damage Pokemon:
+		defenderPokemon.setDamageMarks(defenderPokemon.getDamageMarks() + damageAmount);
 
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
+		// Normalize hitpoints:
+		if (defenderPokemon.getDamageMarks() > defenderPokemon.getHitpoints())
+			defenderPokemon.setDamageMarks(defenderPokemon.getHitpoints());
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		// Apply knockout condition if hitpoints = damagepoints:
+		if (defenderPokemon.getHitpoints() == defenderPokemon.getDamageMarks()) {
+			gameModel.getAttackAction().inflictConditionToPosition(targetPosition, PokemonCondition.KNOCKOUT);
+			// Check if enemy had DESTINY:
+			if (defenderPokemon.hasCondition(PokemonCondition.DESTINY) && attackerPositionID != null)
+				gameModel.getAttackAction().inflictConditionToPosition(attackerPositionID, PokemonCondition.KNOCKOUT);
+		}
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+		// Call pokemonIsDamaged() on defending pokemon script:
+		PokemonCardScript script = (PokemonCardScript) defenderPokemon.getCardScript();
+		script.pokemonIsDamaged(gameModel.getTurnNumber(), damageAmount, attackerPositionID);
 
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+		this.gameModel.sendTextMessageToAllPlayers(defenderPokemon.getName() + " takes " + damageAmount + " damage!", "");
+		if (damageAmount > 0) {
+			// Execute animation:
+			Animation animation = new DamageAnimation(AnimationType.DAMAGE_POSITION, targetPosition, damageAmount);
+			gameModel.sendAnimationToAllPlayers(animation);
+		}
+		this.gameModel.sendGameModelToAllPlayers("");
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
+			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
+					damageAmount, true);
 	}
 }

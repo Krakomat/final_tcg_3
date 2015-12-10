@@ -9,9 +9,11 @@ import java.util.List;
 import network.client.Player;
 import model.database.Card;
 import model.database.EnergyCard;
+import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.PlayerAction;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.enums.Sounds;
 import model.interfaces.PokemonGame;
@@ -36,6 +38,10 @@ public abstract class EnergyCardScript extends CardScript {
 		if (!this.cardInHand())
 			return null;
 
+		Player player = this.getCardOwner();
+		if (this.getArenaPositionForEnergy(player.getColor()).isEmpty())
+			return null;
+
 		if (!this.gameModel.getEnergyPlayed())
 			return PlayerAction.PLAY_ENERGY_CARD;
 		else
@@ -49,7 +55,7 @@ public abstract class EnergyCardScript extends CardScript {
 		if (player == null)
 			throw new IllegalArgumentException("Error: Couldn't find player in playFromHand of EnergyCardScript for id: " + card.getCardId());
 
-		PositionID chosenPosition = player.playerChoosesPositions(this.gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a position:").get(0);
+		PositionID chosenPosition = player.playerChoosesPositions(this.getArenaPositionForEnergy(player.getColor()), 1, true, "Choose a position:").get(0);
 		if (this.gameModel.getPosition(chosenPosition).getTopCard() != null) {
 			Card basicPkmn = this.gameModel.getPosition(chosenPosition).getTopCard();
 			List<Card> cardList = new ArrayList<Card>();
@@ -71,5 +77,16 @@ public abstract class EnergyCardScript extends CardScript {
 				c.getCardScript().energyCardPlayed(eneCard);
 		} else
 			throw new IllegalArgumentException("Error: chosen position does not contain a card");
+	}
+
+	private List<PositionID> getArenaPositionForEnergy(Color playerColor) {
+		List<PositionID> list = new ArrayList<>();
+		for (PositionID posID : this.gameModel.getFullArenaPositions(playerColor)) {
+			PokemonCard card = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+			if (!card.hasCondition(PokemonCondition.NO_ENERGY)) {
+				list.add(posID);
+			}
+		}
+		return list;
 	}
 }

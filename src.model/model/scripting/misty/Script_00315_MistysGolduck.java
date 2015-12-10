@@ -11,6 +11,7 @@ import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00315_MistysGolduck extends PokemonCardScript {
@@ -18,58 +19,48 @@ public class Script_00315_MistysGolduck extends PokemonCardScript {
 	public Script_00315_MistysGolduck(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.WATER);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Electro Beam", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Super Removal", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Electro Beam"))
+			this.ElectroBeam();
 		else
-			this.finale();
+			this.SuperRemoval();
 	}
 
-	private void donnerwelle() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
-		}
-	}
-
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
+	private void ElectroBeam() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+		// Discard all energy cards:
+		if (gameModel.getAttackAction().flipACoin() == Coin.TAILS)
+			gameModel.getAttackAction().removeAllEnergyFromPosition(attacker);
+		gameModel.sendGameModelToAllPlayers("");
+	}
 
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+	private void SuperRemoval() {
+		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+			Player player = getCardOwner();
+			for (PositionID posID : gameModel.getFullArenaPositions(getEnemyPlayer().getColor())) {
+				Position pos = gameModel.getPosition(posID);
+				if (pos.getEnergyCards().size() > 0 && !((PokemonCard) pos.getTopCard()).hasCondition(PokemonCondition.BROCKS_PROTECTION)) {
+					Card c = player.playerChoosesCards(gameModel.getPosition(posID).getEnergyCards(), 1, true, "Choose one energy card to remove!").get(0);
+					gameModel.getAttackAction().moveCard(posID, enemyDiscardPile(), c.getGameID(), true);
+					gameModel.sendGameModelToAllPlayers("");
+				}
+			}
+		} else
+			gameModel.sendTextMessageToAllPlayers("Super Removal does nothing!", "");
 	}
 }

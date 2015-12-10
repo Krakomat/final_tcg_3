@@ -40,7 +40,7 @@ public class Script_00226_DarkMuk extends PokemonCardScript {
 
 	public int modifyRetreatCosts(int retreatCosts, Color color) {
 		if (this.StickyGooCanBeExecuted()) {
-			return retreatCosts + 2;
+			return super.modifyRetreatCosts(retreatCosts, color) + 2;
 		}
 		return super.modifyRetreatCosts(retreatCosts, color);
 	}
@@ -54,7 +54,7 @@ public class Script_00226_DarkMuk extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor()) // Don't modify own retreat costs
+		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor())
 			return false;
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
 			return false;

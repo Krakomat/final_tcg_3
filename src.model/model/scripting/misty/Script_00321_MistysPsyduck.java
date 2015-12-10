@@ -3,73 +3,77 @@ package model.scripting.misty;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
+import network.client.Player;
 
 public class Script_00321_MistysPsyduck extends PokemonCardScript {
 
 	public Script_00321_MistysPsyduck(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
-
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("ESP", att1Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
-	}
-
-	private void donnerwelle() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " flips 3 coins...", "");
+		int heads = gameModel.getAttackAction().flipCoinsCountHeads(3);
+		switch (heads) {
+		case 0:
+			gameModel.sendTextMessageToAllPlayers("ESP does nothing!", "");
+			break;
+		case 1:
+			gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " draws a card!", "");
+			this.gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());
+			break;
+		case 2:
+			PositionID attacker = this.card.getCurrentPosition().getPositionID();
+			PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+			Element attackerElement = ((PokemonCard) this.card).getElement();
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+			break;
+		case 3:
+			metronom();
+			break;
 		}
 	}
 
-	private void finale() {
+	private void metronom() {
 		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
+		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
+		PokemonCardScript defendingCardScript = (PokemonCardScript) defendingPokemon.getCardScript();
+		PokemonCardScript copy = null;
+		try {
+			copy = (PokemonCardScript) defendingCardScript.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		// Choose attack:
+		List<Card> attackOwner = new ArrayList<>();
+		for (int i = 0; i < defendingCardScript.getAttackNames().size(); i++)
+			attackOwner.add(defendingPokemon);
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+		String attackName = player.playerChoosesAttacks(attackOwner, defendingCardScript.getAttackNames(), 1, true, "Choose an attack to copy!").get(0);
+		gameModel.sendTextMessageToAllPlayers(player.getName() + " chooses " + attackName + "!", "");
 
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+		// Set card script for piepi:
+		this.card.setCardScript(copy);
+		copy.setCard(card);
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+		// Clone attack without payments:
+		gameModel.getGameModelParameters().setNoEnergyPayment(true);
+		((PokemonCardScript) this.card.getCardScript()).executeAttack(attackName);
+		gameModel.getGameModelParameters().setNoEnergyPayment(false);
+
+		// Reset card script:
+		this.card.setCardScript(this);
 	}
 }

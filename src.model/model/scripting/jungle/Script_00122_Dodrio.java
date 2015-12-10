@@ -43,17 +43,17 @@ public class Script_00122_Dodrio extends PokemonCardScript {
 
 	public int modifyRetreatCosts(int retreatCosts, Color color) {
 		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
-			return retreatCosts;
+			return super.modifyRetreatCosts(retreatCosts, color);
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
-			return retreatCosts;
+			return super.modifyRetreatCosts(retreatCosts, color);
 		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
-			return retreatCosts;
+			return super.modifyRetreatCosts(retreatCosts, color);
 		if (color != this.getCardOwner().getColor())
-			return retreatCosts;
+			return super.modifyRetreatCosts(retreatCosts, color);
 		if (!PositionID.isBenchPosition(this.card.getCurrentPosition().getPositionID()))
-			return retreatCosts;
+			return super.modifyRetreatCosts(retreatCosts, color);
 		if (retreatCosts == 0)
 			return 0;
-		return retreatCosts - 1;
+		return super.modifyRetreatCosts(retreatCosts, color) - 1;
 	}
 }

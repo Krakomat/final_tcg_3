@@ -8,9 +8,9 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00323_MistysStaryu extends PokemonCardScript {
@@ -18,58 +18,45 @@ public class Script_00323_MistysStaryu extends PokemonCardScript {
 	public Script_00323_MistysStaryu(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
-
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att1Cost.add(Element.WATER);
+		this.addAttack("Star Boomerang", att1Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
-	}
-
-	private void donnerwelle() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
-		}
-	}
-
-	private void finale() {
 		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+			gameModel.sendTextMessageToAllPlayers(player.getName() + " returns " + this.card.getName() + " to his hand!", "");
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+			gameModel.getAttackAction().moveCard(ownActive(), ownHand(), this.card.getGameID(), true);
 
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+			// Discard other cards:
+			Position position = gameModel.getPosition(ownActive());
+			List<Card> cards = position.getCards();
+			List<Card> copyList = new ArrayList<>();
+			for (Card c : cards) {
+				copyList.add(c);
+			}
+			for (Card c : copyList) {
+				gameModel.getAttackAction().moveCard(ownActive(), ownHand(), c.getGameID(), true);
+			}
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+			if (gameModel.getFullArenaPositions(player.getColor()).isEmpty()) {
+				gameModel.sendTextMessageToAllPlayers(player.getName() + " has no active pokemon anymore!", "");
+				gameModel.playerLoses(player);
+			} else {
+				// Choose a new active pokemon in this case:
+				PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a new active pokemon!").get(0);
+				Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
+				gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
+				gameModel.getAttackAction().movePokemonToPosition(newActive, ownActive());
+				gameModel.sendGameModelToAllPlayers("");
+			}
+		}
 	}
 }
