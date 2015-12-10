@@ -18,7 +18,7 @@ public class FinalTCG3 {
 		Database.init();
 		MessageRegister.registerSerializables();
 		GUI2D view = new GUI2D();
-
+		
 		view.setShowSettings(false);
 		AppSettings settings = new AppSettings(true);
 		settings.put("Width", 1280);

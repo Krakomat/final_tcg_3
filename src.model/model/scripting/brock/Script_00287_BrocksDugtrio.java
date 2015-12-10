@@ -65,7 +65,7 @@ public class Script_00287_BrocksDugtrio extends PokemonCardScript {
 	private void LieLow() {
 		gameModel.sendTextMessageToAllPlayers(this.card.getName() + " protects itself!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(this.card.getCurrentPosition().getPositionID(), PokemonCondition.HARDEN20);
-		gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio().add(new Pair<Integer, Integer>(this.card.getGameID(), 2));
+		gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio().add(new Pair<Integer, Integer>(this.card.getGameID(), 3));
 	}
 
 	private void Earthdrill() {

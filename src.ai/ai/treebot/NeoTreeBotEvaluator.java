@@ -80,11 +80,13 @@ public class NeoTreeBotEvaluator implements GameModelEvaluator {
 
 		PokemonCard ownActive = (PokemonCard) gameModel.getPosition(PositionID.getActivePokemon(color)).getTopCard();
 
-		// Gain 1 point for each negative condition on your active pokemon:
-		if (ownActive.hasCondition(PokemonCondition.DAMAGEINCREASE10) || ownActive.hasCondition(PokemonCondition.DESTINY) || ownActive.hasCondition(PokemonCondition.HARDEN20)
-				|| ownActive.hasCondition(PokemonCondition.HARDEN30) || ownActive.hasCondition(PokemonCondition.INVULNERABLE) || ownActive.hasCondition(PokemonCondition.NO_DAMAGE)
-				|| ownActive.hasCondition(PokemonCondition.RETALIATION))
-			value = value + 1;
+		if (ownActive != null) {
+			// Gain 1 point for each negative condition on your active pokemon:
+			if (ownActive.hasCondition(PokemonCondition.DAMAGEINCREASE10) || ownActive.hasCondition(PokemonCondition.DESTINY) || ownActive.hasCondition(PokemonCondition.HARDEN20)
+					|| ownActive.hasCondition(PokemonCondition.HARDEN30) || ownActive.hasCondition(PokemonCondition.INVULNERABLE)
+					|| ownActive.hasCondition(PokemonCondition.NO_DAMAGE) || ownActive.hasCondition(PokemonCondition.RETALIATION))
+				value = value + 1;
+		}
 
 		// Gain 3 for each needed energy in play. Adds multiplier depending on the energy's position:
 		for (PositionID pos : gameModel.getFullArenaPositions(color)) {
