@@ -3,62 +3,59 @@
     <Name>Miki</Name>
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
-    <Deck Name="LightningStrike">
-        <Card ID="00219">
+    <Deck Name="Kaminari">
+        <Card ID="00108">
             <Size>2</Size>
         </Card>
-        <Card ID="00245">
-            <Size>4</Size>
+        <Card ID="00223">
+            <Size>1</Size>
         </Card>
         <Card ID="00088">
             <Size>2</Size>
         </Card>
-        <Card ID="00264">
+        <Card ID="00165">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00078">
             <Size>2</Size>
         </Card>
         <Card ID="00100">
-            <Size>20</Size>
+            <Size>21</Size>
         </Card>
-        <Card ID="00122">
-            <Size>2</Size>
+        <Card ID="00166">
+            <Size>3</Size>
         </Card>
-        <Card ID="00254">
-            <Size>4</Size>
-        </Card>
-        <Card ID="00215">
+        <Card ID="00265">
             <Size>1</Size>
         </Card>
-        <Card ID="00048">
+        <Card ID="00139">
             <Size>4</Size>
         </Card>
         <Card ID="00257">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00016">
             <Size>1</Size>
         </Card>
-        <Card ID="00093">
-            <Size>2</Size>
+        <Card ID="00148">
+            <Size>4</Size>
         </Card>
-        <Card ID="00094">
+        <Card ID="00080">
             <Size>2</Size>
         </Card>
         <Card ID="00091">
             <Size>3</Size>
         </Card>
-        <Card ID="00020">
+        <Card ID="00081">
             <Size>3</Size>
         </Card>
-        <Card ID="00263">
-            <Size>2</Size>
+        <Card ID="00020">
+            <Size>4</Size>
         </Card>
-        <Card ID="00095">
+        <Card ID="00084">
             <Size>1</Size>
         </Card>
-        <Card ID="00162">
-            <Size>2</Size>
+        <Card ID="00095">
+            <Size>3</Size>
         </Card>
-        <Card ID="00090">
+        <Card ID="00074">
             <Size>1</Size>
         </Card>
     </Deck>
