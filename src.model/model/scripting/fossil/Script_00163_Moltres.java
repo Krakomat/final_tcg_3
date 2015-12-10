@@ -55,13 +55,13 @@ public class Script_00163_Moltres extends PokemonCardScript {
 				this.gameModel.sendTextMessageToAllPlayers(player.getName() + " discards " + chosenEnergy.size() + " fire energy from Moltres!", "");
 				// Discard energy:
 				for (Card c : chosenEnergy)
-					this.gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), c.getGameID());
+					this.gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), c.getGameID(), true);
 				this.gameModel.sendGameModelToAllPlayers("");
 
 				// Discard cards from opponents deck:
 				this.gameModel.sendTextMessageToAllPlayers(enemy.getName() + " discards " + chosenEnergy.size() + " from his deck!", "");
 				for (int i = 0; i < chosenEnergy.size() && this.gameModel.getPosition(enemyDeck()).size() > 0; i++)
-					this.gameModel.getAttackAction().discardCardToDiscardPile(enemyDeck(), gameModel.getPosition(enemyDeck()).getTopCard().getGameID());
+					this.gameModel.getAttackAction().discardCardToDiscardPile(enemyDeck(), gameModel.getPosition(enemyDeck()).getTopCard().getGameID(), true);
 				this.gameModel.sendGameModelToAllPlayers("");
 			} else
 				this.gameModel.sendTextMessageToAllPlayers("Wildfire does nothing!", "");

@@ -21,6 +21,6 @@ public class Script_00261_GoopGasAttack extends TrainerCardScript {
 		gameModel.getGameModelParameters().setAllowedToPlayPokemonPower((short) 2);
 
 		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

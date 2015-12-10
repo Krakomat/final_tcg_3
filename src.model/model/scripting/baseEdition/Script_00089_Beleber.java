@@ -45,6 +45,6 @@ public class Script_00089_Beleber extends TrainerCardScript {
 		realCard.setDamageMarks(hp);
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

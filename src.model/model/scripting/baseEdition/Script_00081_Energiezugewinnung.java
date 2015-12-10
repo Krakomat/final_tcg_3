@@ -31,7 +31,7 @@ public class Script_00081_Energiezugewinnung extends TrainerCardScript {
 		Player player = this.getCardOwner();
 
 		// Discard trainer card before choosing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		// Choose one own card:
 		Card chosenCard = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 1, true, "Choose 1 cards to discard!").get(0);
@@ -44,7 +44,7 @@ public class Script_00081_Energiezugewinnung extends TrainerCardScript {
 		List<Card> chosenEnergy = player.playerChoosesCards(chooseCardList, 2, false, "Choose up to 2 energy cards to recover!");
 		
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
-		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID(), true);
 
 		for (Card c : chosenEnergy) {
 			// Message clients:

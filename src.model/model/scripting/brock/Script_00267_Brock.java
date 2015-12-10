@@ -32,7 +32,7 @@ public class Script_00267_Brock extends TrainerCardScript {
 			gameModel.getAttackAction().healPosition(posID, 10);
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	private List<PositionID> getDamagedPositions() {

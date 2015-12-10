@@ -36,7 +36,7 @@ public class Script_00075_Goere extends TrainerCardScript {
 		enemyReady = false;
 
 		// Discard trainer card before revealing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		// Show hands to both players:
 		new Thread(new Runnable() {

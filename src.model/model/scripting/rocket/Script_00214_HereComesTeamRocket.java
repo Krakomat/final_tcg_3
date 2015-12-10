@@ -21,7 +21,7 @@ public class Script_00214_HereComesTeamRocket extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		this.setPrizeVisible(PositionID.BLUE_PRICE_1);
 		this.setPrizeVisible(PositionID.BLUE_PRICE_2);

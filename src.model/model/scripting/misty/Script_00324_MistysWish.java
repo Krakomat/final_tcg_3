@@ -29,7 +29,7 @@ public class Script_00324_MistysWish extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card before choosing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		// Choose prize to look at:
 		PositionID prizePos = getCardOwner().playerChoosesPositions(getFullPrizePositions(), 1, true, "Choose a prize position!").get(0);

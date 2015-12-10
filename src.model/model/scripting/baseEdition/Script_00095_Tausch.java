@@ -44,6 +44,6 @@ public class Script_00095_Tausch extends TrainerCardScript {
 
 		// Execute swap:
 		gameModel.getAttackAction().swapPokemon(chosenBenchPos, activePos);
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

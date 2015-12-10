@@ -418,7 +418,7 @@ public class AttackAction {
 	 * @param posID
 	 * @param gameID
 	 */
-	public void discardCardToDiscardPile(PositionID posID, int gameID) {
+	public void discardCardToDiscardPile(PositionID posID, int gameID, boolean executeAnimation) {
 		PositionID discardPileID = null;
 		Position position = gameModel.getPosition(posID);
 		if (position.getColor() == Color.BLUE)
@@ -431,8 +431,10 @@ public class AttackAction {
 		Card card = gameModel.getCard(gameID);
 
 		// Execute animation:
-		Animation animation = new CardMoveAnimation(posID, discardPileID, card.getCardId(), "");
-		gameModel.sendAnimationToAllPlayers(animation);
+		if (executeAnimation) {
+			Animation animation = new CardMoveAnimation(posID, discardPileID, card.getCardId(), "");
+			gameModel.sendAnimationToAllPlayers(animation);
+		}
 	}
 
 	/**

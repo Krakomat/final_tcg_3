@@ -25,7 +25,7 @@ public class Script_00152_Pokeball extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card before choosing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
 
 		Player player = this.getCardOwner();

@@ -85,7 +85,7 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 			if (c != pCard)
 				cardToPile.add(c);
 		for (Card c : cardToPile)
-			gameModel.getAttackAction().discardCardToDiscardPile(pos.getPositionID(), c.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(pos.getPositionID(), c.getGameID(), true);
 
 		// Check if a new active pokemon has to be chosen:
 		boolean newActive = pos.getPositionID() == PositionID.BLUE_ACTIVEPOKEMON || pos.getPositionID() == PositionID.RED_ACTIVEPOKEMON ? true : false;

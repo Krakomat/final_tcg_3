@@ -167,6 +167,6 @@ public class Script_00076_PokZuechter extends TrainerCardScript {
 		gameModel.getAttackAction().evolvePokemon(chosenPosition, c.getGameID());
 		
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

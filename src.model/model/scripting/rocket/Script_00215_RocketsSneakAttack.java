@@ -26,7 +26,7 @@ public class Script_00215_RocketsSneakAttack extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		
 		this.playerRevealsHand(getEnemyPlayer());
 
@@ -36,7 +36,7 @@ public class Script_00215_RocketsSneakAttack extends TrainerCardScript {
 		else {
 			Card c = this.getCardOwner().playerChoosesCards(cards, 1, true, "Choose a trainer card for your opponent to discard!").get(0);
 			gameModel.sendCardMessageToAllPlayers(getEnemyPlayer().getName() + " discards " + c.getName() + "!", c, "");
-			gameModel.getAttackAction().discardCardToDiscardPile(enemyHand(), c.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(enemyHand(), c.getGameID(), true);
 		}
 		gameModel.sendGameModelToAllPlayers("");
 	}

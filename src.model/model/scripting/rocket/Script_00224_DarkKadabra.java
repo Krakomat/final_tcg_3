@@ -52,7 +52,7 @@ public class Script_00224_DarkKadabra extends PokemonCardScript {
 		List<Card> cardList = gameModel.getPosition(ownHand()).getCards();
 		Card discardCard = player.playerChoosesCards(cardList, 1, true, "Choose a card to discard!").get(0);
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + discardCard.getName(), discardCard, "");
-		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), discardCard.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), discardCard.getGameID(), true);
 		gameModel.getGameModelParameters().getPower_Activated_00224_DarkKadabra().add(this.card.getGameID());
 		gameModel.sendGameModelToAllPlayers("");
 

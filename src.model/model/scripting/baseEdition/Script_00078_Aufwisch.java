@@ -63,7 +63,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		// Check if active position was scooped up - choose a new active pokemon in this case:
 		if (targetPosition == ownActive()) {

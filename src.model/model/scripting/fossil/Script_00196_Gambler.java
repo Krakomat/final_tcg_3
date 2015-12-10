@@ -28,7 +28,7 @@ public class Script_00196_Gambler extends TrainerCardScript {
 		Player player = this.getCardOwner();
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his hand into his deck!", Sounds.SHUFFLE);
 

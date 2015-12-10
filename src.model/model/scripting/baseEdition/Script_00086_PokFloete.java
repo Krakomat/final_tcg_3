@@ -39,6 +39,6 @@ public class Script_00086_PokFloete extends TrainerCardScript {
 		gameModel.getAttackAction().putBasicPokemonOnBench(enemy, realCard);
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

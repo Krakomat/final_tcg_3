@@ -54,7 +54,7 @@ public class Script_00314_MistysDuel extends TrainerCardScript {
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " draws 5 cards!", "");
 		gameModel.getAttackAction().playerDrawsCards(5, player);
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 	}
 }

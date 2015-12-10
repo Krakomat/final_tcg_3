@@ -45,9 +45,9 @@ public class Script_00092_EnergieAbsauger extends TrainerCardScript {
 		// Message clients:
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + chosenEnergy.getName() + " from " + pokemon.getName() + "!", chosenEnergy, "");
 		// Discard energy card:
-		gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, chosenEnergy.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, chosenEnergy.getGameID(), true);
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	private List<PositionID> getPositionsWithEnergy() {

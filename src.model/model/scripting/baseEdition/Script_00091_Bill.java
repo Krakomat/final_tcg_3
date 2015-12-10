@@ -25,7 +25,7 @@ public class Script_00091_Bill extends TrainerCardScript {
 	public void playFromHand() {
 		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
 		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
 	}
 }

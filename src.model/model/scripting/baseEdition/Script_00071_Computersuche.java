@@ -31,13 +31,13 @@ public class Script_00071_Computersuche extends TrainerCardScript {
 		Player player = this.getCardOwner();
 
 		// Discard trainer card before choosing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		// Choose two own cards:
 		List<Card> chosenCards = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 2, true, "Choose 2 cards to discard!");
 		for (Card chosenCard : chosenCards) {
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
-			gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID(), true);
 		}
 
 		// Choose a card from the deck:

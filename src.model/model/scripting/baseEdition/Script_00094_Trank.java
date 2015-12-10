@@ -34,7 +34,7 @@ public class Script_00094_Trank extends TrainerCardScript {
 		gameModel.getAttackAction().healPosition(chosenPosition, 20);
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	private List<PositionID> getDamagedPositions() {

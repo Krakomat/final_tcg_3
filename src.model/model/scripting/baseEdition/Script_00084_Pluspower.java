@@ -37,7 +37,7 @@ public class Script_00084_Pluspower extends TrainerCardScript {
 			endTurnActionCounter--;
 			if (endTurnActionCounter == 0) {
 				// Discard pluspower:
-				gameModel.getAttackAction().discardCardToDiscardPile(ownActive(), card.getGameID());
+				gameModel.getAttackAction().discardCardToDiscardPile(ownActive(), card.getGameID(), true);
 
 				// Set endTurnActionCounter:
 				this.endTurnActionCounter = -1;

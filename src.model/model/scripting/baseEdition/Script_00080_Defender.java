@@ -44,7 +44,7 @@ public class Script_00080_Defender extends TrainerCardScript {
 			endTurnActionCounter--;
 			if (endTurnActionCounter == 0) {
 				// Discard defender:
-				gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, card.getGameID());
+				gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, card.getGameID(), true);
 
 				// Set endTurnActionCounter:
 				this.endTurnActionCounter = -1;

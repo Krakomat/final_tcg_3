@@ -32,13 +32,13 @@ public class Script_00325_MistysTears extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		Player player = this.getCardOwner();
 
 		Card chosenCard = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 1, true, "Discard a card from your hand!").get(0);
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
-		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
 
 		List<Card> cards = this.getWaterCardsFromDeck();

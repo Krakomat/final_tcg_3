@@ -27,9 +27,8 @@ public class Script_00281_BrocksRhyhorn extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		// Flip coin to check if damage is applied:
-		gameModel.sendTextMessageToAllPlayers("If Tails then Drill Tackle does nothing!", "");
+		gameModel.sendTextMessageToAllPlayers("If one coin shows Tails then Drill Tackle does nothing!", "");
 		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers("If Tails then Drill Tackle does nothing!", "");
 			if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
 				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 70, true);
 			} else

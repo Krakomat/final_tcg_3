@@ -40,7 +40,7 @@ public class Script_00090_Supertrank extends TrainerCardScript {
 		// Execute heal(messages to clients send there):
 		gameModel.getAttackAction().healPosition(chosenPosition, 40);
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	private List<PositionID> getDamagedPositionsWithEnergy() {

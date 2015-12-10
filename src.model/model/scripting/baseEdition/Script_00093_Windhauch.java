@@ -47,6 +47,6 @@ public class Script_00093_Windhauch extends TrainerCardScript {
 		// Execute swap:
 		gameModel.getAttackAction().swapPokemon(chosenBenchPos, activePos);
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

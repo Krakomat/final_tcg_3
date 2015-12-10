@@ -66,7 +66,7 @@ public class Script_00199_FossilToken extends PokemonCardScript {
 			if (c != doll)
 				cardToPile.add(c);
 		for (Card c : cardToPile)
-			gameModel.getAttackAction().discardCardToDiscardPile(pos.getPositionID(), c.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(pos.getPositionID(), c.getGameID(), true);
 
 		// Remove doll from position:
 		boolean success = pos.removeFromPosition(doll);

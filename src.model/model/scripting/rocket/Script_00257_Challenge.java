@@ -29,7 +29,7 @@ public class Script_00257_Challenge extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 		int playerBenchSize = gameModel.getFullBenchPositions(player.getColor()).size();

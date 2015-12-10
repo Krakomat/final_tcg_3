@@ -30,7 +30,7 @@ public class Script_00260_NightlyGarbageRun extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		if (gameModel.getPosition(ownDiscardPile()).getPokemonCards().size() > 0) {
 			Player player = this.getCardOwner();

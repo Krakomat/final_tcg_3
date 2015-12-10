@@ -76,7 +76,6 @@ public class Script_00295_MistysTentacruel extends PokemonCardScript {
 
 				// Execute swap:
 				gameModel.getAttackAction().swapPokemon(chosenBenchPos, activePos);
-				gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
 			}
 		}
 	}

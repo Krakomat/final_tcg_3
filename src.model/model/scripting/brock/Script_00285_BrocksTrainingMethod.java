@@ -28,7 +28,7 @@ public class Script_00285_BrocksTrainingMethod extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		List<Card> cards = this.getBrockCardsFromDeck();
 		if (cards.isEmpty())

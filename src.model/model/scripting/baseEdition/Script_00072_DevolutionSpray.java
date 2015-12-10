@@ -51,6 +51,10 @@ public class Script_00072_DevolutionSpray extends TrainerCardScript {
 		basicPokemon.setDamageMarks(damage);
 		if (basicPokemon.getHitpoints() == basicPokemon.getDamageMarks())
 			gameModel.getAttackAction().inflictConditionToPosition(chosenPosition, PokemonCondition.KNOCKOUT);
+		
+		
+		// Discard trainer card:
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	/**

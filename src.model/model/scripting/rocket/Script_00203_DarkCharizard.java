@@ -54,7 +54,7 @@ public class Script_00203_DarkCharizard extends PokemonCardScript {
 			// Pay energy:
 			gameModel.sendTextMessageToAllPlayers(this.card.getName() + " discards " + numberHeads + " fire energy!", "");
 			for (int i = 0; i < numberHeads; i++) {
-				gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), realFireEnergy.get(i).getGameID());
+				gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), realFireEnergy.get(i).getGameID(), true);
 			}
 		}
 	}

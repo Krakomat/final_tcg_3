@@ -48,6 +48,6 @@ public class Script_00194_MrFuji extends TrainerCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

@@ -39,7 +39,7 @@ public class Script_00289_BrocksPrimeape extends PokemonCardScript {
 
 		if (gameModel.getPosition(PositionID.STADIUM).size() > 0) {
 			Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
-			gameModel.getAttackAction().discardCardToDiscardPile(PositionID.STADIUM, stadium.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(PositionID.STADIUM, stadium.getGameID(), false);
 			gameModel.getPosition(PositionID.STADIUM).setColor(Color.WHITE);
 			gameModel.sendGameModelToAllPlayers("");
 		}

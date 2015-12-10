@@ -22,7 +22,7 @@ public class Script_00258_Digger extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 

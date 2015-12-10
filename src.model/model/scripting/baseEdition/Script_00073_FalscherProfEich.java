@@ -42,6 +42,6 @@ public class Script_00073_FalscherProfEich extends TrainerCardScript {
 		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " draws 7 cards!", "");
 		gameModel.getAttackAction().playerDrawsCards(7, getEnemyPlayer());
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 }

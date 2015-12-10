@@ -31,7 +31,7 @@ public class Script_00077_PokHaendler extends TrainerCardScript {
 		Player player = this.getCardOwner();
 
 		// Discard trainer card before choosing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		if (gameModel.getPosition(ownDeck()).getPokemonCards().size() > 0) {
 			// Choose one own pokemon card:

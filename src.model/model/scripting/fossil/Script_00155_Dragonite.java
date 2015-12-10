@@ -56,7 +56,7 @@ public class Script_00155_Dragonite extends PokemonCardScript {
 
 		// Execute swap:
 		gameModel.getAttackAction().swapPokemon(benchPos, activePos);
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.getGameModelParameters().isPower_Activated_00155_Dragonite().add(this.card.getGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}

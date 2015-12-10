@@ -27,14 +27,14 @@ public class Script_00259_ImposterOaksRevenge extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 
 		Card chosenCard = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 1, true, "Discard a card from your hand!").get(0);
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
-		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
 
 		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " shuffles his hand into his deck!", "");

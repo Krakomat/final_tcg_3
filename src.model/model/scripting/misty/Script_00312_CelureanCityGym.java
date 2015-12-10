@@ -23,7 +23,7 @@ public class Script_00312_CelureanCityGym extends TrainerCardScript {
 		if (!gameModel.getPosition(PositionID.STADIUM).isEmpty()) {
 			Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
 			// Discard previous stadium card:
-			gameModel.getAttackAction().discardCardToDiscardPile(PositionID.STADIUM, stadium.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(PositionID.STADIUM, stadium.getGameID(), false);
 		}
 		gameModel.getPosition(PositionID.STADIUM).setColor(this.getCardOwner().getColor());
 		gameModel.getAttackAction().moveCard(getCurrentPositionID(), PositionID.STADIUM, this.card.getGameID(), true);

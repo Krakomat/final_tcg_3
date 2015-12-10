@@ -40,7 +40,7 @@ public class Script_00222_DarkGolduck extends PokemonCardScript {
 		Card chosenEnergyCard = gameModel.getCard(player.playerChoosesCards(this.card.getCurrentPosition().getEnergyCards(), 1, true, "Discard one energy card!")
 				.get(0).getGameID());
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenEnergyCard.getName(), chosenEnergyCard, "");
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), chosenEnergyCard.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), chosenEnergyCard.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
 
 		int deckSize = gameModel.getPosition(ownDeck()).size();

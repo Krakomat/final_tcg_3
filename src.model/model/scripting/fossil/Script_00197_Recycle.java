@@ -41,7 +41,7 @@ public class Script_00197_Recycle extends TrainerCardScript {
 			gameModel.getAttackAction().moveCard(ownDiscardPile(), ownDeck(), chosenCard.getGameID(), true);
 
 			// Discard trainer card:
-			gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 			gameModel.sendGameModelToAllPlayers("");
 		}

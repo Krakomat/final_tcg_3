@@ -44,7 +44,7 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 		Card chosenEnergy = player.playerChoosesCards(chooseCardList, 1, true, "Choose an energy card to discard!").get(0);
 		// Message clients:
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + chosenEnergy.getName() + " from " + pokemon.getName() + "!", chosenEnergy, "");
-		gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, chosenEnergy.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(chosenPosition, chosenEnergy.getGameID(), true);
 
 		// Remove up to 2 energy cards from one of the enemies pokemon:
 		PositionID chosenEnemyPosition = player.playerChoosesPositions(this.getPositionsWithEnergy(enemy), 1, true, "Choose a pokemon to rip energy from!").get(0);
@@ -59,11 +59,11 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 			// Message clients:
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " removes " + c.getName() + " from " + enemyPokemon.getName() + "!", c, "");
 			// Discard energy card:
-			gameModel.getAttackAction().discardCardToDiscardPile(chosenEnemyPosition, c.getGameID());
+			gameModel.getAttackAction().discardCardToDiscardPile(chosenEnemyPosition, c.getGameID(), true);
 		}
 
 		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	private List<PositionID> getPositionsWithEnergy(Player player) {
