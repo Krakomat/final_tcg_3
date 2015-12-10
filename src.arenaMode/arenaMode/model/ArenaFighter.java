@@ -1,6 +1,5 @@
 package arenaMode.model;
 
-import java.io.File;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +8,17 @@ import java.util.Random;
 import com.jme3.asset.TextureKey;
 
 import model.database.Deck;
-import model.game.GameParameters;
 import network.client.Account;
 
 public class ArenaFighter {
 	private TextureKey characterModel, characterThumb;
-	private String name;
+	private Account botAccount;
 	private ArenaFighterCode code;
-	private Deck deck;
 	private List<String> unlockableCards;
 
-	public ArenaFighter(ArenaFighterCode code, String name, String deckName, TextureKey characterModel, TextureKey characterThumb, List<String> unlockableCards) {
+	public ArenaFighter(ArenaFighterCode code, Account botAccount, TextureKey characterModel, TextureKey characterThumb, List<String> unlockableCards) {
 		this.code = code;
-		this.name = name;
-		this.deck = Deck.readFromDatabaseFile(new File(GameParameters.ARENA_DECK_PATH + deckName));
+		this.botAccount = botAccount;
 		this.characterModel = characterModel;
 		this.characterThumb = characterThumb;
 		this.unlockableCards = unlockableCards;
@@ -69,7 +65,7 @@ public class ArenaFighter {
 	}
 
 	public String getName() {
-		return name;
+		return botAccount.getName();
 	}
 
 	public ArenaFighterCode getCode() {
@@ -77,7 +73,7 @@ public class ArenaFighter {
 	}
 
 	public Deck getDeck() {
-		return deck;
+		return botAccount.getDeck();
 	}
 
 	public List<String> getUnlockableCards() {

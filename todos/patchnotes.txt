@@ -18,6 +18,8 @@ Patch 4.00
 		- Adjusted button, panel and window text size
 		- Damage/Heal Animation has updated font
 	AI:
+		- Removed Standard Bot from the game files
+		- Improved gameModel evaluation for the Tree Bot
 		- Fixed a bug, where the game freezes when two draw mechanical cards were in the AIs hand
 	Game:
 		- Fixed a bug, where retreat costs couldn't be modified by pokemon powers

@@ -21,7 +21,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00284");
 			lockedCards.add("00291");
 			lockedCards.add("00292");
-			return new ArenaFighter(code, "Brendan", "Rock Solid.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString()),
+			return new ArenaFighter(code, Database.getBot("Brendan"), Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString() + "_THUMB"), lockedCards);
 		case MAMORIA_RED:
 			lockedCards = new ArrayList<>();
@@ -35,7 +35,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00288");
 			lockedCards.add("00289");
 			lockedCards.add("00290");
-			return new ArenaFighter(code, "Red", "Fighting Spirit.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
+			return new ArenaFighter(code, Database.getBot("Red"), Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString() + "_THUMB"), lockedCards);
 		case MAMORIA_BROCK:
 			lockedCards.add("00266");
@@ -46,7 +46,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00271");
 			lockedCards.add("00287");
 			lockedCards.add("00293");
-			return new ArenaFighter(code, "Brock", "Brock Rocks.xml", Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
+			return new ArenaFighter(code, Database.getBot("Brock"), Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
 					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), lockedCards);
 		case AZURIA_LYRA:
 			lockedCards.add("00306");
@@ -62,7 +62,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00321");
 			lockedCards.add("00322");
 			lockedCards.add("00323");
-			return new ArenaFighter(code, "Lyra", "Dark Rain.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString()),
+			return new ArenaFighter(code, Database.getBot("Lyra"), Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString() + "_THUMB"), lockedCards);
 		case AZURIA_MAY:
 			lockedCards.add("00301");
@@ -74,7 +74,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00313");
 			lockedCards.add("00317");
 			lockedCards.add("00325");
-			return new ArenaFighter(code, "May", "Raindrops.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString()),
+			return new ArenaFighter(code, Database.getBot("May"), Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString() + "_THUMB"), lockedCards);
 		case AZURIA_MISTY:
 			lockedCards.add("00294");
@@ -87,7 +87,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00315");
 			lockedCards.add("00316");
 			lockedCards.add("00324");
-			return new ArenaFighter(code, "Misty", "Misty's Raindance.xml", Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
+			return new ArenaFighter(code, Database.getBot("Misty"), Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
 					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "_THUMB"), lockedCards);
 		default:
 			break;

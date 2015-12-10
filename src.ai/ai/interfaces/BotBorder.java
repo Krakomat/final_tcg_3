@@ -5,7 +5,6 @@ import gui2d.animations.Animation;
 import java.util.List;
 
 import ai.dummy.DummyBot;
-import ai.standard.StandardBot;
 import ai.treebot.GameTree;
 import ai.treebot.TreeBot;
 import network.client.AccountImpl;
@@ -51,9 +50,6 @@ public class BotBorder extends AccountImpl implements Player {
 		switch (this.accountType) {
 		case BOT_DUMMY:
 			this.botModel = new DummyBot();
-			break;
-		case BOT_STANDARD:
-			this.botModel = new StandardBot();
 			break;
 		case BOT_TREE:
 			this.botModel = new TreeBot();

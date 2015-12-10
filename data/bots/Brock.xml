@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Brock</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Brock Rocks">
     <Cards>
         <Card ID="00088">
@@ -96,3 +100,6 @@
         </Card>
     </Cards>
 </Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

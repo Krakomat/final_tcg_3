@@ -1,6 +1,5 @@
 package arenaMode.gui;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,6 @@ import gui2d.geometries.Text2D;
 import gui2d.geometries.TextButton2D;
 import gui2d.geometries.messages.TextPanel2D;
 import model.database.Database;
-import model.database.Deck;
-import model.game.GameParameters;
 import network.client.Account;
 import network.client.Player;
 import network.server.PokemonGameManagerFactory;
@@ -96,12 +93,12 @@ public class AzuriaArenaController extends Node implements GUI2DController {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						Player bot = Database.getBot("TreeBot");
+						Player bot = Database.getBot(currentSelectedFighter.getName());
 						if (currentSelectedFighter == brendan)
 							bot.setBotDifficulty(3);
 						else
 							bot.setBotDifficulty(5);
-						bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.ARENA_DECK_PATH + currentSelectedFighter.getDeck().getName() + ".xml")));
+						bot.setDeck(currentSelectedFighter.getDeck());
 						bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
 
 						// Register at server:

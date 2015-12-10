@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Misty</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Misty's Raindance">
     <Cards>
         <Card ID="00002">
@@ -57,3 +61,6 @@
         </Card>
     </Cards>
 </Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>
