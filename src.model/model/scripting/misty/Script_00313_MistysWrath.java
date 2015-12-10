@@ -37,6 +37,10 @@ public class Script_00313_MistysWrath extends TrainerCardScript {
 		for (Card c : chosenCards) {
 			gameModel.getAttackAction().moveCard(ownDiscardPile(), ownHand(), c.getGameID(), true);
 		}
+		
+		// Discard trainer card before choosing!
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID());
+
 		gameModel.sendGameModelToAllPlayers("");
 	}
 }

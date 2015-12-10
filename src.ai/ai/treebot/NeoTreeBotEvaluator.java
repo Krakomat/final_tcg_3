@@ -45,7 +45,7 @@ public class NeoTreeBotEvaluator implements GameModelEvaluator {
 	private float evaluatePlayerModel(LocalPokemonGameModel gameModel, Color color) {
 		// Return Infinity, if you won:
 		if (gameModel.getGameState() == GameState.BLUE_WON && color == Color.BLUE)
-			return Float.MAX_VALUE;
+			return Float.POSITIVE_INFINITY;
 
 		float value = 0;
 

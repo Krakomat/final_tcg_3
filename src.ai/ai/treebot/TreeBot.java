@@ -120,7 +120,7 @@ public class TreeBot implements Bot {
 			if (this.gameModel.getPosition(activePosition).isEmpty() && amount == 1 && exact) {
 				NeoTreeBotEvaluator evaluator = new NeoTreeBotEvaluator();
 				// Choose new active pokemon:
-				float value = Float.MIN_VALUE;
+				float value = Float.NEGATIVE_INFINITY;
 				PositionID chosenPosition = null;
 				for (PositionID benchPos : positionList) {
 					LocalPokemonGameModel copy = gameModel.copy();

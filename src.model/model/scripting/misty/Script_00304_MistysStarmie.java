@@ -41,7 +41,7 @@ public class Script_00304_MistysStarmie extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		List<Element> energy = gameModel.getPosition(attacker).getEnergy();
-		int waterCounter = -3;
+		int waterCounter = -1;
 		for (Element ele : energy)
 			if (ele == Element.WATER)
 				waterCounter++;
