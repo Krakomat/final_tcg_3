@@ -33,6 +33,11 @@ Patch 4.00
 		- 00114_Scyther: Sword Dance is now stored server side
 		- 00092_Bill: Fixed a visual bug
 		- 00212_DarkVileplume: Fixed the number of coins that are flipped during its attack
+		- 00057_Taubsi: Fixed a game breaking bug
+		- 00022_Tauboga: Fixed a game breaking bug
+		- 00225_DarkMachoke: Fixed a game breaking bug
+		- 00270_BrocksRhyhorn: Fixed a game breaking bug
+		- 00278_BrocksMankey: Fixed a game breaking bug
 	Network:
 		- Added support for local games in single player mode: Single player games are no longer played via the network layer
 	DeckEditor:

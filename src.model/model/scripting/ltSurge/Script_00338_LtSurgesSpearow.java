@@ -37,7 +37,6 @@ public class Script_00338_LtSurgesSpearow extends PokemonCardScript {
 
 	private void Whirlwind() {
 		// Get the player:
-		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
@@ -46,7 +45,7 @@ public class Script_00338_LtSurgesSpearow extends PokemonCardScript {
 
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		if (gameModel.getFullBenchPositions(player.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
+		if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			// Let enemy choose bench pokemon and swap it with his active:
 			gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");
 			PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,

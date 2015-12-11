@@ -52,7 +52,7 @@ public class Script_00278_BrocksMankey extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
 
-		if (gameModel.getFullBenchPositions(player.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
+		if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			// Let enemy choose bench pokemon and swap it with his active:
 			gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");
 			PositionID chosenPosition = player
