@@ -3,7 +3,7 @@
     <Name>Miki</Name>
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
-    <Deck Name="Lt. Surge's Charging Center">
+    <Deck Name="Lt. Surges Charging Center">
         <Card ID="00329">
             <Size>1</Size>
         </Card>
@@ -19,14 +19,11 @@
         <Card ID="00332">
             <Size>2</Size>
         </Card>
+        <Card ID="00330">
+            <Size>2</Size>
+        </Card>
         <Card ID="00088">
             <Size>1</Size>
-        </Card>
-        <Card ID="00330">
-            <Size>4</Size>
-        </Card>
-        <Card ID="00100">
-            <Size>25</Size>
         </Card>
         <Card ID="00331">
             <Size>1</Size>
@@ -34,8 +31,14 @@
         <Card ID="00342">
             <Size>1</Size>
         </Card>
+        <Card ID="00100">
+            <Size>25</Size>
+        </Card>
         <Card ID="00336">
             <Size>4</Size>
+        </Card>
+        <Card ID="00326">
+            <Size>2</Size>
         </Card>
         <Card ID="00334">
             <Size>2</Size>

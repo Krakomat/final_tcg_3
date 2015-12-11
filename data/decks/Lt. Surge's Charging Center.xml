@@ -19,6 +19,9 @@
         <Card ID="00100">
             <Size>25</Size>
         </Card>
+        <Card ID="00326">
+            <Size>2</Size>
+        </Card>
         <Card ID="00327">
             <Size>1</Size>
         </Card>
@@ -29,7 +32,7 @@
             <Size>1</Size>
         </Card>
         <Card ID="00330">
-            <Size>4</Size>
+            <Size>2</Size>
         </Card>
         <Card ID="00331">
             <Size>1</Size>
