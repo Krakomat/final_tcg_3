@@ -103,7 +103,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		pageRightButton.setLocalTranslation(screenWidth * 0.575f - buttonWidth / 2, screenHeight * 0.12f, 0);
+		pageRightButton.setLocalTranslation(screenWidth * 0.595f - buttonWidth / 2, screenHeight * 0.12f, 0);
 		pageRightButton.setVisible(false);
 		dropInUpdateQueue(pageRightButton);
 		this.attachChild(pageRightButton);
@@ -154,7 +154,7 @@ public class DeckEditController extends Node implements GUI2DController {
 					// nothing to do here
 				}
 			};
-			filterButton.setLocalTranslation(screenWidth * 0.29f - buttonWidth / 2 + elementButtonWidth * i, screenHeight * 0.12f, 0);
+			filterButton.setLocalTranslation(screenWidth * 0.3f - buttonWidth / 2 + elementButtonWidth * i, screenHeight * 0.12f, 0);
 			filterButton.setVisible(false);
 			dropInUpdateQueue(filterButton);
 			this.attachChild(filterButton);
@@ -777,7 +777,7 @@ public class DeckEditController extends Node implements GUI2DController {
 			this.pageLeftButton.setVisible(true);
 		this.dropInUpdateQueue(pageLeftButton);
 
-		if (this.currentStartIndex + 15 >= this.shownLibraryCards.size())
+		if (this.currentStartIndex + GameParameters.DECK_EDITOR_LIBRARY_SIZE >= this.shownLibraryCards.size())
 			this.pageRightButton.setVisible(false);
 		else
 			this.pageRightButton.setVisible(true);
