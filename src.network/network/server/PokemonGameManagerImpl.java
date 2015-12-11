@@ -30,8 +30,7 @@ import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.PokemonCardScript;
 
 /**
- * Controls the general flow of the game. Does not change the game model, but
- * only calls its game model instance to perform changes on the game model.
+ * Controls the general flow of the game. Does not change the game model, but only calls its game model instance to perform changes on the game model.
  * 
  * @author Michael
  *
@@ -76,9 +75,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Starts the game. Returns true, if startup was successful, false
-	 * otherwise. Also starts a new Thread, which controls the overall game
-	 * flow.
+	 * Starts the game. Returns true, if startup was successful, false otherwise. Also starts a new Thread, which controls the overall game flow.
 	 * 
 	 * @return
 	 */
@@ -101,8 +98,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Controls the overall game flow. Is started when everything is already set
-	 * up, meaning, that all positions are empty except for the decks.
+	 * Controls the overall game flow. Is started when everything is already set up, meaning, that all positions are empty except for the decks.
 	 */
 	protected void runGame() {
 		this.timeoutWait(200);
@@ -204,8 +200,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Checks if the given password matches with the password of the game and
-	 * returns true, if that is the case.
+	 * Checks if the given password matches with the password of the game and returns true, if that is the case.
 	 * 
 	 * @param password
 	 * @return
@@ -235,8 +230,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
-	 * Adds actions to the given list, which are dependent to the position, the
-	 * selected card is on. Only is called, if the given player is on turn.
+	 * Adds actions to the given list, which are dependent to the position, the selected card is on. Only is called, if the given player is on turn.
 	 * 
 	 * @param actionList
 	 * @param game
@@ -421,9 +415,29 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				}
 
 				if (attackAllowed) {
+					// Check Vermillion City Gym:
+					boolean selfDamage = false;
+					if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342")
+							&& active.getName().contains("Lt. Surge")) {
+						boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
+						if (answer) {
+							if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+								gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(true);
+							} else {
+								selfDamage = true;
+							}
+						}
+					}
+
 					// Execute the attack:
 					gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
 					pScript.executeAttack(attackName);
+
+					// Do 10 damage to yourself:
+					if (selfDamage) {
+						gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
+								active.getCurrentPosition().getPositionID(), 10, true);
+					}
 				}
 				gameModel.cleanDefeatedPositions();
 				endTurn(player);
