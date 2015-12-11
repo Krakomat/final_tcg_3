@@ -25,6 +25,7 @@ Patch 4.00
 		- Fixed a bug, where the game freezes when two draw mechanical cards were in the AIs hand
 	Game:
 		- Fixed a bug, where retreat costs couldn't be modified by pokemon powers
+		- Fixed a bug, where a confused pokemon had infinite tries to return per turn
 		- 00118_Victreebel: Fixed a bug, where the retreat button would appear, even if the pokemon was not allowed to retreat
 		- 00049_Drowzee: Fixed a bug, where Drowzee could retreat for free
 		- 00204_DarkDragonite: Fixed a bug, where the player takes 2 pokemon to his bench, even though the bench is almost full

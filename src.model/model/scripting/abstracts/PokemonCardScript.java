@@ -255,13 +255,15 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		}
 
 		boolean retreatAllowed = true;
-		// If active pokemon is confused check if it can be retreated by
-		// flipping a coin:
+		// If active pokemon is confused, check if it can be retreated by tossing a coin:
 		if (pCard.hasCondition(PokemonCondition.CONFUSED)) {
 			gameModel.sendTextMessageToAllPlayers("Coinflip: " + pCard.getName() + " can't return when tails", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			if (c == Coin.TAILS)
+			if (c == Coin.TAILS) {
 				retreatAllowed = false;
+				// Only one try per turn:
+				gameModel.setRetreatExecuted(true);
+			}
 		}
 
 		if (retreatAllowed) {
