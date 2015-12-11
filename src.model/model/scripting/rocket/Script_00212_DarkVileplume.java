@@ -88,7 +88,7 @@ public class Script_00212_DarkVileplume extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 3 coins...", "");
-		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(4);
+		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(3);
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 30, true);
 
 		if (numberHeads > 1) {
