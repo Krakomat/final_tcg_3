@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Erika</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Vileplumes Free Agent">
+    <Cards>
+        <Card ID="00076">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>22</Size>
+        </Card>
+        <Card ID="00109">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00113">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00114">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00120">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00142">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00146">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00182">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00201">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00212">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00221">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00241">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00248">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00260">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>4</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

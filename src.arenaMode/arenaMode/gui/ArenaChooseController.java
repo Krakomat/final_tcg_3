@@ -86,6 +86,8 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 					GUI2D.getInstance().switchMode(GUI2DMode.AZURIA_CITY_ARENA, true);
 				if (enabledArenaNames.get(currentArenaIndex).equals("Vermilion City Gym"))
 					GUI2D.getInstance().switchMode(GUI2DMode.ORANIA_CITY_ARENA, true);
+				if (enabledArenaNames.get(currentArenaIndex).equals("Celadon City Gym"))
+					GUI2D.getInstance().switchMode(GUI2DMode.PRISMANIA_CITY_ARENA, true);
 			}
 
 			@Override
@@ -220,7 +222,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			this.enabledArenaNames.add("Cerulean City Gym");
 		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.AZURIA_MISTY))
 			this.enabledArenaNames.add("Vermilion City Gym");
-		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
+		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_LTSURGE))
 			this.enabledArenaNames.add("Celadon City Gym");
 		if (this.account.getDefeatedArenaFighters().contains(ArenaFighterCode.LOCKED))
 			this.enabledArenaNames.add("Fuchsia City Gym");
@@ -387,6 +389,51 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 			}
 			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.ORANIA_NATE))
 				account.getDefeatedArenaFighters().add(ArenaFighterCode.ORANIA_NATE);
+			break;
+		case PRISMANIA_ROSA:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.PRISMANIA_ERIKA)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.PRISMANIA_ROSA))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.PRISMANIA_ROSA);
+			break;
+		case PRISMANIA_ERIKA:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.PRISMANIA_ERIKA)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.PRISMANIA_ERIKA)) {
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.PRISMANIA_ERIKA);
+				// 1 reward per fighter for beating the master the first time!
+				for (ArenaFighter f : GUI2D.getInstance().getAzuriaArenaController().getArenaFighters()) {
+					String reward = f.createReward(account);
+					if (reward != null) {
+						rewards.add(reward);
+						account.getUnlockedCards().add(reward);
+					}
+				}
+			}
+			break;
+		case PRISMANIA_SERENA:
+			if (account.getDefeatedArenaFighters().contains(ArenaFighterCode.PRISMANIA_ERIKA)) {
+				// Eligible for rewards:
+				String reward = fighter.createReward(account);
+				if (reward != null) {
+					rewards.add(reward);
+					account.getUnlockedCards().add(reward);
+				}
+			}
+			if (!account.getDefeatedArenaFighters().contains(ArenaFighterCode.PRISMANIA_SERENA))
+				account.getDefeatedArenaFighters().add(ArenaFighterCode.PRISMANIA_SERENA);
 			break;
 		default:
 			break;

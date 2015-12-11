@@ -123,6 +123,15 @@ public class ArenaFighterFactory {
 			lockedCards.add("00344");
 			return new ArenaFighter(code, Database.getBot("Lt. Surge"), Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString()),
 					Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString() + "_THUMB"), lockedCards);
+		case PRISMANIA_ROSA:
+			return new ArenaFighter(code, Database.getBot("Rosa"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_ROSA.toString()),
+					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ROSA.toString() + "_THUMB"), lockedCards);
+		case PRISMANIA_SERENA:
+			return new ArenaFighter(code, Database.getBot("Serena"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_SERENA.toString()),
+					Database.getAssetKey(ArenaFighterCode.PRISMANIA_SERENA.toString() + "_THUMB"), lockedCards);
+		case PRISMANIA_ERIKA:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString()),
+					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "_THUMB"), lockedCards);
 		default:
 			break;
 		}
@@ -140,6 +149,9 @@ public class ArenaFighterFactory {
 		erg.add(createFighter(ArenaFighterCode.ORANIA_LEAF));
 		erg.add(createFighter(ArenaFighterCode.ORANIA_NATE));
 		erg.add(createFighter(ArenaFighterCode.ORANIA_LTSURGE));
+		erg.add(createFighter(ArenaFighterCode.PRISMANIA_ROSA));
+		erg.add(createFighter(ArenaFighterCode.PRISMANIA_SERENA));
+		erg.add(createFighter(ArenaFighterCode.PRISMANIA_ERIKA));
 		return erg;
 	}
 }

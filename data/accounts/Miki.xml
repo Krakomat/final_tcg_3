@@ -3,60 +3,63 @@
     <Name>Miki</Name>
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
-    <Deck Name="Lt. Surges Charging Center">
-        <Card ID="00329">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00327">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00338">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00328">
+    <Deck Name="Vileplumes Free Agent">
+        <Card ID="00109">
             <Size>3</Size>
         </Card>
-        <Card ID="00332">
+        <Card ID="00113">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00146">
             <Size>2</Size>
         </Card>
-        <Card ID="00330">
+        <Card ID="00201">
             <Size>2</Size>
+        </Card>
+        <Card ID="00212">
+            <Size>3</Size>
         </Card>
         <Card ID="00088">
-            <Size>1</Size>
+            <Size>2</Size>
         </Card>
-        <Card ID="00331">
-            <Size>1</Size>
+        <Card ID="00099">
+            <Size>22</Size>
         </Card>
-        <Card ID="00342">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00100">
-            <Size>25</Size>
-        </Card>
-        <Card ID="00336">
+        <Card ID="00264">
             <Size>4</Size>
         </Card>
-        <Card ID="00326">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00334">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00335">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00093">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00094">
+        <Card ID="00221">
             <Size>3</Size>
         </Card>
-        <Card ID="00091">
-            <Size>4</Size>
+        <Card ID="00248">
+            <Size>2</Size>
         </Card>
-        <Card ID="00090">
-            <Size>4</Size>
+        <Card ID="00114">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00182">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00120">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00142">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00241">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00076">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00260">
+            <Size>1</Size>
         </Card>
     </Deck>
     <DefeatedArenaFighters>
@@ -69,6 +72,9 @@
         <DefeatedFighter ID="ORANIA_LEAF"/>
         <DefeatedFighter ID="ORANIA_NATE"/>
         <DefeatedFighter ID="ORANIA_LTSURGE"/>
+        <DefeatedFighter ID="PRISMANIA_ROSA"/>
+        <DefeatedFighter ID="PRISMANIA_SERENA"/>
+        <DefeatedFighter ID="PRISMANIA_ERIKA"/>
     </DefeatedArenaFighters>
     <UnlockedCards>
         <UnlockedCard ID="00266"/>

@@ -53,9 +53,7 @@ public class Database {
 	}
 
 	/**
-	 * Sucht in der Datenbank nach der Karte mit übergebener ID und gibt diese
-	 * zurück. Gibt null zurück, falls die Karte sich nicht in der Datenbank
-	 * befindet.
+	 * Sucht in der Datenbank nach der Karte mit übergebener ID und gibt diese zurück. Gibt null zurück, falls die Karte sich nicht in der Datenbank befindet.
 	 * 
 	 * @param id
 	 *            ID der gesuchten Karte
@@ -130,8 +128,7 @@ public class Database {
 	}
 
 	/**
-	 * For each card created in the init()-method, the respective texture is
-	 * loaded and stored in a ArrayList.
+	 * For each card created in the init()-method, the respective texture is loaded and stored in a ArrayList.
 	 */
 	private static void loadTextures() {
 		cardTextures = new HashMap<String, TextureKey>();
@@ -514,6 +511,27 @@ public class Database {
 		TextureKey ltSurgeCharacterThumb = new TextureKey("/tilesets/characters/MajorBob_thumb.png");
 		ltSurgeCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_LTSURGE.toString() + "THUMB", ltSurgeCharacterThumb);
+
+		TextureKey rosaCharacter = new TextureKey("/tilesets/characters/Rosa.png");
+		rosaCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.PRISMANIA_ROSA.toString(), rosaCharacter);
+		TextureKey rosaCharacterThumb = new TextureKey("/tilesets/characters/Rosa_thumb.png");
+		rosaCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.PRISMANIA_ROSA.toString() + "THUMB", rosaCharacterThumb);
+
+		TextureKey serenaCharacter = new TextureKey("/tilesets/characters/Serena.png");
+		serenaCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.PRISMANIA_SERENA.toString(), serenaCharacter);
+		TextureKey serenaCharacterThumb = new TextureKey("/tilesets/characters/Serena_thumb.png");
+		serenaCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.PRISMANIA_SERENA.toString() + "THUMB", serenaCharacterThumb);
+
+		TextureKey erikaCharacter = new TextureKey("/tilesets/characters/Erika.png");
+		erikaCharacter.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.PRISMANIA_ERIKA.toString(), erikaCharacter);
+		TextureKey erikaCharacterThumb = new TextureKey("/tilesets/characters/Erika_thumb.png");
+		erikaCharacterThumb.setGenerateMips(false);
+		assetTextures.put(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "THUMB", erikaCharacterThumb);
 	}
 
 	public static Player getBot(String name) {
@@ -540,9 +558,8 @@ public class Database {
 	}
 
 	/**
-	 * Reads the account folder for player files. Returns the player if only one
-	 * player file is contained in the account folder. Returns null, if no
-	 * account is contained in the folder.
+	 * Reads the account folder for player files. Returns the player if only one player file is contained in the account folder. Returns null, if no account is contained in the
+	 * folder.
 	 * 
 	 * @return
 	 * @throws IOException

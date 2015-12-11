@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Garden of Flowers">
+    <Cards>
+        <Card ID="00015">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00030">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00044">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00066">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00075">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00076">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00085">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00114">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00118">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00123">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00136">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00137">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00140">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00257">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

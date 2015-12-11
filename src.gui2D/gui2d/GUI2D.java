@@ -80,7 +80,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private IngameController ingameController;
 	private LobbyController lobbyController;
 	private ArenaChooseController arenaController;
-	private ArenaController mamoriaArenaController, azuriaArenaController, oraniaArenaController;
+	private ArenaController mamoriaArenaController, azuriaArenaController, oraniaArenaController, prismaniaArenaController;
 	private DeckEditController deckEditController;
 
 	/** True if this gui is running */
@@ -145,6 +145,11 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				ArenaFighterFactory.createFighter(ArenaFighterCode.ORANIA_NATE), ArenaFighterFactory.createFighter(ArenaFighterCode.ORANIA_LTSURGE), "Vermilion City Gym");
 		oraniaArenaController.initSceneGraph();
 		guiNode.attachChild(oraniaArenaController);
+
+		prismaniaArenaController = new ArenaController(GUI2DMode.PRISMANIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.PRISMANIA_ROSA),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.PRISMANIA_SERENA), ArenaFighterFactory.createFighter(ArenaFighterCode.PRISMANIA_ERIKA), "Celadon City Gym");
+		prismaniaArenaController.initSceneGraph();
+		guiNode.attachChild(prismaniaArenaController);
 
 		deckEditController = new DeckEditController();
 		deckEditController.initSceneGraph();
@@ -866,6 +871,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			case ORANIA_CITY_ARENA:
 				this.currentActiveController = this.oraniaArenaController;
 				break;
+			case PRISMANIA_CITY_ARENA:
+				this.currentActiveController = this.prismaniaArenaController;
+				break;
 			default:
 				break;
 			}
@@ -903,6 +911,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		case ORANIA_CITY_ARENA:
 			this.nextController = this.oraniaArenaController;
 			break;
+		case PRISMANIA_CITY_ARENA:
+			this.nextController = this.prismaniaArenaController;
+			break;
 		default:
 			break;
 		}
@@ -920,6 +931,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		this.mamoriaArenaController.setAccount(this.player.asAccount());
 		this.azuriaArenaController.setAccount(this.player.asAccount());
 		this.oraniaArenaController.setAccount(this.player.asAccount());
+		this.prismaniaArenaController.setAccount(this.player.asAccount());
 		this.deckEditController.setAccount(this.player.asAccount());
 		this.animationController.setPlayerColor(this.player.getColor());
 	}
@@ -1009,5 +1021,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 
 	public ArenaController getOraniaArenaController() {
 		return oraniaArenaController;
+	}
+
+	public ArenaController getPrismaniaArenaController() {
+		return prismaniaArenaController;
 	}
 }
