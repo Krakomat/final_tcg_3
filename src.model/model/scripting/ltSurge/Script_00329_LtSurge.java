@@ -20,7 +20,7 @@ public class Script_00329_LtSurge extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		if (!getBasicPokemonInHand().isEmpty() && gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 5)
+		if (!getBasicPokemonInHand().isEmpty() && gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5)
 			return PlayerAction.PLAY_TRAINER_CARD;
 		return null;
 	}
