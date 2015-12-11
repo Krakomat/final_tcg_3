@@ -3,14 +3,12 @@ package model.scripting.ltSurge;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00326_LtSurgesElectabuzz extends PokemonCardScript {
@@ -19,57 +17,61 @@ public class Script_00326_LtSurgesElectabuzz extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		this.addAttack("Charge", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		this.addAttack("Discharge", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Charge"))
+			this.Charge();
 		else
-			this.finale();
+			this.Discharge();
 	}
 
-	private void donnerwelle() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+	private void Charge() {
+		Position discardPile = gameModel.getPosition(ownDiscardPile());
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : discardPile.getEnergyCards())
+			if (c.getCardId().equals("00100"))
+				cardList.add(c);
+		if (!cardList.isEmpty()) {
+			List<Card> moveList = getCardOwner().playerChoosesCards(cardList, 2, false, "Choose up to two cards to attach to " + this.card.getName());
+			for (Card c : moveList)
+				gameModel.getAttackAction().moveCard(ownDiscardPile(), getCurrentPositionID(), c.getGameID(), false);
 			gameModel.sendGameModelToAllPlayers("");
+		} else {
+			gameModel.sendTextMessageToAllPlayers("No Lightning energy found!", "");
 		}
 	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
+	private void Discharge() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		List<Card> lightningEnergy = getLightningEnergyOnPosition();
+		int size = lightningEnergy.size();
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips " + size + " coins...", "");
+		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(size);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 30, true);
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
+		// Discard all lightning energy cards:
+		for (Card c : lightningEnergy) {
+			gameModel.getAttackAction().discardCardToDiscardPile(getCurrentPositionID(), c.getGameID(), true);
+		}
+		gameModel.sendGameModelToAllPlayers("");
+	}
 
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+	private List<Card> getLightningEnergyOnPosition() {
+		Position pos = gameModel.getPosition(getCurrentPositionID());
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : pos.getEnergyCards())
+			if (c.getCardId().equals("00100"))
+				cardList.add(c);
+		return cardList;
 	}
 }

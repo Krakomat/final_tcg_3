@@ -300,4 +300,6 @@ public interface PokemonGame {
 	 * @return
 	 */
 	Card getCurrentStadium();
+
+	void playerTakesPrize(Color color, int i);
 }

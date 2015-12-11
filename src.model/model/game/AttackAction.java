@@ -123,6 +123,9 @@ public class AttackAction {
 		// Check Misty:
 		if (attackerPokemon != null && attackerPokemon.getName().contains("Misty") && gameModel.getGameModelParameters().isActivated_00296_Misty())
 			damageAmount = damageAmount + 20;
+		// Check Vermillion City Gym:
+		if (gameModel.getGameModelParameters().isVermillionCityGymAttackModifier() && damageAmount > 0)
+			damageAmount = damageAmount + 10;
 
 		// Check for conditions that reduce damage on defending pokemon:
 		if (defenderPokemon.hasCondition(PokemonCondition.HARDEN30))

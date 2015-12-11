@@ -367,9 +367,9 @@ public class PokemonGameModelImpl implements PokemonGame {
 			}
 			// Take prices:
 			if (pricesBlue > 0)
-				this.playerTakesPrice(Color.BLUE, pricesBlue);
+				this.playerTakesPrize(Color.BLUE, pricesBlue);
 			if (pricesRed > 0)
-				this.playerTakesPrice(Color.RED, pricesRed);
+				this.playerTakesPrize(Color.RED, pricesRed);
 
 			// Remove cards from positions:
 			for (PositionID posID : defeatedPositions)
@@ -483,7 +483,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	 * @param playerColor
 	 * @param number
 	 */
-	private void playerTakesPrice(Color playerColor, int number) {
+	public void playerTakesPrize(Color playerColor, int number) {
 		if (playerColor == Color.BLUE) {
 			ArrayList<PositionID> pricePositions = gameField.getNonEmptyPriceList(playerColor);
 			// Normalize price number:

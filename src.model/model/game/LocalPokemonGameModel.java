@@ -448,4 +448,9 @@ public class LocalPokemonGameModel implements PokemonGame {
 	public Card getCurrentStadium() {
 		return this.getPosition(PositionID.STADIUM).getTopCard();
 	}
+
+	@Override
+	public void playerTakesPrize(Color color, int i) {
+		//Leave empty
+	}
 }

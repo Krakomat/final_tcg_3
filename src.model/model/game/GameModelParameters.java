@@ -20,13 +20,13 @@ public class GameModelParameters {
 	private int turnNumber;
 	private GameState gameState;
 	private boolean energyPlayed, retreatExecuted;
-	private boolean noEnergyPayment, activated_00296_Misty; // no payment for attacks if true
+	private boolean noEnergyPayment, activated_00296_Misty, vermillionCityGymAttackModifier;
 	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
 	private List<Integer> lauchschlagUsed_00027_Porenta, power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
 			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite, power_Activated_00251_Rattata,
 			power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra, power_Activated_00221_DarkGloom,
 			power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume;
-	private List<Pair<Integer, Integer>> lieLowUsed_00287_BrocksDugtrio, tunnelingUsed_00269_BrocksOnix;
+	private List<Pair<Integer, Integer>> attackUsed;
 	private List<Triple<Integer, String, Integer>> blockedAttacks;
 
 	public GameModelParameters() {
@@ -34,6 +34,7 @@ public class GameModelParameters {
 		turnNumber = 0;
 		energyPlayed = false;
 		retreatExecuted = false;
+		vermillionCityGymAttackModifier = false;
 		this.noEnergyPayment = false;
 		this.activated_00296_Misty = false;
 		this.blockedAttacks = new ArrayList<>();
@@ -53,8 +54,7 @@ public class GameModelParameters {
 		this.power_Activated_00221_DarkGloom = new ArrayList<>();
 		this.power_Activated_00218_DarkDragonair = new ArrayList<>();
 		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
-		this.lieLowUsed_00287_BrocksDugtrio = new ArrayList<>();
-		this.tunnelingUsed_00269_BrocksOnix = new ArrayList<>();
+		this.attackUsed = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
 		this.allowedToPlayPokemonPower = 0;
 	}
@@ -64,6 +64,7 @@ public class GameModelParameters {
 		this.setGameState(gameModelUpdate.getGameModelParameters().getGameState());
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
 		this.setRetreatExecuted(gameModelUpdate.getGameModelParameters().isRetreatExecuted());
+		this.setVermillionCityGymAttackModifier(gameModelUpdate.getGameModelParameters().isVermillionCityGymAttackModifier());
 		this.setNoEnergyPayment(gameModelUpdate.getGameModelParameters().isNoEnergyPayment());
 		this.setActivated_00296_Misty(gameModelUpdate.getGameModelParameters().isActivated_00296_Misty());
 		this.blockedAttacks = new ArrayList<>();
@@ -86,8 +87,7 @@ public class GameModelParameters {
 		this.power_Activated_00221_DarkGloom = new ArrayList<>();
 		this.power_Activated_00218_DarkDragonair = new ArrayList<>();
 		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
-		this.lieLowUsed_00287_BrocksDugtrio = new ArrayList<>();
-		this.tunnelingUsed_00269_BrocksOnix = new ArrayList<>();
+		this.attackUsed = new ArrayList<>();
 		for (Integer i : gameModelUpdate.getGameModelParameters().getLauchschlagUsed_00027_Porenta())
 			this.lauchschlagUsed_00027_Porenta.add(i);
 		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Active_00164_Muk())
@@ -120,10 +120,8 @@ public class GameModelParameters {
 			this.power_Activated_00218_DarkDragonair.add(i);
 		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00212_DarkVileplume())
 			this.power_Activated_00212_DarkVileplume.add(i);
-		for (Pair<Integer, Integer> i : gameModelUpdate.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio())
-			this.lieLowUsed_00287_BrocksDugtrio.add(i);
-		for (Pair<Integer, Integer> i : gameModelUpdate.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix())
-			this.tunnelingUsed_00269_BrocksOnix.add(i);
+		for (Pair<Integer, Integer> i : gameModelUpdate.getGameModelParameters().getAttackUsed())
+			this.attackUsed.add(i);
 
 		this.setAllowedToPlayTrainerCards(gameModelUpdate.getGameModelParameters().isAllowedToPlayTrainerCards());
 		this.setAllowedToPlayPokemonPower(gameModelUpdate.getGameModelParameters().isAllowedToPlayPokemonPower());
@@ -134,6 +132,7 @@ public class GameModelParameters {
 		copy.setTurnNumber(turnNumber);
 		copy.setEnergyPlayed(energyPlayed);
 		copy.setGameState(gameState);
+		copy.setVermillionCityGymAttackModifier(vermillionCityGymAttackModifier);
 		copy.setNoEnergyPayment(noEnergyPayment);
 		copy.setActivated_00296_Misty(activated_00296_Misty);
 		copy.setRetreatExecuted(retreatExecuted);
@@ -172,10 +171,8 @@ public class GameModelParameters {
 			copy.getPower_Activated_00218_DarkDragonair().add(i);
 		for (Integer i : this.getPower_Activated_00212_DarkVileplume())
 			copy.getPower_Activated_00212_DarkVileplume().add(i);
-		for (Pair<Integer, Integer> i : this.getLieLowUsed_00287_BrocksDugtrio())
-			copy.getLieLowUsed_00287_BrocksDugtrio().add(i);
-		for (Pair<Integer, Integer> i : this.getTunnelingUsed_00269_BrocksOnix())
-			copy.getTunnelingUsed_00269_BrocksOnix().add(i);
+		for (Pair<Integer, Integer> i : this.getAttackUsed())
+			copy.getAttackUsed().add(i);
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
 		copy.setAllowedToPlayPokemonPower(this.isAllowedToPlayPokemonPower());
 		return copy;
@@ -200,6 +197,10 @@ public class GameModelParameters {
 		// retreatExecuted:
 		bString = serializer.unpackByteString(unpacker);
 		this.retreatExecuted = serializer.unpackBool(bString);
+
+		// vermillionCityGymAttackModifier:
+		bString = serializer.unpackByteString(unpacker);
+		this.vermillionCityGymAttackModifier = serializer.unpackBool(bString);
 
 		// noEnergyPayment:
 		bString = serializer.unpackByteString(unpacker);
@@ -277,13 +278,9 @@ public class GameModelParameters {
 		bString = serializer.unpackByteString(unpacker);
 		this.power_Activated_00212_DarkVileplume = serializer.unpackIntList(bString);
 
-		// lieLowUsed_00287_BrocksDugtrio:
+		// attackUsed:
 		bString = serializer.unpackByteString(unpacker);
-		this.lieLowUsed_00287_BrocksDugtrio = serializer.unpackIntegerPairList(bString);
-
-		// tunnelingUsed_00269_BrocksOnix:
-		bString = serializer.unpackByteString(unpacker);
-		this.tunnelingUsed_00269_BrocksOnix = serializer.unpackIntegerPairList(bString);
+		this.attackUsed = serializer.unpackIntegerPairList(bString);
 
 		// allowedToPlayTrainerCards:
 		bString = serializer.unpackByteString(unpacker);
@@ -326,13 +323,18 @@ public class GameModelParameters {
 		packer.packBinaryHeader(retreat.length());
 		packer.writePayload(retreat.copyAsBytes());
 
+		// vermillionCityGymAttackModifier:
+		ByteString b = serializer.packBool(vermillionCityGymAttackModifier);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
 		// noEnergyPayment:
-		ByteString energyPayment = serializer.packBool(noEnergyPayment);
-		packer.packBinaryHeader(energyPayment.length());
-		packer.writePayload(energyPayment.copyAsBytes());
+		b = serializer.packBool(noEnergyPayment);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
 
 		// blockedAttacks
-		ByteString b = serializer.packBlockedAttacksList(blockedAttacks);
+		b = serializer.packBlockedAttacksList(blockedAttacks);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -416,25 +418,20 @@ public class GameModelParameters {
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
-		// lieLowUsed_00287_BrocksDugtrio:
-		b = serializer.packIntPairList(lieLowUsed_00287_BrocksDugtrio);
-		packer.packBinaryHeader(b.length());
-		packer.writePayload(b.copyAsBytes());
-
-		// tunnelingUsed_00269_BrocksOnix:
-		b = serializer.packIntPairList(tunnelingUsed_00269_BrocksOnix);
+		// attackUsed:
+		b = serializer.packIntPairList(attackUsed);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
 		// allowedToPlayTrainerCards:
 		b = serializer.packShort(allowedToPlayTrainerCards);
-		packer.packBinaryHeader(energyPayment.length());
-		packer.writePayload(energyPayment.copyAsBytes());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
 
 		// allowedToPlayPokemonPower:
 		b = serializer.packShort(allowedToPlayPokemonPower);
-		packer.packBinaryHeader(energyPayment.length());
-		packer.writePayload(energyPayment.copyAsBytes());
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
 
 		packer.close();
 		return new ByteString(out.toByteArray());
@@ -624,20 +621,12 @@ public class GameModelParameters {
 		this.lauchschlagUsed_00027_Porenta = lauchschlagUsed_00027_Porenta;
 	}
 
-	public List<Pair<Integer, Integer>> getLieLowUsed_00287_BrocksDugtrio() {
-		return lieLowUsed_00287_BrocksDugtrio;
+	public List<Pair<Integer, Integer>> getAttackUsed() {
+		return attackUsed;
 	}
 
-	public void setLieLowUsed_00287_BrocksDugtrio(List<Pair<Integer, Integer>> lieLowUsed_00287_BrocksDugtrio) {
-		this.lieLowUsed_00287_BrocksDugtrio = lieLowUsed_00287_BrocksDugtrio;
-	}
-
-	public List<Pair<Integer, Integer>> getTunnelingUsed_00269_BrocksOnix() {
-		return tunnelingUsed_00269_BrocksOnix;
-	}
-
-	public void setTunnelingUsed_00269_BrocksOnix(List<Pair<Integer, Integer>> tunnelingUsed_00269_BrocksOnix) {
-		this.tunnelingUsed_00269_BrocksOnix = tunnelingUsed_00269_BrocksOnix;
+	public void setAttackUsed(List<Pair<Integer, Integer>> attackUsed) {
+		this.attackUsed = attackUsed;
 	}
 
 	public List<Triple<Integer, String, Integer>> getBlockedAttacks() {
@@ -673,5 +662,13 @@ public class GameModelParameters {
 
 	public void setActivated_00296_Misty(boolean activated_00296_Misty) {
 		this.activated_00296_Misty = activated_00296_Misty;
+	}
+
+	public boolean isVermillionCityGymAttackModifier() {
+		return vermillionCityGymAttackModifier;
+	}
+
+	public void setVermillionCityGymAttackModifier(boolean vermillionCityGymAttackModifier) {
+		this.vermillionCityGymAttackModifier = vermillionCityGymAttackModifier;
 	}
 }

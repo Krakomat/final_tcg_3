@@ -222,8 +222,8 @@ public class TurnSimulator implements PokemonGameManager {
 				attackAllowed = false;
 				// Damage attacker:
 				gameModel.sendTextMessageToAllPlayers(active.getName() + " hurts itself!", "");
-				gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
-						active.getCurrentPosition().getPositionID(), 20, true);
+				gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(), active.getCurrentPosition().getPositionID(),
+						20, true);
 			}
 		}
 
@@ -238,7 +238,27 @@ public class TurnSimulator implements PokemonGameManager {
 		if (attackAllowed) {
 			// Execute the attack:
 			gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
+
+			// Check Vermillion City Gym:
+			boolean selfDamage = false;
+			if (gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342") && active.getName().contains("Lt. Surge")) {
+				boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
+				if (answer) {
+					if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+						gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(true);
+					} else {
+						selfDamage = true;
+					}
+				}
+			}
 			pScript.executeAttack(attackName);
+			gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(false);
+
+			// Do 10 damage to yourself:
+			if (selfDamage) {
+				gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(), active.getCurrentPosition().getPositionID(),
+						10, true);
+			}
 		}
 		gameModel.cleanDefeatedPositions();
 		endTurn(player);
@@ -331,6 +351,6 @@ public class TurnSimulator implements PokemonGameManager {
 
 	@Override
 	public void surrender(Player player) {
-		
+
 	}
 }

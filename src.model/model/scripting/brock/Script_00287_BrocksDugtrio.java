@@ -30,7 +30,7 @@ public class Script_00287_BrocksDugtrio extends PokemonCardScript {
 	public boolean attackCanBeExecuted(String attackName) {
 		if (attackName.equals("Earthdrill")) {
 			Pair<Integer, Integer> currentPair = null;
-			for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio()) {
+			for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getAttackUsed()) {
 				if (pair.getKey() == this.card.getGameID())
 					currentPair = pair;
 			}
@@ -50,22 +50,22 @@ public class Script_00287_BrocksDugtrio extends PokemonCardScript {
 
 	public void executeEndTurnActions() {
 		Pair<Integer, Integer> currentPair = null;
-		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio()) {
+		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getAttackUsed()) {
 			if (pair.getKey() == this.card.getGameID())
 				currentPair = pair;
 		}
 
 		if (currentPair != null) {
-			gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio().remove(currentPair);
+			gameModel.getGameModelParameters().getAttackUsed().remove(currentPair);
 			if (currentPair.getValue() > 1)
-				gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio().add(new Pair<Integer, Integer>(currentPair.getKey(), currentPair.getValue() - 1));
+				gameModel.getGameModelParameters().getAttackUsed().add(new Pair<Integer, Integer>(currentPair.getKey(), currentPair.getValue() - 1));
 		}
 	}
 
 	private void LieLow() {
 		gameModel.sendTextMessageToAllPlayers(this.card.getName() + " protects itself!", "");
 		gameModel.getAttackAction().inflictConditionToPosition(this.card.getCurrentPosition().getPositionID(), PokemonCondition.HARDEN20);
-		gameModel.getGameModelParameters().getLieLowUsed_00287_BrocksDugtrio().add(new Pair<Integer, Integer>(this.card.getGameID(), 3));
+		gameModel.getGameModelParameters().getAttackUsed().add(new Pair<Integer, Integer>(this.card.getGameID(), 3));
 	}
 
 	private void Earthdrill() {

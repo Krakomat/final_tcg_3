@@ -63,5 +63,4 @@ public class Script_00297_MistysCloyster extends PokemonCardScript {
 			return false;
 		return true;
 	}
-
 }

@@ -3,13 +3,12 @@ package model.scripting.ltSurge;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
-import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
@@ -19,57 +18,49 @@ public class Script_00346_LtSurgesElectrode extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		this.addAttack("Power Ball", att1Cost);
+		this.addPokemonPower("Shock Blast");
+	}
 
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		// Cannot be manually activated!
+		return false;
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
-	}
-
-	private void donnerwelle() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips 3 coins...", "");
+		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(3);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30 + numberHeads * 10, true);
+	}
+
+	public void pokemonIsDamaged(int turnNumber, int damage, PositionID source) {
+		if (shockBlastCanBeExecuted()) {
+			gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates Shock Blast!", card, Sounds.ACTIVATE_TRAINER);
+			if (gameModel.getAttackAction().flipACoin() == Coin.TAILS) {
+				Element attackerElement = ((PokemonCard) this.card).getElement();
+				PositionID attacker = this.card.getCurrentPosition().getPositionID();
+				PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+				gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+				gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 20, true);
+			}
 		}
 	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+	private boolean shockBlastCanBeExecuted() {
+		if (!PositionID.isActivePosition(this.getCurrentPositionID()))
+			return false;
+		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+			return false;
+		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
+			return false;
+		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
+			return false;
+		return true;
 	}
 }

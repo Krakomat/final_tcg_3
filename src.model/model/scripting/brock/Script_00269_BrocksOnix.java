@@ -32,7 +32,7 @@ public class Script_00269_BrocksOnix extends PokemonCardScript {
 	@Override
 	public boolean attackCanBeExecuted(String attackName) {
 		Pair<Integer, Integer> currentPair = null;
-		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix()) {
+		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getAttackUsed()) {
 			if (pair.getKey() == this.card.getGameID())
 				currentPair = pair;
 		}
@@ -68,15 +68,15 @@ public class Script_00269_BrocksOnix extends PokemonCardScript {
 
 	public void executeEndTurnActions() {
 		Pair<Integer, Integer> currentPair = null;
-		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix()) {
+		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getAttackUsed()) {
 			if (pair.getKey() == this.card.getGameID())
 				currentPair = pair;
 		}
 
 		if (currentPair != null) {
-			gameModel.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix().remove(currentPair);
+			gameModel.getGameModelParameters().getAttackUsed().remove(currentPair);
 			if (currentPair.getValue() > 1)
-				gameModel.getGameModelParameters().getTunnelingUsed_00269_BrocksOnix().add(new Pair<Integer, Integer>(currentPair.getKey(), currentPair.getValue() - 1));
+				gameModel.getGameModelParameters().getAttackUsed().add(new Pair<Integer, Integer>(currentPair.getKey(), currentPair.getValue() - 1));
 		}
 	}
 
@@ -96,5 +96,6 @@ public class Script_00269_BrocksOnix extends PokemonCardScript {
 			for (PositionID benchPos : gameModel.getFullBenchPositions(this.getEnemyPlayer().getColor()))
 				gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 20, false);
 		}
+		gameModel.getGameModelParameters().getAttackUsed().add(new Pair<Integer, Integer>(this.card.getGameID(), 3));
 	}
 }

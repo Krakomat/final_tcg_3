@@ -3,6 +3,7 @@ package model.scripting.jungle;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.utilities.Pair;
 import model.database.PokemonCard;
 import model.enums.Element;
 import model.enums.PositionID;
@@ -10,9 +11,6 @@ import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00114_Scyther extends PokemonCardScript {
-
-	private boolean swordDanceActivated;
-	private int endTurnActionCounter;
 
 	public Script_00114_Scyther(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
@@ -25,9 +23,6 @@ public class Script_00114_Scyther extends PokemonCardScript {
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Slash", att2Cost);
-
-		swordDanceActivated = false;
-		this.endTurnActionCounter = -1;
 	}
 
 	@Override
@@ -39,26 +34,41 @@ public class Script_00114_Scyther extends PokemonCardScript {
 	}
 
 	private void swordsDance() {
-		this.swordDanceActivated = true;
-		this.endTurnActionCounter = 3;
+		gameModel.getGameModelParameters().getAttackUsed().add(new Pair<Integer, Integer>(this.card.getGameID(), 3));
+	}
+
+	private boolean attackUsed() {
+		Pair<Integer, Integer> currentPair = null;
+		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getAttackUsed()) {
+			if (pair.getKey() == this.card.getGameID())
+				currentPair = pair;
+		}
+		if (currentPair != null)
+			return true;
+		return false;
 	}
 
 	private void slash() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		if (swordDanceActivated)
+		if (attackUsed())
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 60, true);
 		else
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 	}
 
 	public void executeEndTurnActions() {
-		if (endTurnActionCounter > -1) {
-			endTurnActionCounter--;
-			if (endTurnActionCounter == 0) {
-				this.swordDanceActivated = false;
-			}
+		Pair<Integer, Integer> currentPair = null;
+		for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().getAttackUsed()) {
+			if (pair.getKey() == this.card.getGameID())
+				currentPair = pair;
+		}
+
+		if (currentPair != null) {
+			gameModel.getGameModelParameters().getAttackUsed().remove(currentPair);
+			if (currentPair.getValue() > 1)
+				gameModel.getGameModelParameters().getAttackUsed().add(new Pair<Integer, Integer>(currentPair.getKey(), currentPair.getValue() - 1));
 		}
 	}
 }
