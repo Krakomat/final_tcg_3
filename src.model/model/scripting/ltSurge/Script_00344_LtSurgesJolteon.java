@@ -53,7 +53,7 @@ public class Script_00344_LtSurgesJolteon extends PokemonCardScript {
 		int damage = ((PokemonCard) this.card).getDamageMarks();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30 + damage, true);
 
-		gameModel.sendTextMessageToAllPlayers("If heads then " + this.card.getName() + " hurts itself!", "");
+		gameModel.sendTextMessageToAllPlayers("If tails then " + this.card.getName() + " hurts itself!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.TAILS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 30, true);

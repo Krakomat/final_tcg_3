@@ -11,6 +11,7 @@ import network.tcp.borders.ServerBorder;
 import network.tcp.borders.ServerListener;
 import network.tcp.borders.ServerMain;
 import model.database.Card;
+import model.database.Database;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.database.TrainerCard;
@@ -421,10 +422,14 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 							&& active.getName().contains("Lt. Surge")) {
 						boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
 						if (answer) {
+							gameModel.sendCardMessageToAllPlayers(player.getName() + " activates the effect of Vermillion City Gym!", Database.createCard("00342"),
+									Sounds.ACTIVATE_TRAINER);
 							if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
 								gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(true);
+								gameModel.sendTextMessageToAllPlayers("Attacks from " + active.getName() + " do 10 more damage this turn!", "");
 							} else {
 								selfDamage = true;
+								gameModel.sendTextMessageToAllPlayers(active.getName() + " will hurt itself after attacking!", "");
 							}
 						}
 					}

@@ -31,6 +31,7 @@ Patch 4.00
 		- 00081_Energiezugewinnung: Fixed a bug, where the discarded energy could be retrieved again
 		- 00038_Quaputzi: Fixed a bug where blocked attacks were only stored on server side
 		- 00114_Scyther: Sword Dance is now stored server side
+		- 00092_Bill: Fixed a visual bug
 	Network:
 		- Added support for local games in single player mode: Single player games are no longer played via the network layer
 		
