@@ -3,6 +3,8 @@ package model.scripting.ltSurge;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui2d.animations.Animation;
+import gui2d.animations.CardMoveAnimation;
 import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
@@ -10,6 +12,7 @@ import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
@@ -61,7 +64,10 @@ public class Script_00328_LtSurgesMagneton extends PokemonCardScript {
 			if (c.getCardId().equals("00100"))
 				card = c;
 		if (card != null) {
-			gameModel.getAttackAction().moveCard(ownDiscardPile(), getCurrentPositionID(), card.getGameID(), false);
+			gameModel.getAttackAction().moveCard(chosenPosition, getCurrentPositionID(), card.getGameID(), false);
+
+			Animation animation = new CardMoveAnimation(chosenPosition, getCurrentPositionID(), card.getCardId(), Sounds.EQUIP);
+			gameModel.sendAnimationToAllPlayers(animation);
 		}
 
 		gameModel.sendGameModelToAllPlayers("");
