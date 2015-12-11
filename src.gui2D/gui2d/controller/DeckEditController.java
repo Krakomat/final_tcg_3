@@ -200,7 +200,7 @@ public class DeckEditController extends Node implements GUI2DController {
 					// nothing to do here
 				}
 			};
-			filterButton.setLocalTranslation(screenWidth * 0.01f, screenHeight * 0.82f - elementButtonWidth * i, 0);
+			filterButton.setLocalTranslation(screenWidth * 0.01f, screenHeight * 0.86f - elementButtonWidth * i, 0);
 			filterButton.setVisible(false);
 			dropInUpdateQueue(filterButton);
 			this.attachChild(filterButton);
@@ -307,7 +307,7 @@ public class DeckEditController extends Node implements GUI2DController {
 
 		float libraryImageWidth = screenWidth * 0.08f;
 		float libraryImageHeight = libraryImageWidth * 1.141f;
-		float libraryImageBorder = screenWidth * 0.05f;
+		float libraryImageBorder = screenWidth * 0.01f;
 		this.libraryImages = new ArrayList<>();
 		for (int i = 0; i < GameParameters.DECK_EDITOR_LIBRARY_SIZE; i++) {
 			final int h = i;
@@ -334,8 +334,8 @@ public class DeckEditController extends Node implements GUI2DController {
 					}).start();
 				}
 			};
-			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 5),
-					screenHeight * 0.7f - (libraryImageHeight + libraryImageBorder) * (i / 5), 0);
+			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 7),
+					screenHeight * 0.75f - (libraryImageHeight + libraryImageBorder) * (i / 7), 0);
 			libraryImage.setVisible(false);
 			dropInUpdateQueue(libraryImage);
 			this.attachChild(libraryImage);
@@ -539,13 +539,13 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	protected void pageRightButtonClicked() {
-		currentStartIndex = currentStartIndex + 15;
+		currentStartIndex = currentStartIndex + GameParameters.DECK_EDITOR_LIBRARY_SIZE;
 		this.updateLibraryImages();
 		this.updateButtons();
 	}
 
 	protected void pageLeftButtonClicked() {
-		currentStartIndex = currentStartIndex - 15;
+		currentStartIndex = currentStartIndex - GameParameters.DECK_EDITOR_LIBRARY_SIZE;
 		this.updateLibraryImages();
 		this.updateButtons();
 	}
