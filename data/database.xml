@@ -5513,7 +5513,7 @@
         <Weakness>LIGHTNING</Weakness>
         <Resistance>ROCK</Resistance>
         <RetreatCost/>
-        <EvolvesFrom>Lt. Surge's Fearow</EvolvesFrom>
+        <EvolvesFrom>Lt. Surge's Spearow</EvolvesFrom>
     </PokemonCard>
     <PokemonCard>
         <Card>
@@ -5697,7 +5697,7 @@
             <Edition>LT_SURGE</Edition>
         </Card>
         <Type>COLORLESS</Type>
-        <HP>10</HP>
+        <HP>50</HP>
         <Weakness>LIGHTNING</Weakness>
         <Resistance>ROCK</Resistance>
         <RetreatCost/>

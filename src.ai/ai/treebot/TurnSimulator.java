@@ -241,7 +241,7 @@ public class TurnSimulator implements PokemonGameManager {
 
 			// Check Vermillion City Gym:
 			boolean selfDamage = false;
-			if (gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342") && active.getName().contains("Lt. Surge")) {
+			if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342") && active.getName().contains("Lt. Surge")) {
 				boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
 				if (answer) {
 					if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
