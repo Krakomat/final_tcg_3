@@ -437,6 +437,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 					// Execute the attack:
 					gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
 					pScript.executeAttack(attackName);
+					gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(false);
 
 					// Do 10 damage to yourself:
 					if (selfDamage) {
