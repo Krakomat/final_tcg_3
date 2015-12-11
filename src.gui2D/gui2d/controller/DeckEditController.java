@@ -291,7 +291,7 @@ public class DeckEditController extends Node implements GUI2DController {
 							viewer.setVisible(true);
 							List<Card> cardList = new ArrayList<>();
 							cardList.add(Database.createCard(self.getCardId()));
-							viewer.setData("Cards", cardList);
+							viewer.setData("", cardList);
 							GUI2D.getInstance().addToUpdateQueue(viewer);
 						}
 					}).start();
@@ -328,7 +328,7 @@ public class DeckEditController extends Node implements GUI2DController {
 							viewer.setVisible(true);
 							List<Card> cardList = new ArrayList<>();
 							cardList.add(Database.createCard(self.getCardId()));
-							viewer.setData("Cards", cardList);
+							viewer.setData("", cardList);
 							GUI2D.getInstance().addToUpdateQueue(viewer);
 						}
 					}).start();
