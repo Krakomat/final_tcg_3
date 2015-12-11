@@ -7,11 +7,13 @@ Patch 4.00
 			New Arenas:
 				- Pewter City Gym
 				- Celurean City Gym
+				- Vermillion City Gym
 			- The first arena (Pewter City Gym) is already unlocked, further ones come with future releases
 		Improved control UI
 		New Card sets: 
 			- BROCK
 			- MISTY
+			- LT_SURGE
 	UI:
 		- Reduced the amount of music tracks used in the different modes
 		- Added support for gym cards
