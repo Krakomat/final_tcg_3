@@ -35,6 +35,38 @@ import model.scripting.brock.Script_00290_BrocksSandslash;
 import model.scripting.brock.Script_00291_BrocksDiglett;
 import model.scripting.brock.Script_00292_BrocksGeodude;
 import model.scripting.brock.Script_00293_BrocksProtection;
+import model.scripting.erika.Script_00351_ErikasClefable;
+import model.scripting.erika.Script_00352_ErikasDragonair;
+import model.scripting.erika.Script_00353_ErikasVileplume;
+import model.scripting.erika.Script_00354_Erika;
+import model.scripting.erika.Script_00355_ErikasClefairy;
+import model.scripting.erika.Script_00356_Erikas_Victreebel;
+import model.scripting.erika.Script_00357_ErikasDratini;
+import model.scripting.erika.Script_00358_ErikasExeggcute;
+import model.scripting.erika.Script_00359_ErikasExeggutor;
+import model.scripting.erika.Script_00360_ErikasGloom;
+import model.scripting.erika.Script_00361_ErikasGloom;
+import model.scripting.erika.Script_00362_ErikasOddish;
+import model.scripting.erika.Script_00363_ErikasWeepinbell;
+import model.scripting.erika.Script_00364_ErikasWeepinbell;
+import model.scripting.erika.Script_00365_ErikasBellsprout;
+import model.scripting.erika.Script_00366_ErikasBellsprout;
+import model.scripting.erika.Script_00367_ErikasExeggcute;
+import model.scripting.erika.Script_00368_ErikasOddish;
+import model.scripting.erika.Script_00369_ErikasTangela;
+import model.scripting.erika.Script_00370_CeladonCityGym;
+import model.scripting.erika.Script_00371_ErikasMaids;
+import model.scripting.erika.Script_00372_ErikasPerfume;
+import model.scripting.erika.Script_00373_GoodManners;
+import model.scripting.erika.Script_00374_ErikasVenusaur;
+import model.scripting.erika.Script_00375_ErikasBellsprout;
+import model.scripting.erika.Script_00376_ErikasBulbasaur;
+import model.scripting.erika.Script_00377_ErikasClefairy;
+import model.scripting.erika.Script_00378_ErikasIvysaur;
+import model.scripting.erika.Script_00379_ErikasJigglypuff;
+import model.scripting.erika.Script_00380_ErikasOddish;
+import model.scripting.erika.Script_00381_ErikasParas;
+import model.scripting.erika.Script_00382_ErikasKindness;
 import model.scripting.fossil.Script_00153_Aerodactyl;
 import model.scripting.fossil.Script_00154_Articuno;
 import model.scripting.fossil.Script_00155_Dragonite;
@@ -993,6 +1025,70 @@ public class CardScriptFactory {
 			return new Script_00349_LtSurgesRattata((PokemonCard) card, gameModel);
 		case "00350":
 			return new Script_00350_LtSurgesVoltorb((PokemonCard) card, gameModel);
+		case "00351":
+			return new Script_00351_ErikasClefable((PokemonCard) card, gameModel);
+		case "00352":
+			return new Script_00352_ErikasDragonair((PokemonCard) card, gameModel);
+		case "00353":
+			return new Script_00353_ErikasVileplume((PokemonCard) card, gameModel);
+		case "00354":
+			return new Script_00354_Erika((TrainerCard) card, gameModel);
+		case "00355":
+			return new Script_00355_ErikasClefairy((PokemonCard) card, gameModel);
+		case "00356":
+			return new Script_00356_Erikas_Victreebel((PokemonCard) card, gameModel);
+		case "00357":
+			return new Script_00357_ErikasDratini((PokemonCard) card, gameModel);
+		case "00358":
+			return new Script_00358_ErikasExeggcute((PokemonCard) card, gameModel);
+		case "00359":
+			return new Script_00359_ErikasExeggutor((PokemonCard) card, gameModel);
+		case "00360":
+			return new Script_00360_ErikasGloom((PokemonCard) card, gameModel);
+		case "00361":
+			return new Script_00361_ErikasGloom((PokemonCard) card, gameModel);
+		case "00362":
+			return new Script_00362_ErikasOddish((PokemonCard) card, gameModel);
+		case "00363":
+			return new Script_00363_ErikasWeepinbell((PokemonCard) card, gameModel);
+		case "00364":
+			return new Script_00364_ErikasWeepinbell((PokemonCard) card, gameModel);
+		case "00365":
+			return new Script_00365_ErikasBellsprout((PokemonCard) card, gameModel);
+		case "00366":
+			return new Script_00366_ErikasBellsprout((PokemonCard) card, gameModel);
+		case "00367":
+			return new Script_00367_ErikasExeggcute((PokemonCard) card, gameModel);
+		case "00368":
+			return new Script_00368_ErikasOddish((PokemonCard) card, gameModel);
+		case "00369":
+			return new Script_00369_ErikasTangela((PokemonCard) card, gameModel);
+		case "00370":
+			return new Script_00370_CeladonCityGym((TrainerCard) card, gameModel);
+		case "00371":
+			return new Script_00371_ErikasMaids((TrainerCard) card, gameModel);
+		case "00372":
+			return new Script_00372_ErikasPerfume((TrainerCard) card, gameModel);
+		case "00373":
+			return new Script_00373_GoodManners((TrainerCard) card, gameModel);
+		case "00374":
+			return new Script_00374_ErikasVenusaur((PokemonCard) card, gameModel);
+		case "00375":
+			return new Script_00375_ErikasBellsprout((PokemonCard) card, gameModel);
+		case "00376":
+			return new Script_00376_ErikasBulbasaur((PokemonCard) card, gameModel);
+		case "00377":
+			return new Script_00377_ErikasClefairy((PokemonCard) card, gameModel);
+		case "00378":
+			return new Script_00378_ErikasIvysaur((PokemonCard) card, gameModel);
+		case "00379":
+			return new Script_00379_ErikasJigglypuff((PokemonCard) card, gameModel);
+		case "00380":
+			return new Script_00380_ErikasOddish((PokemonCard) card, gameModel);
+		case "00381":
+			return new Script_00381_ErikasParas((PokemonCard) card, gameModel);
+		case "00382":
+			return new Script_00382_ErikasKindness((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
