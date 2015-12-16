@@ -1,5 +1,5 @@
 package model.enums;
 
 public enum Edition {
-	BASE, JUNGLE, FOSSIL, ROCKET, BROCK, MISTY, LT_SURGE, TOKEN;
+	BASE, JUNGLE, FOSSIL, ROCKET, BROCK, MISTY, LT_SURGE, ERIKA, TOKEN;
 }

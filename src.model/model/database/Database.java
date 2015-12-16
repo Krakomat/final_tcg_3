@@ -385,6 +385,10 @@ public class Database {
 		ltSurgeEdition.setGenerateMips(false);
 		assetTextures.put(Edition.LT_SURGE.toString(), ltSurgeEdition);
 
+		TextureKey erikaEdition = new TextureKey("/tilesets/editions/erikaLogo.png");
+		erikaEdition.setGenerateMips(false);
+		assetTextures.put(Edition.ERIKA.toString(), erikaEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);
