@@ -3,63 +3,66 @@
     <Name>Miki</Name>
     <Password/>
     <AccountType>REAL_PLAYER</AccountType>
-    <Deck Name="Vileplumes Free Agent">
-        <Card ID="00109">
+    <Deck Name="Erikas Weed Garden">
+        <Card ID="00376">
             <Size>3</Size>
         </Card>
-        <Card ID="00113">
+        <Card ID="00354">
             <Size>1</Size>
         </Card>
-        <Card ID="00146">
-            <Size>2</Size>
+        <Card ID="00353">
+            <Size>1</Size>
         </Card>
-        <Card ID="00201">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00212">
+        <Card ID="00375">
             <Size>3</Size>
         </Card>
         <Card ID="00088">
-            <Size>2</Size>
+            <Size>1</Size>
         </Card>
         <Card ID="00099">
-            <Size>22</Size>
+            <Size>25</Size>
         </Card>
-        <Card ID="00264">
+        <Card ID="00352">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00374">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00369">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00357">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00378">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00380">
             <Size>4</Size>
         </Card>
-        <Card ID="00221">
-            <Size>3</Size>
-        </Card>
-        <Card ID="00248">
+        <Card ID="00093">
             <Size>2</Size>
         </Card>
-        <Card ID="00114">
+        <Card ID="00094">
             <Size>3</Size>
-        </Card>
-        <Card ID="00182">
-            <Size>2</Size>
         </Card>
         <Card ID="00091">
-            <Size>2</Size>
+            <Size>3</Size>
         </Card>
-        <Card ID="00120">
+        <Card ID="00372">
             <Size>1</Size>
         </Card>
-        <Card ID="00142">
+        <Card ID="00360">
             <Size>2</Size>
         </Card>
-        <Card ID="00241">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00076">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00263">
+        <Card ID="00382">
             <Size>1</Size>
         </Card>
-        <Card ID="00260">
+        <Card ID="00370">
             <Size>1</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>2</Size>
         </Card>
     </Deck>
     <DefeatedArenaFighters>

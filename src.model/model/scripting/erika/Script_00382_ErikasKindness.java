@@ -1,10 +1,15 @@
 package model.scripting.erika;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.database.PokemonCard;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.PositionID;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
+import network.client.Player;
 
 public class Script_00382_ErikasKindness extends TrainerCardScript {
 
@@ -14,19 +19,35 @@ public class Script_00382_ErikasKindness extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
-		// Discard trainer card before drawing!
+		// Execute heal(messages to clients send there):
+		List<PositionID> damagedPositions = this.getDamagedPositions();
+		for (PositionID posID : damagedPositions)
+			gameModel.getAttackAction().healPosition(posID, 20);
+
+		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
-		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+	}
+
+	private List<PositionID> getDamagedPositions() {
+		Player player = this.getCardOwner();
+		List<PositionID> arenaPositions = gameModel.getFullArenaPositions(player.getColor());
+		List<PositionID> enemyArenaPositions = gameModel.getFullArenaPositions(getEnemyPlayer().getColor());
+		List<PositionID> damagedPositions = new ArrayList<>();
+		for (PositionID posID : arenaPositions) {
+			PokemonCard topCard = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+			if (topCard.getDamageMarks() > 0)
+				damagedPositions.add(posID);
+		}
+		for (PositionID posID : enemyArenaPositions) {
+			PokemonCard topCard = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+			if (topCard.getDamageMarks() > 0)
+				damagedPositions.add(posID);
+		}
+		return damagedPositions;
 	}
 }

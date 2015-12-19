@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Account ID="0">
-	<Name>Erika</Name>
-	<Password />
-	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Erika's Weed Garden">
     <Cards>
         <Card ID="00088">
@@ -67,6 +63,3 @@
         </Card>
     </Cards>
 </Deck>
-    <DefeatedArenaFighters/>
-    <UnlockedCards/>
-</Account>
