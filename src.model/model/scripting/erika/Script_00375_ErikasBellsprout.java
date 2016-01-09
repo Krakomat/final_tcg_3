@@ -27,6 +27,12 @@ public class Script_00375_ErikasBellsprout extends PokemonCardScript {
 		this.addPokemonPower("Soak Up!");
 	}
 
+	public boolean attackCanBeExecuted(String attackName) {
+		if (attackName.equals("Stretch Vine") && gameModel.getFullBenchPositions(getEnemyPlayer().getColor()).isEmpty())
+			return false;
+		return true;
+	}
+
 	@Override
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
