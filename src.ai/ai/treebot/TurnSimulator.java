@@ -22,6 +22,7 @@ import model.interfaces.GameModelUpdate;
 import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.PokemonCardScript;
+import model.scripting.abstracts.TrainerCardScript;
 import network.client.Player;
 import network.server.PokemonGameManager;
 import network.tcp.borders.ServerListener;
@@ -241,7 +242,8 @@ public class TurnSimulator implements PokemonGameManager {
 
 			// Check Vermillion City Gym:
 			boolean selfDamage = false;
-			if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342") && active.getName().contains("Lt. Surge")) {
+			if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342")
+					&& active.getName().contains("Lt. Surge")) {
 				boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
 				if (answer) {
 					if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
@@ -328,6 +330,27 @@ public class TurnSimulator implements PokemonGameManager {
 
 		// Retreat:
 		pScript.executeRetreat();
+	}
+
+	@Override
+	public void activateStadium(Player player) {
+		if (this.turnState == TurnState.TURN_END)
+			try {
+				throw new IOException("Error: Turn was ended already in local game model");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		// Get the script:
+		Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
+		TrainerCardScript stadiumScript = (TrainerCardScript) stadium.getCardScript();
+
+		// Check is activating is allowed:
+		if (!stadiumScript.stadiumCanBeActivatedOnField(player))
+			gameModel.playerLoses(player);
+
+		// Execute the power:
+		gameModel.sendCardMessageToAllPlayers(player.getName() + " activates " + stadium.getName() + "!", stadium, "");
+		stadiumScript.executeStadiumActiveEffect(player);
 	}
 
 	@Override

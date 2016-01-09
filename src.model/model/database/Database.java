@@ -176,6 +176,10 @@ public class Database {
 		pokemonPower.setGenerateMips(false);
 		assetTextures.put("pokemonPower", pokemonPower);
 
+		TextureKey stadium = new TextureKey("tilesets/other/stadium_enabled.png");
+		stadium.setGenerateMips(false);
+		assetTextures.put("stadium", stadium);
+
 		TextureKey win = new TextureKey("tilesets/windows/win.png");
 		win.setGenerateMips(false);
 		assetTextures.put("win", win);

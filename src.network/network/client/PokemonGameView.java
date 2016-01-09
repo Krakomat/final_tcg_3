@@ -199,4 +199,6 @@ public interface PokemonGameView {
 	 * @return
 	 */
 	public boolean userAnswersQuestion(String question);
+
+	public void setStadiumButtonVisible(boolean b);
 }

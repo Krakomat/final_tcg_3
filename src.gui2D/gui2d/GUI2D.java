@@ -1026,4 +1026,13 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	public ArenaController getPrismaniaArenaController() {
 		return prismaniaArenaController;
 	}
+
+	@Override
+	public void setStadiumButtonVisible(boolean b) {
+		SelectableNode stadiumButton = this.ingameController.getStadiumButton();
+		stadiumButton.setVisible(b); // button adds/removes itself to shootables
+										// in update()!
+		// Start writing:
+		this.addToUpdateQueue(stadiumButton);
+	}
 }

@@ -20,8 +20,7 @@ import network.tcp.messages.QueryMessage;
 import network.tcp.messages.RespondMessage;
 
 /**
- * Simulates an artificial server for the client, so messages from the client to
- * the server are being transfered by this class.
+ * Simulates an artificial server for the client, so messages from the client to the server are being transfered by this class.
  * 
  * @author Michael
  *
@@ -169,6 +168,13 @@ public class ClientBorder implements PokemonGameManager {
 		parameters.add(serializer.packString(name));
 		parameters.add(serializer.packPositionID(posID));
 		QueryMessage message = new QueryMessage(Method.SERVER_EXECUTE_POKEMON_POWER, parameters);
+		message.logSendMessage("ClientBorder");
+		myClient.send(message);
+	}
+
+	@Override
+	public void activateStadium(Player player) {
+		QueryMessage message = new QueryMessage(Method.SERVER_ACTIVATE_STADIUM);
 		message.logSendMessage("ClientBorder");
 		myClient.send(message);
 	}

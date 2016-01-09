@@ -175,6 +175,11 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 				for (SelectableNode node : GUI2D.getInstance().getIngameController().getSelectableNodes())
 					GUI2D.getInstance().getIOController().addRightShootable(node);
 
+				// Check if stadium effect can be activated:
+				List<String> actions = localGameModel.getPlayerActions(0, PositionID.STADIUM, self);
+				if (!actions.isEmpty())
+					view.setStadiumButtonVisible(true);
+
 				// Make EndTurnButton visible:
 				view.setEndTurnButtonVisible(true);
 			}
@@ -228,8 +233,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	@Override
 	public void attack(int i) {
 		PositionID posID = this.color == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON;
-		GameModelUpdate gameModel = server.getGameModelForPlayer(this);
-		Position pos = gameModel.getPosition(posID);
+		Position pos = localGameModel.getPosition(posID);
 		this.server.executeAttack(this, ((PokemonCard) pos.getTopCard()).getAttackNames().get(i));
 	}
 
@@ -240,9 +244,13 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public void pokemonPower(PositionID posID) {
-		GameModelUpdate gameModel = server.getGameModelForPlayer(this);
-		Position pos = gameModel.getPosition(posID);
+		Position pos = localGameModel.getPosition(posID);
 		this.server.executePokemonPower(this, ((PokemonCard) pos.getTopCard()).getPokemonPowerNames().get(0), posID);
+	}
+
+	@Override
+	public void activateStadium() {
+		this.server.activateStadium(this);
 	}
 
 	@Override

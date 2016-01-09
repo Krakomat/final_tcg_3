@@ -27,10 +27,10 @@ import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.CardScriptFactory;
 import model.scripting.abstracts.PokemonCardScript;
+import model.scripting.abstracts.TrainerCardScript;
 
 /**
- * Used by a client to locally store the game model that was send from the
- * server.
+ * Used by a client to locally store the game model that was send from the server.
  * 
  * @author Michael
  *
@@ -103,27 +103,40 @@ public class LocalPokemonGameModel implements PokemonGame {
 	}
 
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
-		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
-		Card c = handCard ? this.getPosition(position).getCardAtIndex(positionIndex) : this.getPosition(position).getTopCard();
-		List<PlayerAction> actionList = new ArrayList<PlayerAction>();
-		Position pos = this.getPosition(position);
-		// If player on turn and position doesn't belong to enemy
-		boolean playerOnTurn = this.getPlayerOnTurn().getColor() == player.getColor();
-		boolean playerOnTurnBlue = this.getPlayerOnTurn().getColor() == Color.BLUE;
-		boolean playerOnTurnRed = this.getPlayerOnTurn().getColor() == Color.RED;
-		boolean positionColorBlue = pos.getColor() == Color.BLUE;
-		if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
-			actionList = getActionsForSelectedPosition(actionList, c, position, player);
+		if (position == PositionID.STADIUM) {
+			List<String> actions = new ArrayList<>();
+			Position pos = this.getPosition(position);
+			if (pos.isEmpty())
+				return actions;
+			TrainerCard stadiumCard = (TrainerCard) pos.getTopCard();
+			TrainerCardScript stadiumScript = (TrainerCardScript) stadiumCard.getCardScript();
+			if (stadiumScript.stadiumCanBeActivatedOnField(player)) {
+				actions.add(PlayerAction.ACTIVATE_STADIUM_EFFECT.toString());
+				return actions;
+			}
+			return actions;
+		} else {
+			boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
+			Card c = handCard ? this.getPosition(position).getCardAtIndex(positionIndex) : this.getPosition(position).getTopCard();
+			List<PlayerAction> actionList = new ArrayList<PlayerAction>();
+			Position pos = this.getPosition(position);
+			// If player on turn and position doesn't belong to enemy
+			boolean playerOnTurn = this.getPlayerOnTurn().getColor() == player.getColor();
+			boolean playerOnTurnBlue = this.getPlayerOnTurn().getColor() == Color.BLUE;
+			boolean playerOnTurnRed = this.getPlayerOnTurn().getColor() == Color.RED;
+			boolean positionColorBlue = pos.getColor() == Color.BLUE;
+			if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
+				actionList = getActionsForSelectedPosition(actionList, c, position, player);
+			}
+			List<String> stringActionList = new ArrayList<String>();
+			for (int i = 0; i < actionList.size(); i++)
+				stringActionList.add(actionList.get(i).toString());
+			return stringActionList;
 		}
-		List<String> stringActionList = new ArrayList<String>();
-		for (int i = 0; i < actionList.size(); i++)
-			stringActionList.add(actionList.get(i).toString());
-		return stringActionList;
 	}
 
 	/**
-	 * Adds actions to the given list, which are dependent to the position, the
-	 * selected card is on. Only is called, if the given player is on turn.
+	 * Adds actions to the given list, which are dependent to the position, the selected card is on. Only is called, if the given player is on turn.
 	 * 
 	 * @param actionList
 	 * @param game
@@ -451,6 +464,6 @@ public class LocalPokemonGameModel implements PokemonGame {
 
 	@Override
 	public void playerTakesPrize(Color color, int i) {
-		//Leave empty
+		// Leave empty
 	}
 }

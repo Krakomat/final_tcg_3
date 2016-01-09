@@ -56,7 +56,7 @@ public class IngameController extends Node implements GUI2DController {
 	private Spatial stadiumNode;
 	private Material stadiumMat;
 	private TextButton2D endTurnButton, attack1Button, attack2Button, playButton, pokePower1Button, returnToLobbyButton, backButton;
-	private ImageButton2D surrenderButton, attackButton, retreatButton, pokePowerButton;
+	private ImageButton2D surrenderButton, attackButton, retreatButton, pokePowerButton, stadiumButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
 	private Image2D resultScreen, reward1, reward2, reward3;
@@ -446,6 +446,23 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(pokePowerButton);
 		this.attachChild(pokePowerButton);
 
+		stadiumButton = new ImageButton2D("StadiumButton", Database.getAssetKey("stadium"), buttonWidth / 2, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				stadiumClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		stadiumButton.setLocalTranslation(screenWidth * 0.5f + buttonWidth / 2, screenHeight * 0.455f - activePosHeight + buttonHeight * 1, 0);
+		stadiumButton.setVisible(false);
+		dropInUpdateQueue(stadiumButton);
+		this.attachChild(stadiumButton);
+
 		attackButton = new ImageButton2D("AttackButton", Database.getAssetKey("attack"), buttonWidth / 2, buttonHeight) {
 
 			@Override
@@ -775,6 +792,8 @@ public class IngameController extends Node implements GUI2DController {
 					GUI2D.getInstance().setButtonVisible(attack2Button, false);
 				if (attackEnabled)
 					GUI2D.getInstance().setButtonVisible(attackButton, true);
+				if (stadiumEnabled)
+					GUI2D.getInstance().setButtonVisible(stadiumButton, true);
 				if (retreatEnabled)
 					GUI2D.getInstance().setButtonVisible(retreatButton, true);
 				if (pokemonPowerEnabled) {
@@ -798,6 +817,10 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setButtonVisible(attackButton, false);
 				GUI2D.getInstance().setButtonVisible(pokePowerButton, false);
 				GUI2D.getInstance().setButtonVisible(retreatButton, false);
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = true;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
 				GUI2D.getInstance().setButtonVisible(endTurnButton, false);
 				GUI2D.getInstance().setButtonVisible(backButton, true);
 			}
@@ -863,6 +886,10 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setButtonVisible(pokePowerButton, false);
 				GUI2D.getInstance().setButtonVisible(retreatButton, false);
 				GUI2D.getInstance().setButtonVisible(endTurnButton, false);
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = true;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
 				GUI2D.getInstance().setButtonVisible(backButton, true);
 			}
 		}).start();
@@ -880,10 +907,35 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setEndTurnButtonVisible(false);
 				resetGlowingSelected();
 				resetButtons();
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = false;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
 				GUI2D.getInstance().getPlayer().pokemonPower(getPositionIDForArenaGeometry(arenaNode, color));
 			}
 		});
 		t.setName("PokePowerButtonThread");
+		t.start();
+	}
+
+	protected void stadiumClicked() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean answer = GUI2D.getInstance().userAnswersQuestion("Do you want to activate the stadiums effect?");
+				if (answer) {
+					GUI2D.getInstance().setEndTurnButtonVisible(false);
+					resetGlowingSelected();
+					resetButtons();
+					if (stadiumButton.isVisible()) {
+						stadiumEnabled = false;
+						GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+					}
+					GUI2D.getInstance().getPlayer().activateStadium();
+				}
+			}
+		});
+		t.setName("RetreatButtonThread");
 		t.start();
 	}
 
@@ -905,8 +957,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Executes the first attack of the ownActive pokemon. Note that the attack
-	 * has to exist as a precondition.
+	 * Executes the first attack of the ownActive pokemon. Note that the attack has to exist as a precondition.
 	 */
 	protected void attack1Clicked() {
 		Thread t = new Thread(new Runnable() {
@@ -915,6 +966,10 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setEndTurnButtonVisible(false);
 				resetGlowingSelected();
 				resetButtons();
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = false;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
 				GUI2D.getInstance().getPlayer().attack(0);
 			}
 		});
@@ -923,8 +978,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Executes the second attack of the ownActive pokemon. Note that the attack
-	 * has to exist as a precondition.
+	 * Executes the second attack of the ownActive pokemon. Note that the attack has to exist as a precondition.
 	 */
 	protected void attack2Clicked() {
 		Thread t = new Thread(new Runnable() {
@@ -933,6 +987,10 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setEndTurnButtonVisible(false);
 				resetGlowingSelected();
 				resetButtons();
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = false;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
 				GUI2D.getInstance().getPlayer().attack(1);
 			}
 		});
@@ -950,6 +1008,10 @@ public class IngameController extends Node implements GUI2DController {
 				GUI2D.getInstance().setEndTurnButtonVisible(false);
 				resetGlowingSelected();
 				resetButtons();
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = false;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
 				GUI2D.getInstance().getPlayer().sendEndTurnToServer();
 			}
 		});
@@ -966,6 +1028,10 @@ public class IngameController extends Node implements GUI2DController {
 					GUI2D.getInstance().setEndTurnButtonVisible(false);
 					resetGlowingSelected();
 					resetButtons();
+					if (stadiumButton.isVisible()) {
+						stadiumEnabled = false;
+						GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+					}
 					GUI2D.getInstance().getPlayer().sendSurrenderToServer();
 				}
 			}
@@ -1048,8 +1114,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any
-	 * {@link HandCard2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any {@link HandCard2D} in the scenegraph.
 	 * 
 	 * @param handGeo
 	 */
@@ -1083,7 +1148,7 @@ public class IngameController extends Node implements GUI2DController {
 		t.start();
 	}
 
-	private boolean attack1Enabled, attack2Enabled, attackEnabled, retreatEnabled, pokemonPowerEnabled;
+	private boolean attack1Enabled, attack2Enabled, attackEnabled, retreatEnabled, pokemonPowerEnabled, stadiumEnabled;
 
 	private void makeButtonForActionVisible(PlayerAction action, SelectableNode selectedNode) {
 		GUI2D.getInstance().setButtonVisible(endTurnButton, true);
@@ -1131,6 +1196,10 @@ public class IngameController extends Node implements GUI2DController {
 			retreatEnabled = true;
 			GUI2D.getInstance().setButtonVisible(retreatButton, true);
 			break;
+		case ACTIVATE_STADIUM_EFFECT:
+			stadiumEnabled = true;
+			GUI2D.getInstance().setButtonVisible(stadiumButton, true);
+			break;
 		case SHOW_CARDS_ON_POSITION:
 			break;
 		default:
@@ -1139,8 +1208,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any
-	 * {@link ArenaGeometry2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any {@link ArenaGeometry2D} in the scenegraph.
 	 * 
 	 * @param arenaGeo
 	 */
@@ -1154,6 +1222,8 @@ public class IngameController extends Node implements GUI2DController {
 					Color ownColor = GUI2D.getInstance().getPlayer().getColor();
 					List<PlayerAction> actionList = GUI2D.getInstance().getPlayer().getPlayerActionsForArenaPosition(getPositionIDForArenaGeometry(arenaGeo, ownColor));
 					resetButtons();
+					// stadiumEnabled = false;
+					// GUI2D.getInstance().setButtonVisible(stadiumButton, false);
 					for (PlayerAction action : actionList)
 						makeButtonForActionVisible(action, arenaGeo);
 				}
@@ -1181,8 +1251,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any
-	 * {@link ImageButtonCounter2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any {@link ImageButtonCounter2D} in the scenegraph.
 	 * 
 	 * @param stackGeo
 	 */
@@ -1191,8 +1260,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * This method is called whenever the mouseSelect() method is invoked at any
-	 * {@link Image2D} in the scenegraph.
+	 * This method is called whenever the mouseSelect() method is invoked at any {@link Image2D} in the scenegraph.
 	 * 
 	 * @param stackGeo
 	 */
@@ -1387,8 +1455,7 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Returns the positionID for the given arena position. Positions allowed
-	 * here are active, bench and price position nodes!
+	 * Returns the positionID for the given arena position. Positions allowed here are active, bench and price position nodes!
 	 * 
 	 * @param node
 	 * @param color
@@ -2075,5 +2142,9 @@ public class IngameController extends Node implements GUI2DController {
 	@Override
 	public MusicType getAmbientMusic() {
 		return MusicType.INGAME_MUSIC;
+	}
+
+	public SelectableNode getStadiumButton() {
+		return this.stadiumButton;
 	}
 }

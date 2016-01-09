@@ -29,6 +29,7 @@ import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.PokemonCardScript;
+import model.scripting.abstracts.TrainerCardScript;
 
 /**
  * Controls the general flow of the game. Does not change the game model, but only calls its game model instance to perform changes on the game model.
@@ -212,22 +213,36 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 	@Deprecated
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
-		boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
-		Card c = handCard ? gameModel.getPosition(position).getCardAtIndex(positionIndex) : gameModel.getPosition(position).getTopCard();
-		ArrayList<PlayerAction> actionList = new ArrayList<PlayerAction>();
-		Position pos = gameModel.getPosition(position);
-		// If player on turn and position doesn't belong to enemy
-		boolean playerOnTurn = gameModel.getPlayerOnTurn().getColor() == player.getColor();
-		boolean playerOnTurnBlue = gameModel.getPlayerOnTurn().getColor() == Color.BLUE;
-		boolean playerOnTurnRed = gameModel.getPlayerOnTurn().getColor() == Color.RED;
-		boolean positionColorBlue = pos.getColor() == Color.BLUE;
-		if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
-			actionList = getActionsForSelectedPosition(actionList, c, position, player);
+		if (position == PositionID.STADIUM) {
+			List<String> actions = new ArrayList<>();
+			Position pos = gameModel.getPosition(position);
+			if (pos.isEmpty())
+				return actions;
+			TrainerCard stadiumCard = (TrainerCard) pos.getTopCard();
+			TrainerCardScript stadiumScript = (TrainerCardScript) stadiumCard.getCardScript();
+			if (stadiumScript.stadiumCanBeActivatedOnField(player)) {
+				actions.add(PlayerAction.ACTIVATE_STADIUM_EFFECT.toString());
+				return actions;
+			}
+			return actions;
+		} else {
+			boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
+			Card c = handCard ? gameModel.getPosition(position).getCardAtIndex(positionIndex) : gameModel.getPosition(position).getTopCard();
+			ArrayList<PlayerAction> actionList = new ArrayList<PlayerAction>();
+			Position pos = gameModel.getPosition(position);
+			// If player on turn and position doesn't belong to enemy
+			boolean playerOnTurn = gameModel.getPlayerOnTurn().getColor() == player.getColor();
+			boolean playerOnTurnBlue = gameModel.getPlayerOnTurn().getColor() == Color.BLUE;
+			boolean playerOnTurnRed = gameModel.getPlayerOnTurn().getColor() == Color.RED;
+			boolean positionColorBlue = pos.getColor() == Color.BLUE;
+			if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
+				actionList = getActionsForSelectedPosition(actionList, c, position, player);
+			}
+			ArrayList<String> stringActionList = new ArrayList<String>();
+			for (int i = 0; i < actionList.size(); i++)
+				stringActionList.add(actionList.get(i).toString());
+			return stringActionList;
 		}
-		ArrayList<String> stringActionList = new ArrayList<String>();
-		for (int i = 0; i < actionList.size(); i++)
-			stringActionList.add(actionList.get(i).toString());
-		return stringActionList;
 	}
 
 	/**
@@ -488,6 +503,28 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				// Execute the power:
 				gameModel.sendCardMessageToAllPlayers(pokemon.getName() + " activates " + powerName + "!", pokemon, "");
 				pScript.executePokemonPower(powerName);
+
+				moveMade = true; // Let player make his next move
+			}
+		}).start();
+	}
+
+	@Override
+	public void activateStadium(Player player) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Get the script:
+				Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
+				TrainerCardScript stadiumScript = (TrainerCardScript) stadium.getCardScript();
+
+				// Check is activating is allowed:
+				if (!stadiumScript.stadiumCanBeActivatedOnField(player))
+					gameModel.playerLoses(player);
+
+				// Execute the power:
+				gameModel.sendCardMessageToAllPlayers(player.getName() + " activates " + stadium.getName() + "!", stadium, "");
+				stadiumScript.executeStadiumActiveEffect(player);
 
 				moveMade = true; // Let player make his next move
 			}

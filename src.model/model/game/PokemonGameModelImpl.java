@@ -77,7 +77,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-		
+
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -99,9 +99,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Simulates the initial draw phase. Both players draw 7 cards. If a player
-	 * doesn't have any basic pokemon in his hand, he shuffles his hand into his
-	 * deck and draws once more.
+	 * Simulates the initial draw phase. Both players draw 7 cards. If a player doesn't have any basic pokemon in his hand, he shuffles his hand into his deck and draws once more.
 	 */
 	private void initDraw() {
 		this.sendTextMessageToPlayers(getPlayerList(), "Each player shuffles his deck.", Sounds.SHUFFLE);
@@ -308,8 +306,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Waits until both players are ready and flips a coin to determine, who
-	 * will begin the game.
+	 * Waits until both players are ready and flips a coin to determine, who will begin the game.
 	 * 
 	 */
 	private void startupCoinflip() {
@@ -334,9 +331,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Cleans all positions with defeated pokemon on it. Also forces players to
-	 * take prices and checks the winning conditions. Does nothing if the given
-	 * list is empty.
+	 * Cleans all positions with defeated pokemon on it. Also forces players to take prices and checks the winning conditions. Does nothing if the given list is empty.
 	 * 
 	 * @param defeatedPositions
 	 */
@@ -432,8 +427,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Checks the arena field for defeated pokemon and adds all found positions
-	 * to a list, which is returned.
+	 * Checks the arena field for defeated pokemon and adds all found positions to a list, which is returned.
 	 *
 	 * @return
 	 */
@@ -523,8 +517,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Checks if any of both player lost the game, sets and returns the
-	 * {@link GameState}, which has to occur.
+	 * Checks if any of both player lost the game, sets and returns the {@link GameState}, which has to occur.
 	 * 
 	 * @return
 	 */
@@ -575,8 +568,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Switches the turn and updates the gameModel for both players. Starts the
-	 * next turn, by initiating the draw phase.
+	 * Switches the turn and updates the gameModel for both players. Starts the next turn, by initiating the draw phase.
 	 */
 	public void nextTurn() {
 		if (playerOnTurn.getColor() == Color.BLUE)
@@ -605,8 +597,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Makes actions that have to be executed between the turns, e.g. applying
-	 * poison damage. Does nothing, if there is nothing to do in between turns.
+	 * Makes actions that have to be executed between the turns, e.g. applying poison damage. Does nothing, if there is nothing to do in between turns.
 	 */
 	public void betweenTurns() {
 		// Update isAllowedToPlayTrainerCards value in gameModelParameters:
@@ -642,8 +633,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Calls every PokemonCardScript in play to decrease the blocking of
-	 * attacks.
+	 * Calls every PokemonCardScript in play to decrease the blocking of attacks.
 	 */
 	private void updateBlockedAttacks() {
 		this.gameModelParameters.updateBlockedAttacks();
@@ -792,8 +782,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Adds the card with the given id on top of the given position. For testing
-	 * puposes.
+	 * Adds the card with the given id on top of the given position. For testing puposes.
 	 * 
 	 * @param string
 	 * @param blueDeck
@@ -892,8 +881,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	// ------------------------------------------------Get/Set-Methods-----------------------------------------------------------------------
 
 	/**
-	 * Creates an instance of the given deck, by creating instances of the cards
-	 * of the deck and assigning a gameID to them.
+	 * Creates an instance of the given deck, by creating instances of the cards of the deck and assigning a gameID to them.
 	 * 
 	 * @param deck
 	 * @return
@@ -952,8 +940,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Searches for the card with the given gameID and returns it. Returns null
-	 * if no such card was found.
+	 * Searches for the card with the given gameID and returns it. Returns null if no such card was found.
 	 * 
 	 * @param cardGameID
 	 * @return
