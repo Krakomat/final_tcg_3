@@ -1,7 +1,7 @@
 Patch 4.00
 	New Features:
-		Arena Mode
-			- A single player adventure, where the player travels through the different arena in Kanto
+		Gym Mode
+			- A single player adventure, where the player travels through the different gyms in Kanto
 			- New cards that are associated with the respective master of each arena can be unlocked by defeating the master and his/her servants
 			- All  encounters feature new unique bot decks
 			New Arenas:
@@ -9,7 +9,7 @@ Patch 4.00
 				- Celurean City Gym
 				- Vermillion City Gym
 				- Celadon City Gym
-			- The first arena (Pewter City Gym) is already unlocked, further ones come with future releases
+			- Further gyms come with future releases
 		Improved control UI
 		New Card sets: 
 			- BROCK
