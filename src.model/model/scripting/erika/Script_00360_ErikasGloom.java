@@ -3,7 +3,6 @@ package model.scripting.erika;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
@@ -18,58 +17,59 @@ public class Script_00360_ErikasGloom extends PokemonCardScript {
 	public Script_00360_ErikasGloom(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.GRASS);
+		this.addAttack("Healing Pollen", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.LIGHTNING);
 		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		this.addAttack("Magic Pollen", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Healing Pollen"))
+			this.HealingPollen();
 		else
-			this.finale();
+			this.MagicPollen();
 	}
 
-	private void donnerwelle() {
+	private void HealingPollen() {
+		Coin c = gameModel.getAttackAction().flipACoin();
+		if (c == Coin.HEADS) {
+			gameModel.getAttackAction().healPosition(getCurrentPositionID(), 40);
+			gameModel.sendGameModelToAllPlayers("");
+		} else
+			gameModel.sendTextMessageToAllPlayers("Healing Pollen missed!", "");
+	}
+
+	private void MagicPollen() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
+		// Flip coin to check if defending pokemon is poisoned:
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
+			boolean asleep = getCardOwner().playerDecidesYesOrNo("Should the defending Pokemon be asleep?");
+			if (asleep) {
+				gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!", "");
+				gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);
+				gameModel.sendGameModelToAllPlayers("");
+			} else {
+				boolean confused = getCardOwner().playerDecidesYesOrNo("Should the defending Pokemon be confused?");
+				if (confused) {
+					gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
+					gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
+					gameModel.sendGameModelToAllPlayers("");
+				} else {
+					gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is poisoned!", "");
+					gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
+					gameModel.sendGameModelToAllPlayers("");
+				}
+			}
 		}
-	}
-
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
 	}
 }

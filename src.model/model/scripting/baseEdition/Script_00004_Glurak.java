@@ -1,9 +1,7 @@
 package model.scripting.baseEdition;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import network.client.Player;
 import model.database.Card;
@@ -18,8 +16,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00004_Glurak extends PokemonCardScript {
 
-	private Map<Integer, List<Element>> cardGameIDs;
-
 	public Script_00004_Glurak(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -29,7 +25,6 @@ public class Script_00004_Glurak extends PokemonCardScript {
 		att1Cost.add(Element.FIRE);
 		this.addAttack("Fire Spin", att1Cost);
 		this.addPokemonPower("Energy Burn");
-		this.cardGameIDs = new HashMap<>();
 	}
 
 	@Override
@@ -61,7 +56,6 @@ public class Script_00004_Glurak extends PokemonCardScript {
 
 	@Override
 	public void executePokemonPower(String powerName) {
-		this.cardGameIDs = new HashMap<>();
 		// Turn all energy attached to glurak into fire energy:
 		PokemonCard card = (PokemonCard) this.card;
 		Position pos = card.getCurrentPosition();
@@ -73,22 +67,25 @@ public class Script_00004_Glurak extends PokemonCardScript {
 				originalEnergy.add(eCard.getProvidedEnergy().remove(i));
 				eCard.getProvidedEnergy().add(i, Element.FIRE);
 			}
-			if (!this.cardGameIDs.containsKey(eCard.getGameID()))
-				this.cardGameIDs.put(eCard.getGameID(), originalEnergy);
 		}
 
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (!this.cardGameIDs.isEmpty()) {
-			// Reset the provided energy:
-			for (Integer gameID : this.cardGameIDs.keySet()) {
-				EnergyCard eCard = (EnergyCard) gameModel.getCard(gameID);
-				eCard.setProvidedEnergy(this.cardGameIDs.get(gameID));
+		// Restore energy cards:
+		PokemonCard card = (PokemonCard) this.card;
+		Position pos = card.getCurrentPosition();
+
+		for (Card e : pos.getEnergyCards()) {
+			EnergyCard eCard = (EnergyCard) e;
+			List<Element> originalEnergy = new ArrayList<>();
+			for (int i = 0; i < eCard.getProvidedEnergy().size(); i++) {
+				originalEnergy.add(eCard.getProvidedEnergy().remove(i));
+				eCard.getProvidedEnergy().add(i, EnergyCard.getOriginalEnergy(eCard.getCardId()));
 			}
-			this.cardGameIDs.clear();
-			gameModel.sendGameModelToAllPlayers("");
 		}
+
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }

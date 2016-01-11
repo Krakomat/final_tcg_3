@@ -8,6 +8,34 @@ import model.enums.Element;
 
 public class EnergyCard extends Card {
 
+	public static Element getOriginalEnergy(String cardId) {
+		switch (cardId) {
+		case "00096":
+			return Element.COLORLESS;
+		case "00097":
+			return Element.ROCK;
+		case "00098":
+			return Element.FIRE;
+		case "00099":
+			return Element.GRASS;
+		case "00100":
+			return Element.LIGHTNING;
+		case "00101":
+			return Element.PSYCHIC;
+		case "00102":
+			return Element.WATER;
+		case "00104":
+			return Element.RAINBOW;
+		case "00216":
+			return Element.RAINBOW;
+		case "00263":
+			return Element.COLORLESS;
+		case "00264":
+			return Element.COLORLESS;
+		}
+		return null;
+	}
+
 	private boolean basisEnergy;
 	private List<Element> providedEnergy;
 
