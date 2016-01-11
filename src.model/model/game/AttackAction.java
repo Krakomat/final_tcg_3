@@ -132,6 +132,12 @@ public class AttackAction {
 			damageAmount = damageAmount - 30;
 		if (defenderPokemon.hasCondition(PokemonCondition.HARDEN20))
 			damageAmount = damageAmount - 20;
+		if (defenderPokemon.hasCondition(PokemonCondition.HALF_DAMAGE)) {
+			damageAmount = damageAmount / 2;
+			// Round down:
+			if (damageAmount % 10 > 0)
+				damageAmount = damageAmount - 5;
+		}
 		if (defenderPokemon.hasCondition(PokemonCondition.INVULNERABLE))
 			damageAmount = 0;
 		if (defenderPokemon.hasCondition(PokemonCondition.NO_DAMAGE))
@@ -261,6 +267,9 @@ public class AttackAction {
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case NO_ENERGY:
+					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					break;
+				case HALF_DAMAGE:
 					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
 					break;
 				default:
