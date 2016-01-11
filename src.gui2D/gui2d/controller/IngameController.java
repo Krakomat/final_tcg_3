@@ -2055,6 +2055,14 @@ public class IngameController extends Node implements GUI2DController {
 			dropInUpdateQueue(enemyPriceImage);
 		}
 
+		GUI2D.getInstance().enqueue(new Callable<Spatial>() {
+			@Override
+			public Spatial call() throws Exception {
+				GUI2D.getInstance().getRootNode().detachChild(stadiumNode);
+				return null;
+			}
+		});
+
 		endTurnButton.setVisible(false);
 		dropInUpdateQueue(endTurnButton);
 
