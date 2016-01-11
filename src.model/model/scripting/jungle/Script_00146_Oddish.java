@@ -24,8 +24,6 @@ public class Script_00146_Oddish extends PokemonCardScript {
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.COLORLESS);
-		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Sprout", att2Cost);
 	}
 
