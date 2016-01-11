@@ -25,7 +25,8 @@ public class GameModelParameters {
 	private List<Integer> lauchschlagUsed_00027_Porenta, power_Active_00164_Muk, power_Active_00153_Aerodactyl, power_Activated_00117_Venomoth, power_Activated_00119_Vileplume,
 			power_Activated_00143_Mankey, power_Activated_00155_Dragonite, power_Activated_00156_Gengar, power_Activated_00188_Omanite, power_Activated_00251_Rattata,
 			power_Activated_00239_Drowzee, power_Activated_00235_Charmander, power_Activated_00224_DarkKadabra, power_Activated_00221_DarkGloom,
-			power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume, power_Activated_00375_ErikasBellsprout, power_Activated_00362_ErikasOddish;
+			power_Activated_00218_DarkDragonair, power_Activated_00212_DarkVileplume, power_Activated_00375_ErikasBellsprout, power_Activated_00362_ErikasOddish,
+			power_Activated_00356_ErikasVictreebel;
 	private List<Pair<Integer, Integer>> attackUsed;
 	private List<Triple<Integer, String, Integer>> blockedAttacks;
 
@@ -56,6 +57,7 @@ public class GameModelParameters {
 		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
 		this.power_Activated_00375_ErikasBellsprout = new ArrayList<>();
 		this.power_Activated_00362_ErikasOddish = new ArrayList<>();
+		this.power_Activated_00356_ErikasVictreebel = new ArrayList<>();
 		this.attackUsed = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
 		this.allowedToPlayPokemonPower = 0;
@@ -91,6 +93,7 @@ public class GameModelParameters {
 		this.power_Activated_00212_DarkVileplume = new ArrayList<>();
 		this.power_Activated_00375_ErikasBellsprout = new ArrayList<>();
 		this.power_Activated_00362_ErikasOddish = new ArrayList<>();
+		this.power_Activated_00356_ErikasVictreebel = new ArrayList<>();
 		this.attackUsed = new ArrayList<>();
 		for (Integer i : gameModelUpdate.getGameModelParameters().getLauchschlagUsed_00027_Porenta())
 			this.lauchschlagUsed_00027_Porenta.add(i);
@@ -128,6 +131,8 @@ public class GameModelParameters {
 			this.power_Activated_00375_ErikasBellsprout.add(i);
 		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00362_ErikasOddish())
 			this.power_Activated_00362_ErikasOddish.add(i);
+		for (Integer i : gameModelUpdate.getGameModelParameters().getPower_Activated_00356_ErikasVictreebel())
+			this.power_Activated_00356_ErikasVictreebel.add(i);
 		for (Pair<Integer, Integer> i : gameModelUpdate.getGameModelParameters().getAttackUsed())
 			this.attackUsed.add(i);
 
@@ -183,6 +188,8 @@ public class GameModelParameters {
 			copy.getPower_Activated_00375_ErikasBellsprout().add(i);
 		for (Integer i : this.getPower_Activated_00362_ErikasOddish())
 			copy.getPower_Activated_00362_ErikasOddish().add(i);
+		for (Integer i : this.getPower_Activated_00356_ErikasVictreebel())
+			copy.getPower_Activated_00356_ErikasVictreebel().add(i);
 		for (Pair<Integer, Integer> i : this.getAttackUsed())
 			copy.getAttackUsed().add(i);
 		copy.setAllowedToPlayTrainerCards(this.isAllowedToPlayTrainerCards());
@@ -297,6 +304,10 @@ public class GameModelParameters {
 		// power_Activated_00362_ErikasOddish:
 		bString = serializer.unpackByteString(unpacker);
 		this.power_Activated_00362_ErikasOddish = serializer.unpackIntList(bString);
+
+		// power_Activated_00356_ErikasVictreebel:
+		bString = serializer.unpackByteString(unpacker);
+		this.power_Activated_00356_ErikasVictreebel = serializer.unpackIntList(bString);
 
 		// attackUsed:
 		bString = serializer.unpackByteString(unpacker);
@@ -445,6 +456,11 @@ public class GameModelParameters {
 
 		// power_Activated_00362_ErikasOddish:
 		b = serializer.packIntList(power_Activated_00362_ErikasOddish);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// power_Activated_00356_ErikasVictreebel:
+		b = serializer.packIntList(power_Activated_00356_ErikasVictreebel);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -716,5 +732,13 @@ public class GameModelParameters {
 
 	public void setPower_Activated_00362_ErikasOddish(List<Integer> powerActivated_00362_ErikasOddish) {
 		this.power_Activated_00362_ErikasOddish = powerActivated_00362_ErikasOddish;
+	}
+
+	public List<Integer> getPower_Activated_00356_ErikasVictreebel() {
+		return power_Activated_00356_ErikasVictreebel;
+	}
+
+	public void setPower_Activated_00356_ErikasVictreebel(List<Integer> power_Activated_00356_ErikasVictreebel) {
+		this.power_Activated_00356_ErikasVictreebel = power_Activated_00356_ErikasVictreebel;
 	}
 }

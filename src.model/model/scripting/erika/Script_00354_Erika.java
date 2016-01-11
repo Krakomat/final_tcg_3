@@ -3,7 +3,6 @@ package model.scripting.erika;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00354_Erika extends TrainerCardScript {
@@ -14,19 +13,31 @@ public class Script_00354_Erika extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
 		// Discard trainer card before drawing!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+
+		boolean done = false;
+		for (int i = 0; i < 3 && !done; i++) {
+			boolean answer = getCardOwner().playerDecidesYesOrNo("Do you want to draw a card?");
+			if (answer)
+				gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());
+			else
+				done = true;
+		}
+
+		done = false;
+		for (int i = 0; i < 3 && !done; i++) {
+			boolean answer = getEnemyPlayer().playerDecidesYesOrNo("Do you want to draw a card?");
+			if (answer)
+				gameModel.getAttackAction().playerDrawsCards(1, getEnemyPlayer());
+			else
+				done = true;
+		}
 	}
 }

@@ -8,12 +8,14 @@ Patch 4.00
 				- Pewter City Gym
 				- Celurean City Gym
 				- Vermillion City Gym
+				- Celadon City Gym
 			- The first arena (Pewter City Gym) is already unlocked, further ones come with future releases
 		Improved control UI
 		New Card sets: 
 			- BROCK
 			- MISTY
 			- LT_SURGE
+			- ERIKA
 	UI:
 		- Reduced the amount of music tracks used in the different modes
 		- Added support for gym cards
@@ -39,6 +41,7 @@ Patch 4.00
 		- 00225_DarkMachoke: Fixed a game breaking bug
 		- 00270_BrocksRhyhorn: Fixed a game breaking bug
 		- 00278_BrocksMankey: Fixed a game breaking bug
+		- 00121_Butterfree: Fixed a bug concerning the Mega Drain attack
 	Network:
 		- Added support for local games in single player mode: Single player games are no longer played via the network layer
 	DeckEditor:

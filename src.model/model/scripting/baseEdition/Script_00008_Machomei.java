@@ -12,8 +12,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00008_Machomei extends PokemonCardScript {
 
-	private PositionID attackerPosition;
-
 	public Script_00008_Machomei(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -23,7 +21,6 @@ public class Script_00008_Machomei extends PokemonCardScript {
 		att1Cost.add(Element.COLORLESS);
 		this.addAttack("Seismic Toss", att1Cost);
 		this.addPokemonPower("Strikes Back");
-		attackerPosition = null;
 	}
 
 	@Override
@@ -36,9 +33,8 @@ public class Script_00008_Machomei extends PokemonCardScript {
 
 	public void pokemonIsDamaged(int turnNumber, int damage, PositionID source) {
 		if (gegenschlagCanBeExecuted()) {
-			this.attackerPosition = source;
-			if (this.attackerPosition != null)
-				this.executePokemonPower("Strikes Back");
+			if (source != null)
+				this.StrikesBack(source);
 		}
 	}
 
@@ -68,11 +64,10 @@ public class Script_00008_Machomei extends PokemonCardScript {
 		return false;
 	}
 
-	@Override
-	public void executePokemonPower(String powerName) {
-		gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates " + powerName + "!", card, "");
+	public void StrikesBack(PositionID attacker) {
+		gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates Strikes Back!", card, "");
 		// Inflict damage:
 		PositionID ownPosition = this.card.getCurrentPosition().getPositionID();
-		gameModel.getAttackAction().inflictDamageToPosition(Element.ROCK, ownPosition, attackerPosition, 10, false);
+		gameModel.getAttackAction().inflictDamageToPosition(Element.ROCK, ownPosition, attacker, 10, false);
 	}
 }

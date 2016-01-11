@@ -55,7 +55,7 @@ public class Script_00209_DarkMachamp extends PokemonCardScript {
 	}
 
 	private void Fling() {
-		Player player = this.getCardOwner();
+		Player player = this.getEnemyPlayer();
 		PositionID targetPosition = this.enemyActive();
 
 		// Scoop up position:

@@ -50,8 +50,8 @@ public class Script_00121_Butterfree extends PokemonCardScript {
 		if (gameModel.getFullBenchPositions(player.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			// Let enemy choose bench pokemon and swap it with his active:
 			gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");
-			PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
-					"Choose a pokemon to swap wtih your active!").get(0);
+			PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true, "Choose a pokemon to swap wtih your active!")
+					.get(0);
 			Card newPkm = gameModel.getPosition(chosenPosition).getTopCard();
 			gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!", "");
 			gameModel.getAttackAction().swapPokemon(defender, chosenPosition);
@@ -64,7 +64,8 @@ public class Script_00121_Butterfree extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		int damageDealt = this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-		int healAmount = damageDealt % 20 == 0 ? (damageDealt / 2) : (damageDealt + 10) / 2;
-		this.gameModel.getAttackAction().healPosition(attacker, healAmount);
+		int healAmount = damageDealt % 10 == 0 ? (damageDealt / 2) : (damageDealt + 5) / 2;
+		if (healAmount > 0)
+			this.gameModel.getAttackAction().healPosition(attacker, healAmount);
 	}
 }
