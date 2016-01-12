@@ -11,6 +11,7 @@ import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.scripting.abstracts.CardScriptFactory;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00005_Piepi extends PokemonCardScript {
@@ -56,11 +57,7 @@ public class Script_00005_Piepi extends PokemonCardScript {
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		PokemonCardScript defendingCardScript = (PokemonCardScript) defendingPokemon.getCardScript();
 		PokemonCardScript copy = null;
-		try {
-			copy = (PokemonCardScript) defendingCardScript.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		copy = (PokemonCardScript) CardScriptFactory.getInstance().createScript(defendingPokemon.getCardId(), defendingPokemon, gameModel);
 
 		// Choose attack:
 		List<Card> attackOwner = new ArrayList<>();

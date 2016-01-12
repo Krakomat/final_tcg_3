@@ -93,7 +93,8 @@ public class BotBorder extends AccountImpl implements Player {
 
 	@Override
 	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound) {
-		this.botModel.updateGameModel(new LocalPokemonGameModel(gameModelUpdate, this, server));
+		this.botModel.updateGameModel(new LocalPokemonGameModel(gameModelUpdate, this, server)); // TODO do not create a new LocalGameModel here but just delegate the game model
+																									// update
 	}
 
 	@Override
@@ -103,6 +104,7 @@ public class BotBorder extends AccountImpl implements Player {
 
 	@Override
 	public void playerMakesMove() {
+		// TODO get fresh game model before doing anything
 		Player self = this;
 		new Thread(new Runnable() {
 			@Override

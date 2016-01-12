@@ -304,15 +304,15 @@ public class CardScriptFactory {
 	}
 
 	/**
-	 * Creates the {@link CardScript} for the given cardID, using the given
-	 * {@link PokemonGame}.
+	 * Creates the {@link CardScript} for the given cardID, using the given Card and {@link PokemonGame}.
 	 * 
 	 * @param cardID
-	 * @param pokemonGame_game
+	 * @param card
+	 * @param gameModel
 	 * @return
 	 */
-	public CardScript createScript(Card card, PokemonGame gameModel) {
-		switch (card.getCardId()) {
+	public CardScript createScript(String cardID, Card card, PokemonGame gameModel) {
+		switch (cardID) {
 		case "00000":
 			return new CardScript(card, gameModel) {
 				@Override

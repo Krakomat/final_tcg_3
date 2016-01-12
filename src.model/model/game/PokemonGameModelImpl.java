@@ -791,7 +791,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	private void addCardOnTopOfPosition(String id, Position pos) {
 		Card c = Database.createCard(id);
 		this.assignGameID(c);
-		c.setCardScript(this.cardScriptFactory.createScript(c, this));
+		c.setCardScript(this.cardScriptFactory.createScript(c.getCardId(), c, this));
 		pos.addToPosition(c);
 		c.setCurrentPosition(pos);
 		this.cardMap.put(c.getGameID(), c);
@@ -892,7 +892,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			Card c = Database.createCard(deck.get(i));
 			if (c != null) {
 				this.assignGameID(c);
-				c.setCardScript(this.cardScriptFactory.createScript(c, this));
+				c.setCardScript(this.cardScriptFactory.createScript(c.getCardId(), c, this));
 				if (c instanceof PokemonCard) {
 					((PokemonCard) c).setAttackNames(((PokemonCardScript) c.getCardScript()).getAttackNames());
 					((PokemonCard) c).setPokemonPowerNames(((PokemonCardScript) c.getCardScript()).getPokemonPowerNames());
@@ -920,7 +920,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 				boolean isVisible = (player.getColor() == Color.BLUE && c.isVisibleForPlayerBlue()) || (player.getColor() == Color.RED && c.isVisibleForPlayerRed());
 				if (isVisible) {
 					Card copy = c.copy();
-					copy.setCardScript(CardScriptFactory.getInstance().createScript(c, this));
+					copy.setCardScript(CardScriptFactory.getInstance().createScript(c.getCardId(), c, this));
 					cardList.add(copy);
 				} else
 					cardList.add(dummyCard);

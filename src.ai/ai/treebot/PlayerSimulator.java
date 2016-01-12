@@ -211,7 +211,6 @@ public class PlayerSimulator implements Player {
 			}
 		}
 
-		// TODO Bug here!s
 		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: "
 				+ chosenCards + " AvailableCards: " + copyOfAvailableCards + " colorlessAtStart: " + colorlessAtStart + ", colorless: " + colorless);
 		return chosenCards;

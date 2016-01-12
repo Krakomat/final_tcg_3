@@ -75,7 +75,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 			for (Card c : position.getCards()) {
 				c.setCurrentPositionLocal(position);
 				this.cardMap.put(c.getGameID(), c);
-				CardScript script = this.cardScriptFactory.createScript(c, this);
+				CardScript script = this.cardScriptFactory.createScript(c.getCardId(), c, this);
 				c.setCardScript(script);
 				if (c instanceof PokemonCard) {
 					PokemonCardScript pCardScript = (PokemonCardScript) c.getCardScript();
