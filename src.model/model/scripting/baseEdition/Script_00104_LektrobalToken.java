@@ -1,13 +1,11 @@
 package model.scripting.baseEdition;
 
+import model.database.Card;
 import model.database.EnergyCard;
-import model.database.PokemonCard;
-import model.enums.Color;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.EnergyCardScript;
-import network.client.Player;
 
 /**
  * Script for the doll token!
@@ -17,8 +15,6 @@ import network.client.Player;
  */
 public class Script_00104_LektrobalToken extends EnergyCardScript {
 
-	private PokemonCard lektrobal;
-
 	/**
 	 * For local purposes only!
 	 * 
@@ -27,17 +23,10 @@ public class Script_00104_LektrobalToken extends EnergyCardScript {
 	 */
 	public Script_00104_LektrobalToken(EnergyCard token, PokemonGame gameModel) {
 		super(token, gameModel);
-		this.lektrobal = null;
-	}
-
-	public Script_00104_LektrobalToken(EnergyCard token, PokemonGame gameModel, PokemonCard lektrobal) {
-		super(token, gameModel);
-		this.lektrobal = lektrobal;
 	}
 
 	public void moveToPosition(PositionID targetPosition) {
-		final Player player = this.getCardOwner();
-		if (targetPosition == ownDiscardPile(player)) {
+		if (targetPosition == ownDiscardPile()) {
 			Position pos = gameModel.getPosition(targetPosition);
 
 			// Remove token from position:
@@ -50,16 +39,13 @@ public class Script_00104_LektrobalToken extends EnergyCardScript {
 			gameModel.unregisterCard(this.card);
 
 			// Add Lektrobal to discard pile:
-			pos.addToPosition(this.lektrobal);
-			this.lektrobal.setCurrentPosition(pos);
+			Integer gameID = gameModel.getGameModelParameters().getActiveEffectGameIDs("00021").get(0);
+			gameModel.getGameModelParameters().deactivateEffect("00070", gameID);
+			Card lektrobal = gameModel.getCard(gameID);
+
+			pos.addToPosition(lektrobal);
+			lektrobal.setCurrentPosition(pos);
 			gameModel.sendGameModelToAllPlayers("");
 		}
-	}
-
-	private PositionID ownDiscardPile(Player player) {
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
 	}
 }

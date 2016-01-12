@@ -284,16 +284,8 @@ public class GameModelParameters {
 		return attackUsed;
 	}
 
-	public void setAttackUsed(List<Pair<Integer, Integer>> attackUsed) {
-		this.attackUsed = attackUsed;
-	}
-
 	public List<Triple<Integer, String, Integer>> getBlockedAttacks() {
 		return blockedAttacks;
-	}
-
-	public void setBlockedAttacks(List<Triple<Integer, String, Integer>> blockedAttacks) {
-		this.blockedAttacks = blockedAttacks;
 	}
 
 	public void updateBlockedAttacks() {

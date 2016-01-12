@@ -30,7 +30,9 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 		doll.setPriceValueable(true); // no prices if defeated
 
 		// Set card script:
-		doll.setCardScript(new Script_00103_Doll(doll, gameModel, (TrainerCard) card));
+		doll.setCardScript(new Script_00103_Doll(doll, gameModel));
+		// Store this card at the server:
+		gameModel.getGameModelParameters().activateEffect("00070", cardGameID());
 
 		// Remove trainer card from hand:
 		Position handPos = gameModel.getPosition(ownHand());
@@ -39,10 +41,8 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 			System.err.println("Couldn't remove trainer card from position");
 		this.card.setCurrentPosition(null);
 
-		// Insert doll into hand:
-		doll.setCurrentPosition(handPos);
-		handPos.addToPosition(doll);
-
+		doll.setCurrentPositionLocal(handPos);
+		handPos.getCards().add(doll);
 		// Set doll onto bench:
 		doll.getCardScript().playFromHand();
 	}

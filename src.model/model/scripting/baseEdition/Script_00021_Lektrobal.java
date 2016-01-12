@@ -55,7 +55,8 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-
+		if (gameModel.getFullArenaPositions(getCardOwner().getColor()).size() == 1)
+			return false;
 		return super.pokemonPowerCanBeExecuted(powerName);
 	}
 
@@ -100,10 +101,12 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 		token.setProvidedEnergy(providedEnergy);
 
 		// Set card script:
-		token.setCardScript(new Script_00104_LektrobalToken(token, gameModel, (PokemonCard) card));
+		token.setCardScript(new Script_00104_LektrobalToken(token, gameModel));
+		// Store this card at the server:
+		gameModel.getGameModelParameters().activateEffect("00021", cardGameID());
 
 		// Attach the energy:
-		token.setCurrentPosition(targetPosition);
+		token.setCurrentPositionLocal(targetPosition);
 		targetPosition.getCards().add(0, token);
 
 		// Send messages:
@@ -115,8 +118,7 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 
 		// Choose new active pokemon:
 		if (newActive) {
-			PositionID newActivePosition = player
-					.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a new active pokemon!").get(0);
+			PositionID newActivePosition = player.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a new active pokemon!").get(0);
 			Card active = gameModel.getPosition(chosenPosition).getTopCard();
 			gameModel.getAttackAction().movePokemonToPosition(newActivePosition, pos.getPositionID());
 

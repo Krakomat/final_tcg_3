@@ -1,10 +1,9 @@
 package model.scripting.baseEdition;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import common.utilities.Triple;
 import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
@@ -15,13 +14,6 @@ import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00022_Tauboga extends PokemonCardScript {
-
-	/** Turnnumber at which Tauboga got damaged/a condition the last time */
-	private int lastAttackTurn;
-	/** Stores all damaging actions against tauboga */
-	private Map<Integer, Integer> damageHistory;
-	/** Stores all conditions inflicted against Tauboga */
-	private Map<Integer, PokemonCondition> conditionHistory;
 
 	public Script_00022_Tauboga(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
@@ -35,10 +27,6 @@ public class Script_00022_Tauboga extends PokemonCardScript {
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Mirror Move", att2Cost);
-
-		this.lastAttackTurn = -100;
-		this.damageHistory = new HashMap<>();
-		this.conditionHistory = new HashMap<>();
 	}
 
 	@Override
@@ -62,8 +50,8 @@ public class Script_00022_Tauboga extends PokemonCardScript {
 		if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0 && !defendingPokemon.hasCondition(PokemonCondition.INVULNERABLE)) {
 			// Let enemy choose bench pokemon and swap it with his active:
 			gameModel.sendTextMessageToAllPlayers(enemy.getName() + " chooses a new active pokemon", "");
-			PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
-					"Choose a pokemon to swap wtih your active!").get(0);
+			PositionID chosenPosition = enemy.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true, "Choose a pokemon to swap wtih your active!")
+					.get(0);
 			Card newPkm = gameModel.getPosition(chosenPosition).getTopCard();
 			gameModel.sendTextMessageToAllPlayers(newPkm.getName() + " is the new active pokemon!", "");
 			gameModel.getAttackAction().swapPokemon(defender, chosenPosition);
@@ -73,28 +61,46 @@ public class Script_00022_Tauboga extends PokemonCardScript {
 
 	private void spiegeltrick() {
 		// Check if tauboga was attacked last turn:
-		int currentTurnNumber = gameModel.getTurnNumber();
-		if (currentTurnNumber - 1 == lastAttackTurn) {
+		Integer damage = 0;
+		List<PokemonCondition> cond = new ArrayList<>();
+		for (Triple<Integer, String, Integer> triple : gameModel.getGameModelParameters().getBlockedAttacks()) {
+			if (triple.getKey() == cardGameID() && PokemonCondition.isValue(triple.getValue())) {
+				PokemonCondition c = PokemonCondition.valueOf(triple.getValue());
+				cond.add(c);
+			}
+			if (triple.getKey() == cardGameID() && isInt(triple.getValue()))
+				damage = Integer.valueOf(triple.getValue());
+		}
+		if (damage > 0 || cond.size() > 0) {
 			PositionID attacker = this.card.getCurrentPosition().getPositionID();
 			PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 			Element attackerElement = ((PokemonCard) this.card).getElement();
 
-			if (this.damageHistory.containsKey(lastAttackTurn))
-				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, damageHistory.get(lastAttackTurn), true);
+			if (damage > 0)
+				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, damage, true);
 
-			if (this.conditionHistory.containsKey(lastAttackTurn))
-				gameModel.getAttackAction().inflictConditionToPosition(defender, conditionHistory.get(lastAttackTurn));
+			if (cond.size() > 0) {
+				for (PokemonCondition c : cond)
+					gameModel.getAttackAction().inflictConditionToPosition(defender, c);
+			}
 		} else
 			gameModel.sendTextMessageToAllPlayers("Mirror Move does nothing!", "");
 	}
 
-	public void pokemonIsDamaged(int turnNumber, int damage) {
-		this.lastAttackTurn = turnNumber;
-		this.damageHistory.put(turnNumber, damage);
+	private boolean isInt(String value) {
+		try {
+			Integer.valueOf(value);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public void pokemonIsDamaged(int turnNumber, int damage, PositionID source) {
+		gameModel.getGameModelParameters().getBlockedAttacks().add(new Triple<Integer, String, Integer>(cardGameID(), String.valueOf(damage), 2));
 	}
 
 	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
-		this.lastAttackTurn = turnNumber;
-		this.conditionHistory.put(turnNumber, condition);
+		gameModel.getGameModelParameters().getBlockedAttacks().add(new Triple<Integer, String, Integer>(cardGameID(), condition.toString(), 2));
 	}
 }

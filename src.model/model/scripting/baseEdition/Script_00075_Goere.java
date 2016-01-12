@@ -16,8 +16,6 @@ import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00075_Goere extends TrainerCardScript {
 
-	private boolean playerReady, enemyReady;
-
 	public Script_00075_Goere(TrainerCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 	}
@@ -27,6 +25,8 @@ public class Script_00075_Goere extends TrainerCardScript {
 		// Can always be played
 		return PlayerAction.PLAY_TRAINER_CARD;
 	}
+
+	private boolean playerReady, enemyReady; // Allowed!
 
 	@Override
 	public void playFromHand() {
