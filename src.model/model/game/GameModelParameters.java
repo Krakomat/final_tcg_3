@@ -26,9 +26,9 @@ public class GameModelParameters {
 	private boolean energyPlayed, retreatExecuted;
 	private boolean noEnergyPayment, activated_00296_Misty, vermillionCityGymAttackModifier;
 	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
-	private Map<String, List<Integer>> activatedEffectMap;
-	private List<Pair<Integer, Integer>> attackUsed;
-	private List<Triple<Integer, String, Integer>> blockedAttacks;
+	private Map<String, List<Integer>> activatedEffectMap; // {CardID,(GameIDs)}
+	private List<Pair<Integer, Integer>> attackUsed; // {(GameID, Runtime)}
+	private List<Triple<Integer, String, Integer>> blockedAttacks;// {(GameID, AttackName, Runtime)}
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
