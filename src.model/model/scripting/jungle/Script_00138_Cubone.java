@@ -3,6 +3,7 @@ package model.scripting.jungle;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.utilities.Triple;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
@@ -11,8 +12,6 @@ import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00138_Cubone extends PokemonCardScript {
-
-	private int defenderGameID, duration;
 
 	public Script_00138_Cubone(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
@@ -24,9 +23,6 @@ public class Script_00138_Cubone extends PokemonCardScript {
 		att2Cost.add(Element.ROCK);
 		att2Cost.add(Element.ROCK);
 		this.addAttack("Rage", att2Cost);
-
-		this.defenderGameID = -1;
-		this.duration = 0;
 	}
 
 	@Override
@@ -40,8 +36,7 @@ public class Script_00138_Cubone extends PokemonCardScript {
 	private void snivel() {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		// Remember defender:
-		this.defenderGameID = gameModel.getPosition(defender).getTopCard().getGameID();
-		this.duration = 2;
+		gameModel.getGameModelParameters().getBlockedAttacks().add(new Triple<Integer, String, Integer>(gameModel.getPosition(defender).getTopCard().getGameID(), "00138", 2));
 	}
 
 	private void rage() {
@@ -56,23 +51,10 @@ public class Script_00138_Cubone extends PokemonCardScript {
 
 	public int modifyIncomingDamage(int damage, Card attacker) {
 		if (attacker != null) {
-			if (attacker.getGameID() == this.defenderGameID && PositionID.isActivePosition(attacker.getCurrentPosition().getPositionID()))
+			if (gameModel.getGameModelParameters().attackIsBlocked("00138", attacker.getGameID()) && PositionID.isActivePosition(attacker.getCurrentPosition().getPositionID())
+					&& PositionID.isActivePosition(getCurrentPositionID()))
 				return damage < 20 ? 0 : damage - 20;
 		}
 		return damage;
-	}
-
-	public void moveToPosition(PositionID targetPosition) {
-		if (PositionID.isBenchPosition(targetPosition)) {
-			this.defenderGameID = -1;
-			this.duration = 0;
-		}
-	}
-
-	public void executeEndTurnActions() {
-		if (this.duration > 0)
-			this.duration--;
-		if (this.duration == 0)
-			this.defenderGameID = -1;
 	}
 }

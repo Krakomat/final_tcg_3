@@ -15,8 +15,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00118_Victreebel extends PokemonCardScript {
 
-	private boolean changeRetreatInGameModel;
-
 	public Script_00118_Victreebel(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -27,8 +25,6 @@ public class Script_00118_Victreebel extends PokemonCardScript {
 		att2Cost.add(Element.GRASS);
 		att2Cost.add(Element.GRASS);
 		this.addAttack("Acid", att2Cost);
-
-		this.changeRetreatInGameModel = false;
 	}
 
 	public boolean attackCanBeExecuted(String attackName) {
@@ -50,8 +46,8 @@ public class Script_00118_Victreebel extends PokemonCardScript {
 		Player enemy = this.getEnemyPlayer();
 		Color color = enemy.getColor();
 		PositionID activePos = color == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON;
-		PositionID chosenBenchPos = player.playerChoosesPositions(gameModel.getFullBenchPositions(color), 1, true,
-				"Choose a new active pokemon for " + enemy.getName() + "!").get(0);
+		PositionID chosenBenchPos = player.playerChoosesPositions(gameModel.getFullBenchPositions(color), 1, true, "Choose a new active pokemon for " + enemy.getName() + "!")
+				.get(0);
 
 		// Message clients:
 		Card active = gameModel.getPosition(activePos).getTopCard();
@@ -78,14 +74,14 @@ public class Script_00118_Victreebel extends PokemonCardScript {
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
 			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is not allowed to retreat the next turn!", "");
-			changeRetreatInGameModel = true;
+			gameModel.getGameModelParameters().activateEffect("00118", cardGameID());
 		}
 	}
 
 	public void executePreTurnActions() {
-		if (changeRetreatInGameModel) {
+		if (gameModel.getGameModelParameters().activeEffect("00118", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
-			changeRetreatInGameModel = false;
+			gameModel.getGameModelParameters().deactivateEffect("00118", cardGameID());
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

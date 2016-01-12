@@ -18,15 +18,12 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00117_Venomoth extends PokemonCardScript {
 
-	private Element originalType;
-
 	public Script_00117_Venomoth(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
 		this.addAttack("String Shot", att1Cost);
 		this.addPokemonPower("Shift");
-		this.originalType = ((PokemonCard) this.card).getElement();
 	}
 
 	@Override
@@ -111,8 +108,8 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 	public void moveToPosition(PositionID targetPosition) {
 		PokemonCard pokemon = (PokemonCard) this.card;
 
-		if (!gameModel.getAttackCondition().pokemonIsInPlay(pokemon) && pokemon.getElement() != originalType)
-			pokemon.setElement(originalType);
+		if (!gameModel.getAttackCondition().pokemonIsInPlay(pokemon))
+			pokemon.setElement(Element.GRASS);
 	}
 
 	public void executeEndTurnActions() {
