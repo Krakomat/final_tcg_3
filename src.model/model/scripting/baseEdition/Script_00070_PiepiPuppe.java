@@ -43,6 +43,7 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 
 		doll.setCurrentPositionLocal(handPos);
 		handPos.getCards().add(doll);
+		
 		// Set doll onto bench:
 		doll.getCardScript().playFromHand();
 	}

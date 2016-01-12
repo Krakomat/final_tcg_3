@@ -5,14 +5,12 @@ import java.util.List;
 
 import model.database.Card;
 import model.database.PokemonCard;
-import model.database.TrainerCard;
 import model.enums.Color;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
-import network.client.Player;
 
 /**
  * Script for the doll token!
@@ -22,9 +20,6 @@ import network.client.Player;
  */
 public class Script_00199_FossilToken extends PokemonCardScript {
 
-	private TrainerCard clefaryDoll;
-	private boolean firstPositionMove;
-
 	/**
 	 * Constructor only for local purposes!
 	 * 
@@ -33,16 +28,7 @@ public class Script_00199_FossilToken extends PokemonCardScript {
 	 */
 	public Script_00199_FossilToken(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
-		this.clefaryDoll = null;
 		this.addPokemonPower("Discard");
-		this.firstPositionMove = false;
-	}
-
-	public Script_00199_FossilToken(PokemonCard card, PokemonGame gameModel, TrainerCard clefaryDoll) {
-		super(card, gameModel);
-		this.clefaryDoll = clefaryDoll;
-		this.addPokemonPower("Discard");
-		this.firstPositionMove = false;
 	}
 
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
@@ -53,8 +39,7 @@ public class Script_00199_FossilToken extends PokemonCardScript {
 	}
 
 	public void executePokemonPower(String powerName) {
-		final Player player = this.getCardOwner();
-		gameModel.sendTextMessageToAllPlayers(player.getName() + " discards Mysterious Fossil!", "");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " discards Misterious Fossil!", "");
 
 		Position pos = this.card.getCurrentPosition();
 		boolean newActive = pos.getPositionID() == PositionID.BLUE_ACTIVEPOKEMON || pos.getPositionID() == PositionID.RED_ACTIVEPOKEMON ? true : false;
@@ -78,51 +63,49 @@ public class Script_00199_FossilToken extends PokemonCardScript {
 		gameModel.unregisterCard(this.card);
 
 		// Add trainer card to discard pile:
-		Position discardPile = gameModel.getPosition(ownDiscardPile(player));
+		Position discardPile = gameModel.getPosition(ownDiscardPile());
+		Integer gameID = gameModel.getGameModelParameters().getActiveEffectGameIDs("00198").get(0);
+		gameModel.getGameModelParameters().deactivateEffect("00198", gameID);
+		Card clefaryDoll = gameModel.getCard(gameID);
 		discardPile.addToPosition(clefaryDoll);
 		clefaryDoll.setCurrentPosition(discardPile);
 		gameModel.sendGameModelToAllPlayers("");
 
 		// Choose new active pokemon:
 		if (newActive) {
-			PositionID chosenPosition = player.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a new active pokemon!")
+			PositionID chosenPosition = getCardOwner().playerChoosesPositions(gameModel.getFullArenaPositions(getCardOwner().getColor()), 1, true, "Choose a new active pokemon!")
 					.get(0);
 			Card active = gameModel.getPosition(chosenPosition).getTopCard();
 			gameModel.getAttackAction().movePokemonToPosition(chosenPosition, pos.getPositionID());
 
 			// Send gameModel:
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " has chosen " + active.getName() + " as his new active pokemon!", active, "");
+			gameModel.sendCardMessageToAllPlayers(getCardOwner().getName() + " has chosen " + active.getName() + " as his new active pokemon!", active, "");
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
 	public void moveToPosition(PositionID targetPosition) {
-		if (targetPosition == null || gameModel.getFullArenaPositions(Color.BLUE).contains(targetPosition)
-				|| gameModel.getFullArenaPositions(Color.RED).contains(targetPosition)) {
+		if (targetPosition == null || gameModel.getFullArenaPositions(Color.BLUE).contains(targetPosition) || gameModel.getFullArenaPositions(Color.RED).contains(targetPosition)) {
 			// Everything ok
 		} else {
-			if (!firstPositionMove)
-				firstPositionMove = true;
-			else {
-				/*
-				 * Swap with trainer card here:
-				 */
+			// Swap with trainer card here:
+			Position position = gameModel.getPosition(targetPosition);
 
-				Position position = gameModel.getPosition(targetPosition);
+			// Remove doll from position:
+			boolean success = position.removeFromPosition(this.card);
+			if (!success)
+				System.err.println("Couldn't remove doll from position");
+			this.card.setCurrentPosition(null);
 
-				// Remove doll from position:
-				boolean success = position.removeFromPosition(this.card);
-				if (!success)
-					System.err.println("Couldn't remove doll from position");
-				this.card.setCurrentPosition(null);
+			// Unregister doll from gameModel:
+			gameModel.unregisterCard(this.card);
 
-				// Unregister doll from gameModel:
-				gameModel.unregisterCard(this.card);
-
-				// Add trainer card to position:
-				position.addToPosition(clefaryDoll);
-				clefaryDoll.setCurrentPosition(position);
-			}
+			// Add trainer card to position:
+			Integer gameID = gameModel.getGameModelParameters().getActiveEffectGameIDs("00070").get(0);
+			gameModel.getGameModelParameters().deactivateEffect("00070", gameID);
+			Card clefaryDoll = gameModel.getCard(gameID);
+			position.addToPosition(clefaryDoll);
+			clefaryDoll.setCurrentPosition(position);
 		}
 	}
 
@@ -136,18 +119,11 @@ public class Script_00199_FossilToken extends PokemonCardScript {
 		// nothing todo here!
 	}
 
-	private PositionID ownDiscardPile(Player player) {
-		if (player.getColor() == Color.BLUE)
-			return PositionID.BLUE_DISCARDPILE;
-		else
-			return PositionID.RED_DISCARDPILE;
-	}
-
 	public void pokemonGotCondition(int turnNumber, PokemonCondition condition) {
 		// Clefairy doll cannot be ASLEEP, CONFUSED, POISONED/TOXIC or PARALYZED!
 		PokemonCard doll = (PokemonCard) this.card;
-		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED
-				|| condition == PokemonCondition.POISONED || condition == PokemonCondition.TOXIC)
+		if (condition == PokemonCondition.ASLEEP || condition == PokemonCondition.CONFUSED || condition == PokemonCondition.PARALYZED || condition == PokemonCondition.POISONED
+				|| condition == PokemonCondition.TOXIC)
 			doll.cureCondition(condition);
 	}
 }

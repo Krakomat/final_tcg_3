@@ -4,10 +4,13 @@ Patch 4.5
 		- 00022_Tauboga: Mirror Move is now being stored server side wise
 		- 00150_Spearow: Mirror Move is now being stored server side wise
 		- 00021_Lektrobal: Pokemon Power can only be used if there are other pokemon on the players side
+		- 00070_PiepiPuppe: Is now being stored server side wise
 		- 00118_Victreebel: Acid is now being stored server side wise
 		- 00117_Venomoth: Shift is now being stored server side wise
 		- 00130_Persian: Pounce is now being stored server side wise
 		- 00138_Cubone: Snivel is now being stored server side wise
+		- 00198_MisteriousFossil: Is now being stored server side wise
+		- 00157_Haunter: Trancparency is now being stored server side wise
 		
 Patch 4.00
 	New Features:

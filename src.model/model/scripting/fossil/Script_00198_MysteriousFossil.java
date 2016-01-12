@@ -30,7 +30,9 @@ public class Script_00198_MysteriousFossil extends TrainerCardScript {
 		fossil.setPriceValueable(true); // no prices if defeated
 
 		// Set card script:
-		fossil.setCardScript(new Script_00199_FossilToken(fossil, gameModel, (TrainerCard) card));
+		fossil.setCardScript(new Script_00199_FossilToken(fossil, gameModel));
+		// Store this card at the server:
+		gameModel.getGameModelParameters().activateEffect("00198", cardGameID());
 
 		// Remove trainer card from hand:
 		Position handPos = gameModel.getPosition(ownHand());
@@ -39,9 +41,8 @@ public class Script_00198_MysteriousFossil extends TrainerCardScript {
 			System.err.println("Couldn't remove trainer card from position");
 		this.card.setCurrentPosition(null);
 
-		// Insert doll into hand:
-		fossil.setCurrentPosition(handPos);
-		handPos.addToPosition(fossil);
+		fossil.setCurrentPositionLocal(handPos);
+		handPos.getCards().add(fossil);
 
 		// Set doll onto bench:
 		fossil.getCardScript().playFromHand();

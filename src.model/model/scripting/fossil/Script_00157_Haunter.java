@@ -14,9 +14,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00157_Haunter extends PokemonCardScript {
 
-	private boolean coinFlipped;
-	private boolean powerActive;
-
 	public Script_00157_Haunter(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -25,41 +22,38 @@ public class Script_00157_Haunter extends PokemonCardScript {
 		this.addAttack("Nightmare", att1Cost);
 
 		this.addPokemonPower("Transparency");
-		this.powerActive = false;
-		this.coinFlipped = false;
 	}
 
 	public int modifyIncomingDamage(int damage, Card attacker) {
-		if (powerCanBeUsed() && !coinFlipped) {
+		if (powerCanBeUsed() && gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00157", cardGameID()) == null) {
 			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			if (c == Coin.HEADS)
-				this.powerActive = true;
-			this.coinFlipped = true;
-			if (this.powerActive)
+			if (c == Coin.HEADS) {
+				gameModel.getGameModelParameters().addEffectParameter("00157", cardGameID(), 1);
 				return 0;
-		} else if (powerCanBeUsed() && coinFlipped && powerActive)
+			} else
+				gameModel.getGameModelParameters().addEffectParameter("00157", cardGameID(), 0);
+		} else if (powerCanBeUsed() && gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00157", cardGameID()) == 1)
 			return 0;
 		return damage;
 	}
 
 	public boolean allowIncomingCondition(PokemonCondition condition) {
-		if (powerCanBeUsed() && !coinFlipped) {
+		if (powerCanBeUsed() && gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00157", cardGameID()) == null) {
 			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
 			Coin c = gameModel.getAttackAction().flipACoin();
-			if (c == Coin.HEADS)
-				this.powerActive = true;
-			this.coinFlipped = true;
-			if (this.powerActive)
+			if (c == Coin.HEADS) {
+				gameModel.getGameModelParameters().addEffectParameter("00157", cardGameID(), 1);
 				return false;
-		} else if (powerCanBeUsed() && coinFlipped && powerActive)
+			} else
+				gameModel.getGameModelParameters().addEffectParameter("00157", cardGameID(), 0);
+		} else if (powerCanBeUsed() && gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00157", cardGameID()) == 1)
 			return false;
 		return true;
 	}
 
 	public void executeEndTurnActions() {
-		this.powerActive = false;
-		this.coinFlipped = false;
+		gameModel.getGameModelParameters().removeEffectParameter("00157", cardGameID());
 	}
 
 	private boolean powerCanBeUsed() {

@@ -29,6 +29,7 @@ public class GameModelParameters {
 	private Map<String, List<Integer>> activatedEffectMap; // {CardID,(GameIDs)}
 	private List<Pair<Integer, Integer>> attackUsed; // {(GameID, Runtime)}
 	private List<Triple<Integer, String, Integer>> blockedAttacks;// {(GameID, AttackName, Runtime)}
+	private List<Triple<Integer, String, Integer>> effectParameters; // {(GameID, CardID, Variable)}
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
@@ -39,6 +40,7 @@ public class GameModelParameters {
 		this.noEnergyPayment = false;
 		this.activated_00296_Misty = false;
 		this.blockedAttacks = new ArrayList<>();
+		this.effectParameters = new ArrayList<>();
 		this.activatedEffectMap = new HashMap<>();
 		this.attackUsed = new ArrayList<>();
 		this.allowedToPlayTrainerCards = 0;
@@ -56,6 +58,9 @@ public class GameModelParameters {
 		this.blockedAttacks = new ArrayList<>();
 		for (Triple<Integer, String, Integer> i : gameModelUpdate.getGameModelParameters().getBlockedAttacks())
 			this.blockedAttacks.add(i);
+		this.effectParameters = new ArrayList<>();
+		for (Triple<Integer, String, Integer> i : gameModelUpdate.getGameModelParameters().getEffectParameters())
+			this.effectParameters.add(i);
 
 		this.activatedEffectMap = new HashMap<>();
 
@@ -84,6 +89,8 @@ public class GameModelParameters {
 		copy.setRetreatExecuted(retreatExecuted);
 		for (Triple<Integer, String, Integer> i : this.getBlockedAttacks())
 			copy.getBlockedAttacks().add(i);
+		for (Triple<Integer, String, Integer> i : this.getEffectParameters())
+			copy.getEffectParameters().add(i);
 
 		for (String s : this.getActivatedEffectMap().keySet()) {
 			List<Integer> list = new ArrayList<>();
@@ -135,6 +142,10 @@ public class GameModelParameters {
 		// blockedAttacks
 		bString = serializer.unpackByteString(unpacker);
 		this.blockedAttacks = serializer.unpackBlockedAttacksList(bString);
+
+		// effectParameters
+		bString = serializer.unpackByteString(unpacker);
+		this.effectParameters = serializer.unpackBlockedAttacksList(bString);
 
 		// activatedEffectMap
 		bString = serializer.unpackByteString(unpacker);
@@ -197,6 +208,11 @@ public class GameModelParameters {
 
 		// blockedAttacks
 		b = serializer.packBlockedAttacksList(blockedAttacks);
+		packer.packBinaryHeader(b.length());
+		packer.writePayload(b.copyAsBytes());
+
+		// effectParameters
+		b = serializer.packBlockedAttacksList(effectParameters);
 		packer.packBinaryHeader(b.length());
 		packer.writePayload(b.copyAsBytes());
 
@@ -307,6 +323,29 @@ public class GameModelParameters {
 		return false;
 	}
 
+	public void addEffectParameter(String cardID, int gameID, Integer parameter) {
+		this.effectParameters.add(new Triple<Integer, String, Integer>(gameID, cardID, parameter));
+	}
+
+	public void removeEffectParameter(String cardID, int gameID) {
+		for (int i = 0; i < this.effectParameters.size(); i++) {
+			Triple<Integer, String, Integer> attack = this.effectParameters.get(i);
+			if (attack.getValue().equals(cardID) && attack.getKey() == gameID) {
+				this.effectParameters.remove(i);
+				i--;
+			}
+		}
+	}
+
+	public Integer getValueForEffectParameterKeyPair(String cardID, int gameID) {
+		for (Triple<Integer, String, Integer> attack : this.effectParameters) {
+			if (attack.getValue().equals(cardID) && attack.getKey() == gameID) {
+				return attack.getAction();
+			}
+		}
+		return null;
+	}
+
 	public boolean isActivated_00296_Misty() {
 		return activated_00296_Misty;
 	}
@@ -325,6 +364,10 @@ public class GameModelParameters {
 
 	public Map<String, List<Integer>> getActivatedEffectMap() {
 		return activatedEffectMap;
+	}
+
+	private List<Triple<Integer, String, Integer>> getEffectParameters() {
+		return effectParameters;
 	}
 
 	/**
