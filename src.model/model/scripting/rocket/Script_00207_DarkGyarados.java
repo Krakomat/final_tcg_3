@@ -59,7 +59,7 @@ public class Script_00207_DarkGyarados extends PokemonCardScript {
 			return false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor())
 			return false;

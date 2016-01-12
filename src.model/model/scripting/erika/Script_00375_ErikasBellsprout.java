@@ -37,7 +37,7 @@ public class Script_00375_ErikasBellsprout extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00375_ErikasBellsprout().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00375", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -50,15 +50,15 @@ public class Script_00375_ErikasBellsprout extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00375_ErikasBellsprout().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00375_ErikasBellsprout().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00375", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00375", cardGameID());
 		}
 	}
 
 	@Override
 	public void executePokemonPower(String powerName) {
 		Player player = this.getCardOwner();
-		gameModel.getGameModelParameters().getPower_Activated_00375_ErikasBellsprout().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00375", cardGameID());
 
 		if (getPositionsToMoveEnergyFrom().isEmpty())
 			gameModel.sendTextMessageToAllPlayers("There are no valid Pokemon to move grass energy from!", "");

@@ -85,7 +85,7 @@ public class Script_00362_ErikasOddish extends PokemonCardScript {
 		boolean powerAllowed = true;
 		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			powerAllowed = false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			powerAllowed = false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			powerAllowed = false;
@@ -93,16 +93,16 @@ public class Script_00362_ErikasOddish extends PokemonCardScript {
 			powerAllowed = false;
 
 		if (powerAllowed) {
-			if (!gameModel.getGameModelParameters().getPower_Activated_00362_ErikasOddish().contains(this.card.getGameID()))
-				gameModel.getGameModelParameters().getPower_Activated_00362_ErikasOddish().add(new Integer(this.card.getGameID()));
+			if (!gameModel.getGameModelParameters().activeEffect("00362", cardGameID()))
+				gameModel.getGameModelParameters().activateEffect("00362", cardGameID());
 		} else {
-			gameModel.getGameModelParameters().getPower_Activated_00362_ErikasOddish().remove(new Integer(this.card.getGameID()));
+			gameModel.getGameModelParameters().deactivateEffect("00362", cardGameID());
 		}
 
 		boolean playerHasPower = false;
 		Player player = this.getCardOwner();
 
-		for (Integer gameID : gameModel.getGameModelParameters().getPower_Activated_00362_ErikasOddish()) {
+		for (Integer gameID : gameModel.getGameModelParameters().getActiveEffectGameIDs("00362")) {
 			Card amonite = gameModel.getCard(gameID);
 			if (amonite.getCurrentPosition().getColor() == player.getColor())
 				playerHasPower = true;

@@ -198,7 +198,7 @@ Patch 1.03
 Patch 1.02
 	GUI
 		- Added a symbol for the application
-		- The application now closed properly
+		- The application now closes properly
 	
 	AI
 		- StandardBot[Beta] intelligently plays energy cards

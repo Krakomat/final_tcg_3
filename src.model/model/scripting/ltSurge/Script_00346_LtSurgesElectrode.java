@@ -55,7 +55,7 @@ public class Script_00346_LtSurgesElectrode extends PokemonCardScript {
 	private boolean shockBlastCanBeExecuted() {
 		if (!PositionID.isActivePosition(this.getCurrentPositionID()))
 			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return false;

@@ -31,7 +31,7 @@ public class Script_00205_DarkDugtrio extends PokemonCardScript {
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return false;
 		if (gameModel.getPlayerOnTurn().getColor() == this.getCardOwner().getColor())
 			return false;

@@ -37,7 +37,7 @@ public class Script_00211_DarkSlowbro extends PokemonCardScript {
 	public void playFromHand() {
 		super.playFromHand();
 
-		if (this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty() && gameModel.getPosition(ownDiscardPile()).getPokemonCards().size() > 0) {
+		if (!this.gameModel.getGameModelParameters().activeEffect("00164") && gameModel.getPosition(ownDiscardPile()).getPokemonCards().size() > 0) {
 			Player player = this.getCardOwner();
 			List<Card> cards = player.playerChoosesCards(gameModel.getPosition(ownDiscardPile()).getPokemonCards(), 3, false,
 					"Choose up to 3 pokemon cards from your discard pile!");

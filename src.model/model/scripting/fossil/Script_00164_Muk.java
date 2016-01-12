@@ -74,10 +74,10 @@ public class Script_00164_Muk extends PokemonCardScript {
 			powerAllowed = false;
 
 		if (powerAllowed) {
-			if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().contains(this.card.getGameID()))
-				gameModel.getGameModelParameters().getPower_Active_00164_Muk().add(new Integer(this.card.getGameID()));
+			if (!gameModel.getGameModelParameters().activeEffect("00164", cardGameID()))
+				gameModel.getGameModelParameters().activateEffect("00164", cardGameID());
 		} else {
-			gameModel.getGameModelParameters().getPower_Active_00164_Muk().remove(new Integer(this.card.getGameID()));
+			gameModel.getGameModelParameters().deactivateEffect("00164", cardGameID());
 		}
 	}
 

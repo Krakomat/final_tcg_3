@@ -52,7 +52,7 @@ public class Script_00378_ErikasIvysaur extends PokemonCardScript {
 
 	private boolean relaxingScentCanBeExecuted() {
 		PokemonCard pCard = (PokemonCard) this.card;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;

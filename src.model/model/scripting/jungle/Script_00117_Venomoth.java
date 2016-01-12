@@ -35,7 +35,7 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 
-		if (gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00117", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -104,7 +104,7 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 		pokemon.setElement(chosenElement);
 		gameModel.sendTextMessageToAllPlayers(this.card.getName() + "'s new type is " + chosenElement + "!", "");
 
-		gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00117", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
@@ -116,8 +116,8 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().isPower_Activated_00117_Venomoth().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00117", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00117", cardGameID());
 		}
 	}
 }

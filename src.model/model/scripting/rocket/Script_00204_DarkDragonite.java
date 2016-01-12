@@ -38,7 +38,7 @@ public class Script_00204_DarkDragonite extends PokemonCardScript {
 	public void playFromHand() {
 		super.playFromHand();
 		Player player = this.getCardOwner();
-		if (this.gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() == 0 && this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty()
+		if (this.gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() == 0 && !this.gameModel.getGameModelParameters().activeEffect("00164")
 				&& gameModel.getFullBenchPositions(player.getColor()).size() < 5) {
 			if (!getBasicPokemonFromDeck().isEmpty()) {
 				List<Card> cards = player.playerChoosesCards(getBasicPokemonFromDeck(), gameModel.getFullBenchPositions(player.getColor()).size() == 4 ? 1 : 2, false,

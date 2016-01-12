@@ -27,7 +27,7 @@ public class Script_00239_Drowzee extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00239_Drowzee().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00239", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -37,8 +37,8 @@ public class Script_00239_Drowzee extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00239_Drowzee().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00239_Drowzee().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00239", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00239", cardGameID());
 		}
 	}
 
@@ -52,7 +52,7 @@ public class Script_00239_Drowzee extends PokemonCardScript {
 			gameModel.getAttackAction().inflictConditionToPosition(ownActive(), PokemonCondition.ASLEEP);
 		}
 
-		gameModel.getGameModelParameters().getPower_Activated_00239_Drowzee().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00239", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 

@@ -26,14 +26,15 @@ public class Script_00027_Porenta extends PokemonCardScript {
 	}
 
 	public boolean attackCanBeExecuted(String attackName) {
-		if (attackName.equals("Leek Slap") && gameModel.getGameModelParameters().getLauchschlagUsed_00027_Porenta().contains(card.getGameID()))
+		if (attackName.equals("Leek Slap") && gameModel.getGameModelParameters().activeEffect("00027", this.card.getGameID()))
 			return false;
 		return super.attackCanBeExecuted(attackName);
 	}
 
 	public void moveToPosition(PositionID targetPosition) {
-		if (!PositionID.isArenaPosition(targetPosition) && targetPosition != PositionID.BLUE_DISCARDPILE && targetPosition != PositionID.RED_DISCARDPILE)
-			gameModel.getGameModelParameters().getLauchschlagUsed_00027_Porenta().remove(new Integer(this.card.getGameID()));
+		if (!PositionID.isArenaPosition(targetPosition) && targetPosition != PositionID.BLUE_DISCARDPILE && targetPosition != PositionID.RED_DISCARDPILE
+				&& gameModel.getGameModelParameters().activeEffect("00027", cardGameID()))
+			gameModel.getGameModelParameters().deactivateEffect("00027", this.card.getGameID());
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class Script_00027_Porenta extends PokemonCardScript {
 	}
 
 	private void lauchschlag() {
-		gameModel.getGameModelParameters().getLauchschlagUsed_00027_Porenta().add(new Integer(this.card.getGameID()));
+		gameModel.getGameModelParameters().activateEffect("00027", this.card.getGameID());
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();

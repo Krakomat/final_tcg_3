@@ -31,7 +31,7 @@ public class Script_00235_Charmander extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00235_Charmander().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00235", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -43,8 +43,8 @@ public class Script_00235_Charmander extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00235_Charmander().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00235_Charmander().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00235", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00235", cardGameID());
 		}
 	}
 
@@ -52,10 +52,9 @@ public class Script_00235_Charmander extends PokemonCardScript {
 	public void executePokemonPower(String powerName) {
 		Player player = this.getCardOwner();
 		List<PositionID> posList = this.positionsWithFireEnergy();
-		PositionID chosenPosition = player.playerChoosesPositions(posList, 1, true, "Choose a position to transfer a fire energy to " + this.card.getName() + "...")
-				.get(0);
-		this.gameModel.sendTextMessageToAllPlayers(player.getName() + " transfers a fire energy from "
-				+ gameModel.getPosition(chosenPosition).getTopCard().getName() + " to " + this.card.getName() + "!", "");
+		PositionID chosenPosition = player.playerChoosesPositions(posList, 1, true, "Choose a position to transfer a fire energy to " + this.card.getName() + "...").get(0);
+		this.gameModel.sendTextMessageToAllPlayers(
+				player.getName() + " transfers a fire energy from " + gameModel.getPosition(chosenPosition).getTopCard().getName() + " to " + this.card.getName() + "!", "");
 
 		Card fireEnergy = null;
 		for (Card c : gameModel.getPosition(chosenPosition).getEnergyCards()) {
@@ -65,7 +64,7 @@ public class Script_00235_Charmander extends PokemonCardScript {
 		}
 
 		gameModel.getAttackAction().moveCard(chosenPosition, this.card.getCurrentPosition().getPositionID(), fireEnergy.getGameID(), false);
-		gameModel.getGameModelParameters().getPower_Activated_00235_Charmander().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00235", cardGameID());
 
 		// Execute animation:
 		Animation animation = new CardMoveAnimation(chosenPosition, this.card.getCurrentPosition().getPositionID(), fireEnergy.getCardId(), Sounds.EQUIP);

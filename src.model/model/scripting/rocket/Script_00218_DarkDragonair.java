@@ -34,7 +34,7 @@ public class Script_00218_DarkDragonair extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00218_DarkDragonair().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00218", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -47,8 +47,8 @@ public class Script_00218_DarkDragonair extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00218_DarkDragonair().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00218_DarkDragonair().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00218", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00218", cardGameID());
 		}
 	}
 
@@ -71,7 +71,7 @@ public class Script_00218_DarkDragonair extends PokemonCardScript {
 		gameModel.getAttackAction().shufflePosition(ownDeck());
 		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 
-		gameModel.getGameModelParameters().getPower_Activated_00218_DarkDragonair().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00218", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 

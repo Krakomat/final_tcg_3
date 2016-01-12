@@ -32,21 +32,20 @@ public class Script_00143_Mankey extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00143", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 
-		if (gameModel.getPosition(PositionID.BLUE_DECK).isEmpty() && gameModel.getPosition(PositionID.RED_DECK).isEmpty()
-				&& gameModel.getPosition(getEnemyHand()).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_1).isEmpty()
-				&& gameModel.getPosition(PositionID.BLUE_PRICE_2).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_3).isEmpty()
-				&& gameModel.getPosition(PositionID.BLUE_PRICE_4).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_5).isEmpty()
-				&& gameModel.getPosition(PositionID.BLUE_PRICE_6).isEmpty() && gameModel.getPosition(PositionID.RED_PRICE_1).isEmpty()
-				&& gameModel.getPosition(PositionID.RED_PRICE_2).isEmpty() && gameModel.getPosition(PositionID.RED_PRICE_3).isEmpty()
-				&& gameModel.getPosition(PositionID.RED_PRICE_4).isEmpty() && gameModel.getPosition(PositionID.RED_PRICE_5).isEmpty()
-				&& gameModel.getPosition(PositionID.RED_PRICE_6).isEmpty())
+		if (gameModel.getPosition(PositionID.BLUE_DECK).isEmpty() && gameModel.getPosition(PositionID.RED_DECK).isEmpty() && gameModel.getPosition(getEnemyHand()).isEmpty()
+				&& gameModel.getPosition(PositionID.BLUE_PRICE_1).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_2).isEmpty()
+				&& gameModel.getPosition(PositionID.BLUE_PRICE_3).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_4).isEmpty()
+				&& gameModel.getPosition(PositionID.BLUE_PRICE_5).isEmpty() && gameModel.getPosition(PositionID.BLUE_PRICE_6).isEmpty()
+				&& gameModel.getPosition(PositionID.RED_PRICE_1).isEmpty() && gameModel.getPosition(PositionID.RED_PRICE_2).isEmpty()
+				&& gameModel.getPosition(PositionID.RED_PRICE_3).isEmpty() && gameModel.getPosition(PositionID.RED_PRICE_4).isEmpty()
+				&& gameModel.getPosition(PositionID.RED_PRICE_5).isEmpty() && gameModel.getPosition(PositionID.RED_PRICE_6).isEmpty())
 			return false;
 
 		return super.pokemonPowerCanBeExecuted(powerName);
@@ -111,13 +110,13 @@ public class Script_00143_Mankey extends PokemonCardScript {
 			revealedCard.add(gameModel.getPosition(chosenPosition).getCardAtIndex(index));
 		}
 		player.playerChoosesCards(revealedCard, 1, false, "Revealed card on " + chosenPosition);
-		gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00143", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().isPower_Activated_00143_Mankey().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00143", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00143", cardGameID());
 		}
 	}
 

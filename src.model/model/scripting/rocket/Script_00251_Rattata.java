@@ -28,7 +28,7 @@ public class Script_00251_Rattata extends PokemonCardScript {
 		PokemonCard pCard = (PokemonCard) this.card;
 		Player enemy = this.getEnemyPlayer();
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00251", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -42,8 +42,8 @@ public class Script_00251_Rattata extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00251", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00251", cardGameID());
 		}
 	}
 
@@ -75,7 +75,7 @@ public class Script_00251_Rattata extends PokemonCardScript {
 		gameModel.getAttackAction().moveCard(chosenPrizePosition, ownDeck(), prize.getGameID(), true);
 		gameModel.getAttackAction().moveCard(ownDeck(), chosenPrizePosition, topDeck.getGameID(), true);
 
-		gameModel.getGameModelParameters().getPower_Activated_00251_Rattata().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00251", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 }

@@ -19,7 +19,7 @@ public class Script_00221_DarkGloom extends PokemonCardScript {
 		att1Cost.add(Element.GRASS);
 		att1Cost.add(Element.GRASS);
 		this.addAttack("Poisonpowder", att1Cost);
-		
+
 		this.addPokemonPower("Pollen Stench");
 	}
 
@@ -27,7 +27,7 @@ public class Script_00221_DarkGloom extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00221_DarkGloom().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00221", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -37,8 +37,8 @@ public class Script_00221_DarkGloom extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00221_DarkGloom().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00221_DarkGloom().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00221", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00221", cardGameID());
 		}
 	}
 
@@ -52,10 +52,9 @@ public class Script_00221_DarkGloom extends PokemonCardScript {
 			gameModel.getAttackAction().inflictConditionToPosition(ownActive(), PokemonCondition.CONFUSED);
 		}
 
-		gameModel.getGameModelParameters().getPower_Activated_00221_DarkGloom().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00221", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
-
 
 	@Override
 	public void executeAttack(String attackName) {

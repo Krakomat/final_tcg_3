@@ -68,7 +68,7 @@ public class Script_00266_BrocksRhydon extends PokemonCardScript {
 	private boolean benchGuardCanBeExecuted() {
 		if (!PositionID.isBenchPosition(this.getCurrentPositionID()))
 			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return false;

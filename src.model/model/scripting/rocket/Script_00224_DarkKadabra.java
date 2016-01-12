@@ -28,7 +28,7 @@ public class Script_00224_DarkKadabra extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00224_DarkKadabra().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00224", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -41,8 +41,8 @@ public class Script_00224_DarkKadabra extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00224_DarkKadabra().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00224_DarkKadabra().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00224", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00224", cardGameID());
 		}
 	}
 
@@ -53,7 +53,7 @@ public class Script_00224_DarkKadabra extends PokemonCardScript {
 		Card discardCard = player.playerChoosesCards(cardList, 1, true, "Choose a card to discard!").get(0);
 		gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + discardCard.getName(), discardCard, "");
 		gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), discardCard.getGameID(), true);
-		gameModel.getGameModelParameters().getPower_Activated_00224_DarkKadabra().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00224", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 
 		gameModel.getAttackAction().playerDrawsCards(1, player);

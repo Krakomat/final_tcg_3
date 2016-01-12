@@ -31,7 +31,7 @@ public class Script_00356_Erikas_Victreebel extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00356_ErikasVictreebel().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00356", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -43,8 +43,8 @@ public class Script_00356_Erikas_Victreebel extends PokemonCardScript {
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00356_ErikasVictreebel().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00356_ErikasVictreebel().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00356", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00356", cardGameID());
 		}
 	}
 
@@ -71,7 +71,7 @@ public class Script_00356_Erikas_Victreebel extends PokemonCardScript {
 		} else
 			gameModel.sendTextMessageToAllPlayers("Fragrance Trap missed!", "");
 
-		gameModel.getGameModelParameters().getPower_Activated_00356_ErikasVictreebel().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00356", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 

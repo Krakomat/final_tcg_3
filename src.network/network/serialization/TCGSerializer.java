@@ -6,7 +6,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.CharacterCodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessagePacker;
@@ -1000,5 +1002,40 @@ public class TCGSerializer {
 		}
 		packer.close();
 		return new ByteString(out.toByteArray());
+	}
+
+	public ByteString packMap(Map<String, List<Integer>> map) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MessagePacker packer = MessagePack.newDefaultPacker(out);
+
+		packer.packArrayHeader(map.size());
+		for (String s : map.keySet()) {
+			ByteString b = packString(s);
+			packer.packBinaryHeader(b.length());
+			packer.writePayload(b.copyAsBytes());
+
+			List<Integer> list = map.get(s);
+			b = packIntList(list);
+			packer.packBinaryHeader(b.length());
+			packer.writePayload(b.copyAsBytes());
+		}
+		packer.close();
+		return new ByteString(out.toByteArray());
+	}
+
+	public Map<String, List<Integer>> unpackMap(ByteString b) throws IOException {
+		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
+
+		Map<String, List<Integer>> map = new HashMap<>();
+		int size = unpacker.unpackArrayHeader();
+		for (int i = 0; i < size; i++) {
+			ByteString bString = unpackByteString(unpacker);
+			String s = unpackString(bString);
+			bString = unpackByteString(unpacker);
+			List<Integer> list = unpackIntList(bString);
+			map.put(s, list);
+		}
+		unpacker.close();
+		return map;
 	}
 }

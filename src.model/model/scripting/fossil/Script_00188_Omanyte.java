@@ -66,7 +66,7 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 			powerAllowed = false;
 		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			powerAllowed = false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			powerAllowed = false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			powerAllowed = false;
@@ -74,16 +74,16 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 			powerAllowed = false;
 
 		if (powerAllowed) {
-			if (!gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().contains(this.card.getGameID()))
-				gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().add(new Integer(this.card.getGameID()));
+			if (!gameModel.getGameModelParameters().activeEffect("00188", cardGameID()))
+				gameModel.getGameModelParameters().activateEffect("00188", cardGameID());
 		} else {
-			gameModel.getGameModelParameters().getPower_Activated_00188_Omanite().remove(new Integer(this.card.getGameID()));
+			gameModel.getGameModelParameters().deactivateEffect("00188", cardGameID());
 		}
 
 		boolean playerHasPower = false;
 		Player player = this.getCardOwner();
 
-		for (Integer gameID : gameModel.getGameModelParameters().getPower_Activated_00188_Omanite()) {
+		for (Integer gameID : gameModel.getGameModelParameters().getActiveEffectGameIDs("00188")) {
 			Card amonite = gameModel.getCard(gameID);
 			if (amonite.getCurrentPosition().getColor() == player.getColor())
 				playerHasPower = true;

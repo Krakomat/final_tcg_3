@@ -47,7 +47,7 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 		PokemonCard pCard = (PokemonCard) this.card;
 		Player player = this.getCardOwner();
 
-		if (gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00119", cardGameID()))
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
@@ -81,13 +81,13 @@ public class Script_00119_Vileplume extends PokemonCardScript {
 			this.gameModel.getAttackAction().healPosition(chosenPosition, 10);
 		}
 
-		gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00119", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().isPower_Activated_00119_Vileplume().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00119", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00119", cardGameID());
 		}
 	}
 }

@@ -46,7 +46,7 @@ public class Script_00228_DarkPrimeape extends PokemonCardScript {
 
 	private boolean frenzyCanBeExecuted() {
 		PokemonCard pCard = (PokemonCard) this.card;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return false;

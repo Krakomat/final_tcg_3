@@ -23,9 +23,9 @@ public abstract class TrainerCardScript extends CardScript {
 		if (!this.cardInHand())
 			return null;
 
-		// Check if flag in gameModelParameters is set:
-		if (gameModel.getGameModelParameters().isAllowedToPlayTrainerCards() > 0 || (gameModel.getGameModelParameters().getPower_Activated_00212_DarkVileplume().size() > 0
-				&& gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty()))
+		// Check if flag in gameModelParameters is set (DarkVileplume and Muk):
+		if (gameModel.getGameModelParameters().isAllowedToPlayTrainerCards() > 0
+				|| (this.gameModel.getGameModelParameters().activeEffect("00212") && !this.gameModel.getGameModelParameters().activeEffect("00164")))
 			return null;
 
 		return trainerCanBePlayedFromHand();

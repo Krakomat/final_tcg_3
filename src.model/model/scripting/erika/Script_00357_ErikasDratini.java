@@ -27,7 +27,7 @@ public class Script_00357_ErikasDratini extends PokemonCardScript {
 
 	@Override
 	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			return damage; // no modifications allowed
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return damage;

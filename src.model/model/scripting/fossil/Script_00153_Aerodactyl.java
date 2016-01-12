@@ -66,7 +66,7 @@ public class Script_00153_Aerodactyl extends PokemonCardScript {
 			powerAllowed = false;
 		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			powerAllowed = false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
 			powerAllowed = false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			powerAllowed = false;
@@ -74,10 +74,10 @@ public class Script_00153_Aerodactyl extends PokemonCardScript {
 			powerAllowed = false;
 
 		if (powerAllowed) {
-			if (!gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().contains(this.card.getGameID()))
-				gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().add(new Integer(this.card.getGameID()));
+			if (!gameModel.getGameModelParameters().activeEffect("00153", cardGameID()))
+				gameModel.getGameModelParameters().activateEffect("00153", cardGameID());
 		} else {
-			gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().remove(new Integer(this.card.getGameID()));
+			gameModel.getGameModelParameters().deactivateEffect("00153", cardGameID());
 		}
 	}
 

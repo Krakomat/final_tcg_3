@@ -29,7 +29,7 @@ public class Script_00156_Gengar extends PokemonCardScript {
 		PokemonCard pCard = (PokemonCard) this.card;
 		Player enemy = this.getEnemyPlayer();
 
-		if (gameModel.getGameModelParameters().getPower_Activated_00156_Gengar().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00156", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -48,8 +48,7 @@ public class Script_00156_Gengar extends PokemonCardScript {
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
 
-		PositionID chosenHealPosition = player.playerChoosesPositions(getDamagedEnemyPositions(), 1, true, "Choose a pokemon to remove a damage counter from...")
-				.get(0);
+		PositionID chosenHealPosition = player.playerChoosesPositions(getDamagedEnemyPositions(), 1, true, "Choose a pokemon to remove a damage counter from...").get(0);
 		List<PositionID> otherPositions = gameModel.getFullArenaPositions(enemy.getColor());
 		otherPositions.remove(chosenHealPosition);
 		PositionID chosenDamagePosition = player.playerChoosesPositions(otherPositions, 1, true, "Choose a pokemon to damage ...").get(0);
@@ -68,14 +67,14 @@ public class Script_00156_Gengar extends PokemonCardScript {
 			if (damagePkmn.hasCondition(PokemonCondition.DESTINY))
 				gameModel.getAttackAction().inflictConditionToPosition(this.card.getCurrentPosition().getPositionID(), PokemonCondition.KNOCKOUT);
 		}
-		gameModel.getGameModelParameters().getPower_Activated_00156_Gengar().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00156", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 		gameModel.cleanDefeatedPositions();
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().getPower_Activated_00156_Gengar().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().getPower_Activated_00156_Gengar().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00156", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00156", cardGameID());
 		}
 	}
 
@@ -94,8 +93,8 @@ public class Script_00156_Gengar extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 
 		if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0) {
-			PositionID benchDefender = player.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true,
-					"Choose a pokemon that receives the damage!").get(0);
+			PositionID benchDefender = player.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true, "Choose a pokemon that receives the damage!")
+					.get(0);
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchDefender, 10, false);
 		}
 	}

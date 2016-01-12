@@ -30,7 +30,7 @@ public class Script_00155_Dragonite extends PokemonCardScript {
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		PokemonCard pCard = (PokemonCard) this.card;
 
-		if (gameModel.getGameModelParameters().isPower_Activated_00155_Dragonite().contains(this.card.getGameID()))
+		if (gameModel.getGameModelParameters().activeEffect("00155", cardGameID()))
 			return false;
 		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
 			return false;
@@ -57,13 +57,13 @@ public class Script_00155_Dragonite extends PokemonCardScript {
 		// Execute swap:
 		gameModel.getAttackAction().swapPokemon(benchPos, activePos);
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
-		gameModel.getGameModelParameters().isPower_Activated_00155_Dragonite().add(this.card.getGameID());
+		gameModel.getGameModelParameters().activateEffect("00155", cardGameID());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	public void executeEndTurnActions() {
-		if (gameModel.getGameModelParameters().isPower_Activated_00155_Dragonite().contains(this.card.getGameID())) {
-			gameModel.getGameModelParameters().isPower_Activated_00155_Dragonite().remove(new Integer(this.card.getGameID()));
+		if (gameModel.getGameModelParameters().activeEffect("00155", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00155", cardGameID());
 		}
 	}
 

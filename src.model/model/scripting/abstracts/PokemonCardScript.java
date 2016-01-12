@@ -49,9 +49,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 				return PlayerAction.PUT_ON_BENCH;
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
 			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
-					&& (this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty()
-							|| (!this.gameModel.getGameModelParameters().getPower_Active_00153_Aerodactyl().isEmpty()
-									&& !this.gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())))
+					&& (!this.gameModel.getGameModelParameters().activeEffect("00153")
+							|| (this.gameModel.getGameModelParameters().activeEffect("00153") && this.gameModel.getGameModelParameters().activeEffect("00164"))))
 				return PlayerAction.EVOLVE_POKEMON;
 		} else
 			throw new IllegalArgumentException("Error: Wrong CardType for the card in canBePlayedFromHand() of PokemonCardScript: " + this.card.getCardType());
@@ -209,7 +208,7 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	public boolean pokemonPowerCanBeExecuted(String powerName) {
 		if (gameModel.getPlayerOnTurn().getColor() != this.getCardOwner().getColor())
 			return false;
-		if (!gameModel.getGameModelParameters().getPower_Active_00164_Muk().isEmpty())
+		if (this.gameModel.getGameModelParameters().activeEffect("00164")) // Muk pokemon power!
 			return false;
 		if (((PokemonCard) this.card).hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
 			return false;
