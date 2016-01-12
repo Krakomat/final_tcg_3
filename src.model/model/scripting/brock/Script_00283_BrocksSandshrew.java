@@ -12,16 +12,12 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00283_BrocksSandshrew extends PokemonCardScript {
 
-	private boolean changeRetreatInGameModel;
-
 	public Script_00283_BrocksSandshrew(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.ROCK);
 		att1Cost.add(Element.ROCK);
-		this.addAttack("Sand pit", att1Cost);
-
-		this.changeRetreatInGameModel = false;
+		this.addAttack("Sand Pit", att1Cost);
 	}
 
 	@Override
@@ -32,13 +28,13 @@ public class Script_00283_BrocksSandshrew extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is not allowed to retreat the next turn!", "");
-		changeRetreatInGameModel = true;
+		gameModel.getGameModelParameters().activateEffect("00283", cardGameID());
 	}
 
 	public void executePreTurnActions() {
-		if (changeRetreatInGameModel) {
+		if (gameModel.getGameModelParameters().activeEffect("00283", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
-			changeRetreatInGameModel = false;
+			gameModel.getGameModelParameters().deactivateEffect("00283", cardGameID());
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
