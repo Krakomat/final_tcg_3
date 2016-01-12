@@ -13,8 +13,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00322_MistysSeel extends PokemonCardScript {
 
-	private boolean changeRetreatInGameModel;
-
 	public Script_00322_MistysSeel(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -25,8 +23,6 @@ public class Script_00322_MistysSeel extends PokemonCardScript {
 		att2Cost.add(Element.WATER);
 		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Mirage", att2Cost);
-
-		this.changeRetreatInGameModel = false;
 	}
 
 	@Override
@@ -44,13 +40,13 @@ public class Script_00322_MistysSeel extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is not allowed to retreat the next turn!", "");
-		changeRetreatInGameModel = true;
+		gameModel.getGameModelParameters().activateEffect("00322", cardGameID());
 	}
 
 	public void executePreTurnActions() {
-		if (changeRetreatInGameModel) {
+		if (gameModel.getGameModelParameters().activeEffect("00322", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
-			changeRetreatInGameModel = false;
+			gameModel.getGameModelParameters().deactivateEffect("00322", cardGameID());
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

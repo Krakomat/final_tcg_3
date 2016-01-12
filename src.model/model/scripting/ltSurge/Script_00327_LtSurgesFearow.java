@@ -12,8 +12,6 @@ import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00327_LtSurgesFearow extends PokemonCardScript {
 
-	private boolean changeRetreatInGameModel;
-
 	public Script_00327_LtSurgesFearow(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
@@ -26,8 +24,6 @@ public class Script_00327_LtSurgesFearow extends PokemonCardScript {
 		att2Cost.add(Element.COLORLESS);
 		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Clutch", att2Cost);
-
-		this.changeRetreatInGameModel = false;
 	}
 
 	@Override
@@ -56,13 +52,13 @@ public class Script_00327_LtSurgesFearow extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 
 		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is not allowed to retreat the next turn!", "");
-		changeRetreatInGameModel = true;
+		gameModel.getGameModelParameters().activateEffect("00327", cardGameID());
 	}
 
 	public void executePreTurnActions() {
-		if (changeRetreatInGameModel) {
+		if (gameModel.getGameModelParameters().activeEffect("00327", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
-			changeRetreatInGameModel = false;
+			gameModel.getGameModelParameters().deactivateEffect("00327", cardGameID());
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}

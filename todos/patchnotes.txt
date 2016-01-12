@@ -12,6 +12,8 @@ Patch 4.5
 		- 00198_MisteriousFossil: Is now being stored server side wise
 		- 00157_Haunter: Trancparency is now being stored server side wise
 		- 00283_BrocksSandshrew: Sand Pit is now being stored server side wise
+		- 00322_MistysSeel: Frostbite is now being stored server side wise
+		- 00327_LtSurgesFearow: Clutch is now being stored server side wise
 		
 Patch 4.00
 	New Features:
