@@ -43,8 +43,7 @@ public class Script_00375_ErikasBellsprout extends PokemonCardScript {
 			return false;
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
-		// Dark Kadabra: Hand and Deck have to contain at least one card
-		if (gameModel.getPosition(ownHand()).isEmpty() || gameModel.getPosition(ownDeck()).isEmpty())
+		if (gameModel.getFullArenaPositions(getCardOwner().getColor()).size() < 2)
 			return false;
 		return super.pokemonPowerCanBeExecuted(powerName);
 	}
