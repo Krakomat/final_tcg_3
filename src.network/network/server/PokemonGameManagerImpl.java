@@ -503,6 +503,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				// Execute the power:
 				gameModel.sendCardMessageToAllPlayers(pokemon.getName() + " activates " + powerName + "!", pokemon, "");
 				pScript.executePokemonPower(powerName);
+				gameModel.sendGameModelToAllPlayers("");
 
 				moveMade = true; // Let player make his next move
 			}

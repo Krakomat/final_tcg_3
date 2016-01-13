@@ -30,7 +30,7 @@ public class Script_00375_ErikasBellsprout extends PokemonCardScript {
 	public boolean attackCanBeExecuted(String attackName) {
 		if (attackName.equals("Stretch Vine") && gameModel.getFullBenchPositions(getEnemyPlayer().getColor()).isEmpty())
 			return false;
-		return true;
+		return super.attackCanBeExecuted(attackName);
 	}
 
 	@Override
