@@ -15,8 +15,10 @@ import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
+import model.game.GameModelUpdate;
 import model.game.LocalPokemonGameModel;
 import ai.interfaces.Bot;
+import ai.interfaces.BotBorder;
 import ai.util.AIUtilities;
 
 /**
@@ -49,8 +51,11 @@ public class TreeBot implements Bot {
 	}
 
 	@Override
-	public void updateGameModel(LocalPokemonGameModel gameModel) {
-		this.gameModel = gameModel;
+	public void updateGameModel(GameModelUpdate update, BotBorder botBorder, PokemonGameManager server) {
+		if (this.gameModel == null)
+			this.gameModel = new LocalPokemonGameModel(update, botBorder);
+		else
+			this.gameModel = gameModel.updateGameModel(update);
 	}
 
 	@Override

@@ -95,14 +95,18 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound) {
-		this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this, server);
+		if (this.localGameModel == null) {
+			System.out.println("Local game model = null --> Create new game model!");
+			this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this);
+		}
+		this.localGameModel = this.localGameModel.updateGameModel(gameModelUpdate);
 		view.userUpdatesGameModel(this.localGameModel, color, sound);
 	}
 
 	private LocalPokemonGameModel getFreshGameModel() {
 		if (this.localGameModel == null) {
-			GameModelUpdate gameModelUpdate = server.getGameModelForPlayer(self);
-			return new LocalPokemonGameModel(gameModelUpdate, this, server);
+			GameModelUpdate gameModelUpdate = server.getGameModelForPlayer(self, -2); // Get full game model
+			return new LocalPokemonGameModel(gameModelUpdate, this);
 		}
 		return this.localGameModel;
 	}

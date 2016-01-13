@@ -124,7 +124,7 @@ public interface PokemonGameManager {
 	 * @param player
 	 * @return
 	 */
-	public GameModelUpdate getGameModelForPlayer(Player player);
+	public GameModelUpdate getGameModelForPlayer(Player player, int version);
 
 	/**
 	 * Sets the listener for this game manager. Only used at the server side.

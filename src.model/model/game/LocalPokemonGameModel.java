@@ -9,7 +9,6 @@ import java.util.Map;
 
 import ai.interfaces.BotBorder;
 import network.client.Player;
-import network.server.PokemonGameManager;
 import model.database.Card;
 import model.database.EnergyCard;
 import model.database.PokemonCard;
@@ -42,7 +41,6 @@ public class LocalPokemonGameModel implements PokemonGame {
 	protected AttackCondition attackCondition;
 	protected Map<Integer, Card> cardMap;
 	protected CardScriptFactory cardScriptFactory;
-	protected PokemonGameManager server;
 	private GameField gameField;
 	protected GameModelParameters gameModelParameters;
 
@@ -51,12 +49,11 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 * 
 	 * @param gameModelUpdate
 	 */
-	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client, PokemonGameManager server) {
+	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client) {
 		this.gameModelParameters = new GameModelParameters(gameModelUpdate);
 		this.gameField = new GameField(gameModelUpdate);
 		this.gameID = 0; // just a default id
 		this.playerOnTurn = client;
-		this.server = server;
 		if (client.getColor() == Color.BLUE) {
 			this.playerBlue = client;
 			this.playerRed = new BotBorder(-1, "EnemyPlayer", "", AccountType.BOT_DUMMY);
@@ -96,9 +93,29 @@ public class LocalPokemonGameModel implements PokemonGame {
 		for (Position position : gameField.getAllPositions())
 			pList.add(position.copy());
 		update.setPositionList(pList);
-		LocalPokemonGameModel copy = new LocalPokemonGameModel(update, this.playerOnTurn, this.server);
+		LocalPokemonGameModel copy = new LocalPokemonGameModel(update, this.playerOnTurn);
 		copy.setGameModelParameters(gameModelParameters.copy());
 		return copy;
+	}
+
+	public LocalPokemonGameModel updateGameModel(GameModelUpdate gameModelUpdate) {
+		this.gameModelParameters = new GameModelParameters(gameModelUpdate);
+
+		for (Position position : gameModelUpdate.getPositionList()) {
+			this.gameField.replacePosition(position);
+			for (Card c : position.getCards()) {
+				c.setCurrentPositionLocal(position);
+				this.cardMap.put(c.getGameID(), c);// replace old card
+				CardScript script = this.cardScriptFactory.createScript(c.getCardId(), c, this);
+				c.setCardScript(script);
+				if (c instanceof PokemonCard) {
+					PokemonCardScript pCardScript = (PokemonCardScript) c.getCardScript();
+					((PokemonCard) c).setAttackNames(pCardScript.getAttackNames());
+					((PokemonCard) c).setPokemonPowerNames(pCardScript.getPokemonPowerNames());
+				}
+			}
+		}
+		return this;
 	}
 
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {

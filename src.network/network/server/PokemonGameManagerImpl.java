@@ -546,7 +546,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	@Override
-	public GameModelUpdate getGameModelForPlayer(Player player) {
+	public GameModelUpdate getGameModelForPlayer(Player player, int version) {
 		return gameModel.getGameModelForPlayer(player);
 	}
 

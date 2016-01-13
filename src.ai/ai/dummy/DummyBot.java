@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 
 import ai.interfaces.Bot;
+import ai.interfaces.BotBorder;
 import ai.util.AIUtilities;
 import network.client.Player;
 import network.server.PokemonGameManager;
@@ -14,7 +15,7 @@ import model.database.EnergyCard;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.game.LocalPokemonGameModel;
+import model.game.GameModelUpdate;
 
 /**
  * Represents a stupid bot, which only ends his turn.
@@ -32,7 +33,7 @@ public class DummyBot implements Bot {
 	}
 
 	@Override
-	public void updateGameModel(LocalPokemonGameModel gameModel) {
+	public void updateGameModel(GameModelUpdate update, BotBorder botBorder, PokemonGameManager server) {
 
 	}
 

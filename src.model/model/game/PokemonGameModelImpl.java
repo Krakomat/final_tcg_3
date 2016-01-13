@@ -865,6 +865,10 @@ public class PokemonGameModelImpl implements PokemonGame {
 			GameModelUpdate updateModel = this.getGameModelForPlayer(p);
 			p.playerUpdatesGameModel(updateModel, sound);
 		}
+
+		// Reset changed variable on positions:
+		for (Position p : this.getGameField().getChangedPositions())
+			p.setChanged(false);
 	}
 
 	@Override

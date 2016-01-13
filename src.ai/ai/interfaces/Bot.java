@@ -6,7 +6,7 @@ import model.database.Card;
 import model.enums.Color;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.game.LocalPokemonGameModel;
+import model.game.GameModelUpdate;
 import network.client.Player;
 import network.server.PokemonGameManager;
 
@@ -19,10 +19,12 @@ import network.server.PokemonGameManager;
 public interface Bot {
 	/**
 	 * The bot updates his game model.
+	 * @param server 
+	 * @param botBorder 
 	 * 
 	 * @param gameModel
 	 */
-	public void updateGameModel(LocalPokemonGameModel gameModel);
+	public void updateGameModel(GameModelUpdate update, BotBorder botBorder, PokemonGameManager server);
 
 	/**
 	 * The bot gets notified that the game has been started.

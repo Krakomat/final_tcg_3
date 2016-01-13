@@ -85,8 +85,9 @@ public class ServerListener implements MessageListener<HostedConnection> {
 					break;
 				case SERVER_GET_GAME_MODEL_FOR_PLAYER:
 					player = this.connectionMap.get(source.getId());
+					int version = serializer.unpackInt(qMessage.getParameters().get(0));
 
-					GameModelUpdate gameModel = gameManager.getGameModelForPlayer(player);
+					GameModelUpdate gameModel = gameManager.getGameModelForPlayer(player, version);
 
 					response = new RespondMessage(qMessage.getMethod(), serializer.packGameModelUpdate(gameModel));
 					server.broadcast(Filters.in(source), response);

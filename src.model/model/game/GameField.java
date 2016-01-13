@@ -666,4 +666,104 @@ public class GameField {
 			System.err.println("Wrong player send to method 'returnPositionsForEvolving'!");
 		return posList;
 	}
+
+	public void replacePosition(Position position) {
+		switch (position.getPositionID()) {
+		case BLUE_ACTIVEPOKEMON:
+			this.blueActive = position;
+			break;
+		case BLUE_BENCH_1:
+			this.blueBench1 = position;
+			break;
+		case BLUE_BENCH_2:
+			this.blueBench2 = position;
+			break;
+		case BLUE_BENCH_3:
+			this.blueBench3 = position;
+			break;
+		case BLUE_BENCH_4:
+			this.blueBench4 = position;
+			break;
+		case BLUE_BENCH_5:
+			this.blueBench5 = position;
+			break;
+		case BLUE_DECK:
+			this.blueDeck = position;
+			break;
+		case BLUE_DISCARDPILE:
+			this.blueDiscardPile = position;
+			break;
+		case BLUE_HAND:
+			this.blueHand = position;
+			break;
+		case BLUE_PRICE_1:
+			this.bluePrice1 = position;
+			break;
+		case BLUE_PRICE_2:
+			this.bluePrice2 = position;
+			break;
+		case BLUE_PRICE_3:
+			this.bluePrice3 = position;
+			break;
+		case BLUE_PRICE_4:
+			this.bluePrice4 = position;
+			break;
+		case BLUE_PRICE_5:
+			this.bluePrice5 = position;
+			break;
+		case BLUE_PRICE_6:
+			this.bluePrice6 = position;
+			break;
+		case RED_ACTIVEPOKEMON:
+			this.redActive = position;
+			break;
+		case RED_BENCH_1:
+			this.redBench1 = position;
+			break;
+		case RED_BENCH_2:
+			this.redBench2 = position;
+			break;
+		case RED_BENCH_3:
+			this.redBench3 = position;
+			break;
+		case RED_BENCH_4:
+			this.redBench4 = position;
+			break;
+		case RED_BENCH_5:
+			this.redBench5 = position;
+			break;
+		case RED_DECK:
+			this.redDeck = position;
+			break;
+		case RED_DISCARDPILE:
+			this.redDiscardPile = position;
+			break;
+		case RED_HAND:
+			this.redHand = position;
+			break;
+		case RED_PRICE_1:
+			this.redPrice1 = position;
+			break;
+		case RED_PRICE_2:
+			this.redPrice2 = position;
+			break;
+		case RED_PRICE_3:
+			this.redPrice3 = position;
+			break;
+		case RED_PRICE_4:
+			this.redPrice4 = position;
+			break;
+		case RED_PRICE_5:
+			this.redPrice5 = position;
+			break;
+		case RED_PRICE_6:
+			this.redPrice6 = position;
+			break;
+		case STADIUM:
+			this.stadium = position;
+			break;
+		default:
+			throw new IllegalArgumentException("Wrong positionID: " + position.getPositionID());
+		}
+	}
 }

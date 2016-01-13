@@ -359,7 +359,7 @@ public class TurnSimulator implements PokemonGameManager {
 	}
 
 	@Override
-	public GameModelUpdate getGameModelForPlayer(Player player) {
+	public GameModelUpdate getGameModelForPlayer(Player player, int version) {
 		throw new UnsupportedOperationException("getGameModelForPlayer");
 	}
 
