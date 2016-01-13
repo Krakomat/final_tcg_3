@@ -76,7 +76,7 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 		if (powerAllowed) {
 			if (!gameModel.getGameModelParameters().activeEffect("00188", cardGameID()))
 				gameModel.getGameModelParameters().activateEffect("00188", cardGameID());
-		} else {
+		} else if (gameModel.getGameModelParameters().activeEffect("00188", cardGameID())) {
 			gameModel.getGameModelParameters().deactivateEffect("00188", cardGameID());
 		}
 

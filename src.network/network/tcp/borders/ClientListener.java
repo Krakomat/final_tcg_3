@@ -11,7 +11,7 @@ import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 import network.client.Player;
 import network.serialization.TCGSerializer;

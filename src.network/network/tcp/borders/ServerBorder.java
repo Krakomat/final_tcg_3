@@ -16,7 +16,7 @@ import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 import network.client.Player;
 import network.serialization.TCGSerializer;
@@ -27,9 +27,8 @@ import network.tcp.messages.QueryMessage;
 import network.tcp.messages.RespondMessage;
 
 /**
- * Simulates an artificial Player for the game manager. If the game manager
- * calls some operation on the player, it is being send to the respective hosted
- * connection, which receives the message via the client listener.
+ * Simulates an artificial Player for the game manager. If the game manager calls some operation on the player, it is being send to the respective hosted connection, which receives
+ * the message via the client listener.
  * 
  * @author Michael
  *

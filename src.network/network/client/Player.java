@@ -10,7 +10,7 @@ import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 
 /**
@@ -22,8 +22,7 @@ import model.interfaces.Position;
 public interface Player extends Account {
 
 	/**
-	 * Notifies the player, that the game has started. The player has to start
-	 * his view.
+	 * Notifies the player, that the game has started. The player has to start his view.
 	 */
 	public void startGame();
 
@@ -38,8 +37,7 @@ public interface Player extends Account {
 	 * @param cards
 	 * @param amount
 	 * @param exact
-	 *            true, if the player has to choose the exact amount of cards
-	 *            given.
+	 *            true, if the player has to choose the exact amount of cards given.
 	 * @param message
 	 * @return
 	 */
@@ -51,8 +49,7 @@ public interface Player extends Account {
 	 * @param list
 	 * @param amount
 	 * @param exact
-	 *            true, if the player has to choose the exact amount of
-	 *            positions given.
+	 *            true, if the player has to choose the exact amount of positions given.
 	 * @param message
 	 * @return
 	 */
@@ -64,8 +61,7 @@ public interface Player extends Account {
 	 * @param elements
 	 * @param amount
 	 * @param exact
-	 *            true, if the player has to choose the exact amount of elements
-	 *            given.
+	 *            true, if the player has to choose the exact amount of elements given.
 	 * @param message
 	 * @return
 	 */
@@ -79,16 +75,14 @@ public interface Player extends Account {
 	 * @param attacks
 	 * @param amount
 	 * @param exact
-	 *            true, if the player has to choose the exact amount of attacks
-	 *            given.
+	 *            true, if the player has to choose the exact amount of attacks given.
 	 * @param message
 	 * @return
 	 */
 	public List<String> playerChoosesAttacks(List<Card> attackOwner, List<String> attacks, int amount, boolean exact, String message);
 
 	/**
-	 * This player has to choose a set out of the given energy cards, such that
-	 * the given costs can be payed with this set.
+	 * This player has to choose a set out of the given energy cards, such that the given costs can be payed with this set.
 	 * 
 	 * @param costs
 	 *            costs
@@ -99,8 +93,7 @@ public interface Player extends Account {
 	public List<Card> playerPaysEnergyCosts(List<Element> costs, List<Card> energyCards);
 
 	/**
-	 * The player receives a game message from the server. He displays this
-	 * message in his view.
+	 * The player receives a game message from the server. He displays this message in his view.
 	 * 
 	 * @param message
 	 * @param sound
@@ -109,9 +102,8 @@ public interface Player extends Account {
 	public void playerReceivesGameTextMessage(String message, String sound);
 
 	/**
-	 * The player receives a game message from the server. He displays this
-	 * message in his view using the given card. For example the card can be
-	 * displayed along with the message in the center of the view.
+	 * The player receives a game message from the server. He displays this message in his view using the given card. For example the card can be displayed along with the message
+	 * in the center of the view.
 	 * 
 	 * @param message
 	 * @param card
@@ -119,10 +111,8 @@ public interface Player extends Account {
 	public void playerReceivesCardMessage(String message, Card card, String sound);
 
 	/**
-	 * The player receives a game message from the server. He displays this
-	 * message in his view using the given card list. For example the cards can
-	 * be displayed along with the message in the center of the view using
-	 * arrows between the card images.
+	 * The player receives a game message from the server. He displays this message in his view using the given card list. For example the cards can be displayed along with the
+	 * message in the center of the view using arrows between the card images.
 	 * 
 	 * @param message
 	 * @param cardList
@@ -132,8 +122,7 @@ public interface Player extends Account {
 	public void playerReceivesCardMessage(String message, List<Card> cardList, String sound);
 
 	/**
-	 * The player updates his representation of the game field with the given
-	 * game field.
+	 * The player updates his representation of the game field with the given game field.
 	 * 
 	 * @param gameModelUpdate
 	 * @param sound
@@ -162,9 +151,8 @@ public interface Player extends Account {
 	public void setColor(Color color);
 
 	/**
-	 * The player receives a message from the {@link PokemonGameManager} that
-	 * the game the player is currently in has been deleted. Therefore this
-	 * player updated his view to the main lobby.
+	 * The player receives a message from the {@link PokemonGameManager} that the game the player is currently in has been deleted. Therefore this player updated his view to the
+	 * main lobby.
 	 */
 	public void receiveGameDeleted();
 
@@ -197,9 +185,8 @@ public interface Player extends Account {
 	public void playerReceivesSound(String sound);
 
 	/**
-	 * The player receives an animation and has to delegate this object to its
-	 * gui, in order to play the animation. After the animation is finished, the
-	 * player sends a {@link RespondMessage} to the server.
+	 * The player receives an animation and has to delegate this object to its gui, in order to play the animation. After the animation is finished, the player sends a
+	 * {@link RespondMessage} to the server.
 	 * 
 	 * @param animation
 	 */

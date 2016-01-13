@@ -21,7 +21,7 @@ import model.enums.GameState;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.interfaces.GameField;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
@@ -92,7 +92,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 * @return
 	 */
 	public LocalPokemonGameModel copy() {
-		GameModelUpdate update = new GameModelUpdateImpl();
+		GameModelUpdate update = new GameModelUpdate();
 		List<Position> pList = new ArrayList<>();
 		for (Position position : gameField.getAllPositions())
 			pList.add(position.copy());

@@ -18,7 +18,7 @@ import model.enums.PositionID;
 import model.enums.Sounds;
 import model.enums.TurnState;
 import model.game.LocalPokemonGameModel;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
 import model.scripting.abstracts.PokemonCardScript;

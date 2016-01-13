@@ -18,7 +18,7 @@ import common.utilities.Triple;
 import network.serialization.TCGSerializer;
 import network.tcp.messages.ByteString;
 import model.enums.GameState;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 
 public class GameModelParameters {
 	private int turnNumber;

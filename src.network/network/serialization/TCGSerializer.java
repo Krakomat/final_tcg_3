@@ -31,9 +31,8 @@ import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.enums.Rarity;
 import model.game.GameModelParameters;
-import model.game.GameModelUpdateImpl;
 import model.game.PositionImpl;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 import network.tcp.messages.ByteString;
@@ -836,7 +835,7 @@ public class TCGSerializer {
 	public GameModelUpdate unpackGameModelUpdate(ByteString b) throws IOException {
 		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
 
-		GameModelUpdate update = new GameModelUpdateImpl();
+		GameModelUpdate update = new GameModelUpdate();
 
 		ByteString gameModelParameters = unpackByteString(unpacker);
 		update.setGameModelParameters(new GameModelParameters(gameModelParameters));

@@ -76,7 +76,7 @@ public class Script_00153_Aerodactyl extends PokemonCardScript {
 		if (powerAllowed) {
 			if (!gameModel.getGameModelParameters().activeEffect("00153", cardGameID()))
 				gameModel.getGameModelParameters().activateEffect("00153", cardGameID());
-		} else {
+		} else if (gameModel.getGameModelParameters().activeEffect("00153", cardGameID())) {
 			gameModel.getGameModelParameters().deactivateEffect("00153", cardGameID());
 		}
 	}

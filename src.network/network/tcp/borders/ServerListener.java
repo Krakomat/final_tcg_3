@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import network.client.Player;
 import network.serialization.TCGSerializer;
 import network.server.PokemonGameManager;

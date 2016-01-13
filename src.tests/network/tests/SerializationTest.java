@@ -16,9 +16,8 @@ import model.enums.Color;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
-import model.game.GameModelUpdateImpl;
 import model.game.PositionImpl;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 import network.serialization.TCGSerializer;
 import network.tcp.messages.ByteString;
@@ -90,7 +89,7 @@ public class SerializationTest {
 			positionList.add(pos);
 		}
 
-		update = new GameModelUpdateImpl();
+		update = new GameModelUpdate();
 		update.setPositionList(positionList);
 		
 		deck = new Deck();

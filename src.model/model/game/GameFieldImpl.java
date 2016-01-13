@@ -9,7 +9,7 @@ import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.PositionID;
 import model.interfaces.GameField;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 
 public class GameFieldImpl implements GameField {

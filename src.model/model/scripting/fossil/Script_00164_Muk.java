@@ -76,7 +76,7 @@ public class Script_00164_Muk extends PokemonCardScript {
 		if (powerAllowed) {
 			if (!gameModel.getGameModelParameters().activeEffect("00164", cardGameID()))
 				gameModel.getGameModelParameters().activateEffect("00164", cardGameID());
-		} else {
+		} else if (gameModel.getGameModelParameters().activeEffect("00164", cardGameID())) {
 			gameModel.getGameModelParameters().deactivateEffect("00164", cardGameID());
 		}
 	}

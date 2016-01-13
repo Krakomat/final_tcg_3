@@ -10,7 +10,7 @@ import com.jme3.network.HostedConnection;
 import com.jme3.network.Network;
 
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import network.client.Player;
 import network.serialization.TCGSerializer;
 import network.server.PokemonGameManager;

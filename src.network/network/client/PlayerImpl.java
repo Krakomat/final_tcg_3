@@ -23,7 +23,7 @@ import model.enums.Element;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 
 public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommunication {

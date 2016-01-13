@@ -17,7 +17,7 @@ import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 
 /**

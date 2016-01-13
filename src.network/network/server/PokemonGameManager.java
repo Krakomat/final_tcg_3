@@ -9,7 +9,7 @@ import network.tcp.borders.ServerListener;
 import model.enums.Color;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 
 /**
  * The pokemon game manager provides the api to the clients and controls the game flow. This is by convention the only class, that can execute a wait()-operation.

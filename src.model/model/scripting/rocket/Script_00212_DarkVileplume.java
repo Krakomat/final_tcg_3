@@ -76,7 +76,7 @@ public class Script_00212_DarkVileplume extends PokemonCardScript {
 		if (powerAllowed) {
 			if (!gameModel.getGameModelParameters().activeEffect("00212", cardGameID()))
 				gameModel.getGameModelParameters().activateEffect("00212", cardGameID());
-		} else {
+		} else if (gameModel.getGameModelParameters().activeEffect("00212", cardGameID())) {
 			gameModel.getGameModelParameters().deactivateEffect("00212", cardGameID());
 		}
 	}

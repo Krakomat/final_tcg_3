@@ -20,7 +20,7 @@ import model.enums.Color;
 import model.enums.DistributionMode;
 import model.enums.Element;
 import model.enums.PositionID;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.Position;
 import network.client.Player;
 import network.server.PokemonGameManager;
@@ -211,8 +211,8 @@ public class PlayerSimulator implements Player {
 			}
 		}
 
-		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: "
-				+ chosenCards + " AvailableCards: " + copyOfAvailableCards + " colorlessAtStart: " + colorlessAtStart + ", colorless: " + colorless);
+		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: " + chosenCards
+				+ " AvailableCards: " + copyOfAvailableCards + " colorlessAtStart: " + colorlessAtStart + ", colorless: " + colorless);
 		return chosenCards;
 	}
 
@@ -369,7 +369,7 @@ public class PlayerSimulator implements Player {
 
 	@Override
 	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters) {
-		
+
 	}
 
 	@Override
@@ -379,11 +379,11 @@ public class PlayerSimulator implements Player {
 
 	@Override
 	public void setUnlockedCards(List<String> unlockedCards) {
-		
+
 	}
 
 	@Override
 	public void setBotDifficulty(int diff) {
-		
+
 	}
 }

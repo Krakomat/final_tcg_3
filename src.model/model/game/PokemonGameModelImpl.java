@@ -22,7 +22,7 @@ import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.enums.Sounds;
 import model.interfaces.GameField;
-import model.interfaces.GameModelUpdate;
+import model.game.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.CardScriptFactory;
@@ -906,7 +906,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	public GameModelUpdate getGameModelForPlayer(Player player) {
-		GameModelUpdate gameModelUpdate = new GameModelUpdateImpl();
+		GameModelUpdate gameModelUpdate = new GameModelUpdate();
 		gameModelUpdate.setGameModelParameters(gameModelParameters);
 
 		Card dummyCard = new Card();
