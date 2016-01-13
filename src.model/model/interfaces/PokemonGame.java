@@ -13,6 +13,7 @@ import model.enums.GameState;
 import model.enums.PositionID;
 import model.game.AttackAction;
 import model.game.AttackCondition;
+import model.game.GameField;
 import model.game.GameModelParameters;
 import model.game.GameModelUpdate;
 

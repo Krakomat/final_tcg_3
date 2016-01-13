@@ -69,8 +69,7 @@ public interface Position {
 	public boolean isEvolved();
 
 	/**
-	 * Returns a list of the energy that is on this position. This does not need to be equal to the amount of energy cards(consider 2xcolorless energy, or
-	 * electrode).
+	 * Returns a list of the energy that is on this position. This does not need to be equal to the amount of energy cards(consider 2xcolorless energy, or electrode).
 	 * 
 	 * @return
 	 */
@@ -199,4 +198,8 @@ public interface Position {
 	 * @return
 	 */
 	public Integer getAmountOfEnergy(Element ele);
+
+	public boolean isChanged();
+
+	public void setChanged(boolean flag);
 }

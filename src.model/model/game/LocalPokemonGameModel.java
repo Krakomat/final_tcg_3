@@ -20,7 +20,6 @@ import model.enums.Color;
 import model.enums.GameState;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
-import model.interfaces.GameField;
 import model.game.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -54,7 +53,7 @@ public class LocalPokemonGameModel implements PokemonGame {
 	 */
 	public LocalPokemonGameModel(GameModelUpdate gameModelUpdate, Player client, PokemonGameManager server) {
 		this.gameModelParameters = new GameModelParameters(gameModelUpdate);
-		this.gameField = new GameFieldImpl(gameModelUpdate);
+		this.gameField = new GameField(gameModelUpdate);
 		this.gameID = 0; // just a default id
 		this.playerOnTurn = client;
 		this.server = server;

@@ -21,7 +21,7 @@ import model.enums.GameState;
 import model.game.GameModelUpdate;
 
 public class GameModelParameters {
-	private int turnNumber;
+	private int gameModelVersion, turnNumber;
 	private GameState gameState;
 	private boolean energyPlayed, retreatExecuted;
 	private boolean noEnergyPayment, activated_00296_Misty, vermillionCityGymAttackModifier;
@@ -33,6 +33,7 @@ public class GameModelParameters {
 
 	public GameModelParameters() {
 		gameState = GameState.PREGAME;
+		gameModelVersion = 0;
 		turnNumber = 0;
 		energyPlayed = false;
 		retreatExecuted = false;
@@ -48,6 +49,7 @@ public class GameModelParameters {
 	}
 
 	public GameModelParameters(GameModelUpdate gameModelUpdate) {
+		this.setGameModelVersion(gameModelUpdate.getGameModelParameters().getGameModelVersion());
 		this.setTurnNumber(gameModelUpdate.getGameModelParameters().getTurnNumber());
 		this.setGameState(gameModelUpdate.getGameModelParameters().getGameState());
 		this.setEnergyPlayed(gameModelUpdate.getGameModelParameters().isEnergyPlayed());
@@ -80,6 +82,7 @@ public class GameModelParameters {
 
 	public GameModelParameters copy() {
 		GameModelParameters copy = new GameModelParameters();
+		copy.setGameModelVersion(gameModelVersion);
 		copy.setTurnNumber(turnNumber);
 		copy.setEnergyPlayed(energyPlayed);
 		copy.setGameState(gameState);
@@ -111,8 +114,12 @@ public class GameModelParameters {
 		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(b.asInputStream());
 		TCGSerializer serializer = new TCGSerializer();
 
-		// Turn Number:
+		// gameModelVersion:
 		ByteString bString = serializer.unpackByteString(unpacker);
+		this.gameModelVersion = serializer.unpackInt(bString);
+
+		// Turn Number:
+		bString = serializer.unpackByteString(unpacker);
 		this.turnNumber = serializer.unpackInt(bString);
 
 		// GameState:
@@ -170,6 +177,11 @@ public class GameModelParameters {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		MessagePacker packer = MessagePack.newDefaultPacker(out);
 		TCGSerializer serializer = new TCGSerializer();
+
+		// Turn Number:
+		ByteString version = serializer.packInt(gameModelVersion);
+		packer.packBinaryHeader(version.length());
+		packer.writePayload(version.copyAsBytes());
 
 		// Turn Number:
 		ByteString turn = serializer.packInt(turnNumber);
@@ -238,6 +250,14 @@ public class GameModelParameters {
 
 		packer.close();
 		return new ByteString(out.toByteArray());
+	}
+
+	public int getGameModelVersion() {
+		return gameModelVersion;
+	}
+
+	public void setGameModelVersion(int gameModelVersion) {
+		this.gameModelVersion = gameModelVersion;
 	}
 
 	public int getTurnNumber() {

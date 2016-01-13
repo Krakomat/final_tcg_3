@@ -8,21 +8,20 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.PositionID;
-import model.interfaces.GameField;
 import model.game.GameModelUpdate;
 import model.interfaces.Position;
 
-public class GameFieldImpl implements GameField {
+public class GameField {
 
 	private Position blueHand, blueBench1, blueBench2, blueBench3, blueBench4, blueBench5, blueActive, blueDiscardPile, bluePrice1, bluePrice2, bluePrice3, bluePrice4, bluePrice5,
 			bluePrice6, blueDeck, redHand, redBench1, redBench2, redBench3, redBench4, redBench5, redActive, redDiscardPile, redPrice1, redPrice2, redPrice3, redPrice4, redPrice5,
 			redPrice6, redDeck, stadium;
 
-	public GameFieldImpl() {
+	public GameField() {
 		initPositions();
 	}
 
-	public GameFieldImpl(GameModelUpdate gameModelUpdate) {
+	public GameField(GameModelUpdate gameModelUpdate) {
 		blueHand = gameModelUpdate.getPosition(PositionID.BLUE_HAND);
 		blueBench1 = gameModelUpdate.getPosition(PositionID.BLUE_BENCH_1);
 		blueBench2 = gameModelUpdate.getPosition(PositionID.BLUE_BENCH_2);
@@ -95,6 +94,44 @@ public class GameFieldImpl implements GameField {
 	}
 
 	public ArrayList<Position> getAllPositions() {
+		ArrayList<Position> list = new ArrayList<Position>();
+		list.add(blueHand);
+		list.add(blueBench1);
+		list.add(blueBench2);
+		list.add(blueBench3);
+		list.add(blueBench4);
+		list.add(blueBench5);
+		list.add(blueActive);
+		list.add(blueDiscardPile);
+		list.add(bluePrice1);
+		list.add(bluePrice2);
+		list.add(bluePrice3);
+		list.add(bluePrice4);
+		list.add(bluePrice5);
+		list.add(bluePrice6);
+		list.add(blueDeck);
+
+		list.add(redHand);
+		list.add(redBench1);
+		list.add(redBench2);
+		list.add(redBench3);
+		list.add(redBench4);
+		list.add(redBench5);
+		list.add(redActive);
+		list.add(redDiscardPile);
+		list.add(redPrice1);
+		list.add(redPrice2);
+		list.add(redPrice3);
+		list.add(redPrice4);
+		list.add(redPrice5);
+		list.add(redPrice6);
+		list.add(redDeck);
+
+		list.add(stadium);
+		return list;
+	}
+
+	public ArrayList<Position> getChangedPositions() {
 		ArrayList<Position> list = new ArrayList<Position>();
 		list.add(blueHand);
 		list.add(blueBench1);
@@ -372,17 +409,14 @@ public class GameFieldImpl implements GameField {
 		this.redPrice6 = redPrice6;
 	}
 
-	@Override
 	public Position getStadium() {
 		return stadium;
 	}
 
-	@Override
 	public void setStadium(Position stadium) {
 		this.stadium = stadium;
 	}
 
-	@Override
 	public ArrayList<PositionID> getNonEmptyPriceList(Color color) {
 		ArrayList<PositionID> posList = new ArrayList<>();
 		if (color == Color.BLUE) {
@@ -415,7 +449,6 @@ public class GameFieldImpl implements GameField {
 		return posList;
 	}
 
-	@Override
 	public List<PositionID> getEmptyPriceList(Color color) {
 		ArrayList<PositionID> posList = new ArrayList<>();
 		if (color == Color.BLUE) {
@@ -448,7 +481,6 @@ public class GameFieldImpl implements GameField {
 		return posList;
 	}
 
-	@Override
 	public Position getPosition(PositionID posID) {
 		switch (posID) {
 		case BLUE_ACTIVEPOKEMON:
@@ -518,7 +550,6 @@ public class GameFieldImpl implements GameField {
 		}
 	}
 
-	@Override
 	public ArrayList<PositionID> getFullBenchPositions(Color playerColor, Player playerBlue, Player playerRed) {
 		ArrayList<PositionID> positionList = new ArrayList<PositionID>();
 		if (playerBlue.getColor() == playerColor) {
@@ -548,7 +579,6 @@ public class GameFieldImpl implements GameField {
 		return positionList;
 	}
 
-	@Override
 	public ArrayList<PositionID> getFullArenaPositions(Color playerColor, Player playerBlue, Player playerRed) {
 		ArrayList<PositionID> positionList = new ArrayList<PositionID>();
 		if (playerBlue.getColor() == playerColor) {
@@ -582,7 +612,6 @@ public class GameFieldImpl implements GameField {
 		return positionList;
 	}
 
-	@Override
 	public ArrayList<PositionID> getPositionsForEvolving(PokemonCard c, Color color, int turnNumber) {
 		ArrayList<PositionID> posList = new ArrayList<PositionID>();
 		if (color == Color.BLUE) {

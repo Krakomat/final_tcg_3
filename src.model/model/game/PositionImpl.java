@@ -19,13 +19,14 @@ public class PositionImpl implements Position {
 	private PositionID positionID;
 	private List<Card> cards;
 	private Color color;
-	private boolean visibleForPlayerBlue, visibleForPlayerRed;
+	private boolean visibleForPlayerBlue, visibleForPlayerRed, changed;
 
 	/**
 	 * Only used for serialization!
 	 */
 	public PositionImpl() {
 		cards = new ArrayList<Card>();
+		changed = true;
 	}
 
 	public PositionImpl(PositionID id, Color color) {
@@ -34,6 +35,7 @@ public class PositionImpl implements Position {
 		this.color = color;
 		visibleForPlayerBlue = false;
 		visibleForPlayerRed = false;
+		changed = true;
 	}
 
 	@Override
@@ -60,6 +62,7 @@ public class PositionImpl implements Position {
 
 	public void addToPosition(Card card) {
 		this.cards.add(card);
+		changed = true;
 	}
 
 	public Card getTopCard() {
@@ -69,8 +72,10 @@ public class PositionImpl implements Position {
 	}
 
 	public boolean removeFromPosition(Card value) {
-		if (this.cards.contains(value))
+		if (this.cards.contains(value)) {
+			changed = true;
 			return this.cards.remove(value);
+		}
 		return false;
 	}
 
@@ -95,6 +100,7 @@ public class PositionImpl implements Position {
 			hList.add(c);
 		}
 		cards = hList;
+		changed = true;
 	}
 
 	public int size() {
@@ -171,6 +177,7 @@ public class PositionImpl implements Position {
 	@Override
 	public void setPositionID(PositionID id) {
 		this.positionID = id;
+		changed = true;
 	}
 
 	public List<Card> getCards() {
@@ -179,6 +186,7 @@ public class PositionImpl implements Position {
 
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
+		changed = true;
 	}
 
 	@Override
@@ -201,6 +209,7 @@ public class PositionImpl implements Position {
 			else
 				cards.get(i).setVisibleForPlayerRed(value);
 		}
+		changed = true;
 	}
 
 	public Color getColor() {
@@ -209,12 +218,14 @@ public class PositionImpl implements Position {
 
 	public void setColor(Color color) {
 		this.color = color;
+		changed = true;
 	}
 
 	@Override
 	public Card removeTopCard() {
 		if (this.isEmpty())
 			return null;
+		changed = true;
 		return this.cards.remove(this.size() - 1);
 	}
 
@@ -225,5 +236,15 @@ public class PositionImpl implements Position {
 			if (((EnergyCard) e).getProvidedEnergy().contains(ele))
 				counter++;
 		return counter;
+	}
+
+	@Override
+	public boolean isChanged() {
+		return changed;
+	}
+
+	@Override
+	public void setChanged(boolean flag) {
+		this.changed = flag;
 	}
 }

@@ -21,7 +21,6 @@ import model.enums.GameState;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.enums.Sounds;
-import model.interfaces.GameField;
 import model.game.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -53,7 +52,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		playerOnTurn = null;
 		playerRed = null;
 		playerBlue = null;
-		gameField = new GameFieldImpl();
+		gameField = new GameField();
 		cardMap = new HashMap<>();
 		attackCondition = new AttackCondition(this);
 		attackAction = new AttackAction(this);
@@ -63,7 +62,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	@Override
 	public void initNewGame() {
-		this.gameField = new GameFieldImpl();
+		this.gameField = new GameField();
 		this.cardGameIDCounter = 0;
 		List<Card> blueCards = getDeckInstance(playerBlue.getDeck());
 		List<Card> redCards = getDeckInstance(playerRed.getDeck());
@@ -859,6 +858,9 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	private void sendGameModelToPlayers(List<Player> playerList, String sound) {
+		// Increase version:
+		this.gameModelParameters.setGameModelVersion(gameModelParameters.getGameModelVersion() + 1);
+
 		for (Player p : playerList) {
 			GameModelUpdate updateModel = this.getGameModelForPlayer(p);
 			p.playerUpdatesGameModel(updateModel, sound);
@@ -874,9 +876,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 		for (Player p : playerList)
 			p.playerReceivesSound(sound);
 	}
-
-	// ------------------------------------------------/GameServer
-	// Methods-------------------------------------------------------------------
 
 	// ------------------------------------------------Get/Set-Methods-----------------------------------------------------------------------
 
@@ -910,7 +909,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		gameModelUpdate.setGameModelParameters(gameModelParameters);
 
 		Card dummyCard = new Card();
-		for (Position pos : gameField.getAllPositions()) {
+		for (Position pos : gameField.getChangedPositions()) {
 			Position position = new PositionImpl(pos.getPositionID(), pos.getColor());
 			position.setVisible(pos.isVisibleForPlayer(Color.BLUE), Color.BLUE);
 			position.setVisible(pos.isVisibleForPlayer(Color.RED), Color.RED);
