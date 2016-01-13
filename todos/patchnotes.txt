@@ -2,6 +2,7 @@ Patch 4.5
 	Network:
 		- Significantly lowered the amount of data that is send in a single game model update
 	Game:
+		- Added new icons for pokemon conditions
 		- The game model will be send out after an active pokemon power has been activated
 		- 00146_Oddish: Fixed the costs of Sprout
 		- 00022_Tauboga: Mirror Move is now being stored server side wise

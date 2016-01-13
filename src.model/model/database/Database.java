@@ -285,7 +285,7 @@ public class Database {
 		confused.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.CONFUSED.toString(), confused);
 
-		TextureKey poisoned = new TextureKey("/tilesets/conditions/vergiftet.gif");
+		TextureKey poisoned = new TextureKey("/tilesets/conditions/vergiftet.png");
 		poisoned.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.POISONED.toString(), poisoned);
 
