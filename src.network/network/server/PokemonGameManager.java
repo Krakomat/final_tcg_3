@@ -146,4 +146,11 @@ public interface PokemonGameManager {
 	 * @param playerImpl
 	 */
 	public void activateStadium(Player playerImpl);
+
+	/**
+	 * Returns the current version of the game model.
+	 * 
+	 * @return
+	 */
+	public int getGameModelVersion();
 }

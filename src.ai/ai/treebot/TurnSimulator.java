@@ -376,4 +376,9 @@ public class TurnSimulator implements PokemonGameManager {
 	public void surrender(Player player) {
 
 	}
+
+	@Override
+	public int getGameModelVersion() {
+		return this.gameModel.getGameModelParameters().getGameModelVersion();
+	}
 }

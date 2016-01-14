@@ -222,6 +222,21 @@ public class ClientBorder implements PokemonGameManager {
 		return null;
 	}
 
+	@Override
+	public int getGameModelVersion() {
+		List<ByteString> parameters = new ArrayList<>();
+		QueryMessage message = new QueryMessage(Method.SERVER_GET_GAME_MODEL_VERSION, parameters);
+		message.logSendMessage("ClientBorder");
+		this.respondMessage = null;
+		myClient.send(message);
+
+		this.waitForResponse();
+
+		RespondMessage response = this.respondMessage;
+		response.logSendMessage("ClientBorder");
+		return serializer.unpackInt(response.getParameters().get(0));
+	}
+
 	public void setRespondMessage(RespondMessage respondMessage) {
 		this.respondMessage = respondMessage;
 	}

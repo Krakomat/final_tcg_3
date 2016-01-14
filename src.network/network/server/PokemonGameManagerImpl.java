@@ -555,4 +555,9 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	public void setListener(ServerListener listener) {
 		this.serverListener = listener;
 	}
+
+	@Override
+	public int getGameModelVersion() {
+		return this.gameModel.getGameModelParameters().getGameModelVersion();
+	}
 }

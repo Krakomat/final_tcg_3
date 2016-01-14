@@ -108,6 +108,12 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 			GameModelUpdate gameModelUpdate = server.getGameModelForPlayer(self, -2); // Get full game model
 			return new LocalPokemonGameModel(gameModelUpdate, this);
 		}
+		int version = server.getGameModelVersion();
+		if (version != localGameModel.getGameModelParameters().getGameModelVersion()) {
+			System.out.println("Versions(" + version + ", " + localGameModel.getGameModelParameters().getGameModelVersion() + ") do not match --> get fresh game model: ");
+			GameModelUpdate gameModelUpdate = server.getGameModelForPlayer(self, -2); // Get full game model
+			return new LocalPokemonGameModel(gameModelUpdate, this);
+		}
 		return this.localGameModel;
 	}
 

@@ -127,6 +127,12 @@ public class ServerListener implements MessageListener<HostedConnection> {
 					player = this.connectionMap.get(source.getId());
 					this.gameManager.surrender(player);
 					break;
+				case SERVER_GET_GAME_MODEL_VERSION:
+					version = gameManager.getGameModelVersion();
+
+					response = new RespondMessage(qMessage.getMethod(), serializer.packInt(version));
+					server.broadcast(Filters.in(source), response);
+					break;
 				default:
 					try {
 						throw new IOException("Wrong Method type at ServerListener: " + qMessage.getMethod());
