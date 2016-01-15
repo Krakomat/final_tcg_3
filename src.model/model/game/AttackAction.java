@@ -209,68 +209,68 @@ public class AttackAction {
 					defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
 					defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
 					defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case BLIND:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case CONFUSED:
 					defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
 					defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
 					defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case DAMAGEINCREASE10:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 1));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 1));
 					break;
 				case DESTINY:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case HARDEN30:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case HARDEN20:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case INVULNERABLE:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case KNOCKOUT:
 					defenderPokemon.getConditions().clear(); // Remove all other
 																// conditions
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case NO_DAMAGE:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case PARALYZED:
 					defenderPokemon.cureCondition(PokemonCondition.ASLEEP);
 					defenderPokemon.cureCondition(PokemonCondition.CONFUSED);
 					defenderPokemon.cureCondition(PokemonCondition.PARALYZED);
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case POISONED:
 					if (defenderPokemon.hasCondition(PokemonCondition.POISONED))
 						this.cureCondition(targetPosition, PokemonCondition.POISONED);
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case TOXIC:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case RETALIATION:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case POKEMON_POWER_BLOCK:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case BROCKS_PROTECTION:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 9999));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 					break;
 				case NO_ENERGY:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				case HALF_DAMAGE:
-					defenderPokemon.getConditions().add(new DynamicPokemonCondition(condition, 2));
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
 				default:
 					break;
@@ -298,6 +298,7 @@ public class AttackAction {
 				i--;
 			}
 		}
+		gameModel.getPosition(posID).setChanged(true);
 	}
 
 	/**

@@ -657,8 +657,10 @@ public class PokemonGameModelImpl implements PokemonGame {
 			}
 		}
 		// Remove conditions:
-		for (DynamicPokemonCondition condition : removedConditions)
+		for (DynamicPokemonCondition condition : removedConditions) {
 			pokemon.getConditions().remove(condition);
+			pos.setChanged(true);
+		}
 
 		this.sendGameModelToPlayers(getPlayerList(), "");
 	}
@@ -713,7 +715,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 				if (c == Coin.HEADS) {
 					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " woke up...", "");
 					// Remove condition:
-					pokemon.getConditions().remove(asleepCondition);
+					pokemon.cureCondition(asleepCondition.getCondition());
 					this.sendGameModelToPlayers(getPlayerList(), "");
 				} else
 					this.sendTextMessageToPlayers(this.getPlayerList(), pokemon.getName() + " is still sleeping...", "");

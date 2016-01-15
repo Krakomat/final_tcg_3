@@ -294,6 +294,11 @@ public class PokemonCard extends Card {
 		notifiyPosition();
 	}
 
+	public void addCondition(DynamicPokemonCondition condition) {
+		this.conditions.add(condition);
+		this.notifiyPosition();
+	}
+
 	public boolean isPriceValueable() {
 		return priceValueable;
 	}
