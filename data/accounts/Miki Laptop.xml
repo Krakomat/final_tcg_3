@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+    <Name>Miki Laptop</Name>
+    <Password/>
+    <AccountType>REAL_PLAYER</AccountType>
+    <Deck Name="Dark Rain">
+        <Card ID="00207">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>9</Size>
+        </Card>
+        <Card ID="00222">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>13</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00187">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00231">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00253">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00232">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00006">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00216">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00202">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00171">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00174">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00161">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00063">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00250">
+            <Size>4</Size>
+        </Card>
+    </Deck>
+    <DefeatedArenaFighters>
+        <DefeatedFighter ID="MAMORIA_RED"/>
+        <DefeatedFighter ID="MAMORIA_BRENDAN"/>
+        <DefeatedFighter ID="MAMORIA_BROCK"/>
+        <DefeatedFighter ID="AZURIA_LYRA"/>
+        <DefeatedFighter ID="AZURIA_MAY"/>
+        <DefeatedFighter ID="AZURIA_MISTY"/>
+        <DefeatedFighter ID="ORANIA_LEAF"/>
+        <DefeatedFighter ID="ORANIA_NATE"/>
+        <DefeatedFighter ID="ORANIA_LTSURGE"/>
+        <DefeatedFighter ID="PRISMANIA_ROSA"/>
+        <DefeatedFighter ID="PRISMANIA_SERENA"/>
+        <DefeatedFighter ID="PRISMANIA_ERIKA"/>
+    </DefeatedArenaFighters>
+    <UnlockedCards>
+        <UnlockedCard ID="00266"/>
+        <UnlockedCard ID="00267"/>
+        <UnlockedCard ID="00268"/>
+        <UnlockedCard ID="00269"/>
+        <UnlockedCard ID="00270"/>
+        <UnlockedCard ID="00271"/>
+        <UnlockedCard ID="00272"/>
+        <UnlockedCard ID="00273"/>
+        <UnlockedCard ID="00274"/>
+        <UnlockedCard ID="00275"/>
+        <UnlockedCard ID="00276"/>
+        <UnlockedCard ID="00277"/>
+        <UnlockedCard ID="00278"/>
+        <UnlockedCard ID="00279"/>
+        <UnlockedCard ID="00280"/>
+        <UnlockedCard ID="00281"/>
+        <UnlockedCard ID="00282"/>
+        <UnlockedCard ID="00283"/>
+        <UnlockedCard ID="00284"/>
+        <UnlockedCard ID="00285"/>
+        <UnlockedCard ID="00286"/>
+        <UnlockedCard ID="00287"/>
+        <UnlockedCard ID="00288"/>
+        <UnlockedCard ID="00289"/>
+        <UnlockedCard ID="00290"/>
+        <UnlockedCard ID="00291"/>
+        <UnlockedCard ID="00292"/>
+        <UnlockedCard ID="00293"/>
+        <UnlockedCard ID="00294"/>
+        <UnlockedCard ID="00295"/>
+        <UnlockedCard ID="00296"/>
+        <UnlockedCard ID="00297"/>
+        <UnlockedCard ID="00298"/>
+        <UnlockedCard ID="00299"/>
+        <UnlockedCard ID="00300"/>
+        <UnlockedCard ID="00301"/>
+        <UnlockedCard ID="00302"/>
+        <UnlockedCard ID="00303"/>
+        <UnlockedCard ID="00304"/>
+        <UnlockedCard ID="00305"/>
+        <UnlockedCard ID="00306"/>
+        <UnlockedCard ID="00307"/>
+        <UnlockedCard ID="00308"/>
+        <UnlockedCard ID="00309"/>
+        <UnlockedCard ID="00310"/>
+        <UnlockedCard ID="00311"/>
+        <UnlockedCard ID="00312"/>
+        <UnlockedCard ID="00313"/>
+        <UnlockedCard ID="00314"/>
+        <UnlockedCard ID="00315"/>
+        <UnlockedCard ID="00316"/>
+        <UnlockedCard ID="00317"/>
+        <UnlockedCard ID="00318"/>
+        <UnlockedCard ID="00319"/>
+        <UnlockedCard ID="00320"/>
+        <UnlockedCard ID="00321"/>
+        <UnlockedCard ID="00322"/>
+        <UnlockedCard ID="00323"/>
+        <UnlockedCard ID="00324"/>
+        <UnlockedCard ID="00325"/>
+        <UnlockedCard ID="00326"/>
+        <UnlockedCard ID="00327"/>
+        <UnlockedCard ID="00328"/>
+        <UnlockedCard ID="00329"/>
+        <UnlockedCard ID="00330"/>
+        <UnlockedCard ID="00331"/>
+        <UnlockedCard ID="00332"/>
+        <UnlockedCard ID="00333"/>
+        <UnlockedCard ID="00334"/>
+        <UnlockedCard ID="00335"/>
+        <UnlockedCard ID="00336"/>
+        <UnlockedCard ID="00337"/>
+        <UnlockedCard ID="00338"/>
+        <UnlockedCard ID="00339"/>
+        <UnlockedCard ID="00340"/>
+        <UnlockedCard ID="00341"/>
+        <UnlockedCard ID="00342"/>
+        <UnlockedCard ID="00343"/>
+        <UnlockedCard ID="00344"/>
+        <UnlockedCard ID="00345"/>
+        <UnlockedCard ID="00346"/>
+        <UnlockedCard ID="00347"/>
+        <UnlockedCard ID="00348"/>
+        <UnlockedCard ID="00349"/>
+        <UnlockedCard ID="00350"/>
+    </UnlockedCards>
+</Account>
