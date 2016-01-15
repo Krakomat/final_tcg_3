@@ -157,7 +157,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 					Position handPos = localGameModel.getPosition(PositionID.RED_HAND);
 					for (int i = 0; i < handPos.getCards().size(); i++) {
 						List<String> actions = null;
-						actions = localGameModel.getPlayerActions(i, PositionID.BLUE_HAND, self);
+						actions = localGameModel.getPlayerActions(i, PositionID.RED_HAND, self);
 						if (!actions.isEmpty())
 							choosableCards.add(new Pair<Position, Integer>(handPos, i));
 					}
