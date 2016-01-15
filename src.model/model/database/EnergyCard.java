@@ -82,6 +82,7 @@ public class EnergyCard extends Card {
 	 */
 	public void setBasisEnergy(boolean basisEnergy) {
 		this.basisEnergy = basisEnergy;
+		notifiyPosition();
 	}
 
 	/**
@@ -97,5 +98,6 @@ public class EnergyCard extends Card {
 	 */
 	public void setProvidedEnergy(List<Element> providedEnergy) {
 		this.providedEnergy = providedEnergy;
+		notifiyPosition();
 	}
 }

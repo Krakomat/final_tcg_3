@@ -91,21 +91,7 @@ public class PokemonCard extends Card {
 		conditions = new ArrayList<DynamicPokemonCondition>();
 		currentWeakness = weakness;
 		currentResistance = resistance;
-	}
-
-	public ArrayList<PokemonCondition> nextTurn() {
-		// Update conditions:
-		ArrayList<PokemonCondition> curedConditions = new ArrayList<PokemonCondition>();
-		int size = conditions.size();
-		for (int i = size - 1; i >= 0; i--) {
-			DynamicPokemonCondition condition = conditions.get(i);
-			condition.setRemainingTurns(condition.getRemainingTurns() - 1);
-			if (condition.getRemainingTurns() == 0) {
-				conditions.remove(condition);
-				curedConditions.add(condition.getCondition());
-			}
-		}
-		return curedConditions;
+		notifiyPosition();
 	}
 
 	/**
@@ -121,6 +107,7 @@ public class PokemonCard extends Card {
 	 */
 	public void setElement(Element element) {
 		this.element = element;
+		notifiyPosition();
 	}
 
 	/**
@@ -136,6 +123,7 @@ public class PokemonCard extends Card {
 	 */
 	public void setHitpoints(int hitpoints) {
 		this.hitpoints = hitpoints;
+		notifiyPosition();
 	}
 
 	/**
@@ -152,6 +140,7 @@ public class PokemonCard extends Card {
 	public void setWeakness(Element weakness) {
 		this.weakness = weakness;
 		this.currentWeakness = weakness;
+		notifiyPosition();
 	}
 
 	/**
@@ -168,6 +157,7 @@ public class PokemonCard extends Card {
 	public void setResistance(Element resistance) {
 		this.resistance = resistance;
 		this.currentResistance = resistance;
+		notifiyPosition();
 	}
 
 	/**
@@ -183,6 +173,7 @@ public class PokemonCard extends Card {
 	 */
 	public void setRetreatCosts(List<Element> retreatCosts) {
 		this.retreatCosts = retreatCosts;
+		notifiyPosition();
 	}
 
 	/**
@@ -198,6 +189,7 @@ public class PokemonCard extends Card {
 	 */
 	public void setEvolvesFrom(String evolvesFrom) {
 		this.evolvesFrom = evolvesFrom;
+		notifiyPosition();
 	}
 
 	/**
@@ -213,6 +205,7 @@ public class PokemonCard extends Card {
 	 */
 	public void setDamageMarks(int damageMarks) {
 		this.damageMarks = damageMarks;
+		notifiyPosition();
 	}
 
 	/**
@@ -228,6 +221,7 @@ public class PokemonCard extends Card {
 	 */
 	public void setConditions(List<DynamicPokemonCondition> conditions) {
 		this.conditions = conditions;
+		notifiyPosition();
 	}
 
 	public boolean hasCondition(PokemonCondition condition) {
@@ -297,6 +291,7 @@ public class PokemonCard extends Card {
 				conditions.remove(condition);
 			}
 		}
+		notifiyPosition();
 	}
 
 	public boolean isPriceValueable() {
@@ -305,6 +300,7 @@ public class PokemonCard extends Card {
 
 	public void setPriceValueable(boolean priceValueable) {
 		this.priceValueable = priceValueable;
+		notifiyPosition();
 	}
 
 	public Element getCurrentWeakness() {
@@ -313,6 +309,7 @@ public class PokemonCard extends Card {
 
 	public void setCurrentWeakness(Element currentWeakness) {
 		this.currentWeakness = currentWeakness;
+		notifiyPosition();
 	}
 
 	public Element getCurrentResistance() {
@@ -321,6 +318,7 @@ public class PokemonCard extends Card {
 
 	public void setCurrentResistance(Element currentResistance) {
 		this.currentResistance = currentResistance;
+		notifiyPosition();
 	}
 
 	public List<String> getAttackNames() {
@@ -329,6 +327,7 @@ public class PokemonCard extends Card {
 
 	public void setAttackNames(List<String> attackNames) {
 		this.attackNames = attackNames;
+		notifiyPosition();
 	}
 
 	public List<String> getPokemonPowerNames() {
@@ -337,6 +336,7 @@ public class PokemonCard extends Card {
 
 	public void setPokemonPowerNames(List<String> pokemonPowerNames) {
 		this.pokemonPowerNames = pokemonPowerNames;
+		notifiyPosition();
 	}
 
 }

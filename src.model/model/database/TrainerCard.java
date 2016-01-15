@@ -35,5 +35,6 @@ public class TrainerCard extends Card {
 
 	public void setStadiumCard(boolean stadiumCard) {
 		this.stadiumCard = stadiumCard;
+		notifiyPosition();
 	}
 }

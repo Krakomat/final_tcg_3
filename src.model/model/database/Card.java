@@ -35,8 +35,7 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * Copies the given card. The CardScript and Position will not be cloned
-	 * with this.
+	 * Copies the given card. The CardScript and Position will not be cloned with this.
 	 * 
 	 * @return
 	 */
@@ -68,8 +67,7 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * Sets the current position for this card. Also call moveToPosition()
-	 * method of the cards card script, if the position is != null.
+	 * Sets the current position for this card. Also call moveToPosition() method of the cards card script, if the position is != null.
 	 * 
 	 * @param value
 	 */
@@ -84,9 +82,15 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * Sets the current position for this card. WARNING: Do not use this method
-	 * at the server. This method is only being used for the construction of the
-	 * local game model.
+	 * Notifies this cards current position when parameters of this card have been changed in order to correctly update the game model.
+	 */
+	protected void notifiyPosition() {
+		if (this.currentPosition != null)
+			this.currentPosition.setChanged(true);
+	}
+
+	/**
+	 * Sets the current position for this card. WARNING: Do not use this method at the server. This method is only being used for the construction of the local game model.
 	 * 
 	 * @param value
 	 */
@@ -107,6 +111,7 @@ public class Card implements Comparable<Card> {
 	 */
 	public void setName(String name) {
 		this.name = name;
+		notifiyPosition();
 	}
 
 	/**
@@ -137,6 +142,7 @@ public class Card implements Comparable<Card> {
 	 */
 	public void setCardId(String cardId) {
 		this.cardId = cardId;
+		notifiyPosition();
 	}
 
 	/**
@@ -152,6 +158,7 @@ public class Card implements Comparable<Card> {
 	 */
 	public void setGameID(int gameID) {
 		this.gameID = gameID;
+		notifiyPosition();
 	}
 
 	/**
@@ -167,6 +174,7 @@ public class Card implements Comparable<Card> {
 	 */
 	public void setCardType(CardType cardType) {
 		this.cardType = cardType;
+		notifiyPosition();
 	}
 
 	/**
@@ -197,6 +205,7 @@ public class Card implements Comparable<Card> {
 	 */
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+		notifiyPosition();
 	}
 
 	public String toString() {
@@ -218,6 +227,7 @@ public class Card implements Comparable<Card> {
 
 	public void setPlayedInTurn(int playedInTurn) {
 		this.playedInTurn = playedInTurn;
+		notifiyPosition();
 	}
 
 	public boolean isVisibleForPlayerBlue() {
@@ -226,6 +236,7 @@ public class Card implements Comparable<Card> {
 
 	public void setVisibleForPlayerBlue(boolean visibleForPlayerBlue) {
 		this.visibleForPlayerBlue = visibleForPlayerBlue;
+		notifiyPosition();
 	}
 
 	public boolean isVisibleForPlayerRed() {
@@ -234,6 +245,7 @@ public class Card implements Comparable<Card> {
 
 	public void setVisibleForPlayerRed(boolean visibleForPlayerRed) {
 		this.visibleForPlayerRed = visibleForPlayerRed;
+		notifiyPosition();
 	}
 
 	public CardScript getCardScript() {
