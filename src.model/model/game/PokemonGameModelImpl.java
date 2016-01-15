@@ -909,6 +909,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	public GameModelUpdate getGameModelForPlayer(Player player) {
+		System.out.println("Get Game Model for " + player.getName());
 		GameModelUpdate gameModelUpdate = new GameModelUpdate();
 		gameModelUpdate.setGameModelParameters(gameModelParameters);
 

@@ -133,39 +133,70 @@ public class GameField {
 
 	public ArrayList<Position> getChangedPositions() {
 		ArrayList<Position> list = new ArrayList<Position>();
-		list.add(blueHand);
-		list.add(blueBench1);
-		list.add(blueBench2);
-		list.add(blueBench3);
-		list.add(blueBench4);
-		list.add(blueBench5);
-		list.add(blueActive);
-		list.add(blueDiscardPile);
-		list.add(bluePrice1);
-		list.add(bluePrice2);
-		list.add(bluePrice3);
-		list.add(bluePrice4);
-		list.add(bluePrice5);
-		list.add(bluePrice6);
-		list.add(blueDeck);
+		if (blueHand.isChanged())
+			list.add(blueHand);
+		if (blueBench1.isChanged())
+			list.add(blueBench1);
+		if (blueBench2.isChanged())
+			list.add(blueBench2);
+		if (blueBench3.isChanged())
+			list.add(blueBench3);
+		if (blueBench4.isChanged())
+			list.add(blueBench4);
+		if (blueBench5.isChanged())
+			list.add(blueBench5);
+		if (blueActive.isChanged())
+			list.add(blueActive);
+		if (blueDiscardPile.isChanged())
+			list.add(blueDiscardPile);
+		if (bluePrice1.isChanged())
+			list.add(bluePrice1);
+		if (bluePrice2.isChanged())
+			list.add(bluePrice2);
+		if (bluePrice3.isChanged())
+			list.add(bluePrice3);
+		if (bluePrice4.isChanged())
+			list.add(bluePrice4);
+		if (bluePrice5.isChanged())
+			list.add(bluePrice5);
+		if (bluePrice6.isChanged())
+			list.add(bluePrice6);
+		if (blueDeck.isChanged())
+			list.add(blueDeck);
 
-		list.add(redHand);
-		list.add(redBench1);
-		list.add(redBench2);
-		list.add(redBench3);
-		list.add(redBench4);
-		list.add(redBench5);
-		list.add(redActive);
-		list.add(redDiscardPile);
-		list.add(redPrice1);
-		list.add(redPrice2);
-		list.add(redPrice3);
-		list.add(redPrice4);
-		list.add(redPrice5);
-		list.add(redPrice6);
-		list.add(redDeck);
+		if (redHand.isChanged())
+			list.add(redHand);
+		if (redBench1.isChanged())
+			list.add(redBench1);
+		if (redBench2.isChanged())
+			list.add(redBench2);
+		if (redBench3.isChanged())
+			list.add(redBench3);
+		if (redBench4.isChanged())
+			list.add(redBench4);
+		if (redBench5.isChanged())
+			list.add(redBench5);
+		if (redActive.isChanged())
+			list.add(redActive);
+		if (redDiscardPile.isChanged())
+			list.add(redDiscardPile);
+		if (redPrice1.isChanged())
+			list.add(redPrice1);
+		if (redPrice2.isChanged())
+			list.add(redPrice2);
+		if (redPrice3.isChanged())
+			list.add(redPrice3);
+		if (redPrice4.isChanged())
+			list.add(redPrice4);
+		if (redPrice5.isChanged())
+			list.add(redPrice5);
+		if (redPrice6.isChanged())
+			list.add(redPrice6);
+		if (redDeck.isChanged())
+			list.add(redDeck);
 
-		list.add(stadium);
+		if (stadium.isChanged())
+			list.add(stadium);
 		return list;
 	}
 
