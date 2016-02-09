@@ -80,7 +80,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private IngameController ingameController;
 	private LobbyController lobbyController;
 	private ArenaChooseController arenaController;
-	private ArenaController mamoriaArenaController, azuriaArenaController, oraniaArenaController, prismaniaArenaController;
+	private ArenaController mamoriaArenaController, azuriaArenaController, oraniaArenaController, prismaniaArenaController, fuchsaniaArenaController, saffroniaArenaController,
+			zinnoberArenaController, vertaniaArenaController;
 	private DeckEditController deckEditController;
 
 	/** True if this gui is running */
@@ -150,6 +151,27 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				ArenaFighterFactory.createFighter(ArenaFighterCode.PRISMANIA_SERENA), ArenaFighterFactory.createFighter(ArenaFighterCode.PRISMANIA_ERIKA), "Celadon City Gym");
 		prismaniaArenaController.initSceneGraph();
 		guiNode.attachChild(prismaniaArenaController);
+
+		fuchsaniaArenaController = new ArenaController(GUI2DMode.FUCHSANIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.FUCHSANIA_HILBERT),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.FUCHSANIA_LUCAS), ArenaFighterFactory.createFighter(ArenaFighterCode.FUCHSANIA_KOGA), "Fuchsia City Gym");
+		fuchsaniaArenaController.initSceneGraph();
+		guiNode.attachChild(fuchsaniaArenaController);
+
+		saffroniaArenaController = new ArenaController(GUI2DMode.SAFFRONIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.SAFFRONIA_CALEM),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.SAFFRONIA_HILDA), ArenaFighterFactory.createFighter(ArenaFighterCode.SAFFRONIA_SABRINA), "Saffron City Gym");
+		saffroniaArenaController.initSceneGraph();
+		guiNode.attachChild(saffroniaArenaController);
+
+		zinnoberArenaController = new ArenaController(GUI2DMode.ZINNOBERINSEL_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.ZINNOBER_DAWN),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.ZINNOBER_ETHAN), ArenaFighterFactory.createFighter(ArenaFighterCode.ZINNOBER_PYRO), "Cinnabar City Gym");
+		zinnoberArenaController.initSceneGraph();
+		guiNode.attachChild(zinnoberArenaController);
+
+		vertaniaArenaController = new ArenaController(GUI2DMode.VERTANIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.VERTANIA_ROCKET_FEMALE),
+				ArenaFighterFactory.createFighter(ArenaFighterCode.VERTANIA_ROCKET_MALE), ArenaFighterFactory.createFighter(ArenaFighterCode.VERTANIA_GIOVANNI),
+				"Viridian City Gym");
+		vertaniaArenaController.initSceneGraph();
+		guiNode.attachChild(vertaniaArenaController);
 
 		deckEditController = new DeckEditController();
 		deckEditController.initSceneGraph();
@@ -874,6 +896,18 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			case PRISMANIA_CITY_ARENA:
 				this.currentActiveController = this.prismaniaArenaController;
 				break;
+			case FUCHSANIA_CITY_ARENA:
+				this.currentActiveController = this.fuchsaniaArenaController;
+				break;
+			case SAFFRONIA_CITY_ARENA:
+				this.currentActiveController = this.saffroniaArenaController;
+				break;
+			case ZINNOBERINSEL_ARENA:
+				this.currentActiveController = this.zinnoberArenaController;
+				break;
+			case VERTANIA_CITY_ARENA:
+				this.currentActiveController = this.vertaniaArenaController;
+				break;
 			default:
 				break;
 			}
@@ -914,6 +948,18 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		case PRISMANIA_CITY_ARENA:
 			this.nextController = this.prismaniaArenaController;
 			break;
+		case FUCHSANIA_CITY_ARENA:
+			this.nextController = this.fuchsaniaArenaController;
+			break;
+		case SAFFRONIA_CITY_ARENA:
+			this.nextController = this.saffroniaArenaController;
+			break;
+		case ZINNOBERINSEL_ARENA:
+			this.nextController = this.zinnoberArenaController;
+			break;
+		case VERTANIA_CITY_ARENA:
+			this.nextController = this.vertaniaArenaController;
+			break;
 		default:
 			break;
 		}
@@ -932,6 +978,10 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		this.azuriaArenaController.setAccount(this.player.asAccount());
 		this.oraniaArenaController.setAccount(this.player.asAccount());
 		this.prismaniaArenaController.setAccount(this.player.asAccount());
+		this.fuchsaniaArenaController.setAccount(this.player.asAccount());
+		this.saffroniaArenaController.setAccount(this.player.asAccount());
+		this.zinnoberArenaController.setAccount(this.player.asAccount());
+		this.vertaniaArenaController.setAccount(this.player.asAccount());
 		this.deckEditController.setAccount(this.player.asAccount());
 		this.animationController.setPlayerColor(this.player.getColor());
 	}

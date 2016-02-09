@@ -164,6 +164,43 @@ public class ArenaFighterFactory {
 			lockedCards.add("00382");
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString()),
 					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "_THUMB"), lockedCards);
+		// TODO: Create bots with decks for new cards
+		case FUCHSANIA_HILBERT:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString()),
+					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString() + "_THUMB"), lockedCards);
+		case FUCHSANIA_KOGA:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString()),
+					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString() + "_THUMB"), lockedCards);
+		case FUCHSANIA_LUCAS:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString()),
+					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "_THUMB"), lockedCards);
+		case SAFFRONIA_CALEM:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString()),
+					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString() + "_THUMB"), lockedCards);
+		case SAFFRONIA_HILDA:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString()),
+					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString() + "_THUMB"), lockedCards);
+		case SAFFRONIA_SABRINA:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString()),
+					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString() + "_THUMB"), lockedCards);
+		case ZINNOBER_DAWN:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString()),
+					Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString() + "_THUMB"), lockedCards);
+		case ZINNOBER_ETHAN:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString()),
+					Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString() + "_THUMB"), lockedCards);
+		case ZINNOBER_PYRO:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString()),
+					Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString() + "_THUMB"), lockedCards);
+		case VERTANIA_GIOVANNI:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.VERTANIA_GIOVANNI.toString()),
+					Database.getAssetKey(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "_THUMB"), lockedCards);
+		case VERTANIA_ROCKET_FEMALE:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString()),
+					Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString() + "_THUMB"), lockedCards);
+		case VERTANIA_ROCKET_MALE:
+			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString()),
+					Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString() + "_THUMB"), lockedCards);
 		default:
 			break;
 		}
@@ -184,6 +221,18 @@ public class ArenaFighterFactory {
 		erg.add(createFighter(ArenaFighterCode.PRISMANIA_ROSA));
 		erg.add(createFighter(ArenaFighterCode.PRISMANIA_SERENA));
 		erg.add(createFighter(ArenaFighterCode.PRISMANIA_ERIKA));
+		erg.add(createFighter(ArenaFighterCode.FUCHSANIA_HILBERT));
+		erg.add(createFighter(ArenaFighterCode.FUCHSANIA_LUCAS));
+		erg.add(createFighter(ArenaFighterCode.FUCHSANIA_KOGA));
+		erg.add(createFighter(ArenaFighterCode.SAFFRONIA_CALEM));
+		erg.add(createFighter(ArenaFighterCode.SAFFRONIA_HILDA));
+		erg.add(createFighter(ArenaFighterCode.SAFFRONIA_SABRINA));
+		erg.add(createFighter(ArenaFighterCode.ZINNOBER_DAWN));
+		erg.add(createFighter(ArenaFighterCode.ZINNOBER_ETHAN));
+		erg.add(createFighter(ArenaFighterCode.ZINNOBER_PYRO));
+		erg.add(createFighter(ArenaFighterCode.VERTANIA_ROCKET_FEMALE));
+		erg.add(createFighter(ArenaFighterCode.VERTANIA_ROCKET_MALE));
+		erg.add(createFighter(ArenaFighterCode.VERTANIA_GIOVANNI));
 		return erg;
 	}
 }
