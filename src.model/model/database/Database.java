@@ -393,6 +393,10 @@ public class Database {
 		erikaEdition.setGenerateMips(false);
 		assetTextures.put(Edition.ERIKA.toString(), erikaEdition);
 
+		TextureKey kogaEdition = new TextureKey("/tilesets/editions/kogaLogo.png");
+		kogaEdition.setGenerateMips(false);
+		assetTextures.put(Edition.KOGA.toString(), kogaEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);
