@@ -1,9 +1,14 @@
 package model.scripting.koga;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.database.PokemonCard;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.PokemonCondition;
+import model.enums.PositionID;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00402_KogasNinjaTrick extends TrainerCardScript {
@@ -14,19 +19,36 @@ public class Script_00402_KogasNinjaTrick extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		if (getKogaCardsFromOwnField().isEmpty())
+			return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
-		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
-		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+		// Move KogasNinjaTrick to active koga pokemon:
+		this.gameModel.getAttackAction().moveCard(card.getCurrentPosition().getPositionID(), ownActive(), card.getGameID(), false);
+		// Add condition for pokemon:
+		gameModel.getAttackAction().inflictConditionToPosition(ownActive(), PokemonCondition.KOGAS_NINJA_TRICK);
+	}
+
+	@Override
+	public void moveToPosition(PositionID targetPosition) {
+		// Discard KogasNinjaTrick if neccessary:
+		if (PositionID.isBenchPosition(targetPosition)) {
+			// Discard KogasNinjaTrick:
+			gameModel.getAttackAction().discardCardToDiscardPile(targetPosition, card.getGameID(), true);
+			gameModel.getAttackAction().cureCondition(targetPosition, PokemonCondition.KOGAS_NINJA_TRICK);
+
+			gameModel.sendGameModelToAllPlayers("");
+		}
+	}
+
+	private List<PositionID> getKogaCardsFromOwnField() {
+		List<PositionID> posList = new ArrayList<>();
+		PokemonCard pCard = (PokemonCard) gameModel.getPosition(ownActive()).getTopCard();
+		if (pCard.getName().contains("Koga"))
+			posList.add(ownActive());
+		return posList;
 	}
 }

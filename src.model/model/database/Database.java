@@ -329,6 +329,10 @@ public class Database {
 		brocksProtection.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.BROCKS_PROTECTION.toString(), brocksProtection);
 
+		TextureKey kogasNinjaTrick = new TextureKey("/tilesets/conditions/kogasNinjaTrick.jpg");
+		kogasNinjaTrick.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.KOGAS_NINJA_TRICK.toString(), kogasNinjaTrick);
+
 		TextureKey noEnergy = new TextureKey("/tilesets/conditions/noEnergy.png");
 		noEnergy.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.NO_ENERGY.toString(), noEnergy);

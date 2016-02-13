@@ -449,6 +449,35 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 						}
 					}
 
+					// Check Koga's Ninja Trick on the defending pokemon:
+					// Get the defending pokemon:
+					PokemonCard defender = null;
+					Player defendingPlayer = null;
+					if (player.getColor() == Color.BLUE) {
+						defender = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
+						defendingPlayer = gameModel.getPlayerRed();
+					} else {
+						defender = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
+						defendingPlayer = gameModel.getPlayerBlue();
+					}
+					if (defender.hasCondition(PokemonCondition.KOGAS_NINJA_TRICK) && gameModel.getFullBenchPositions(defendingPlayer.getColor()).size() > 0) {
+						boolean answer = defendingPlayer.playerDecidesYesOrNo(active.getName() + " attacks with " + attackName + "! Do you want to use Koga's Ninja Trick?");
+						if (answer) {
+							PositionID benchPos = defendingPlayer.playerChoosesPositions(gameModel.getFullBenchPositions(defendingPlayer.getColor()), 1, true,
+									"Choose a pokemon to swap with your active pokemon!").get(0);
+
+							// Message clients:
+							Card bench = gameModel.getPosition(benchPos).getTopCard();
+							List<Card> cardList = new ArrayList<>();
+							cardList.add(defender);
+							cardList.add(bench);
+							gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + defender.getName() + " with " + bench.getName() + "!", cardList, "");
+
+							// Execute swap:
+							gameModel.getAttackAction().swapPokemon(benchPos, defender.getCurrentPosition().getPositionID());
+						}
+					}
+
 					// Execute the attack:
 					gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
 					pScript.executeAttack(attackName);

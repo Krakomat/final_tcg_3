@@ -272,6 +272,8 @@ public class AttackAction {
 				case HALF_DAMAGE:
 					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
+				case KOGAS_NINJA_TRICK:
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
 				default:
 					break;
 				}
