@@ -3,13 +3,11 @@ package model.scripting.koga;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
 
@@ -18,58 +16,56 @@ public class Script_00400_KogasZubat extends PokemonCardScript {
 	public Script_00400_KogasZubat(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
-
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att1Cost.add(Element.GRASS);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Group Attack", att1Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
-	}
+		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5 && getKogasZubatCardsFromDeck().size() > 0) {
+			int max = Math.min(5 - gameModel.getFullBenchPositions(getCardOwner().getColor()).size(), getKogasZubatCardsFromDeck().size());
+			List<Card> zubatList = getCardOwner().playerChoosesCards(getKogasZubatCardsFromDeck(), max, false, "Choose any number of cards from your deck!");
 
-	private void donnerwelle() {
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+			if (zubatList.isEmpty()) {
+				// Put basic pokemon on bench:
+				for (Card c : zubatList) {
+					Card zubat = gameModel.getCard(c.getGameID());
+					this.gameModel.getAttackAction().putBasicPokemonOnBench(getCardOwner(), (PokemonCard) zubat);
+				}
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
+				// Shuffle deck:
+				gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
+				gameModel.getAttackAction().shufflePosition(ownDeck());
+				this.gameModel.sendGameModelToAllPlayers("");
+
+			}
 		}
-	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
+		// Damage:
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10 * getKogasZubatCardsFromPlay().size(), true);
+	}
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+	private List<Card> getKogasZubatCardsFromDeck() {
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : gameModel.getPosition(ownDeck()).getPokemonCards()) {
+			PokemonCard pCard = (PokemonCard) c;
+			if (pCard.getName().equals("Koga's Zubat"))
+				cardList.add(c);
+		}
+		return cardList;
+	}
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+	private List<Card> getKogasZubatCardsFromPlay() {
+		List<Card> cardList = new ArrayList<>();
+		for (PositionID c : gameModel.getFullArenaPositions(getCardOwner().getColor())) {
+			Card pCard = gameModel.getPosition(c).getTopCard();
+			if (pCard.getName().equals("Koga's Zubat"))
+				cardList.add(pCard);
+		}
+		return cardList;
 	}
 }
