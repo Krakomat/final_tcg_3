@@ -162,6 +162,26 @@ import model.scripting.jungle.Script_00149_Rhyhorn;
 import model.scripting.jungle.Script_00150_Spearow;
 import model.scripting.jungle.Script_00151_Venonat;
 import model.scripting.jungle.Script_00152_Pokeball;
+import model.scripting.koga.Script_00383_KogasBeedrill;
+import model.scripting.koga.Script_00384_KogasDitto;
+import model.scripting.koga.Script_00385_Koga;
+import model.scripting.koga.Script_00386_KogasArbok;
+import model.scripting.koga.Script_00387_KogasMuk;
+import model.scripting.koga.Script_00388_KogasPidgeotto;
+import model.scripting.koga.Script_00389_KogasGolbat;
+import model.scripting.koga.Script_00390_KogasKakuna;
+import model.scripting.koga.Script_00391_KogasKoffing;
+import model.scripting.koga.Script_00392_KogasPidgey;
+import model.scripting.koga.Script_00393_KogasWeezing;
+import model.scripting.koga.Script_00394_KogasEkans;
+import model.scripting.koga.Script_00395_KogasGrimer;
+import model.scripting.koga.Script_00396_KogasKoffing;
+import model.scripting.koga.Script_00397_KogasPidgey;
+import model.scripting.koga.Script_00398_KogasTangela;
+import model.scripting.koga.Script_00399_KogasWeedle;
+import model.scripting.koga.Script_00400_KogasZubat;
+import model.scripting.koga.Script_00401_FuchsiaCityGym;
+import model.scripting.koga.Script_00402_KogasNinjaTrick;
 import model.scripting.ltSurge.Script_00326_LtSurgesElectabuzz;
 import model.scripting.ltSurge.Script_00327_LtSurgesFearow;
 import model.scripting.ltSurge.Script_00328_LtSurgesMagneton;
@@ -1089,6 +1109,46 @@ public class CardScriptFactory {
 			return new Script_00381_ErikasParas((PokemonCard) card, gameModel);
 		case "00382":
 			return new Script_00382_ErikasKindness((TrainerCard) card, gameModel);
+		case "00383":
+			return new Script_00383_KogasBeedrill((PokemonCard) card, gameModel);
+		case "00384":
+			return new Script_00384_KogasDitto((PokemonCard) card, gameModel);
+		case "00385":
+			return new Script_00385_Koga((TrainerCard) card, gameModel);
+		case "00386":
+			return new Script_00386_KogasArbok((PokemonCard) card, gameModel);
+		case "00387":
+			return new Script_00387_KogasMuk((PokemonCard) card, gameModel);
+		case "00388":
+			return new Script_00388_KogasPidgeotto((PokemonCard) card, gameModel);
+		case "00389":
+			return new Script_00389_KogasGolbat((PokemonCard) card, gameModel);
+		case "00390":
+			return new Script_00390_KogasKakuna((PokemonCard) card, gameModel);
+		case "00391":
+			return new Script_00391_KogasKoffing((PokemonCard) card, gameModel);
+		case "00392":
+			return new Script_00392_KogasPidgey((PokemonCard) card, gameModel);
+		case "00393":
+			return new Script_00393_KogasWeezing((PokemonCard) card, gameModel);
+		case "00394":
+			return new Script_00394_KogasEkans((PokemonCard) card, gameModel);
+		case "00395":
+			return new Script_00395_KogasGrimer((PokemonCard) card, gameModel);
+		case "00396":
+			return new Script_00396_KogasKoffing((PokemonCard) card, gameModel);
+		case "00397":
+			return new Script_00397_KogasPidgey((PokemonCard) card, gameModel);
+		case "00398":
+			return new Script_00398_KogasTangela((PokemonCard) card, gameModel);
+		case "00399":
+			return new Script_00399_KogasWeedle((PokemonCard) card, gameModel);
+		case "00400":
+			return new Script_00400_KogasZubat((PokemonCard) card, gameModel);
+		case "00401":
+			return new Script_00401_FuchsiaCityGym((TrainerCard) card, gameModel);
+		case "00402":
+			return new Script_00402_KogasNinjaTrick((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
