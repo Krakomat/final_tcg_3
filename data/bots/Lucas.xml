@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Lucas</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Scientific Experiments">
+    <Cards>
+        <Card ID="00083">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>14</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>10</Size>
+        </Card>
+        <Card ID="00117">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00151">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00159">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00164">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00170">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00179">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00184">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00195">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00215">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00239">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00252">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00255">
+            <Size>3</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

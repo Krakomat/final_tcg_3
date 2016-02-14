@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Hilbert</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Ninja Bugs">
+    <Cards>
+        <Card ID="00079">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00082">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00114">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00124">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00129">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00147">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00150">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00167">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00181">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00182">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00193">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00201">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00206">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00213">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00241">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00243">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

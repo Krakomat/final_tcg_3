@@ -164,16 +164,36 @@ public class ArenaFighterFactory {
 			lockedCards.add("00382");
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString()),
 					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "_THUMB"), lockedCards);
-		// TODO: Create bots with decks for new cards
 		case FUCHSANIA_HILBERT:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString()),
+			lockedCards.add("00394");
+			lockedCards.add("00395");
+			lockedCards.add("00396");
+			lockedCards.add("00397");
+			lockedCards.add("00398");
+			lockedCards.add("00399");
+			lockedCards.add("00400");
+			return new ArenaFighter(code, Database.getBot("Hilbert"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString()),
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString() + "_THUMB"), lockedCards);
 		case FUCHSANIA_KOGA:
+			lockedCards.add("00383");
+			lockedCards.add("00384");
+			lockedCards.add("00385");
+			lockedCards.add("00386");
+			lockedCards.add("00387");
+			lockedCards.add("00388");
 			return new ArenaFighter(code, Database.getBot("Koga"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString()),
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString() + "_THUMB"), lockedCards);
 		case FUCHSANIA_LUCAS:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString()),
+			lockedCards.add("00389");
+			lockedCards.add("00390");
+			lockedCards.add("00391");
+			lockedCards.add("00392");
+			lockedCards.add("00393");
+			lockedCards.add("00401");
+			lockedCards.add("00402");
+			return new ArenaFighter(code, Database.getBot("Lucas"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString()),
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "_THUMB"), lockedCards);
+		// TODO: Create bots with decks for new cards
 		case SAFFRONIA_CALEM:
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString()),
 					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString() + "_THUMB"), lockedCards);
