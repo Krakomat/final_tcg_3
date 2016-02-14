@@ -169,7 +169,7 @@ public class ArenaFighterFactory {
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString()),
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString() + "_THUMB"), lockedCards);
 		case FUCHSANIA_KOGA:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString()),
+			return new ArenaFighter(code, Database.getBot("Koga"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString()),
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString() + "_THUMB"), lockedCards);
 		case FUCHSANIA_LUCAS:
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString()),

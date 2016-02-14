@@ -289,6 +289,10 @@ public class Database {
 		poisoned.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.POISONED.toString(), poisoned);
 
+		TextureKey toxic = new TextureKey("/tilesets/conditions/vergiftet.png");
+		toxic.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.TOXIC.toString(), toxic);
+
 		TextureKey powerUp = new TextureKey("/tilesets/conditions/powerup.png");
 		powerUp.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.DAMAGEINCREASE10.toString(), powerUp);

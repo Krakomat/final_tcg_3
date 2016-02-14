@@ -20,12 +20,12 @@ public class Script_00391_KogasKoffing extends PokemonCardScript {
 	public Script_00391_KogasKoffing(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
+		att1Cost.add(Element.GRASS);
 		this.addAttack("Smokescreen", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
+		att2Cost.add(Element.GRASS);
+		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Obscuring Gas", att2Cost);
 	}
 

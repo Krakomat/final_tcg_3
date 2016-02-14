@@ -105,7 +105,7 @@ public class Script_00401_FuchsiaCityGym extends TrainerCardScript {
 		List<PositionID> posList = new ArrayList<>();
 		for (PositionID posID : gameModel.getFullArenaPositions(player.getColor())) {
 			PokemonCard pCard = (PokemonCard) gameModel.getPosition(posID).getTopCard();
-			if (pCard.getName().contains("Erika"))
+			if (pCard.getName().contains("Koga"))
 				posList.add(posID);
 		}
 		return posList;

@@ -45,7 +45,7 @@ public class Script_00384_KogasDitto extends PokemonCardScript {
 	}
 
 	public void moveToPosition(PositionID targetPosition) {
-		PokemonCard attackingPokemon = (PokemonCard) gameModel.getPosition(this.getCurrentPositionID()).getTopCard();
+		PokemonCard attackingPokemon = (PokemonCard) this.card;
 		attackingPokemon.setHitpoints(40);
 		if (attackingPokemon.getHitpoints() >= 40 && PositionID.isArenaPosition(targetPosition)) {
 			attackingPokemon.setHitpoints(40);
@@ -58,7 +58,7 @@ public class Script_00384_KogasDitto extends PokemonCardScript {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		PokemonCard attackingPokemon = (PokemonCard) gameModel.getPosition(attacker).getTopCard();
+		PokemonCard attackingPokemon = (PokemonCard) this.card;
 
 		if (attackingPokemon.getHitpoints() == 80)
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);

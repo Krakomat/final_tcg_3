@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Kogas K.O. Krew">
+    <Cards>
+        <Card ID="00079">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>24</Size>
+        </Card>
+        <Card ID="00383">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00384">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00385">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00386">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00387">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00390">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00391">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00393">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00394">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00395">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00396">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00398">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00399">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00401">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00402">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>
