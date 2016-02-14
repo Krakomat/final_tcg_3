@@ -22,7 +22,8 @@ public class Script_00117_Venomoth extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		this.addAttack("String Shot", att1Cost);
+		att1Cost.add(Element.GRASS);
+		this.addAttack("Venom Powder", att1Cost);
 		this.addPokemonPower("Shift");
 	}
 

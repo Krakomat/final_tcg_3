@@ -5,7 +5,9 @@ Patch 5.0
 				- Fuchsia City Gym
 		New Card sets:
 			- KOGA
-			
+	Game:
+		- 00117_Venomoth: Fixed the attack costs of Venom Powder
+	
 Patch 4.5
 	Network:
 		- Significantly lowered the amount of data that is send in a single game model update
