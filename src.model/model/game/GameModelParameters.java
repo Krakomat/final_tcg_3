@@ -24,7 +24,7 @@ public class GameModelParameters {
 	private int gameModelVersion, turnNumber;
 	private GameState gameState;
 	private boolean energyPlayed, retreatExecuted;
-	private boolean noEnergyPayment, activated_00296_Misty, vermillionCityGymAttackModifier;
+	private boolean noEnergyPayment, activated_00296_Misty, activated_00385_Koga, vermillionCityGymAttackModifier;
 	private short allowedToPlayTrainerCards, allowedToPlayPokemonPower;
 	private Map<String, List<Integer>> activatedEffectMap; // {CardID,(GameIDs)}
 	private List<Pair<Integer, Integer>> attackUsed; // {(GameID, Runtime)}
@@ -40,6 +40,7 @@ public class GameModelParameters {
 		vermillionCityGymAttackModifier = false;
 		this.noEnergyPayment = false;
 		this.activated_00296_Misty = false;
+		this.activated_00385_Koga = false;
 		this.blockedAttacks = new ArrayList<>();
 		this.effectParameters = new ArrayList<>();
 		this.activatedEffectMap = new HashMap<>();
@@ -89,6 +90,7 @@ public class GameModelParameters {
 		copy.setVermillionCityGymAttackModifier(vermillionCityGymAttackModifier);
 		copy.setNoEnergyPayment(noEnergyPayment);
 		copy.setActivated_00296_Misty(activated_00296_Misty);
+		copy.setActivated_00385_Koga(activated_00385_Koga);
 		copy.setRetreatExecuted(retreatExecuted);
 		for (Triple<Integer, String, Integer> i : this.getBlockedAttacks())
 			copy.getBlockedAttacks().add(i);
@@ -146,6 +148,10 @@ public class GameModelParameters {
 		bString = serializer.unpackByteString(unpacker);
 		this.activated_00296_Misty = serializer.unpackBool(bString);
 
+		// activated_00385_Koga:
+		bString = serializer.unpackByteString(unpacker);
+		this.activated_00385_Koga = serializer.unpackBool(bString);
+
 		// blockedAttacks
 		bString = serializer.unpackByteString(unpacker);
 		this.blockedAttacks = serializer.unpackBlockedAttacksList(bString);
@@ -202,6 +208,11 @@ public class GameModelParameters {
 		ByteString mistyActive = serializer.packBool(activated_00296_Misty);
 		packer.packBinaryHeader(mistyActive.length());
 		packer.writePayload(mistyActive.copyAsBytes());
+
+		// activated_00385_Koga:
+		ByteString kogaActive = serializer.packBool(activated_00385_Koga);
+		packer.packBinaryHeader(kogaActive.length());
+		packer.writePayload(kogaActive.copyAsBytes());
 
 		// retreatExecuted:
 		ByteString retreat = serializer.packBool(retreatExecuted);
@@ -458,5 +469,13 @@ public class GameModelParameters {
 			this.activatedEffectMap.remove(cardID);
 		else
 			this.activatedEffectMap.get(cardID).remove(gameID);
+	}
+
+	public boolean isActivated_00385_Koga() {
+		return activated_00385_Koga;
+	}
+
+	public void setActivated_00385_Koga(boolean activated_00385_Koga) {
+		this.activated_00385_Koga = activated_00385_Koga;
 	}
 }

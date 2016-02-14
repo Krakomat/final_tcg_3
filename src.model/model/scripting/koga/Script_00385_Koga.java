@@ -3,7 +3,6 @@ package model.scripting.koga;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00385_Koga extends TrainerCardScript {
@@ -14,19 +13,19 @@ public class Script_00385_Koga extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
-		// Discard trainer card before drawing!
+		// Discard trainer card!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
+
+		gameModel.getGameModelParameters().setActivated_00385_Koga(true);
 		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+	}
+
+	public void executeEndTurnActions() {
+		gameModel.getGameModelParameters().setActivated_00385_Koga(false);
 	}
 }

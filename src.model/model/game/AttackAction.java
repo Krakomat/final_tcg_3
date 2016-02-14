@@ -188,6 +188,10 @@ public class AttackAction {
 		}
 		this.gameModel.sendGameModelToAllPlayers("");
 
+		// Check Koga:
+		if (attackerPokemon != null && attackerPokemon.getName().contains("Koga") && gameModel.getGameModelParameters().isActivated_00385_Koga() && damageAmount > 0)
+			this.inflictConditionToPosition(targetPosition, PokemonCondition.POISONED);
+
 		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
 			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, damageAmount, true);
 		return damageAmount;
