@@ -305,6 +305,35 @@ import model.scripting.rocket.Script_00262_Sleep;
 import model.scripting.rocket.Script_00263_FullHealEnergy;
 import model.scripting.rocket.Script_00264_PotionEnergy;
 import model.scripting.rocket.Script_00265_DarkRaichu;
+import model.scripting.sabrina.Script_00403_SabrinasGengar;
+import model.scripting.sabrina.Script_00404_SabrinasVenomoth;
+import model.scripting.sabrina.Script_00405_SabrinasHaunter;
+import model.scripting.sabrina.Script_00406_SabrinasJynx;
+import model.scripting.sabrina.Script_00407_SabrinasSlowbro;
+import model.scripting.sabrina.Script_00408_SabrinasAbra;
+import model.scripting.sabrina.Script_00409_SabrinasDrowzee;
+import model.scripting.sabrina.Script_00410_SabrinasGastly;
+import model.scripting.sabrina.Script_00411_SabrinasMrMime;
+import model.scripting.sabrina.Script_00412_SabrinasSlowpoke;
+import model.scripting.sabrina.Script_00413_SabrinasVenonat;
+import model.scripting.sabrina.Script_00414_SabrinasGaze;
+import model.scripting.sabrina.Script_00415_SabrinasAlakazam;
+import model.scripting.sabrina.Script_00416_Sabrina;
+import model.scripting.sabrina.Script_00417_SabrinasGengar;
+import model.scripting.sabrina.Script_00418_SabrinasGolduck;
+import model.scripting.sabrina.Script_00419_SabrinasHaunter;
+import model.scripting.sabrina.Script_00420_SabrinasHypno;
+import model.scripting.sabrina.Script_00421_SabrinasJynx;
+import model.scripting.sabrina.Script_00422_SabrinasKadabra;
+import model.scripting.sabrina.Script_00423_SabrinasMrMime;
+import model.scripting.sabrina.Script_00424_SabrinasAbra;
+import model.scripting.sabrina.Script_00425_SabrinasAbra;
+import model.scripting.sabrina.Script_00426_SabrinasDrowzee;
+import model.scripting.sabrina.Script_00427_SabrinasGastly;
+import model.scripting.sabrina.Script_00428_SabrinasGastly;
+import model.scripting.sabrina.Script_00429_SabrinasPorygon;
+import model.scripting.sabrina.Script_00430_SabrinasPsyduck;
+import model.scripting.sabrina.Script_00431_SaffronCityGym;
 
 /**
  * Factory, which generates the {@link CardScript} for a specific card.
@@ -1149,6 +1178,64 @@ public class CardScriptFactory {
 			return new Script_00401_FuchsiaCityGym((TrainerCard) card, gameModel);
 		case "00402":
 			return new Script_00402_KogasNinjaTrick((TrainerCard) card, gameModel);
+		case "00403":
+			return new Script_00403_SabrinasGengar((PokemonCard) card, gameModel);
+		case "00404":
+			return new Script_00404_SabrinasVenomoth((PokemonCard) card, gameModel);
+		case "00405":
+			return new Script_00405_SabrinasHaunter((PokemonCard) card, gameModel);
+		case "00406":
+			return new Script_00406_SabrinasJynx((PokemonCard) card, gameModel);
+		case "00407":
+			return new Script_00407_SabrinasSlowbro((PokemonCard) card, gameModel);
+		case "00408":
+			return new Script_00408_SabrinasAbra((PokemonCard) card, gameModel);
+		case "00409":
+			return new Script_00409_SabrinasDrowzee((PokemonCard) card, gameModel);
+		case "00410":
+			return new Script_00410_SabrinasGastly((PokemonCard) card, gameModel);
+		case "00411":
+			return new Script_00411_SabrinasMrMime((PokemonCard) card, gameModel);
+		case "00412":
+			return new Script_00412_SabrinasSlowpoke((PokemonCard) card, gameModel);
+		case "00413":
+			return new Script_00413_SabrinasVenonat((PokemonCard) card, gameModel);
+		case "00414":
+			return new Script_00414_SabrinasGaze((TrainerCard) card, gameModel);
+		case "00415":
+			return new Script_00415_SabrinasAlakazam((PokemonCard) card, gameModel);
+		case "00416":
+			return new Script_00416_Sabrina((TrainerCard) card, gameModel);
+		case "00417":
+			return new Script_00417_SabrinasGengar((PokemonCard) card, gameModel);
+		case "00418":
+			return new Script_00418_SabrinasGolduck((PokemonCard) card, gameModel);
+		case "00419":
+			return new Script_00419_SabrinasHaunter((PokemonCard) card, gameModel);
+		case "00420":
+			return new Script_00420_SabrinasHypno((PokemonCard) card, gameModel);
+		case "00421":
+			return new Script_00421_SabrinasJynx((PokemonCard) card, gameModel);
+		case "00422":
+			return new Script_00422_SabrinasKadabra((PokemonCard) card, gameModel);
+		case "00423":
+			return new Script_00423_SabrinasMrMime((PokemonCard) card, gameModel);
+		case "00424":
+			return new Script_00424_SabrinasAbra((PokemonCard) card, gameModel);
+		case "00425":
+			return new Script_00425_SabrinasAbra((PokemonCard) card, gameModel);
+		case "00426":
+			return new Script_00426_SabrinasDrowzee((PokemonCard) card, gameModel);
+		case "00427":
+			return new Script_00427_SabrinasGastly((PokemonCard) card, gameModel);
+		case "00428":
+			return new Script_00428_SabrinasGastly((PokemonCard) card, gameModel);
+		case "00429":
+			return new Script_00429_SabrinasPorygon((PokemonCard) card, gameModel);
+		case "00430":
+			return new Script_00430_SabrinasPsyduck((PokemonCard) card, gameModel);
+		case "00431":
+			return new Script_00431_SaffronCityGym((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
