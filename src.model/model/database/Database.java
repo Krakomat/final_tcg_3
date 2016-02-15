@@ -405,6 +405,22 @@ public class Database {
 		kogaEdition.setGenerateMips(false);
 		assetTextures.put(Edition.KOGA.toString(), kogaEdition);
 
+		TextureKey sabrinaEdition = new TextureKey("/tilesets/editions/sabrinaLogo.png");
+		sabrinaEdition.setGenerateMips(false);
+		assetTextures.put(Edition.SABRINA.toString(), sabrinaEdition);
+
+		TextureKey pyroEdition = new TextureKey("/tilesets/editions/blaineLogo.png");
+		pyroEdition.setGenerateMips(false);
+		assetTextures.put(Edition.BLAINE.toString(), pyroEdition);
+
+		TextureKey teamRocketEdition = new TextureKey("/tilesets/editions/rocketArenaLogo.png");
+		teamRocketEdition.setGenerateMips(false);
+		assetTextures.put(Edition.TEAM_ROCKET.toString(), teamRocketEdition);
+
+		TextureKey giovanniEdition = new TextureKey("/tilesets/editions/giovanniLogo.png");
+		giovanniEdition.setGenerateMips(false);
+		assetTextures.put(Edition.GIOVANNI.toString(), giovanniEdition);
+
 		TextureKey grassChopper = new TextureKey("/decks/grassChopper.jpg");
 		grassChopper.setGenerateMips(false);
 		assetTextures.put("grassChopper", grassChopper);

@@ -162,7 +162,7 @@ public class DeckEditController extends Node implements GUI2DController {
 		}
 
 		editionFilterButtons = new ArrayList<>();
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 13; i++) {
 			String texture = "";
 			switch (i) {
 			case 0:
@@ -191,6 +191,18 @@ public class DeckEditController extends Node implements GUI2DController {
 				break;
 			case 8:
 				texture = Edition.KOGA.toString();
+				break;
+			case 9:
+				texture = Edition.SABRINA.toString();
+				break;
+			case 10:
+				texture = Edition.BLAINE.toString();
+				break;
+			case 11:
+				texture = Edition.TEAM_ROCKET.toString();
+				break;
+			case 12:
+				texture = Edition.GIOVANNI.toString();
 				break;
 			}
 			final int index = i;
@@ -377,7 +389,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				selectedButtonIndices.add(i);
 		}
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 13; i++) {
 			Image2D button = this.editionFilterButtons.get(i);
 			if (button.isSelected())
 				selectedButtonIndices.add(i + 9);
@@ -448,6 +460,18 @@ public class DeckEditController extends Node implements GUI2DController {
 					break;
 				case 17:
 					selectedButtonEditions.add(Edition.KOGA);
+					break;
+				case 18:
+					selectedButtonEditions.add(Edition.SABRINA);
+					break;
+				case 19:
+					selectedButtonEditions.add(Edition.BLAINE);
+					break;
+				case 20:
+					selectedButtonEditions.add(Edition.TEAM_ROCKET);
+					break;
+				case 21:
+					selectedButtonEditions.add(Edition.GIOVANNI);
 					break;
 				}
 			}
@@ -633,8 +657,7 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Moves all cards of the given deck from the library into the deck. Only
-	 * call, if deckCards is empty and the size of the given deck is <= 60.
+	 * Moves all cards of the given deck from the library into the deck. Only call, if deckCards is empty and the size of the given deck is <= 60.
 	 * 
 	 */
 	private void createDeckFromLibrary(Deck deck) {
@@ -672,8 +695,7 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * Moves all cards from the deck into the library. Does NOT update the
-	 * visualization!
+	 * Moves all cards from the deck into the library. Does NOT update the visualization!
 	 * 
 	 */
 	private void clearDeck() {
@@ -839,8 +861,7 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * (Re-)Starts this node by setting the two main buttons visible and setting
-	 * the rest invisible.
+	 * (Re-)Starts this node by setting the two main buttons visible and setting the rest invisible.
 	 */
 	public void restart() {
 		this.currentStartIndex = 0;
