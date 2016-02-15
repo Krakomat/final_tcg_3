@@ -1,5 +1,5 @@
 Patch 5.0
-	New Feautures:
+	New Features:
 		Gym Mode Expansion
 			- New Arenas:
 				- Fuchsia City Gym
