@@ -132,6 +132,8 @@ public class AttackAction {
 			damageAmount = damageAmount - 30;
 		if (defenderPokemon.hasCondition(PokemonCondition.HARDEN20))
 			damageAmount = damageAmount - 20;
+		if (defenderPokemon.hasCondition(PokemonCondition.HARDEN10))
+			damageAmount = damageAmount - 10;
 		if (defenderPokemon.hasCondition(PokemonCondition.HALF_DAMAGE)) {
 			damageAmount = damageAmount / 2;
 			// Round down:

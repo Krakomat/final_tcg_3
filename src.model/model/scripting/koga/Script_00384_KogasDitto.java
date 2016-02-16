@@ -47,7 +47,7 @@ public class Script_00384_KogasDitto extends PokemonCardScript {
 	public void moveToPosition(PositionID targetPosition) {
 		PokemonCard attackingPokemon = (PokemonCard) this.card;
 		attackingPokemon.setHitpoints(40);
-		if (attackingPokemon.getHitpoints() >= 40 && PositionID.isArenaPosition(targetPosition)) {
+		if (attackingPokemon.getHitpoints() >= 40 && PositionID.isArenaPosition(targetPosition) && !attackingPokemon.hasCondition(PokemonCondition.KNOCKOUT)) {
 			attackingPokemon.setHitpoints(40);
 			gameModel.getAttackAction().inflictConditionToPosition(getCurrentPositionID(), PokemonCondition.KNOCKOUT);
 			gameModel.cleanDefeatedPositions();

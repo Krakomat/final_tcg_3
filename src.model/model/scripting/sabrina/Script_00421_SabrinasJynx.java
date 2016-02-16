@@ -3,12 +3,10 @@ package model.scripting.sabrina;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -18,58 +16,60 @@ public class Script_00421_SabrinasJynx extends PokemonCardScript {
 	public Script_00421_SabrinasJynx(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Helping Hand", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Hug", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Helping Hand"))
+			this.HelpingHand();
 		else
-			this.finale();
+			this.Hug();
 	}
 
-	private void donnerwelle() {
+	private void HelpingHand() {
+		PositionID defender = getCardOwner().playerChoosesPositions(gameModel.getFullArenaPositions(getEnemyPlayer().getColor()), 1, true, "Choose a Pokemon to heal!").get(0);
+		PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
+
+		if (defendingPokemon.getDamageMarks() > 0) {
+			boolean heal = getCardOwner().playerDecidesYesOrNo("Do you want to remove a damage mark from " + defendingPokemon.getName() + " in order to draw a card?");
+			while (heal && defendingPokemon.getDamageMarks() > 0) {
+				this.gameModel.getAttackAction().healPosition(defender, 10);
+				this.gameModel.getAttackAction().playerDrawsCards(1, getCardOwner());
+				heal = getCardOwner().playerDecidesYesOrNo("Do you want to remove a damage mark from " + defendingPokemon.getName() + " in order to draw a card?");
+			}
+		} else {
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " has no damage marks! Helping Hand missed!", "");
+		}
+	}
+
+	private void Hug() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
+		// Flip coin to check if defending pokemon is allowed to retreat the next turn:
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is not allowed to retreat the next turn!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is not allowed to retreat the next turn!", "");
+			gameModel.getGameModelParameters().activateEffect("00421", cardGameID());
 		}
 	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+	public void executePreTurnActions() {
+		if (gameModel.getGameModelParameters().activeEffect("00421", cardGameID())) {
+			gameModel.setRetreatExecuted(true);
+			gameModel.getGameModelParameters().deactivateEffect("00421", cardGameID());
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 }

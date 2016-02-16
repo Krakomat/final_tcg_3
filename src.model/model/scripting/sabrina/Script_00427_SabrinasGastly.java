@@ -3,14 +3,15 @@ package model.scripting.sabrina;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
+import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00427_SabrinasGastly extends PokemonCardScript {
@@ -18,24 +19,24 @@ public class Script_00427_SabrinasGastly extends PokemonCardScript {
 	public Script_00427_SabrinasGastly(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Lick", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.PSYCHIC);
+		this.addAttack("Fade Out", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Lick"))
+			this.Lick();
 		else
-			this.finale();
+			this.FadeOut();
 	}
 
-	private void donnerwelle() {
+	private void Lick() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
@@ -52,24 +53,36 @@ public class Script_00427_SabrinasGastly extends PokemonCardScript {
 		}
 	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
+	private void FadeOut() {
+		PositionID posID = this.getCurrentPositionID();
+		// Scoop up position:
+		Position position = gameModel.getPosition(posID);
+		List<Card> cards = position.getCards();
 
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
+		gameModel.sendCardMessageToAllPlayers(getCardOwner().getName() + " chooses " + position.getTopCard().getName() + "!", position.getTopCard(), "");
+		PositionID hand = ownHand();
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		int size = cards.size();
+		for (int i = 0; i < size; i++) {
+			Card c = cards.get(0);
+			if (c == this.card || c instanceof EnergyCard)
+				gameModel.getAttackAction().moveCard(posID, hand, cards.get(0).getGameID(), true);
+			else
+				gameModel.getAttackAction().moveCard(posID, ownDiscardPile(), cards.get(0).getGameID(), true);
+		}
+		gameModel.sendGameModelToAllPlayers("");
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+		if (gameModel.getFullArenaPositions(getCardOwner().getColor()).isEmpty()) {
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " has no active pokemon anymore!", "");
+			gameModel.playerLoses(getCardOwner());
+		} else if (gameModel.getPosition(this.ownActive()).isEmpty()) {
+			// Choose a new active pokemon in this case:
+			PositionID newActive = getCardOwner().playerChoosesPositions(gameModel.getFullArenaPositions(getCardOwner().getColor()), 1, true, "Choose a new active pokemon!")
+					.get(0);
+			Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
+			gameModel.sendCardMessageToAllPlayers(getCardOwner().getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
+			gameModel.getAttackAction().movePokemonToPosition(newActive, this.ownActive());
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 }

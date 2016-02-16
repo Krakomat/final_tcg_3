@@ -297,6 +297,10 @@ public class Database {
 		powerUp.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.DAMAGEINCREASE10.toString(), powerUp);
 
+		TextureKey harden10 = new TextureKey("/tilesets/conditions/harden10.png");
+		harden10.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.HARDEN10.toString(), harden10);
+
 		TextureKey harden20 = new TextureKey("/tilesets/conditions/harden20.png");
 		harden20.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.HARDEN20.toString(), harden20);
