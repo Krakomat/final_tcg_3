@@ -96,6 +96,7 @@ public class Script_00428_SabrinasGastly extends PokemonCardScript {
 				&& !pokemonCard.hasCondition(PokemonCondition.KNOCKOUT)) {
 			pokemonCard.setHitpoints(40);
 			gameModel.getAttackAction().inflictConditionToPosition(getCurrentPositionID(), PokemonCondition.KNOCKOUT);
+			gameModel.sendGameModelToAllPlayers("");
 			gameModel.cleanDefeatedPositions();
 		}
 	}

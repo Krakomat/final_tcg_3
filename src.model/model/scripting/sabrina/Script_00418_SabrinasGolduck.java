@@ -3,8 +3,6 @@ package model.scripting.sabrina;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
-import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
@@ -18,58 +16,65 @@ public class Script_00418_SabrinasGolduck extends PokemonCardScript {
 	public Script_00418_SabrinasGolduck(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Damage Shift", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.WATER);
+		att2Cost.add(Element.COLORLESS);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Water Spray", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Damage Shift"))
+			this.DamageShift();
 		else
-			this.finale();
+			this.WaterSpray();
 	}
 
-	private void donnerwelle() {
+	private void DamageShift() {
+		List<PokemonCard> damagedPokemon = damagedPokemon();
+		for (PokemonCard pokemon : damagedPokemon) {
+			pokemon.setDamageMarks(pokemon.getDamageMarks() - 10);
+		}
+
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
+		defendingPokemon.setDamageMarks(damagedPokemon.size() * 10 + defendingPokemon.getDamageMarks());
+
+		if (defendingPokemon.getDamageMarks() >= defendingPokemon.getHitpoints() && !defendingPokemon.hasCondition(PokemonCondition.KNOCKOUT)) {
+			defendingPokemon.setDamageMarks(defendingPokemon.getHitpoints());
+			gameModel.getAttackAction().inflictConditionToPosition(getCurrentPositionID(), PokemonCondition.KNOCKOUT);
+			gameModel.sendGameModelToAllPlayers("");
+			gameModel.cleanDefeatedPositions();
+		} else
+			gameModel.sendGameModelToAllPlayers("");
+		gameModel.sendTextMessageToAllPlayers("Damage marks have been moved!", "");
+	}
+
+	private List<PokemonCard> damagedPokemon() {
+		List<PokemonCard> pList = new ArrayList<>();
+		for (PositionID posID : gameModel.getFullArenaPositions(getCardOwner().getColor())) {
+			PokemonCard c = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+			if (c.getDamageMarks() > 0)
+				pList.add(c);
+		}
+		return pList;
+	}
+
+	private void WaterSpray() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
+		gameModel.sendTextMessageToAllPlayers("If heads then this attack does 20 more damage!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
-		}
-	}
-
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		} else
+			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 	}
 }

@@ -18,58 +18,50 @@ public class Script_00419_SabrinasHaunter extends PokemonCardScript {
 	public Script_00419_SabrinasHaunter(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Nightmare", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.PSYCHIC);
+		this.addAttack("Shadow Attack", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Nightmare"))
+			this.Nightmare();
 		else
-			this.finale();
+			this.ShadowAttack();
 	}
 
-	private void donnerwelle() {
+	private void Nightmare() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
-		}
+		gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is asleep!", "");
+		gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.ASLEEP);
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	private void finale() {
+	private void ShadowAttack() {
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
-
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+			if (gameModel.getFullBenchPositions(enemy.getColor()).size() > 0) {
+				PositionID benchDefender = player.playerChoosesPositions(gameModel.getFullBenchPositions(enemy.getColor()), 1, true, "Choose a pokemon that receives the damage!")
+						.get(0);
+				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchDefender, 30, false);
+			} else
+				gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " has no bench Pokemon!", "");
+		}
 	}
 }
