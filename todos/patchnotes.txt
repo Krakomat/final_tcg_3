@@ -11,6 +11,8 @@ Patch 5.0
 		- 00117_Venomoth: Fixed the attack costs of Venom Powder
 		- 00252_Slowpoke: Fixed a visual bug
 		- 00209_DarkMachamp: Fixed a bug with the Fling attack
+	AI:
+		- Fixed another bug in the player simulator regarding energy payments
 		
 Patch 4.5
 	Network:

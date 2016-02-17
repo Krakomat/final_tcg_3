@@ -190,7 +190,7 @@ public class PlayerSimulator implements Player {
 		}
 
 		// Pay colorless costs with non-basic energy:
-		for (int i = 0; i < colorless; i++) {
+		for (int i = 0; i < availableCards.size(); i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
 			if (c.getProvidedEnergy().size() <= colorless && !c.isBasisEnergy()) {
 				chosenCards.add(c);
@@ -201,7 +201,7 @@ public class PlayerSimulator implements Player {
 		}
 
 		// Pay colorless costs with basic energy:
-		for (int i = 0; i < colorless; i++) {
+		for (int i = 0; i < availableCards.size(); i++) {
 			EnergyCard c = (EnergyCard) availableCards.get(i);
 			if (c.getProvidedEnergy().size() <= colorless) {
 				chosenCards.add(c);
@@ -210,11 +210,37 @@ public class PlayerSimulator implements Player {
 				i--;
 			}
 		}
+		// In case there are still colorless costs left: Pay with non-basic energy and 'overpay':
+		if (colorless > 0) {
+			for (int i = 0; i < availableCards.size(); i++) {
+				EnergyCard c = (EnergyCard) availableCards.get(i);
+				if (c.getProvidedEnergy().size() >= colorless && !c.isBasisEnergy()) {
+					chosenCards.add(c);
+					colorless = colorless - c.getProvidedEnergy().size();
+					availableCards.remove(i);
+					i--;
+				}
+			}
+		}
 
 		Preconditions.checkArgument(aiUtilities.checkPaymentOk(chosenCards, costs), "Error: Payment of PlayerSimulator was not ok! Cost: " + costs + " Payment: " + chosenCards
-				+ " AvailableCards: " + copyOfAvailableCards + " colorlessAtStart: " + colorlessAtStart + ", colorless: " + colorless);
+				+ " AvailableCards: " + copyOfAvailableCards + " colorlessAtStart: " + colorlessAtStart + ", colorless: " + colorless + " colorcosts: " + colorCosts);
 		return chosenCards;
 	}
+
+	// public static void main(String[] args) {
+	// Database.init();
+	// List<Element> costs = new ArrayList<>();
+	// costs.add(Element.COLORLESS);
+	// List<Card> energyCards = new ArrayList<>();
+	// energyCards.add(Database.createCard("00096"));
+	// energyCards.add(Database.createCard("00264"));
+	// // energyCards.add(Database.createCard("00101"));
+	//
+	// PlayerSimulator simulator = new PlayerSimulator(Color.BLUE);
+	// List<Card> payment = simulator.playerPaysEnergyCosts(costs, energyCards);
+	// System.out.println(payment);
+	// }
 
 	@Override
 	public List<Integer> playerDistributesDamage(List<Position> positionList, List<Integer> damageList, List<Integer> maxDistList, DistributionMode mode) {
