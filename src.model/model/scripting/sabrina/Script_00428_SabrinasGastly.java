@@ -37,6 +37,11 @@ public class Script_00428_SabrinasGastly extends PokemonCardScript {
 		return false;
 	}
 
+	public void positionChanged() {
+		super.positionChanged();
+		checkGaseousFormPower();
+	}
+
 	public void moveToPosition(PositionID targetPosition) {
 		super.moveToPosition(targetPosition);
 		checkGaseousFormPower();

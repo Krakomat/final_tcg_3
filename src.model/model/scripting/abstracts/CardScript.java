@@ -90,6 +90,13 @@ public abstract class CardScript {
 	}
 
 	/**
+	 * Is called whenever the underlying position of this card has changed!
+	 */
+	public void positionChanged() {
+		// Only override when needed
+	}
+
+	/**
 	 * Returns the positionID on which the card is at right now.
 	 * 
 	 * @return

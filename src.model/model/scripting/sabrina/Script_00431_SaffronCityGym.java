@@ -34,7 +34,14 @@ public class Script_00431_SaffronCityGym extends TrainerCardScript {
 	}
 
 	public void executeStadiumActiveEffect(Player player) {
-		PositionID sabrinaPos = player.playerChoosesPositions(this.getSabrinaCardsFromOwnField(player), 1, true, "Choose a position to take energy from!").get(0);
+		List<PositionID> temp = this.getSabrinaCardsFromOwnField(player);
+		List<PositionID> sabrinaList = new ArrayList<>();
+		for (PositionID posID : temp) {
+			if (gameModel.getPosition(posID).getBasicEnergyCards().size() > 0)
+				sabrinaList.add(posID);
+		}
+
+		PositionID sabrinaPos = player.playerChoosesPositions(sabrinaList, 1, true, "Choose a position to take energy from!").get(0);
 		Card energy = player.playerChoosesCards(gameModel.getPosition(sabrinaPos).getBasicEnergyCards(), 1, true, "Choose an energy card to take from this position!").get(0);
 		List<Card> cards = new ArrayList<>();
 		cards.add(energy);
