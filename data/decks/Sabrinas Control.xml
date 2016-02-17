@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Sabrinas Control">
+    <Cards>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00403">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00405">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00406">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00408">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00409">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00410">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00414">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00415">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00416">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00419">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00420">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00422">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00423">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00424">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00425">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00426">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00427">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00428">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00429">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00431">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>

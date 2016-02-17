@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Psychic Control">
+    <Cards>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00126">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00135">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00156">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00157">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00169">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00179">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00200">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00211">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00224">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00234">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00252">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00257">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00261">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

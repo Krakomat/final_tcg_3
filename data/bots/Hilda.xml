@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Hilda</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Damage Control">
+    <Cards>
+        <Card ID="00001">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00003">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00032">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00078">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00085">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00109">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00110">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00115">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00159">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00208">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00234">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00239">
+            <Size>3</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>

@@ -195,13 +195,42 @@ public class ArenaFighterFactory {
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "_THUMB"), lockedCards);
 		// TODO: Create bots with decks for new cards
 		case SAFFRONIA_CALEM:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString()),
+			lockedCards.add("00408");
+			lockedCards.add("00409");
+			lockedCards.add("00410");
+			lockedCards.add("00411");
+			lockedCards.add("00412");
+			lockedCards.add("00413");
+			lockedCards.add("00414");
+			lockedCards.add("00424");
+			lockedCards.add("00425");
+			lockedCards.add("00426");
+			lockedCards.add("00427");
+			lockedCards.add("00428");
+			lockedCards.add("00429");
+			lockedCards.add("00430");
+			return new ArenaFighter(code, Database.getBot("Calem"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString()),
 					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString() + "_THUMB"), lockedCards);
 		case SAFFRONIA_HILDA:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString()),
+			lockedCards.add("00405");
+			lockedCards.add("00406");
+			lockedCards.add("00407");
+			lockedCards.add("00419");
+			lockedCards.add("00420");
+			lockedCards.add("00421");
+			lockedCards.add("00422");
+			lockedCards.add("00423");
+			lockedCards.add("00431");
+			return new ArenaFighter(code, Database.getBot("Hilda"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString()),
 					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString() + "_THUMB"), lockedCards);
 		case SAFFRONIA_SABRINA:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString()),
+			lockedCards.add("00403");
+			lockedCards.add("00404");
+			lockedCards.add("00415");
+			lockedCards.add("00416");
+			lockedCards.add("00417");
+			lockedCards.add("00418");
+			return new ArenaFighter(code, Database.getBot("Sabrina"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString()),
 					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString() + "_THUMB"), lockedCards);
 		case ZINNOBER_DAWN:
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString()),
