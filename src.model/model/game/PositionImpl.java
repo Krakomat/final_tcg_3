@@ -66,7 +66,7 @@ public class PositionImpl implements Position {
 	}
 
 	public Card getTopCard() {
-		if (this.cards.isEmpty())
+		if (this.cards == null || this.cards.isEmpty())
 			return null;
 		return this.cards.get(this.cards.size() - 1);
 	}
@@ -251,7 +251,7 @@ public class PositionImpl implements Position {
 
 	private void notifyPosition() {
 		changed = true;
-		if(this.getTopCard() != null)
+		if (this.getTopCard() != null && this.getTopCard().getCardScript() != null)
 			this.getTopCard().getCardScript().positionChanged();
 	}
 }
