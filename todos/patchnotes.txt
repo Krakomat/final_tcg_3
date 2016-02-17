@@ -3,11 +3,14 @@ Patch 5.0
 		Gym Mode Expansion
 			- New Arenas:
 				- Fuchsia City Gym
+				- Saffron City Gym
 		New Card sets:
 			- KOGA
+			- SABRINA
 	Game:
 		- 00117_Venomoth: Fixed the attack costs of Venom Powder
 		- 00252_Slowpoke: Fixed a visual bug
+		- 00209_DarkMachamp: Fixed a bug with the Fling attack
 		
 Patch 4.5
 	Network:

@@ -95,7 +95,7 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 
 		// If pokemon is paralyzed or asleep, the it cannot attack:
 		PokemonCard pCard = (PokemonCard) card;
-		if (pCard.hasCondition(PokemonCondition.PARALYZED) || pCard.hasCondition(PokemonCondition.ASLEEP))
+		if (pCard.hasCondition(PokemonCondition.PARALYZED) || pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.NO_ATTACK))
 			return false;
 
 		List<Element> attackCosts = this.attackCosts.get(attackName);

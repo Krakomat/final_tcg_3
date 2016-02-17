@@ -62,8 +62,7 @@ public class Script_00209_DarkMachamp extends PokemonCardScript {
 		Position position = gameModel.getPosition(targetPosition);
 		List<Card> cards = position.getCards();
 
-		gameModel.sendCardMessageToAllPlayers(this.getEnemyPlayer().getName() + " shuffles " + position.getTopCard().getName() + "into his deck!",
-				position.getTopCard(), "");
+		gameModel.sendCardMessageToAllPlayers(this.getEnemyPlayer().getName() + " shuffles " + position.getTopCard().getName() + "into his deck!", position.getTopCard(), "");
 		PositionID playerDeck = enemyDeck();
 
 		int size = cards.size();
@@ -72,5 +71,17 @@ public class Script_00209_DarkMachamp extends PokemonCardScript {
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getPosition(playerDeck).shuffle();
 		gameModel.sendGameModelToAllPlayers("");
+
+		if (gameModel.getFullArenaPositions(player.getColor()).isEmpty()) {
+			gameModel.sendTextMessageToAllPlayers(player.getName() + " has no active pokemon anymore!", "");
+			gameModel.playerLoses(player);
+		} else {
+			// Choose a new active pokemon in this case:
+			PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a new active pokemon!").get(0);
+			Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
+			gameModel.getAttackAction().movePokemonToPosition(newActive, ownActive());
+			gameModel.sendGameModelToAllPlayers("");
+		}
 	}
 }

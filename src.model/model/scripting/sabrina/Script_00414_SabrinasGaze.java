@@ -1,9 +1,13 @@
 package model.scripting.sabrina;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.database.Card;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.Sounds;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00414_SabrinasGaze extends TrainerCardScript {
@@ -14,19 +18,44 @@ public class Script_00414_SabrinasGaze extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
-		// Discard trainer card before drawing!
+		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
-		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+
+		int enemyHand = gameModel.getPosition(enemyHand()).size();
+		int ownHand = gameModel.getPosition(ownHand()).size();
+
+		gameModel.sendTextMessageToAllPlayers("Both players shuffles their hands into their decks!", "");
+		List<Card> list = gameModel.getPosition(enemyHand()).getCards();
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : list)
+			cardList.add(c);
+		for (Card c : cardList)
+			gameModel.getAttackAction().moveCard(enemyHand(), enemyDeck(), c.getGameID(), true);
+		gameModel.getAttackAction().shufflePosition(enemyDeck());
+
+		list = gameModel.getPosition(ownHand()).getCards();
+		cardList = new ArrayList<>();
+		for (Card c : list)
+			cardList.add(c);
+		for (Card c : cardList)
+			gameModel.getAttackAction().moveCard(ownHand(), ownDeck(), c.getGameID(), true);
+		gameModel.getAttackAction().shufflePosition(ownDeck());
+
+		gameModel.sendGameModelToAllPlayers(Sounds.SHUFFLE);
+
+		// Draw cards:
+		if (ownHand > 0) {
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws " + ownHand + " cards!", "");
+			gameModel.getAttackAction().playerDrawsCards(ownHand, getCardOwner());
+		}
+		if (enemyHand > 0) {
+			gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " draws " + enemyHand + " cards!", "");
+			gameModel.getAttackAction().playerDrawsCards(enemyHand, getEnemyPlayer());
+		}
 	}
 }

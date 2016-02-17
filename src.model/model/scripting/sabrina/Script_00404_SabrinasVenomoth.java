@@ -3,7 +3,6 @@ package model.scripting.sabrina;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
@@ -18,58 +17,49 @@ public class Script_00404_SabrinasVenomoth extends PokemonCardScript {
 	public Script_00404_SabrinasVenomoth(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.GRASS);
+		this.addAttack("Healing Pollen", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		this.addAttack("Sonic Distortion", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Healing Pollen"))
+			this.HealingPollen();
 		else
-			this.finale();
+			this.SonicDistortion();
 	}
 
-	private void donnerwelle() {
+	private void HealingPollen() {
+		int amount = gameModel.getAttackAction().flipCoinsCountHeads(3) * 10;
+		for (PositionID posID : getDamagedCardsFromOwnField())
+			gameModel.getAttackAction().healPosition(posID, amount);
+	}
+
+	private List<PositionID> getDamagedCardsFromOwnField() {
+		List<PositionID> posList = new ArrayList<>();
+		for (PositionID posID : gameModel.getFullArenaPositions(getCardOwner().getColor())) {
+			PokemonCard pCard = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+			if (pCard.getDamageMarks() > 0)
+				posList.add(posID);
+		}
+		return posList;
+	}
+
+	private void SonicDistortion() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS && gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
 			gameModel.sendGameModelToAllPlayers("");
 		}
-	}
-
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
 	}
 }

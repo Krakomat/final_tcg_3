@@ -238,6 +238,9 @@ public class AttackAction {
 				case HARDEN20:
 					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
+				case HARDEN10:
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
+					break;
 				case INVULNERABLE:
 					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 					break;
@@ -280,6 +283,8 @@ public class AttackAction {
 					break;
 				case KOGAS_NINJA_TRICK:
 					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
+				case NO_ATTACK:
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
 				default:
 					break;
 				}

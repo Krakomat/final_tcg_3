@@ -345,6 +345,10 @@ public class Database {
 		noEnergy.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.NO_ENERGY.toString(), noEnergy);
 
+		TextureKey noAttack = new TextureKey("/tilesets/conditions/noAttack.png");
+		noAttack.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.NO_ATTACK.toString(), noAttack);
+
 		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
 		overgrowth.setGenerateMips(false);
 		assetTextures.put("overgrowth", overgrowth);

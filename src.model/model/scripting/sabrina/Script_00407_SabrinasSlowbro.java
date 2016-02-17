@@ -3,8 +3,7 @@ package model.scripting.sabrina;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
-import model.database.Card;
+import common.utilities.Triple;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
@@ -18,58 +17,43 @@ public class Script_00407_SabrinasSlowbro extends PokemonCardScript {
 	public Script_00407_SabrinasSlowbro(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.PSYCHIC);
+		this.addAttack("Naptime", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.PSYCHIC);
+		att2Cost.add(Element.COLORLESS);
+		att2Cost.add(Element.COLORLESS);
+		this.addAttack("Screaming Headbutt", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Naptime"))
+			this.Naptime();
 		else
-			this.finale();
+			this.ScreamingHeadbutt();
 	}
 
-	private void donnerwelle() {
+	private void Naptime() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+			gameModel.getAttackAction().healPosition(attacker, 30);
+			gameModel.sendTextMessageToAllPlayers(card.getName() + " is asleep!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.ASLEEP);
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
+	private void ScreamingHeadbutt() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+		// Block attack:
+		gameModel.getGameModelParameters().getBlockedAttacks().add(new Triple<Integer, String, Integer>(this.card.getGameID(), "Screaming Headbutt", 3));
 	}
 }
