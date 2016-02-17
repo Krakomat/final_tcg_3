@@ -49,6 +49,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 	PokemonGameManagerImpl(long id, String name, String password, ServerMain serverMain) {
 		this.gameModel = new PokemonGameModelImpl(id);
+		((PokemonGameModelImpl) this.gameModel).setPokemonGameManager(this);
 		this.name = name;
 		this.password = password;
 		this.moveMade = false;
@@ -57,6 +58,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 	public PokemonGameManagerImpl(long id, String name, String password) {
 		this.gameModel = new PokemonGameModelImpl(id);
+		((PokemonGameModelImpl) this.gameModel).setPokemonGameManager(this);
 		this.name = name;
 		this.password = password;
 		this.moveMade = false;

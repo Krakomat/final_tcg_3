@@ -48,7 +48,7 @@ public class Script_00252_Slowpoke extends PokemonCardScript {
 				this.gameModel.setEnergyPlayed(true);
 
 				// Execute animation:
-				Animation animation = new CardMoveAnimation(ownDeck(), this.card.getCurrentPosition().getPositionID(), card.getCardId(), Sounds.EQUIP);
+				Animation animation = new CardMoveAnimation(ownDeck(), this.card.getCurrentPosition().getPositionID(), c.getCardId(), Sounds.EQUIP);
 				gameModel.sendAnimationToAllPlayers(animation);
 
 				this.gameModel.sendGameModelToAllPlayers("");

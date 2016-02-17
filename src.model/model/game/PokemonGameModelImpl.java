@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import network.client.Player;
+import network.server.PokemonGameManagerImpl;
 import model.database.Card;
 import model.database.Database;
 import model.database.Deck;
@@ -39,6 +40,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	protected Map<Integer, Card> cardMap;
 	protected CardScriptFactory cardScriptFactory;
 	protected GameModelParameters gameModelParameters;
+	private PokemonGameManagerImpl pokemonGameManager;
 
 	/**
 	 * The given player initializes a new PokemonGameModel with the given id.
@@ -76,7 +78,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-		
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
@@ -1092,5 +1093,13 @@ public class PokemonGameModelImpl implements PokemonGame {
 	@Override
 	public Card getCurrentStadium() {
 		return this.getPosition(PositionID.STADIUM).getTopCard();
+	}
+
+	public PokemonGameManagerImpl getPokemonGameManager() {
+		return pokemonGameManager;
+	}
+
+	public void setPokemonGameManager(PokemonGameManagerImpl pokemonGameManager) {
+		this.pokemonGameManager = pokemonGameManager;
 	}
 }

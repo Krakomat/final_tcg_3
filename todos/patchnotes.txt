@@ -7,7 +7,8 @@ Patch 5.0
 			- KOGA
 	Game:
 		- 00117_Venomoth: Fixed the attack costs of Venom Powder
-	
+		- 00252_Slowpoke: Fixed a visual bug
+		
 Patch 4.5
 	Network:
 		- Significantly lowered the amount of data that is send in a single game model update
