@@ -7,6 +7,33 @@ import model.database.TrainerCard;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
 import model.scripting.baseEdition.*;
+import model.scripting.blaine.Script_00432_BlainesMoltres;
+import model.scripting.blaine.Script_00433_BlainesGrowlithe;
+import model.scripting.blaine.Script_00434_BlainesKangaskhan;
+import model.scripting.blaine.Script_00435_BlainesMagmar;
+import model.scripting.blaine.Script_00436_BlainesCharmander;
+import model.scripting.blaine.Script_00437_BlainesGrowlithe;
+import model.scripting.blaine.Script_00438_BlainesPonyta;
+import model.scripting.blaine.Script_00439_BlainesTauros;
+import model.scripting.blaine.Script_00440_BlainesVulpix;
+import model.scripting.blaine.Script_00441_BlainesLastResort;
+import model.scripting.blaine.Script_00442_BlainesGamble;
+import model.scripting.blaine.Script_00443_BlainesArcanine;
+import model.scripting.blaine.Script_00444_BlainesCharizard;
+import model.scripting.blaine.Script_00445_Blaine;
+import model.scripting.blaine.Script_00446_BlainesNinetales;
+import model.scripting.blaine.Script_00447_BlainesCharmeleon;
+import model.scripting.blaine.Script_00448_BlainesDodrio;
+import model.scripting.blaine.Script_00449_BlainesRapidash;
+import model.scripting.blaine.Script_00450_BlainesCharmander;
+import model.scripting.blaine.Script_00451_BlainesDoduo;
+import model.scripting.blaine.Script_00452_BlainesGrowlithe;
+import model.scripting.blaine.Script_00453_BlainesMankey;
+import model.scripting.blaine.Script_00454_BlainesPonyta;
+import model.scripting.blaine.Script_00455_BlainesRhyhorn;
+import model.scripting.blaine.Script_00456_BlainesVulpix;
+import model.scripting.blaine.Script_00457_CinnabarCityGym;
+import model.scripting.blaine.Script_00458_Fervor;
 import model.scripting.brock.Script_00266_BrocksRhydon;
 import model.scripting.brock.Script_00267_Brock;
 import model.scripting.brock.Script_00268_BrocksGolem;
@@ -1236,6 +1263,60 @@ public class CardScriptFactory {
 			return new Script_00430_SabrinasPsyduck((PokemonCard) card, gameModel);
 		case "00431":
 			return new Script_00431_SaffronCityGym((TrainerCard) card, gameModel);
+		case "00432":
+			return new Script_00432_BlainesMoltres((PokemonCard) card, gameModel);
+		case "00433":
+			return new Script_00433_BlainesGrowlithe((PokemonCard) card, gameModel);
+		case "00434":
+			return new Script_00434_BlainesKangaskhan((PokemonCard) card, gameModel);
+		case "00435":
+			return new Script_00435_BlainesMagmar((PokemonCard) card, gameModel);
+		case "00436":
+			return new Script_00436_BlainesCharmander((PokemonCard) card, gameModel);
+		case "00437":
+			return new Script_00437_BlainesGrowlithe((PokemonCard) card, gameModel);
+		case "00438":
+			return new Script_00438_BlainesPonyta((PokemonCard) card, gameModel);
+		case "00439":
+			return new Script_00439_BlainesTauros((PokemonCard) card, gameModel);
+		case "00440":
+			return new Script_00440_BlainesVulpix((PokemonCard) card, gameModel);
+		case "00441":
+			return new Script_00441_BlainesLastResort((TrainerCard) card, gameModel);
+		case "00442":
+			return new Script_00442_BlainesGamble((TrainerCard) card, gameModel);
+		case "00443":
+			return new Script_00443_BlainesArcanine((PokemonCard) card, gameModel);
+		case "00444":
+			return new Script_00444_BlainesCharizard((PokemonCard) card, gameModel);
+		case "00445":
+			return new Script_00445_Blaine((TrainerCard) card, gameModel);
+		case "00446":
+			return new Script_00446_BlainesNinetales((PokemonCard) card, gameModel);
+		case "00447":
+			return new Script_00447_BlainesCharmeleon((PokemonCard) card, gameModel);
+		case "00448":
+			return new Script_00448_BlainesDodrio((PokemonCard) card, gameModel);
+		case "00449":
+			return new Script_00449_BlainesRapidash((PokemonCard) card, gameModel);
+		case "00450":
+			return new Script_00450_BlainesCharmander((PokemonCard) card, gameModel);
+		case "00451":
+			return new Script_00451_BlainesDoduo((PokemonCard) card, gameModel);
+		case "00452":
+			return new Script_00452_BlainesGrowlithe((PokemonCard) card, gameModel);
+		case "00453":
+			return new Script_00453_BlainesMankey((PokemonCard) card, gameModel);
+		case "00454":
+			return new Script_00454_BlainesPonyta((PokemonCard) card, gameModel);
+		case "00455":
+			return new Script_00455_BlainesRhyhorn((PokemonCard) card, gameModel);
+		case "00456":
+			return new Script_00456_BlainesVulpix((PokemonCard) card, gameModel);
+		case "00457":
+			return new Script_00457_CinnabarCityGym((TrainerCard) card, gameModel);
+		case "00458":
+			return new Script_00458_Fervor((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
