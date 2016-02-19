@@ -44,8 +44,17 @@ public abstract class EnergyCardScript extends CardScript {
 
 		if (!this.gameModel.getEnergyPlayed())
 			return PlayerAction.PLAY_ENERGY_CARD;
-		else
-			return null;
+		else if (gameModel.getGameModelParameters().getValueForUniqueEffectParameterKey("00445") != null
+				&& gameModel.getGameModelParameters().getValueForUniqueEffectParameterKey("00445") > 0 && card.getCardId().equals("00098")) {
+			// Blaine effect: We may be able to add a second fire energy in this turn!
+			// Check if the pokemon that received the first fire energy is still in play:
+			for (PositionID posID : gameModel.getFullArenaPositions(getCardOwner().getColor())) {
+				Card c = gameModel.getPosition(posID).getTopCard();
+				if (c.getGameID() == gameModel.getGameModelParameters().getValueForUniqueEffectParameterKey("00445"))
+					return PlayerAction.PLAY_ENERGY_CARD;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -55,7 +64,19 @@ public abstract class EnergyCardScript extends CardScript {
 		if (player == null)
 			throw new IllegalArgumentException("Error: Couldn't find player in playFromHand of EnergyCardScript for id: " + card.getCardId());
 
-		PositionID chosenPosition = player.playerChoosesPositions(this.getArenaPositionForEnergy(player.getColor()), 1, true, "Choose a position:").get(0);
+		// Check second fire Blaine:
+		boolean secondFireBlaine = false;
+		Integer gameID = gameModel.getGameModelParameters().getValueForUniqueEffectParameterKey("00445");
+		if (gameID != null && gameID > 0 && card.getCardId().equals("00098")) {
+			secondFireBlaine = true;
+		}
+
+		PositionID chosenPosition = null;
+		if (!secondFireBlaine)
+			chosenPosition = player.playerChoosesPositions(this.getArenaPositionForEnergy(player.getColor()), 1, true, "Choose a position:").get(0);
+		else
+			chosenPosition = gameModel.getCard(gameID).getCurrentPosition().getPositionID();
+
 		if (this.gameModel.getPosition(chosenPosition).getTopCard() != null) {
 			Card basicPkmn = this.gameModel.getPosition(chosenPosition).getTopCard();
 			List<Card> cardList = new ArrayList<Card>();
@@ -63,6 +84,16 @@ public abstract class EnergyCardScript extends CardScript {
 			cardList.add(card);
 			this.gameModel.sendCardMessageToAllPlayers(player.getName() + " attaches an Energy-Card to " + basicPkmn.getName(), cardList, "");
 			this.gameModel.getAttackAction().moveCard(card.getCurrentPosition().getPositionID(), chosenPosition, card.getGameID(), false);
+
+			// Check Blaine:
+			Integer value = gameModel.getGameModelParameters().getValueForUniqueEffectParameterKey("00445");
+			if (value != null && value == 0 && card.getCardId().equals("00098") && basicPkmn.getName().contains("Blaine")) {
+				gameModel.getGameModelParameters().replaceUniqueEffectParameter("00445", basicPkmn.getGameID());
+			}
+			if (value != null && value > 0) {
+				gameModel.getGameModelParameters().replaceUniqueEffectParameter("00445", -1);
+			}
+
 			this.gameModel.setEnergyPlayed(true);
 
 			// Execute animation:

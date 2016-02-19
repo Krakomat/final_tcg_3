@@ -354,8 +354,44 @@ public class GameModelParameters {
 		return false;
 	}
 
+	public List<Pair<Integer, Integer>> effectParameterActive(String cardID) {
+		List<Pair<Integer, Integer>> erg = new ArrayList<>();
+		for (Triple<Integer, String, Integer> attack : this.effectParameters) {
+			if (attack.getValue().equals(cardID)) {
+				erg.add(new Pair<Integer, Integer>(attack.getKey(), attack.getAction()));
+			}
+		}
+		return erg;
+	}
+
 	public void addEffectParameter(String cardID, int gameID, Integer parameter) {
 		this.effectParameters.add(new Triple<Integer, String, Integer>(gameID, cardID, parameter));
+	}
+
+	public void replaceEffectParameter(String cardID, int gameID, Integer parameter) {
+		Triple<Integer, String, Integer> p = null;
+		for (Triple<Integer, String, Integer> attack : this.effectParameters) {
+			if (attack.getValue().equals(cardID) && attack.getKey() == gameID) {
+				p = attack;
+			}
+		}
+
+		Preconditions.checkArgument(p != null, "Error: Parameter to be replaced is not in this list!");
+		this.effectParameters.remove(p);
+		this.effectParameters.add(new Triple<Integer, String, Integer>(p.getKey(), p.getValue(), parameter));
+	}
+
+	public void replaceUniqueEffectParameter(String cardID, Integer parameter) {
+		Triple<Integer, String, Integer> p = null;
+		for (Triple<Integer, String, Integer> attack : this.effectParameters) {
+			if (attack.getValue().equals(cardID)) {
+				p = attack;
+			}
+		}
+
+		Preconditions.checkArgument(p != null, "Error: Parameter to be replaced is not in this list!");
+		this.effectParameters.remove(p);
+		this.effectParameters.add(new Triple<Integer, String, Integer>(p.getKey(), p.getValue(), parameter));
 	}
 
 	public void removeEffectParameter(String cardID, int gameID) {
@@ -371,6 +407,15 @@ public class GameModelParameters {
 	public Integer getValueForEffectParameterKeyPair(String cardID, int gameID) {
 		for (Triple<Integer, String, Integer> attack : this.effectParameters) {
 			if (attack.getValue().equals(cardID) && attack.getKey() == gameID) {
+				return attack.getAction();
+			}
+		}
+		return null;
+	}
+
+	public Integer getValueForUniqueEffectParameterKey(String cardID) {
+		for (Triple<Integer, String, Integer> attack : this.effectParameters) {
+			if (attack.getValue().equals(cardID)) {
 				return attack.getAction();
 			}
 		}
