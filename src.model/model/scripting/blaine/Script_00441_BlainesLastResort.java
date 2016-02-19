@@ -14,19 +14,18 @@ public class Script_00441_BlainesLastResort extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
+		Position ownHand = gameModel.getPosition(ownHand());
+		if (ownHand.size() == 1)
 			return PlayerAction.PLAY_TRAINER_CARD;
 		return null;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 5 cards!", "");
 		// Discard trainer card before drawing!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+		gameModel.getAttackAction().playerDrawsCards(5, getCardOwner());
 	}
 }

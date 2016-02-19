@@ -8,9 +8,9 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
+import model.interfaces.Position;
 import model.scripting.abstracts.PokemonCardScript;
 
 public class Script_00444_BlainesCharizard extends PokemonCardScript {
@@ -18,58 +18,118 @@ public class Script_00444_BlainesCharizard extends PokemonCardScript {
 	public Script_00444_BlainesCharizard(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.FIRE);
+		this.addAttack("Roaring Flames", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.FIRE);
+		att2Cost.add(Element.FIRE);
+		this.addAttack("Flame Jet", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Roaring Flames"))
+			this.RoaringFlames();
 		else
-			this.finale();
+			this.FlameJet();
 	}
 
-	private void donnerwelle() {
+	private void RoaringFlames() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
 
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+		// Discard all rock energy cards:
+		List<Card> rockEnergy = getRockEnergyOnPosition();
+		for (Card c : rockEnergy) {
+			gameModel.getAttackAction().discardCardToDiscardPile(getCurrentPositionID(), c.getGameID(), true);
+		}
+		gameModel.sendGameModelToAllPlayers("");
+
+		int bonusDamage = 0;
+		if (costsAvailable()) {
+			bonusDamage = 20 * getFireEnergyOnPosition().size();
+			// Discard all energy cards:
+			gameModel.getAttackAction().removeAllEnergyFromPosition(attacker);
 			gameModel.sendGameModelToAllPlayers("");
 		}
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20 + bonusDamage, true);
 	}
 
-	private void finale() {
+	private List<Card> getRockEnergyOnPosition() {
+		Position pos = gameModel.getPosition(getCurrentPositionID());
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : pos.getEnergyCards())
+			if (c.getCardId().equals("00097"))
+				cardList.add(c);
+		return cardList;
+	}
+
+	private List<Card> getFireEnergyOnPosition() {
+		Position pos = gameModel.getPosition(getCurrentPositionID());
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : pos.getEnergyCards())
+			if (c.getCardId().equals("00098"))
+				cardList.add(c);
+		return cardList;
+	}
+
+	private boolean costsAvailable() {
+		List<Element> attackCosts = new ArrayList<Element>();
+		attackCosts.add(Element.FIRE);
+		attackCosts.add(Element.FIRE);
+
+		// Check if costs are available at the position:
+		ArrayList<Element> onField = (ArrayList<Element>) this.card.getCurrentPosition().getEnergy();
+		@SuppressWarnings("unchecked")
+		List<Element> copy = (ArrayList<Element>) onField.clone();
+		List<Element> colors = new ArrayList<Element>();
+		List<Element> colorless = new ArrayList<Element>();
+		for (int i = 0; i < attackCosts.size(); i++) {
+			if (attackCosts.get(i).equals(Element.COLORLESS))
+				colorless.add(attackCosts.get(i));
+			else
+				colors.add(attackCosts.get(i));
+		}
+
+		for (int i = 0; i < colors.size(); i++) {
+			Element e = colors.get(i);
+			boolean found = false;
+			for (int j = 0; j < copy.size(); j++) {
+				if (e.equals(copy.get(j)) && !found) {
+					copy.remove(j);
+					found = true;
+				}
+			}
+			// Try to pay with rainbow energy:
+			if (!found) {
+				for (int j = 0; j < copy.size(); j++) {
+					if (copy.get(j).equals(Element.RAINBOW) && !found) {
+						copy.remove(j);
+						found = true;
+					}
+				}
+			}
+			if (!found)
+				return false;
+		}
+		return true;
+	}
+
+	private void FlameJet() {
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
-
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+			if (gameModel.getFullArenaPositions(enemy.getColor()).size() > 0) {
+				PositionID benchDefender = player.playerChoosesPositions(gameModel.getFullArenaPositions(enemy.getColor()), 1, true, "Choose a pokemon that receives the damage!")
+						.get(0);
+				this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchDefender, 40, false);
+			} else
+				gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " has no bench Pokemon!", "");
+		}
 	}
 }

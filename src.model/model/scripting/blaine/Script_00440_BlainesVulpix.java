@@ -3,7 +3,6 @@ package model.scripting.blaine;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
 import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
@@ -18,58 +17,55 @@ public class Script_00440_BlainesVulpix extends PokemonCardScript {
 	public Script_00440_BlainesVulpix(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.FIRE);
+		att1Cost.add(Element.COLORLESS);
+		att1Cost.add(Element.COLORLESS);
+		this.addAttack("Tail Fan", att1Cost);
 
-		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		this.addPokemonPower("Natural Healing");
+	}
+
+	@Override
+	public boolean pokemonPowerCanBeExecuted(String powerName) {
+		PokemonCard pCard = (PokemonCard) this.card;
+
+		if (gameModel.getGameModelParameters().activeEffect("00440", cardGameID()))
+			return false;
+		if (!gameModel.getAttackCondition().pokemonIsInPlay(pCard))
+			return false;
+		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+			return false;
+		return super.pokemonPowerCanBeExecuted(powerName);
+	}
+
+	public void executeEndTurnActions() {
+		if (gameModel.getGameModelParameters().activeEffect("00440", cardGameID())) {
+			gameModel.getGameModelParameters().deactivateEffect("00440", cardGameID());
+		}
+	}
+
+	@Override
+	public void executePokemonPower(String powerName) {
+		gameModel.getAttackAction().healPosition(getCurrentPositionID(), 10);
+		gameModel.getGameModelParameters().activateEffect("00440", cardGameID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
-		else
-			this.finale();
-	}
-
-	private void donnerwelle() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
 		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
+		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
+			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is confused!", "");
+			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
 			gameModel.sendGameModelToAllPlayers("");
 		}
-	}
-
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
-		PositionID attacker = this.card.getCurrentPosition().getPositionID();
-		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Element attackerElement = ((PokemonCard) this.card).getElement();
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
-		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
 	}
 }
