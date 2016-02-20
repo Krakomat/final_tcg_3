@@ -7,6 +7,7 @@ import java.util.Map;
 
 import network.client.Player;
 import model.database.Card;
+import model.database.EnergyCard;
 import model.database.PokemonCard;
 import model.enums.CardType;
 import model.enums.Coin;
@@ -451,5 +452,14 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	public boolean allowIncomingCondition(PokemonCondition condition) {
 		// Override when needed!
 		return true;
+	}
+
+	/**
+	 * Is called whenever the pokemon got a new energy card attached.
+	 * 
+	 * @param energyCard
+	 */
+	public void pokemonGotEnergy(EnergyCard energyCard) {
+
 	}
 }

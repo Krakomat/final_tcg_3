@@ -3,12 +3,8 @@ package model.scripting.blaine;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.client.Player;
-import model.database.Card;
 import model.database.PokemonCard;
-import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -18,58 +14,48 @@ public class Script_00447_BlainesCharmeleon extends PokemonCardScript {
 	public Script_00447_BlainesCharmeleon(PokemonCard card, PokemonGame gameModel) {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
-		att1Cost.add(Element.LIGHTNING);
-		this.addAttack("Thunder Wave", att1Cost);
+		att1Cost.add(Element.FIRE);
+		att1Cost.add(Element.FIRE);
+		this.addAttack("Fire Claws", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
-		att2Cost.add(Element.LIGHTNING);
-		att2Cost.add(Element.LIGHTNING);
-		this.addAttack("Selfdestruct", att2Cost);
+		att2Cost.add(Element.FIRE);
+		att2Cost.add(Element.FIRE);
+		att2Cost.add(Element.FIRE);
+		this.addAttack("Bonfire", att2Cost);
 	}
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (attackName.equals("Thunder Wave"))
-			this.donnerwelle();
+		if (attackName.equals("Fire Claws"))
+			this.FireClaws();
 		else
-			this.finale();
+			this.Bonfire();
 	}
 
-	private void donnerwelle() {
+	private void FireClaws() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
-		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-
-		// Flip coin to check if defending pokemon is paralyzed:
-		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is paralyzed!", "");
-		Coin c = gameModel.getAttackAction().flipACoin();
-		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(defendingPokemon.getName() + " is paralyzed!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.PARALYZED);
-			gameModel.sendGameModelToAllPlayers("");
-		}
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 	}
 
-	private void finale() {
-		Player player = this.getCardOwner();
-		Player enemy = this.getEnemyPlayer();
-
+	private void Bonfire() {
 		PositionID attacker = this.card.getCurrentPosition().getPositionID();
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		int heads = gameModel.getAttackAction().flipCoinsCountHeads(3);
+		List<Element> costs = new ArrayList<>();
+		for (int i = 0; i < heads; i++)
+			costs.add(Element.FIRE);
 
-		List<PositionID> enemyBench = gameModel.getFullBenchPositions(enemy.getColor());
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " has to pay 3 fire energy!", "");
+		gameModel.getAttackAction().playerPaysEnergy(getCardOwner(), costs, attacker);
+
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10 * heads, false);
+		List<PositionID> enemyBench = gameModel.getFullBenchPositions(getEnemyPlayer().getColor());
 		for (PositionID benchPos : enemyBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		List<PositionID> ownBench = gameModel.getFullBenchPositions(player.getColor());
-		for (PositionID benchPos : ownBench)
-			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10, false);
-
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, attacker, 40, true);
+			gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, benchPos, 10 * heads, false);
 	}
 }

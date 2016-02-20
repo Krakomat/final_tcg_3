@@ -107,8 +107,10 @@ public class AttackAction {
 
 		// Apply weakness/resistance if set:
 		if (applyWeaknessResistance && attackerPokemon != null) {
-			// Calculate real damage:
-			if (attackElement.equals(defenderPokemon.getCurrentWeakness()))
+			// Don't apply weakness, if Cinnabar City Gym is in play and the
+			// defender has Blaine in its name and the attacker is a water pokemon:
+			if (attackElement.equals(defenderPokemon.getCurrentWeakness()) && !(attackerPokemon.getElement() == Element.WATER && gameModel.getCurrentStadium() != null
+					&& gameModel.getCurrentStadium().getCardId().equals("00457") && defenderPokemon.getName().contains("Blaine")))
 				damageAmount = damageAmount * 2; // Double damage when weakness
 			// Don't apply resistance, if Pewter City Gym is in play and the
 			// attacker has Brock in its name:

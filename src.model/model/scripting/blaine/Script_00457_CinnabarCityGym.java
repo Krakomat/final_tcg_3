@@ -1,9 +1,10 @@
 package model.scripting.blaine;
 
+import model.database.Card;
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.PositionID;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00457_CinnabarCityGym extends TrainerCardScript {
@@ -14,19 +15,18 @@ public class Script_00457_CinnabarCityGym extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
-		// Discard trainer card before drawing!
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
+		if (!gameModel.getPosition(PositionID.STADIUM).isEmpty()) {
+			Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
+			// Discard previous stadium card:
+			gameModel.getAttackAction().discardCardToDiscardPile(PositionID.STADIUM, stadium.getGameID(), false);
+		}
+		gameModel.getPosition(PositionID.STADIUM).setColor(this.getCardOwner().getColor());
+		gameModel.getAttackAction().moveCard(getCurrentPositionID(), PositionID.STADIUM, this.card.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
 	}
 }

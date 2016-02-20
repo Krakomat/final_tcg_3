@@ -57,7 +57,7 @@ public class Script_00426_SabrinasDrowzee extends PokemonCardScript {
 		// Shuffle:
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		deck.shuffle();
-		gameModel.sendSoundToAllPlayers("");
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	private void MindShock() {

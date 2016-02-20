@@ -4,9 +4,11 @@ Patch 5.0
 			- New Arenas:
 				- Fuchsia City Gym
 				- Saffron City Gym
+				- Cinnabar City Gym
 		New Card sets:
 			- KOGA
 			- SABRINA
+			- BLAINE
 	Game:
 		- 00117_Venomoth: Fixed the attack costs of Venom Powder
 		- 00252_Slowpoke: Fixed a visual bug

@@ -102,6 +102,10 @@ public abstract class EnergyCardScript extends CardScript {
 
 			this.gameModel.sendGameModelToAllPlayers("");
 
+			// Notify pokemon card script:
+			PokemonCardScript script = (PokemonCardScript) ((PokemonCard) basicPkmn).getCardScript();
+			script.pokemonGotEnergy((EnergyCard) card);
+
 			EnergyCard eneCard = (EnergyCard) this.card;
 			// Call energy played of all card scripts:
 			for (Card c : gameModel.getAllCards())
