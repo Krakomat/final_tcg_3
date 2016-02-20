@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Sparking Fire">
+    <Cards>
+        <Card ID="00003">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00012">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00068">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00078">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00084">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00090">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00098">
+            <Size>21</Size>
+        </Card>
+        <Card ID="00109">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00175">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00197">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00203">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00217">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00229">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00235">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00249">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00257">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>

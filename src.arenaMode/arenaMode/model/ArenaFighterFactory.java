@@ -233,13 +233,40 @@ public class ArenaFighterFactory {
 			return new ArenaFighter(code, Database.getBot("Sabrina"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString()),
 					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString() + "_THUMB"), lockedCards);
 		case ZINNOBER_DAWN:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString()),
+			lockedCards.add("00436");
+			lockedCards.add("00437");
+			lockedCards.add("00438");	
+			lockedCards.add("00439");	
+			lockedCards.add("00440");
+			lockedCards.add("00442");	
+			lockedCards.add("00450");
+			lockedCards.add("00451");
+			lockedCards.add("00452");
+			lockedCards.add("00453");
+			lockedCards.add("00454");
+			lockedCards.add("00455");
+			lockedCards.add("00456");
+			lockedCards.add("00458");
+			return new ArenaFighter(code, Database.getBot("Dawn"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString()),
 					Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString() + "_THUMB"), lockedCards);
 		case ZINNOBER_ETHAN:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString()),
+			lockedCards.add("00433");
+			lockedCards.add("00434");
+			lockedCards.add("00435");	
+			lockedCards.add("00441");	
+			lockedCards.add("00447");
+			lockedCards.add("00448");	
+			lockedCards.add("00449");
+			lockedCards.add("00457");
+			return new ArenaFighter(code, Database.getBot("Ethan"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString()),
 					Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString() + "_THUMB"), lockedCards);
 		case ZINNOBER_PYRO:
-			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString()),
+			lockedCards.add("00432");
+			lockedCards.add("00443");
+			lockedCards.add("00444");
+			lockedCards.add("00445");
+			lockedCards.add("00446");
+			return new ArenaFighter(code, Database.getBot("Blaine"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString()),
 					Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString() + "_THUMB"), lockedCards);
 		case VERTANIA_GIOVANNI:
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.VERTANIA_GIOVANNI.toString()),

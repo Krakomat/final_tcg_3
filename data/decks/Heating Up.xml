@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Heating Up">
+    <Cards>
+        <Card ID="00004">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00024">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00036">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00046">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00060">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00081">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00098">
+            <Size>20</Size>
+        </Card>
+        <Card ID="00107">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00120">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00132">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00139">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00142">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00175">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00196">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>

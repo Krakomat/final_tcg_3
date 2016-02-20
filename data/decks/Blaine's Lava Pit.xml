@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Blaine's Lava Pit">
+    <Cards>
+        <Card ID="00081">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00098">
+            <Size>26</Size>
+        </Card>
+        <Card ID="00175">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00434">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00435">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00436">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00437">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00439">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00440">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00441">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00443">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00444">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00445">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00446">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00447">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00450">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00452">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00456">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00457">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00458">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>
