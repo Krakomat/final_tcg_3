@@ -361,6 +361,25 @@ import model.scripting.sabrina.Script_00428_SabrinasGastly;
 import model.scripting.sabrina.Script_00429_SabrinasPorygon;
 import model.scripting.sabrina.Script_00430_SabrinasPsyduck;
 import model.scripting.sabrina.Script_00431_SaffronCityGym;
+import model.scripting.teamRocket.Script_00459_RocketsHitmonchan;
+import model.scripting.teamRocket.Script_00460_RocketsMoltres;
+import model.scripting.teamRocket.Script_00461_RocketsScyther;
+import model.scripting.teamRocket.Script_00462_TheRocketsTrap;
+import model.scripting.teamRocket.Script_00463_RocketsSnorlax;
+import model.scripting.teamRocket.Script_00464_NoRemovalGym;
+import model.scripting.teamRocket.Script_00465_TheRocketsTrainingGym;
+import model.scripting.teamRocket.Script_00466_MinionsOfTeamRocket;
+import model.scripting.teamRocket.Script_00467_EnergyFlow;
+import model.scripting.teamRocket.Script_00468_NarrowGym;
+import model.scripting.teamRocket.Script_00469_TrashExchange;
+import model.scripting.teamRocket.Script_00470_RocketsMewtwo;
+import model.scripting.teamRocket.Script_00471_RocketsZapdos;
+import model.scripting.teamRocket.Script_00472_ResistanceGym;
+import model.scripting.teamRocket.Script_00473_MasterBall;
+import model.scripting.teamRocket.Script_00474_MaxRevive;
+import model.scripting.teamRocket.Script_00475_RocketsSecretExperiment;
+import model.scripting.teamRocket.Script_00476_TransparentWalls;
+import model.scripting.teamRocket.Script_00477_WarpPoint;
 
 /**
  * Factory, which generates the {@link CardScript} for a specific card.
@@ -1317,6 +1336,44 @@ public class CardScriptFactory {
 			return new Script_00457_CinnabarCityGym((TrainerCard) card, gameModel);
 		case "00458":
 			return new Script_00458_Fervor((TrainerCard) card, gameModel);
+		case "00459":
+			return new Script_00459_RocketsHitmonchan((PokemonCard) card, gameModel);
+		case "00460":
+			return new Script_00460_RocketsMoltres((PokemonCard) card, gameModel);
+		case "00461":
+			return new Script_00461_RocketsScyther((PokemonCard) card, gameModel);
+		case "00462":
+			return new Script_00462_TheRocketsTrap((TrainerCard) card, gameModel);
+		case "00463":
+			return new Script_00463_RocketsSnorlax((PokemonCard) card, gameModel);
+		case "00464":
+			return new Script_00464_NoRemovalGym((TrainerCard) card, gameModel);
+		case "00465":
+			return new Script_00465_TheRocketsTrainingGym((TrainerCard) card, gameModel);
+		case "00466":
+			return new Script_00466_MinionsOfTeamRocket((TrainerCard) card, gameModel);
+		case "00467":
+			return new Script_00467_EnergyFlow((TrainerCard) card, gameModel);
+		case "00468":
+			return new Script_00468_NarrowGym((TrainerCard) card, gameModel);
+		case "00469":
+			return new Script_00469_TrashExchange((TrainerCard) card, gameModel);
+		case "00470":
+			return new Script_00470_RocketsMewtwo((PokemonCard) card, gameModel);
+		case "00471":
+			return new Script_00471_RocketsZapdos((PokemonCard) card, gameModel);
+		case "00472":
+			return new Script_00472_ResistanceGym((TrainerCard) card, gameModel);
+		case "00473":
+			return new Script_00473_MasterBall((TrainerCard) card, gameModel);
+		case "00474":
+			return new Script_00474_MaxRevive((TrainerCard) card, gameModel);
+		case "00475":
+			return new Script_00475_RocketsSecretExperiment((TrainerCard) card, gameModel);
+		case "00476":
+			return new Script_00476_TransparentWalls((TrainerCard) card, gameModel);
+		case "00477":
+			return new Script_00477_WarpPoint((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
