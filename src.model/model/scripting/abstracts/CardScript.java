@@ -58,7 +58,7 @@ public abstract class CardScript {
 	/**
 	 * Will be executed immediately before the player that is on turn next, will start his turn.
 	 */
-	public void executePreTurnActions() {
+	public void executePreTurnActions(Player playerOnTurn) {
 		// Only override when needed
 	}
 

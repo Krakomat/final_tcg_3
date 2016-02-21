@@ -9,6 +9,7 @@ import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
+import network.client.Player;
 
 public class Script_00153_Aerodactyl extends PokemonCardScript {
 
@@ -54,8 +55,8 @@ public class Script_00153_Aerodactyl extends PokemonCardScript {
 		checkPower();
 	}
 
-	public void executePreTurnActions() {
-		super.executePreTurnActions();
+	public void executePreTurnActions(Player playerOnTurn) {
+		super.executePreTurnActions(playerOnTurn);
 		checkPower();
 	}
 

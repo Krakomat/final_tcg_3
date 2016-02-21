@@ -76,8 +76,8 @@ public class Script_00362_ErikasOddish extends PokemonCardScript {
 		checkPhotosynthesis();
 	}
 
-	public void executePreTurnActions() {
-		super.executePreTurnActions();
+	public void executePreTurnActions(Player playerOnTurn) {
+		super.executePreTurnActions(playerOnTurn);
 		checkPhotosynthesis();
 	}
 

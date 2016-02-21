@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import common.utilities.Pair;
 import network.client.Player;
 import model.database.Card;
 import model.database.DynamicPokemonCondition;
@@ -146,6 +147,15 @@ public class AttackAction {
 			damageAmount = 0;
 		if (defenderPokemon.hasCondition(PokemonCondition.NO_DAMAGE))
 			damageAmount = 0;
+
+		// Check Transparent Walls:
+		if (PositionID.isBenchPosition(defenderPokemon.getCurrentPosition().getPositionID()) && !gameModel.getGameModelParameters().effectParameterActive("00476").isEmpty()) {
+			Color defendColor = defenderPokemon.getCurrentPosition().getColor();
+			for (Pair<Integer, Integer> pair : gameModel.getGameModelParameters().effectParameterActive("00476")) {
+				if ((pair.getValue() == 0 && defendColor == Color.BLUE) || (pair.getValue() == 1 && defendColor == Color.RED))
+					damageAmount = 0;
+			}
+		}
 
 		// Normalize damage:
 		if (damageAmount < 0)

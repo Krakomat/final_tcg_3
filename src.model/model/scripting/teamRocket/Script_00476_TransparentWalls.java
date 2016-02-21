@@ -1,10 +1,11 @@
 package model.scripting.teamRocket;
 
 import model.database.TrainerCard;
+import model.enums.Color;
 import model.enums.PlayerAction;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
+import network.client.Player;
 
 public class Script_00476_TransparentWalls extends TrainerCardScript {
 
@@ -14,19 +15,23 @@ public class Script_00476_TransparentWalls extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
-			return PlayerAction.PLAY_TRAINER_CARD;
-		return null;
+		return PlayerAction.PLAY_TRAINER_CARD;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
-		// Discard trainer card before drawing!
+		gameModel.getGameModelParameters().addEffectParameter(this.card.getCardId(), this.cardGameID(), getCardOwner().getColor() == Color.BLUE ? 0 : 1);
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+	}
+
+	public void executePreTurnActions(Player playerOnTurn) {
+		if ((playerOnTurn.getColor() == this.getCardOwner().getColor()
+				&& gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID()) == 0 && getCardOwner().getColor() == Color.BLUE)
+				|| (playerOnTurn.getColor() == this.getCardOwner().getColor()
+						&& gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID()) == 1
+						&& getCardOwner().getColor() == Color.RED)) {
+			gameModel.getGameModelParameters().removeEffectParameter(this.card.getCardId(), this.cardGameID());
+		}
 	}
 }

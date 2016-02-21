@@ -10,6 +10,7 @@ import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
+import network.client.Player;
 
 public class Script_00428_SabrinasGastly extends PokemonCardScript {
 
@@ -67,8 +68,8 @@ public class Script_00428_SabrinasGastly extends PokemonCardScript {
 		checkGaseousFormPower();
 	}
 
-	public void executePreTurnActions() {
-		super.executePreTurnActions();
+	public void executePreTurnActions(Player playerOnTurn) {
+		super.executePreTurnActions(playerOnTurn);
 		checkGaseousFormPower();
 	}
 

@@ -54,8 +54,8 @@ public class Script_00188_Omanyte extends PokemonCardScript {
 		checkOmanitePower();
 	}
 
-	public void executePreTurnActions() {
-		super.executePreTurnActions();
+	public void executePreTurnActions(Player playerOnTurn) {
+		super.executePreTurnActions(playerOnTurn);
 		checkOmanitePower();
 	}
 
