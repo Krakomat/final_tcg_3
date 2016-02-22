@@ -19,7 +19,8 @@ public class Script_00089_Beleber extends TrainerCardScript {
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
 		// Can be played if the players bench is not full and there is at least one basic pokemon in the players discard pile.
-		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5)
+		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5 && !(this.gameModel.getCurrentStadium() != null
+				&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 4))
 			if (gameModel.getAttackCondition().positionHasBasicPokemon(ownDiscardPile()))
 				return PlayerAction.PLAY_TRAINER_CARD;
 		return null;

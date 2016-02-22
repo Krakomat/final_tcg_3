@@ -36,8 +36,9 @@ public class Script_00372_ErikasPerfume extends TrainerCardScript {
 		playerRevealsHand(getEnemyPlayer());
 
 		if (getBasicPokemonCardsFromHand().size() > 0) {
-			List<Card> basicPokemon = getCardOwner().playerChoosesCards(getBasicPokemonCardsFromHand(), 5 - gameModel.getFullBenchPositions(getEnemyPlayer().getColor()).size(),
-					false, "Put any number of basic pokemon onto your opponents bench!");
+			int maxBench = this.gameModel.getCurrentStadium() != null && this.gameModel.getCurrentStadium().getCardId().equals("00468") ? 4 : 5;
+			List<Card> basicPokemon = getCardOwner().playerChoosesCards(getBasicPokemonCardsFromHand(),
+					maxBench - gameModel.getFullBenchPositions(getEnemyPlayer().getColor()).size(), false, "Put any number of basic pokemon onto your opponents bench!");
 
 			for (Card c : basicPokemon) {
 				PokemonCard pCard = (PokemonCard) c;

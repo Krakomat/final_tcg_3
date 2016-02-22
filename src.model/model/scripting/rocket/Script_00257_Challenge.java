@@ -34,7 +34,8 @@ public class Script_00257_Challenge extends TrainerCardScript {
 		Player enemy = this.getEnemyPlayer();
 		int playerBenchSize = gameModel.getFullBenchPositions(player.getColor()).size();
 		int enemyBenchSize = gameModel.getFullBenchPositions(enemy.getColor()).size();
-		if (playerBenchSize == 5 && enemyBenchSize == 5) {
+		int maxBenchSize = this.gameModel.getCurrentStadium() != null && this.gameModel.getCurrentStadium().getCardId().equals("00468") ? 4 : 5;
+		if (playerBenchSize == maxBenchSize && enemyBenchSize == maxBenchSize) {
 			gameModel.sendTextMessageToAllPlayers("Both benches are full!", "");
 			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
 			gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
@@ -43,17 +44,17 @@ public class Script_00257_Challenge extends TrainerCardScript {
 			if (accept) {
 				gameModel.sendTextMessageToAllPlayers(enemy.getName() + " accepted the challenge!", "");
 				{
-					if (playerBenchSize < 5) {
-						List<Card> playerCards = player.playerChoosesCards(getBasicPokemonFromDeck(ownDeck()), 5 - playerBenchSize, false, "Choose up to "
-								+ (5 - playerBenchSize) + " pokemon for your bench!");
+					if (playerBenchSize < maxBenchSize) {
+						List<Card> playerCards = player.playerChoosesCards(getBasicPokemonFromDeck(ownDeck()), maxBenchSize - playerBenchSize, false,
+								"Choose up to " + (maxBenchSize - playerBenchSize) + " pokemon for your bench!");
 						for (Card c : playerCards)
 							gameModel.getAttackAction().moveCard(ownDeck(), getLowestBenchPosition(player), c.getGameID(), true);
 					}
 				}
 				{
-					if (enemyBenchSize < 5) {
-						List<Card> playerCards = enemy.playerChoosesCards(getBasicPokemonFromDeck(enemyDeck()), 5 - enemyBenchSize, false, "Choose up to "
-								+ (5 - enemyBenchSize) + " pokemon for your bench!");
+					if (enemyBenchSize < maxBenchSize) {
+						List<Card> playerCards = enemy.playerChoosesCards(getBasicPokemonFromDeck(enemyDeck()), maxBenchSize - enemyBenchSize, false,
+								"Choose up to " + (maxBenchSize - enemyBenchSize) + " pokemon for your bench!");
 						for (Card c : playerCards)
 							gameModel.getAttackAction().moveCard(enemyDeck(), getLowestBenchPosition(enemy), c.getGameID(), true);
 					}

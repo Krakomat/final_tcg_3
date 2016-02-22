@@ -23,8 +23,11 @@ public class Script_00400_KogasZubat extends PokemonCardScript {
 
 	@Override
 	public void executeAttack(String attackName) {
-		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5 && getKogasZubatCardsFromDeck().size() > 0) {
-			int max = Math.min(5 - gameModel.getFullBenchPositions(getCardOwner().getColor()).size(), getKogasZubatCardsFromDeck().size());
+		int maxBench = (this.gameModel.getCurrentStadium() != null && this.gameModel.getCurrentStadium().getCardId().equals("00468")
+				&& this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 4) ? 4 : 5;
+
+		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < maxBench && getKogasZubatCardsFromDeck().size() > 0) {
+			int max = Math.min(maxBench - gameModel.getFullBenchPositions(getCardOwner().getColor()).size(), getKogasZubatCardsFromDeck().size());
 			List<Card> zubatList = getCardOwner().playerChoosesCards(getKogasZubatCardsFromDeck(), max, false, "Choose any number of cards from your deck!");
 
 			if (zubatList.isEmpty()) {

@@ -25,9 +25,11 @@ public class Script_00302_MistysPsyduck extends PokemonCardScript {
 		att2Cost.add(Element.WATER);
 		this.addAttack("Call for Friend", att2Cost);
 	}
+
 	@Override
 	public boolean attackCanBeExecuted(String attackName) {
-		if (attackName.equals("Call for Friend") && gameModel.getFullBenchPositions(this.getCardOwner().getColor()).size() == 5)
+		if (attackName.equals("Call for Friend") && gameModel.getFullBenchPositions(this.getCardOwner().getColor()).size() == 5 || (this.gameModel.getCurrentStadium() != null
+				&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 4))
 			return false;
 		else
 			return super.attackCanBeExecuted(attackName);

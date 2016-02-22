@@ -39,10 +39,14 @@ public class Script_00204_DarkDragonite extends PokemonCardScript {
 		super.playFromHand();
 		Player player = this.getCardOwner();
 		if (this.gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() == 0 && !this.gameModel.getGameModelParameters().activeEffect("00164")
-				&& gameModel.getFullBenchPositions(player.getColor()).size() < 5) {
+				&& gameModel.getFullBenchPositions(player.getColor()).size() < 5 && !(this.gameModel.getCurrentStadium() != null
+						&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 4)) {
 			if (!getBasicPokemonFromDeck().isEmpty()) {
-				List<Card> cards = player.playerChoosesCards(getBasicPokemonFromDeck(), gameModel.getFullBenchPositions(player.getColor()).size() == 4 ? 1 : 2, false,
-						"Choose up to " + (gameModel.getFullBenchPositions(player.getColor()).size() == 4 ? 1 : 2) + " pokemon card(s) from your deck to put on your bench!");
+				int number = gameModel.getFullBenchPositions(player.getColor()).size() == 4 || (this.gameModel.getCurrentStadium() != null
+						&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 3) ? 1 : 2;
+
+				List<Card> cards = player.playerChoosesCards(getBasicPokemonFromDeck(), number, false,
+						"Choose up to " + number + " pokemon card(s) from your deck to put on your bench!");
 
 				if (!cards.isEmpty()) {
 					gameModel.sendCardMessageToAllPlayers(this.card.getName() + " activates Summon Minions!", card, "");

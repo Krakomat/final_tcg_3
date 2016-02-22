@@ -46,7 +46,8 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		// Check conditions for playing the card from the hand:
 		Color color = this.card.getCurrentPosition().getColor();
 		if (this.card.getCardType() == CardType.BASICPOKEMON) {
-			if (!(this.gameModel.getFullBenchPositions(color).size() == 5))
+			if (!(this.gameModel.getFullBenchPositions(color).size() == 5) && !(this.gameModel.getCurrentStadium() != null
+					&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(color).size() == 4))
 				return PlayerAction.PUT_ON_BENCH;
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
 			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()

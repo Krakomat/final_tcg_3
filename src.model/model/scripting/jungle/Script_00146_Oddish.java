@@ -29,7 +29,8 @@ public class Script_00146_Oddish extends PokemonCardScript {
 
 	@Override
 	public boolean attackCanBeExecuted(String attackName) {
-		if (attackName.equals("Sprout") && gameModel.getFullBenchPositions(this.getCardOwner().getColor()).size() == 5)
+		if (attackName.equals("Sprout") && gameModel.getFullBenchPositions(this.getCardOwner().getColor()).size() == 5 || (this.gameModel.getCurrentStadium() != null
+				&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 4))
 			return false;
 		else
 			return super.attackCanBeExecuted(attackName);

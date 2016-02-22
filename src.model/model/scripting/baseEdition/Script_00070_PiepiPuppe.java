@@ -17,7 +17,8 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
 		// Can be played if the players bench is not full
-		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5)
+		if (gameModel.getFullBenchPositions(getCardOwner().getColor()).size() < 5 && !(this.gameModel.getCurrentStadium() != null
+				&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(getCardOwner().getColor()).size() == 4))
 			return PlayerAction.PLAY_TRAINER_CARD;
 		return null;
 	}
@@ -43,7 +44,7 @@ public class Script_00070_PiepiPuppe extends TrainerCardScript {
 
 		doll.setCurrentPositionLocal(handPos);
 		handPos.getCards().add(doll);
-		
+
 		// Set doll onto bench:
 		doll.getCardScript().playFromHand();
 	}
