@@ -113,6 +113,9 @@ public class TurnSimulator implements PokemonGameManager {
 						case 1:
 							actionList.add(PlayerAction.ATTACK_2);
 							break;
+						case 2:
+							actionList.add(PlayerAction.ATTACK_3);
+							break;
 						case -1:
 							throw new IllegalArgumentException("Error: AttackName" + attName + " is not valid!");
 						default:

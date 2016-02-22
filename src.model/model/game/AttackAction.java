@@ -117,7 +117,7 @@ public class AttackAction {
 			// attacker has Brock in its name:
 			if (attackElement.equals(defenderPokemon.getCurrentResistance())
 					&& !(gameModel.getCurrentStadium() != null && gameModel.getCurrentStadium().getCardId().equals("00286") && attackerPokemon.getName().contains("Brock"))) {
-				if (gameModel.getCurrentStadium().getCardId().equals("00472"))
+				if (gameModel.getCurrentStadium() != null && gameModel.getCurrentStadium().getCardId().equals("00472"))
 					damageAmount = damageAmount - 10; // Reduce damage
 				else
 					damageAmount = damageAmount - 10; // Reduce damage

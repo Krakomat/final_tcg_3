@@ -216,8 +216,11 @@ public class AIUtilities {
         gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getTriple().getKey().getTopCard()).getAttackNames().get(0));
         break;
       case ATTACK_2:
-        gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getTriple().getKey().getTopCard()).getAttackNames().get(1));
-        break;
+          gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getTriple().getKey().getTopCard()).getAttackNames().get(1));
+          break;
+      case ATTACK_3:
+          gameSimulator.executeAttack(executingPlayer, ((PokemonCard) move.getTriple().getKey().getTopCard()).getAttackNames().get(2));
+          break;
       case EVOLVE_POKEMON:
         gameSimulator.playerPlaysCard(executingPlayer, move.getTriple().getValue());
         break;

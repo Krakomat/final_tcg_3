@@ -55,7 +55,7 @@ public class IngameController extends Node implements GUI2DController {
 	private List<Image2D> ownPrize, enemyPrize;
 	private Spatial stadiumNode;
 	private Material stadiumMat;
-	private TextButton2D endTurnButton, attack1Button, attack2Button, playButton, pokePower1Button, returnToLobbyButton, backButton;
+	private TextButton2D endTurnButton, attack1Button, attack2Button, attack3Button, playButton, pokePower1Button, returnToLobbyButton, backButton;
 	private ImageButton2D surrenderButton, attackButton, retreatButton, pokePowerButton, stadiumButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
@@ -480,7 +480,8 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(attackButton);
 		this.attachChild(attackButton);
 
-		attack1Button = new TextButton2D("Attack1Button", "Attack1", buttonWidth, buttonHeight) {
+		float attackButtonHeight = activePosHeight * 0.75f / 3;
+		attack1Button = new TextButton2D("Attack1Button", "Attack1", buttonWidth, attackButtonHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -492,12 +493,12 @@ public class IngameController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		attack1Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.455f - activePosHeight + buttonHeight * 2, 0);
+		attack1Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight + attackButtonHeight * 3, 0);
 		attack1Button.setVisible(false);
 		dropInUpdateQueue(attack1Button);
 		this.attachChild(attack1Button);
 
-		attack2Button = new TextButton2D("Attack2Button", "Attack2", buttonWidth, buttonHeight) {
+		attack2Button = new TextButton2D("Attack2Button", "Attack2", buttonWidth, attackButtonHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -509,10 +510,27 @@ public class IngameController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		attack2Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.455f - activePosHeight + buttonHeight * 1, 0);
+		attack2Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight + attackButtonHeight * 2, 0);
 		attack2Button.setVisible(false);
 		dropInUpdateQueue(attack2Button);
 		this.attachChild(attack2Button);
+
+		attack3Button = new TextButton2D("Attack3Button", "Attack3", buttonWidth, attackButtonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				attack3Clicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		attack3Button.setLocalTranslation(screenWidth * 0.5f, screenHeight * 0.48f - activePosHeight + attackButtonHeight * 1, 0);
+		attack3Button.setVisible(false);
+		dropInUpdateQueue(attack3Button);
+		this.attachChild(attack3Button);
 
 		retreatButton = new ImageButton2D("RetreatButton", Database.getAssetKey("swap"), buttonWidth / 2, buttonHeight) {
 
@@ -790,6 +808,8 @@ public class IngameController extends Node implements GUI2DController {
 					GUI2D.getInstance().setButtonVisible(attack1Button, false);
 				if (attack2Enabled)
 					GUI2D.getInstance().setButtonVisible(attack2Button, false);
+				if (attack3Enabled)
+					GUI2D.getInstance().setButtonVisible(attack3Button, false);
 				if (attackEnabled)
 					GUI2D.getInstance().setButtonVisible(attackButton, true);
 				if (stadiumEnabled)
@@ -814,6 +834,8 @@ public class IngameController extends Node implements GUI2DController {
 					GUI2D.getInstance().setButtonVisible(attack1Button, true);
 				if (attack2Enabled)
 					GUI2D.getInstance().setButtonVisible(attack2Button, true);
+				if (attack3Enabled)
+					GUI2D.getInstance().setButtonVisible(attack3Button, true);
 				GUI2D.getInstance().setButtonVisible(attackButton, false);
 				GUI2D.getInstance().setButtonVisible(pokePowerButton, false);
 				GUI2D.getInstance().setButtonVisible(retreatButton, false);
@@ -999,6 +1021,27 @@ public class IngameController extends Node implements GUI2DController {
 	}
 
 	/**
+	 * Executes the second attack of the ownActive pokemon. Note that the attack has to exist as a precondition.
+	 */
+	protected void attack3Clicked() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				GUI2D.getInstance().setEndTurnButtonVisible(false);
+				resetGlowingSelected();
+				resetButtons();
+				if (stadiumButton.isVisible()) {
+					stadiumEnabled = false;
+					GUI2D.getInstance().setButtonVisible(stadiumButton, false);
+				}
+				GUI2D.getInstance().getPlayer().attack(2);
+			}
+		});
+		t.setName("Attack3ButtonThread");
+		t.start();
+	}
+
+	/**
 	 * Actions, when the endTurnButton is clicked.
 	 */
 	protected void endTurnClicked() {
@@ -1100,12 +1143,14 @@ public class IngameController extends Node implements GUI2DController {
 		pokemonPowerEnabled = false;
 		attack1Enabled = false;
 		attack2Enabled = false;
+		attack3Enabled = false;
 		attackEnabled = false;
 		retreatEnabled = false;
 		GUI2D.getInstance().setButtonVisible(backButton, false);
 		GUI2D.getInstance().setButtonVisible(attackButton, false);
 		GUI2D.getInstance().setButtonVisible(attack1Button, false);
 		GUI2D.getInstance().setButtonVisible(attack2Button, false);
+		GUI2D.getInstance().setButtonVisible(attack3Button, false);
 		GUI2D.getInstance().setButtonVisible(playButton, false);
 		GUI2D.getInstance().setButtonVisible(retreatButton, false);
 		GUI2D.getInstance().setButtonVisible(pokePowerButton, false);
@@ -1148,7 +1193,7 @@ public class IngameController extends Node implements GUI2DController {
 		t.start();
 	}
 
-	private boolean attack1Enabled, attack2Enabled, attackEnabled, retreatEnabled, pokemonPowerEnabled, stadiumEnabled;
+	private boolean attack1Enabled, attack2Enabled, attack3Enabled, attackEnabled, retreatEnabled, pokemonPowerEnabled, stadiumEnabled;
 
 	private void makeButtonForActionVisible(PlayerAction action, SelectableNode selectedNode) {
 		GUI2D.getInstance().setButtonVisible(endTurnButton, true);
@@ -1167,6 +1212,14 @@ public class IngameController extends Node implements GUI2DController {
 			color = GUI2D.getInstance().getPlayer().getColor();
 			attackNames = GUI2D.getInstance().getPlayer().getAttackNames(color == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
 			attack2Button.setText(attackNames.get(1));
+			GUI2D.getInstance().setButtonVisible(attackButton, true);
+			break;
+		case ATTACK_3:
+			attackEnabled = true;
+			attack3Enabled = true;
+			color = GUI2D.getInstance().getPlayer().getColor();
+			attackNames = GUI2D.getInstance().getPlayer().getAttackNames(color == Color.BLUE ? PositionID.BLUE_ACTIVEPOKEMON : PositionID.RED_ACTIVEPOKEMON);
+			attack3Button.setText(attackNames.get(2));
 			GUI2D.getInstance().setButtonVisible(attackButton, true);
 			break;
 		case EVOLVE_POKEMON:
@@ -2080,6 +2133,9 @@ public class IngameController extends Node implements GUI2DController {
 
 		attack2Button.setVisible(false);
 		dropInUpdateQueue(attack2Button);
+
+		attack2Button.setVisible(false);
+		dropInUpdateQueue(attack3Button);
 
 		retreatButton.setVisible(false);
 		dropInUpdateQueue(retreatButton);

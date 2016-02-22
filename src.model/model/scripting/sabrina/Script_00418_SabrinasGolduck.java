@@ -47,7 +47,7 @@ public class Script_00418_SabrinasGolduck extends PokemonCardScript {
 
 		if (defendingPokemon.getDamageMarks() >= defendingPokemon.getHitpoints() && !defendingPokemon.hasCondition(PokemonCondition.KNOCKOUT)) {
 			defendingPokemon.setDamageMarks(defendingPokemon.getHitpoints());
-			gameModel.getAttackAction().inflictConditionToPosition(getCurrentPositionID(), PokemonCondition.KNOCKOUT);
+			gameModel.getAttackAction().inflictConditionToPosition(defendingPokemon.getCurrentPosition().getPositionID(), PokemonCondition.KNOCKOUT);
 			gameModel.sendGameModelToAllPlayers("");
 			gameModel.cleanDefeatedPositions();
 		} else

@@ -94,7 +94,7 @@ public class GameTree {
 			for (int i = 0; i < rootNode.getMoves().size(); i++) {
 				GameTreeMove move = rootNode.getMoves().get(i);
 				PlayerAction action = PlayerAction.valueOf(move.getTriple().getAction());
-				if (!action.equals(PlayerAction.ATTACK_1) && !action.equals(PlayerAction.ATTACK_2)) {
+				if (!action.equals(PlayerAction.ATTACK_1) && !action.equals(PlayerAction.ATTACK_2) && !action.equals(PlayerAction.ATTACK_3)) {
 					GameTreeNode childNode = move.getResultingNode();
 					this.computeGameTree(childNode, childModels.get(i).copy(), server, depth + 1);
 				}

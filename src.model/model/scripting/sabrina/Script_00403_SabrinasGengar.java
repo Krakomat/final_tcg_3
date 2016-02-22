@@ -46,7 +46,7 @@ public class Script_00403_SabrinasGengar extends PokemonCardScript {
 
 			if (pokemon.getDamageMarks() >= pokemon.getHitpoints() && !pokemon.hasCondition(PokemonCondition.KNOCKOUT)) {
 				pokemon.setDamageMarks(pokemon.getHitpoints());
-				gameModel.getAttackAction().inflictConditionToPosition(getCurrentPositionID(), PokemonCondition.KNOCKOUT);
+				gameModel.getAttackAction().inflictConditionToPosition(posID, PokemonCondition.KNOCKOUT);
 			}
 		}
 		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + "'s Pokemon got damage marks!", "");

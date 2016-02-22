@@ -15,7 +15,9 @@ Patch 5.0
 		- 00209_DarkMachamp: Fixed a bug with the Fling attack
 	AI:
 		- Fixed another bug in the player simulator regarding energy payments
-		
+	UI:
+		- Added support for 3 attacks per pokemon
+				 
 Patch 4.5
 	Network:
 		- Significantly lowered the amount of data that is send in a single game model update
