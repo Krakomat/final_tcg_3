@@ -172,11 +172,15 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.PARALYZED))
 			return false;
 
+		// Calculate retreat costs:
 		int costs = pCard.getRetreatCosts().size();
 		for (Card c : gameModel.getAllCards()) {
 			if (c instanceof PokemonCard)
 				costs = ((PokemonCardScript) c.getCardScript()).modifyRetreatCosts(costs, this.getCardOwner().getColor());
 		}
+		// Check Stadium for retreat costs:
+		if (gameModel.stadiumActive("00465"))
+			costs++;
 
 		return pos.getEnergy().size() >= costs;
 	}

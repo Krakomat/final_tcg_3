@@ -210,8 +210,12 @@ public class AttackAction {
 		if (attackerPokemon != null && attackerPokemon.getName().contains("Koga") && gameModel.getGameModelParameters().isActivated_00385_Koga() && damageAmount > 0)
 			this.inflictConditionToPosition(targetPosition, PokemonCondition.POISONED);
 
-		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
+		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null && damageAmount > 0)
 			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, damageAmount, true);
+		if (defenderPokemon.hasCondition(PokemonCondition.FIRE_WALL) && attackerPositionID != null && damageAmount > 0)
+			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, 10, true);
+		if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION) && attackerPositionID != null && damageAmount > 0 && this.flipACoin() == Coin.HEADS)
+			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, damageAmount * 2, true);
 		return damageAmount;
 	}
 
@@ -299,8 +303,19 @@ public class AttackAction {
 					break;
 				case KOGAS_NINJA_TRICK:
 					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
+					break;
 				case NO_ATTACK:
 					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
+					break;
+				case SHADOW_IMAGE:
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 9999));
+					break;
+				case SUPER_RETALIATION:
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
+					break;
+				case FIRE_WALL:
+					defenderPokemon.addCondition(new DynamicPokemonCondition(condition, 2));
+					break;
 				default:
 					break;
 				}

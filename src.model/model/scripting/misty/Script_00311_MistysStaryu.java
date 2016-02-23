@@ -7,6 +7,7 @@ import gui2d.animations.Animation;
 import gui2d.animations.AnimationType;
 import gui2d.animations.DamageAnimation;
 import model.database.PokemonCard;
+import model.enums.Coin;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
@@ -40,6 +41,9 @@ public class Script_00311_MistysStaryu extends PokemonCardScript {
 		// Check Misty:
 		if (attackerPokemon != null && attackerPokemon.getName().contains("Misty") && gameModel.getGameModelParameters().isActivated_00296_Misty())
 			damageAmount = damageAmount + 20;
+		// Check Vermillion City Gym:
+		if (gameModel.getGameModelParameters().isVermillionCityGymAttackModifier() && damageAmount > 0)
+			damageAmount = damageAmount + 10;
 
 		// Normalize damage:
 		if (damageAmount < 0)
@@ -78,8 +82,15 @@ public class Script_00311_MistysStaryu extends PokemonCardScript {
 		}
 		this.gameModel.sendGameModelToAllPlayers("");
 
+		// Check Koga:
+		if (attackerPokemon != null && attackerPokemon.getName().contains("Koga") && gameModel.getGameModelParameters().isActivated_00385_Koga() && damageAmount > 0)
+			this.gameModel.getAttackAction().inflictConditionToPosition(targetPosition, PokemonCondition.POISONED);
+
 		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
 			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
 					damageAmount, true);
+		if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION) && attackerPositionID != null && gameModel.getAttackAction().flipACoin() == Coin.HEADS)
+			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
+					damageAmount * 2, true);
 	}
 }

@@ -485,4 +485,11 @@ public class LocalPokemonGameModel implements PokemonGame {
 	public void playerTakesPrize(Color color, int i) {
 		// Leave empty
 	}
+
+	@Override
+	public boolean stadiumActive(String stadiumCardID) {
+		if (this.getCurrentStadium() != null && this.getCurrentStadium().getCardId().equals(stadiumCardID))
+			return true;
+		return false;
+	}
 }

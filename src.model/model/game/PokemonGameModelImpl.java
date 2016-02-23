@@ -414,14 +414,32 @@ public class PokemonGameModelImpl implements PokemonGame {
 					Card card = cardList.get(i);
 					if (card instanceof PokemonCard) // reset pokemon attributes
 						((PokemonCard) card).resetDynamicAttributes();
-					this.attackAction.moveCard(positionID, PositionID.BLUE_DISCARDPILE, card.getGameID(), true);
+
+					// Check Rocket's Moltres:
+					if (card.getCardId().equals("00460")) {
+						if (playerBlue.playerDecidesYesOrNo("Do you want to activate Rebirth on Rocket's Moltres?")) {
+							this.sendCardMessageToAllPlayers(card.getName() + " activates Rebirth!", card, Sounds.ACTIVATE_TRAINER);
+							this.attackAction.moveCard(positionID, PositionID.BLUE_HAND, card.getGameID(), true);
+						} else
+							this.attackAction.moveCard(positionID, PositionID.BLUE_DISCARDPILE, card.getGameID(), true);
+					} else
+						this.attackAction.moveCard(positionID, PositionID.BLUE_DISCARDPILE, card.getGameID(), true);
 				}
 			} else {
 				for (int i = cardListSize - 1; i >= 0; i--) {
 					Card card = cardList.get(i);
 					if (card instanceof PokemonCard) // reset pokemon attributes
 						((PokemonCard) card).resetDynamicAttributes();
-					this.attackAction.moveCard(positionID, PositionID.RED_DISCARDPILE, card.getGameID(), true);
+
+					// Check Rocket's Moltres:
+					if (card.getCardId().equals("00460")) {
+						if (playerRed.playerDecidesYesOrNo("Do you want to activate Rebirth on Rocket's Moltres?")) {
+							this.sendCardMessageToAllPlayers(card.getName() + " activates Rebirth!", card, Sounds.ACTIVATE_TRAINER);
+							this.attackAction.moveCard(positionID, PositionID.RED_HAND, card.getGameID(), true);
+						} else
+							this.attackAction.moveCard(positionID, PositionID.RED_DISCARDPILE, card.getGameID(), true);
+					} else
+						this.attackAction.moveCard(positionID, PositionID.RED_DISCARDPILE, card.getGameID(), true);
 				}
 			}
 		}
@@ -1102,5 +1120,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 
 	public void setPokemonGameManager(PokemonGameManagerImpl pokemonGameManager) {
 		this.pokemonGameManager = pokemonGameManager;
+	}
+
+	@Override
+	public boolean stadiumActive(String stadiumCardID) {
+		if (this.getCurrentStadium() != null && this.getCurrentStadium().getCardId().equals(stadiumCardID))
+			return true;
+		return false;
 	}
 }

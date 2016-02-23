@@ -21,8 +21,11 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
 		// Can be played, if there is a pokemon with energy in the enemies arena and a pokemon with energy in the own arena:
-		if (this.getPositionsWithEnergy(this.getEnemyPlayer()).size() > 0 && this.getPositionsWithEnergy(this.getCardOwner()).size() > 0)
+		if (this.getPositionsWithEnergy(this.getEnemyPlayer()).size() > 0 && this.getPositionsWithEnergy(this.getCardOwner()).size() > 0) {
+			if (gameModel.stadiumActive("00464") && gameModel.getPosition(ownHand()).size() < 3)
+				return null;
 			return PlayerAction.PLAY_TRAINER_CARD;
+		}
 		return null;
 	}
 
@@ -30,6 +33,18 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 	public void playFromHand() {
 		Player player = this.getCardOwner();
 		Player enemy = this.getEnemyPlayer();
+
+		// Discard trainer card:
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
+
+		if (gameModel.stadiumActive("00464")) {
+			// Choose two own cards:
+			List<Card> chosenCards = player.playerChoosesCards(gameModel.getPosition(ownHand()).getCards(), 2, true, "Choose 2 cards to discard!");
+			for (Card chosenCard : chosenCards) {
+				gameModel.sendCardMessageToAllPlayers(player.getName() + " discards " + chosenCard.getName() + "!", chosenCard, "");
+				gameModel.getAttackAction().discardCardToDiscardPile(ownHand(), chosenCard.getGameID(), true);
+			}
+		}
 
 		// Remove 1 energy card from one of your own pokemon:
 		PositionID chosenPosition = player.playerChoosesPositions(this.getPositionsWithEnergy(player), 1, true, "Choose a pokemon to pay energy!").get(0);
@@ -61,9 +76,6 @@ public class Script_00079_SupEnergieAbsauger extends TrainerCardScript {
 			// Discard energy card:
 			gameModel.getAttackAction().discardCardToDiscardPile(chosenEnemyPosition, c.getGameID(), true);
 		}
-
-		// Discard trainer card:
-		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 	}
 
 	private List<PositionID> getPositionsWithEnergy(Player player) {

@@ -349,6 +349,18 @@ public class Database {
 		noAttack.setGenerateMips(false);
 		assetTextures.put(PokemonCondition.NO_ATTACK.toString(), noAttack);
 
+		TextureKey shadowImages = new TextureKey("/tilesets/conditions/shadowImages.jpg");
+		shadowImages.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.SHADOW_IMAGE.toString(), shadowImages);
+
+		TextureKey superRetaliation = new TextureKey("/tilesets/conditions/superRetaliation.png");
+		superRetaliation.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.SUPER_RETALIATION.toString(), superRetaliation);
+
+		TextureKey fireWall = new TextureKey("/tilesets/conditions/fireWall.png");
+		fireWall.setGenerateMips(false);
+		assetTextures.put(PokemonCondition.FIRE_WALL.toString(), fireWall);
+
 		TextureKey overgrowth = new TextureKey("/decks/overgrowth.jpg");
 		overgrowth.setGenerateMips(false);
 		assetTextures.put("overgrowth", overgrowth);
