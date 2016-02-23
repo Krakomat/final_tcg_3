@@ -82,6 +82,7 @@ public class AccountStorageHelper {
 			long id = Long.valueOf(parentElement.getAttribute("ID"));
 			String name = getTextValue(parentElement, "Name");
 			String password = getTextValue(parentElement, "Password");
+			String prizeCards = getTextValue(parentElement, "PrizeCards");
 			AccountType accType = AccountType.valueOf(getTextValue(parentElement, "AccountType"));
 
 			Deck deck = new Deck();
@@ -94,13 +95,13 @@ public class AccountStorageHelper {
 			Player acc = null;
 			switch (accType) {
 			case BOT_DUMMY:
-				acc = BotBorder.createBot(id, name, password, AccountType.BOT_DUMMY);
+				acc = BotBorder.createBot(id, name, password, Integer.parseInt(prizeCards), AccountType.BOT_DUMMY);
 				break;
 			case REAL_PLAYER:
-				acc = PlayerImpl.createNewPlayer(id, name, password);
+				acc = PlayerImpl.createNewPlayer(id, name, password, Integer.parseInt(prizeCards));
 				break;
 			case BOT_TREE:
-				acc = BotBorder.createBot(id, name, password, AccountType.BOT_TREE);
+				acc = BotBorder.createBot(id, name, password, Integer.parseInt(prizeCards), AccountType.BOT_TREE);
 				break;
 			default:
 				System.err.println("Wrong AccountType in method parseAccount() of class AccountStorageHelper");
@@ -155,9 +156,8 @@ public class AccountStorageHelper {
 	}
 
 	/**
-	 * I take a xml element and the tag name, look for the tag and get the text
-	 * content i.e for <employee><name>John</name></employee> xml snippet if the
-	 * Element points to employee node and tagName is name I will return John
+	 * I take a xml element and the tag name, look for the tag and get the text content i.e for <employee><name>John</name></employee> xml snippet if the Element points to employee
+	 * node and tagName is name I will return John
 	 * 
 	 * @param ele
 	 * @param tagName
@@ -205,8 +205,7 @@ public class AccountStorageHelper {
 	}
 
 	/**
-	 * Using JAXP in implementation independent manner create a document object
-	 * using which we create a xml tree in memory
+	 * Using JAXP in implementation independent manner create a document object using which we create a xml tree in memory
 	 */
 	static Document createDocument() {
 
@@ -263,6 +262,10 @@ public class AccountStorageHelper {
 		Element passwordElement = dom.createElement("Password");
 		passwordElement.appendChild(dom.createTextNode(acc.getPassword()));
 		element.appendChild(passwordElement);
+
+		Element prizeCardsElement = dom.createElement("PrizeCards");
+		prizeCardsElement.appendChild(dom.createTextNode(String.valueOf(acc.getPrizeCards())));
+		element.appendChild(prizeCardsElement);
 
 		Element accTypeElement = dom.createElement("AccountType");
 		accTypeElement.appendChild(dom.createTextNode(acc.getAccountType().toString()));

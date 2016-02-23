@@ -11,15 +11,17 @@ public abstract class AccountImpl implements Account {
 	protected long id;
 	protected String name, password;
 	protected Deck deck;
+	protected int prizeCards;
 	protected AccountType accountType;
 	protected List<ArenaFighterCode> defeatedArenaFighters;
 	protected List<String> unlockedCards;
 
-	public AccountImpl(long id, String name, String password) {
+	public AccountImpl(long id, String name, String password, int prizeCards) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.prizeCards = prizeCards;
 		deck = null;
 		accountType = null; // is set in an upper level constructor
 		unlockedCards = null;
@@ -49,6 +51,14 @@ public abstract class AccountImpl implements Account {
 	@Override
 	public void setDeck(Deck deck) {
 		this.deck = deck;
+	}
+
+	public int getPrizeCards() {
+		return prizeCards;
+	}
+
+	public void setPriceCards(int number) {
+		this.prizeCards = number;
 	}
 
 	@Override

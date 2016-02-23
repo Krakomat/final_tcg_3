@@ -1,6 +1,6 @@
 Patch 5.0
 	New Features:
-		Gym Mode Expansion
+		Gym Mode Expansion --> Now called 'Gym Challenge'
 			- New Arenas:
 				- Fuchsia City Gym
 				- Saffron City Gym
@@ -20,7 +20,16 @@ Patch 5.0
 		- Fixed another bug in the player simulator regarding energy payments
 	UI:
 		- Added support for 3 attacks per pokemon
-				 
+	Singleplayer:
+		- Renamed Singleplayer to 'Practice Match' 
+		- Practice Matches are now being played with 4 prizes
+	Gym Mode:
+		- Renamed Arena Mode to 'Gym Challenge'
+		- Balanced the amount of prizes for each match:
+			- Tier 1 Opponents play matches with 2 prizes
+			- Tier 2 Opponents play matches with 4 prizes
+			- Arena Masters play matches with 6 prizes
+			
 Patch 4.5
 	Network:
 		- Significantly lowered the amount of data that is send in a single game model update

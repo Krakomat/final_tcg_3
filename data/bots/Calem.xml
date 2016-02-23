@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Calem</Name>
 	<Password />
+	<PrizeCards>2</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Psychic Control">
     <Cards>

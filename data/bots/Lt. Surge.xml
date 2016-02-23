@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Lt. Surge</Name>
 	<Password />
+	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Lt. Surge's Charging Center">
     <Cards>

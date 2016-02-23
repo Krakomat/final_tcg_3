@@ -2,6 +2,7 @@
 <Account ID="5">
     <Name>DummyBot</Name>
     <Password>dummy</Password>
+	<PrizeCards>6</PrizeCards>
     <AccountType>BOT_DUMMY</AccountType>
     <Deck Name="DummyBotDeck">
         <Card ID="00046">

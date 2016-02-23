@@ -61,6 +61,10 @@ public interface Account {
 	 */
 	public AccountType getAccountType();
 
+	public int getPrizeCards();
+
+	public void setPriceCards(int number);
+
 	public List<ArenaFighterCode> getDefeatedArenaFighters();
 
 	public void setDefeatedArenaFighters(List<ArenaFighterCode> defeatedArenaFighters);
@@ -70,8 +74,7 @@ public interface Account {
 	public void setUnlockedCards(List<String> unlockedCards);
 
 	/**
-	 * Reads the given folder and returns a list of accounts, that this file
-	 * stores.
+	 * Reads the given folder and returns a list of accounts, that this file stores.
 	 * 
 	 * @param path
 	 *            folder that contains account files

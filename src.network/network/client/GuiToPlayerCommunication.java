@@ -101,7 +101,7 @@ public interface GuiToPlayerCommunication {
 	/**
 	 * A new server is created using the localhost adress. Also this player connects to the created server. Only for local games.
 	 */
-	public void createLocalGame();
+	public void createLocalGame(int prizeCards);
 
 	/**
 	 * The player connects to the game with localhost adresses.

@@ -82,14 +82,14 @@ public class ArenaController extends Node implements GUI2DController {
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_SERVANT_MUSIC);
 
 				GUI2D.getInstance().setNextMode(arenaMode);
-				GUI2D.getInstance().getPlayer().createLocalGame();
+				Player bot = Database.getBot(currentSelectedFighter.getName());
+				GUI2D.getInstance().getPlayer().createLocalGame(bot.getPrizeCards());
 
 				// Create tree bot and connect him to the server that was
 				// created in createGame:
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						Player bot = Database.getBot(currentSelectedFighter.getName());
 						bot.setDeck(currentSelectedFighter.getDeck());
 						bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
 

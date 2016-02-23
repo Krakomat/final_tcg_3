@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>May</Name>
 	<Password />
+	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Raindrops">
     <Cards>

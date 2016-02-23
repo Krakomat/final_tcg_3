@@ -12,8 +12,7 @@ import network.tcp.messages.QueryMessage;
 import network.tcp.messages.RespondMessage;
 
 /**
- * Representation of a Server that is created by the main application of the
- * server program. Maintains a single game currently.
+ * Representation of a Server that is created by the main application of the server program. Maintains a single game currently.
  * 
  * @author Michael
  *
@@ -27,9 +26,11 @@ public class ServerMain extends SimpleApplication {
 	private ServerListener serverListener;
 	private Server myServer;
 	private boolean isStarted;
+	private int prizeCards;
 
-	public ServerMain() {
+	public ServerMain(int prizeCards) {
 		isStarted = false;
+		this.prizeCards = prizeCards;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class ServerMain extends SimpleApplication {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		long id = PokemonGameManagerFactory.createNewGame(GAME_NAME, GAME_PW, this);
+		long id = PokemonGameManagerFactory.createNewGame(GAME_NAME, GAME_PW, this, this.prizeCards);
 		serverListener = new ServerListener(PokemonGameManagerFactory.getGame(id));
 		myServer.addMessageListener(serverListener, QueryMessage.class);
 		myServer.addMessageListener(serverListener, RespondMessage.class);

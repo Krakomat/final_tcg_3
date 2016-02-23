@@ -429,4 +429,16 @@ public class ServerBorder implements Player {
 	public void setBotDifficulty(int diff) {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public int getPrizeCards() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setPriceCards(int number) {
+		// TODO Auto-generated method stub
+		
+	}
 }

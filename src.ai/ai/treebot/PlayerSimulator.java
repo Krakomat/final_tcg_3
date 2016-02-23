@@ -412,4 +412,13 @@ public class PlayerSimulator implements Player {
 	public void setBotDifficulty(int diff) {
 
 	}
+
+	@Override
+	public int getPrizeCards() {
+		return 0;
+	}
+
+	@Override
+	public void setPriceCards(int number) {
+	}
 }

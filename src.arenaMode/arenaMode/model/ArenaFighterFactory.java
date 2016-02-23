@@ -193,7 +193,6 @@ public class ArenaFighterFactory {
 			lockedCards.add("00402");
 			return new ArenaFighter(code, Database.getBot("Lucas"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString()),
 					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "_THUMB"), lockedCards);
-		// TODO: Create bots with decks for new cards
 		case SAFFRONIA_CALEM:
 			lockedCards.add("00408");
 			lockedCards.add("00409");

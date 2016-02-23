@@ -59,7 +59,7 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(chooseBotDeckPanel);
 		this.attachChild(chooseBotDeckPanel);
 
-		singlePlayerButton = new TextButton2D("singlePlayerButton", "Singleplayer", buttonWidth, buttonHeight) {
+		singlePlayerButton = new TextButton2D("singlePlayerButton", "Practice Match", buttonWidth, buttonHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -76,7 +76,7 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(singlePlayerButton);
 		this.attachChild(singlePlayerButton);
 
-		arenaButton = new TextButton2D("arenaButton", "Arena Mode", buttonWidth, buttonHeight) {
+		arenaButton = new TextButton2D("arenaButton", "Gym Challenge", buttonWidth, buttonHeight) {
 
 			@Override
 			public void mouseSelect() {
@@ -496,14 +496,14 @@ public class LobbyController extends Node implements GUI2DController {
 
 	protected void botClicked(String deckName) {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
-		GUI2D.getInstance().getPlayer().createLocalGame();
+		Player bot = Database.getBot("TreeBot");
+		GUI2D.getInstance().getPlayer().createLocalGame(bot.getPrizeCards());
 
 		// Create tree bot and connect him to the server that was created in
 		// createGame:
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Player bot = Database.getBot("TreeBot");
 				bot.setDeck(Deck.readFromDatabaseFile(new File(GameParameters.BOT_DECK_PATH + deckName)));
 				bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
 
@@ -650,8 +650,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * (Re-)Starts this node by setting the two main buttons visible and setting
-	 * the rest invisible.
+	 * (Re-)Starts this node by setting the two main buttons visible and setting the rest invisible.
 	 */
 	public void restart() {
 		this.hide();

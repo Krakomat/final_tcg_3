@@ -24,6 +24,7 @@ import model.enums.PositionID;
 import model.enums.Sounds;
 import model.enums.TurnState;
 import model.game.GameModelUpdate;
+import model.game.GameParameters;
 import model.game.PokemonGameModelImpl;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
@@ -47,8 +48,9 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	private ServerMain serverMain; // only used for destroying the server from
 									// here
 
-	PokemonGameManagerImpl(long id, String name, String password, ServerMain serverMain) {
+	PokemonGameManagerImpl(long id, String name, String password, ServerMain serverMain, int prizeCards) {
 		this.gameModel = new PokemonGameModelImpl(id);
+		GameParameters.PRIZE_NUMBER = prizeCards;
 		((PokemonGameModelImpl) this.gameModel).setPokemonGameManager(this);
 		this.name = name;
 		this.password = password;
@@ -56,8 +58,9 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		this.serverMain = serverMain;
 	}
 
-	public PokemonGameManagerImpl(long id, String name, String password) {
+	public PokemonGameManagerImpl(long id, String name, String password, int prizeCards) {
 		this.gameModel = new PokemonGameModelImpl(id);
+		GameParameters.PRIZE_NUMBER = prizeCards;
 		((PokemonGameModelImpl) this.gameModel).setPokemonGameManager(this);
 		this.name = name;
 		this.password = password;

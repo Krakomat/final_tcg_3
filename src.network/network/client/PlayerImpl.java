@@ -42,13 +42,13 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	 * @param password
 	 * @return
 	 */
-	public static Player createNewPlayer(long id, String name, String password) {
-		Player p = new PlayerImpl(id, name, password);
+	public static Player createNewPlayer(long id, String name, String password, int prizeCards) {
+		Player p = new PlayerImpl(id, name, password, prizeCards);
 		return p;
 	}
 
-	public PlayerImpl(long id, String name, String password) {
-		super(id, name, password);
+	public PlayerImpl(long id, String name, String password, int prizeCards) {
+		super(id, name, password, prizeCards);
 		this.accountType = AccountType.REAL_PLAYER;
 		this.color = null;
 		this.self = this;
@@ -336,7 +336,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	public void createGame() {
 		System.out.println("[Server] Starting server...!");
 
-		ServerMain main = new ServerMain();
+		ServerMain main = new ServerMain(this.prizeCards);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -363,11 +363,11 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	}
 
 	@Override
-	public void createLocalGame() {
+	public void createLocalGame(int prizeCards) {
 		System.out.println("[Server] Starting server...!");
 
 		System.out.println("[Server] Calling start...!");
-		PokemonGameManager server = PokemonGameManagerFactory.createNewGame(name, ServerMain.GAME_PW);
+		PokemonGameManager server = PokemonGameManagerFactory.createNewGame(name, ServerMain.GAME_PW, prizeCards);
 		System.out.println("[Server] Start sucessful!");
 
 		System.out.println("[Server] Started!");

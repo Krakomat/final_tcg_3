@@ -90,7 +90,7 @@ public class TitleController extends Node implements GUI2DController {
 				String accountName = JOptionPane.showInputDialog("Enter your name:");
 				if (accountName != null) {
 					if (!accountName.equals("")) {
-						player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "");
+						player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "", 6);
 						File deckFile = new File(GameParameters.DECK_PATH + "Starter Deck.xml");
 						Deck deck = Deck.readFromDatabaseFile(deckFile);
 						player.setDeck(deck);
@@ -112,8 +112,7 @@ public class TitleController extends Node implements GUI2DController {
 	}
 
 	/**
-	 * (Re-)Starts this node by setting the two main buttons visible and setting
-	 * the rest invisible.
+	 * (Re-)Starts this node by setting the two main buttons visible and setting the rest invisible.
 	 */
 	public void restart() {
 		this.hide();
