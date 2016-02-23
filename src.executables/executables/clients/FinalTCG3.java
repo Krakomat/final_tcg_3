@@ -13,7 +13,7 @@ import model.database.Database;
 import network.tcp.messages.MessageRegister;
 
 public class FinalTCG3 {
-	public static final String VERSION = "5.00";
+	public static final String VERSION = "5.01";
 
 	public static void main(String[] args) {
 		Database.init();

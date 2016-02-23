@@ -1,4 +1,4 @@
-Patch 5.5
+Patch 5.01
 	Game:
 		- 00473_MasterBall: Fixed a crash bug
 		- 00459_RocketsHitmonchan: Crosscounter works now even if Rocket's Hitmonchan is knocked out
