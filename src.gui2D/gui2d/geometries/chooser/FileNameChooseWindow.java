@@ -20,8 +20,8 @@ public class FileNameChooseWindow extends ChooseWindow implements KeyShootable {
 	private BitmapText question, nameImage;
 	private FileNameChooseWindow self;
 
-	public FileNameChooseWindow(String name, String text, float width, float height) {
-		super(name, text, width, height);
+	public FileNameChooseWindow(String name, String text, float width, float height, int elementsPerPage) {
+		super(name, text, width, height, elementsPerPage);
 		lock = new Lock();
 		self = this;
 

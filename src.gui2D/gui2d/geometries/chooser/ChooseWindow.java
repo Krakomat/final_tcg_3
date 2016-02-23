@@ -19,11 +19,13 @@ public class ChooseWindow extends WindowGeometry {
 	protected List<Integer> indexList;
 	protected int chooseListSize;
 	private Lock lock;
+	protected int elementsPerPage;
 
-	public ChooseWindow(String name, String text, float width, float height) {
+	public ChooseWindow(String name, String text, float width, float height, int elementsPerPage) {
 		super(name, text, width, height);
 		this.indexList = new ArrayList<>();
 		this.choosingFinished = false;
+		this.elementsPerPage = elementsPerPage;
 		chooseListSize = 0;
 		lock = new Lock();
 
@@ -90,7 +92,7 @@ public class ChooseWindow extends WindowGeometry {
 			else
 				this.goLeftButton.setVisible(false);
 
-			if (startIndex < (chooseListSize - 15))
+			if (startIndex < (chooseListSize - this.elementsPerPage))
 				this.goRightButton.setVisible(true);
 			else
 				this.goRightButton.setVisible(false);
@@ -118,7 +120,7 @@ public class ChooseWindow extends WindowGeometry {
 	}
 
 	protected void goRightClicked() {
-		this.startIndex += 15;
+		this.startIndex += this.elementsPerPage;
 		ChooseWindow self = this;
 		new Thread(new Runnable() {
 			@Override
@@ -129,7 +131,7 @@ public class ChooseWindow extends WindowGeometry {
 	}
 
 	protected void goLeftClicked() {
-		this.startIndex -= 15;
+		this.startIndex -= this.elementsPerPage;
 		ChooseWindow self = this;
 		new Thread(new Runnable() {
 			@Override

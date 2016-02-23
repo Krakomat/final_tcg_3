@@ -17,8 +17,8 @@ public class AttackChooseWindow extends ChooseWindow {
 	private List<ImageText2D> imageList;
 	private Lock lock;
 
-	public AttackChooseWindow(String name, String text, float width, float height) {
-		super(name, text, width, height);
+	public AttackChooseWindow(String name, String text, float width, float height, int elementsPerPage) {
+		super(name, text, width, height, elementsPerPage);
 		imageList = new ArrayList<>();
 		this.attacks = new ArrayList<>();
 		lock = new Lock();

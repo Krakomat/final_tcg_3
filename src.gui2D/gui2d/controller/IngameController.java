@@ -601,31 +601,31 @@ public class IngameController extends Node implements GUI2DController {
 
 		// Init Choose windows:
 		cardChooseWindow = new CardChooseWindow("CardChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
-				GUI2D.getInstance().getResolution().getValue() * 0.8f);
+				GUI2D.getInstance().getResolution().getValue() * 0.8f, 15);
 		cardChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(cardChooseWindow);
 		cardChooseWindow.setVisible(false);
 
 		elementChooseWindow = new ElementChooseWindow("ElementChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
-				GUI2D.getInstance().getResolution().getValue() * 0.8f);
+				GUI2D.getInstance().getResolution().getValue() * 0.8f, 15);
 		elementChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(elementChooseWindow);
 		elementChooseWindow.setVisible(false);
 
 		attackChooseWindow = new AttackChooseWindow("AttackChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
-				GUI2D.getInstance().getResolution().getValue() * 0.8f);
+				GUI2D.getInstance().getResolution().getValue() * 0.8f, 15);
 		attackChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(attackChooseWindow);
 		attackChooseWindow.setVisible(false);
 
 		fileChooseWindow = new FileChooseWindow("FileChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.5f,
-				GUI2D.getInstance().getResolution().getValue() * 0.8f);
+				GUI2D.getInstance().getResolution().getValue() * 0.8f, 30);
 		fileChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.25f, GUI2D.getInstance().getResolution().getValue() * 0.15f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(fileChooseWindow);
 		fileChooseWindow.setVisible(false);
 
 		fileNameChooseWindow = new FileNameChooseWindow("FileNameChooseWindow", "Middle", GUI2D.getInstance().getResolution().getKey() * 0.3f,
-				GUI2D.getInstance().getResolution().getValue() * 0.3f);
+				GUI2D.getInstance().getResolution().getValue() * 0.3f, 15);
 		fileNameChooseWindow.setLocalTranslation(GUI2D.getInstance().getResolution().getKey() * 0.35f, GUI2D.getInstance().getResolution().getValue() * 0.35f, 1);
 		GUI2D.getInstance().getGuiNode().attachChild(fileNameChooseWindow);
 		fileNameChooseWindow.setVisible(false);

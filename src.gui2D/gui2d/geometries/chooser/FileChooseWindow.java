@@ -13,8 +13,8 @@ public class FileChooseWindow extends ChooseWindow {
 	private List<TextButton2D> imageList;
 	private Lock lock;
 
-	public FileChooseWindow(String name, String text, float width, float height) {
-		super(name, text, width, height);
+	public FileChooseWindow(String name, String text, float width, float height, int elementsPerPage) {
+		super(name, text, width, height, elementsPerPage);
 		imageList = new ArrayList<>();
 		this.attacks = new ArrayList<>();
 		lock = new Lock();
@@ -22,7 +22,7 @@ public class FileChooseWindow extends ChooseWindow {
 		float imageWidth = this.width * 0.40f;
 		float imageHeight = imageWidth * 0.10f;
 		// Create new images:
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < elementsPerPage; i++) {
 			float imageXPos = this.width * 0.05f + (imageWidth * 1.15f) * (i / 15);
 			float imageYPos = this.height * 0.875f - (imageHeight * 1.10f) * (i % 15);
 

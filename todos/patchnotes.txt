@@ -20,6 +20,7 @@ Patch 5.0
 		- Fixed another bug in the player simulator regarding energy payments
 	UI:
 		- Added support for 3 attacks per pokemon
+		- Fixed a bug in the load deck ui, where the 'go right' button would appear even if there is no right page
 	Singleplayer:
 		- Renamed Singleplayer to 'Practice Match' 
 		- Practice Matches are now being played with 4 prizes

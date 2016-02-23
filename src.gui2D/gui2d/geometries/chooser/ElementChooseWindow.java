@@ -17,8 +17,8 @@ public class ElementChooseWindow extends ChooseWindow {
 	private List<Image2D> imageList;
 	private Lock lock;
 
-	public ElementChooseWindow(String name, String text, float width, float height) {
-		super(name, text, width, height);
+	public ElementChooseWindow(String name, String text, float width, float height, int elementsPerPage) {
+		super(name, text, width, height, elementsPerPage);
 		imageList = new ArrayList<>();
 		this.elements = new ArrayList<>();
 		lock = new Lock();
