@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account ID="0">
+	<Name>Rocket Female</Name>
+	<Password />
+	<AccountType>BOT_TREE</AccountType>
+<Deck Name="Rocket's Haymaker 1">
+    <Cards>
+        <Card ID="00010">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00020">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00031">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00100">
+            <Size>12</Size>
+        </Card>
+        <Card ID="00101">
+            <Size>12</Size>
+        </Card>
+        <Card ID="00195">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00214">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00215">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00462">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00463">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00465">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00466">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00470">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00471">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00473">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00477">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>
+    <DefeatedArenaFighters/>
+    <UnlockedCards/>
+</Account>
