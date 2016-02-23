@@ -35,17 +35,25 @@ public class Script_00473_MasterBall extends TrainerCardScript {
 
 		Position pos = gameModel.getPosition(ownDeck());
 		List<Card> cardList = new ArrayList<>();
+		List<Card> restCards = new ArrayList<>();
 
 		for (int i = 0; i < 7; i++) {
 			Card card = pos.getCardAtIndex(pos.size() - 1 - i);
 			if (card instanceof PokemonCard)
 				cardList.add(pos.getCardAtIndex(pos.size() - 1 - i));
+			else
+				restCards.add(pos.getCardAtIndex(pos.size() - 1 - i));
 		}
 
-		Card c = getCardOwner().playerChoosesCards(cardList, 1, true, "Choose a pokemon to move into your hand!").get(0);
+		if (cardList.size() > 0) {
+			Card c = getCardOwner().playerChoosesCards(cardList, 1, true, "Choose a pokemon to move into your hand!").get(0);
 
-		gameModel.sendCardMessageToAllPlayers(getCardOwner().getName() + " puts " + c.getName() + " into his hand!", c, "");
-		gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), c.getGameID(), true);
+			gameModel.sendCardMessageToAllPlayers(getCardOwner().getName() + " puts " + c.getName() + " into his hand!", c, "");
+			gameModel.getAttackAction().moveCard(ownDeck(), ownHand(), c.getGameID(), true);
+		} else {
+			gameModel.sendTextMessageToAllPlayers("No pokemon cards found!", "");
+			getCardOwner().playerChoosesCards(restCards, 7, false, "");
+		}
 		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getAttackAction().shufflePosition(ownDeck());
 		gameModel.sendGameModelToAllPlayers("");

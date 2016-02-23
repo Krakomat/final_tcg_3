@@ -1,3 +1,7 @@
+Patch 5.5
+	Game:
+		- 00473_MasterBall: Fixed a crash bug
+
 Patch 5.0
 	New Features:
 		Gym Mode Expansion --> Now called 'Gym Challenge'
