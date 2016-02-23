@@ -1,5 +1,6 @@
 package executables.clients;
 
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -21,10 +22,8 @@ public class FinalTCG3 {
 
 		view.setShowSettings(false);
 		AppSettings settings = new AppSettings(true);
-		settings.put("Width", 1280);
-		settings.put("Height", 720);
-		// settings.put("Width", (int) (Toolkit.getDefaultToolkit().getScreenSize().width));
-		// settings.put("Height", (int) (Toolkit.getDefaultToolkit().getScreenSize().height));
+		settings.put("Width", (int) (Toolkit.getDefaultToolkit().getScreenSize().width * 0.85f));
+		settings.put("Height", (int) (Toolkit.getDefaultToolkit().getScreenSize().height * 0.85f));
 		settings.setTitle("Final TCG 3 Version " + FinalTCG3.VERSION);
 		settings.put("VSync", true);
 		settings.put("Samples", 16);
