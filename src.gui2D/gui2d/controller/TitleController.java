@@ -3,8 +3,6 @@ package gui2d.controller;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
-
 import network.client.Account;
 import network.client.PlayerImpl;
 import model.database.Database;
@@ -83,32 +81,35 @@ public class TitleController extends Node implements GUI2DController {
 	}
 
 	protected void startButtonClicked() {
-		try {
-			PlayerImpl player = (PlayerImpl) Database.readAccountFolder();
-			if (player == null) {
-				// Make a new account:
-				String accountName = JOptionPane.showInputDialog("Enter your name:");
-				if (accountName != null) {
-					if (!accountName.equals("")) {
-						player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "", 6);
-						File deckFile = new File(GameParameters.DECK_PATH + "Starter Deck.xml");
-						Deck deck = Deck.readFromDatabaseFile(deckFile);
-						player.setDeck(deck);
-						Account.saveAccount(player);
-						JOptionPane.showMessageDialog(null, "Saved your account with the name " + accountName + " on this PC!", "Success", JOptionPane.INFORMATION_MESSAGE);
-					} else
-						JOptionPane.showMessageDialog(null, "Account name is not valid!", "Error", JOptionPane.ERROR_MESSAGE);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					PlayerImpl player = (PlayerImpl) Database.readAccountFolder();
+					if (player == null) {
+						// Make a new account:
+						String accountName = GUI2D.getInstance().userTypesName("Default Name", "What's your name?");
+						if (accountName != null) {
+							if (!accountName.equals("")) {
+								player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "", 6);
+								File deckFile = new File(GameParameters.DECK_PATH + "Starter Deck.xml");
+								Deck deck = Deck.readFromDatabaseFile(deckFile);
+								player.setDeck(deck);
+								Account.saveAccount(player);
+							}
+						}
+					}
+					if (player != null) {
+						GUI2D.getInstance().setPlayer(player);
+						player.setGUI(GUI2D.getInstance());
+						GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.exit(0);
 				}
 			}
-			if (player != null) {
-				GUI2D.getInstance().setPlayer(player);
-				player.setGUI(GUI2D.getInstance());
-				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
+		}).start();
 	}
 
 	/**

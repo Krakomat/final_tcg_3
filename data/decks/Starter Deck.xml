@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Starter Deck">
+    <Cards>
+        <Card ID="00026">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00046">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00048">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00077">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00093">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00095">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00098">
+            <Size>16</Size>
+        </Card>
+        <Card ID="00109">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00150">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00204">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00218">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00220">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00240">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00260">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00261">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+    </Cards>
+</Deck>

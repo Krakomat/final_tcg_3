@@ -1,5 +1,6 @@
 package network.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import arenaMode.model.ArenaFighterCode;
@@ -24,8 +25,8 @@ public abstract class AccountImpl implements Account {
 		this.prizeCards = prizeCards;
 		deck = null;
 		accountType = null; // is set in an upper level constructor
-		unlockedCards = null;
-		defeatedArenaFighters = null;
+		unlockedCards = new ArrayList<>();
+		defeatedArenaFighters = new ArrayList<>();
 	}
 
 	@Override
