@@ -84,7 +84,9 @@ public class NeoTreeBotEvaluator implements GameModelEvaluator {
 			// Gain 1 point for each positive condition on your active pokemon:
 			if (ownActive.hasCondition(PokemonCondition.DAMAGEINCREASE10) || ownActive.hasCondition(PokemonCondition.DESTINY) || ownActive.hasCondition(PokemonCondition.HARDEN20)
 					|| ownActive.hasCondition(PokemonCondition.HARDEN30) || ownActive.hasCondition(PokemonCondition.INVULNERABLE)
-					|| ownActive.hasCondition(PokemonCondition.NO_DAMAGE) || ownActive.hasCondition(PokemonCondition.RETALIATION))
+					|| ownActive.hasCondition(PokemonCondition.NO_DAMAGE) || ownActive.hasCondition(PokemonCondition.RETALIATION)
+					|| ownActive.hasCondition(PokemonCondition.SHADOW_IMAGE) || ownActive.hasCondition(PokemonCondition.SUPER_RETALIATION)
+					|| ownActive.hasCondition(PokemonCondition.FIRE_WALL) || ownActive.hasCondition(PokemonCondition.HARDEN10))
 				value = value + 1;
 		}
 

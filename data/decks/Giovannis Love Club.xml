@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Giovannis Love Club">
+    <Cards>
+        <Card ID="00080">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00094">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00099">
+            <Size>25</Size>
+        </Card>
+        <Card ID="00473">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00480">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00481">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00482">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00483">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00487">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00488">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00491">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00492">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00493">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00494">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00495">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>

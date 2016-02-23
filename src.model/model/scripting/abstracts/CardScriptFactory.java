@@ -141,6 +141,24 @@ import model.scripting.fossil.Script_00196_Gambler;
 import model.scripting.fossil.Script_00197_Recycle;
 import model.scripting.fossil.Script_00198_MysteriousFossil;
 import model.scripting.fossil.Script_00199_FossilToken;
+import model.scripting.giovanni.Script_00478_GiovannisGyarados;
+import model.scripting.giovanni.Script_00479_GiovannisMachamp;
+import model.scripting.giovanni.Script_00480_GiovannisNidoking;
+import model.scripting.giovanni.Script_00481_GiovannisPersian;
+import model.scripting.giovanni.Script_00482_Giovanni;
+import model.scripting.giovanni.Script_00483_GiovannisNidoqueen;
+import model.scripting.giovanni.Script_00484_GiovannisPinsir;
+import model.scripting.giovanni.Script_00485_GiovannisMachoke;
+import model.scripting.giovanni.Script_00486_GiovannisMeowth;
+import model.scripting.giovanni.Script_00487_GiovannisNidorina;
+import model.scripting.giovanni.Script_00488_GiovannisNidorino;
+import model.scripting.giovanni.Script_00489_GiovannisMachop;
+import model.scripting.giovanni.Script_00490_GiovannisMagikarp;
+import model.scripting.giovanni.Script_00491_GiovannisMeowth;
+import model.scripting.giovanni.Script_00492_GiovannisNidoranF;
+import model.scripting.giovanni.Script_00493_GiovannisNidoranM;
+import model.scripting.giovanni.Script_00494_GiovannisLastResort;
+import model.scripting.giovanni.Script_00495_ViridianCityGym;
 import model.scripting.jungle.Script_00105_Clefable;
 import model.scripting.jungle.Script_00106_Electrode;
 import model.scripting.jungle.Script_00107_Flareon;
@@ -1374,6 +1392,42 @@ public class CardScriptFactory {
 			return new Script_00476_TransparentWalls((TrainerCard) card, gameModel);
 		case "00477":
 			return new Script_00477_WarpPoint((TrainerCard) card, gameModel);
+		case "00478":
+			return new Script_00478_GiovannisGyarados((PokemonCard) card, gameModel);
+		case "00479":
+			return new Script_00479_GiovannisMachamp((PokemonCard) card, gameModel);
+		case "00480":
+			return new Script_00480_GiovannisNidoking((PokemonCard) card, gameModel);
+		case "00481":
+			return new Script_00481_GiovannisPersian((PokemonCard) card, gameModel);
+		case "00482":
+			return new Script_00482_Giovanni((TrainerCard) card, gameModel);
+		case "00483":
+			return new Script_00483_GiovannisNidoqueen((PokemonCard) card, gameModel);
+		case "00484":
+			return new Script_00484_GiovannisPinsir((PokemonCard) card, gameModel);
+		case "00485":
+			return new Script_00485_GiovannisMachoke((PokemonCard) card, gameModel);
+		case "00486":
+			return new Script_00486_GiovannisMeowth((PokemonCard) card, gameModel);
+		case "00487":
+			return new Script_00487_GiovannisNidorina((PokemonCard) card, gameModel);
+		case "00488":
+			return new Script_00488_GiovannisNidorino((PokemonCard) card, gameModel);
+		case "00489":
+			return new Script_00489_GiovannisMachop((PokemonCard) card, gameModel);
+		case "00490":
+			return new Script_00490_GiovannisMagikarp((PokemonCard) card, gameModel);
+		case "00491":
+			return new Script_00491_GiovannisMeowth((PokemonCard) card, gameModel);
+		case "00492":
+			return new Script_00492_GiovannisNidoranF((PokemonCard) card, gameModel);
+		case "00493":
+			return new Script_00493_GiovannisNidoranM((PokemonCard) card, gameModel);
+		case "00494":
+			return new Script_00494_GiovannisLastResort((TrainerCard) card, gameModel);
+		case "00495":
+			return new Script_00495_ViridianCityGym((TrainerCard) card, gameModel);
 		default:
 			throw new IllegalArgumentException("Error: Wrong card id in createScript of CardScriptFactory: " + card.getCardId());
 		}
