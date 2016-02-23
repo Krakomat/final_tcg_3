@@ -5,8 +5,7 @@ View:
 GameModel: 
 	- time counter for each turn
 	- Implement timer for (single) actions for a client
-	- Reduce the game model data size
-	- Fix card scripts that use local variables
+
 DeckEditor:
 	- Make filters glow on mouseOver
 
