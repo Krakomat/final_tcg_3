@@ -6,6 +6,8 @@ Patch 5.01
 		- 00231_DarkWartortle: Mirros Shell works now even if Dark Wartortle is knocked out
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
+	UI:
+		- New image for the mouse cursor
 	
 Patch 5.0
 	New Features:

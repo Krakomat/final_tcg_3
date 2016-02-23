@@ -3,9 +3,11 @@ package gui2d.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui2d.GUI2D;
 import gui2d.abstracts.KeyShootable;
 import gui2d.abstracts.SelectableNode;
 
+import com.jme3.cursors.plugins.JmeCursor;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
@@ -44,7 +46,11 @@ public class IOController {
 
 	public IOController(InputManager inputManager) {
 		this.inputManager = inputManager;
-		this.shootables = new ArrayList<>();
+		List<JmeCursor> cursors = new ArrayList<>();
+	    cursors.add((JmeCursor) GUI2D.getInstance().getAssetManager().loadAsset("/tilesets/windows/cursor.cur"));
+	    
+	    inputManager.setMouseCursor(cursors.get(0));		
+	    this.shootables = new ArrayList<>();
 		this.keyShootables = new ArrayList<>();
 		this.storedShootables = new ArrayList<>();
 		this.rightClickShootables = new ArrayList<>();
