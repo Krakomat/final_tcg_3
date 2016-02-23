@@ -777,6 +777,14 @@ public class AttackAction {
 
 		// Update gameModel:
 		gameModel.sendGameModelToAllPlayers("");
+
+		// Check Viridian City Gym:
+		if (c.getName().contains("Giovanni") && gameModel.stadiumActive("00495"))
+			this.healPosition(chosenPosition, 20);
+
+		// Check Giovanni:
+		if (gameModel.getGameModelParameters().activeEffect("00482", oldCard.getGameID()))
+			gameModel.getGameModelParameters().activateEffect("00482", c.getGameID());
 	}
 
 	public String movePokemonToPosition(PositionID from, PositionID to) {

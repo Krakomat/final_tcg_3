@@ -288,4 +288,13 @@ public interface PokemonGame {
 	boolean stadiumActive(String stadiumCardID);
 
 	void playerTakesPrize(Color color, int i);
+
+	/**
+	 * Needed for the Giovanni Card!
+	 * 
+	 * @param card
+	 * @param color
+	 * @return
+	 */
+	List<PositionID> getGiovanniPositionsForEvolving(PokemonCard card, Color color);
 }

@@ -516,6 +516,11 @@ public class GameModelParameters {
 			this.activatedEffectMap.get(cardID).remove(gameID);
 	}
 
+	public void deactivateEffect(String cardID) {
+		Preconditions.checkArgument(this.activatedEffectMap.containsKey(cardID), "Error: Key not found: " + cardID);
+		this.activatedEffectMap.remove(cardID);
+	}
+
 	public boolean isActivated_00385_Koga() {
 		return activated_00385_Koga;
 	}

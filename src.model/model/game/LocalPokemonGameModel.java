@@ -329,6 +329,11 @@ public class LocalPokemonGameModel implements PokemonGame {
 	}
 
 	@Override
+	public List<PositionID> getGiovanniPositionsForEvolving(PokemonCard c, Color color) {
+		return this.gameField.getGiovanniPositionsForEvolving(c, color, gameModelParameters.getTurnNumber(), this);
+	}
+
+	@Override
 	public void sendCardMessageToAllPlayers(String string, List<Card> cardList, String sound) {
 		// leave empty
 	}

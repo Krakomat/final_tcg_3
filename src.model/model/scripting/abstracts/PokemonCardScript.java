@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.msgpack.core.Preconditions;
+
+import common.utilities.Pair;
 import network.client.Player;
 import model.database.Card;
 import model.database.EnergyCard;
@@ -50,6 +53,10 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 					&& this.gameModel.getCurrentStadium().getCardId().equals("00468") && this.gameModel.getFullBenchPositions(color).size() == 4))
 				return PlayerAction.PUT_ON_BENCH;
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
+			if (gameModel.getGameModelParameters().activeEffect("00482") && !this.gameModel.getGiovanniPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
+					&& (!this.gameModel.getGameModelParameters().activeEffect("00153")
+							|| (this.gameModel.getGameModelParameters().activeEffect("00153") && this.gameModel.getGameModelParameters().activeEffect("00164"))))
+				return PlayerAction.EVOLVE_POKEMON;
 			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
 					&& (!this.gameModel.getGameModelParameters().activeEffect("00153")
 							|| (this.gameModel.getGameModelParameters().activeEffect("00153") && this.gameModel.getGameModelParameters().activeEffect("00164"))))
@@ -76,7 +83,24 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			this.gameModel.getAttackAction().putBasicPokemonOnBench(player, (PokemonCard) card);
 		} else if (this.card.getCardType() == CardType.STAGE1POKEMON || this.card.getCardType() == CardType.STAGE2POKEMON) {
 			// Evolve pokemon:
-			List<PositionID> posList = this.gameModel.getPositionsForEvolving((PokemonCard) this.card, player.getColor());
+			Color color = this.card.getCurrentPosition().getColor();
+			List<PositionID> posList = new ArrayList<>();
+			if (this.gameModel.getTurnNumber() > 1 && !this.gameModel.getPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
+					&& (!this.gameModel.getGameModelParameters().activeEffect("00153")
+							|| (this.gameModel.getGameModelParameters().activeEffect("00153") && this.gameModel.getGameModelParameters().activeEffect("00164"))))
+				posList = this.gameModel.getPositionsForEvolving((PokemonCard) this.card, player.getColor());
+
+			// Check Giovanni:
+			if (gameModel.getGameModelParameters().activeEffect("00482") && !this.gameModel.getGiovanniPositionsForEvolving((PokemonCard) this.card, color).isEmpty()
+					&& (!this.gameModel.getGameModelParameters().activeEffect("00153")
+							|| (this.gameModel.getGameModelParameters().activeEffect("00153") && this.gameModel.getGameModelParameters().activeEffect("00164")))) {
+				List<PositionID> giovanniPos = this.gameModel.getGiovanniPositionsForEvolving((PokemonCard) this.card, player.getColor());
+				for (PositionID posID : giovanniPos)
+					if (!posList.contains(posID))
+						posList.add(posID);
+			}
+
+			Preconditions.checkArgument(!posList.isEmpty(), "Error: Position list is empty!");
 			PositionID chosenPosID = player.playerChoosesPositions(posList, 1, true, "Choose a position to evolve into " + card.getName()).get(0);
 			this.gameModel.getAttackAction().evolvePokemon(chosenPosID, card.getGameID());
 		} else
@@ -99,6 +123,16 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 		PokemonCard pCard = (PokemonCard) card;
 		if (pCard.hasCondition(PokemonCondition.PARALYZED) || pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.NO_ATTACK))
 			return false;
+
+		// Check if pokemon is not influenced by the Intimidate attack of Giovanni's Nidoking:
+		if (gameModel.getGameModelParameters().activeEffect("00480", this.cardGameID())) {
+			List<Pair<Integer, Integer>> values = gameModel.getGameModelParameters().effectParameterActive("00480");
+			Card defendingPokemon = gameModel.getPosition(enemyActive()).getTopCard();
+			for (Pair<Integer, Integer> pair : values) {
+				if (pair.getKey() == defendingPokemon.getGameID())
+					return false;
+			}
+		}
 
 		List<Element> attackCosts = this.attackCosts.get(attackName);
 		if (attackCosts == null)

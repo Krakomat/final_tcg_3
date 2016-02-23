@@ -5,11 +5,13 @@ Patch 5.0
 				- Fuchsia City Gym
 				- Saffron City Gym
 				- Cinnabar City Gym
+				- Viridian City Gym
 		New Card sets:
 			- KOGA
 			- SABRINA
 			- BLAINE
 			- TEAM ROCKET
+			- GIOVANNI
 	Game:
 		- 00117_Venomoth: Fixed the attack costs of Venom Powder
 		- 00252_Slowpoke: Fixed a visual bug

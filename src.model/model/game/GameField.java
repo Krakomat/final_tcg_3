@@ -9,6 +9,7 @@ import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.PositionID;
 import model.game.GameModelUpdate;
+import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 
 public class GameField {
@@ -796,5 +797,60 @@ public class GameField {
 		default:
 			throw new IllegalArgumentException("Wrong positionID: " + position.getPositionID());
 		}
+	}
+
+	public List<PositionID> getGiovanniPositionsForEvolving(PokemonCard c, Color color, int turnNumber, PokemonGame gameModel) {
+		ArrayList<PositionID> posList = new ArrayList<PositionID>();
+		if (color == Color.BLUE) {
+			Card topCard = this.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.BLUE_ACTIVEPOKEMON);
+
+			topCard = this.getPosition(PositionID.BLUE_BENCH_1).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.BLUE_BENCH_1);
+
+			topCard = this.getPosition(PositionID.BLUE_BENCH_2).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.BLUE_BENCH_2);
+
+			topCard = this.getPosition(PositionID.BLUE_BENCH_3).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.BLUE_BENCH_3);
+
+			topCard = this.getPosition(PositionID.BLUE_BENCH_4).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.BLUE_BENCH_4);
+
+			topCard = this.getPosition(PositionID.BLUE_BENCH_5).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.BLUE_BENCH_5);
+		} else if (color == Color.RED) {
+			Card topCard = this.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.RED_ACTIVEPOKEMON);
+
+			topCard = this.getPosition(PositionID.RED_BENCH_1).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.RED_BENCH_1);
+
+			topCard = this.getPosition(PositionID.RED_BENCH_2).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.RED_BENCH_2);
+
+			topCard = this.getPosition(PositionID.RED_BENCH_3).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.RED_BENCH_3);
+
+			topCard = this.getPosition(PositionID.RED_BENCH_4).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.RED_BENCH_4);
+
+			topCard = this.getPosition(PositionID.RED_BENCH_5).getTopCard();
+			if (topCard != null && c.getEvolvesFrom().equals(topCard.getName()) && gameModel.getGameModelParameters().activeEffect("00482", topCard.getGameID()))
+				posList.add(PositionID.RED_BENCH_5);
+		} else
+			System.err.println("Wrong player send to method 'returnPositionsForEvolving'!");
+		return posList;
 	}
 }

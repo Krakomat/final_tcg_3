@@ -1,9 +1,12 @@
 package model.scripting.giovanni;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.database.TrainerCard;
 import model.enums.PlayerAction;
+import model.enums.PositionID;
 import model.interfaces.PokemonGame;
-import model.interfaces.Position;
 import model.scripting.abstracts.TrainerCardScript;
 
 public class Script_00494_GiovannisLastResort extends TrainerCardScript {
@@ -14,19 +17,30 @@ public class Script_00494_GiovannisLastResort extends TrainerCardScript {
 
 	@Override
 	public PlayerAction trainerCanBePlayedFromHand() {
-		// Can be played if the own deck contains at least 2 cards:
-		Position ownDeck = gameModel.getPosition(ownDeck());
-		if (ownDeck.size() >= 2)
+		if (getGiovanniPokemonInArena().size() > 0)
 			return PlayerAction.PLAY_TRAINER_CARD;
 		return null;
 	}
 
 	@Override
 	public void playFromHand() {
-		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " draws 2 cards!", "");
 		// Discard trainer card before drawing!
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
-		gameModel.getAttackAction().playerDrawsCards(2, getCardOwner());
+
+		PositionID chosenPos = getCardOwner().playerChoosesPositions(getGiovanniPokemonInArena(), 1, true, "Choose a pokemon to fully heal!").get(0);
+		gameModel.getAttackAction().fullHealPosition(chosenPos);
+
+		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " discards his hand!", "");
+		gameModel.getAttackAction().playerDiscardsAllCards(getCardOwner());
+		gameModel.sendGameModelToAllPlayers("");
+	}
+
+	private List<PositionID> getGiovanniPokemonInArena() {
+		List<PositionID> erg = new ArrayList<>();
+		for (PositionID posID : gameModel.getFullArenaPositions(getCardOwner().getColor()))
+			if (gameModel.getPosition(posID).getTopCard().getName().contains("Giovanni"))
+				erg.add(posID);
+		return erg;
 	}
 }

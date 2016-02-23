@@ -1002,6 +1002,11 @@ public class PokemonGameModelImpl implements PokemonGame {
 		return this.gameField.getPositionsForEvolving(c, color, gameModelParameters.getTurnNumber());
 	}
 
+	@Override
+	public List<PositionID> getGiovanniPositionsForEvolving(PokemonCard c, Color color) {
+		return this.gameField.getGiovanniPositionsForEvolving(c, color, gameModelParameters.getTurnNumber(), this);
+	}
+
 	/**
 	 * Assigns a new gameID to a single card.
 	 * 
