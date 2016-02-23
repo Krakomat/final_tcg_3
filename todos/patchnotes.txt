@@ -4,7 +4,9 @@ Patch 5.5
 		- 00459_RocketsHitmonchan: Crosscounter works now even if Rocket's Hitmonchan is knocked out
 		- 00459_RocketsMoltres: Fire Wall works now even if Rocket's Moltres is knocked out
 		- 00231_DarkWartortle: Mirros Shell works now even if Dark Wartortle is knocked out
-		
+	Gym Challenge:
+		- Now remembers the last entered gym when leaving a gym
+	
 Patch 5.0
 	New Features:
 		Gym Mode Expansion --> Now called 'Gym Challenge'

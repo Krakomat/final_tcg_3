@@ -200,23 +200,32 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 	@Override
 	public void restart() {
-		currentArenaIndex = 0;
+		// currentArenaIndex = 0;
 		this.arenaImage.setTexture(Database.getAssetKey(this.enabledArenaNames.get(currentArenaIndex)));
 		this.arenaImage.setVisible(true);
 		this.dropInUpdateQueue(arenaImage);
 		this.chooseArenaPanel.setText(this.enabledArenaNames.get(currentArenaIndex));
+		if (enabledArenaNames.size() > currentArenaIndex + 1) {
+			scrollRightButton.setVisible(true);
+		} else
+			this.scrollRightButton.setVisible(false);
+		dropInUpdateQueue(scrollRightButton);
+		if (currentArenaIndex > 0) {
+			scrollLeftButton.setVisible(true);
+		} else
+			this.scrollLeftButton.setVisible(false);
+		dropInUpdateQueue(scrollLeftButton);
 		this.dropInUpdateQueue(chooseArenaPanel);
 		this.backButton.setVisible(true);
 		this.dropInUpdateQueue(backButton);
 		this.enterArenaButton.setVisible(true);
 		this.dropInUpdateQueue(enterArenaButton);
-		this.scrollLeftButton.setVisible(false);
 		this.dropInUpdateQueue(scrollLeftButton);
-		if (enabledArenaNames.size() > currentArenaIndex + 1)
-			this.scrollRightButton.setVisible(true);
-		else
-			this.scrollRightButton.setVisible(false);
-		this.dropInUpdateQueue(scrollRightButton);
+		// if (enabledArenaNames.size() > currentArenaIndex + 1)
+		// this.scrollRightButton.setVisible(true);
+		// else
+		// this.scrollRightButton.setVisible(false);
+		// this.dropInUpdateQueue(scrollRightButton);
 		this.chooseArenaPanel.setVisible(true);
 		this.dropInUpdateQueue(chooseArenaPanel);
 	}
