@@ -187,7 +187,16 @@ public class AttackAction {
 			defenderPokemon.setDamageMarks(defenderPokemon.getHitpoints());
 
 		// Apply knockout condition if hitpoints = damagepoints:
+		boolean superRetal = false;
+		boolean fireWall = false;
+		boolean retal = false;
 		if (defenderPokemon.getHitpoints() == defenderPokemon.getDamageMarks()) {
+			if (defenderPokemon.hasCondition(PokemonCondition.FIRE_WALL))
+				fireWall = true;
+			if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION))
+				superRetal = true;
+			if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION))
+				retal = true;
 			this.inflictConditionToPosition(targetPosition, PokemonCondition.KNOCKOUT);
 			// Check if enemy had DESTINY:
 			if (defenderPokemon.hasCondition(PokemonCondition.DESTINY) && attackerPositionID != null)
@@ -210,11 +219,11 @@ public class AttackAction {
 		if (attackerPokemon != null && attackerPokemon.getName().contains("Koga") && gameModel.getGameModelParameters().isActivated_00385_Koga() && damageAmount > 0)
 			this.inflictConditionToPosition(targetPosition, PokemonCondition.POISONED);
 
-		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null && damageAmount > 0)
+		if (retal && attackerPositionID != null && damageAmount > 0)
 			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, damageAmount, true);
-		if (defenderPokemon.hasCondition(PokemonCondition.FIRE_WALL) && attackerPositionID != null && damageAmount > 0)
+		if (fireWall && attackerPositionID != null && damageAmount > 0)
 			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, 10, true);
-		if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION) && attackerPositionID != null && damageAmount > 0 && this.flipACoin() == Coin.HEADS)
+		if (superRetal && attackerPositionID != null && damageAmount > 0 && this.flipACoin() == Coin.HEADS)
 			this.inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, damageAmount * 2, true);
 		return damageAmount;
 	}

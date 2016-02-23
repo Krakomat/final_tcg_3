@@ -63,7 +63,16 @@ public class Script_00311_MistysStaryu extends PokemonCardScript {
 			defenderPokemon.setDamageMarks(defenderPokemon.getHitpoints());
 
 		// Apply knockout condition if hitpoints = damagepoints:
+		boolean superRetal = false;
+		boolean fireWall = false;
+		boolean retal = false;
 		if (defenderPokemon.getHitpoints() == defenderPokemon.getDamageMarks()) {
+			if (defenderPokemon.hasCondition(PokemonCondition.FIRE_WALL))
+				fireWall = true;
+			if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION))
+				superRetal = true;
+			if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION))
+				retal = true;
 			gameModel.getAttackAction().inflictConditionToPosition(targetPosition, PokemonCondition.KNOCKOUT);
 			// Check if enemy had DESTINY:
 			if (defenderPokemon.hasCondition(PokemonCondition.DESTINY) && attackerPositionID != null)
@@ -86,12 +95,12 @@ public class Script_00311_MistysStaryu extends PokemonCardScript {
 		if (attackerPokemon != null && attackerPokemon.getName().contains("Koga") && gameModel.getGameModelParameters().isActivated_00385_Koga() && damageAmount > 0)
 			this.gameModel.getAttackAction().inflictConditionToPosition(targetPosition, PokemonCondition.POISONED);
 
-		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null && damageAmount > 0)
+		if (retal && attackerPositionID != null && damageAmount > 0)
 			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
 					damageAmount, true);
-		if (defenderPokemon.hasCondition(PokemonCondition.FIRE_WALL) && attackerPositionID != null && damageAmount > 0)
+		if (fireWall && attackerPositionID != null && damageAmount > 0)
 			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, 10, true);
-		if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION) && attackerPositionID != null && damageAmount > 0
+		if (superRetal && attackerPositionID != null && damageAmount > 0
 				&& gameModel.getAttackAction().flipACoin() == Coin.HEADS)
 			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
 					damageAmount * 2, true);
