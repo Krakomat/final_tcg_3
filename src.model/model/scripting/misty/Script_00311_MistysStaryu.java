@@ -86,10 +86,13 @@ public class Script_00311_MistysStaryu extends PokemonCardScript {
 		if (attackerPokemon != null && attackerPokemon.getName().contains("Koga") && gameModel.getGameModelParameters().isActivated_00385_Koga() && damageAmount > 0)
 			this.gameModel.getAttackAction().inflictConditionToPosition(targetPosition, PokemonCondition.POISONED);
 
-		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null)
+		if (defenderPokemon.hasCondition(PokemonCondition.RETALIATION) && attackerPositionID != null && damageAmount > 0)
 			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
 					damageAmount, true);
-		if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION) && attackerPositionID != null && gameModel.getAttackAction().flipACoin() == Coin.HEADS)
+		if (defenderPokemon.hasCondition(PokemonCondition.FIRE_WALL) && attackerPositionID != null && damageAmount > 0)
+			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID, 10, true);
+		if (defenderPokemon.hasCondition(PokemonCondition.SUPER_RETALIATION) && attackerPositionID != null && damageAmount > 0
+				&& gameModel.getAttackAction().flipACoin() == Coin.HEADS)
 			gameModel.getAttackAction().inflictDamageToPosition(defenderPokemon.getElement(), defenderPokemon.getCurrentPosition().getPositionID(), attackerPositionID,
 					damageAmount * 2, true);
 	}

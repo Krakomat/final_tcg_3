@@ -9,6 +9,7 @@ Patch 5.0
 			- KOGA
 			- SABRINA
 			- BLAINE
+			- TEAM ROCKET
 	Game:
 		- 00117_Venomoth: Fixed the attack costs of Venom Powder
 		- 00252_Slowpoke: Fixed a visual bug
