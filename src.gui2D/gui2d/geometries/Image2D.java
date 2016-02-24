@@ -119,18 +119,18 @@ public abstract class Image2D extends Node implements SelectableNode {
 		float zPos = level + 0.00001f;
 		Node selectedNode = new Node();
 
-		GlowingBorder lineUpRight = new GlowingBorder((xPos + width) / 2, yPos + height, zPos, (xPos + width) / 4, 2, color, blendMode);
+		GlowingBorder lineUpRight = new GlowingBorder((xPos + width) / 2, yPos + height, zPos, (xPos + width) / 2, 2, color, blendMode);
 		selectedNode.attachChild(lineUpRight);
 
-		GlowingBorder lineRightLeft = new GlowingBorder((xPos + width) / 2, yPos, zPos, (xPos + width) / 4, 2, color, blendMode);
+		GlowingBorder lineRightLeft = new GlowingBorder((xPos + width) / 2, yPos, zPos, (xPos + width) / 2, 2, color, blendMode);
 		lineRightLeft.rotate(0, 0, Degree.degreeToRadiant(180));
 		selectedNode.attachChild(lineRightLeft);
 
-		GlowingBorder lineLeftUp = new GlowingBorder(xPos, (yPos + height) / 2, zPos, (yPos + height) / 4, 3, color, blendMode);
+		GlowingBorder lineLeftUp = new GlowingBorder(xPos, (yPos + height) / 2, zPos, (yPos + height) / 2, 3, color, blendMode);
 		lineLeftUp.rotate(0, 0, Degree.degreeToRadiant(90));
 		selectedNode.attachChild(lineLeftUp);
 
-		GlowingBorder lineRightDown = new GlowingBorder(xPos + width, (yPos + height) / 2, zPos, (yPos + height) / 4, 3, color, blendMode);
+		GlowingBorder lineRightDown = new GlowingBorder(xPos + width, (yPos + height) / 2, zPos, (yPos + height) / 2, 3, color, blendMode);
 		lineRightDown.rotate(0, 0, Degree.degreeToRadiant(-90));
 		selectedNode.attachChild(lineRightDown);
 

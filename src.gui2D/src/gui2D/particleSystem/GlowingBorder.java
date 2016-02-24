@@ -2,7 +2,6 @@ package src.gui2D.particleSystem;
 
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
-import com.jme3.effect.shapes.EmitterBoxShape;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
@@ -15,18 +14,18 @@ import model.database.Database;
 public class GlowingBorder extends ParticleEmitter {
 	public GlowingBorder(float xPos, float yPos, float zPos, float width, float height, ColorRGBA color, BlendMode blendMode) {
 		super("Emitter", ParticleMesh.Type.Triangle, 30);
-		this.setShape(new EmitterBoxShape(new Vector3f(-1f, -1f, -1f), new Vector3f(1f, 1f, 1f)));
+		// this.setShape(new EmitterBoxShape(new Vector3f(-1f, -1f, -1f), new Vector3f(1f, 1f, 1f)));
 		Material mat_red = new Material(GUI2D.getInstance().getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
 		mat_red.setTexture("Texture", GUI2D.getInstance().getAssetManager().loadTexture(Database.getAssetKey("Particle")));
 		mat_red.getAdditionalRenderState().setBlendMode(blendMode);
 		this.setMaterial(mat_red);
-		this.setImagesX(1);
-		this.setImagesY(1); // 2x2 texture animation
+		this.setImagesX(2);
+		this.setImagesY(2); // 2x2 texture animation
 		this.setEndColor(new ColorRGBA(color.r, color.g, color.b, 1.0f)); // red
 		this.setStartColor(new ColorRGBA(color.r, color.g, color.b, 1.0f)); // yellow
 		this.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 1, 0));
 		this.setStartSize(1.0f);
-		this.setEndSize(1.0f);
+		this.setEndSize(0.6f);
 		this.setGravity(0, -1, 0);
 		this.setLowLife(1f);
 		this.setHighLife(1f);
