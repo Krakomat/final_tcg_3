@@ -21,7 +21,7 @@ public class GlowingBorder extends ParticleEmitter {
 		this.setImagesX(2);
 		this.setImagesY(2); // 2x2 texture animation
 		this.setEndColor(new ColorRGBA(color.r, color.g, color.b, 1.0f)); // red
-		this.setStartColor(new ColorRGBA(color.r, color.g, color.b, 1.0f)); // yellow
+		this.setStartColor(new ColorRGBA(color.r, color.g, color.b, 0.1f)); // yellow
 		this.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 1, 0));
 		this.setStartSize(1.0f);
 		this.setEndSize(0.6f);
