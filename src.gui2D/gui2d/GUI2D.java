@@ -875,9 +875,12 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				break;
 			case LOBBY:
+				boolean switchMusic = false;
 				if (this.currentActiveController != this.titleController && this.currentActiveController != this.arenaController && changeMusic)
-					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+					switchMusic = true;
 				this.currentActiveController = this.lobbyController;
+				if (switchMusic)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				break;
 			case ARENA_CHOOSE_LOBBY:
 				if (this.currentActiveController != this.lobbyController && changeMusic)

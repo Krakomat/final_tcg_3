@@ -11,6 +11,7 @@ Patch 5.01
 	UI:
 		- New image for the mouse cursor
 		- Replaced the static glowing/selected borders with a dynamic particle system
+		- Fixed a bug, where the ambient music would not switch after returning to the lobby from ingame
 		
 Patch 5.0
 	New Features:
