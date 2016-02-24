@@ -43,7 +43,7 @@ public class Script_00198_MysteriousFossil extends TrainerCardScript {
 		this.card.setCurrentPosition(null);
 
 		fossil.setCurrentPositionLocal(handPos);
-		handPos.getCards().add(fossil);
+		handPos.addToPosition(fossil);
 
 		// Set doll onto bench:
 		fossil.getCardScript().playFromHand();

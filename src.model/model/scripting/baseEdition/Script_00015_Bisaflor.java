@@ -122,7 +122,7 @@ public class Script_00015_Bisaflor extends PokemonCardScript {
 			Position position = positionList.get(i);
 			for (int j = 0; j < distribution.get(i); j++) {
 				EnergyCard grass = energyCardPool.remove(0);
-				position.getCards().add(0, grass);
+				position.addToPosition(0, grass);
 				grass.setCurrentPosition(position);
 			}
 		}

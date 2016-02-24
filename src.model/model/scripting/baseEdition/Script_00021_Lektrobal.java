@@ -107,7 +107,7 @@ public class Script_00021_Lektrobal extends PokemonCardScript {
 
 		// Attach the energy:
 		token.setCurrentPositionLocal(targetPosition);
-		targetPosition.getCards().add(0, token);
+		targetPosition.addToPosition(0, token);
 
 		// Send messages:
 		List<Card> cardMessageList = new ArrayList<>();

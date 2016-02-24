@@ -439,7 +439,7 @@ public class AttackAction {
 		if (onTop && target != null)
 			target.addToPosition(c);
 		else if (target != null)
-			target.getCards().add(0, c);
+			target.addToPosition(0, c);
 		c.setCurrentPosition(target);
 
 		if (target != null && target.isVisibleForPlayer(Color.BLUE))

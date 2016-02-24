@@ -65,6 +65,11 @@ public class PositionImpl implements Position {
 		notifyPosition();
 	}
 
+	public void addToPosition(int index, Card c) {
+		this.cards.add(index, c);
+		notifyPosition();
+	}
+
 	public Card getTopCard() {
 		if (this.cards == null || this.cards.isEmpty())
 			return null;
@@ -182,7 +187,10 @@ public class PositionImpl implements Position {
 	}
 
 	public List<Card> getCards() {
-		return cards;
+		List<Card> cardList = new ArrayList<>();
+		for (Card c : cards)
+			cardList.add(c);
+		return cardList;
 	}
 
 	public void setCards(List<Card> cards) {

@@ -50,7 +50,7 @@ public class Script_00468_NarrowGym extends TrainerCardScript {
 
 			int size = cards.size();
 			for (int i = 0; i < size; i++) {
-				gameModel.getAttackAction().moveCard(posID, hand, cards.get(0).getGameID(), true);
+				gameModel.getAttackAction().moveCard(posID, hand, cards.get(i).getGameID(), true);
 			}
 			gameModel.sendGameModelToAllPlayers("");
 		}

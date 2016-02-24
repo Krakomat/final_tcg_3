@@ -64,11 +64,11 @@ public class Script_00427_SabrinasGastly extends PokemonCardScript {
 
 		int size = cards.size();
 		for (int i = 0; i < size; i++) {
-			Card c = cards.get(0);
+			Card c = cards.get(i);
 			if (c == this.card || c instanceof EnergyCard)
-				gameModel.getAttackAction().moveCard(posID, hand, cards.get(0).getGameID(), true);
+				gameModel.getAttackAction().moveCard(posID, hand, c.getGameID(), true);
 			else
-				gameModel.getAttackAction().moveCard(posID, ownDiscardPile(), cards.get(0).getGameID(), true);
+				gameModel.getAttackAction().moveCard(posID, ownDiscardPile(), c.getGameID(), true);
 		}
 		gameModel.sendGameModelToAllPlayers("");
 

@@ -121,6 +121,14 @@ public interface Position {
 	public void addToPosition(Card c);
 
 	/**
+	 * Adds the given card at the given index of the card list in the position.
+	 * 
+	 * @param index
+	 * @param c
+	 */
+	public void addToPosition(int index, Card c);
+
+	/**
 	 * Removes the top card of this position(card at index size-1) and returns it. Returns null, if this position is empty.
 	 * 
 	 * @return

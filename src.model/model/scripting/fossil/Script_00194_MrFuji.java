@@ -42,7 +42,7 @@ public class Script_00194_MrFuji extends TrainerCardScript {
 
 		int size = cards.size();
 		for (int i = 0; i < size; i++)
-			gameModel.getAttackAction().moveCard(targetPosition, playerDeck, cards.get(0).getGameID(), true);
+			gameModel.getAttackAction().moveCard(targetPosition, playerDeck, cards.get(i).getGameID(), true);
 		gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getPosition(playerDeck).shuffle();
 		gameModel.sendGameModelToAllPlayers("");

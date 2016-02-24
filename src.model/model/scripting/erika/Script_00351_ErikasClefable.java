@@ -50,7 +50,7 @@ public class Script_00351_ErikasClefable extends PokemonCardScript {
 
 					int size = cards.size();
 					for (int i = 0; i < size; i++)
-						gameModel.getAttackAction().moveCard(position.getPositionID(), ownHand(), cards.get(0).getGameID(), true);
+						gameModel.getAttackAction().moveCard(position.getPositionID(), ownHand(), cards.get(i).getGameID(), true);
 					gameModel.sendGameModelToAllPlayers("");
 				} else
 					done = true;

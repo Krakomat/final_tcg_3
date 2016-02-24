@@ -71,7 +71,7 @@ public class Script_00352_ErikasDragonair extends PokemonCardScript {
 
 		int size = cards.size();
 		for (int i = 0; i < size; i++)
-			gameModel.getAttackAction().moveCard(ownActive(), ownDeck(), cards.get(0).getGameID(), true);
+			gameModel.getAttackAction().moveCard(ownActive(), ownDeck(), cards.get(i).getGameID(), true);
 		gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getPosition(enemyDeck()).shuffle();
 		gameModel.sendGameModelToAllPlayers("");
@@ -100,7 +100,7 @@ public class Script_00352_ErikasDragonair extends PokemonCardScript {
 
 		size = cards.size();
 		for (int i = 0; i < size; i++)
-			gameModel.getAttackAction().moveCard(enemyActive(), enemyDeck(), cards.get(0).getGameID(), true);
+			gameModel.getAttackAction().moveCard(enemyActive(), enemyDeck(), cards.get(i).getGameID(), true);
 		gameModel.sendTextMessageToAllPlayers(getEnemyPlayer().getName() + " shuffles his deck!", Sounds.SHUFFLE);
 		gameModel.getPosition(enemyDeck()).shuffle();
 		gameModel.sendGameModelToAllPlayers("");

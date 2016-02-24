@@ -55,7 +55,7 @@ public class Script_00401_FuchsiaCityGym extends TrainerCardScript {
 
 			int size = cards.size();
 			for (int i = 0; i < size; i++)
-				gameModel.getAttackAction().moveCard(posID, playerDeck, cards.get(0).getGameID(), true);
+				gameModel.getAttackAction().moveCard(posID, playerDeck, cards.get(i).getGameID(), true);
 			gameModel.sendTextMessageToAllPlayers(player.getName() + " shuffles his deck!", Sounds.SHUFFLE);
 			gameModel.getPosition(playerDeck).shuffle();
 			gameModel.sendGameModelToAllPlayers("");
