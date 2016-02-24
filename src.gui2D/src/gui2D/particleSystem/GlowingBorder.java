@@ -14,7 +14,6 @@ import model.database.Database;
 public class GlowingBorder extends ParticleEmitter {
 	public GlowingBorder(float xPos, float yPos, float zPos, float width, float height, ColorRGBA color, BlendMode blendMode) {
 		super("Emitter", ParticleMesh.Type.Triangle, 30);
-		// this.setShape(new EmitterBoxShape(new Vector3f(-1f, -1f, -1f), new Vector3f(1f, 1f, 1f)));
 		Material mat_red = new Material(GUI2D.getInstance().getAssetManager(), "Common/MatDefs/Misc/Particle.j3md");
 		mat_red.setTexture("Texture", GUI2D.getInstance().getAssetManager().loadTexture(Database.getAssetKey("Particle")));
 		mat_red.getAdditionalRenderState().setBlendMode(blendMode);
@@ -28,8 +27,8 @@ public class GlowingBorder extends ParticleEmitter {
 		this.setEndSize(0.6f);
 		this.setGravity(0, -1, 0);
 		this.setLowLife(1f);
-		this.setHighLife(1f);
-		this.getParticleInfluencer().setVelocityVariation(0.5f);
+		this.setHighLife(1.5f);
+		this.getParticleInfluencer().setVelocityVariation(0.4f);
 
 		this.setLocalTranslation(xPos, yPos, zPos); // doesn't have to be this just pick somewhere on screen
 		this.setLocalScale(width, height, 1); // scale it to your need so it's not few pixels wide
