@@ -6,9 +6,6 @@ GameModel:
 	- time counter for each turn
 	- Implement timer for (single) actions for a client
 
-DeckEditor:
-	- Make filters glow on mouseOver
-
 AI:
 	- (HARD!) Enhanced bot that knows what he's doing
 	- Add parameter for the rest cards in the bots deck (the bot knows his own cards)
