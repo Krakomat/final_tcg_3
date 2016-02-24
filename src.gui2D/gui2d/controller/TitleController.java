@@ -14,6 +14,7 @@ import gui2d.abstracts.SelectableNode;
 import gui2d.controller.MusicController.MusicType;
 import gui2d.geometries.TextButton2D;
 
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 
 import gui2d.geometries.Image2D;
@@ -51,7 +52,7 @@ public class TitleController extends Node implements GUI2DController {
 		dropInUpdateQueue(startButton);
 		this.attachChild(startButton);
 
-		titleImage = new Image2D("titleImage!", Database.getAssetKey("logo"), screenWidth * 0.4f, screenWidth * 0.2f) {
+		titleImage = new Image2D("titleImage!", Database.getAssetKey("logo"), screenWidth * 0.4f, screenWidth * 0.2f, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Preconditions;
+import com.jme3.material.RenderState.BlendMode;
 
 import common.utilities.Lock;
 import model.database.Card;
@@ -71,7 +72,7 @@ public class CardViewer extends WindowGeometry {
 		okButton.setLocalTranslation(xPos + width * 0.40f, yPos + height * 0.05f, level + 0.00001f);
 		this.attachChild(okButton);
 
-		this.cardImage = new Image2D(name, Database.getTextureKey("00000"), width * 0.55f, height * 0.75f) {
+		this.cardImage = new Image2D(name, Database.getTextureKey("00000"), width * 0.55f, height * 0.75f, BlendMode.PremultAlpha) {
 			@Override
 			public void mouseSelect() {
 			}

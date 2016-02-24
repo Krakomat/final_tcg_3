@@ -1,6 +1,7 @@
 package gui2d.geometries;
 
 import com.jme3.asset.TextureKey;
+import com.jme3.material.RenderState.BlendMode;
 
 import gui2d.abstracts.SelectableNode;
 
@@ -15,7 +16,7 @@ public abstract class HandCard2D extends Image2D implements SelectableNode {
 	private int currentScrollIndex;
 
 	public HandCard2D(String name, TextureKey texture, float width, float height, int index) {
-		super(name, texture, width, height);
+		super(name, texture, width, height, BlendMode.Alpha);
 		this.setIndex(index);
 		this.currentScrollIndex = 0;
 	}

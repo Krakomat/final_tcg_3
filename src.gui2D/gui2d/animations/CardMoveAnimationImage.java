@@ -8,6 +8,7 @@ import gui2d.geometries.HandCardManager2D;
 import gui2d.geometries.Image2D;
 
 import com.jme3.asset.TextureKey;
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
@@ -20,7 +21,7 @@ public class CardMoveAnimationImage extends Image2D implements AnimateableObject
 	private String sound;
 
 	public CardMoveAnimationImage(Node from, Node to, String name, TextureKey texture, float width, float height, String sound) {
-		super(name, texture, width, height);
+		super(name, texture, width, height, BlendMode.Alpha);
 		this.animationTime = 0;
 		this.sound = sound;
 

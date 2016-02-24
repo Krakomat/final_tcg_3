@@ -3,6 +3,7 @@ package gui2d.animations;
 import java.util.concurrent.Callable;
 
 import com.jme3.asset.TextureKey;
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Spatial;
 
 import common.utilities.LinearFunction;
@@ -23,7 +24,7 @@ public class CardDrawAnimationImage extends Image2D implements AnimateableObject
 
 	public CardDrawAnimationImage(String name, TextureKey texture, float width, float height, float startX, float startY, float finishX, float finishY,
 			float animationTime) {
-		super(name, texture, width, height);
+		super(name, texture, width, height, BlendMode.Alpha);
 		this.maxAnimationTime = animationTime;
 		this.animationTime = 0;
 

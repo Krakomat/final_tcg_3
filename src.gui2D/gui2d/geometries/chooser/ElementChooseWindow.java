@@ -7,6 +7,8 @@ import gui2d.geometries.Image2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jme3.material.RenderState.BlendMode;
+
 import common.utilities.Lock;
 import model.database.Database;
 import model.enums.Element;
@@ -32,7 +34,7 @@ public class ElementChooseWindow extends ChooseWindow {
 
 			// Create image:
 			final int index = i;
-			Image2D image = new Image2D("ChooseImage", Database.getTextureKey("00001"), imageWidth, imageHeight) {
+			Image2D image = new Image2D("ChooseImage", Database.getTextureKey("00001"), imageWidth, imageHeight, BlendMode.PremultAlpha) {
 				@Override
 				public void mouseSelect() {
 					imageSelected(index);

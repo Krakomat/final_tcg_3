@@ -8,17 +8,16 @@ import model.database.DynamicPokemonCondition;
 import model.enums.Element;
 import model.enums.PokemonCondition;
 import model.enums.Sounds;
+import src.gui2D.particleSystem.GlowingBorder;
 
 import com.jme3.asset.TextureKey;
 import com.jme3.audio.AudioNode;
-import com.jme3.material.Material;
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.shape.Line;
 
+import common.utilities.Degree;
 import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.abstracts.Panel2D;
@@ -111,7 +110,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 			float boxXPos = mirrorInverted ? width + ((i % 6) * damageBoxWidth) : -damageBoxWidth - ((i % 6) * damageBoxWidth);
 			float boxYPos = damageBoxHeight - (damageBoxHeight * (i / 6));
 
-			Image2D damageBox = new Image2D("DamageBox", Database.getAssetKey(DAMAGE_BOX), damageBoxWidth, damageBoxHeight) {
+			Image2D damageBox = new Image2D("DamageBox", Database.getAssetKey(DAMAGE_BOX), damageBoxWidth, damageBoxHeight, BlendMode.Alpha) {
 				@Override
 				public void mouseSelect() {
 					// Do nothing here
@@ -133,7 +132,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 			float boxYPos = (height - damageBoxHeight) - (damageBoxHeight * (i / 6));
 
 			Element energy = Element.COLORLESS; // Default energy
-			Image2D damageBox = new Image2D("DamageBox", Database.getAssetKey(energy.toString()), damageBoxWidth, damageBoxHeight) {
+			Image2D damageBox = new Image2D("DamageBox", Database.getAssetKey(energy.toString()), damageBoxWidth, damageBoxHeight, BlendMode.Alpha) {
 				@Override
 				public void mouseSelect() {
 					// Do nothing here
@@ -155,7 +154,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 			float boxYPos = (height - damageBoxHeight * 4) + (damageBoxHeight * (i / 6));
 
 			PokemonCondition condition = PokemonCondition.ASLEEP; // default condition
-			Image2D damageBox = new Image2D("DamageBox", Database.getAssetKey(condition.toString()), damageBoxWidth, damageBoxHeight) {
+			Image2D damageBox = new Image2D("DamageBox", Database.getAssetKey(condition.toString()), damageBoxWidth, damageBoxHeight, BlendMode.Alpha) {
 				@Override
 				public void mouseSelect() {
 					// Do nothing here
@@ -190,14 +189,14 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 			if (!this.hasChild(imagePanel))
 				this.attachChild(imagePanel);
 
-			if (this.isGlowing() && !this.hasChild(glowingNode))
+			if (this.isGlowing() && !this.hasChild(glowingNode) && !this.isSelected())
 				this.attachChild(glowingNode);
-			else if (!this.isGlowing())
+			else if (!this.isGlowing() || this.isSelected())
 				this.detachChild(glowingNode);
 
-			if (this.isSelected() && !this.hasChild(selectedNode))
+			if (this.isSelected() && !this.hasChild(selectedNode)) {
 				this.attachChild(selectedNode);
-			else if (!this.isSelected())
+			} else if (!this.isSelected())
 				this.detachChild(selectedNode);
 		} else {
 			this.detachChild(imagePanel);
@@ -325,37 +324,20 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 		float yPos = imagePanel.getyPos();
 		float zPos = level + 0.00001f;
 		Node selectedNode = new Node();
-		Material mark_mat = new Material(GUI2D.getInstance().getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-		mark_mat.setColor("Color", color);
+		GlowingBorder lineUpRight = new GlowingBorder((xPos + width) / 2, yPos + height, zPos, (xPos + width) / 4, 2, color, BlendMode.Alpha);
+		selectedNode.attachChild(lineUpRight);
 
-		Line lineLeftUp = new Line(new Vector3f(xPos, yPos, zPos), new Vector3f(xPos, yPos + height, zPos));
-		Line lineUpRight = new Line(new Vector3f(xPos, yPos + height, zPos), new Vector3f(xPos + width, yPos + height, zPos));
-		Line lineRightDown = new Line(new Vector3f(xPos + width, yPos + height, zPos), new Vector3f(xPos + width, yPos, zPos));
-		Line lineRightLeft = new Line(new Vector3f(xPos + width, yPos, zPos), new Vector3f(xPos, yPos, zPos));
-		lineLeftUp.setLineWidth(5);
-		lineUpRight.setLineWidth(5);
-		lineRightDown.setLineWidth(5);
-		lineRightLeft.setLineWidth(5);
+		GlowingBorder lineRightLeft = new GlowingBorder((xPos + width) / 2, yPos, zPos, (xPos + width) / 4, 2, color, BlendMode.Alpha);
+		lineRightLeft.rotate(0, 0, Degree.degreeToRadiant(180));
+		selectedNode.attachChild(lineRightLeft);
 
-		Geometry line1 = new Geometry(this.name, lineLeftUp);
-		line1.setMaterial(mark_mat);
-		line1.setLocalTranslation(0, 0, level + 0.00001f);
-		selectedNode.attachChild(line1);
+		GlowingBorder lineLeftUp = new GlowingBorder(xPos, (yPos + height) / 2, zPos, (yPos + height) / 4, 3, color, BlendMode.Alpha);
+		lineLeftUp.rotate(0, 0, Degree.degreeToRadiant(90));
+		selectedNode.attachChild(lineLeftUp);
 
-		Geometry line2 = new Geometry(this.name, lineUpRight);
-		line2.setMaterial(mark_mat);
-		line2.setLocalTranslation(0, 0, level + 0.00001f);
-		selectedNode.attachChild(line2);
-
-		Geometry line3 = new Geometry(this.name, lineRightDown);
-		line3.setMaterial(mark_mat);
-		line3.setLocalTranslation(0, 0, level + 0.00001f);
-		selectedNode.attachChild(line3);
-
-		Geometry line4 = new Geometry(this.name, lineRightLeft);
-		line4.setMaterial(mark_mat);
-		line4.setLocalTranslation(0, 0, level + 0.00001f);
-		selectedNode.attachChild(line4);
+		GlowingBorder lineRightDown = new GlowingBorder(xPos + width, (yPos + height) / 2, zPos, (yPos + height) / 4, 3, color, BlendMode.Alpha);
+		lineRightDown.rotate(0, 0, Degree.degreeToRadiant(-90));
+		selectedNode.attachChild(lineRightDown);
 
 		return selectedNode;
 	}
@@ -448,7 +430,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 	public void setTopCardID(String id) {
 		this.topCardID = id;
 	}
-	
+
 	public Vector2f getSize() {
 		return new Vector2f(this.imagePanel.getWidth(), this.imagePanel.getHeight());
 	}

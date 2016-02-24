@@ -8,7 +8,8 @@ Patch 5.01
 		- Now remembers the last entered gym when leaving a gym
 	UI:
 		- New image for the mouse cursor
-	
+		- Replaced the static glowing/selected borders with a dynamic particle system
+		
 Patch 5.0
 	New Features:
 		Gym Mode Expansion --> Now called 'Gym Challenge'

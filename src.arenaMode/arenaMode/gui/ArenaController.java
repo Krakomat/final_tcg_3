@@ -3,6 +3,7 @@ package arenaMode.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighter;
@@ -109,7 +110,7 @@ public class ArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(fightButton);
 		this.attachChild(fightButton);
 
-		arenaImage = new Image2D("arenaImage", Database.getAssetKey(imageAssetKey), imageWidth, thumbHeight) {
+		arenaImage = new Image2D("arenaImage", Database.getAssetKey(imageAssetKey), imageWidth, thumbHeight, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {
@@ -126,7 +127,7 @@ public class ArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(arenaImage);
 		this.attachChild(arenaImage);
 
-		redThumb = new Image2D("redThumb", Database.getAssetKey(first.getCode() + "THUMB"), thumbWidth, thumbHeight) {
+		redThumb = new Image2D("redThumb", Database.getAssetKey(first.getCode() + "THUMB"), thumbWidth, thumbHeight, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {
@@ -155,7 +156,7 @@ public class ArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(redThumb);
 		this.attachChild(redThumb);
 
-		brendanThumb = new Image2D("brendanThumb", Database.getAssetKey(second.getCode() + "THUMB"), thumbWidth, thumbHeight) {
+		brendanThumb = new Image2D("brendanThumb", Database.getAssetKey(second.getCode() + "THUMB"), thumbWidth, thumbHeight, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {
@@ -184,7 +185,7 @@ public class ArenaController extends Node implements GUI2DController {
 		dropInUpdateQueue(brendanThumb);
 		this.attachChild(brendanThumb);
 
-		brockThumb = new Image2D("brockThumb", Database.getAssetKey(third.getCode() + "THUMB"), thumbWidth, thumbHeight) {
+		brockThumb = new Image2D("brockThumb", Database.getAssetKey(third.getCode() + "THUMB"), thumbWidth, thumbHeight, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {
@@ -216,7 +217,7 @@ public class ArenaController extends Node implements GUI2DController {
 		float fighterImageWidth = screenWidth * 0.25f;
 		float fighterImageHeight = screenHeight * 0.8f;
 
-		fighterImage = new Image2D("fighterImage", Database.getAssetKey(first.getCode().toString()), fighterImageWidth, fighterImageHeight) {
+		fighterImage = new Image2D("fighterImage", Database.getAssetKey(first.getCode().toString()), fighterImageWidth, fighterImageHeight, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {

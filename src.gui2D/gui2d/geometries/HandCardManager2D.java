@@ -89,8 +89,7 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 		float startPoint = 0;
 		float newStartPoint = 0;
 		startPoint = xPos - ((handCardWidth / 2) * (MAX_HAND_CARDS - 1) + epsilon * (MAX_HAND_CARDS / 2)) - handCardWidth / 2;
-		newStartPoint = xPos - ((handCardWidth) * (MAX_HAND_CARDS / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((MAX_HAND_CARDS / 2) - 1))
-				- handCardWidth / 2;
+		newStartPoint = xPos - ((handCardWidth) * (MAX_HAND_CARDS / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((MAX_HAND_CARDS / 2) - 1)) - handCardWidth / 2;
 
 		float height = handCardWidth * 1.141f;
 		for (int i = 0; i < MAX_HAND_CARDS; i++) {
@@ -116,14 +115,14 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 
 		if (this.enemyHand) {
 			for (int i = 0; i < MAX_HAND_CARDS; i++) {
-				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newStartPoint
-						+ (handCardWidth + epsilon) * (i + 1));
+				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME,
+						newStartPoint + (handCardWidth + epsilon) * (i + 1));
 				this.xFunction.add(xFunc);
 			}
 		} else {
 			for (int i = 0; i < MAX_HAND_CARDS; i++) {
-				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, newStartPoint
-						+ (handCardWidth + epsilon) * (i - 1));
+				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME,
+						newStartPoint + (handCardWidth + epsilon) * (i - 1));
 				this.xFunction.add(xFunc);
 			}
 		}
@@ -176,7 +175,8 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 		// Align hand cards:
 		{
 			int screenWidth = GUI2D.getInstance().getResolution().getKey();
-			int size = cards.size() >= MAX_HAND_CARDS ? MAX_HAND_CARDS : cards.size();
+			int cardSize = cards.size();
+			int size = cardSize >= MAX_HAND_CARDS ? MAX_HAND_CARDS : cardSize;
 			float epsilon = screenWidth * 0.01f; // distance between two cards
 			float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
 
@@ -190,14 +190,14 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 			this.xFunction.clear();
 			if (this.enemyHand) {
 				for (int i = size - 1; i >= 0; i--) {
-					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, startPoint
-							+ (handCardWidth + epsilon) * (i) + handCardWidth / 2 + epsilon / 2);
+					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME,
+							startPoint + (handCardWidth + epsilon) * (i) + handCardWidth / 2 + epsilon / 2);
 					this.xFunction.add(xFunc);
 				}
 			} else {
 				for (int i = 0; i < size; i++) {
-					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME, startPoint
-							+ (handCardWidth + epsilon) * (i) - handCardWidth / 2 + epsilon / 2);
+					LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME,
+							startPoint + (handCardWidth + epsilon) * (i) - handCardWidth / 2 + epsilon / 2);
 					this.xFunction.add(xFunc);
 				}
 			}
@@ -297,7 +297,9 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 		if (this.animationTime > AnimationParameters.CARD_DRAW_TIME)
 			this.animationTime = AnimationParameters.CARD_DRAW_TIME;
 
-		int size = cards.size() >= MAX_HAND_CARDS ? MAX_HAND_CARDS : cards.size();
+//		int cardSize = cards.size();
+//		int size = cardSize >= MAX_HAND_CARDS ? MAX_HAND_CARDS : cardSize;
+		int size = updateXFunction();
 		if (!this.enemyHand) {
 			for (int i = 0; i < size; i++) {
 				HandCard2D handCard = this.handCards.get(i);
@@ -316,7 +318,38 @@ public class HandCardManager2D extends Node implements SelectableNode, Animateab
 
 		lock.unlock();
 	}
+	
+	private int updateXFunction(){
+		int screenWidth = GUI2D.getInstance().getResolution().getKey();
+		int cardSize = cards.size();
+		int size = cardSize >= MAX_HAND_CARDS ? MAX_HAND_CARDS : cardSize;
+		float epsilon = screenWidth * 0.01f; // distance between two cards
+		float handCardWidth = screenWidth * 0.06f; // Size of one single hand card
 
+		float startPoint = 0;
+		if (size % 2 == 0)
+			startPoint = xPos - ((handCardWidth) * (size / 2 - 1) + handCardWidth / 2 + (epsilon / 2) + epsilon * ((size / 2) - 1)) - handCardWidth / 2;
+		else
+			startPoint = xPos - ((handCardWidth / 2) * (size - 1) + epsilon * (size / 2)) - handCardWidth / 2;
+
+		// Update Linear functions:
+		this.xFunction.clear();
+		if (this.enemyHand) {
+			for (int i = size - 1; i >= 0; i--) {
+				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME,
+						startPoint + (handCardWidth + epsilon) * (i) + handCardWidth / 2 + epsilon / 2);
+				this.xFunction.add(xFunc);
+			}
+		} else {
+			for (int i = 0; i < size; i++) {
+				LinearFunction xFunc = new LinearFunction(0, startPoint + (handCardWidth + epsilon) * i, AnimationParameters.CARD_DRAW_TIME,
+						startPoint + (handCardWidth + epsilon) * (i) - handCardWidth / 2 + epsilon / 2);
+				this.xFunction.add(xFunc);
+			}
+		}
+		return size;
+	}
+	
 	public void handCardSelected(int index) {
 		IngameController parent = (IngameController) this.getParent();
 		parent.handCardGeometrySelected(handCards.get(index));

@@ -29,6 +29,7 @@ import gui2d.geometries.TextButton2D;
 import gui2d.geometries.Image2D;
 import gui2d.geometries.chooser.CardViewer;
 
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighter;
@@ -142,7 +143,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				break;
 			}
 			final int index = i;
-			Image2D filterButton = new Image2D("filterButton" + i, Database.getAssetKey(texture), elementButtonWidth, elementButtonWidth) {
+			Image2D filterButton = new Image2D("filterButton" + i, Database.getAssetKey(texture), elementButtonWidth, elementButtonWidth, BlendMode.Alpha) {
 
 				@Override
 				public void mouseSelect() {
@@ -206,7 +207,7 @@ public class DeckEditController extends Node implements GUI2DController {
 				break;
 			}
 			final int index = i;
-			Image2D filterButton = new Image2D("editionFilterButtons" + i, Database.getAssetKey(texture), elementButtonWidth, elementButtonWidth) {
+			Image2D filterButton = new Image2D("editionFilterButtons" + i, Database.getAssetKey(texture), elementButtonWidth, elementButtonWidth, BlendMode.Alpha) {
 
 				@Override
 				public void mouseSelect() {
@@ -292,7 +293,7 @@ public class DeckEditController extends Node implements GUI2DController {
 		this.deckImages = new ArrayList<>();
 		for (int i = 0; i < GameParameters.DECK_SIZE; i++) {
 			final int h = i;
-			Image2D deckImage = new Image2D("DeckImage!" + i, Database.getCardThumbnailKey("00000"), deckImageWidth, deckImageHeight) {
+			Image2D deckImage = new Image2D("DeckImage!" + i, Database.getCardThumbnailKey("00000"), deckImageWidth, deckImageHeight, BlendMode.Alpha) {
 
 				@Override
 				public void mouseSelect() {
@@ -329,7 +330,7 @@ public class DeckEditController extends Node implements GUI2DController {
 		this.libraryImages = new ArrayList<>();
 		for (int i = 0; i < GameParameters.DECK_EDITOR_LIBRARY_SIZE; i++) {
 			final int h = i;
-			Image2D libraryImage = new Image2D("LibraryImage!" + i, Database.getCardThumbnailKey("00000"), libraryImageWidth, libraryImageHeight) {
+			Image2D libraryImage = new Image2D("LibraryImage!" + i, Database.getCardThumbnailKey("00000"), libraryImageWidth, libraryImageHeight, BlendMode.Alpha) {
 
 				@Override
 				public void mouseSelect() {

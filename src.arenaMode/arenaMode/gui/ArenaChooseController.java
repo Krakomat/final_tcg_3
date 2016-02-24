@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.msgpack.core.Preconditions;
 
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighter;
@@ -164,7 +165,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 		float imageWidth = screenWidth * 0.45f;
 		float imageHeight = screenHeight * 0.35f;
-		arenaImage = new Image2D("arenaImage", Database.getAssetKey(this.enabledArenaNames.get(0)), imageWidth, imageHeight) {
+		arenaImage = new Image2D("arenaImage", Database.getAssetKey(this.enabledArenaNames.get(0)), imageWidth, imageHeight, BlendMode.Alpha) {
 
 			@Override
 			public void mouseSelect() {

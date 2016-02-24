@@ -672,6 +672,10 @@ public class Database {
 		TextureKey giovanniCharacterThumb = new TextureKey("/tilesets/characters/Giovanni_thumb.png");
 		giovanniCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "THUMB", giovanniCharacterThumb);
+		
+		TextureKey cloudyParticleTexture = new TextureKey("/tilesets/other/particle.png");
+		cloudyParticleTexture.setGenerateMips(false);
+		assetTextures.put("Particle", cloudyParticleTexture);
 	}
 
 	public static Player getBot(String name) {

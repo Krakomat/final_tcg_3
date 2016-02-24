@@ -35,6 +35,7 @@ import model.enums.PositionID;
 import model.interfaces.Position;
 
 import com.jme3.material.Material;
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -336,7 +337,7 @@ public class IngameController extends Node implements GUI2DController {
 		ownPrize = new ArrayList<>();
 		enemyPrize = new ArrayList<>();
 		for (int i = 0; i < 6; i++) {
-			Image2D ownPriceImage = new Image2D("Prize", Database.getTextureKey("00000"), prizePosWidth, prizePosHeight) {
+			Image2D ownPriceImage = new Image2D("Prize", Database.getTextureKey("00000"), prizePosWidth, prizePosHeight, BlendMode.Alpha) {
 				@Override
 				public void mouseSelect() {
 					prizeGeometrySelected(this);
@@ -364,7 +365,7 @@ public class IngameController extends Node implements GUI2DController {
 			this.attachChild(ownPriceImage);
 			ownPrize.add(ownPriceImage);
 
-			Image2D enemyPriceImage = new Image2D("Prize", Database.getTextureKey("00000"), prizePosWidth, prizePosHeight) {
+			Image2D enemyPriceImage = new Image2D("Prize", Database.getTextureKey("00000"), prizePosWidth, prizePosHeight, BlendMode.Alpha) {
 				@Override
 				public void mouseSelect() {
 					prizeGeometrySelected(this);
@@ -693,7 +694,7 @@ public class IngameController extends Node implements GUI2DController {
 		GUI2D.getInstance().getGuiNode().attachChild(cardMessagePanel);
 		cardMessagePanel.setVisible(false);
 
-		this.resultScreen = new Image2D("Result", Database.getAssetKey("win"), this.screenWidth * 0.3f, this.screenHeight * 0.3f) {
+		this.resultScreen = new Image2D("Result", Database.getAssetKey("win"), this.screenWidth * 0.3f, this.screenHeight * 0.3f, BlendMode.Alpha) {
 			@Override
 			public void mouseSelect() {
 
@@ -709,7 +710,7 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(this.resultScreen);
 		this.attachChild(this.resultScreen);
 
-		this.reward1 = new Image2D("reward1", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f) {
+		this.reward1 = new Image2D("reward1", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f, BlendMode.Alpha) {
 			@Override
 			public void mouseSelect() {
 
@@ -725,7 +726,7 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(this.reward1);
 		this.attachChild(this.reward1);
 
-		this.reward2 = new Image2D("reward2", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f) {
+		this.reward2 = new Image2D("reward2", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f, BlendMode.Alpha) {
 			@Override
 			public void mouseSelect() {
 
@@ -741,7 +742,7 @@ public class IngameController extends Node implements GUI2DController {
 		dropInUpdateQueue(this.reward2);
 		this.attachChild(this.reward2);
 
-		this.reward3 = new Image2D("reward3", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f) {
+		this.reward3 = new Image2D("reward3", Database.getAssetKey("win"), this.screenWidth * 0.1f, this.screenHeight * 0.3f, BlendMode.Alpha) {
 			@Override
 			public void mouseSelect() {
 
