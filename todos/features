@@ -1,10 +1,6 @@
 View:
 	- Add further Animations (For attacks, etc.)
 	- Rework distribution view, s.t. the minus button can be pressed so long until the resources on the pokemon are gone and not just once. Also add a balance counter.
-	
-GameModel: 
-	- time counter for each turn
-	- Implement timer for (single) actions for a client
 
 AI:
 	- (HARD!) Enhanced bot that knows what he's doing
