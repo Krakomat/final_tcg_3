@@ -45,7 +45,7 @@ public class ExplorationMain extends SimpleApplication {
 		fire.setQueueBucket(RenderQueue.Bucket.Gui); // that's the trick!!
 		fire.setFaceNormal(Vector3f.UNIT_Z); // that's the second trick!!
 		guiNode.attachChild(fire);
-		
+
 		ParticleEmitter fire2 = new ParticleEmitter("Emitter", ParticleMesh.Type.Triangle, 30);
 		Material mat_red2 = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
 		// Effects/Explosion/Debris.png (3:3)
@@ -53,17 +53,17 @@ public class ExplorationMain extends SimpleApplication {
 		// Effects/Explosion/shockwave.png (1:1)
 		// Effects/Explosion/smoketrail.png (1:3)
 		// Effects/Smoke/Smoke.png (1:15)
-		mat_red2.setTexture("Texture", assetManager.loadTexture("Effects/Explosion/flame.png"));
+		mat_red2.setTexture("Texture", assetManager.loadTexture("Effects/Explosion/shockwave.png"));
 		fire2.setMaterial(mat_red2);
-		fire2.setImagesX(2);
-		fire2.setImagesY(2); // 2x2 texture animation
+		fire2.setImagesX(1);
+		fire2.setImagesY(1); // 2x2 texture animation
 		fire2.setStartColor(new ColorRGBA(0f, 1f, 1f, 1.0f)); // yellow
 		fire2.setEndColor(new ColorRGBA(0f, 1f, 1f, 0.5f)); // red
 		fire2.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 0, 0));
 		fire2.setStartSize(1.5f);
 		fire2.setEndSize(1.1f);
 		fire2.setGravity(-6.0f, 0, 0);
-		fire2.setLowLife(1f);
+		fire2.setLowLife(2f);
 		fire2.setHighLife(2f);
 		fire2.getParticleInfluencer().setVelocityVariation(0.5f);
 		fire2.setLocalTranslation(300, 400, 0); // doesn't have to be this just pick somewhere on screen
