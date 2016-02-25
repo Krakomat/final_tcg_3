@@ -32,6 +32,7 @@ public class MusicController extends Node {
 	static final int ARENA_MASTER_MUSIC_TRACKS = 1;
 	static final int ARENA_SERVANT_MUSIC_TRACKS = 1;
 	static final int FINAL_BOSS_MUSIC_TRACKS = 1;
+	static final int GYM_CHALLENGE_MUSIC_TRACKS = 1;
 	static final int DRAFT_TOURNAMENT_MUSIC_TRACKS = 1;
 	static final float MUSIC_FADE_TIME = 150;
 	static final float MUSIC_VOLUME = 0.5f;
@@ -43,7 +44,7 @@ public class MusicController extends Node {
 	 *
 	 */
 	public enum MusicType {
-		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC, VICTORY_MUSIC, LOSS_MUSIC, ARENA_SERVANT_MUSIC, ARENA_MASTER_MUSIC, FINAL_BOSS_MUSIC, DRAFT_TOURNAMENT_MUSIC;
+		INGAME_MUSIC, LOBBY_MUSIC, TITLE_MUSIC, DECK_EDIT_MUSIC, VICTORY_MUSIC, LOSS_MUSIC, ARENA_SERVANT_MUSIC, ARENA_MASTER_MUSIC, FINAL_BOSS_MUSIC, GYM_CHALLENGE_MUSIC, DRAFT_TOURNAMENT_MUSIC;
 	}
 
 	private List<AudioNode> fadeOutList;
@@ -73,6 +74,7 @@ public class MusicController extends Node {
 		List<String> arenaServantMusic = new ArrayList<>();
 		List<String> arenaMasterMusic = new ArrayList<>();
 		List<String> finalBossMusic = new ArrayList<>();
+		List<String> gymChallengeMusic = new ArrayList<>();
 		List<String> draftTournamentMusic = new ArrayList<>();
 
 		for (int i = 1; i <= TITLE_MUSIC_TRACKS; i++)
@@ -110,6 +112,10 @@ public class MusicController extends Node {
 		for (int i = 1; i <= FINAL_BOSS_MUSIC_TRACKS; i++)
 			finalBossMusic.add("music/final_boss.wav");
 		this.musicTrackMap.put(MusicType.FINAL_BOSS_MUSIC, finalBossMusic);
+
+		for (int i = 1; i <= GYM_CHALLENGE_MUSIC_TRACKS; i++)
+			gymChallengeMusic.add("music/draft_tournament/prelude.wav");
+		this.musicTrackMap.put(MusicType.GYM_CHALLENGE_MUSIC, gymChallengeMusic);
 
 		for (int i = 1; i <= DRAFT_TOURNAMENT_MUSIC_TRACKS; i++)
 			draftTournamentMusic.add("music/draft_tournament/prelude.wav");

@@ -882,16 +882,16 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				break;
 			case LOBBY:
 				boolean switchMusic = false;
-				if (this.currentActiveController != this.titleController && this.currentActiveController != this.arenaController && changeMusic)
+				if (this.currentActiveController != this.titleController && changeMusic)
 					switchMusic = true;
 				this.currentActiveController = this.lobbyController;
 				if (switchMusic)
 					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				break;
 			case ARENA_CHOOSE_LOBBY:
-				if (this.currentActiveController != this.lobbyController && changeMusic)
-					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				this.currentActiveController = this.arenaController;
+				if (changeMusic)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 				break;
 			case MAMORIA_CITY_ARENA:
 				this.currentActiveController = this.mamoriaArenaController;
@@ -919,7 +919,8 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 				break;
 			case DRAFT_TOURNAMENT_START:
 				this.currentActiveController = this.draftTournamentController;
-				this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
+				if (changeMusic)
+					this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 			default:
 				break;
 			}

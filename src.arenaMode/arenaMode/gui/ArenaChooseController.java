@@ -265,7 +265,7 @@ public class ArenaChooseController extends Node implements GUI2DController, Aren
 
 	@Override
 	public MusicType getAmbientMusic() {
-		return MusicType.LOBBY_MUSIC;
+		return MusicType.GYM_CHALLENGE_MUSIC;
 	}
 
 	@Override
