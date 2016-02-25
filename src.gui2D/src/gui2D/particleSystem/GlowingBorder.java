@@ -29,6 +29,7 @@ public class GlowingBorder extends ParticleEmitter {
 		this.setLowLife(1f);
 		this.setHighLife(1.5f);
 		this.getParticleInfluencer().setVelocityVariation(0.4f);
+		// this.emitAllParticles();
 
 		this.setLocalTranslation(xPos, yPos, zPos); // doesn't have to be this just pick somewhere on screen
 		this.setLocalScale(width, height, 1); // scale it to your need so it's not few pixels wide
