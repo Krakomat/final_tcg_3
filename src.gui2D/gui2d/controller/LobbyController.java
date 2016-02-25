@@ -24,7 +24,8 @@ import com.jme3.scene.Node;
 
 public class LobbyController extends Node implements GUI2DController {
 
-	private TextButton2D singlePlayerButton, multiPlayerButton, arenaButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
+	private TextButton2D singlePlayerButton, multiPlayerButton, draftTournamentButton, arenaButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton,
+			exitButton;
 	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton, psychOutButton,
 			wasserschwallButton, leibwaechterButton, schlossUndRiegelButton, aergerButton, verwuestungButton;
 	private TextPanel2D chooseBotDeckPanel;
@@ -93,6 +94,23 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(arenaButton);
 		this.attachChild(arenaButton);
 
+		draftTournamentButton = new TextButton2D("draftTournamentButton", "Draft Tournament", buttonWidth, buttonHeight) {
+
+			@Override
+			public void mouseSelect() {
+				draftTournamentClicked();
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+				// nothing to do here
+			}
+		};
+		draftTournamentButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
+		draftTournamentButton.setVisible(false);
+		dropInUpdateQueue(draftTournamentButton);
+		this.attachChild(draftTournamentButton);
+
 		multiPlayerButton = new TextButton2D("multiPlayerButton", "Multiplayer", buttonWidth, buttonHeight) {
 
 			@Override
@@ -105,7 +123,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		multiPlayerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
+		multiPlayerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.35f + buttonHeight / 2, 0);
 		multiPlayerButton.setVisible(false);
 		dropInUpdateQueue(multiPlayerButton);
 		this.attachChild(multiPlayerButton);
@@ -494,6 +512,10 @@ public class LobbyController extends Node implements GUI2DController {
 		this.attachChild(leibwaechterButton);
 	}
 
+	protected void draftTournamentClicked() {
+		GUI2D.getInstance().switchMode(GUI2DMode.DRAFT_TOURNAMENT_START, true);
+	}
+
 	protected void botClicked(String deckName) {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 		Player bot = Database.getBot("TreeBot");
@@ -550,6 +572,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(arenaButton);
 		this.multiPlayerButton.setVisible(false);
 		this.dropInUpdateQueue(multiPlayerButton);
+		this.draftTournamentButton.setVisible(false);
+		this.dropInUpdateQueue(draftTournamentButton);
 		this.deckEditorButton.setVisible(false);
 		this.dropInUpdateQueue(deckEditorButton);
 
@@ -572,6 +596,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(arenaButton);
 		this.multiPlayerButton.setVisible(false);
 		this.dropInUpdateQueue(multiPlayerButton);
+		this.draftTournamentButton.setVisible(false);
+		this.dropInUpdateQueue(draftTournamentButton);
 		this.deckEditorButton.setVisible(false);
 		this.dropInUpdateQueue(deckEditorButton);
 
@@ -660,6 +686,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(arenaButton);
 		this.multiPlayerButton.setVisible(true);
 		this.dropInUpdateQueue(multiPlayerButton);
+		this.draftTournamentButton.setVisible(true);
+		this.dropInUpdateQueue(draftTournamentButton);
 		this.ipAdressPanel.setVisible(true);
 		this.dropInUpdateQueue(ipAdressPanel);
 		this.exitButton.setVisible(true);
@@ -681,6 +709,8 @@ public class LobbyController extends Node implements GUI2DController {
 		this.dropInUpdateQueue(arenaButton);
 		this.multiPlayerButton.setVisible(false);
 		this.dropInUpdateQueue(multiPlayerButton);
+		this.draftTournamentButton.setVisible(false);
+		this.dropInUpdateQueue(draftTournamentButton);
 		this.multiPlayerCreateButton.setVisible(false);
 		this.dropInUpdateQueue(multiPlayerCreateButton);
 		this.multiPlayerConnectButton.setVisible(false);

@@ -57,6 +57,7 @@ import arenaMode.model.ArenaFighterCode;
 import arenaMode.model.ArenaFighterFactory;
 import common.utilities.Pair;
 import common.utilities.Threads;
+import draftTournament.gui.DraftTournamentController;
 
 public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private static GUI2D GUI2D;// public variable for the gui
@@ -80,6 +81,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 	private IngameController ingameController;
 	private LobbyController lobbyController;
 	private ArenaChooseController arenaController;
+	private DraftTournamentController draftTournamentController;
 	private ArenaController mamoriaArenaController, azuriaArenaController, oraniaArenaController, prismaniaArenaController, fuchsaniaArenaController, saffroniaArenaController,
 			zinnoberArenaController, vertaniaArenaController;
 	private DeckEditController deckEditController;
@@ -131,6 +133,10 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		arenaController = new ArenaChooseController();
 		arenaController.initSceneGraph();
 		guiNode.attachChild(arenaController);
+
+		draftTournamentController = new DraftTournamentController();
+		draftTournamentController.initSceneGraph();
+		guiNode.attachChild(draftTournamentController);
 
 		mamoriaArenaController = new ArenaController(GUI2DMode.MAMORIA_CITY_ARENA, ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_RED),
 				ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BRENDAN), ArenaFighterFactory.createFighter(ArenaFighterCode.MAMORIA_BROCK), "Pewter City Gym");
@@ -911,6 +917,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			case VERTANIA_CITY_ARENA:
 				this.currentActiveController = this.vertaniaArenaController;
 				break;
+			case DRAFT_TOURNAMENT_START:
+				this.currentActiveController = this.draftTournamentController;
+				this.musicController.switchMusic(this.currentActiveController.getAmbientMusic());
 			default:
 				break;
 			}
@@ -938,6 +947,9 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			break;
 		case ARENA_CHOOSE_LOBBY:
 			this.nextController = this.arenaController;
+			break;
+		case DRAFT_TOURNAMENT_START:
+			this.nextController = this.draftTournamentController;
 			break;
 		case MAMORIA_CITY_ARENA:
 			this.nextController = this.mamoriaArenaController;

@@ -11,6 +11,7 @@
 	<classpathentry kind="src" path="sounds"/>
 	<classpathentry kind="src" path="src.ai"/>
 	<classpathentry kind="src" path="src.arenaMode"/>
+	<classpathentry kind="src" path="src.draftTournament"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/eventbus.jar">
