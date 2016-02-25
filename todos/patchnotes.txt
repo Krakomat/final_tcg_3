@@ -15,6 +15,7 @@ Patch 5.01
 		- Fixed a bug, where the ambient music would not switch after returning to the lobby from ingame
 		- Changed the title music
 		- Changed the Gym Challenge Menu music
+		- Lowered the Effect sound volume
 		
 Patch 5.0
 	New Features:

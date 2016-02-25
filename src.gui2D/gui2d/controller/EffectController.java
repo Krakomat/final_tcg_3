@@ -9,7 +9,7 @@ import com.jme3.scene.Spatial;
 import common.utilities.Threads;
 
 public class EffectController {
-	static final int EFFECT_VOLUME = 2;
+	static final float EFFECT_VOLUME = 0.5f;
 	static int activeThreads = 0;
 
 	public static AudioNode createEffectAudioNode(String effectPath) {

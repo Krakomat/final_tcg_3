@@ -12,9 +12,9 @@ import com.jme3.scene.Node;
 
 import common.utilities.Degree;
 import common.utilities.Lock;
-import gui2d.GUI2D;
 import gui2d.abstracts.Panel2D;
 import gui2d.abstracts.SelectableNode;
+import gui2d.controller.EffectController;
 
 /**
  * Selectable node that represents an image.
@@ -76,10 +76,7 @@ public abstract class Image2D extends Node implements SelectableNode {
 		this.attachChild(glowingNode);
 
 		// Init audio:
-		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), Sounds.BUTTON_CLICKED, false);
-		this.clickSoundNode.setPositional(false);
-		this.clickSoundNode.setLooping(false);
-		this.clickSoundNode.setVolume(2);
+		this.clickSoundNode = EffectController.createEffectAudioNode(Sounds.BUTTON_CLICKED);
 		this.attachChild(this.clickSoundNode);
 	}
 
