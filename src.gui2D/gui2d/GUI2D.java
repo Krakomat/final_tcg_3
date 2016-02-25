@@ -990,6 +990,7 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 		this.player = player;
 		this.lobbyController.setAccount(this.player.asAccount());
 		this.arenaController.setAccount(this.player.asAccount());
+		this.draftTournamentController.setAccount(this.player.asAccount());
 		this.mamoriaArenaController.setAccount(this.player.asAccount());
 		this.azuriaArenaController.setAccount(this.player.asAccount());
 		this.oraniaArenaController.setAccount(this.player.asAccount());

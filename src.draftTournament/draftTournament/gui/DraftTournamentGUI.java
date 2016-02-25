@@ -59,7 +59,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 				@Override
 				public void mouseSelect() {
-					cardChooseImageSelected(h);
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							cardChooseImageSelected(h);
+						}
+					}).start();
 				}
 			};
 			cardChooseImage.setCardId("00000");
@@ -95,7 +100,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 				@Override
 				public void mouseSelect() {
-					basicEnergyChooseImageSelected(h);
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							basicEnergyChooseImageSelected(h);
+						}
+					}).start();
 				}
 			};
 			basicEnergyChooseImage.setCardId("00000");
@@ -118,7 +128,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 				@Override
 				public void mouseSelect() {
-					deckImageSelected(h);
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							deckImageSelected(h);
+						}
+					}).start();
 				}
 
 				@Override
@@ -157,7 +172,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 				@Override
 				public void mouseSelect() {
-					elementImageSelected(h);
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							elementImageSelected(h);
+						}
+					}).start();
 				}
 
 				@Override
@@ -167,7 +187,6 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 			};
 			elementImage.setLocalTranslation(screenWidth * 0.15f + (elementImagesWidth + elementImagesBorder) * (i % 6), screenHeight * 0.5f, 0);
 			elementImage.setVisible(false);
-			elementImage.setCardId("00001");
 			dropInUpdateQueue(elementImage);
 			this.attachChild(elementImage);
 			this.elementImages.add(elementImage);
@@ -197,7 +216,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 			@Override
 			public void mouseSelect() {
-				saveDeckButtonClicked();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						saveDeckButtonClicked();
+					}
+				}).start();
 			}
 
 			@Override
@@ -214,7 +238,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 			@Override
 			public void mouseSelect() {
-				backButtonClicked();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						backButtonClicked();
+					}
+				}).start();
 			}
 
 			@Override
@@ -294,7 +323,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 			@Override
 			public void mouseSelect() {
-				confirmButtonClicked();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						confirmButtonClicked();
+					}
+				}).start();
 			}
 
 			@Override
@@ -332,11 +366,12 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 	protected void setVisible(List<Image2D> nodes, boolean flag) {
 		for (int i = 0; i < nodes.size(); i++) {
 			Image2D node = nodes.get(i);
-			if (node.getCardId() == null || node.getCardId().equals("00000")) {
+			if (node.getCardId() == null || node.getCardId().equals("00000") || !(Element.valueOf(node.getCardId()) != null)) {
 				node.setVisible(false);
 				flag = false;
 			} else
 				node.setVisible(flag);
+			node.setSelected(false);
 			final boolean visible = flag;
 			new Thread(new Runnable() {
 				@Override
