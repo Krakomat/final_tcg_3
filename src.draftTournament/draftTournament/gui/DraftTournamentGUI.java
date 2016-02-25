@@ -8,7 +8,6 @@ import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighterCode;
 import gui2d.GUI2D;
-import gui2d.GUI2DMode;
 import gui2d.abstracts.SelectableNode;
 import gui2d.controller.GUI2DController;
 import gui2d.controller.MusicController.MusicType;
@@ -168,6 +167,7 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 			};
 			elementImage.setLocalTranslation(screenWidth * 0.15f + (elementImagesWidth + elementImagesBorder) * (i % 6), screenHeight * 0.5f, 0);
 			elementImage.setVisible(false);
+			elementImage.setCardId("00001");
 			dropInUpdateQueue(elementImage);
 			this.attachChild(elementImage);
 			this.elementImages.add(elementImage);
@@ -214,7 +214,7 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 			@Override
 			public void mouseSelect() {
-				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
+				backButtonClicked();
 			}
 
 			@Override
@@ -308,6 +308,8 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 		this.attachChild(confirmButton);
 	}
 
+	protected abstract void backButtonClicked();
+
 	protected abstract void basicEnergyChooseImageSelected(int h);
 
 	protected abstract void saveDeckButtonClicked();
@@ -319,6 +321,38 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 	protected abstract void deckImageSelected(int h);
 
 	protected abstract void cardChooseImageSelected(int h);
+
+	protected abstract void updateGUI();
+
+	protected void setVisible(SelectableNode node, boolean flag) {
+		node.setVisible(flag);
+		this.dropInUpdateQueue(node);
+	}
+
+	protected void setVisible(List<Image2D> nodes, boolean flag) {
+		for (int i = 0; i < nodes.size(); i++) {
+			Image2D node = nodes.get(i);
+			if (node.getCardId() == null || node.getCardId().equals("00000")) {
+				node.setVisible(false);
+				flag = false;
+			} else
+				node.setVisible(flag);
+			final boolean visible = flag;
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					if (!visible) {
+						GUI2D.getInstance().getIOController().removeShootable(node);
+						GUI2D.getInstance().getIOController().removeRightShootable(node);
+					} else {
+						GUI2D.getInstance().getIOController().addShootable(node);
+						GUI2D.getInstance().getIOController().addRightShootable(node);
+					}
+				}
+			}).start();
+			dropInUpdateQueue(node);
+		}
+	}
 
 	protected void dropInUpdateQueue(SelectableNode node) {
 		Thread t = new Thread(new Runnable() {
@@ -333,144 +367,23 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 
 	@Override
 	public void hide() {
-		this.cardCountPanel.setVisible(false);
-		this.dropInUpdateQueue(cardCountPanel);
-		this.saveDeckButton.setVisible(false);
-		this.dropInUpdateQueue(saveDeckButton);
-		this.confirmButton.setVisible(false);
-		this.dropInUpdateQueue(confirmButton);
-		this.opponentImage.setVisible(false);
-		this.dropInUpdateQueue(opponentImage);
-		this.exitButton.setVisible(false);
-		this.dropInUpdateQueue(exitButton);
-		this.deckPanel.setVisible(false);
-		this.dropInUpdateQueue(deckPanel);
-		this.headPanel.setVisible(false);
-		this.dropInUpdateQueue(headPanel);
-		this.backButton.setVisible(false);
-		this.dropInUpdateQueue(backButton);
-		for (int i = 0; i < 3; i++) {
-			Image2D cardChooseImage = this.cardChooseImages.get(i);
-			cardChooseImage.setVisible(false);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().removeShootable(cardChooseImage);
-					GUI2D.getInstance().getIOController().removeRightShootable(cardChooseImage);
-				}
-			}).start();
-			dropInUpdateQueue(cardChooseImage);
-		}
-
-		for (int i = 0; i < 6; i++) {
-			Image2D basicEnergyChooseImage = this.basicEnergyChooseImages.get(i);
-			basicEnergyChooseImage.setVisible(false);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().removeShootable(basicEnergyChooseImage);
-					GUI2D.getInstance().getIOController().removeRightShootable(basicEnergyChooseImage);
-				}
-			}).start();
-			dropInUpdateQueue(basicEnergyChooseImage);
-		}
-
-		for (int i = 0; i < GameParameters.DECK_SIZE; i++) {
-			Image2D deckImage = this.deckImages.get(i);
-			deckImage.setVisible(false);
-			Thread t = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().removeShootable(deckImage);
-					GUI2D.getInstance().getIOController().removeRightShootable(deckImage);
-				}
-			});
-			t.start();
-			dropInUpdateQueue(deckImage);
-		}
-
-		for (int i = 0; i < 4; i++) {
-			Image2D elementImage = this.elementImages.get(i);
-			elementImage.setVisible(false);
-			Thread t = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().removeShootable(elementImage);
-				}
-			});
-			t.start();
-			dropInUpdateQueue(elementImage);
-		}
+		setVisible(cardCountPanel, false);
+		setVisible(saveDeckButton, false);
+		setVisible(confirmButton, false);
+		setVisible(opponentImage, false);
+		setVisible(exitButton, false);
+		setVisible(deckPanel, false);
+		setVisible(headPanel, false);
+		setVisible(backButton, false);
+		setVisible(cardChooseImages, false);
+		setVisible(basicEnergyChooseImages, false);
+		setVisible(deckImages, false);
+		setVisible(elementImages, false);
 	}
 
 	@Override
 	public void restart() {
-		this.cardCountPanel.setVisible(true);
-		this.dropInUpdateQueue(cardCountPanel);
-		this.saveDeckButton.setVisible(true);
-		this.dropInUpdateQueue(saveDeckButton);
-		this.confirmButton.setVisible(true);
-		this.dropInUpdateQueue(confirmButton);
-		this.opponentImage.setVisible(true);
-		this.dropInUpdateQueue(opponentImage);
-		this.exitButton.setVisible(true);
-		this.dropInUpdateQueue(exitButton);
-		this.deckPanel.setVisible(true);
-		this.dropInUpdateQueue(deckPanel);
-		this.headPanel.setVisible(true);
-		this.dropInUpdateQueue(headPanel);
-		this.backButton.setVisible(true);
-		this.dropInUpdateQueue(backButton);
-		for (int i = 0; i < 3; i++) {
-			Image2D cardChooseImage = this.cardChooseImages.get(i);
-			cardChooseImage.setVisible(true);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().addShootable(cardChooseImage);
-					GUI2D.getInstance().getIOController().addRightShootable(cardChooseImage);
-				}
-			}).start();
-			dropInUpdateQueue(cardChooseImage);
-		}
-
-		for (int i = 0; i < 6; i++) {
-			Image2D basicEnergyChooseImage = this.basicEnergyChooseImages.get(i);
-			basicEnergyChooseImage.setVisible(true);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().addShootable(basicEnergyChooseImage);
-					GUI2D.getInstance().getIOController().addRightShootable(basicEnergyChooseImage);
-				}
-			}).start();
-			dropInUpdateQueue(basicEnergyChooseImage);
-		}
-
-		for (int i = 0; i < GameParameters.DECK_SIZE; i++) {
-			Image2D deckImage = this.deckImages.get(i);
-			deckImage.setVisible(true);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().addShootable(deckImage);
-					GUI2D.getInstance().getIOController().addRightShootable(deckImage);
-				}
-			}).start();
-			dropInUpdateQueue(deckImage);
-		}
-
-		for (int i = 0; i < 4; i++) {
-			Image2D elementImage = this.elementImages.get(i);
-			elementImage.setVisible(true);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					GUI2D.getInstance().getIOController().addShootable(elementImage);
-				}
-			}).start();
-			dropInUpdateQueue(elementImage);
-		}
+		this.updateGUI();
 	}
 
 	@Override
