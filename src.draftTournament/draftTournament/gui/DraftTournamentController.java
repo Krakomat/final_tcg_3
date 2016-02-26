@@ -28,6 +28,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 	private Deck deck, normalDeck;
 	private Account account;
 	private List<Element> chosenElements;
+	private int fightResult;
 
 	public DraftTournamentController() {
 		state = DraftTournamentState.CHOOSE_2_ELEMENTS;
@@ -36,6 +37,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 		chosenElements = new ArrayList<>();
 		account = null;
 		normalDeck = null;
+		fightResult = -1; // no result
 	}
 
 	@Override
@@ -50,6 +52,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 				image.setCardId(null);
 			}
 			draftDatabase.initOpponents();
+			this.fightResult = -1;
 			GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 			break;
 		case FIGHT_1:
@@ -65,6 +68,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 					image.setCardId(null);
 				}
 				draftDatabase.initOpponents();
+				this.fightResult = -1;
 				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 				Preconditions.checkArgument(normalDeck != null);
 				this.account.setDeck(normalDeck); // Restore deck
@@ -149,6 +153,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 				image.setCardId(null);
 			}
 			draftDatabase.initOpponents();
+			this.fightResult = -1;
 			GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 			Preconditions.checkArgument(normalDeck != null);
 			this.account.setDeck(normalDeck); // Restore deck
@@ -253,6 +258,20 @@ public class DraftTournamentController extends DraftTournamentGUI {
 
 	@Override
 	protected void updateGUI() {
+		if (this.fightResult >= 0) {
+			Preconditions.checkArgument(state == DraftTournamentState.FIGHT_1 || state == DraftTournamentState.FIGHT_2 || state == DraftTournamentState.FIGHT_3);
+			if (fightResult == 1) {
+				if (state == DraftTournamentState.FIGHT_1)
+					state = DraftTournamentState.FIGHT_2;
+				else if (state == DraftTournamentState.FIGHT_2)
+					state = DraftTournamentState.FIGHT_2;
+				else if (state == DraftTournamentState.FIGHT_3)
+					state = DraftTournamentState.VICTORY;
+			} else {
+				this.state = DraftTournamentState.DEFEAT;
+			}
+			this.fightResult = -1;
+		}
 		switch (this.state) {
 		case CHOOSE_2_ELEMENTS: // Occurs at start
 			setVisible(cardCountPanel, false);
@@ -404,5 +423,13 @@ public class DraftTournamentController extends DraftTournamentGUI {
 
 	public void restart() {
 		this.updateGUI();
+	}
+
+	public int isFightResult() {
+		return fightResult;
+	}
+
+	public void setFightResult(int fightResult) {
+		this.fightResult = fightResult;
 	}
 }

@@ -209,6 +209,7 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 			};
 			elementImage.setLocalTranslation(screenWidth * 0.15f + (elementImagesWidth + elementImagesBorder) * (i % 6), screenHeight * 0.5f, 0);
 			elementImage.setVisible(false);
+			elementImage.setGlowing(true);
 			dropInUpdateQueue(elementImage);
 			this.attachChild(elementImage);
 			this.elementImages.add(elementImage);

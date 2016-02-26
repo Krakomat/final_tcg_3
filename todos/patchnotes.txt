@@ -1,4 +1,14 @@
-Patch 5.01
+Patch 6.00
+	New Features:
+		Draft Mode:
+			- Create your own deck by choosing from a preset set of cards:
+				- Players choose 2 Elements out of 4 random selected non-colorless elements
+				- Selectable cards are only of the chosen elements, colorless, trainer cards or non-basic energy cards
+				- After the deck contains 40 cards, the player is forced to choose 20 basic energy cards to fill up the deck
+			- Players fight 3 opponents in a row with their drafted deck
+			- Only if all 3 opponents are defeated, the player wins Draft Mode
+			- You can save your drafted deck via the safe-button in the draft menu
+			
 	Game:
 		- 00473_MasterBall: Fixed a crash bug
 		- 00459_RocketsHitmonchan: Crosscounter works now even if Rocket's Hitmonchan is knocked out

@@ -1071,10 +1071,16 @@ public class GUI2D extends SimpleApplication implements PokemonGameView {
 			this.currentOpponent = null;
 			return reward;
 		}
+		if (this.nextController == this.draftTournamentController) {
+			this.draftTournamentController.setFightResult(1);
+		}
 		return new ArrayList<String>();
 	}
 
 	public void playerLost() {
+		if (this.nextController == this.draftTournamentController) {
+			this.draftTournamentController.setFightResult(0);
+		}
 		this.currentOpponent = null;
 	}
 
