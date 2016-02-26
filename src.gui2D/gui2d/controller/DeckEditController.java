@@ -607,12 +607,7 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	protected void backButtonClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
-		GUI2D.getInstance().getMusicController().switchMusic(MusicType.LOBBY_MUSIC);
-	}
-
-	protected void deckEditorButtonClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.DECK_EDIT, true);
+		GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, false);
 	}
 
 	/**

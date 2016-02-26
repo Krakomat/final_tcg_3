@@ -25,7 +25,7 @@ public class MusicController extends Node {
 
 	static final int TITLE_MUSIC_TRACKS = 1;
 	static final int LOBBY_MUSIC_TRACKS = 1;
-	static final int DECK_EDIT_MUSIC_TRACKS = 2;
+	static final int DECK_EDIT_MUSIC_TRACKS = 0;
 	static final int INGAME_MUSIC_TRACKS = 4;
 	static final int VICTORY_MUSIC_TRACKS = 1;
 	static final int LOSS_MUSIC_TRACKS = 1;

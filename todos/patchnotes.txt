@@ -27,6 +27,9 @@ Patch 6.00
 		- Changed the title music
 		- Changed the Gym Challenge Menu music
 		- Lowered the Effect sound volume
+
+	Deck Editor:
+		- Music now stays the same as in the Lobby
 		
 Patch 5.0
 	New Features:

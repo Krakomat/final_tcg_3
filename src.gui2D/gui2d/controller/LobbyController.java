@@ -672,7 +672,7 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void deckEditorButtonClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.DECK_EDIT, true);
+		GUI2D.getInstance().switchMode(GUI2DMode.DECK_EDIT, false);
 	}
 
 	/**
