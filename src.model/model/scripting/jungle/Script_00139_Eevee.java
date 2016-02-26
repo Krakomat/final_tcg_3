@@ -43,10 +43,8 @@ public class Script_00139_Eevee extends PokemonCardScript {
 		if (c == Coin.HEADS) {
 			PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 			PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
-			if (defendingPokemon.getHitpoints() <= 50) {
-				gameModel.getGameModelParameters().activateEffect("00139", defendingPokemon.getGameID());
-				gameModel.getGameModelParameters().addEffectParameter("00139", this.cardGameID(), 2);
-			}
+			gameModel.getGameModelParameters().activateEffect("00139", defendingPokemon.getGameID());
+			gameModel.getGameModelParameters().addEffectParameter("00139", this.cardGameID(), 2);
 		}
 	}
 
