@@ -7,7 +7,6 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Coin;
 import model.enums.Element;
-import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -42,9 +41,23 @@ public class Script_00139_Eevee extends PokemonCardScript {
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " can't be attacked next turn!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
-			gameModel.sendTextMessageToAllPlayers(attackingPokemon.getName() + " protects itself!", "");
-			gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.INVULNERABLE);
-			gameModel.sendGameModelToAllPlayers("");
+			PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+			PokemonCard defendingPokemon = (PokemonCard) gameModel.getPosition(defender).getTopCard();
+			if (defendingPokemon.getHitpoints() <= 50) {
+				gameModel.getGameModelParameters().activateEffect("00139", defendingPokemon.getGameID());
+				gameModel.getGameModelParameters().addEffectParameter("00139", this.cardGameID(), 2);
+			}
+		}
+	}
+
+	public void executeEndTurnActions() {
+		if (gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00139", this.cardGameID()) != null) {
+			if (gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00139", this.cardGameID()) == 2)
+				gameModel.getGameModelParameters().replaceEffectParameter("00139", this.cardGameID(), 1);
+			else {
+				gameModel.getGameModelParameters().deactivateEffect("00139");
+				gameModel.getGameModelParameters().removeEffectParameter("00139", this.cardGameID());
+			}
 		}
 	}
 
