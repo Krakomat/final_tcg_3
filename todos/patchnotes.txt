@@ -1,6 +1,6 @@
 Patch 6.00
 	New Features:
-		Draft Mode:
+		Draft Tournament:
 			- Create your own deck by choosing from a preset set of cards:
 				- Players choose 2 Elements out of 4 random selected non-colorless elements
 				- Selectable cards are only of the chosen elements, colorless, trainer cards or non-basic energy cards
