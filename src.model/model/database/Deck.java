@@ -69,6 +69,10 @@ public class Deck {
 		cards.remove(c);
 	}
 
+	public void removeCard(int index) {
+		this.cards.remove(index);
+	}
+
 	/**
 	 * Returns the number of cards containing in this deck.
 	 * 
@@ -79,12 +83,14 @@ public class Deck {
 	}
 
 	/**
-	 * Returns the card id at the given index.
+	 * Returns the card id at the given index. Returns null, if i is out of bounds.
 	 * 
 	 * @param i
 	 * @return
 	 */
 	public String get(int i) {
+		if (i < 0 || i >= cards.size())
+			return null;
 		return cards.get(i);
 	}
 
@@ -114,8 +120,7 @@ public class Deck {
 			possibilities[i] = file.substring(0, file.length() - 4);
 		}
 
-		String s = (String) JOptionPane.showInputDialog(null, "Choose the deck to load:", "Load Deck", JOptionPane.PLAIN_MESSAGE, null, possibilities,
-				possibilities[1]);
+		String s = (String) JOptionPane.showInputDialog(null, "Choose the deck to load:", "Load Deck", JOptionPane.PLAIN_MESSAGE, null, possibilities, possibilities[1]);
 		if (s != null) {
 			// Search index:
 			int index = -1;
@@ -303,8 +308,8 @@ public class Deck {
 	}
 
 	/**
-	 * I take a xml element and the tag name, look for the tag and get the text content i.e for <employee><name>John</name></employee> xml snippet if the Element
-	 * points to employee node and tagName is name I will return John
+	 * I take a xml element and the tag name, look for the tag and get the text content i.e for <employee><name>John</name></employee> xml snippet if the Element points to employee
+	 * node and tagName is name I will return John
 	 * 
 	 * @param ele
 	 * @param tagName

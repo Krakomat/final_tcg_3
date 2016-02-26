@@ -14,6 +14,8 @@ import model.database.Card;
 import model.database.Database;
 import model.database.Deck;
 import model.enums.Element;
+import model.enums.Rarity;
+import model.game.GameParameters;
 import network.client.Account;
 
 public class DraftTournamentController extends DraftTournamentGUI {
@@ -37,6 +39,13 @@ public class DraftTournamentController extends DraftTournamentGUI {
 		switch (state) {
 		case CHOOSE_2_ELEMENTS:
 			chosenElements.clear();
+			deck = new Deck();
+			for (int i = 0; i < 60; i++) {
+				Image2D image = this.deckImages.get(i);
+				image.setTexture(Database.getTextureKey("00000"));
+				image.setCardId(null);
+			}
+			draftDatabase.initOpponents();
 			GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 			break;
 		case FIGHT_1:
@@ -44,6 +53,14 @@ public class DraftTournamentController extends DraftTournamentGUI {
 		case FIGHT_3:
 			if (GUI2D.getInstance().userAnswersQuestion("Do you really want to surrender this Draft Tournament?")) {
 				chosenElements.clear();
+				deck = new Deck();
+				state = DraftTournamentState.CHOOSE_2_ELEMENTS;
+				for (int i = 0; i < 60; i++) {
+					Image2D image = this.deckImages.get(i);
+					image.setTexture(Database.getTextureKey("00000"));
+					image.setCardId(null);
+				}
+				draftDatabase.initOpponents();
 				GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 				Preconditions.checkArgument(normalDeck != null);
 				this.account.setDeck(normalDeck); // Restore deck
@@ -56,31 +73,82 @@ public class DraftTournamentController extends DraftTournamentGUI {
 
 	@Override
 	protected void basicEnergyChooseImageSelected(int h) {
-		// TODO Auto-generated method stub
+		if (deck.size() < 60) {
+			String cardID = basicEnergyChooseImages.get(h).getCardId();
+			this.deck.addCard(cardID);
+			int maxIndex = deck.size() - 1;
+			deckImages.get(maxIndex).setTexture(Database.getTextureKey(cardID));
+			deckImages.get(maxIndex).setCardId(cardID);
+			updateGUI();
 
+			if (deck.size() == 60) {
+				setVisible(confirmButton, true);
+				setVisible(saveDeckButton, true);
+			}
+		}
 	}
 
 	@Override
 	protected void saveDeckButtonClicked() {
-		// TODO Auto-generated method stub
-
+		String deckName = GUI2D.getInstance().userTypesName("Name", "Type in a name:");
+		if (deckName != null) {
+			Deck d = new Deck();
+			d.setCards(deck.getCards());
+			d.setName(deckName);
+			d.saveDeck(GameParameters.DECK_PATH);
+		}
 	}
 
 	@Override
 	protected void confirmButtonClicked() {
 		switch (state) {
 		case CHOOSE_2_ELEMENTS:
+			for (Image2D image : this.elementImages)
+				if (image.isSelected())
+					chosenElements.add(Element.valueOf(image.getCardId()));
+			chosenElements.add(Element.COLORLESS);
 			this.state = DraftTournamentState.CHOOSE_CARDS;
-			List<Card> randomCards = draftDatabase.getRandomCardList(3);
-			for (int i = 0; i < randomCards.size(); i++)
-				elementImages.get(i).setTexture(Database.getTextureKey(randomCards.get(i).getCardId()));
+			draftDatabase.initializeCardSet(chosenElements, true);
+			List<Card> randomCards = draftDatabase.getRandomCardList(3, null);
+			for (int i = 0; i < randomCards.size(); i++) {
+				cardChooseImages.get(i).setTexture(Database.getTextureKey(randomCards.get(i).getCardId()));
+				cardChooseImages.get(i).setCardId(randomCards.get(i).getCardId());
+				cardChooseImages.get(i).setGlowing(true);
+			}
 			this.updateGUI();
 			break;
-		case FIGHT_1:
-		case FIGHT_2:
-		case FIGHT_3:
-			// TODO
+		case CHOOSE_BASIC_ENERGY:
+			this.account.setDeck(deck); // Set Deck
+			state = DraftTournamentState.FIGHT_1;
+			updateGUI();
 			break;
+		case FIGHT_1:
+			state = DraftTournamentState.FIGHT_2;
+			updateGUI();
+			break;
+		case FIGHT_2:
+			state = DraftTournamentState.FIGHT_3;
+			updateGUI();
+			break;
+		case FIGHT_3:
+			state = DraftTournamentState.VICTORY;
+			updateGUI();
+			break;
+		// TODO
+		case DEFEAT:
+		case VICTORY:
+			chosenElements.clear();
+			deck = new Deck();
+			state = DraftTournamentState.CHOOSE_2_ELEMENTS;
+			for (int i = 0; i < 60; i++) {
+				Image2D image = this.deckImages.get(i);
+				image.setTexture(Database.getTextureKey("00000"));
+				image.setCardId(null);
+			}
+			draftDatabase.initOpponents();
+			GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
+			Preconditions.checkArgument(normalDeck != null);
+			this.account.setDeck(normalDeck); // Restore deck
 		default:
 			break;
 		}
@@ -115,14 +183,49 @@ public class DraftTournamentController extends DraftTournamentGUI {
 
 	@Override
 	protected void deckImageSelected(int h) {
-		// TODO Auto-generated method stub
-
+		if (state == DraftTournamentState.CHOOSE_BASIC_ENERGY) {
+			if (h >= 40) {
+				this.deck.removeCard(h);
+				for (int i = 40; i < 60; i++) {
+					Image2D image = this.deckImages.get(i);
+					String id = deck.get(i);
+					if (id != null) {
+						image.setTexture(Database.getTextureKey(id));
+						image.setCardId(id);
+					} else {
+						image.setTexture(Database.getTextureKey("00000"));
+						image.setCardId(null);
+					}
+				}
+				updateGUI();
+			}
+		}
 	}
 
 	@Override
 	protected void cardChooseImageSelected(int h) {
-		// TODO Auto-generated method stub
+		String cardID = cardChooseImages.get(h).getCardId();
+		this.deck.addCard(cardID);
+		int maxIndex = deck.size() - 1;
+		deckImages.get(maxIndex).setTexture(Database.getTextureKey(cardID));
+		deckImages.get(maxIndex).setCardId(cardID);
 
+		// Next round:
+		if (maxIndex < 39) {
+			List<Card> randomCards = draftDatabase.getRandomCardList(3, (maxIndex == 13 || maxIndex == 33) ? Rarity.RARE : null);
+			for (int i = 0; i < randomCards.size(); i++) {
+				cardChooseImages.get(i).setTexture(Database.getTextureKey(randomCards.get(i).getCardId()));
+				cardChooseImages.get(i).setCardId(randomCards.get(i).getCardId());
+				cardChooseImages.get(i).setGlowing(true);
+			}
+		} else {
+			for (int i = 0; i < 3; i++) {
+				cardChooseImages.get(i).setTexture(Database.getTextureKey("00000"));
+				cardChooseImages.get(i).setCardId(null);
+			}
+			this.state = DraftTournamentState.CHOOSE_BASIC_ENERGY;
+		}
+		updateGUI();
 	}
 
 	@Override
@@ -135,20 +238,22 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(opponentImage, false);
 			setVisible(exitButton, true);
 			setVisible(deckPanel, false);
+			headPanel.setText("Choose two Elements");
 			setVisible(headPanel, true);
+			backButton.setText("Back");
 			setVisible(backButton, true);
 			setVisible(cardChooseImages, false);
 			setVisible(basicEnergyChooseImages, false);
 			setVisible(deckImages, false);
 			List<Element> randomElements = draftDatabase.getRandomElementList(4);
-			for (int i = 0; i < randomElements.size(); i++){
+			for (int i = 0; i < randomElements.size(); i++) {
 				elementImages.get(i).setTexture(Database.getAssetKey(randomElements.get(i).toString()));
 				elementImages.get(i).setCardId(randomElements.get(i).toString());
 			}
 			setVisible(elementImages, true);
 			break;
 		case CHOOSE_CARDS:
-			cardCountPanel.setText("0/40");
+			cardCountPanel.setText(deck.size() + "/40");
 			setVisible(cardCountPanel, true);
 			setVisible(saveDeckButton, false);
 			setVisible(deckPanel, true);
@@ -160,6 +265,21 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(opponentImage, false);
 			setVisible(exitButton, true);
 			headPanel.setText("Choose a card for your deck!");
+			setVisible(headPanel, true);
+			setVisible(backButton, false);
+			break;
+		case CHOOSE_BASIC_ENERGY:
+			setVisible(cardCountPanel, false);
+			setVisible(saveDeckButton, false);
+			setVisible(deckPanel, true);
+			setVisible(cardChooseImages, false);
+			setVisible(basicEnergyChooseImages, true);
+			setVisible(deckImages, true);
+			setVisible(elementImages, false);
+			setVisible(confirmButton, false);
+			setVisible(opponentImage, false);
+			setVisible(exitButton, true);
+			headPanel.setText("Fill up the rest of your deck with Basic Energy Cards!");
 			setVisible(headPanel, true);
 			setVisible(backButton, false);
 			break;
@@ -175,7 +295,8 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(confirmButton, true);
 			setVisible(opponentImage, false);
 			setVisible(exitButton, true);
-			setVisible(headPanel, false);
+			headPanel.setText("Defeat!");
+			setVisible(headPanel, true);
 			setVisible(backButton, false);
 			break;
 		case FIGHT_1:
@@ -188,9 +309,12 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(elementImages, false);
 			confirmButton.setText("Fight");
 			setVisible(confirmButton, true);
+			opponentImage.setTexture(Database.getAssetKey(draftDatabase.getOpponent(0).getCode().toString()));
 			setVisible(opponentImage, true);
 			setVisible(exitButton, true);
+			headPanel.setText("First Opponent: " + draftDatabase.getOpponent(0).getName());
 			setVisible(headPanel, true);
+			backButton.setText("Surrender");
 			setVisible(backButton, true);
 			break;
 		case FIGHT_2:
@@ -203,9 +327,12 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(elementImages, false);
 			confirmButton.setText("Fight");
 			setVisible(confirmButton, true);
+			opponentImage.setTexture(Database.getAssetKey(draftDatabase.getOpponent(1).getCode().toString()));
 			setVisible(opponentImage, true);
 			setVisible(exitButton, true);
+			headPanel.setText("Second Opponent: " + draftDatabase.getOpponent(1).getName());
 			setVisible(headPanel, true);
+			backButton.setText("Surrender");
 			setVisible(backButton, true);
 			break;
 		case FIGHT_3:
@@ -218,9 +345,12 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(elementImages, false);
 			confirmButton.setText("Fight");
 			setVisible(confirmButton, true);
+			opponentImage.setTexture(Database.getAssetKey(draftDatabase.getOpponent(2).getCode().toString()));
 			setVisible(opponentImage, true);
 			setVisible(exitButton, true);
+			headPanel.setText("Third Opponent: " + draftDatabase.getOpponent(2).getName());
 			setVisible(headPanel, true);
+			backButton.setText("Surrender");
 			setVisible(backButton, true);
 			break;
 		case VICTORY:
@@ -235,7 +365,8 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(confirmButton, true);
 			setVisible(opponentImage, false);
 			setVisible(exitButton, true);
-			setVisible(headPanel, false);
+			headPanel.setText("Victory!");
+			setVisible(headPanel, true);
 			setVisible(backButton, false);
 			break;
 		default:

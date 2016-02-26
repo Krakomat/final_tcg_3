@@ -26,8 +26,10 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 	protected List<Image2D> basicEnergyChooseImages, cardChooseImages, deckImages, elementImages;
 	protected Image2D opponentImage;
 	protected TextPanel2D headPanel, cardCountPanel, deckPanel;
+	private boolean lock;
 
 	public DraftTournamentGUI() {
+		lock = false;
 		screenWidth = GUI2D.getInstance().getResolution().getKey();
 		screenHeight = GUI2D.getInstance().getResolution().getValue();
 	}
@@ -62,7 +64,11 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							cardChooseImageSelected(h);
+							if (!lock) {
+								lock = true;
+								cardChooseImageSelected(h);
+								lock = false;
+							}
 						}
 					}).start();
 				}
@@ -103,7 +109,11 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							basicEnergyChooseImageSelected(h);
+							if (!lock) {
+								lock = true;
+								basicEnergyChooseImageSelected(h);
+								lock = false;
+							}
 						}
 					}).start();
 				}
@@ -116,6 +126,18 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 			this.attachChild(basicEnergyChooseImage);
 			this.basicEnergyChooseImages.add(basicEnergyChooseImage);
 		}
+		basicEnergyChooseImages.get(0).setTexture(Database.getTextureKey("00097"));
+		basicEnergyChooseImages.get(1).setTexture(Database.getTextureKey("00098"));
+		basicEnergyChooseImages.get(2).setTexture(Database.getTextureKey("00099"));
+		basicEnergyChooseImages.get(3).setTexture(Database.getTextureKey("00100"));
+		basicEnergyChooseImages.get(4).setTexture(Database.getTextureKey("00101"));
+		basicEnergyChooseImages.get(5).setTexture(Database.getTextureKey("00102"));
+		basicEnergyChooseImages.get(0).setCardId("00097");
+		basicEnergyChooseImages.get(1).setCardId("00098");
+		basicEnergyChooseImages.get(2).setCardId("00099");
+		basicEnergyChooseImages.get(3).setCardId("00100");
+		basicEnergyChooseImages.get(4).setCardId("00101");
+		basicEnergyChooseImages.get(5).setCardId("00102");
 
 		deckImages = new ArrayList<>();
 		float deckImageWidth = screenWidth * 0.04f;
@@ -366,7 +388,7 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 	protected void setVisible(List<Image2D> nodes, boolean flag) {
 		for (int i = 0; i < nodes.size(); i++) {
 			Image2D node = nodes.get(i);
-			if (node.getCardId() == null || node.getCardId().equals("00000") || !(Element.valueOf(node.getCardId()) != null)) {
+			if (!isValidCardID(node.getCardId()) && !isValidElement(node.getCardId())) {
 				node.setVisible(false);
 				flag = false;
 			} else
@@ -386,6 +408,28 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 				}
 			}).start();
 			dropInUpdateQueue(node);
+		}
+	}
+
+	private boolean isValidCardID(String id) {
+		if (id == null || id.equals("00000"))
+			return false;
+		try {
+			Integer.parseInt(id);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	private boolean isValidElement(String id) {
+		if (id == null)
+			return false;
+		try {
+			Element.valueOf(id);
+			return true;
+		} catch (IllegalArgumentException e) {
+			return false;
 		}
 	}
 
