@@ -7,6 +7,7 @@ import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighter;
+import arenaMode.model.ArenaFighterCode;
 import arenaMode.model.ArenaFighterFactory;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
@@ -81,6 +82,8 @@ public class ArenaController extends Node implements GUI2DController {
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_MASTER_MUSIC);
 				else
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_SERVANT_MUSIC);
+				if (currentSelectedFighter.getCode() == ArenaFighterCode.VERTANIA_GIOVANNI)
+					GUI2D.getInstance().getMusicController().switchMusic(MusicType.FINAL_BOSS_MUSIC);
 
 				GUI2D.getInstance().setNextMode(arenaMode);
 				Player bot = Database.getBot(currentSelectedFighter.getName());

@@ -102,7 +102,7 @@ public class MusicController extends Node {
 		this.musicTrackMap.put(MusicType.LOSS_MUSIC, lossMusicList);
 
 		for (int i = 1; i <= ARENA_SERVANT_MUSIC_TRACKS; i++)
-			arenaServantMusic.add("music/ingame/track4.wav");
+			arenaServantMusic.add("music/arena/track1.wav");
 		this.musicTrackMap.put(MusicType.ARENA_SERVANT_MUSIC, arenaServantMusic);
 
 		for (int i = 1; i <= ARENA_MASTER_MUSIC_TRACKS; i++)

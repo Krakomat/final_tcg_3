@@ -20,6 +20,8 @@ Patch 6.00
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
+		- The final boss now has a special battle music track
+		
 	UI:
 		- New image for the mouse cursor
 		- Replaced the static glowing/selected borders with a dynamic particle system
@@ -27,7 +29,8 @@ Patch 6.00
 		- Changed the title music
 		- Changed the Gym Challenge Menu music
 		- Lowered the Effect sound volume
-
+		- Changed the battle music tracks to fit better together
+		
 	Deck Editor:
 		- Music now stays the same as in the Lobby
 		
