@@ -633,6 +633,7 @@ public class AttackAction {
 					break;
 				}
 			this.moveCard(handPos, discardPilePos, realCard.getGameID(), true);
+			handCards = gameModel.getPosition(handPos).getCards();
 		}
 	}
 

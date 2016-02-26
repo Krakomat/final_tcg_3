@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 
+import arenaMode.model.ArenaFighter;
 import draftTournament.model.DraftTournamentDatabase;
 import draftTournament.model.DraftTournamentState;
 import gui2d.GUI2D;
@@ -17,6 +18,9 @@ import model.enums.Element;
 import model.enums.Rarity;
 import model.game.GameParameters;
 import network.client.Account;
+import network.client.Player;
+import network.server.PokemonGameManagerFactory;
+import network.tcp.borders.ServerMain;
 
 public class DraftTournamentController extends DraftTournamentGUI {
 	private DraftTournamentState state;
@@ -123,18 +127,17 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			updateGUI();
 			break;
 		case FIGHT_1:
-			state = DraftTournamentState.FIGHT_2;
-			updateGUI();
+			ArenaFighter opponent = draftDatabase.getOpponent(0);
+			startFight(opponent);
 			break;
 		case FIGHT_2:
-			state = DraftTournamentState.FIGHT_3;
-			updateGUI();
+			opponent = draftDatabase.getOpponent(1);
+			startFight(opponent);
 			break;
 		case FIGHT_3:
-			state = DraftTournamentState.VICTORY;
-			updateGUI();
+			opponent = draftDatabase.getOpponent(2);
+			startFight(opponent);
 			break;
-		// TODO
 		case DEFEAT:
 		case VICTORY:
 			chosenElements.clear();
@@ -152,6 +155,26 @@ public class DraftTournamentController extends DraftTournamentGUI {
 		default:
 			break;
 		}
+	}
+
+	private void startFight(ArenaFighter opponent) {
+		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
+		GUI2D.getInstance().setNextMode(GUI2DMode.DRAFT_TOURNAMENT_START);
+		Player bot = Database.getBot(opponent.getName());
+		GUI2D.getInstance().getPlayer().createLocalGame(state == DraftTournamentState.FIGHT_1 ? 2 : state == DraftTournamentState.FIGHT_2 ? 3 : 4);
+
+		// Create tree bot and connect him to the server that was
+		// created in createGame:
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				bot.setDeck(opponent.getDeck());
+				bot.setServer(PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME);
+
+				// Register at server:
+				PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME.connectAsLocalPlayer(bot, ServerMain.GAME_PW);
+			}
+		}).start();
 	}
 
 	@Override

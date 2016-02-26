@@ -320,40 +320,35 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	public void playerPlaysCard(Player player, int index) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// Get the hand position:
-				Position handPos = null;
-				if (player.getColor() == Color.BLUE)
-					handPos = gameModel.getPosition(PositionID.BLUE_HAND);
-				else
-					handPos = gameModel.getPosition(PositionID.RED_HAND);
+		// Get the hand position:
+		Position handPos = null;
+		if (player.getColor() == Color.BLUE)
+			handPos = gameModel.getPosition(PositionID.BLUE_HAND);
+		else
+			handPos = gameModel.getPosition(PositionID.RED_HAND);
 
-				// Get the card:
-				Card c = handPos.getCardAtIndex(index);
+		// Get the card:
+		Card c = handPos.getCardAtIndex(index);
 
-				// Check if card is allowed to be played:
-				if (c.getCardScript().canBePlayedFromHand() == null)
-					gameModel.playerLoses(player);
+		// Check if card is allowed to be played:
+		if (c.getCardScript().canBePlayedFromHand() == null)
+			gameModel.playerLoses(player);
 
-				// If card is a trainer card then send card message beforehand,
-				// so scripts don't need to implement this:
-				if (c instanceof TrainerCard)
-					gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
+		// If card is a trainer card then send card message beforehand,
+		// so scripts don't need to implement this:
+		if (c instanceof TrainerCard)
+			gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
 
-				// Set the turn number for the card:
-				c.setPlayedInTurn(gameModel.getTurnNumber());
+		// Set the turn number for the card:
+		c.setPlayedInTurn(gameModel.getTurnNumber());
 
-				// Execute the card script:
-				c.getCardScript().playFromHand();
+		// Execute the card script:
+		c.getCardScript().playFromHand();
 
-				gameModel.sendGameModelToAllPlayers("");
-				gameModel.cleanDefeatedPositions();
+		gameModel.sendGameModelToAllPlayers("");
+		gameModel.cleanDefeatedPositions();
 
-				moveMade = true;
-			}
-		}).start();
+		moveMade = true;
 	}
 
 	@Override
