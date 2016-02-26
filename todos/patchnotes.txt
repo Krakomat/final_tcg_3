@@ -16,6 +16,7 @@ Patch 6.00
 		- 00231_DarkWartortle: Mirros Shell works now even if Dark Wartortle is knocked out
 		- Fixed a bug where ResistanceGym would always be active
 		- Fixed a game crash regarding the getCards() method of the class Position
+		- 00197_Recycle: Is no properly being discarded
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym

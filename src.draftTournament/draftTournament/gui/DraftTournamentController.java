@@ -264,7 +264,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 				if (state == DraftTournamentState.FIGHT_1)
 					state = DraftTournamentState.FIGHT_2;
 				else if (state == DraftTournamentState.FIGHT_2)
-					state = DraftTournamentState.FIGHT_2;
+					state = DraftTournamentState.FIGHT_3;
 				else if (state == DraftTournamentState.FIGHT_3)
 					state = DraftTournamentState.VICTORY;
 			} else {
