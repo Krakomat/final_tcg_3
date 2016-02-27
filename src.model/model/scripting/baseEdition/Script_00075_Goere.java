@@ -92,10 +92,10 @@ public class Script_00075_Goere extends TrainerCardScript {
 			deckPos = PositionID.RED_DECK;
 		}
 		List<Card> handCards = gameModel.getPosition(handPos).getCards();
-		for (int i = 0; i < handCards.size(); i++) {
+		int size = handCards.size();
+		for (int i = 0; i < size; i++) {
 			if (handCards.get(i).getCardType().equals(CardType.TRAINER)) {
 				gameModel.getAttackAction().moveCard(handPos, deckPos, handCards.get(i).getGameID(), true);
-				i--;
 			}
 		}
 	}

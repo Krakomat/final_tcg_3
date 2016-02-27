@@ -19,6 +19,7 @@ Patch 6.00
 		- 00197_Recycle: Is no properly being discarded
 		- 00139_Eevee: Tail Wag should work as intended now
 		- 00078_Aufwisch: Fixed a bug, where the scooped up cards was moved to the wrong position
+		- 00075_Göre: Fixed a deadlock
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
