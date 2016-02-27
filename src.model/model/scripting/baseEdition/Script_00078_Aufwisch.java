@@ -32,8 +32,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 	@Override
 	public void playFromHand() {
 		Player player = this.getCardOwner();
-		PositionID targetPosition = player.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a position to scoop up!")
-				.get(0);
+		PositionID targetPosition = player.playerChoosesPositions(gameModel.getFullArenaPositions(player.getColor()), 1, true, "Choose a position to scoop up!").get(0);
 
 		// Scoop up position:
 		Position position = gameModel.getPosition(targetPosition);
@@ -55,6 +54,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 				playerDiscard = PositionID.RED_DISCARDPILE;
 			}
 			gameModel.getAttackAction().moveCard(targetPosition, playerHand, basicPokemon.getGameID(), false);
+			cards = position.getCards();
 			int size = cards.size();
 			for (int i = 0; i < size; i++)
 				gameModel.getAttackAction().moveCard(targetPosition, playerDiscard, cards.get(i).getGameID(), true);
@@ -67,8 +67,7 @@ public class Script_00078_Aufwisch extends TrainerCardScript {
 
 		// Check if active position was scooped up - choose a new active pokemon in this case:
 		if (targetPosition == ownActive()) {
-			PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(position.getColor()), 1, true, "Choose a new active pokemon!").get(
-					0);
+			PositionID newActive = player.playerChoosesPositions(gameModel.getFullArenaPositions(position.getColor()), 1, true, "Choose a new active pokemon!").get(0);
 			Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
 			gameModel.getAttackAction().movePokemonToPosition(newActive, ownActive());

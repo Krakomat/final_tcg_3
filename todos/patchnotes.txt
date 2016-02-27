@@ -18,6 +18,7 @@ Patch 6.00
 		- Fixed a game crash regarding the getCards() method of the class Position
 		- 00197_Recycle: Is no properly being discarded
 		- 00139_Eevee: Tail Wag should work as intended now
+		- 00078_Aufwisch: Fixed a bug, where the scooped up cards was moved to the wrong position
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
