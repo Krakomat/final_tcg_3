@@ -7,6 +7,7 @@ import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Node;
 
 import arenaMode.model.ArenaFighterCode;
+import common.utilities.Lock;
 import gui2d.GUI2D;
 import gui2d.abstracts.SelectableNode;
 import gui2d.controller.GUI2DController;
@@ -26,10 +27,10 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 	protected List<Image2D> basicEnergyChooseImages, cardChooseImages, deckImages, elementImages;
 	protected Image2D opponentImage;
 	protected TextPanel2D headPanel, cardCountPanel, deckPanel;
-	private boolean lock;
+	private Lock lock;
 
 	public DraftTournamentGUI() {
-		lock = false;
+		lock = new Lock();
 		screenWidth = GUI2D.getInstance().getResolution().getKey();
 		screenHeight = GUI2D.getInstance().getResolution().getValue();
 	}
@@ -64,11 +65,13 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							if (!lock) {
-								lock = true;
-								cardChooseImageSelected(h);
-								lock = false;
+							try {
+								lock.lock();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
 							}
+							cardChooseImageSelected(h);
+							lock.unlock();
 						}
 					}).start();
 				}
@@ -109,11 +112,13 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							if (!lock) {
-								lock = true;
-								basicEnergyChooseImageSelected(h);
-								lock = false;
+							try {
+								lock.lock();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
 							}
+							basicEnergyChooseImageSelected(h);
+							lock.unlock();
 						}
 					}).start();
 				}
