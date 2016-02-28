@@ -42,17 +42,28 @@ public class Script_00250_Psyduck extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
 		List<Element> energy = gameModel.getPosition(attacker).getEnergy();
-		int energyCounter = energy.size();
-		int waterCounter = -2;
-		for (Element ele : energy)
-			if (ele == Element.WATER)
-				waterCounter++;
+		List<Element> waterEnergy = new ArrayList<>();
+		List<Element> otherEnergy = new ArrayList<>();
+		for (Element e : energy)
+			if (e == Element.WATER)
+				waterEnergy.add(e);
+			else
+				otherEnergy.add(e);
 
-		if (energyCounter == 3)
-			waterCounter = waterCounter - 1;
-		if (waterCounter < 0)
-			waterCounter = 0;
-		waterCounter = waterCounter % 3;
+		List<Element> attackCosts = new ArrayList<>();
+		attackCosts.add(Element.WATER);
+		attackCosts.add(Element.COLORLESS);
+		for (Element e : attackCosts) {
+			if (e == Element.WATER)
+				waterEnergy.remove(Element.WATER);
+			else if (!otherEnergy.isEmpty())
+				otherEnergy.remove(0);
+			else
+				waterEnergy.remove(Element.WATER);
+		}
+		int waterCounter = waterEnergy.size();
+		if (waterCounter > 2)
+			waterCounter = 2;
 
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20 + (10 * waterCounter), true);
 	}

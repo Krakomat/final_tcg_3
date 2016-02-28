@@ -44,23 +44,32 @@ public class Script_00013_Quappo extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		List<Element> energyList = new ArrayList<>();
+		List<Element> energy = gameModel.getPosition(attacker).getEnergy();
+		List<Element> waterEnergy = new ArrayList<>();
+		List<Element> otherEnergy = new ArrayList<>();
+		for (Element e : energy)
+			if (e == Element.WATER)
+				waterEnergy.add(e);
+			else
+				otherEnergy.add(e);
 
-		for (Element ele : gameModel.getPosition(attacker).getEnergy())
-			energyList.add(ele);
-
-		energyList.remove(Element.WATER);
-		energyList.remove(Element.WATER);
-
-		int remainingWater = 0;
-		if (energyList.size() > 1 && energyList.contains(Element.WATER)) {
-			// Count remaining water energy:
-			for (Element ele : energyList)
-				if (ele == Element.WATER)
-					remainingWater++;
+		List<Element> attackCosts = new ArrayList<>();
+		attackCosts.add(Element.WATER);
+		attackCosts.add(Element.WATER);
+		attackCosts.add(Element.COLORLESS);
+		for (Element e : attackCosts) {
+			if (e == Element.WATER)
+				waterEnergy.remove(Element.WATER);
+			else if (!otherEnergy.isEmpty())
+				otherEnergy.remove(0);
+			else
+				waterEnergy.remove(Element.WATER);
 		}
-		remainingWater = remainingWater % 3;
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30 + (10 * remainingWater), true);
+		int waterCounter = waterEnergy.size();
+		if (waterCounter > 2)
+			waterCounter = 2;
+
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30 + (10 * waterCounter), true);
 	}
 
 	private void strudel() {

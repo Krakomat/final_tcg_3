@@ -20,6 +20,17 @@ Patch 6.00
 		- 00139_Eevee: Tail Wag should work as intended now
 		- 00078_Aufwisch: Fixed a bug, where the scooped up cards was moved to the wrong position
 		- 00075_Göre: Fixed a deadlock
+		- 00250_Psyduck: Fixed Water Gun attack
+		- 00002_Turtok: Fixed Water Gun attack
+		- 00013_Quappo: Fixed Water Gun attack
+		- 00059_Quapsel: Fixed Water Gun attack
+		- 00116_Vaporeon: Fixed Water Gun attack
+		- 00161_Lapras: Fixed Water Gun attack
+		- 00176_Omastar: Fixed Water Gun attack
+		- 00178_Seadra: Fixed Water Gun attack
+		- 00188_Omanyte: Fixed Water Gun attack
+		- 00202_DarkBlastoise: Fixed Water Gun attack
+		- 00304_MistysStarmie: Fixed Water Gun attack
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
