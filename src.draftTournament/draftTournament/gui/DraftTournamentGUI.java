@@ -158,7 +158,13 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
+							try {
+								lock.lock();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 							deckImageSelected(h);
+							lock.unlock();
 						}
 					}).start();
 				}
@@ -202,7 +208,13 @@ public abstract class DraftTournamentGUI extends Node implements GUI2DController
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
+							try {
+								lock.lock();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 							elementImageSelected(h);
+							lock.unlock();
 						}
 					}).start();
 				}
