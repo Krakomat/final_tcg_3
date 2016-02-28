@@ -13,7 +13,7 @@ Patch 6.00
 		- 00473_MasterBall: Fixed a crash bug
 		- 00459_RocketsHitmonchan: Crosscounter works now even if Rocket's Hitmonchan is knocked out
 		- 00459_RocketsMoltres: Fire Wall works now even if Rocket's Moltres is knocked out
-		- 00231_DarkWartortle: Mirros Shell works now even if Dark Wartortle is knocked out
+		- 00231_DarkWartortle: Mirror Shell works now even if Dark Wartortle is knocked out
 		- Fixed a bug where ResistanceGym would always be active
 		- Fixed a game crash regarding the getCards() method of the class Position
 		- 00197_Recycle: Is now properly being discarded
