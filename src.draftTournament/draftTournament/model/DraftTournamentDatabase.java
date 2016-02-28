@@ -98,8 +98,8 @@ public class DraftTournamentDatabase {
 	private List<Card> generateRandomCards(List<Card> pokemonCards, List<Card> trainerCards, List<Card> colorlessCards, int number) {
 		List<Card> erg = new ArrayList<>();
 		ProbabilityCoin coin = new ProbabilityCoin();
-		final float trainerCardPercentage = 0.1f;
-		final float colorlessCardPercentage = 0.1f;
+		final float trainerCardPercentage = 0.15f;
+		final float colorlessCardPercentage = 0.15f;
 
 		while (erg.size() < number) {
 			List<Card> chosenCardSet = null;
@@ -111,8 +111,18 @@ public class DraftTournamentDatabase {
 				chosenCardSet = pokemonCards;
 			}
 
-			Card c = chosenCardSet.get(random.nextInt(chosenCardSet.size()));
-			erg.add(c);
+			boolean cardAdded = false;
+			while (!cardAdded) {
+				Card c = chosenCardSet.get(random.nextInt(chosenCardSet.size()));
+				boolean alreadyIn = false;
+				for (Card card : erg)
+					if (card.getCardId().equals(c.getCardId()))
+						alreadyIn = true;
+				if (!alreadyIn) {
+					erg.add(c);
+					cardAdded = true;
+				}
+			}
 		}
 
 		return erg;
