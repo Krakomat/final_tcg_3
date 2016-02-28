@@ -144,6 +144,16 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			}
 		}
 
+		// Check if pokemon is not influenced by the Leer attack of Rhyhorn:
+		if (gameModel.getGameModelParameters().activeEffect("00149", this.cardGameID())) {
+			List<Pair<Integer, Integer>> values = gameModel.getGameModelParameters().effectParameterActive("00149");
+			Card defendingPokemon = gameModel.getPosition(enemyActive()).getTopCard();
+			for (Pair<Integer, Integer> pair : values) {
+				if (pair.getKey() == defendingPokemon.getGameID())
+					return false;
+			}
+		}
+
 		List<Element> attackCosts = this.attackCosts.get(attackName);
 		if (attackCosts == null)
 			throw new IllegalArgumentException("Error: Wrong attack name in attackCanBeExecuted of PokemonCardScript: " + attackName);

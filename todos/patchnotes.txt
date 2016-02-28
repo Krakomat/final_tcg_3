@@ -18,6 +18,7 @@ Patch 6.00
 		- Fixed a game crash regarding the getCards() method of the class Position
 		- 00197_Recycle: Is no properly being discarded
 		- 00139_Eevee: Tail Wag should work as intended now
+		- 00149_Rhyhorn: Leer should work as intended now
 		- 00078_Aufwisch: Fixed a bug, where the scooped up cards was moved to the wrong position
 		- 00075_Göre: Fixed a deadlock
 		- 00250_Psyduck: Fixed Water Gun attack
