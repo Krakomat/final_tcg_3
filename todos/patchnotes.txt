@@ -32,6 +32,7 @@ Patch 6.00
 		- 00188_Omanyte: Fixed Water Gun attack
 		- 00202_DarkBlastoise: Fixed Water Gun attack
 		- 00304_MistysStarmie: Fixed Water Gun attack
+		- 00263_FullHealEnergy: Fixed a bug, where the full heal is not being send to the clients
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym

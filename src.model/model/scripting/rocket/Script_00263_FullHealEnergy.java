@@ -15,6 +15,8 @@ public class Script_00263_FullHealEnergy extends EnergyCardScript {
 		super.playFromHand();
 
 		// Clean conditions on pokemon:
+		gameModel.sendCardMessageToAllPlayers("All conditions on " + this.card.getName() + " are cured!", this.card, "");
 		gameModel.getAttackAction().cureAllConditionsOnPosition(this.card.getCurrentPosition().getPositionID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 }
