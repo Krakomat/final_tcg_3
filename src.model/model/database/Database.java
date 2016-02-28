@@ -672,7 +672,7 @@ public class Database {
 		TextureKey giovanniCharacterThumb = new TextureKey("/tilesets/characters/Giovanni_thumb.png");
 		giovanniCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "THUMB", giovanniCharacterThumb);
-		
+
 		TextureKey cloudyParticleTexture = new TextureKey("/tilesets/other/particle.png");
 		cloudyParticleTexture.setGenerateMips(false);
 		assetTextures.put("Particle", cloudyParticleTexture);
@@ -694,8 +694,7 @@ public class Database {
 		List<String> cardList = new ArrayList<>();
 		for (Card c : cards) {
 			if (!c.getEdition().equals(Edition.TOKEN))
-				for (int i = 0; i < 60; i++)
-					cardList.add(c.getCardId());
+				cardList.add(c.getCardId());
 		}
 		CardLibrary lib = new CardLibrary(cardList);
 		return lib;

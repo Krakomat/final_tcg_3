@@ -114,7 +114,6 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			for (Image2D image : this.elementImages)
 				if (image.isSelected())
 					chosenElements.add(Element.valueOf(image.getCardId()));
-			chosenElements.add(Element.COLORLESS);
 			this.state = DraftTournamentState.CHOOSE_CARDS;
 			draftDatabase.initializeCardSet(chosenElements, true);
 			List<Card> randomCards = draftDatabase.getRandomCardList(3, null);

@@ -9,6 +9,7 @@ import com.google.common.base.Preconditions;
 
 import arenaMode.model.ArenaFighter;
 import arenaMode.model.ArenaFighterFactory;
+import common.utilities.ProbabilityCoin;
 import model.database.Card;
 import model.database.Database;
 import model.database.EnergyCard;
@@ -23,6 +24,8 @@ public class DraftTournamentDatabase {
 	private List<Edition> validEditions;
 	private List<Element> elements;
 	private List<Card> commonCards, uncommonCards, rareCards;
+	private List<Card> commonTrainerCards, uncommonTrainerCards, rareTrainerCards;
+	private List<Card> commonColorlessCards, uncommonColorlessCards, rareColorlessCards;
 	private Random random;
 	private List<ArenaFighter> opponents;
 
@@ -74,7 +77,6 @@ public class DraftTournamentDatabase {
 	}
 
 	public List<Card> getRandomCardList(int number, Rarity setRarity) {
-		List<Card> erg = new ArrayList<>();
 		Rarity rarity = null;
 		if (setRarity == null)
 			rarity = this.generateRarity();
@@ -83,22 +85,34 @@ public class DraftTournamentDatabase {
 
 		switch (rarity) {
 		case COMMON:
-			List<Integer> indices = this.createIndices(number, commonCards.size());
-			for (Integer index : indices)
-				erg.add(commonCards.get(index));
-			break;
+			return generateRandomCards(commonCards, commonTrainerCards, commonColorlessCards, 3);
 		case UNCOMMON:
-			indices = this.createIndices(number, uncommonCards.size());
-			for (Integer index : indices)
-				erg.add(uncommonCards.get(index));
-			break;
+			return generateRandomCards(uncommonCards, uncommonTrainerCards, uncommonColorlessCards, 3);
 		case RARE:
-			indices = this.createIndices(number, rareCards.size());
-			for (Integer index : indices)
-				erg.add(rareCards.get(index));
-			break;
+			return generateRandomCards(rareCards, rareTrainerCards, rareColorlessCards, 3);
 		default:
-			break;
+			return new ArrayList<>();
+		}
+	}
+
+	private List<Card> generateRandomCards(List<Card> pokemonCards, List<Card> trainerCards, List<Card> colorlessCards, int number) {
+		List<Card> erg = new ArrayList<>();
+		ProbabilityCoin coin = new ProbabilityCoin();
+		final float trainerCardPercentage = 0.1f;
+		final float colorlessCardPercentage = 0.1f;
+
+		while (erg.size() < number) {
+			List<Card> chosenCardSet = null;
+			if (coin.tossCoin(trainerCardPercentage)) {
+				chosenCardSet = trainerCards;
+			} else if (coin.tossCoin(colorlessCardPercentage)) {
+				chosenCardSet = colorlessCards;
+			} else {
+				chosenCardSet = pokemonCards;
+			}
+
+			Card c = chosenCardSet.get(random.nextInt(chosenCardSet.size()));
+			erg.add(c);
 		}
 
 		return erg;
@@ -118,6 +132,12 @@ public class DraftTournamentDatabase {
 		commonCards = new ArrayList<>();
 		uncommonCards = new ArrayList<>();
 		rareCards = new ArrayList<>();
+		commonColorlessCards = new ArrayList<>();
+		uncommonColorlessCards = new ArrayList<>();
+		rareColorlessCards = new ArrayList<>();
+		commonTrainerCards = new ArrayList<>();
+		uncommonTrainerCards = new ArrayList<>();
+		rareTrainerCards = new ArrayList<>();
 
 		for (String id : Database.getFullCardLibrary().getCards()) {
 			Card c = Database.createCard(id);
@@ -125,14 +145,60 @@ public class DraftTournamentDatabase {
 				if (c instanceof PokemonCard) {
 					if (chosenElements.contains(((PokemonCard) c).getElement()))
 						this.addCardToSet(c);
+					else if (((PokemonCard) c).getElement() == Element.COLORLESS)
+						this.addCardToColorlessCardSet(c);
 				} else if (c instanceof EnergyCard) {
 					if (!((EnergyCard) c).isBasisEnergy())
-						this.addCardToSet(c);
+						this.addCardToColorlessCardSet(c);
 				} else {
 					// Trainer card
-					this.addCardToSet(c);
+					this.addCardToTrainerCardSet(c);
 				}
 			}
+		}
+	}
+
+	private void addCardToTrainerCardSet(Card c) {
+		switch (c.getRarity()) {
+		case COMMON:
+			commonTrainerCards.add(c);
+			break;
+		case HOLO:
+			rareTrainerCards.add(c);
+			break;
+		case LEGENDARY:
+			rareTrainerCards.add(c);
+			break;
+		case RARE:
+			rareTrainerCards.add(c);
+			break;
+		case UNCOMMON:
+			uncommonTrainerCards.add(c);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void addCardToColorlessCardSet(Card c) {
+		switch (c.getRarity()) {
+		case COMMON:
+			commonColorlessCards.add(c);
+			break;
+		case HOLO:
+			rareColorlessCards.add(c);
+			break;
+		case LEGENDARY:
+			rareColorlessCards.add(c);
+			break;
+		case RARE:
+			rareColorlessCards.add(c);
+			break;
+		case UNCOMMON:
+			uncommonColorlessCards.add(c);
+			break;
+		default:
+			break;
 		}
 	}
 
