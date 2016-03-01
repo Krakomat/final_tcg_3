@@ -9,6 +9,7 @@ import model.enums.Element;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
+import network.client.Player;
 
 public class Script_00410_SabrinasGastly extends PokemonCardScript {
 
@@ -33,7 +34,7 @@ public class Script_00410_SabrinasGastly extends PokemonCardScript {
 		gameModel.getGameModelParameters().activateEffect("00410", cardGameID());
 	}
 
-	public void executePreTurnActions() {
+	public void executePreTurnActions(Player player) {
 		if (gameModel.getGameModelParameters().activeEffect("00410", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
 			gameModel.getGameModelParameters().deactivateEffect("00410", cardGameID());

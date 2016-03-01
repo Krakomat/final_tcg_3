@@ -19,6 +19,8 @@ import model.enums.Element;
 import model.enums.Rarity;
 
 public class DraftTournamentDatabase {
+	// private final Edition[] VALID_EDITIONS = { Edition.BASE, Edition.JUNGLE, Edition.FOSSIL, Edition.ROCKET, Edition.BROCK, Edition.MISTY, Edition.LT_SURGE, Edition.ERIKA,
+	// Edition.KOGA, Edition.SABRINA, Edition.BLAINE, Edition.TEAM_ROCKET, Edition.GIOVANNI };
 	private final Edition[] VALID_EDITIONS = { Edition.BASE, Edition.JUNGLE, Edition.FOSSIL, Edition.ROCKET };
 	private final Integer[] PERCENTAGE_FOR_RARITY = { 65, 30, 5 };
 	private List<Edition> validEditions;
@@ -99,8 +101,8 @@ public class DraftTournamentDatabase {
 	private List<Card> generateRandomCards(List<Card> pokemonCards1, List<Card> pokemonCards2, List<Card> trainerCards, List<Card> colorlessCards, int number) {
 		List<Card> erg = new ArrayList<>();
 		ProbabilityCoin coin = new ProbabilityCoin();
-		final float trainerCardPercentage = 0.15f;
-		final float colorlessCardPercentage = 0.15f;
+		final float trainerCardPercentage = 0.2f;
+		final float colorlessCardPercentage = 0.2f;
 
 		while (erg.size() < number) {
 			List<Card> chosenCardSet = null;
@@ -109,10 +111,13 @@ public class DraftTournamentDatabase {
 			} else if (coin.tossCoin(colorlessCardPercentage)) {
 				chosenCardSet = colorlessCards;
 			} else {
-				if (coin.tossCoin(0.5f))
+				if (!pokemonCards2.isEmpty()) {
+					if (coin.tossCoin(0.5f))
+						chosenCardSet = pokemonCards1;
+					else
+						chosenCardSet = pokemonCards2;
+				} else
 					chosenCardSet = pokemonCards1;
-				else
-					chosenCardSet = pokemonCards2;
 			}
 
 			boolean cardAdded = false;
@@ -220,7 +225,7 @@ public class DraftTournamentDatabase {
 	}
 
 	private void addCardToSet(PokemonCard c, List<Element> chosenElements) {
-		Preconditions.checkArgument(chosenElements.size() == 2);
+		Preconditions.checkArgument(chosenElements.size() >= 1);
 		if (c.getElement() == chosenElements.get(0)) {
 			switch (c.getRarity()) {
 			case COMMON:

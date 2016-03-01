@@ -78,7 +78,7 @@ public class Script_00118_Victreebel extends PokemonCardScript {
 		}
 	}
 
-	public void executePreTurnActions() {
+	public void executePreTurnActions(Player player) {
 		if (gameModel.getGameModelParameters().activeEffect("00118", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
 			gameModel.getGameModelParameters().deactivateEffect("00118", cardGameID());

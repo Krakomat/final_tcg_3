@@ -202,7 +202,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 		}
 		this.dropInUpdateQueue(element);
 
-		if (selectedElements == 2)
+		if (selectedElements >= 1)
 			setVisible(confirmButton, true);
 		else
 			setVisible(confirmButton, false);
@@ -243,7 +243,6 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			for (int i = 0; i < randomCards.size(); i++) {
 				cardChooseImages.get(i).setTexture(Database.getTextureKey(randomCards.get(i).getCardId()));
 				cardChooseImages.get(i).setCardId(randomCards.get(i).getCardId());
-				cardChooseImages.get(i).setGlowing(true);
 			}
 		} else {
 			for (int i = 0; i < 3; i++) {

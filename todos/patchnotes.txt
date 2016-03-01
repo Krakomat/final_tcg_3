@@ -33,7 +33,13 @@ Patch 6.00
 		- 00202_DarkBlastoise: Fixed Water Gun attack
 		- 00304_MistysStarmie: Fixed Water Gun attack
 		- 00263_FullHealEnergy: Fixed a bug, where the full heal is not being send to the clients
-		
+		- 00283_BrocksSandshrew: Fixed a game crash
+		- 00118_Victreebel: Fixed a game crash
+		- 00327_LtSurgesFearow: Fixed a game crash
+		- 00322_MistysSeel: Fixed a game crash
+		- 00410_SabrinasGastly: Fixed a game crash
+		- 00417_SabrinasGengar: Fixed a game crash
+		- 00421_SabrinasJynx: Fixed a game crash
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
 		- The final boss now has a special battle music track

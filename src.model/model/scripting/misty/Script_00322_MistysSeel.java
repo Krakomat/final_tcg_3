@@ -10,6 +10,7 @@ import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
+import network.client.Player;
 
 public class Script_00322_MistysSeel extends PokemonCardScript {
 
@@ -43,7 +44,7 @@ public class Script_00322_MistysSeel extends PokemonCardScript {
 		gameModel.getGameModelParameters().activateEffect("00322", cardGameID());
 	}
 
-	public void executePreTurnActions() {
+	public void executePreTurnActions(Player player) {
 		if (gameModel.getGameModelParameters().activeEffect("00322", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
 			gameModel.getGameModelParameters().deactivateEffect("00322", cardGameID());

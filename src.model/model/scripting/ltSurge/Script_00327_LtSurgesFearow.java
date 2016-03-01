@@ -9,6 +9,7 @@ import model.enums.Element;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
+import network.client.Player;
 
 public class Script_00327_LtSurgesFearow extends PokemonCardScript {
 
@@ -55,7 +56,7 @@ public class Script_00327_LtSurgesFearow extends PokemonCardScript {
 		gameModel.getGameModelParameters().activateEffect("00327", cardGameID());
 	}
 
-	public void executePreTurnActions() {
+	public void executePreTurnActions(Player player) {
 		if (gameModel.getGameModelParameters().activeEffect("00327", cardGameID())) {
 			gameModel.setRetreatExecuted(true);
 			gameModel.getGameModelParameters().deactivateEffect("00327", cardGameID());
