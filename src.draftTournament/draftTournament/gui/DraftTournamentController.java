@@ -236,7 +236,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 		int maxIndex = deck.size() - 1;
 		deckImages.get(maxIndex).setTexture(Database.getTextureKey(cardID));
 		deckImages.get(maxIndex).setCardId(cardID);
-
+		
 		// Next round:
 		if (maxIndex < 39) {
 			List<Card> randomCards = draftDatabase.getRandomCardList(3, (maxIndex == 13 || maxIndex == 33) ? Rarity.RARE : null);

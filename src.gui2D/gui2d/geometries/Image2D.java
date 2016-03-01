@@ -208,13 +208,13 @@ public abstract class Image2D extends Node implements SelectableNode {
 	}
 
 	public synchronized void setTexture(TextureKey texture) {
-		try {
-			this.lock.lock();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			this.lock.lock();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		this.imagePanel.setTexture(texture);
-		lock.unlock();
+		//		lock.unlock();
 	}
 
 	@Override
