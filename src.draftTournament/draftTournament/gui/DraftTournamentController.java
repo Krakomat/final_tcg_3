@@ -278,7 +278,7 @@ public class DraftTournamentController extends DraftTournamentGUI {
 			setVisible(opponentImage, false);
 			setVisible(exitButton, true);
 			setVisible(deckPanel, false);
-			headPanel.setText("Choose two Elements");
+			headPanel.setText("Choose up to two Elements");
 			setVisible(headPanel, true);
 			backButton.setText("Back");
 			setVisible(backButton, true);
