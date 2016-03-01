@@ -40,6 +40,7 @@ Patch 6.00
 		- 00410_SabrinasGastly: Fixed a game crash
 		- 00417_SabrinasGengar: Fixed a game crash
 		- 00421_SabrinasJynx: Fixed a game crash
+		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
 		- The final boss now has a special battle music track
