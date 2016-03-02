@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Deck Name="Starter Deck">
     <Cards>
+        <Card ID="00003">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00018">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00022">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00024">
+            <Size>1</Size>
+        </Card>
         <Card ID="00026">
             <Size>4</Size>
+        </Card>
+        <Card ID="00027">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00036">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00039">
+            <Size>1</Size>
         </Card>
         <Card ID="00046">
             <Size>4</Size>
         </Card>
         <Card ID="00048">
             <Size>4</Size>
+        </Card>
+        <Card ID="00057">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00061">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00071">
+            <Size>1</Size>
         </Card>
         <Card ID="00077">
             <Size>1</Size>
@@ -18,6 +48,9 @@
         </Card>
         <Card ID="00091">
             <Size>3</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>2</Size>
         </Card>
         <Card ID="00093">
             <Size>1</Size>
@@ -32,37 +65,7 @@
             <Size>3</Size>
         </Card>
         <Card ID="00098">
-            <Size>16</Size>
-        </Card>
-        <Card ID="00109">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00150">
-            <Size>3</Size>
-        </Card>
-        <Card ID="00204">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00218">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00220">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00240">
-            <Size>4</Size>
-        </Card>
-        <Card ID="00260">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00261">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00263">
-            <Size>1</Size>
-        </Card>
-        <Card ID="00264">
-            <Size>2</Size>
+            <Size>19</Size>
         </Card>
     </Cards>
 </Deck>
