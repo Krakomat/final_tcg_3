@@ -41,6 +41,7 @@ Patch 6.00
 		- 00417_SabrinasGengar: Fixed a game crash
 		- 00421_SabrinasJynx: Fixed a game crash
 		- 00132_Rapidash: Fixed the attack costs of "Stomp" and "Agility"
+		- 00384_KogasDitto: Fixed a bug, where Koga's Ditto would be knocked out immediately as soon as it is being set on the bench
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
