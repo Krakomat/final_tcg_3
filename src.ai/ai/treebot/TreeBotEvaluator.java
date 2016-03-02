@@ -7,8 +7,10 @@ import ai.util.AIUtilities;
 import common.utilities.Pair;
 import model.database.Card;
 import model.database.PokemonCard;
+import model.enums.CardType;
 import model.enums.Color;
 import model.enums.Element;
+import model.enums.GameState;
 import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.game.LocalPokemonGameModel;
@@ -41,68 +43,75 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 	 * @return
 	 */
 	private float evaluatePlayerModel(LocalPokemonGameModel gameModel, Color color) {
+		// Return Infinity, if you won:
+		if (gameModel.getGameState() == GameState.BLUE_WON && color == Color.BLUE)
+			return Float.POSITIVE_INFINITY;
+
 		float value = 0;
 
-		// Loose 20 points for each of your remaining prize cards:
-		value = value - 20 * gameModel.getGameField().getNonEmptyPriceList(color).size();
+		// Gain 20 points for each of your remaining prize cards:
+		value = value + 20 * gameModel.getGameField().getEmptyPriceList(color).size();
 
 		// Gain one point for each card in your deck:
-		value = value + gameModel.getPosition(PositionID.getDeckPosition(color)).size();
+		int deckSize = gameModel.getPosition(PositionID.getDeckPosition(color)).size();
+		if (deckSize < 21)
+			value = value + deckSize * 4;
+		else
+			value = value + 60 + deckSize;
 
-		// Lose one point for each card in your discard pile:
-		value = value - gameModel.getPosition(PositionID.getDiscardPilePosition(color)).size();
+		// Gain 1 point for each trainer card in your discard pile:
+		value = value + gameModel.getPosition(PositionID.getDiscardPilePosition(color)).getTrainerCards().size();
 
 		// Gain 2 points for each card in your hand:
 		value = value + 2 * gameModel.getPosition(PositionID.getHandPosition(color)).size();
 
-		// Gain 10 points for each pokemon card on your side:
+		// Gain 4 points for each pokemon card on your side:
 		for (PositionID pos : gameModel.getFullBenchPositions(color))
-			value = value + 10 * gameModel.getPosition(pos).getPokemonCards().size();
-		value = value + 10 * gameModel.getPosition(PositionID.getActivePokemon(color)).getPokemonCards().size();
+			value = value + 4 * gameModel.getPosition(pos).getPokemonCards().size();
+		value = value + 4 * gameModel.getPosition(PositionID.getActivePokemon(color)).getPokemonCards().size();
 
-		// Loose 2 point for each damage mark on your own field:
-		for (PositionID pos : gameModel.getFullBenchPositions(color)) {
+		// Gain up to 20 points for each position in your arena, depending on how much damage the position contains:
+		for (PositionID pos : gameModel.getFullArenaPositions(color)) {
 			PokemonCard pokemon = (PokemonCard) gameModel.getPosition(pos).getTopCard();
-			value = value - 2 * (pokemon.getDamageMarks() / 10);
+			float damage = pokemon.getDamageMarks();
+			float maxHP = pokemon.getHitpoints();
+			value = value + 20 - 20 * (damage / maxHP);
 		}
 
-		// Loose 4 points for each damage mark on your own active pokemon:
 		PokemonCard ownActive = (PokemonCard) gameModel.getPosition(PositionID.getActivePokemon(color)).getTopCard();
-		if (ownActive == null)
-			return Integer.MIN_VALUE; // Lost game without own active!
-		value = value - 4 * (ownActive.getDamageMarks() / 10);
 
-		// Loose 1 point for each negative condition on your active pokemon:
-		if (ownActive.hasCondition(PokemonCondition.ASLEEP) || ownActive.hasCondition(PokemonCondition.BLIND) || ownActive.hasCondition(PokemonCondition.CONFUSED)
-				|| ownActive.hasCondition(PokemonCondition.PARALYZED) || ownActive.hasCondition(PokemonCondition.POKEMON_POWER_BLOCK))
-			value = value - 1;
-
-		// Loose 2 points if your active pokemon is poisoned:
-		if (ownActive.hasCondition(PokemonCondition.POISONED))
-			value = value - 2;
-		// Loose 3 points if your active pokemon is toxic:
-		if (ownActive.hasCondition(PokemonCondition.TOXIC))
-			value = value - 3;
-
-		// Gain 1 point for each negative condition on your active pokemon:
-		if (ownActive.hasCondition(PokemonCondition.DAMAGEINCREASE10) || ownActive.hasCondition(PokemonCondition.DESTINY)
-				|| ownActive.hasCondition(PokemonCondition.HARDEN20) || ownActive.hasCondition(PokemonCondition.HARDEN30)
-				|| ownActive.hasCondition(PokemonCondition.INVULNERABLE) || ownActive.hasCondition(PokemonCondition.NO_DAMAGE)
-				|| ownActive.hasCondition(PokemonCondition.RETALIATION))
-			value = value - 1;
-
-		// Loose 2 points for each unnecessary energy in play, gain 4 for each needed energy in play. Gain 1 point for each attack that is ready, 3 points for
-		// each attack of your active pokemon that is ready:
-		for (PositionID pos : gameModel.getFullBenchPositions(color)) {
-			Pair<Integer, Integer> analysisResult = this.analyseEnergyOnPosition(gameModel.getPosition(pos));
-			value = value - 2 * analysisResult.getValue();
-			value = value + 4 * analysisResult.getKey();
-			value = value + this.countAttacksReady(gameModel.getPosition(pos));
+		if (ownActive != null) {
+			// Gain 1 point for each positive condition on your active pokemon:
+			if (ownActive.hasCondition(PokemonCondition.DAMAGEINCREASE10) || ownActive.hasCondition(PokemonCondition.DESTINY) || ownActive.hasCondition(PokemonCondition.HARDEN20)
+					|| ownActive.hasCondition(PokemonCondition.HARDEN30) || ownActive.hasCondition(PokemonCondition.INVULNERABLE)
+					|| ownActive.hasCondition(PokemonCondition.NO_DAMAGE) || ownActive.hasCondition(PokemonCondition.RETALIATION)
+					|| ownActive.hasCondition(PokemonCondition.SHADOW_IMAGE) || ownActive.hasCondition(PokemonCondition.SUPER_RETALIATION)
+					|| ownActive.hasCondition(PokemonCondition.FIRE_WALL) || ownActive.hasCondition(PokemonCondition.HARDEN10))
+				value = value + 1;
 		}
-		Pair<Integer, Integer> analysisResult = this.analyseEnergyOnPosition(gameModel.getPosition(PositionID.getActivePokemon(color)));
-		value = value - 2 * analysisResult.getValue();
-		value = value + 4 * analysisResult.getKey();
-		value = value + 3 * this.countAttacksReady(gameModel.getPosition(PositionID.getActivePokemon(color)));
+
+		// Gain 3 for each needed energy in play. Adds multiplier depending on the energy's position:
+		for (PositionID pos : gameModel.getFullArenaPositions(color)) {
+			PokemonCard pokemon = (PokemonCard) gameModel.getPosition(pos).getTopCard();
+			Pair<Integer, Integer> analysisResult = this.analyseEnergyOnPosition(gameModel.getPosition(pos));
+			float energyValue = 3 * analysisResult.getKey();
+
+			// *1.5 for stage 1 pokemon:
+			if (pokemon.getCardType() == CardType.STAGE1POKEMON)
+				energyValue = energyValue * 1.5f;
+			// *2 for stage 2 pokemon:
+			if (pokemon.getCardType() == CardType.STAGE2POKEMON)
+				energyValue = energyValue * 2f;
+			// *2 for active pokemon:
+			if (PositionID.isActivePosition(pos))
+				energyValue = energyValue * 2f;
+
+			value = value + energyValue;
+		}
+
+		// Gain 4 points, if you own the current stadium card:
+		if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getColor() == color)
+			value = value + 4;
 
 		return value;
 	}
@@ -140,23 +149,5 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 			}
 		}
 		return new Pair<Integer, Integer>(neededEnergy, trashEnergy);
-	}
-
-	/**
-	 * Counts the number of attacks the pokemon on the given position could execute, if it were the active pokemon.
-	 * 
-	 * @param position
-	 * @return
-	 */
-	private int countAttacksReady(Position position) {
-		if (position.isEmpty())
-			return 0;
-		PokemonCard pokemon = (PokemonCard) position.getTopCard();
-		PokemonCardScript cardScript = (PokemonCardScript) pokemon.getCardScript();
-		int counter = 0;
-		for (String attack : pokemon.getAttackNames()) {
-			counter = counter + (aiUtilities.energyAvailableForAttack(cardScript.getAttackCosts(attack), (ArrayList<Element>) position.getEnergy()) == true ? 1 : 0);
-		}
-		return counter;
 	}
 }
