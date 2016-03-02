@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Account ID="0">
-	<Name>TreeBot</Name>
+	<Name>Computer</Name>
 	<Password />
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>

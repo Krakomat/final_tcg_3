@@ -10,7 +10,6 @@ import model.game.GameParameters;
 import network.client.Account;
 import network.client.Player;
 import network.server.PokemonGameManagerFactory;
-import network.tcp.borders.ClientBorder;
 import network.tcp.borders.ServerMain;
 import gui2d.GUI2D;
 import gui2d.GUI2DMode;
@@ -518,7 +517,7 @@ public class LobbyController extends Node implements GUI2DController {
 
 	protected void botClicked(String deckName) {
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
-		Player bot = Database.getBot("TreeBot");
+		Player bot = Database.getBot("Computer");
 		GUI2D.getInstance().getPlayer().createLocalGame(bot.getPrizeCards());
 
 		// Create tree bot and connect him to the server that was created in
@@ -531,25 +530,6 @@ public class LobbyController extends Node implements GUI2DController {
 
 				// Register at server:
 				PokemonGameManagerFactory.CURRENT_RUNNING_LOCAL_GAME.connectAsLocalPlayer(bot, ServerMain.GAME_PW);
-			}
-		}).start();
-	}
-
-	protected void standardBotClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
-		GUI2D.getInstance().getPlayer().createGame();
-
-		// Create standard bot and connect him to the server that was created in
-		// createGame:
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Player bot = Database.getBot("StandardBot");
-				ClientBorder botBorder = new ClientBorder(bot);
-				bot.setServer(botBorder);
-
-				// Register at server:
-				botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
 			}
 		}).start();
 	}
@@ -646,25 +626,6 @@ public class LobbyController extends Node implements GUI2DController {
 			GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
 			GUI2D.getInstance().getPlayer().connectToGame(ipAdress);
 		}
-	}
-
-	protected void dummyBotClicked() {
-		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
-		GUI2D.getInstance().getPlayer().createGame();
-
-		// Create dummy bot and connect him to the server that was created in
-		// createGame:
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Player bot = Database.getBot("DummyBot");
-				ClientBorder botBorder = new ClientBorder(bot);
-				bot.setServer(botBorder);
-
-				// Register at server:
-				botBorder.connectAsPlayer(bot, ServerMain.SERVER_LOCALHOST, ServerMain.GAME_PW);
-			}
-		}).start();
 	}
 
 	protected void backButtonClicked() {
