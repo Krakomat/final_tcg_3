@@ -56,6 +56,7 @@ Patch 6.00
 		- Changed the Gym Challenge Menu music
 		- Lowered the Effect sound volume
 		- Changed the battle music tracks to fit better together
+		- Fixed a visual bug in the card selection window
 		
 	Deck Editor:
 		- Music now stays the same as in the Lobby

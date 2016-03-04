@@ -88,6 +88,10 @@ public class CardChooseWindow extends ChooseWindow {
 				Image2D image = this.imageList.get(i);
 				image.setTexture(Database.getTextureKey(cards.get(startIndex + i).getCardId()));
 				image.setVisible(true);
+				if (this.indexList.contains(startIndex + i))
+					image.setSelected(true);
+				else
+					image.setSelected(false);
 				image.update();
 			}
 			for (int i = cards.size() - startIndex; i < imageList.size(); i++) {

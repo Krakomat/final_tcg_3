@@ -78,7 +78,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
 		}
-
 		blueDeck.setVisible(false, Color.BLUE);
 		blueDeck.setVisible(false, Color.RED);
 		redDeck.setVisible(false, Color.BLUE);
