@@ -2,6 +2,8 @@ package gui2d.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import network.client.Account;
 import network.client.PlayerImpl;
@@ -93,6 +95,18 @@ public class TitleController extends Node implements GUI2DController {
 						if (accountName != null) {
 							if (!accountName.equals("")) {
 								player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "", 6);
+								List<String> unlockedCards = new ArrayList<>();
+								for (int i = 1; i < 265; i++) {
+									if (i != 103 && i != 104 && i != 199) {
+										if (i / 100 > 0)
+											unlockedCards.add("00" + i);
+										else if (i / 10 > 0)
+											unlockedCards.add("000" + i);
+										else
+											unlockedCards.add("0000" + i);
+									}
+								}
+								player.setUnlockedCards(unlockedCards);
 								File deckFile = new File(GameParameters.DECK_PATH + "Starter Deck.xml");
 								Deck deck = Deck.readFromDatabaseFile(deckFile);
 								player.setDeck(deck);

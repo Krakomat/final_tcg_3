@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import model.database.Card;
 import model.database.Database;
 import model.database.Deck;
@@ -509,13 +507,12 @@ public class DeckEditController extends Node implements GUI2DController {
 
 	protected void loadDeckButtonClicked() {
 		Deck loadedDeck = loadDeckDialog();
-		if (loadedDeck != null && this.checkDeckForCorrectness(loadedDeck.getCards())) {
+		if (loadedDeck != null) {
 			this.clearDeck();
 			this.createDeckFromLibrary(loadedDeck);
 			this.account.setDeck(loadedDeck);
 			Account.saveAccount(this.account);
-		} else if (loadedDeck != null && !this.checkDeckForCorrectness(loadedDeck.getCards()))
-			JOptionPane.showMessageDialog(null, "Failed on loading the deck - File is not a valid deck!", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public Deck loadDeckDialog() {
@@ -526,15 +523,16 @@ public class DeckEditController extends Node implements GUI2DController {
 			possibilities[i] = file.substring(0, file.length() - 4);
 		}
 		List<String> fileNames = new ArrayList<>();
-		for (Object file : possibilities)
-			fileNames.add((String) file);
+		int i1 = 0;
+		for (Object file : possibilities) {
+			Deck deck = Deck.readFromDatabaseFile(files[i1]);
+			if (this.deckIsValid(deck) && this.checkDeckForCorrectness(deck.getCards()))
+				fileNames.add((String) file);
+			i1++;
+		}
 		List<String> list = GUI2D.getInstance().userChoosesStrings(fileNames, 1, false, "Choose a deck to load!");
 		if (!list.isEmpty()) {
 			String s = list.get(0);
-			// String s = (String) JOptionPane.showInputDialog(null, "Choose the
-			// deck to load:", "Load Deck", JOptionPane.PLAIN_MESSAGE, null,
-			// possibilities,
-			// possibilities[1]);
 			if (s != null) {
 				// Search index:
 				int index = -1;
@@ -550,6 +548,14 @@ public class DeckEditController extends Node implements GUI2DController {
 			}
 		}
 		return null;
+	}
+
+	private boolean deckIsValid(Deck deck) {
+		for (String cardID : deck.getCards()) {
+			if (!account.getUnlockedCards().contains(cardID))
+				return false;
+		}
+		return true;
 	}
 
 	private static File[] finder(String dirName) {
@@ -657,19 +663,15 @@ public class DeckEditController extends Node implements GUI2DController {
 	 * 
 	 */
 	private void createDeckFromLibrary(Deck deck) {
-		if (deck.size() != GameParameters.DECK_SIZE)
-			JOptionPane.showMessageDialog(null, "Deck file is not valid!", "Error", JOptionPane.ERROR_MESSAGE);
-		else {
-			for (int i = 0; i < deck.size(); i++) {
-				String card = deck.get(i);
-				this.deckCards.add(card);
-			}
-
-			// Visual update:
-			this.updateDeckImages();
-			this.updateLibraryImages();
-			this.updateButtons();
+		for (int i = 0; i < deck.size(); i++) {
+			String card = deck.get(i);
+			this.deckCards.add(card);
 		}
+
+		// Visual update:
+		this.updateDeckImages();
+		this.updateLibraryImages();
+		this.updateButtons();
 	}
 
 	/**
@@ -822,7 +824,7 @@ public class DeckEditController extends Node implements GUI2DController {
 
 	private boolean checkDeckForCorrectness(List<String> deck) {
 		// Exactly 60 cards in the deck
-		if (deck.size() != 60)
+		if (deck.size() != GameParameters.DECK_SIZE)
 			return false;
 
 		List<Card> cardList = new ArrayList<>();

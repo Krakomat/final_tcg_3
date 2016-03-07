@@ -60,7 +60,8 @@ Patch 6.00
 		
 	Deck Editor:
 		- Music now stays the same as in the Lobby
-
+		- Decks that have locked cards can't be loaded anymore
+		
 Patch 5.0
 	New Features:
 		Gym Mode Expansion --> Now called 'Gym Challenge'
