@@ -232,6 +232,15 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			if (c instanceof PokemonCard)
 				costs = ((PokemonCardScript) c.getCardScript()).modifyRetreatCosts(costs, this.getCardOwner().getColor());
 		}
+
+		// Check if Celurean City Gym is in play and the active pokemons name contains "Misty"
+		if (costs > 0) {
+			if (gameModel.stadiumActive("00312")) {
+				if (pCard.getName().contains("Misty"))
+					costs--;
+			}
+		}
+
 		// Check Stadium for retreat costs:
 		if (gameModel.stadiumActive("00465"))
 			costs++;
@@ -247,15 +256,6 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 	 * @return
 	 */
 	public int modifyRetreatCosts(int retreatCosts, Color color) {
-		if (retreatCosts > 0) {
-			// Check if Celurean City Gym is in play and the active pokemons name contains "Misty"
-			Position stadium = gameModel.getPosition(PositionID.STADIUM);
-			if (!stadium.isEmpty() && stadium.getTopCard().getCardId().equals("00312")) {
-				Card activePokemon = gameModel.getPosition(PositionID.getActivePokemon(color)).getTopCard();
-				if (activePokemon.getName().contains("Misty"))
-					return retreatCosts - 1;
-			}
-		}
 		return retreatCosts;
 	}
 
@@ -305,6 +305,18 @@ public abstract class PokemonCardScript extends CardScript implements Cloneable 
 			if (c instanceof PokemonCard)
 				costs = ((PokemonCardScript) c.getCardScript()).modifyRetreatCosts(costs, this.getCardOwner().getColor());
 		}
+
+		// Check if Celurean City Gym is in play and the active pokemons name contains "Misty"
+		if (costs > 0) {
+			if (gameModel.stadiumActive("00312")) {
+				if (pCard.getName().contains("Misty"))
+					costs--;
+			}
+		}
+
+		// Check Stadium for retreat costs:
+		if (gameModel.stadiumActive("00465"))
+			costs++;
 
 		if (costs > 0) {
 			List<Element> elementCosts = new ArrayList<>();
