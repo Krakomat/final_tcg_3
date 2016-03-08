@@ -3,6 +3,7 @@ package model.scripting.teamRocket;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Element;
 import model.enums.PokemonCondition;
@@ -35,11 +36,12 @@ public class Script_00463_RocketsSnorlax extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	public void pokemonIsDamaged(int turnNumber, int damage, PositionID source) {
-		if (RestlessSleepCanBeExecuted()) {
-			if (source != null)
-				this.RestlessSleep(source);
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
+		if (RestlessSleepCanBeExecuted() && defender == this.getCurrentPositionID()) {
+			if (attacker != null && attacker.getCurrentPosition() != null)
+				this.RestlessSleep(attacker.getCurrentPosition().getPositionID());
 		}
+		return damage;
 	}
 
 	private boolean RestlessSleepCanBeExecuted() {

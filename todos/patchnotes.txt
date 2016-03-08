@@ -45,6 +45,7 @@ Patch 6.00
 		- 00384_KogasDitto: Fixed a bug, where Koga's Ditto would be knocked out immediately as soon as it is being set on the bench
 		- 00312_CelureanCityGym: Fixed a bug, where the retreat costs would be reduced to 0 automatically
 		- 00329_LtSurge: Fixed a bug, where the new pokemon could be evolved in the same turn
+		- 00463_RocketsSnorlax: Restless Sleep now is also triggered when Rocket's Snorlax has been knocked out
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
