@@ -44,6 +44,7 @@ public class Script_00329_LtSurge extends TrainerCardScript {
 
 		gameModel.getAttackAction().movePokemonToPosition(ownActive(), benchPosition);
 		gameModel.getAttackAction().moveCard(ownHand(), ownActive(), c.getGameID(), true);
+		c.setPlayedInTurn(gameModel.getTurnNumber());
 		gameModel.sendGameModelToAllPlayers("");
 	}
 

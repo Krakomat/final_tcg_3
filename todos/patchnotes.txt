@@ -44,6 +44,7 @@ Patch 6.00
 		- 00132_Rapidash: Fixed the attack costs of "Stomp" and "Agility"
 		- 00384_KogasDitto: Fixed a bug, where Koga's Ditto would be knocked out immediately as soon as it is being set on the bench
 		- 00312_CelureanCityGym: Fixed a bug, where the retreat costs would be reduced to 0 automatically
+		- 00329_LtSurge: Fixed a bug, where the new pokemon could be evolved in the same turn
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
