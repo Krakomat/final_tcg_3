@@ -13,39 +13,39 @@ Patch 6.00
 		- Changed the starting deck for new accounts
 		- Fixed a bug where ResistanceGym would always be active
 		- Fixed a game crash regarding the getCards() method of the class Position
-		- 00473_MasterBall: Fixed a crash bug
-		- 00459_RocketsHitmonchan: Crosscounter works now even if Rocket's Hitmonchan is knocked out
-		- 00459_RocketsMoltres: Fire Wall works now even if Rocket's Moltres is knocked out
-		- 00231_DarkWartortle: Mirror Shell works now even if Dark Wartortle is knocked out
-		- 00197_Recycle: Is now properly being discarded
-		- 00139_Eevee: Tail Wag should work as intended now
-		- 00149_Rhyhorn: Leer should work as intended now
-		- 00078_Aufwisch: Fixed a bug, where the scooped up cards was moved to the wrong position
-		- 00075_Göre: Fixed a deadlock
-		- 00250_Psyduck: Fixed Water Gun attack
 		- 00002_Turtok: Fixed Water Gun attack
 		- 00013_Quappo: Fixed Water Gun attack
 		- 00059_Quapsel: Fixed Water Gun attack
+		- 00075_Göre: Fixed a deadlock
+		- 00078_Aufwisch: Fixed a bug, where the scooped up cards was moved to the wrong position
 		- 00116_Vaporeon: Fixed Water Gun attack
+		- 00118_Victreebel: Fixed a game crash
+		- 00132_Rapidash: Fixed the attack costs of "Stomp" and "Agility"
+		- 00139_Eevee: Tail Wag should work as intended now
+		- 00149_Rhyhorn: Leer should work as intended now
 		- 00161_Lapras: Fixed Water Gun attack
 		- 00176_Omastar: Fixed Water Gun attack
 		- 00178_Seadra: Fixed Water Gun attack
 		- 00188_Omanyte: Fixed Water Gun attack
+		- 00197_Recycle: Is now properly being discarded
 		- 00202_DarkBlastoise: Fixed Water Gun attack
-		- 00304_MistysStarmie: Fixed Water Gun attack
+		- 00231_DarkWartortle: Mirror Shell works now even if Dark Wartortle is knocked out
+		- 00250_Psyduck: Fixed Water Gun attack
 		- 00263_FullHealEnergy: Fixed a bug, where the full heal is not being send to the clients
 		- 00283_BrocksSandshrew: Fixed a game crash
-		- 00118_Victreebel: Fixed a game crash
-		- 00327_LtSurgesFearow: Fixed a game crash
+		- 00304_MistysStarmie: Fixed Water Gun attack
+		- 00312_CelureanCityGym: Fixed a bug, where the retreat costs would be reduced to 0 automatically
 		- 00322_MistysSeel: Fixed a game crash
+		- 00327_LtSurgesFearow: Fixed a game crash
+		- 00329_LtSurge: Fixed a bug, where the new pokemon could be evolved in the same turn
+		- 00384_KogasDitto: Fixed a bug, where Koga's Ditto would be knocked out immediately as soon as it is being set on the bench
 		- 00410_SabrinasGastly: Fixed a game crash
 		- 00417_SabrinasGengar: Fixed a game crash
 		- 00421_SabrinasJynx: Fixed a game crash
-		- 00132_Rapidash: Fixed the attack costs of "Stomp" and "Agility"
-		- 00384_KogasDitto: Fixed a bug, where Koga's Ditto would be knocked out immediately as soon as it is being set on the bench
-		- 00312_CelureanCityGym: Fixed a bug, where the retreat costs would be reduced to 0 automatically
-		- 00329_LtSurge: Fixed a bug, where the new pokemon could be evolved in the same turn
+		- 00459_RocketsHitmonchan: Crosscounter works now even if Rocket's Hitmonchan is knocked out
+		- 00460_RocketsMoltres: Fire Wall works now even if Rocket's Moltres is knocked out
 		- 00463_RocketsSnorlax: Restless Sleep now is also triggered when Rocket's Snorlax has been knocked out
+		- 00473_MasterBall: Fixed a crash bug
 		
 	Gym Challenge:
 		- Now remembers the last entered gym when leaving a gym
