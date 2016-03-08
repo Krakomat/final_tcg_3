@@ -64,6 +64,7 @@ Patch 6.00
 	Deck Editor:
 		- Music now stays the same as in the Lobby
 		- Decks that have locked cards can't be loaded anymore
+		- Fixed a bug, where cards could be right-clicked while a load/save deck panel was open
 		
 Patch 5.0
 	New Features:

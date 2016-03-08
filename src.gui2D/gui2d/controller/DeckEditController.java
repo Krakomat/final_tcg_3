@@ -300,18 +300,20 @@ public class DeckEditController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					Image2D self = this;
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
-							viewer.setVisible(true);
-							List<Card> cardList = new ArrayList<>();
-							cardList.add(Database.createCard(self.getCardId()));
-							viewer.setData("", cardList);
-							GUI2D.getInstance().addToUpdateQueue(viewer);
-						}
-					}).start();
+					if (!buttonClicked) {
+						Image2D self = this;
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+								viewer.setVisible(true);
+								List<Card> cardList = new ArrayList<>();
+								cardList.add(Database.createCard(self.getCardId()));
+								viewer.setData("", cardList);
+								GUI2D.getInstance().addToUpdateQueue(viewer);
+							}
+						}).start();
+					}
 				}
 			};
 			deckImage.setLocalTranslation(screenWidth * 0.70f + (deckImageWidth + deckImageBorder) * (i % 6), screenHeight * 0.85f - (deckImageHeight + deckImageBorder) * (i / 6),
@@ -337,18 +339,20 @@ public class DeckEditController extends Node implements GUI2DController {
 
 				@Override
 				public void mouseSelectRightClick() {
-					Image2D self = this;
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
-							viewer.setVisible(true);
-							List<Card> cardList = new ArrayList<>();
-							cardList.add(Database.createCard(self.getCardId()));
-							viewer.setData("", cardList);
-							GUI2D.getInstance().addToUpdateQueue(viewer);
-						}
-					}).start();
+					if (!buttonClicked) {
+						Image2D self = this;
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								CardViewer viewer = GUI2D.getInstance().getIngameController().getCardViewer();
+								viewer.setVisible(true);
+								List<Card> cardList = new ArrayList<>();
+								cardList.add(Database.createCard(self.getCardId()));
+								viewer.setData("", cardList);
+								GUI2D.getInstance().addToUpdateQueue(viewer);
+							}
+						}).start();
+					}
 				}
 			};
 			libraryImage.setLocalTranslation(screenWidth * 0.05f + (libraryImageWidth + libraryImageBorder) * (i % 7),
@@ -505,7 +509,10 @@ public class DeckEditController extends Node implements GUI2DController {
 		this.updateButtons();
 	}
 
+	private boolean buttonClicked = false;
+
 	protected void loadDeckButtonClicked() {
+		buttonClicked = true;
 		Deck loadedDeck = loadDeckDialog();
 		if (loadedDeck != null) {
 			this.clearDeck();
@@ -513,6 +520,7 @@ public class DeckEditController extends Node implements GUI2DController {
 			this.account.setDeck(loadedDeck);
 			Account.saveAccount(this.account);
 		}
+		buttonClicked = false;
 	}
 
 	public Deck loadDeckDialog() {
@@ -570,6 +578,7 @@ public class DeckEditController extends Node implements GUI2DController {
 	}
 
 	protected void saveDeckButtonClicked() {
+		buttonClicked = true;
 		String deckName = GUI2D.getInstance().userTypesName("Name", "Type in a name:");
 		if (deckName != null) {
 			Deck d = new Deck();
@@ -579,6 +588,7 @@ public class DeckEditController extends Node implements GUI2DController {
 			this.account.setDeck(d);
 			Account.saveAccount(this.account);
 		}
+		buttonClicked = false;
 	}
 
 	protected void pageRightButtonClicked() {
