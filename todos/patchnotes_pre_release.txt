@@ -1,4 +1,4 @@
-Patch 6.00
+Patch 6.00 - Release
 	New Features:
 		Draft Tournament:
 			- Create your own deck by choosing from a preset set of cards:

@@ -32,7 +32,7 @@ public class Script_00197_Recycle extends TrainerCardScript {
 		if (c == Coin.HEADS) {
 			// Choose a card from the discard pile:
 			List<Card> cards = gameModel.getPosition(ownDiscardPile()).getCards();
-			Card chosenCard = player.playerChoosesCards(cards, 1, true, "Choose a pokemon card from your discard pile!").get(0);
+			Card chosenCard = player.playerChoosesCards(cards, 1, true, "Choose a card from your discard pile!").get(0);
 
 			// Message clients:
 			gameModel.sendCardMessageToAllPlayers(player.getName() + " puts " + chosenCard.getName() + " on his deck!", chosenCard, "");
@@ -41,8 +41,8 @@ public class Script_00197_Recycle extends TrainerCardScript {
 			gameModel.getAttackAction().moveCard(ownDiscardPile(), ownDeck(), chosenCard.getGameID(), true);
 
 			gameModel.sendGameModelToAllPlayers("");
-		}
-		gameModel.sendTextMessageToAllPlayers("Recycle was not successful!", "");
+		} else
+			gameModel.sendTextMessageToAllPlayers("Recycle was not successful!", "");
 
 		// Discard trainer card:
 		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
