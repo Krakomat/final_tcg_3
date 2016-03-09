@@ -41,6 +41,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 	protected CardScriptFactory cardScriptFactory;
 	protected GameModelParameters gameModelParameters;
 	private PokemonGameManagerImpl pokemonGameManager;
+	private List<String> matchHistory;
 
 	/**
 	 * The given player initializes a new PokemonGameModel with the given id.
@@ -60,10 +61,12 @@ public class PokemonGameModelImpl implements PokemonGame {
 		attackAction = new AttackAction(this);
 		cardScriptFactory = CardScriptFactory.getInstance();
 		gameModelParameters = new GameModelParameters();
+		matchHistory = new ArrayList<>();
 	}
 
 	@Override
 	public void initNewGame() {
+		matchHistory = new ArrayList<>();
 		this.gameField = new GameField();
 		this.cardGameIDCounter = 0;
 		List<Card> blueCards = getDeckInstance(playerBlue.getDeck());
@@ -221,7 +224,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		System.out.println("Finished Waiting");
+		// System.out.println("Finished Waiting");
 
 		// Both players have chosen:
 		blueChosenActive.setPlayedInTurn(0);
@@ -594,9 +597,9 @@ public class PokemonGameModelImpl implements PokemonGame {
 		else
 			this.playerOnTurn = playerBlue;
 		this.sendTextMessageToPlayers(getPlayerList(), playerOnTurn.getName() + " 's turn...", Sounds.ON_TURN);
-		this.gameModelParameters.setTurnNumber(this.gameModelParameters.getTurnNumber() + 1); // Increase
-																								// turn
-																								// number
+
+		// Increase turn number:
+		this.gameModelParameters.setTurnNumber(this.gameModelParameters.getTurnNumber() + 1);
 
 		// Draw a card or end game if the player is not able to draw:
 		if (this.attackAction.playerDrawsCards(1, playerOnTurn)) {
@@ -821,16 +824,19 @@ public class PokemonGameModelImpl implements PokemonGame {
 	// Methods:-------------------------------------------------------------------
 	@Override
 	public void sendTextMessageToAllPlayers(String message, String sound) {
+		this.matchHistory.add(message);
 		this.sendTextMessageToPlayers(this.getPlayerList(), message, sound);
 	}
 
 	@Override
 	public void sendCardMessageToAllPlayers(String message, List<Card> cardList, String sound) {
+		this.matchHistory.add(message);
 		this.sendCardMessageToPlayers(this.getPlayerList(), message, cardList, sound);
 	}
 
 	@Override
 	public void sendCardMessageToAllPlayers(String message, Card card, String sound) {
+		this.matchHistory.add(message);
 		playerBlue.playerReceivesCardMessage(message, card, sound);
 		playerRed.playerReceivesCardMessage(message, card, sound);
 	}
@@ -869,11 +875,13 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	private void sendTextMessageToPlayers(List<Player> playerList, String message, String sound) {
+		this.matchHistory.add(message);
 		for (Player p : playerList)
 			p.playerReceivesGameTextMessage(message, sound);
 	}
 
 	private void sendCardMessageToPlayers(List<Player> playerList, String message, List<Card> cardList, String sound) {
+		this.matchHistory.add(message);
 		for (Player p : playerList)
 			p.playerReceivesCardMessage(message, cardList, sound);
 	}
@@ -930,7 +938,6 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	public GameModelUpdate getGameModelForPlayer(Player player) {
-		System.out.println("Get Game Model for " + player.getName());
 		GameModelUpdate gameModelUpdate = new GameModelUpdate();
 		gameModelUpdate.setGameModelParameters(gameModelParameters);
 
@@ -1131,5 +1138,9 @@ public class PokemonGameModelImpl implements PokemonGame {
 		if (this.getCurrentStadium() != null && this.getCurrentStadium().getCardId().equals(stadiumCardID))
 			return true;
 		return false;
+	}
+
+	public List<String> getMatchHistory() {
+		return matchHistory;
 	}
 }

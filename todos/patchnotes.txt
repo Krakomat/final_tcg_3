@@ -8,7 +8,11 @@ Patch 6.00
 			- Players fight 3 opponents in a row with their drafted deck
 			- Only if all 3 opponents are defeated, the player wins Draft Mode
 			- You can save your drafted deck via the safe-button in the draft menu
-			
+		Error Reports:
+			- Once the system recognizes an error, it will create a file, which contains the match history and the specific error
+			- A popup window will be displayed to indicate that something went wrong
+			- Players can then choose to close the game
+			- The error report is named after the current time and stored in the folder data/ErrorReports/
 	Game:
 		- Changed the starting deck for new accounts
 		- Fixed a bug where ResistanceGym would always be active

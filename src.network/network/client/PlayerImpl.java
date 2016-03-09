@@ -96,7 +96,6 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	@Override
 	public void playerUpdatesGameModel(GameModelUpdate gameModelUpdate, String sound) {
 		if (this.localGameModel == null) {
-			System.out.println("Local game model = null --> Create new game model!");
 			this.localGameModel = new LocalPokemonGameModel(gameModelUpdate, this);
 		}
 		this.localGameModel = this.localGameModel.updateGameModel(gameModelUpdate);
@@ -334,7 +333,7 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public void createGame() {
-		System.out.println("[Server] Starting server...!");
+		// System.out.println("[Server] Starting server...!");
 
 		ServerMain main = new ServerMain(this.prizeCards);
 		new Thread(new Runnable() {
@@ -364,13 +363,12 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 
 	@Override
 	public void createLocalGame(int prizeCards) {
-		System.out.println("[Server] Starting server...!");
-
-		System.out.println("[Server] Calling start...!");
+		// System.out.println("[Server] Starting server...!");
+		// System.out.println("[Server] Calling start...!");
 		PokemonGameManager server = PokemonGameManagerFactory.createNewGame(name, ServerMain.GAME_PW, prizeCards);
-		System.out.println("[Server] Start sucessful!");
+		// System.out.println("[Server] Start sucessful!");
 
-		System.out.println("[Server] Started!");
+		// System.out.println("[Server] Started!");
 
 		this.setServer(server);
 

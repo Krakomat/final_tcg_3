@@ -1,7 +1,14 @@
 package network.server;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import com.jme3.network.HostedConnection;
 
@@ -91,8 +98,13 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 			Thread t = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					gameModel.initNewGame();
-					runGame();
+					try {
+						gameModel.initNewGame();
+						runGame();
+					} catch (Exception e) {
+						e.printStackTrace();
+						printErrorReport(gameModel, e);
+					}
 				}
 			});
 			t.setName(Threads.GAME_THREAD.toString());
@@ -102,6 +114,50 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 			System.err.println("You called initNewGame, but there is at least one player missing");
 
 		return false;
+	}
+
+	protected void printErrorReport(PokemonGame gameModel, Exception error) {
+		Calendar cal = Calendar.getInstance();
+		String fileName = "";
+		fileName = fileName + cal.get(Calendar.YEAR);
+		fileName = fileName + "_" + cal.get(Calendar.MONTH);
+		fileName = fileName + "_" + cal.get(Calendar.DAY_OF_MONTH);
+		fileName = fileName + "_" + cal.get(Calendar.HOUR_OF_DAY);
+		fileName = fileName + "_" + cal.get(Calendar.MINUTE);
+		fileName = fileName + "_" + cal.get(Calendar.SECOND);
+		fileName = fileName + "_" + cal.get(Calendar.MILLISECOND);
+		File file = new File("data/ErrorReports/" + fileName + ".txt");
+		try {
+			FileWriter writer = new FileWriter(file, true);
+
+			for (String s : ((PokemonGameModelImpl) gameModel).getMatchHistory()) {
+				writer.write(s);
+				writer.write(System.getProperty("line.separator"));
+			}
+			writer.write(System.getProperty("line.separator"));
+
+			writer.write(error.toString());
+			writer.write(System.getProperty("line.separator"));
+			for (StackTraceElement element : error.getStackTrace()) {
+				writer.write(element.toString());
+				writer.write(System.getProperty("line.separator"));
+			}
+
+			writer.flush();
+			writer.close();
+
+			JOptionPane jop = new JOptionPane();
+			jop.setMessage("An Error has occured! See the error report " + fileName + "! Close game?");
+			jop.setOptionType(JOptionPane.YES_NO_OPTION);
+			JDialog dialog = jop.createDialog(null, "Error");
+			dialog.setAlwaysOnTop(true);
+			dialog.setModal(true);
+			dialog.setVisible(true);
+			if ((int) jop.getValue() == JOptionPane.YES_OPTION)
+				System.exit(0);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -218,36 +274,42 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 	@Deprecated
 	public List<String> getPlayerActions(int positionIndex, PositionID position, Player player) {
-		if (position == PositionID.STADIUM) {
-			List<String> actions = new ArrayList<>();
-			Position pos = gameModel.getPosition(position);
-			if (pos.isEmpty())
+		try {
+			if (position == PositionID.STADIUM) {
+				List<String> actions = new ArrayList<>();
+				Position pos = gameModel.getPosition(position);
+				if (pos.isEmpty())
+					return actions;
+				TrainerCard stadiumCard = (TrainerCard) pos.getTopCard();
+				TrainerCardScript stadiumScript = (TrainerCardScript) stadiumCard.getCardScript();
+				if (stadiumScript.stadiumCanBeActivatedOnField(player)) {
+					actions.add(PlayerAction.ACTIVATE_STADIUM_EFFECT.toString());
+					return actions;
+				}
 				return actions;
-			TrainerCard stadiumCard = (TrainerCard) pos.getTopCard();
-			TrainerCardScript stadiumScript = (TrainerCardScript) stadiumCard.getCardScript();
-			if (stadiumScript.stadiumCanBeActivatedOnField(player)) {
-				actions.add(PlayerAction.ACTIVATE_STADIUM_EFFECT.toString());
-				return actions;
+			} else {
+				boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
+				Card c = handCard ? gameModel.getPosition(position).getCardAtIndex(positionIndex) : gameModel.getPosition(position).getTopCard();
+				ArrayList<PlayerAction> actionList = new ArrayList<PlayerAction>();
+				Position pos = gameModel.getPosition(position);
+				// If player on turn and position doesn't belong to enemy
+				boolean playerOnTurn = gameModel.getPlayerOnTurn().getColor() == player.getColor();
+				boolean playerOnTurnBlue = gameModel.getPlayerOnTurn().getColor() == Color.BLUE;
+				boolean playerOnTurnRed = gameModel.getPlayerOnTurn().getColor() == Color.RED;
+				boolean positionColorBlue = pos.getColor() == Color.BLUE;
+				if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
+					actionList = getActionsForSelectedPosition(actionList, c, position, player);
+				}
+				ArrayList<String> stringActionList = new ArrayList<String>();
+				for (int i = 0; i < actionList.size(); i++)
+					stringActionList.add(actionList.get(i).toString());
+				return stringActionList;
 			}
-			return actions;
-		} else {
-			boolean handCard = position == PositionID.BLUE_HAND || position == PositionID.RED_HAND;
-			Card c = handCard ? gameModel.getPosition(position).getCardAtIndex(positionIndex) : gameModel.getPosition(position).getTopCard();
-			ArrayList<PlayerAction> actionList = new ArrayList<PlayerAction>();
-			Position pos = gameModel.getPosition(position);
-			// If player on turn and position doesn't belong to enemy
-			boolean playerOnTurn = gameModel.getPlayerOnTurn().getColor() == player.getColor();
-			boolean playerOnTurnBlue = gameModel.getPlayerOnTurn().getColor() == Color.BLUE;
-			boolean playerOnTurnRed = gameModel.getPlayerOnTurn().getColor() == Color.RED;
-			boolean positionColorBlue = pos.getColor() == Color.BLUE;
-			if (playerOnTurn && ((positionColorBlue && playerOnTurnBlue) || (!positionColorBlue && playerOnTurnRed))) {
-				actionList = getActionsForSelectedPosition(actionList, c, position, player);
-			}
-			ArrayList<String> stringActionList = new ArrayList<String>();
-			for (int i = 0; i < actionList.size(); i++)
-				stringActionList.add(actionList.get(i).toString());
-			return stringActionList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			printErrorReport(gameModel, e);
 		}
+		return null;
 	}
 
 	/**
@@ -320,35 +382,40 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	public void playerPlaysCard(Player player, int index) {
-		// Get the hand position:
-		Position handPos = null;
-		if (player.getColor() == Color.BLUE)
-			handPos = gameModel.getPosition(PositionID.BLUE_HAND);
-		else
-			handPos = gameModel.getPosition(PositionID.RED_HAND);
+		try {
+			// Get the hand position:
+			Position handPos = null;
+			if (player.getColor() == Color.BLUE)
+				handPos = gameModel.getPosition(PositionID.BLUE_HAND);
+			else
+				handPos = gameModel.getPosition(PositionID.RED_HAND);
 
-		// Get the card:
-		Card c = handPos.getCardAtIndex(index);
+			// Get the card:
+			Card c = handPos.getCardAtIndex(index);
 
-		// Check if card is allowed to be played:
-		if (c.getCardScript().canBePlayedFromHand() == null)
-			gameModel.playerLoses(player);
+			// Check if card is allowed to be played:
+			if (c.getCardScript().canBePlayedFromHand() == null)
+				gameModel.playerLoses(player);
 
-		// If card is a trainer card then send card message beforehand,
-		// so scripts don't need to implement this:
-		if (c instanceof TrainerCard)
-			gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
+			// If card is a trainer card then send card message beforehand,
+			// so scripts don't need to implement this:
+			if (c instanceof TrainerCard)
+				gameModel.sendCardMessageToAllPlayers(player.getName() + " plays " + c.getName(), c, Sounds.ACTIVATE_TRAINER);
 
-		// Set the turn number for the card:
-		c.setPlayedInTurn(gameModel.getTurnNumber());
+			// Set the turn number for the card:
+			c.setPlayedInTurn(gameModel.getTurnNumber());
 
-		// Execute the card script:
-		c.getCardScript().playFromHand();
+			// Execute the card script:
+			c.getCardScript().playFromHand();
 
-		gameModel.sendGameModelToAllPlayers("");
-		gameModel.cleanDefeatedPositions();
+			gameModel.sendGameModelToAllPlayers("");
+			gameModel.cleanDefeatedPositions();
 
-		moveMade = true;
+			moveMade = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			printErrorReport(gameModel, e);
+		}
 	}
 
 	@Override
@@ -356,159 +423,181 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// Get the script:
-				PokemonCard active = null;
-				if (player.getColor() == Color.BLUE)
-					active = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
-				else
-					active = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
-				PokemonCardScript pScript = (PokemonCardScript) active.getCardScript();
+				try {
+					// Get the script:
+					PokemonCard active = null;
+					if (player.getColor() == Color.BLUE)
+						active = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
+					else
+						active = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
+					PokemonCardScript pScript = (PokemonCardScript) active.getCardScript();
 
-				// Check is retreat is allowed:
-				if (!pScript.retreatCanBeExecuted())
-					gameModel.playerLoses(player);
+					// Check is retreat is allowed:
+					if (!pScript.retreatCanBeExecuted())
+						gameModel.playerLoses(player);
 
-				// Retreat:
-				pScript.executeRetreat();
+					// Retreat:
+					pScript.executeRetreat();
 
-				moveMade = true;
+					moveMade = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+					printErrorReport(gameModel, e);
+				}
 			}
 		}).start();
 	}
 
 	@Override
 	public List<String> getAttacksForPosition(PositionID position) {
-		Position pos = this.gameModel.getPosition(position);
-		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
-			return new ArrayList<String>(); // position empty or no arena
-											// position
+		try {
+			Position pos = this.gameModel.getPosition(position);
+			if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
+				return new ArrayList<String>(); // position empty or no arena
+												// position
 
-		// Get the attacks from the card script:
-		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
-		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
-		return script.getAttackNames();
+			// Get the attacks from the card script:
+			PokemonCard pokemon = (PokemonCard) pos.getTopCard();
+			PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
+			return script.getAttackNames();
+		} catch (Exception e) {
+			e.printStackTrace();
+			printErrorReport(gameModel, e);
+		}
+		return null;
 	}
 
 	public void executeAttack(Player player, String attackName) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// Get the script:
-				PokemonCard active = null;
-				if (player.getColor() == Color.BLUE)
-					active = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
-				else
-					active = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
-				PokemonCardScript pScript = (PokemonCardScript) active.getCardScript();
+				try {
+					// Get the script:
+					PokemonCard active = null;
+					if (player.getColor() == Color.BLUE)
+						active = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
+					else
+						active = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
+					PokemonCardScript pScript = (PokemonCardScript) active.getCardScript();
 
-				// Get the attack name:
-				if (pScript.getAttackNumber(attackName) == -1)
-					throw new IllegalArgumentException("Error: attack name " + attackName + " is not valid in executeAttack()");
+					// Get the attack name:
+					if (pScript.getAttackNumber(attackName) == -1)
+						throw new IllegalArgumentException("Error: attack name " + attackName + " is not valid in executeAttack()");
 
-				// Check is attacking is allowed:
-				if (!pScript.attackCanBeExecuted(attackName))
-					gameModel.playerLoses(player);
+					// Check is attacking is allowed:
+					if (!pScript.attackCanBeExecuted(attackName))
+						gameModel.playerLoses(player);
 
-				// Check if pokemon is confused and flip a coin, if attacking is
-				// allowed or the pokemon hurts itself:
-				boolean attackAllowed = true;
-				if (active.hasCondition(PokemonCondition.CONFUSED)) {
-					gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!", "");
-					Coin c = gameModel.getAttackAction().flipACoin();
-					if (c == Coin.TAILS) {
-						attackAllowed = false;
-						// Damage attacker:
-						gameModel.sendTextMessageToAllPlayers(active.getName() + " hurts itself!", "");
-						gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
-								active.getCurrentPosition().getPositionID(), 20, true);
+					// Check if pokemon is confused and flip a coin, if attacking is
+					// allowed or the pokemon hurts itself:
+					boolean attackAllowed = true;
+					if (active.hasCondition(PokemonCondition.CONFUSED)) {
+						gameModel.sendTextMessageToAllPlayers("Coinflip: On TAILS " + active.getName() + " hurts itself!", "");
+						Coin c = gameModel.getAttackAction().flipACoin();
+						if (c == Coin.TAILS) {
+							attackAllowed = false;
+							// Damage attacker:
+							gameModel.sendTextMessageToAllPlayers(active.getName() + " hurts itself!", "");
+							gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
+									active.getCurrentPosition().getPositionID(), 20, true);
+						}
 					}
-				}
 
-				// Check if pokemon is blind and flip a coin, if attacking is
-				// allowed:
-				if (attackAllowed && active.hasCondition(PokemonCondition.BLIND)) {
-					gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails", "");
-					Coin c = gameModel.getAttackAction().flipACoin();
-					if (c == Coin.TAILS)
-						attackAllowed = false;
-				}
+					// Check if pokemon is blind and flip a coin, if attacking is
+					// allowed:
+					if (attackAllowed && active.hasCondition(PokemonCondition.BLIND)) {
+						gameModel.sendTextMessageToAllPlayers("Coinflip: " + active.getName() + " can't attack when tails", "");
+						Coin c = gameModel.getAttackAction().flipACoin();
+						if (c == Coin.TAILS)
+							attackAllowed = false;
+					}
 
-				if (attackAllowed) {
-					// Check Vermillion City Gym:
-					boolean selfDamage = false;
-					if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342")
-							&& active.getName().contains("Lt. Surge")) {
-						boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
-						if (answer) {
-							gameModel.sendCardMessageToAllPlayers(player.getName() + " activates the effect of Vermillion City Gym!", Database.createCard("00342"),
-									Sounds.ACTIVATE_TRAINER);
-							if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
-								gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(true);
-								gameModel.sendTextMessageToAllPlayers("Attacks from " + active.getName() + " do 10 more damage this turn!", "");
-							} else {
-								selfDamage = true;
-								gameModel.sendTextMessageToAllPlayers(active.getName() + " will hurt itself after attacking!", "");
+					if (attackAllowed) {
+						// Check Vermillion City Gym:
+						boolean selfDamage = false;
+						if (!gameModel.getPosition(PositionID.STADIUM).isEmpty() && gameModel.getPosition(PositionID.STADIUM).getTopCard().getCardId().equals("00342")
+								&& active.getName().contains("Lt. Surge")) {
+							boolean answer = player.playerDecidesYesOrNo("Do you want to use the effect of Vermillion City Gym?");
+							if (answer) {
+								gameModel.sendCardMessageToAllPlayers(player.getName() + " activates the effect of Vermillion City Gym!", Database.createCard("00342"),
+										Sounds.ACTIVATE_TRAINER);
+								if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+									gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(true);
+									gameModel.sendTextMessageToAllPlayers("Attacks from " + active.getName() + " do 10 more damage this turn!", "");
+								} else {
+									selfDamage = true;
+									gameModel.sendTextMessageToAllPlayers(active.getName() + " will hurt itself after attacking!", "");
+								}
 							}
 						}
-					}
 
-					// Check Koga's Ninja Trick on the defending pokemon:
-					// Get the defending pokemon:
-					PokemonCard defender = null;
-					Player defendingPlayer = null;
-					if (player.getColor() == Color.BLUE) {
-						defender = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
-						defendingPlayer = gameModel.getPlayerRed();
-					} else {
-						defender = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
-						defendingPlayer = gameModel.getPlayerBlue();
-					}
-					if (defender.hasCondition(PokemonCondition.KOGAS_NINJA_TRICK) && gameModel.getFullBenchPositions(defendingPlayer.getColor()).size() > 0) {
-						boolean answer = defendingPlayer.playerDecidesYesOrNo(active.getName() + " attacks with " + attackName + "! Do you want to use Koga's Ninja Trick?");
-						if (answer) {
-							PositionID benchPos = defendingPlayer.playerChoosesPositions(gameModel.getFullBenchPositions(defendingPlayer.getColor()), 1, true,
-									"Choose a pokemon to swap with your active pokemon!").get(0);
+						// Check Koga's Ninja Trick on the defending pokemon:
+						// Get the defending pokemon:
+						PokemonCard defender = null;
+						Player defendingPlayer = null;
+						if (player.getColor() == Color.BLUE) {
+							defender = (PokemonCard) gameModel.getPosition(PositionID.RED_ACTIVEPOKEMON).getTopCard();
+							defendingPlayer = gameModel.getPlayerRed();
+						} else {
+							defender = (PokemonCard) gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
+							defendingPlayer = gameModel.getPlayerBlue();
+						}
+						if (defender.hasCondition(PokemonCondition.KOGAS_NINJA_TRICK) && gameModel.getFullBenchPositions(defendingPlayer.getColor()).size() > 0) {
+							boolean answer = defendingPlayer.playerDecidesYesOrNo(active.getName() + " attacks with " + attackName + "! Do you want to use Koga's Ninja Trick?");
+							if (answer) {
+								PositionID benchPos = defendingPlayer.playerChoosesPositions(gameModel.getFullBenchPositions(defendingPlayer.getColor()), 1, true,
+										"Choose a pokemon to swap with your active pokemon!").get(0);
 
-							// Message clients:
-							Card bench = gameModel.getPosition(benchPos).getTopCard();
-							List<Card> cardList = new ArrayList<>();
-							cardList.add(defender);
-							cardList.add(bench);
-							gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + defender.getName() + " with " + bench.getName() + "!", cardList, "");
+								// Message clients:
+								Card bench = gameModel.getPosition(benchPos).getTopCard();
+								List<Card> cardList = new ArrayList<>();
+								cardList.add(defender);
+								cardList.add(bench);
+								gameModel.sendCardMessageToAllPlayers(player.getName() + " swaps " + defender.getName() + " with " + bench.getName() + "!", cardList, "");
 
-							// Execute swap:
-							gameModel.getAttackAction().swapPokemon(benchPos, defender.getCurrentPosition().getPositionID());
+								// Execute swap:
+								gameModel.getAttackAction().swapPokemon(benchPos, defender.getCurrentPosition().getPositionID());
+							}
+						}
+
+						// Execute the attack:
+						gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
+						pScript.executeAttack(attackName);
+						gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(false);
+
+						// Do 10 damage to yourself:
+						if (selfDamage) {
+							gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
+									active.getCurrentPosition().getPositionID(), 10, true);
 						}
 					}
-
-					// Execute the attack:
-					gameModel.sendTextMessageToAllPlayers(active.getName() + " attacks with " + attackName, "");
-					pScript.executeAttack(attackName);
-					gameModel.getGameModelParameters().setVermillionCityGymAttackModifier(false);
-
-					// Do 10 damage to yourself:
-					if (selfDamage) {
-						gameModel.getAttackAction().inflictDamageToPosition(active.getElement(), active.getCurrentPosition().getPositionID(),
-								active.getCurrentPosition().getPositionID(), 10, true);
-					}
+					gameModel.cleanDefeatedPositions();
+					endTurn(player);
+				} catch (Exception e) {
+					e.printStackTrace();
+					printErrorReport(gameModel, e);
 				}
-				gameModel.cleanDefeatedPositions();
-				endTurn(player);
 			}
 		}).start();
 	}
 
 	@Override
 	public List<String> getPokePowerForPosition(PositionID posID) {
-		Position pos = this.gameModel.getPosition(posID);
-		if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
-			return new ArrayList<String>(); // position empty or no arena
-											// position
+		try {
+			Position pos = this.gameModel.getPosition(posID);
+			if (pos.isEmpty() || !(pos.getTopCard() instanceof PokemonCard))
+				return new ArrayList<String>(); // position empty or no arena
+												// position
 
-		// Get the pokemon power from the card script:
-		PokemonCard pokemon = (PokemonCard) pos.getTopCard();
-		PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
-		return script.getPokemonPowerNames();
+			// Get the pokemon power from the card script:
+			PokemonCard pokemon = (PokemonCard) pos.getTopCard();
+			PokemonCardScript script = (PokemonCardScript) pokemon.getCardScript();
+			return script.getPokemonPowerNames();
+		} catch (Exception e) {
+			e.printStackTrace();
+			printErrorReport(gameModel, e);
+		}
+		return null;
 	}
 
 	@Override
@@ -516,28 +605,33 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// Get the script:
-				PokemonCard pokemon = null;
-				if (player.getColor() == Color.BLUE)
-					pokemon = (PokemonCard) gameModel.getPosition(posID).getTopCard();
-				else
-					pokemon = (PokemonCard) gameModel.getPosition(posID).getTopCard();
-				PokemonCardScript pScript = (PokemonCardScript) pokemon.getCardScript();
+				try {
+					// Get the script:
+					PokemonCard pokemon = null;
+					if (player.getColor() == Color.BLUE)
+						pokemon = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+					else
+						pokemon = (PokemonCard) gameModel.getPosition(posID).getTopCard();
+					PokemonCardScript pScript = (PokemonCardScript) pokemon.getCardScript();
 
-				// Check the power name:
-				if (pScript.getPokemonPowerNumber(powerName) == -1)
-					throw new IllegalArgumentException("Error: attack name " + powerName + " is not valid in executePokemonPower()");
+					// Check the power name:
+					if (pScript.getPokemonPowerNumber(powerName) == -1)
+						throw new IllegalArgumentException("Error: attack name " + powerName + " is not valid in executePokemonPower()");
 
-				// Check is activating is allowed:
-				if (!pScript.pokemonPowerCanBeExecuted(powerName))
-					gameModel.playerLoses(player);
+					// Check is activating is allowed:
+					if (!pScript.pokemonPowerCanBeExecuted(powerName))
+						gameModel.playerLoses(player);
 
-				// Execute the power:
-				gameModel.sendCardMessageToAllPlayers(pokemon.getName() + " activates " + powerName + "!", pokemon, "");
-				pScript.executePokemonPower(powerName);
-				gameModel.sendGameModelToAllPlayers("");
+					// Execute the power:
+					gameModel.sendCardMessageToAllPlayers(pokemon.getName() + " activates " + powerName + "!", pokemon, "");
+					pScript.executePokemonPower(powerName);
+					gameModel.sendGameModelToAllPlayers("");
 
-				moveMade = true; // Let player make his next move
+					moveMade = true; // Let player make his next move
+				} catch (Exception e) {
+					e.printStackTrace();
+					printErrorReport(gameModel, e);
+				}
 			}
 		}).start();
 	}
@@ -547,19 +641,24 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// Get the script:
-				Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
-				TrainerCardScript stadiumScript = (TrainerCardScript) stadium.getCardScript();
+				try {
+					// Get the script:
+					Card stadium = gameModel.getPosition(PositionID.STADIUM).getTopCard();
+					TrainerCardScript stadiumScript = (TrainerCardScript) stadium.getCardScript();
 
-				// Check is activating is allowed:
-				if (!stadiumScript.stadiumCanBeActivatedOnField(player))
-					gameModel.playerLoses(player);
+					// Check is activating is allowed:
+					if (!stadiumScript.stadiumCanBeActivatedOnField(player))
+						gameModel.playerLoses(player);
 
-				// Execute the power:
-				gameModel.sendCardMessageToAllPlayers(player.getName() + " activates " + stadium.getName() + "!", stadium, "");
-				stadiumScript.executeStadiumActiveEffect(player);
+					// Execute the power:
+					gameModel.sendCardMessageToAllPlayers(player.getName() + " activates " + stadium.getName() + "!", stadium, "");
+					stadiumScript.executeStadiumActiveEffect(player);
 
-				moveMade = true; // Let player make his next move
+					moveMade = true; // Let player make his next move
+				} catch (Exception e) {
+					e.printStackTrace();
+					printErrorReport(gameModel, e);
+				}
 			}
 		}).start();
 	}
@@ -580,7 +679,13 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 
 	@Override
 	public GameModelUpdate getGameModelForPlayer(Player player, int version) {
-		return gameModel.getGameModelForPlayer(player);
+		try {
+			return gameModel.getGameModelForPlayer(player);
+		} catch (Exception e) {
+			e.printStackTrace();
+			printErrorReport(gameModel, e);
+		}
+		return null;
 	}
 
 	@Override
