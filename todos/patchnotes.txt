@@ -21,6 +21,7 @@ Patch 6.00
 		- 00116_Vaporeon: Fixed Water Gun attack
 		- 00118_Victreebel: Fixed a game crash
 		- 00132_Rapidash: Fixed the attack costs of "Stomp" and "Agility"
+		- 00132_Rapidash: Fixed tha damage of "Agility"
 		- 00139_Eevee: Tail Wag should work as intended now
 		- 00149_Rhyhorn: Leer should work as intended now
 		- 00161_Lapras: Fixed Water Gun attack

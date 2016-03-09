@@ -55,7 +55,7 @@ public class Script_00132_Rapidash extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
 
 		// Flip coin to check if active pokemon is protected:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + attackingPokemon.getName() + " protects itself from all effects!", "");
