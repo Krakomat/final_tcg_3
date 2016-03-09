@@ -1,0 +1,13 @@
+The game has started
+Each player shuffles his deck.
+Each player draws 7 cards.
+Each player lays down 4 price cards
+Coin shows 'Tails' - Computer begins.
+Computer 's turn...
+
+java.lang.NullPointerException
+network.server.PokemonGameManagerImpl.playerPlaysCard(PokemonGameManagerImpl.java:383)
+ai.util.AIUtilities.executeMove(AIUtilities.java:236)
+ai.treebot.TreeBot.makeMove(TreeBot.java:82)
+ai.interfaces.BotBorder$1.run(BotBorder.java:110)
+java.lang.Thread.run(Thread.java:745)
