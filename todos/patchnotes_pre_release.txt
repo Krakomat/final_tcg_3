@@ -1,4 +1,4 @@
-Patch 6.00 - Stable Release
+Patch 6.00 - Stable Release - March 9th 2016
 	New Features:
 		Draft Tournament:
 			- Create your own deck by choosing from a preset set of cards:
