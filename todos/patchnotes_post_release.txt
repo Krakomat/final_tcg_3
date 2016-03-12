@@ -4,5 +4,6 @@ Patch 1.1
 
 	Cards:
 		- 00197_Recycle: Fixed some text bugs
+		- 00460_RocketsMoltres: Fire Wall should work properly now
 		
 (c) 2016

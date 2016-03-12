@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.database.PokemonCard;
 import model.enums.Element;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.interfaces.PokemonGame;
 import model.scripting.abstracts.PokemonCardScript;
@@ -34,5 +35,6 @@ public class Script_00460_RocketsMoltres extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
+		gameModel.getAttackAction().inflictConditionToPosition(attacker, PokemonCondition.FIRE_WALL);
 	}
 }
