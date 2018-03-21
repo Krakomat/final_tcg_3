@@ -12,164 +12,104 @@
 	<classpathentry kind="src" path="src.ai"/>
 	<classpathentry kind="src" path="src.arenaMode"/>
 	<classpathentry kind="src" path="src.draftTournament"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/eventbus.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/gluegen-rt.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jbullet.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jglfont-core.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jinput.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-blender.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-core.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-desktop.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-effects.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-jbullet.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-jogg.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-lwjgl.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-lwjgl-natives.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-networking.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-niftygui.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-openal-soft-natives-android.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-plugins.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-terrain.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jME3-testdata.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/joal.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/j-ogg-oggd.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/j-ogg-vorbisd.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/jogl-all.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/lwjgl.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty-default-controls.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty-examples.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/nifty-style-black.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/stack-alloc.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/vecmath.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jmonkey/lib/xmlpull-xpp3.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jmonkey/javadoc/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/utils/msgpack-core-0.7.0-p4.jar" sourcepath="C:/Users/Michael/.m2/repository/org/msgpack/msgpack-core/0.7.0-p4/msgpack-core-0.7.0-p4-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/utils/guava-18.0.jar" sourcepath="C:/Users/Michael/.m2/repository/com/google/guava/guava/18.0/guava-18.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/core.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/dense64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/denseC64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/eventbus.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-main.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-android-aarch64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-android-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-linux-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-solaris-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-solaris-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/gson.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jbullet.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jglfont-core.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jinput.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jinput-platform-natives-linux.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jinput-platform-natives-osx.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jinput-platform-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-blender.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-core.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-desktop.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-effects.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-jbullet.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-jogg.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-jogl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-networking.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-niftygui.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-plugins.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-terrain.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-testdata.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-main.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-android-aarch64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-android-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-linux-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-solaris-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-solaris-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/joal-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-main.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-android-aarch64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-android-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-linux-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-solaris-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-solaris-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jocl-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/j-ogg-all.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-main.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-android-aarch64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-android-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-linux-armv6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-solaris-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-solaris-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jsr305.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jutils.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/lwjgl-platform-natives-linux.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/lwjgl-platform-natives-osx.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/lwjgl-platform-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/nifty.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/nifty-default-controls.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/nifty-examples.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/nifty-style-black.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/simple.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/stack-alloc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/vecmath.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/xpp3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,9 +1,15 @@
 Final TCG
 
+Patch 1.2
+	
+	Cards:
+		- 00436_BlainesCharmander: Kindle should work properly now
+		
+		
 Patch 1.1
 
 	Cards:
 		- 00197_Recycle: Fixed some text bugs
 		- 00460_RocketsMoltres: Fire Wall should work properly now
 		
-(c) 2016
+(c) 2016 - 2018

@@ -42,7 +42,7 @@ public class Script_00436_BlainesCharmander extends PokemonCardScript {
 		Card chosenEnergyCard = getCardOwner()
 				.playerChoosesCards(this.card.getCurrentPosition().getEnergyCards(), 1, true, "Select one energy card to discard from " + this.card.getName() + "!").get(0);
 		PositionID discardPile = ownDiscardPile();
-		gameModel.getAttackAction().moveCard(defender, discardPile, chosenEnergyCard.getGameID(), true);
+		gameModel.getAttackAction().moveCard(attacker, discardPile, chosenEnergyCard.getGameID(), true);
 		gameModel.sendGameModelToAllPlayers("");
 
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
