@@ -4,7 +4,7 @@ Patch 1.2
 	
 	Cards:
 		- 00436_BlainesCharmander: Kindle should work properly now
-		
+		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
 		
 Patch 1.1
 

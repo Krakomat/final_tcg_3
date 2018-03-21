@@ -75,9 +75,9 @@ public class Script_00428_SabrinasGastly extends PokemonCardScript {
 
 	private void checkGaseousFormPower() {
 		boolean powerAllowed = true;
-		PokemonCard pCard = (PokemonCard) this.card;
-		if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
-			powerAllowed = false;
+		// Works even under negative conditions!!
+		// if (pCard.hasCondition(PokemonCondition.ASLEEP) || pCard.hasCondition(PokemonCondition.CONFUSED) || pCard.hasCondition(PokemonCondition.PARALYZED))
+		// powerAllowed = false;
 		if (gameModel.getGameModelParameters().isAllowedToPlayPokemonPower() > 0)
 			powerAllowed = false;
 		if (this.gameModel.getGameModelParameters().activeEffect("00164"))
