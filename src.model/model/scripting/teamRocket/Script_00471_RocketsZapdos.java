@@ -36,6 +36,11 @@ public class Script_00471_RocketsZapdos extends PokemonCardScript {
 	}
 
 	private void Plasma() {
+		PositionID attacker = this.card.getCurrentPosition().getPositionID();
+		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
+		Element attackerElement = ((PokemonCard) this.card).getElement();
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
+
 		Position discardPile = gameModel.getPosition(ownDiscardPile());
 		Card card = null;
 		for (Card c : discardPile.getEnergyCards())
