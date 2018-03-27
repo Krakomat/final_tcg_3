@@ -45,7 +45,11 @@
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jinput-platform-natives-osx.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jinput-platform-natives-windows.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-blender.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-core.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-core.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files%20(x86)/eclipse/jme/javadoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-desktop.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-effects.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/eclipse/jme/lib/jme3-jbullet.jar"/>

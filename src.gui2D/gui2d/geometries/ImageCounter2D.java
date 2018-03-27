@@ -222,10 +222,7 @@ public abstract class ImageCounter2D extends Node implements SelectableNode {
 		Line lineUpRight = new Line(new Vector3f(xPos, yPos + height, zPos), new Vector3f(xPos + width, yPos + height, zPos));
 		Line lineRightDown = new Line(new Vector3f(xPos + width, yPos + height, zPos), new Vector3f(xPos + width, yPos, zPos));
 		Line lineRightLeft = new Line(new Vector3f(xPos + width, yPos, zPos), new Vector3f(xPos, yPos, zPos));
-		lineLeftUp.setLineWidth(5);
-		lineUpRight.setLineWidth(5);
-		lineRightDown.setLineWidth(5);
-		lineRightLeft.setLineWidth(5);
+		mark_mat.getAdditionalRenderState().setLineWidth(5);
 
 		Geometry line1 = new Geometry(this.name, lineLeftUp);
 		line1.setMaterial(mark_mat);

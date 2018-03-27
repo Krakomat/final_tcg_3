@@ -7,6 +7,9 @@ Patch 1.2
 		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
 		- 00416_Sabrina: Removed the incorrect display text when playing the card.
 		
+	GUI:
+		- Adjusted the size of stadium cards in the arena
+		
 Patch 1.1
 
 	Cards:

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
 import com.jme3.audio.AudioSource;
 import com.jme3.scene.Node;
@@ -123,7 +124,7 @@ public class MusicController extends Node {
 	}
 
 	private AudioNode createAudioNode(String trackPath) {
-		AudioNode soundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), trackPath, true);
+		AudioNode soundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), trackPath, AudioData.DataType.Stream);
 		soundNode.setPositional(false);
 		soundNode.setLooping(false);
 		soundNode.setVolume(MUSIC_VOLUME);

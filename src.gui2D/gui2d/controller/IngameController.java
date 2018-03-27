@@ -793,7 +793,7 @@ public class IngameController extends Node implements GUI2DController {
 		}).start();
 
 		// Make stadium
-		Box stadium = new Box(5.83f, 2.41f, 0.0f);
+		Box stadium = new Box(4.52f, 2.4f, 0.0f);
 		stadiumNode = new Geometry("Box", stadium);
 		stadiumMat = new Material(GUI2D.getInstance().getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 		stadiumMat.setTexture("ColorMap", GUI2D.getInstance().getAssetManager().loadTexture(Database.getPokemonThumbnailKey("00286")));

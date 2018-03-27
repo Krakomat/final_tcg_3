@@ -11,6 +11,7 @@ import model.enums.Sounds;
 import src.gui2D.particleSystem.GlowingBorder;
 
 import com.jme3.asset.TextureKey;
+import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
@@ -171,7 +172,7 @@ public abstract class ArenaGeometry2D extends Node implements SelectableNode {
 		}
 
 		// Init audio:
-		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), Sounds.BUTTON_CLICKED, false);
+		this.clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), Sounds.BUTTON_CLICKED, AudioData.DataType.Buffer);
 		this.clickSoundNode.setPositional(false);
 		this.clickSoundNode.setLooping(false);
 		this.clickSoundNode.setVolume(2);

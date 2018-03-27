@@ -4,6 +4,7 @@ import java.util.concurrent.Callable;
 
 import gui2d.GUI2D;
 
+import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
 import com.jme3.scene.Spatial;
 import common.utilities.Threads;
@@ -13,7 +14,7 @@ public class EffectController {
 	static int activeThreads = 0;
 
 	public static AudioNode createEffectAudioNode(String effectPath) {
-		AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), effectPath, false);
+		AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), effectPath, AudioData.DataType.Buffer);
 		clickSoundNode.setPositional(false);
 		clickSoundNode.setLooping(false);
 		clickSoundNode.setVolume(EFFECT_VOLUME);
@@ -31,7 +32,7 @@ public class EffectController {
 				// The wrapper thread is unnecessary, unless it blocks on the
 				// Clip finishing; see comments.
 				public void run() {
-					AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), url, false);
+					AudioNode clickSoundNode = new AudioNode(GUI2D.getInstance().getAssetManager(), url, AudioData.DataType.Buffer);
 					clickSoundNode.setPositional(false);
 					clickSoundNode.setLooping(false);
 					clickSoundNode.setVolume(1);
