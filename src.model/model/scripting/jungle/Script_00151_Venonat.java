@@ -56,6 +56,7 @@ public class Script_00151_Venonat extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		int damageDone = this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
-		this.gameModel.getAttackAction().healPosition(attacker, damageDone);
+		if (damageDone > 0)
+			this.gameModel.getAttackAction().healPosition(attacker, damageDone);
 	}
 }

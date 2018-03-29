@@ -3,11 +3,16 @@ Final TCG
 Patch 1.2
 	
 	Cards:
-		- 00436_BlainesCharmander: Kindle should work properly now
-		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
+		- 00121_Butterfree: Fixed a rounding bug
+		- 00151_Venonat: Healing only applies if greater than 0
+		- 00160_Kabutops: Fixed a rounding bug
+		- 00170_Golbat: Healing only applies if greater than 0
+		- 00353_ErikasVileplume: Healing only applies if greater than 0
 		- 00416_Sabrina: Removed the incorrect display text when playing the card.
-		- 00471_RocketsZapdos: Plasma now does damage
+		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
+		- 00436_BlainesCharmander: Kindle should work properly now
 		- 00446_BlainesNinetales: Energy removal is triggered correctly for Burn Up
+		- 00471_RocketsZapdos: Plasma now does damage
 		
 	GUI:
 		- Adjusted the size of stadium cards in the arena

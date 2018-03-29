@@ -46,6 +46,7 @@ public class Script_00170_Golbat extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		int damageDealt = this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-		this.gameModel.getAttackAction().healPosition(attacker, damageDealt);
+		if (damageDealt > 0)
+			this.gameModel.getAttackAction().healPosition(attacker, damageDealt);
 	}
 }

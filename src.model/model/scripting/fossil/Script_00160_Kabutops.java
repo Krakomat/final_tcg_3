@@ -46,7 +46,7 @@ public class Script_00160_Kabutops extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		int damageDealt = this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 40, true);
-		int healAmount = damageDealt % 20 == 0 ? (damageDealt / 2) : (damageDealt + 10) / 2;
+		int healAmount = (damageDealt / 2) % 2 == 0 ? (damageDealt / 2) : (damageDealt + 10) / 2;
 		this.gameModel.getAttackAction().healPosition(attacker, healAmount);
 	}
 }
