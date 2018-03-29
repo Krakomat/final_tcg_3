@@ -33,7 +33,7 @@ public class Script_00446_BlainesNinetales extends PokemonCardScript {
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 50, true);
 
-		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+		if (gameModel.getAttackAction().flipACoin() == Coin.TAILS) {
 			gameModel.sendTextMessageToAllPlayers(this.card.getName() + " loses all its fire energy!", "");
 			// Discard all fire energy cards:
 			List<Card> fireEnergy = getFireEnergyOnPosition();

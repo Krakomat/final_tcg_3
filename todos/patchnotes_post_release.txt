@@ -7,6 +7,7 @@ Patch 1.2
 		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
 		- 00416_Sabrina: Removed the incorrect display text when playing the card.
 		- 00471_RocketsZapdos: Plasma now does damage
+		- 00446_BlainesNinetales: Energy removal is triggered correctly for Burn Up
 		
 	GUI:
 		- Adjusted the size of stadium cards in the arena
