@@ -8,6 +8,7 @@ Patch 1.2
 		- 00160_Kabutops: Fixed a rounding bug
 		- 00170_Golbat: Healing only applies if greater than 0
 		- 00353_ErikasVileplume: Healing only applies if greater than 0
+		- 00401_FuchsiaCityGym: Should be working correct now
 		- 00416_Sabrina: Removed the incorrect display text when playing the card.
 		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
 		- 00436_BlainesCharmander: Kindle should work properly now

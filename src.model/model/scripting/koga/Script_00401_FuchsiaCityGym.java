@@ -30,7 +30,7 @@ public class Script_00401_FuchsiaCityGym extends TrainerCardScript {
 	public boolean stadiumCanBeActivatedOnField(Player player) {
 		if (gameModel.getGameModelParameters().activeEffect("00401", cardGameID()))
 			return false;
-		if (getKogaCardsFromOwnField(player).size() > 0)
+		if (getKogaCardsFromOwnField(player).size() > 0 && gameModel.getFullArenaPositions(this.getCardOwner().getColor()).size() > 1)
 			return true;
 		return false;
 	}
@@ -69,10 +69,10 @@ public class Script_00401_FuchsiaCityGym extends TrainerCardScript {
 				Card newActivePokmn = gameModel.getPosition(newActive).getTopCard();
 				gameModel.sendCardMessageToAllPlayers(player.getName() + " chooses " + newActivePokmn.getName() + " as his new active pokemon!", newActivePokmn, "");
 				gameModel.getAttackAction().movePokemonToPosition(newActive, active(player));
-				gameModel.sendGameModelToAllPlayers("");
 			}
 		}
 		gameModel.getGameModelParameters().activateEffect("00401", cardGameID());
+		gameModel.sendGameModelToAllPlayers("");
 	}
 
 	protected PositionID active(Player player) {
