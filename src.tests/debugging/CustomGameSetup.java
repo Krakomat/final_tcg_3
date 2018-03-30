@@ -4,6 +4,12 @@ import model.enums.PositionID;
 import model.game.PokemonGameModelImpl;
 import network.server.PokemonGameManagerImpl;
 
+/**
+ * Sets up a custom game, where one can debug specific cards really fast!
+ * 
+ * @author Michael
+ *
+ */
 public class CustomGameSetup extends SetupGame {
 	private PokemonGameManagerImpl server;
 	private PokemonGameModelImpl gameModel;
