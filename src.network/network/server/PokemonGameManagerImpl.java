@@ -54,6 +54,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	private ServerListener serverListener;
 	private ServerMain serverMain; // only used for destroying the server from
 									// here
+	private boolean debug_mode;
 
 	PokemonGameManagerImpl(long id, String name, String password, ServerMain serverMain, int prizeCards) {
 		this.gameModel = new PokemonGameModelImpl(id);
@@ -63,6 +64,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		this.password = password;
 		this.moveMade = false;
 		this.serverMain = serverMain;
+		this.debug_mode = false;
 	}
 
 	public PokemonGameManagerImpl(long id, String name, String password, int prizeCards) {
@@ -73,6 +75,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 		this.password = password;
 		this.moveMade = false;
 		this.serverMain = null;
+		this.debug_mode = false;
 	}
 
 	/**
@@ -89,6 +92,13 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 	}
 
 	/**
+	 * Only used for debugging!
+	 */
+	public void activateDebugMode() {
+		this.debug_mode = true;
+	}
+
+	/**
 	 * Starts the game. Returns true, if startup was successful, false otherwise. Also starts a new Thread, which controls the overall game flow.
 	 * 
 	 * @return
@@ -99,7 +109,8 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				@Override
 				public void run() {
 					try {
-						gameModel.initNewGame();
+						if (!debug_mode)
+							gameModel.initNewGame();
 						runGame();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -255,7 +266,7 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 				System.err.println("Fatal error in connectAsPlayer!");
 
 			// Start game automatically when game is full:
-			if (this.isFull())
+			if (this.isFull() && !debug_mode)
 				this.startGame(); // Creates a new Thread
 			return true;
 		}
@@ -686,6 +697,15 @@ public class PokemonGameManagerImpl implements PokemonGameManager {
 			printErrorReport(gameModel, e);
 		}
 		return null;
+	}
+
+	/**
+	 * Used only for debugging!
+	 * 
+	 * @return
+	 */
+	public PokemonGame getGameModel() {
+		return this.gameModel;
 	}
 
 	@Override

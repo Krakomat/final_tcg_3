@@ -317,6 +317,15 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 		this.server.retreatPokemon(this);
 	}
 
+	/**
+	 * Only used for debugging!
+	 * 
+	 * @return
+	 */
+	public PokemonGameManager getServer() {
+		return this.server;
+	}
+
 	public void setServer(PokemonGameManager server) {
 		this.server = server;
 	}

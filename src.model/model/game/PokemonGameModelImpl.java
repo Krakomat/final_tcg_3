@@ -43,6 +43,8 @@ public class PokemonGameModelImpl implements PokemonGame {
 	private PokemonGameManagerImpl pokemonGameManager;
 	private List<String> matchHistory;
 
+	private boolean debug_mode;
+
 	/**
 	 * The given player initializes a new PokemonGameModel with the given id.
 	 * 
@@ -62,6 +64,16 @@ public class PokemonGameModelImpl implements PokemonGame {
 		cardScriptFactory = CardScriptFactory.getInstance();
 		gameModelParameters = new GameModelParameters();
 		matchHistory = new ArrayList<>();
+		debug_mode = false;
+	}
+
+	/**
+	 * Only used for debugging!
+	 * 
+	 * @return
+	 */
+	public void activateDebugMode() {
+		this.debug_mode = true;
 	}
 
 	@Override
@@ -76,7 +88,7 @@ public class PokemonGameModelImpl implements PokemonGame {
 		for (int i = 0; i < blueCards.size(); i++) {
 			blueCards.get(i).setCurrentPosition(blueDeck);
 			blueDeck.addToPosition(blueCards.get(i));
-		}		
+		}
 		for (int i = 0; i < redCards.size(); i++) {
 			redCards.get(i).setCurrentPosition(redDeck);
 			redDeck.addToPosition(redCards.get(i));
@@ -94,11 +106,35 @@ public class PokemonGameModelImpl implements PokemonGame {
 		this.sendTextMessageToPlayers(getPlayerList(), "The game has started", "");
 		this.gameModelParameters.setGameState(GameState.RUNNING);
 
-		this.initDraw();
-		this.initPrizes();
-		this.initStartPokemon();
-		this.initBenchPokemon();
-		this.startupCoinflip();
+		if (!debug_mode) {
+			this.initDraw();
+			this.initPrizes();
+			this.initStartPokemon();
+			this.initBenchPokemon();
+			this.startupCoinflip();
+		} else {
+			// debug mode only
+			this.playerOnTurn = playerRed;
+
+			// Make Arena visible for enemies:
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_ACTIVEPOKEMON);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_ACTIVEPOKEMON);
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_BENCH_1);
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_BENCH_2);
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_BENCH_3);
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_BENCH_4);
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_BENCH_5);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_BENCH_1);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_BENCH_2);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_BENCH_3);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_BENCH_4);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_BENCH_5);
+			this.makePositionVisibleForAllPlayers(PositionID.BLUE_DISCARDPILE);
+			this.makePositionVisibleForAllPlayers(PositionID.RED_DISCARDPILE);
+			this.makePositionVisibleForAllPlayers(PositionID.STADIUM);
+			this.getPosition(PositionID.BLUE_PRICE_1).setVisible(false, Color.BLUE);
+			this.getPosition(PositionID.BLUE_PRICE_1).setVisible(false, Color.RED);
+		}
 	}
 
 	/**
@@ -805,19 +841,21 @@ public class PokemonGameModelImpl implements PokemonGame {
 	}
 
 	/**
-	 * Adds the card with the given id on top of the given position. For testing puposes.
+	 * Adds the card with the given id on top of the given position. For testing purposes only!
 	 * 
 	 * @param string
 	 * @param blueDeck
 	 */
-	@SuppressWarnings("unused")
-	private void addCardOnTopOfPosition(String id, Position pos) {
+	public void addCardOnTopOfPosition(String id, PositionID posID) {
+		Position pos = this.getPosition(posID);
 		Card c = Database.createCard(id);
 		this.assignGameID(c);
 		c.setCardScript(this.cardScriptFactory.createScript(c.getCardId(), c, this));
 		pos.addToPosition(c);
 		c.setCurrentPosition(pos);
 		this.cardMap.put(c.getGameID(), c);
+		c.setVisibleForPlayerBlue(pos.isVisibleForPlayer(Color.BLUE));
+		c.setVisibleForPlayerRed(pos.isVisibleForPlayer(Color.RED));
 	}
 
 	// ------------------------------------------------GameServer
