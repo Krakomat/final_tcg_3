@@ -16,6 +16,9 @@
             <Size>4</Size>
         </Card>
         <Card ID="00074">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00076">
             <Size>3</Size>
         </Card>
         <Card ID="00079">
@@ -25,22 +28,22 @@
             <Size>2</Size>
         </Card>
         <Card ID="00088">
-            <Size>4</Size>
+            <Size>3</Size>
         </Card>
         <Card ID="00091">
-            <Size>4</Size>
+            <Size>3</Size>
         </Card>
         <Card ID="00092">
             <Size>2</Size>
         </Card>
         <Card ID="00093">
-            <Size>3</Size>
+            <Size>2</Size>
         </Card>
         <Card ID="00102">
-            <Size>24</Size>
+            <Size>26</Size>
         </Card>
         <Card ID="00154">
-            <Size>4</Size>
+            <Size>3</Size>
         </Card>
         <Card ID="00161">
             <Size>3</Size>
