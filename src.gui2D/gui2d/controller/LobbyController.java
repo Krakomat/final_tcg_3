@@ -23,8 +23,12 @@ import com.jme3.scene.Node;
 
 public class LobbyController extends Node implements GUI2DController {
 
-	private TextButton2D singlePlayerButton, multiPlayerButton, draftTournamentButton, arenaButton, multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton,
+	ImageButton2D singlePlayerButton;
+	private TextButton2D multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton,
 			exitButton;
+	ImageButton2D multiPlayerButton;
+	ImageButton2D draftTournamentButton;
+	ImageButton2D arenaButton;
 	private ImageButton2D overgrowthButton, zappButton, brushfireButton, blackoutButton, lightningBugButton, kraftreserveButton, grassChopperButton, hotWaterButton, psychOutButton,
 			wasserschwallButton, leibwaechterButton, schlossUndRiegelButton, aergerButton, verwuestungButton;
 	private TextPanel2D chooseBotDeckPanel;
@@ -59,7 +63,7 @@ public class LobbyController extends Node implements GUI2DController {
 		dropInUpdateQueue(chooseBotDeckPanel);
 		this.attachChild(chooseBotDeckPanel);
 
-		singlePlayerButton = new TextButton2D("singlePlayerButton", "Practice Match", buttonWidth, buttonHeight) {
+		singlePlayerButton = new ImageButton2D("singlePlayerButton", Database.getAssetKey("practice_symbol"), 200, 200) {
 
 			@Override
 			public void mouseSelect() {
@@ -71,12 +75,12 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		singlePlayerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.65f + buttonHeight / 2, 0);
+		singlePlayerButton.setLocalTranslation(screenWidth * 0.4f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
 		singlePlayerButton.setVisible(false);
 		dropInUpdateQueue(singlePlayerButton);
 		this.attachChild(singlePlayerButton);
 
-		arenaButton = new TextButton2D("arenaButton", "Gym Challenge", buttonWidth, buttonHeight) {
+		arenaButton = new ImageButton2D("arenaButton", Database.getAssetKey("arena_symbol"), 200, 200) {
 
 			@Override
 			public void mouseSelect() {
@@ -88,12 +92,12 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		arenaButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
+		arenaButton.setLocalTranslation(screenWidth * 0.6f - buttonWidth / 2, screenHeight * 0.55f + buttonHeight / 2, 0);
 		arenaButton.setVisible(false);
 		dropInUpdateQueue(arenaButton);
 		this.attachChild(arenaButton);
 
-		draftTournamentButton = new TextButton2D("draftTournamentButton", "Draft Tournament", buttonWidth, buttonHeight) {
+		draftTournamentButton = new ImageButton2D("draftTournamentButton", Database.getAssetKey("draft_symbol"), 200, 200) {
 
 			@Override
 			public void mouseSelect() {
@@ -105,12 +109,12 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		draftTournamentButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.45f + buttonHeight / 2, 0);
+		draftTournamentButton.setLocalTranslation(screenWidth * 0.4f - buttonWidth / 2, screenHeight * 0.2f + buttonHeight / 2, 0);
 		draftTournamentButton.setVisible(false);
 		dropInUpdateQueue(draftTournamentButton);
 		this.attachChild(draftTournamentButton);
 
-		multiPlayerButton = new TextButton2D("multiPlayerButton", "Multiplayer", buttonWidth, buttonHeight) {
+		multiPlayerButton = new ImageButton2D("multiPlayerButton", Database.getAssetKey("multiplayer_symbol"), 200, 200) {
 
 			@Override
 			public void mouseSelect() {
@@ -122,7 +126,7 @@ public class LobbyController extends Node implements GUI2DController {
 				// nothing to do here
 			}
 		};
-		multiPlayerButton.setLocalTranslation(screenWidth * 0.5f - buttonWidth / 2, screenHeight * 0.35f + buttonHeight / 2, 0);
+		multiPlayerButton.setLocalTranslation(screenWidth * 0.6f - buttonWidth / 2, screenHeight * 0.2f + buttonHeight / 2, 0);
 		multiPlayerButton.setVisible(false);
 		dropInUpdateQueue(multiPlayerButton);
 		this.attachChild(multiPlayerButton);
@@ -218,7 +222,7 @@ public class LobbyController extends Node implements GUI2DController {
 		this.attachChild(deckEditorButton);
 
 		try {
-			ipAdressPanel = new TextPanel2D("ipAdressPanel", InetAddress.getLocalHost().getHostAddress(), screenWidth * 0.2f, screenWidth * 0.2f / 8) {
+			ipAdressPanel = new TextPanel2D("ipAdressPanel", "IP-Adress: " + InetAddress.getLocalHost().getHostAddress(), screenWidth * 0.2f, screenWidth * 0.2f / 8) {
 				@Override
 				public void mouseSelect() {
 
@@ -723,7 +727,7 @@ public class LobbyController extends Node implements GUI2DController {
 	public void setAccount(Account account) {
 		if (account != null) {
 			this.account = account;
-			this.usernamePanel.setText(account.getName());
+			this.usernamePanel.setText("Account: " + account.getName());
 			this.dropInUpdateQueue(usernamePanel);
 
 			this.equipedDeckPanel.setText("Deck: " + account.getDeck().getName());

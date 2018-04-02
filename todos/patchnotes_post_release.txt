@@ -19,7 +19,9 @@ Patch 1.2
 		- 00475_RocketsSecretExperiment: Fixed multiple bugs with this card
 		
 	GUI:
+		- Replaced text buttons in the lobby with symbols
 		- Adjusted the size of stadium cards in the arena
+		- Small quality of life features for the lobby screen
 		
 Patch 1.1
 
