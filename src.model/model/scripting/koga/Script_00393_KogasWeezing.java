@@ -41,7 +41,7 @@ public class Script_00393_KogasWeezing extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Element attackerElement = ((PokemonCard) this.card).getElement();
 
-		gameModel.sendTextMessageToAllPlayers("If heads then this attack does 20 more damage!", "");
+		gameModel.sendTextMessageToAllPlayers("If heads then this attack does more damage!", "");
 		Coin c = gameModel.getAttackAction().flipACoin();
 		if (c == Coin.HEADS) {
 			this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 30, true);
