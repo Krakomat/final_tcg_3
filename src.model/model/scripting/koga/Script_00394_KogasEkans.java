@@ -31,6 +31,7 @@ public class Script_00394_KogasEkans extends PokemonCardScript {
 		gameModel.sendTextMessageToAllPlayers("If both coins shows Heads then the defending Pokemon is confused and poisoned!", "");
 		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
 			if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
+				gameModel.sendTextMessageToAllPlayers(this.gameModel.getPosition(defender).getTopCard().getName() + " is confused and poisoned!", "");
 				this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.CONFUSED);
 				this.gameModel.getAttackAction().inflictConditionToPosition(defender, PokemonCondition.POISONED);
 			}

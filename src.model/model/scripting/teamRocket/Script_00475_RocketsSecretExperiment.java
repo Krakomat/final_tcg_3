@@ -29,11 +29,11 @@ public class Script_00475_RocketsSecretExperiment extends TrainerCardScript {
 
 	@Override
 	public void playFromHand() {
+		// Discard trainer card!
+		gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
+
 		if (gameModel.getAttackAction().flipACoin() == Coin.HEADS) {
 			Player player = this.getCardOwner();
-
-			// Discard trainer card before choosing!
-			gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), this.card.getGameID(), true);
 
 			// Choose a card from the deck:
 			List<Card> cards = gameModel.getPosition(ownDeck()).getCards();
@@ -51,20 +51,20 @@ public class Script_00475_RocketsSecretExperiment extends TrainerCardScript {
 		} else {
 			gameModel.getGameModelParameters().setAllowedToPlayTrainerCards((short) 1);
 			gameModel.getGameModelParameters().addEffectParameter(this.card.getCardId(), this.cardGameID(), getCardOwner().getColor() == Color.BLUE ? 0 : 1);
-			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " can't play Trainer cards on his next turn!", "");
+			gameModel.sendTextMessageToAllPlayers(getCardOwner().getName() + " can't play Trainer cards until the end of his next turn!", "");
 			gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 
 	public void executePreTurnActions(Player playerOnTurn) {
-		if ((playerOnTurn.getColor() == this.getCardOwner().getColor()
-				&& gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID()) == 0 && getCardOwner().getColor() == Color.BLUE)
-				|| (playerOnTurn.getColor() == this.getCardOwner().getColor()
-						&& gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID()) == 1
-						&& getCardOwner().getColor() == Color.RED)) {
-			gameModel.getGameModelParameters().removeEffectParameter(this.card.getCardId(), this.cardGameID());
-			gameModel.getGameModelParameters().setAllowedToPlayTrainerCards((short) 1);
-			gameModel.sendGameModelToAllPlayers("");
+		Integer value = gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID());
+		if (value != null) {
+			if ((playerOnTurn.getColor() == this.getCardOwner().getColor() && value == 0 && getCardOwner().getColor() == Color.BLUE)
+					|| (playerOnTurn.getColor() == this.getCardOwner().getColor() && value == 1 && getCardOwner().getColor() == Color.RED)) {
+				gameModel.getGameModelParameters().removeEffectParameter(this.card.getCardId(), this.cardGameID());
+				gameModel.getGameModelParameters().setAllowedToPlayTrainerCards((short) 1);
+				gameModel.sendGameModelToAllPlayers("");
+			}
 		}
 	}
 }
