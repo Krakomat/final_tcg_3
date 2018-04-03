@@ -4,9 +4,12 @@ Patch 1.2
 	
 	Cards:
 		- 00121_Butterfree: Fixed a rounding bug
+		- 00138_Cubone: Fixed a bug with the Snivel attack
 		- 00151_Venonat: Healing only applies if greater than 0
 		- 00160_Kabutops: Fixed a rounding bug
 		- 00170_Golbat: Healing only applies if greater than 0
+		- 00263_FullHealEnergy: Only cures conditions if there are conditions to cure
+		- 00264_PotionEnergy: Only applies healing if the pokemon is damaged
 		- 00353_ErikasVileplume: Healing only applies if greater than 0
 		- 00393_KogasWeezing: Fixed text message
 		- 00394_KogasEkans: Improved text messages

@@ -49,7 +49,7 @@ public class Script_00138_Cubone extends PokemonCardScript {
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10 + damageMarks, true);
 	}
 
-	public int modifyIncomingDamage(int damage, Card attacker) {
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
 		if (attacker != null) {
 			if (gameModel.getGameModelParameters().attackIsBlocked("00138", attacker.getGameID()) && PositionID.isActivePosition(attacker.getCurrentPosition().getPositionID())
 					&& PositionID.isActivePosition(getCurrentPositionID()))

@@ -14,7 +14,8 @@ public class Script_00264_PotionEnergy extends EnergyCardScript {
 	public void playFromHand() {
 		super.playFromHand();
 
-		// Clean conditions on pokemon:
-		gameModel.getAttackAction().healPosition(this.card.getCurrentPosition().getPositionID(), 10);
+		if (this.card.getCurrentPosition().isDamaged())
+			// Clean conditions on pokemon:
+			gameModel.getAttackAction().healPosition(this.card.getCurrentPosition().getPositionID(), 10);
 	}
 }
