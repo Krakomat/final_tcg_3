@@ -44,7 +44,7 @@ public class TreeBotEvaluator implements GameModelEvaluator {
 	 */
 	private float evaluatePlayerModel(LocalPokemonGameModel gameModel, Color color) {
 		// Return Infinity, if you won:
-		if (gameModel.getGameState() == GameState.BLUE_WON && color == Color.BLUE)
+		if ((gameModel.getGameState() == GameState.BLUE_WON && color == Color.BLUE) || (gameModel.getGameState() == GameState.RED_WON && color == Color.RED))
 			return Float.POSITIVE_INFINITY;
 
 		float value = 0;

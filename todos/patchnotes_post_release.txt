@@ -28,6 +28,9 @@ Patch 1.2
 		- Replaced text buttons in the lobby with symbols
 		- Adjusted the size of stadium cards in the arena
 		- Small quality of life features for the lobby screen
+	
+	AI:
+		- Some small improvements
 		
 Patch 1.1
 
