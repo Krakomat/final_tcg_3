@@ -596,7 +596,7 @@ public class IngameController extends Node implements GUI2DController {
 				surrenderButtonClicked();
 			}
 		};
-		surrenderButton.setLocalTranslation(screenWidth * 0.97f, screenHeight - screenWidth * 0.03f, 0);
+		surrenderButton.setLocalTranslation(screenWidth * 0.1f, 0, 0);
 		surrenderButton.setVisible(false);
 		dropInUpdateQueue(surrenderButton);
 		this.attachChild(surrenderButton);
