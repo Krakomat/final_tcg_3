@@ -46,13 +46,13 @@ public class Script_00203_DarkCharizard extends PokemonCardScript {
 
 		List<Card> realFireEnergy = realFireEnergy();
 		int numberOfCoins = realFireEnergy.size();
-		gameModel.sendTextMessageToAllPlayers(this.getEnemyPlayer().getName() + " flips " + numberOfCoins + " coins...", "");
+		gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " flips " + numberOfCoins + " coins...", "");
 		int numberHeads = gameModel.getAttackAction().flipCoinsCountHeads(numberOfCoins);
 		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, numberHeads * 50, true);
 
 		if (numberHeads > 0) {
 			// Pay energy:
-			gameModel.sendTextMessageToAllPlayers(this.card.getName() + " discards " + numberHeads + " fire energy!", "");
+			gameModel.sendTextMessageToAllPlayers(this.getCardOwner().getName() + " discards " + numberHeads + " fire energy from " + this.card.getName() + "!", "");
 			for (int i = 0; i < numberHeads; i++) {
 				gameModel.getAttackAction().discardCardToDiscardPile(this.card.getCurrentPosition().getPositionID(), realFireEnergy.get(i).getGameID(), true);
 			}
