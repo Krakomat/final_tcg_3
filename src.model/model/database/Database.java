@@ -508,168 +508,168 @@ public class Database {
 		TextureKey redCharacter = new TextureKey("/tilesets/characters/Red.png");
 		redCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_RED.toString(), redCharacter);
-		TextureKey redCharacterThumb = new TextureKey("/tilesets/characters/Red_thumb.png");
+		TextureKey redCharacterThumb = new TextureKey("/tilesets/avatars/Red_avatar.png");
 		redCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_RED.toString() + "THUMB", redCharacterThumb);
 
 		TextureKey brendanCharacter = new TextureKey("/tilesets/characters/Brendan.png");
 		brendanCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_BRENDAN.toString(), brendanCharacter);
-		TextureKey brendanCharacterThumb = new TextureKey("/tilesets/characters/Brendan_thumb.png");
+		TextureKey brendanCharacterThumb = new TextureKey("/tilesets/avatars/Brendan_avatar.png");
 		brendanCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_BRENDAN.toString() + "THUMB", brendanCharacterThumb);
 
 		TextureKey rockoCharacter = new TextureKey("/tilesets/characters/Rocko.png");
 		rockoCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_BROCK.toString(), rockoCharacter);
-		TextureKey rockoCharacterThumb = new TextureKey("/tilesets/characters/Rocko_thumb.png");
+		TextureKey rockoCharacterThumb = new TextureKey("/tilesets/avatars/Rocko_avatar.png");
 		rockoCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.MAMORIA_BROCK.toString() + "THUMB", rockoCharacterThumb);
 
 		TextureKey lyraCharacter = new TextureKey("/tilesets/characters/Lyra.png");
 		lyraCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_LYRA.toString(), lyraCharacter);
-		TextureKey lyraCharacterThumb = new TextureKey("/tilesets/characters/Lyra_thumb.png");
+		TextureKey lyraCharacterThumb = new TextureKey("/tilesets/avatars/Lyra_avatar.png");
 		lyraCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_LYRA.toString() + "THUMB", lyraCharacterThumb);
 
 		TextureKey mayCharacter = new TextureKey("/tilesets/characters/May.png");
 		mayCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_MAY.toString(), mayCharacter);
-		TextureKey mayCharacterThumb = new TextureKey("/tilesets/characters/May_thumb.png");
+		TextureKey mayCharacterThumb = new TextureKey("/tilesets/avatars/May_avatar.png");
 		mayCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_MAY.toString() + "THUMB", mayCharacterThumb);
 
 		TextureKey mistyCharacter = new TextureKey("/tilesets/characters/Misty.png");
 		mistyCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_MISTY.toString(), mistyCharacter);
-		TextureKey mistyCharacterThumb = new TextureKey("/tilesets/characters/Misty_thumb.png");
+		TextureKey mistyCharacterThumb = new TextureKey("/tilesets/avatars/Misty_avatar.png");
 		mistyCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.AZURIA_MISTY.toString() + "THUMB", mistyCharacterThumb);
 
 		TextureKey leafCharacter = new TextureKey("/tilesets/characters/Leaf.png");
 		leafCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_LEAF.toString(), leafCharacter);
-		TextureKey leafCharacterThumb = new TextureKey("/tilesets/characters/Leaf_thumb.png");
+		TextureKey leafCharacterThumb = new TextureKey("/tilesets/avatars/Leaf_avatar.png");
 		leafCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_LEAF.toString() + "THUMB", leafCharacterThumb);
 
 		TextureKey nateCharacter = new TextureKey("/tilesets/characters/Nate.png");
 		nateCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_NATE.toString(), nateCharacter);
-		TextureKey nateCharacterThumb = new TextureKey("/tilesets/characters/Nate_thumb.png");
+		TextureKey nateCharacterThumb = new TextureKey("/tilesets/avatars/Nate_avatar.png");
 		nateCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_NATE.toString() + "THUMB", nateCharacterThumb);
 
 		TextureKey ltSurgeCharacter = new TextureKey("/tilesets/characters/MajorBob.png");
 		ltSurgeCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_LTSURGE.toString(), ltSurgeCharacter);
-		TextureKey ltSurgeCharacterThumb = new TextureKey("/tilesets/characters/MajorBob_thumb.png");
+		TextureKey ltSurgeCharacterThumb = new TextureKey("/tilesets/avatars/MajorBob_avatar.png");
 		ltSurgeCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ORANIA_LTSURGE.toString() + "THUMB", ltSurgeCharacterThumb);
 
 		TextureKey rosaCharacter = new TextureKey("/tilesets/characters/Rosa.png");
 		rosaCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.PRISMANIA_ROSA.toString(), rosaCharacter);
-		TextureKey rosaCharacterThumb = new TextureKey("/tilesets/characters/Rosa_thumb.png");
+		TextureKey rosaCharacterThumb = new TextureKey("/tilesets/avatars/Rosa_avatar.png");
 		rosaCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.PRISMANIA_ROSA.toString() + "THUMB", rosaCharacterThumb);
 
 		TextureKey serenaCharacter = new TextureKey("/tilesets/characters/Serena.png");
 		serenaCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.PRISMANIA_SERENA.toString(), serenaCharacter);
-		TextureKey serenaCharacterThumb = new TextureKey("/tilesets/characters/Serena_thumb.png");
+		TextureKey serenaCharacterThumb = new TextureKey("/tilesets/avatars/Serena_avatar.png");
 		serenaCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.PRISMANIA_SERENA.toString() + "THUMB", serenaCharacterThumb);
 
 		TextureKey erikaCharacter = new TextureKey("/tilesets/characters/Erika.png");
 		erikaCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.PRISMANIA_ERIKA.toString(), erikaCharacter);
-		TextureKey erikaCharacterThumb = new TextureKey("/tilesets/characters/Erika_thumb.png");
+		TextureKey erikaCharacterThumb = new TextureKey("/tilesets/avatars/Erika_avatar.png");
 		erikaCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "THUMB", erikaCharacterThumb);
 
 		TextureKey hilbertCharacter = new TextureKey("/tilesets/characters/Hilbert.png");
 		hilbertCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.FUCHSANIA_HILBERT.toString(), hilbertCharacter);
-		TextureKey hilbertCharacterThumb = new TextureKey("/tilesets/characters/Hilbert_thumb.png");
+		TextureKey hilbertCharacterThumb = new TextureKey("/tilesets/avatars/Hilbert_avatar.png");
 		hilbertCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.FUCHSANIA_HILBERT.toString() + "THUMB", hilbertCharacterThumb);
 
 		TextureKey lucasCharacter = new TextureKey("/tilesets/characters/Lucas.png");
 		lucasCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.FUCHSANIA_LUCAS.toString(), lucasCharacter);
-		TextureKey lucasCharacterThumb = new TextureKey("/tilesets/characters/Lucas_thumb.png");
+		TextureKey lucasCharacterThumb = new TextureKey("/tilesets/avatars/Lucas_avatar.png");
 		lucasCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "THUMB", lucasCharacterThumb);
 
 		TextureKey kogaCharacter = new TextureKey("/tilesets/characters/Koga.png");
 		kogaCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.FUCHSANIA_KOGA.toString(), kogaCharacter);
-		TextureKey kogaCharacterThumb = new TextureKey("/tilesets/characters/Koga_thumb.png");
+		TextureKey kogaCharacterThumb = new TextureKey("/tilesets/avatars/Koga_avatar.png");
 		kogaCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.FUCHSANIA_KOGA.toString() + "THUMB", kogaCharacterThumb);
 
 		TextureKey hildaCharacter = new TextureKey("/tilesets/characters/Hilda.png");
 		hildaCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.SAFFRONIA_HILDA.toString(), hildaCharacter);
-		TextureKey hildaCharacterThumb = new TextureKey("/tilesets/characters/Hilda_thumb.png");
+		TextureKey hildaCharacterThumb = new TextureKey("/tilesets/avatars/Hilda_avatar.png");
 		hildaCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.SAFFRONIA_HILDA.toString() + "THUMB", hildaCharacterThumb);
 
 		TextureKey calemCharacter = new TextureKey("/tilesets/characters/Calem.png");
 		calemCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.SAFFRONIA_CALEM.toString(), calemCharacter);
-		TextureKey calemCharacterThumb = new TextureKey("/tilesets/characters/Calem_thumb.png");
+		TextureKey calemCharacterThumb = new TextureKey("/tilesets/avatars/Calem_avatar.png");
 		calemCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.SAFFRONIA_CALEM.toString() + "THUMB", calemCharacterThumb);
 
 		TextureKey sabrinaCharacter = new TextureKey("/tilesets/characters/Sabrina.png");
 		sabrinaCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.SAFFRONIA_SABRINA.toString(), sabrinaCharacter);
-		TextureKey sabrinaCharacterThumb = new TextureKey("/tilesets/characters/Sabrina_thumb.png");
+		TextureKey sabrinaCharacterThumb = new TextureKey("/tilesets/avatars/Sabrina_avatar.png");
 		sabrinaCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.SAFFRONIA_SABRINA.toString() + "THUMB", sabrinaCharacterThumb);
 
 		TextureKey ethanCharacter = new TextureKey("/tilesets/characters/Ethan.png");
 		ethanCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ZINNOBER_ETHAN.toString(), ethanCharacter);
-		TextureKey ethanCharacterThumb = new TextureKey("/tilesets/characters/Ethan_thumb.png");
+		TextureKey ethanCharacterThumb = new TextureKey("/tilesets/avatars/Ethan_avatar.png");
 		ethanCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ZINNOBER_ETHAN.toString() + "THUMB", ethanCharacterThumb);
 
 		TextureKey dawnCharacter = new TextureKey("/tilesets/characters/Dawn.png");
 		dawnCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ZINNOBER_DAWN.toString(), dawnCharacter);
-		TextureKey dawnCharacterThumb = new TextureKey("/tilesets/characters/Dawn_thumb.png");
+		TextureKey dawnCharacterThumb = new TextureKey("/tilesets/avatars/Dawn_avatar.png");
 		dawnCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ZINNOBER_DAWN.toString() + "THUMB", dawnCharacterThumb);
 
 		TextureKey pyroCharacter = new TextureKey("/tilesets/characters/Pyro.png");
 		pyroCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ZINNOBER_PYRO.toString(), pyroCharacter);
-		TextureKey pyroCharacterThumb = new TextureKey("/tilesets/characters/Pyro_thumb.png");
+		TextureKey pyroCharacterThumb = new TextureKey("/tilesets/avatars/Pyro_avatar.png");
 		pyroCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.ZINNOBER_PYRO.toString() + "THUMB", pyroCharacterThumb);
 
 		TextureKey rocketFemaleCharacter = new TextureKey("/tilesets/characters/rocket_female.png");
 		rocketFemaleCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString(), rocketFemaleCharacter);
-		TextureKey rocketFemaleCharacterThumb = new TextureKey("/tilesets/characters/rocket_female_thumb.png");
+		TextureKey rocketFemaleCharacterThumb = new TextureKey("/tilesets/avatars/rocket_female_avatar.png");
 		rocketFemaleCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString() + "THUMB", rocketFemaleCharacterThumb);
 
 		TextureKey rocketMaleCharacter = new TextureKey("/tilesets/characters/rocket_male.png");
 		rocketMaleCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString(), rocketMaleCharacter);
-		TextureKey rocketMaleCharacterThumb = new TextureKey("/tilesets/characters/rocket_male_thumb.png");
+		TextureKey rocketMaleCharacterThumb = new TextureKey("/tilesets/avatars/rocket_male_avatar.png");
 		rocketMaleCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString() + "THUMB", rocketMaleCharacterThumb);
 
 		TextureKey giovanniCharacter = new TextureKey("/tilesets/characters/Giovanni.png");
 		giovanniCharacter.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_GIOVANNI.toString(), giovanniCharacter);
-		TextureKey giovanniCharacterThumb = new TextureKey("/tilesets/characters/Giovanni_thumb.png");
+		TextureKey giovanniCharacterThumb = new TextureKey("/tilesets/avatars/Giovanni_avatar.png");
 		giovanniCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "THUMB", giovanniCharacterThumb);
 
