@@ -26,12 +26,13 @@ public class Script_00476_TransparentWalls extends TrainerCardScript {
 	}
 
 	public void executePreTurnActions(Player playerOnTurn) {
-		if ((playerOnTurn.getColor() == this.getCardOwner().getColor()
-				&& gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID()) == 0 && getCardOwner().getColor() == Color.BLUE)
-				|| (playerOnTurn.getColor() == this.getCardOwner().getColor()
-						&& gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID()) == 1
-						&& getCardOwner().getColor() == Color.RED)) {
-			gameModel.getGameModelParameters().removeEffectParameter(this.card.getCardId(), this.cardGameID());
+		Integer value = gameModel.getGameModelParameters().getValueForEffectParameterKeyPair(this.card.getCardId(), this.cardGameID());
+		if (value != null) {
+			if ((playerOnTurn.getColor() == this.getCardOwner().getColor() && value == 0 && getCardOwner().getColor() == Color.BLUE)
+					|| (playerOnTurn.getColor() == this.getCardOwner().getColor() && value == 1 && getCardOwner().getColor() == Color.RED)) {
+				gameModel.getGameModelParameters().removeEffectParameter(this.card.getCardId(), this.cardGameID());
+				gameModel.sendGameModelToAllPlayers("");
+			}
 		}
 	}
 }

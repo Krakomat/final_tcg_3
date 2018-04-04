@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Name="Dragons Roar">
+    <Cards>
+        <Card ID="00018">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00026">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00076">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00077">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00083">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00088">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00091">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00092">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00096">
+            <Size>4</Size>
+        </Card>
+        <Card ID="00102">
+            <Size>16</Size>
+        </Card>
+        <Card ID="00155">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00207">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00232">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00238">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00263">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00264">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00294">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00307">
+            <Size>2</Size>
+        </Card>
+        <Card ID="00352">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00357">
+            <Size>3</Size>
+        </Card>
+        <Card ID="00467">
+            <Size>1</Size>
+        </Card>
+        <Card ID="00476">
+            <Size>1</Size>
+        </Card>
+    </Cards>
+</Deck>

@@ -21,6 +21,7 @@ Patch 1.2
 		- 00446_BlainesNinetales: Energy removal is triggered correctly for Burn Up
 		- 00471_RocketsZapdos: Plasma now does damage
 		- 00475_RocketsSecretExperiment: Fixed multiple bugs with this card
+		- 00476_TransparentWalls: Fixed a bug with this card
 		
 	GUI:
 		- Added special player avatars to both the actual player and the opponent
