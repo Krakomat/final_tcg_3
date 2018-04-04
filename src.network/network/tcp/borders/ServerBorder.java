@@ -77,6 +77,10 @@ public class ServerBorder implements Player {
 		return password;
 	}
 
+	public String getAvatarPath() {
+		throw new UnsupportedOperationException("");
+	}
+
 	@Override
 	public Deck getDeck() {
 		QueryMessage qMessage = new QueryMessage(Method.PLAYER_GET_DECK);
@@ -439,6 +443,6 @@ public class ServerBorder implements Player {
 	@Override
 	public void setPriceCards(int number) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

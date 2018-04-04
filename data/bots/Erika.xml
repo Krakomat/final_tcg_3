@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Erika</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Erika_avatar.png</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Erika's Weed Garden">

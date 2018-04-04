@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Sabrina</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Sabrina_avatar.png</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Sabrinas Control">

@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Brendan</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Brendan_avatar.png</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Rock Solid">

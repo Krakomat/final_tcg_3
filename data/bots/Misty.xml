@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Misty</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Misty_avatar.png</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Misty's Raindance">

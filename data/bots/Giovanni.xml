@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Giovanni</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Giovanni_avatar.png</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Giovanni's Love Club">

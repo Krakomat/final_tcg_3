@@ -39,13 +39,13 @@ public class BotBorder extends AccountImpl implements Player {
 	 * @param prizeCards
 	 * @return
 	 */
-	public static Player createBot(long id, String name, String password, int prizeCards, AccountType type) {
-		BotBorder p = new BotBorder(id, name, password, prizeCards, type);
+	public static Player createBot(long id, String name, String password, String avatar, int prizeCards, AccountType type) {
+		BotBorder p = new BotBorder(id, name, password, avatar, prizeCards, type);
 		return p;
 	}
 
-	public BotBorder(long id, String name, String password, int prizeCards, AccountType type) {
-		super(id, name, password, prizeCards);
+	public BotBorder(long id, String name, String password, String avatar, int prizeCards, AccountType type) {
+		super(id, name, password, avatar, prizeCards);
 		this.accountType = type;
 		switch (this.accountType) {
 		case BOT_DUMMY:

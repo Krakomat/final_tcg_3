@@ -73,6 +73,11 @@ public class PlayerSimulator implements Player {
 	}
 
 	@Override
+	public String getAvatarPath() {
+		throw new UnsupportedOperationException("");
+	}
+
+	@Override
 	public Deck getDeck() {
 		return null;
 	}

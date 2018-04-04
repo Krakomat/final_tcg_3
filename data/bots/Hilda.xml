@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Hilda</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Hilda_avatar.png</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Damage Control">

@@ -10,18 +10,19 @@ import model.enums.AccountType;
 public abstract class AccountImpl implements Account {
 
 	protected long id;
-	protected String name, password;
+	protected String name, password, avatar;
 	protected Deck deck;
 	protected int prizeCards;
 	protected AccountType accountType;
 	protected List<ArenaFighterCode> defeatedArenaFighters;
 	protected List<String> unlockedCards;
 
-	public AccountImpl(long id, String name, String password, int prizeCards) {
+	public AccountImpl(long id, String name, String password, String avatar, int prizeCards) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.avatar = avatar;
 		this.prizeCards = prizeCards;
 		deck = null;
 		accountType = null; // is set in an upper level constructor
@@ -42,6 +43,11 @@ public abstract class AccountImpl implements Account {
 	@Override
 	public String getPassword() {
 		return password;
+	}
+
+	@Override
+	public String getAvatarPath() {
+		return this.avatar;
 	}
 
 	@Override

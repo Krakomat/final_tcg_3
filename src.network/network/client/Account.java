@@ -73,6 +73,8 @@ public interface Account {
 
 	public void setUnlockedCards(List<String> unlockedCards);
 
+	public String getAvatarPath();
+
 	/**
 	 * Reads the given folder and returns a list of accounts, that this file stores.
 	 * 

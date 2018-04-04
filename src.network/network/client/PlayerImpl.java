@@ -42,13 +42,13 @@ public class PlayerImpl extends AccountImpl implements Player, GuiToPlayerCommun
 	 * @param password
 	 * @return
 	 */
-	public static Player createNewPlayer(long id, String name, String password, int prizeCards) {
-		Player p = new PlayerImpl(id, name, password, prizeCards);
+	public static Player createNewPlayer(long id, String name, String password, String avatar, int prizeCards) {
+		Player p = new PlayerImpl(id, name, password, avatar, prizeCards);
 		return p;
 	}
 
-	public PlayerImpl(long id, String name, String password, int prizeCards) {
-		super(id, name, password, prizeCards);
+	public PlayerImpl(long id, String name, String password, String avatar, int prizeCards) {
+		super(id, name, password, avatar, prizeCards);
 		this.accountType = AccountType.REAL_PLAYER;
 		this.color = null;
 		this.self = this;

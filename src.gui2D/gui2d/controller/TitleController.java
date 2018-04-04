@@ -94,7 +94,7 @@ public class TitleController extends Node implements GUI2DController {
 						String accountName = GUI2D.getInstance().userTypesName("Default Name", "What's your name?");
 						if (accountName != null) {
 							if (!accountName.equals("")) {
-								player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "", 6);
+								player = (PlayerImpl) PlayerImpl.createNewPlayer(0, accountName, "", "/tilesets/avatars/player_avatar.png", 6);
 								List<String> unlockedCards = new ArrayList<>();
 								for (int i = 1; i < 265; i++) {
 									if (i != 103 && i != 104 && i != 199) {

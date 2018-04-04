@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Lucas</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\Lucas_avatar.png</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Scientific Experiments">

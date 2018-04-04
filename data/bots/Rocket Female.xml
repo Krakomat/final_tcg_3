@@ -2,6 +2,7 @@
 <Account ID="0">
 	<Name>Rocket Female</Name>
 	<Password />
+    <Avatar>\tilesets\avatars\rocket_female_avatar.png</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Rocket's Haymaker 1">
