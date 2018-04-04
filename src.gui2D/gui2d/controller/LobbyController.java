@@ -24,8 +24,7 @@ import com.jme3.scene.Node;
 public class LobbyController extends Node implements GUI2DController {
 
 	ImageButton2D singlePlayerButton;
-	private TextButton2D multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton,
-			exitButton;
+	private TextButton2D multiPlayerCreateButton, multiPlayerConnectButton, backButton, deckEditorButton, exitButton;
 	ImageButton2D multiPlayerButton;
 	ImageButton2D draftTournamentButton;
 	ImageButton2D arenaButton;
@@ -520,7 +519,9 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void botClicked(String deckName) {
+		GUI2D.getInstance().getIngameController().updateOpponentAvatar(Database.getAssetKey("COMPUTER_AVATAR"));
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
+		GUI2D.getInstance().getIngameController().showAvatars();
 		Player bot = Database.getBot("Computer");
 		GUI2D.getInstance().getPlayer().createLocalGame(bot.getPrizeCards());
 
@@ -620,14 +621,18 @@ public class LobbyController extends Node implements GUI2DController {
 	}
 
 	protected void multiPlayerCreateClicked() {
+		GUI2D.getInstance().getIngameController().updateOpponentAvatar(Database.getAssetKey("PLAYER_AVATAR"));
 		GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
+		GUI2D.getInstance().getIngameController().showAvatars();
 		GUI2D.getInstance().getPlayer().createGame();
 	}
 
 	protected void multiPlayerConnectClicked() {
 		String ipAdress = GUI2D.getInstance().userTypesName("192.168.178.", "IP4 adress:");
 		if (ipAdress != null) {
+			GUI2D.getInstance().getIngameController().updateOpponentAvatar(Database.getAssetKey("PLAYER_AVATAR"));
 			GUI2D.getInstance().switchMode(GUI2DMode.INGAME, true);
+			GUI2D.getInstance().getIngameController().showAvatars();
 			GUI2D.getInstance().getPlayer().connectToGame(ipAdress);
 		}
 	}

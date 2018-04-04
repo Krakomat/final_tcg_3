@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Brock</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Brock_avatar.png</Avatar>
+    <Avatar>MAMORIA_BROCKTHUMB</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Brock's Mining Crew">

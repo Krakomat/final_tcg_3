@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Red</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Red_avatar.png</Avatar>
+    <Avatar>MAMORIA_REDTHUMB</Avatar>
 	<PrizeCards>2</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Fighting Spirit">

@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Rocket Male</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\rocket_male_avatar.png</Avatar>
+    <Avatar>VERTANIA_ROCKET_MALETHUMB</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Rocket's Haymaker 2">

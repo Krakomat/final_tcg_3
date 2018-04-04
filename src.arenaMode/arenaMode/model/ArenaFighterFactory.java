@@ -22,7 +22,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00291");
 			lockedCards.add("00292");
 			return new ArenaFighter(code, Database.getBot("Brendan"), Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString()),
-					Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.MAMORIA_BRENDAN.toString() + "THUMB"), lockedCards);
 		case MAMORIA_RED:
 			lockedCards = new ArrayList<>();
 			lockedCards.add("00272");
@@ -36,7 +36,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00289");
 			lockedCards.add("00290");
 			return new ArenaFighter(code, Database.getBot("Red"), Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString()),
-					Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.MAMORIA_RED.toString() + "THUMB"), lockedCards);
 		case MAMORIA_BROCK:
 			lockedCards.add("00266");
 			lockedCards.add("00267");
@@ -47,7 +47,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00287");
 			lockedCards.add("00293");
 			return new ArenaFighter(code, Database.getBot("Brock"), Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString()),
-					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.MAMORIA_BROCK.toString() + "THUMB"), lockedCards);
 		case AZURIA_LYRA:
 			lockedCards.add("00306");
 			lockedCards.add("00307");
@@ -63,7 +63,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00322");
 			lockedCards.add("00323");
 			return new ArenaFighter(code, Database.getBot("Lyra"), Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString()),
-					Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.AZURIA_LYRA.toString() + "THUMB"), lockedCards);
 		case AZURIA_MAY:
 			lockedCards.add("00301");
 			lockedCards.add("00302");
@@ -75,7 +75,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00317");
 			lockedCards.add("00325");
 			return new ArenaFighter(code, Database.getBot("May"), Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString()),
-					Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.AZURIA_MAY.toString() + "THUMB"), lockedCards);
 		case AZURIA_MISTY:
 			lockedCards.add("00294");
 			lockedCards.add("00295");
@@ -88,7 +88,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00316");
 			lockedCards.add("00324");
 			return new ArenaFighter(code, Database.getBot("Misty"), Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString()),
-					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.AZURIA_MISTY.toString() + "THUMB"), lockedCards);
 		case ORANIA_LEAF:
 			lockedCards.add("00335");
 			lockedCards.add("00336");
@@ -99,7 +99,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00349");
 			lockedCards.add("00350");
 			return new ArenaFighter(code, Database.getBot("Leaf"), Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString()),
-					Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.ORANIA_LEAF.toString() + "THUMB"), lockedCards);
 		case ORANIA_NATE:
 			lockedCards.add("00332");
 			lockedCards.add("00333");
@@ -111,7 +111,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00346");
 			lockedCards.add("00347");
 			return new ArenaFighter(code, Database.getBot("Nate"), Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString()),
-					Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.ORANIA_NATE.toString() + "THUMB"), lockedCards);
 		case ORANIA_LTSURGE:
 			lockedCards.add("00326");
 			lockedCards.add("00327");
@@ -122,7 +122,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00343");
 			lockedCards.add("00344");
 			return new ArenaFighter(code, Database.getBot("Lt. Surge"), Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString()),
-					Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.ORANIA_LTSURGE.toString() + "THUMB"), lockedCards);
 		case PRISMANIA_ROSA:
 			lockedCards.add("00365");
 			lockedCards.add("00366");
@@ -133,7 +133,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00380");
 			lockedCards.add("00381");
 			return new ArenaFighter(code, Database.getBot("Rosa"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_ROSA.toString()),
-					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ROSA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ROSA.toString() + "THUMB"), lockedCards);
 		case PRISMANIA_SERENA:
 			lockedCards.add("00357");
 			lockedCards.add("00358");
@@ -152,7 +152,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00377");
 			lockedCards.add("00378");
 			return new ArenaFighter(code, Database.getBot("Serena"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_SERENA.toString()),
-					Database.getAssetKey(ArenaFighterCode.PRISMANIA_SERENA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.PRISMANIA_SERENA.toString() + "THUMB"), lockedCards);
 		case PRISMANIA_ERIKA:
 			lockedCards.add("00351");
 			lockedCards.add("00352");
@@ -163,7 +163,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00374");
 			lockedCards.add("00382");
 			return new ArenaFighter(code, Database.getBot("Erika"), Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString()),
-					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.PRISMANIA_ERIKA.toString() + "THUMB"), lockedCards);
 		case FUCHSANIA_HILBERT:
 			lockedCards.add("00394");
 			lockedCards.add("00395");
@@ -173,7 +173,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00399");
 			lockedCards.add("00400");
 			return new ArenaFighter(code, Database.getBot("Hilbert"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString()),
-					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_HILBERT.toString() + "THUMB"), lockedCards);
 		case FUCHSANIA_KOGA:
 			lockedCards.add("00383");
 			lockedCards.add("00384");
@@ -182,7 +182,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00387");
 			lockedCards.add("00388");
 			return new ArenaFighter(code, Database.getBot("Koga"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString()),
-					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_KOGA.toString() + "THUMB"), lockedCards);
 		case FUCHSANIA_LUCAS:
 			lockedCards.add("00389");
 			lockedCards.add("00390");
@@ -192,7 +192,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00401");
 			lockedCards.add("00402");
 			return new ArenaFighter(code, Database.getBot("Lucas"), Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString()),
-					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.FUCHSANIA_LUCAS.toString() + "THUMB"), lockedCards);
 		case SAFFRONIA_CALEM:
 			lockedCards.add("00408");
 			lockedCards.add("00409");
@@ -209,7 +209,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00429");
 			lockedCards.add("00430");
 			return new ArenaFighter(code, Database.getBot("Calem"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString()),
-					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_CALEM.toString() + "THUMB"), lockedCards);
 		case SAFFRONIA_HILDA:
 			lockedCards.add("00405");
 			lockedCards.add("00406");
@@ -221,7 +221,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00423");
 			lockedCards.add("00431");
 			return new ArenaFighter(code, Database.getBot("Hilda"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString()),
-					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_HILDA.toString() + "THUMB"), lockedCards);
 		case SAFFRONIA_SABRINA:
 			lockedCards.add("00403");
 			lockedCards.add("00404");
@@ -230,7 +230,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00417");
 			lockedCards.add("00418");
 			return new ArenaFighter(code, Database.getBot("Sabrina"), Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString()),
-					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.SAFFRONIA_SABRINA.toString() + "THUMB"), lockedCards);
 		case ZINNOBER_DAWN:
 			lockedCards.add("00436");
 			lockedCards.add("00437");
@@ -247,7 +247,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00456");
 			lockedCards.add("00458");
 			return new ArenaFighter(code, Database.getBot("Dawn"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString()),
-					Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.ZINNOBER_DAWN.toString() + "THUMB"), lockedCards);
 		case ZINNOBER_ETHAN:
 			lockedCards.add("00433");
 			lockedCards.add("00434");
@@ -258,7 +258,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00449");
 			lockedCards.add("00457");
 			return new ArenaFighter(code, Database.getBot("Ethan"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString()),
-					Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.ZINNOBER_ETHAN.toString() + "THUMB"), lockedCards);
 		case ZINNOBER_PYRO:
 			lockedCards.add("00432");
 			lockedCards.add("00443");
@@ -266,7 +266,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00445");
 			lockedCards.add("00446");
 			return new ArenaFighter(code, Database.getBot("Blaine"), Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString()),
-					Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.ZINNOBER_PYRO.toString() + "THUMB"), lockedCards);
 		case VERTANIA_GIOVANNI:
 			lockedCards.add("00478");
 			lockedCards.add("00479");
@@ -287,7 +287,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00494");
 			lockedCards.add("00495");
 			return new ArenaFighter(code, Database.getBot("Giovanni"), Database.getAssetKey(ArenaFighterCode.VERTANIA_GIOVANNI.toString()),
-					Database.getAssetKey(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "THUMB"), lockedCards);
 		case VERTANIA_ROCKET_FEMALE:
 			lockedCards.add("00459");
 			lockedCards.add("00468");
@@ -300,7 +300,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00476");
 			lockedCards.add("00477");
 			return new ArenaFighter(code, Database.getBot("Rocket Female"), Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString()),
-					Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_FEMALE.toString() + "THUMB"), lockedCards);
 		case VERTANIA_ROCKET_MALE:
 			lockedCards.add("00460");
 			lockedCards.add("00461");
@@ -312,7 +312,7 @@ public class ArenaFighterFactory {
 			lockedCards.add("00467");
 			lockedCards.add("00472");
 			return new ArenaFighter(code, Database.getBot("Rocket Male"), Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString()),
-					Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString() + "_THUMB"), lockedCards);
+					Database.getAssetKey(ArenaFighterCode.VERTANIA_ROCKET_MALE.toString() + "THUMB"), lockedCards);
 		default:
 			break;
 		}

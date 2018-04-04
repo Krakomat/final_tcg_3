@@ -34,6 +34,7 @@ import model.enums.PlayerAction;
 import model.enums.PositionID;
 import model.interfaces.Position;
 
+import com.jme3.asset.TextureKey;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.scene.Geometry;
@@ -60,7 +61,7 @@ public class IngameController extends Node implements GUI2DController {
 	private ImageButton2D surrenderButton, attackButton, retreatButton, pokePowerButton, stadiumButton;
 	/** Resolution variable */
 	private int screenWidth, screenHeight;
-	private Image2D resultScreen, reward1, reward2, reward3;
+	private Image2D resultScreen, reward1, reward2, reward3, player_avatar, opponent_avatar;
 	/** Currently selected node */
 	private SelectableNode currentlySelected;
 	/** True if a position has to be selected */
@@ -774,6 +775,38 @@ public class IngameController extends Node implements GUI2DController {
 		returnToLobbyButton.setVisible(false);
 		dropInUpdateQueue(returnToLobbyButton);
 		this.attachChild(returnToLobbyButton);
+
+		this.player_avatar = new Image2D("Player_Avatar", Database.getAssetKey("PLAYER_AVATAR"), this.screenWidth * 0.1f, this.screenWidth * 0.1f, BlendMode.Alpha) {
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+
+			}
+		};
+		this.player_avatar.setLocalTranslation(screenWidth * 0.0f, screenHeight * 0.0f, 0.2f);
+		this.player_avatar.setVisible(false);
+		dropInUpdateQueue(this.player_avatar);
+		this.attachChild(this.player_avatar);
+
+		this.opponent_avatar = new Image2D("Opponent_avatar", Database.getAssetKey("COMPUTER_AVATAR"), this.screenWidth * 0.1f, this.screenWidth * 0.1f, BlendMode.Alpha) {
+			@Override
+			public void mouseSelect() {
+
+			}
+
+			@Override
+			public void mouseSelectRightClick() {
+
+			}
+		};
+		this.opponent_avatar.setLocalTranslation(screenWidth * 0.9f, screenHeight * 0.822f, 0.2f);
+		this.opponent_avatar.setVisible(false);
+		dropInUpdateQueue(this.opponent_avatar);
+		this.attachChild(this.opponent_avatar);
 
 		new Thread(new Runnable() {
 			@Override
@@ -2149,6 +2182,12 @@ public class IngameController extends Node implements GUI2DController {
 
 		surrenderButton.setVisible(false);
 		dropInUpdateQueue(surrenderButton);
+
+		player_avatar.setVisible(false);
+		dropInUpdateQueue(player_avatar);
+
+		opponent_avatar.setVisible(false);
+		dropInUpdateQueue(opponent_avatar);
 	}
 
 	public CardChooseWindow getCardChooseWindow() {
@@ -2211,5 +2250,20 @@ public class IngameController extends Node implements GUI2DController {
 
 	public SelectableNode getStadiumButton() {
 		return this.stadiumButton;
+	}
+
+	public void updateOpponentAvatar(TextureKey characterThumb) {
+		this.opponent_avatar.setTexture(characterThumb);
+	}
+
+	public void updatePlayerAvatar(TextureKey characterThumb) {
+		this.player_avatar.setTexture(characterThumb);
+	}
+
+	public void showAvatars() {
+		this.player_avatar.setVisible(true);
+		this.opponent_avatar.setVisible(true);
+		dropInUpdateQueue(this.player_avatar);
+		dropInUpdateQueue(this.opponent_avatar);
 	}
 }

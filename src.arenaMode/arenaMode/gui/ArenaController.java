@@ -77,7 +77,9 @@ public class ArenaController extends Node implements GUI2DController {
 			@Override
 			public void mouseSelect() {
 				GUI2D.getInstance().registerFighterAsOpponent(currentSelectedFighter);
+				GUI2D.getInstance().getIngameController().updateOpponentAvatar(currentSelectedFighter.getCharacterThumb());
 				GUI2D.getInstance().switchMode(GUI2DMode.INGAME, false);
+				GUI2D.getInstance().getIngameController().showAvatars();
 				if (currentSelectedFighter == third)
 					GUI2D.getInstance().getMusicController().switchMusic(MusicType.ARENA_MASTER_MUSIC);
 				else

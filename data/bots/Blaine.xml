@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Blaine</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Pyro_avatar.png</Avatar>
+    <Avatar>ZINNOBER_PYROTHUMB</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Blaine's Lava Pit">

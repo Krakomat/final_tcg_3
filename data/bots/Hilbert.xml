@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Hilbert</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Hilbert_avatar.png</Avatar>
+    <Avatar>FUCHSANIA_HILBERTTHUMB</Avatar>
 	<PrizeCards>2</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Ninja Bugs">

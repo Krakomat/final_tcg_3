@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Leaf</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Leaf_avatar.png</Avatar>
+    <Avatar>ORANIA_LEAFTHUMB</Avatar>
 	<PrizeCards>2</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Lightning Strike">

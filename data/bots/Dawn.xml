@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Dawn</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Dawn_avatar.png</Avatar>
+    <Avatar>ZINNOBER_DAWNTHUMB</Avatar>
 	<PrizeCards>2</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Heating Up">

@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Serena</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Serena_avatar.png</Avatar>
+    <Avatar>PRISMANIA_SERENATHUMB</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Vileplumes Free Agent">

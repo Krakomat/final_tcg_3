@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Computer</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\computer_avatar.png</Avatar>
+    <Avatar>COMPUTER_AVATAR</Avatar>
 	<PrizeCards>4</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 	<Deck Name="Overgrowth">

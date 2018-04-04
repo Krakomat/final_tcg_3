@@ -117,6 +117,7 @@ public class TitleController extends Node implements GUI2DController {
 					if (player != null) {
 						GUI2D.getInstance().setPlayer(player);
 						player.setGUI(GUI2D.getInstance());
+						GUI2D.getInstance().getIngameController().updatePlayerAvatar(Database.getAssetKey(player.getAvatarPath()));
 						GUI2D.getInstance().switchMode(GUI2DMode.LOBBY, true);
 					}
 				} catch (IOException e) {

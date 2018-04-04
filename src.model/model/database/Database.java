@@ -673,6 +673,14 @@ public class Database {
 		giovanniCharacterThumb.setGenerateMips(false);
 		assetTextures.put(ArenaFighterCode.VERTANIA_GIOVANNI.toString() + "THUMB", giovanniCharacterThumb);
 
+		TextureKey playerAvatar = new TextureKey("/tilesets/avatars/player_avatar.png");
+		playerAvatar.setGenerateMips(false);
+		assetTextures.put("PLAYER_AVATAR", playerAvatar);
+
+		TextureKey computerAvatar = new TextureKey("/tilesets/avatars/computer_avatar.png");
+		computerAvatar.setGenerateMips(false);
+		assetTextures.put("COMPUTER_AVATAR", computerAvatar);
+
 		TextureKey arena_mode_symbol = new TextureKey("/tilesets/other/arena_symbol.png");
 		arena_mode_symbol.setGenerateMips(false);
 		assetTextures.put("arena_symbol", arena_mode_symbol);

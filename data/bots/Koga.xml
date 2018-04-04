@@ -2,7 +2,7 @@
 <Account ID="0">
 	<Name>Koga</Name>
 	<Password />
-    <Avatar>\tilesets\avatars\Koga_avatar.png</Avatar>
+    <Avatar>FUCHSANIA_KOGATHUMB</Avatar>
 	<PrizeCards>6</PrizeCards>
 	<AccountType>BOT_TREE</AccountType>
 <Deck Name="Koga's K.O. Krew">
