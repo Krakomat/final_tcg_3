@@ -26,29 +26,14 @@ public class CustomGameSetup extends SetupGame {
 	}
 
 	private void initPlayer() {
-		this.gameModel.addCardOnTopOfPosition("00096", PositionID.BLUE_ACTIVEPOKEMON);
-		this.gameModel.addCardOnTopOfPosition("00003", PositionID.BLUE_ACTIVEPOKEMON);
+		this.gameModel.addCardOnTopOfPosition("00101", PositionID.BLUE_ACTIVEPOKEMON);
+		this.gameModel.addCardOnTopOfPosition("00101", PositionID.BLUE_ACTIVEPOKEMON);
+		this.gameModel.addCardOnTopOfPosition("00239", PositionID.BLUE_ACTIVEPOKEMON);
 		this.gameModel.addCardOnTopOfPosition("00003", PositionID.BLUE_PRICE_1);
-		this.gameModel.addCardOnTopOfPosition("00475", PositionID.BLUE_HAND);
-		this.gameModel.addCardOnTopOfPosition("00091", PositionID.BLUE_HAND);
-		this.gameModel.addCardOnTopOfPosition("00091", PositionID.BLUE_HAND);
-		this.gameModel.addCardOnTopOfPosition("00091", PositionID.BLUE_HAND);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
-		this.gameModel.addCardOnTopOfPosition("00097", PositionID.BLUE_DECK);
 	}
 
 	private void initOpponent() {
-		this.gameModel.addCardOnTopOfPosition("00003", PositionID.RED_ACTIVEPOKEMON);
+		this.gameModel.addCardOnTopOfPosition("00357", PositionID.RED_ACTIVEPOKEMON);
 		this.gameModel.addCardOnTopOfPosition("00003", PositionID.RED_PRICE_1);
 	}
 

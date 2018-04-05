@@ -24,7 +24,7 @@ public class Script_00157_Haunter extends PokemonCardScript {
 		this.addPokemonPower("Transparency");
 	}
 
-	public int modifyIncomingDamage(int damage, Card attacker) {
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
 		if (powerCanBeUsed() && gameModel.getGameModelParameters().getValueForEffectParameterKeyPair("00157", cardGameID()) == null) {
 			gameModel.sendTextMessageToAllPlayers("Check for Haunters Pokemon Power Transparency!", "");
 			Coin c = gameModel.getAttackAction().flipACoin();

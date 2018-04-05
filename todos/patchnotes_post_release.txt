@@ -4,8 +4,10 @@ Patch 1.2
 	
 	Cards:
 		- 00121_Butterfree: Fixed a rounding bug
+		- 00130_Persian: Fixed a bug concerning incoming damage
 		- 00138_Cubone: Fixed a bug with the Snivel attack
 		- 00151_Venonat: Healing only applies if greater than 0
+		- 00157_Haunter: Fixed a bug concerning incoming damage
 		- 00160_Kabutops: Fixed a rounding bug
 		- 00170_Golbat: Healing only applies if greater than 0
 		- 00203_DarkCharizard: Fixed descriptions of Continous Fireball attack
@@ -19,6 +21,7 @@ Patch 1.2
 		- 00428_SabrinasGastly: Fixed a bug in Gaseous Form
 		- 00436_BlainesCharmander: Kindle should work properly now
 		- 00446_BlainesNinetales: Energy removal is triggered correctly for Burn Up
+		- 00461_RocketsScyther: Fixed a bug concerning incoming damage
 		- 00471_RocketsZapdos: Plasma now does damage
 		- 00475_RocketsSecretExperiment: Fixed multiple bugs with this card
 		- 00476_TransparentWalls: Fixed a bug with this card

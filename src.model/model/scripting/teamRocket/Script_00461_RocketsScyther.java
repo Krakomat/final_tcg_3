@@ -50,7 +50,7 @@ public class Script_00461_RocketsScyther extends PokemonCardScript {
 		gameModel.sendGameModelToAllPlayers("");
 	}
 
-	public int modifyIncomingDamage(int damage, Card attacker) {
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
 		PokemonCard pokemon = (PokemonCard) this.card;
 		if (pokemon.hasCondition(PokemonCondition.SHADOW_IMAGE)) {
 			gameModel.sendCardMessageToAllPlayers("Check for Shadow Images on " + this.card.getName() + "!", card, "");

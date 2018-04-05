@@ -51,7 +51,7 @@ public class Script_00130_Persian extends PokemonCardScript {
 		gameModel.getGameModelParameters().getBlockedAttacks().add(new Triple<Integer, String, Integer>(gameModel.getPosition(defender).getTopCard().getGameID(), "00130", 2));
 	}
 
-	public int modifyIncomingDamage(int damage, Card attacker) {
+	public int modifyIncomingDamage(int damage, Card attacker, PositionID defender) {
 		if (attacker != null) {
 			if (gameModel.getGameModelParameters().attackIsBlocked("00130", attacker.getGameID()) && PositionID.isActivePosition(attacker.getCurrentPosition().getPositionID())
 					&& PositionID.isActivePosition(getCurrentPositionID()))

@@ -31,6 +31,9 @@
         <Card ID="00102">
             <Size>16</Size>
         </Card>
+        <Card ID="00109">
+            <Size>2</Size>
+        </Card>
         <Card ID="00155">
             <Size>3</Size>
         </Card>
@@ -41,9 +44,6 @@
             <Size>2</Size>
         </Card>
         <Card ID="00238">
-            <Size>2</Size>
-        </Card>
-        <Card ID="00263">
             <Size>2</Size>
         </Card>
         <Card ID="00264">
