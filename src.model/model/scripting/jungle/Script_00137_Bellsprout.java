@@ -17,14 +17,10 @@ public class Script_00137_Bellsprout extends PokemonCardScript {
 		super(card, gameModel);
 		List<Element> att1Cost = new ArrayList<>();
 		att1Cost.add(Element.GRASS);
-		att1Cost.add(Element.COLORLESS);
 		this.addAttack("Vine Whip", att1Cost);
 
 		List<Element> att2Cost = new ArrayList<>();
 		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.GRASS);
-		att2Cost.add(Element.COLORLESS);
-		att2Cost.add(Element.COLORLESS);
 		this.addAttack("Call for Family", att2Cost);
 	}
 
