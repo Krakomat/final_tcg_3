@@ -156,7 +156,7 @@ public class ElementChooseWindow extends ChooseWindow {
 			e.printStackTrace();
 		}
 		if (this.indexList.contains(index))
-			this.indexList.remove(new Integer(index));
+			this.indexList.remove(Integer.valueOf(index));
 		else
 			this.indexList.add(index);
 

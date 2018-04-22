@@ -1,10 +1,6 @@
 package executables.clients;
 
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import com.jme3.system.AppSettings;
 
@@ -29,13 +25,6 @@ public class FinalTCG3 {
 			settings.put("VSync", true);
 			settings.put("Samples", 16);
 			settings.setFullscreen(false);
-			try {
-				BufferedImage newimg = ImageIO.read(GUI2D.class.getClass().getResourceAsStream("/tilesets/other/pokeball16x16.png"));
-				BufferedImage newimg2 = ImageIO.read(GUI2D.class.getClass().getResourceAsStream("/tilesets/other/pokeball32x32.png"));
-				settings.setIcons(new BufferedImage[] { newimg, newimg2 });
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 
 			view.setSettings(settings);
 			view.start();
@@ -46,6 +35,7 @@ public class FinalTCG3 {
 					e.printStackTrace();
 				}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Error");
 		}
 	}

@@ -1,7 +1,6 @@
 package model.database;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +13,15 @@ import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import model.game.GameParameters;
 
@@ -21,9 +29,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 public class Deck {
 
@@ -287,23 +292,19 @@ public class Deck {
 	}
 
 	private void printToFile(Document dom, String path) {
+		Transformer transformer = null;
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer();
+		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
+			e.printStackTrace();
+		}
+		Result output = new StreamResult(new File(path + name + ".xml"));
+		Source input = new DOMSource(dom);
 
 		try {
-			// print
-			OutputFormat format = new OutputFormat(dom);
-			format.setIndenting(true);
-
-			// to generate output to console use this serializer
-			// XMLSerializer serializer = new XMLSerializer(System.out, format);
-
-			// to generate a file output use fileoutputstream instead of
-			// system.out
-			XMLSerializer serializer = new XMLSerializer(new FileOutputStream(new File(path + name + ".xml")), format);
-
-			serializer.serialize(dom);
-
-		} catch (IOException ie) {
-			ie.printStackTrace();
+			transformer.transform(input, output);
+		} catch (TransformerException e) {
+			e.printStackTrace();
 		}
 	}
 

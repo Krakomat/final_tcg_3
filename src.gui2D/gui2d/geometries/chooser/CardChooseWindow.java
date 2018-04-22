@@ -165,7 +165,7 @@ public class CardChooseWindow extends ChooseWindow {
 			e.printStackTrace();
 		}
 		if (this.indexList.contains(startIndex + index))
-			this.indexList.remove(new Integer(startIndex + index));
+			this.indexList.remove(Integer.valueOf(startIndex + index));
 		else
 			this.indexList.add(startIndex + index);
 

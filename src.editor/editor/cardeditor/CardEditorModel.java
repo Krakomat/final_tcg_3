@@ -1,7 +1,6 @@
 package editor.cardeditor;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +9,15 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import model.database.Card;
 import model.database.EnergyCard;
@@ -24,9 +32,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
-
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 public class CardEditorModel {
 
@@ -232,8 +237,7 @@ public class CardEditorModel {
 	}
 
 	/**
-	 * Using JAXP in implementation independent manner create a document object
-	 * using which we create a xml tree in memory
+	 * Using JAXP in implementation independent manner create a document object using which we create a xml tree in memory
 	 */
 	private void createDocument() {
 
@@ -382,23 +386,19 @@ public class CardEditorModel {
 	}
 
 	private void printToFile() {
+		Transformer transformer = null;
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer();
+		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
+			e.printStackTrace();
+		}
+		Result output = new StreamResult(new File("data/database.xml"));
+		Source input = new DOMSource(dom);
 
 		try {
-			// print
-			OutputFormat format = new OutputFormat(dom);
-			format.setIndenting(true);
-
-			// to generate output to console use this serializer
-			// XMLSerializer serializer = new XMLSerializer(System.out, format);
-
-			// to generate a file output use fileoutputstream instead of
-			// system.out
-			XMLSerializer serializer = new XMLSerializer(new FileOutputStream(new File("data/database.xml")), format);
-
-			serializer.serialize(dom);
-
-		} catch (IOException ie) {
-			ie.printStackTrace();
+			transformer.transform(input, output);
+		} catch (TransformerException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -472,9 +472,8 @@ public class CardEditorModel {
 	}
 
 	/**
-	 * I take a xml element and the tag name, look for the tag and get the text
-	 * content i.e for <employee><name>John</name></employee> xml snippet if the
-	 * Element points to employee node and tagName is name I will return John
+	 * I take a xml element and the tag name, look for the tag and get the text content i.e for <employee><name>John</name></employee> xml snippet if the Element points to employee
+	 * node and tagName is name I will return John
 	 * 
 	 * @param ele
 	 * @param tagName

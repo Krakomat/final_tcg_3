@@ -1,7 +1,6 @@
 package network.client;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,6 +10,15 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import model.database.Card;
 import model.database.CardLibrary;
@@ -25,9 +33,6 @@ import org.xml.sax.SAXException;
 
 import ai.interfaces.BotBorder;
 import arenaMode.model.ArenaFighterCode;
-
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 public class AccountStorageHelper {
 
@@ -320,23 +325,19 @@ public class AccountStorageHelper {
 	}
 
 	static void printToFile(Document dom, String accountDataPath) {
+		Transformer transformer = null;
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer();
+		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
+			e.printStackTrace();
+		}
+		Result output = new StreamResult(new File(accountDataPath));
+		Source input = new DOMSource(dom);
 
 		try {
-			// print
-			OutputFormat format = new OutputFormat(dom);
-			format.setIndenting(true);
-
-			// to generate output to console use this serializer
-			// XMLSerializer serializer = new XMLSerializer(System.out, format);
-
-			// to generate a file output use fileoutputstream instead of
-			// system.out
-			XMLSerializer serializer = new XMLSerializer(new FileOutputStream(new File(accountDataPath)), format);
-
-			serializer.serialize(dom);
-
-		} catch (IOException ie) {
-			ie.printStackTrace();
+			transformer.transform(input, output);
+		} catch (TransformerException e) {
+			e.printStackTrace();
 		}
 	}
 

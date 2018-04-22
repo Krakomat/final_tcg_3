@@ -50,7 +50,7 @@ public class TCGSerializer {
 	}
 
 	public Integer unpackInt(ByteString b) {
-		return new Integer((int) b.asLong());
+		return Integer.valueOf((int) b.asLong());
 	}
 
 	public ByteString packShort(short s) {
