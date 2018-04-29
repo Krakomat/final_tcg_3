@@ -25,7 +25,6 @@ public class FinalTCG3 {
 			settings.put("VSync", true);
 			settings.put("Samples", 16);
 			settings.setFullscreen(false);
-
 			view.setSettings(settings);
 			view.start();
 			while (!view.isStarted())
