@@ -14,6 +14,7 @@ Patch 1.2
 		- 00203_DarkCharizard: Fixed descriptions of Continous Fireball attack
 		- 00263_FullHealEnergy: Only cures conditions if there are conditions to cure
 		- 00264_PotionEnergy: Only applies healing if the pokemon is damaged
+		- 00332_LtSurgesMagnemite: Fixed the damage of Confusion Pulse
 		- 00353_ErikasVileplume: Healing only applies if greater than 0
 		- 00393_KogasWeezing: Fixed text message
 		- 00394_KogasEkans: Improved text messages

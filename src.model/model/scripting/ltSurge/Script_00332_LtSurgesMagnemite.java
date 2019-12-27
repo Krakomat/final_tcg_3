@@ -66,7 +66,7 @@ public class Script_00332_LtSurgesMagnemite extends PokemonCardScript {
 		PositionID defender = this.gameModel.getDefendingPosition(this.card.getCurrentPosition().getColor());
 		Card defendingPokemon = gameModel.getPosition(defender).getTopCard();
 		Element attackerElement = ((PokemonCard) this.card).getElement();
-		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 10, true);
+		this.gameModel.getAttackAction().inflictDamageToPosition(attackerElement, attacker, defender, 20, true);
 
 		// Flip coin to check if defending pokemon is confused:
 		gameModel.sendTextMessageToAllPlayers("If heads then " + defendingPokemon.getName() + " is confused!", "");
