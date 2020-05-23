@@ -3,6 +3,7 @@ Final TCG
 Patch 1.2
 	
 	Cards:
+		- 00051_Smogon: Fixed cost for Foul Gas attack
 		- 00121_Butterfree: Fixed a rounding bug
 		- 00130_Persian: Fixed a bug concerning incoming damage
 		- 00137_Bellsprout: Fixed costs of both attacks
