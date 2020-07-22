@@ -27,13 +27,12 @@ public class Script_00263_FullHealEnergy extends EnergyCardScript {
 			if (condition.equals(PokemonCondition.ASLEEP) || condition.equals(PokemonCondition.CONFUSED) || condition.equals(PokemonCondition.PARALYZED)
 					|| condition.equals(PokemonCondition.POISONED) || condition.equals(PokemonCondition.TOXIC)) {
 				hasCurableCondition = true;
-				i--;
 			}
 		}
 		if (hasCurableCondition) {
 			gameModel.sendCardMessageToAllPlayers("All conditions on " + this.card.getName() + " are cured!", this.card, "");
 			gameModel.getAttackAction().cureAllConditionsOnPosition(this.card.getCurrentPosition().getPositionID());
-			gameModel.sendGameModelToAllPlayers("");
+			//gameModel.sendGameModelToAllPlayers("");
 		}
 	}
 }

@@ -391,6 +391,7 @@ public class AttackAction {
 				i--;
 			}
 		}
+		gameModel.getPosition(targetPosition).setChanged(true);
 	}
 
 	/**

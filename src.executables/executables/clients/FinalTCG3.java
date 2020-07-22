@@ -1,6 +1,11 @@
 package executables.clients;
 
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 
 import com.jme3.system.AppSettings;
 
@@ -25,6 +30,20 @@ public class FinalTCG3 {
 			settings.put("VSync", true);
 			settings.put("Samples", 16);
 			settings.setFullscreen(false);
+			
+			try {
+				// the path must be relative to your *class* files
+				String imagePath1 = "/tilesets/other/pokeball16x16.png";
+				String imagePath2 = "/tilesets/other/pokeball32x32.png";
+				InputStream imgStream1 = GUI2D.class.getResourceAsStream(imagePath1);
+				InputStream imgStream2 = GUI2D.class.getResourceAsStream(imagePath2);
+				BufferedImage myImg1 = ImageIO.read(imgStream1);
+				BufferedImage myImg2 = ImageIO.read(imgStream2);
+				settings.setIcons(new BufferedImage[] { myImg1, myImg2 });
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
 			view.setSettings(settings);
 			view.start();
 			while (!view.isStarted())

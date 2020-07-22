@@ -4,8 +4,9 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import com.jme3.system.AppSettings;
 
 import executables.clients.FinalTCG3;
@@ -39,9 +40,14 @@ public class SetupGame {
 			settings.put("Samples", 16);
 			settings.setFullscreen(false);
 			try {
-				BufferedImage newimg = ImageIO.read(GUI2D.class.getClass().getResourceAsStream("/tilesets/other/pokeball16x16.png"));
-				BufferedImage newimg2 = ImageIO.read(GUI2D.class.getClass().getResourceAsStream("/tilesets/other/pokeball32x32.png"));
-				settings.setIcons(new BufferedImage[] { newimg, newimg2 });
+				// the path must be relative to your *class* files
+				String imagePath1 = "/tilesets/other/pokeball16x16.png";
+				String imagePath2 = "/tilesets/other/pokeball32x32.png";
+				InputStream imgStream1 = GUI2D.class.getResourceAsStream(imagePath1);
+				InputStream imgStream2 = GUI2D.class.getResourceAsStream(imagePath2);
+				BufferedImage myImg1 = ImageIO.read(imgStream1);
+				BufferedImage myImg2 = ImageIO.read(imgStream2);
+				settings.setIcons(new BufferedImage[] { myImg1, myImg2 });
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

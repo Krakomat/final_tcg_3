@@ -1,5 +1,8 @@
 package debugging;
 
+import model.database.DynamicPokemonCondition;
+import model.database.PokemonCard;
+import model.enums.PokemonCondition;
 import model.enums.PositionID;
 import model.game.PokemonGameModelImpl;
 import network.server.PokemonGameManagerImpl;
@@ -30,6 +33,9 @@ public class CustomGameSetup extends SetupGame {
 		this.gameModel.addCardOnTopOfPosition("00101", PositionID.BLUE_ACTIVEPOKEMON);
 		this.gameModel.addCardOnTopOfPosition("00239", PositionID.BLUE_ACTIVEPOKEMON);
 		this.gameModel.addCardOnTopOfPosition("00003", PositionID.BLUE_PRICE_1);
+		PokemonCard c = (PokemonCard) this.gameModel.getPosition(PositionID.BLUE_ACTIVEPOKEMON).getTopCard();
+		c.addCondition(new DynamicPokemonCondition(PokemonCondition.PARALYZED, 1));
+		this.gameModel.addCardOnTopOfPosition("00263", PositionID.BLUE_HAND);
 	}
 
 	private void initOpponent() {
