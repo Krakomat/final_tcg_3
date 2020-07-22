@@ -45,4 +45,4 @@ Patch 1.1
 		- 00197_Recycle: Fixed some text bugs
 		- 00460_RocketsMoltres: Fire Wall should work properly now
 		
-(c) 2016 - 2019
+(c) 2016 - 2020
