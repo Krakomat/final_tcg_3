@@ -18,6 +18,7 @@ Patch 1.2
 		- 00332_LtSurgesMagnemite: Fixed the damage of Confusion Pulse
 		- 00353_ErikasVileplume: Healing only applies if greater than 0
 		- 00393_KogasWeezing: Fixed text message
+		- 00395_KogasGrimer: Fixed damage on second attack
 		- 00394_KogasEkans: Improved text messages
 		- 00401_FuchsiaCityGym: Should be working correct now
 		- 00416_Sabrina: Removed the incorrect display text when playing the card.
