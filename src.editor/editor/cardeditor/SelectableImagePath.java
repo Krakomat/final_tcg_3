@@ -2,8 +2,6 @@ package editor.cardeditor;
 
 import javax.swing.ImageIcon;
 
-import editor.cardeditor.ISelectable;
-
 public class SelectableImagePath implements ISelectable {
 
 	private String path;

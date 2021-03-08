@@ -8,7 +8,6 @@ import model.database.Card;
 import model.database.PokemonCard;
 import model.enums.Color;
 import model.enums.PositionID;
-import model.game.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 

@@ -19,7 +19,6 @@ import model.enums.Color;
 import model.enums.GameState;
 import model.enums.PlayerAction;
 import model.enums.PositionID;
-import model.game.GameModelUpdate;
 import model.interfaces.PokemonGame;
 import model.interfaces.Position;
 import model.scripting.abstracts.CardScript;
